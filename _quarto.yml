@@ -1,0 +1,78 @@
+project:
+  output-dir: docs
+  
+author:
+  - name: Eduard Bukin
+    # orcid: 0000-000
+    email: "eduard.bukin@agrar.uni-giessen.de"
+    affiliations:
+      - name: "Institute of Agricultural Policy and Market Research. Faculty 09. 
+              Justus Liebig University Giessen."
+        faculty: Faculty 09 - Agricultural Sciences, Nutritional Sciences and Environmental Management
+        university: Justus Liebig University Giessen.
+        address: Senckenbergstrasse 3
+        city: Giessen
+        postal-code: 35390
+        
+course: "MP-223-EN Applied Econometrics Methods for the Social Sciences (SoSe 2023)"
+
+footer: |
+  MP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). 
+  | Materials: [github.com/EBukin/mp223-2023-aem-R-public](https://github.com/EBukin/mp223-2023-aem-R-public). 
+  | [StudIP](https://studip.uni-giessen.de/dispatch.php/course/details?sem_id=f6e2c09067e60ef3c084b358d4a490cd&again=yes). 
+  | [ILIAS](https://ilias.uni-giessen.de/goto.php?target=crs_350157&client_id=JLUG). 
+  
+logo: img/jlu-logo.png
+
+csl: "bib/apa.csl"
+
+# # Need to be copied in each file.
+bibliography: "./bib/references.bib"
+# editor_options:
+#   editor: source
+#   chunk_output_type: console
+#   markdown:
+#     wrap: sentence
+#     canonical: FALSE
+
+format:
+  revealjs: 
+    width: 1280
+    height: 1024
+    margin: 0.05
+    transition: fade
+    slide-number: true
+    smaller: true
+    scrollable: true
+    auto-animate: true
+  html: 
+    fig-width: 8
+    fig-height: 5
+    # theme: journal
+    linestretch: 1
+    code-line-numbers: true
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    code-summary: "Show the code"
+    code-overflow: wrap
+    code-block-border-left: true
+    code-block-bg: true
+    # code-block-border-left: "#31BAE9"
+    # source: https://github.com/quarto-dev/quarto-web/blob/main/index.md
+  pdf: 
+    fig-width: 8
+    fig-height: 5
+    toc: false
+    toc-depth: 3
+    echo: false
+  docx: 
+    fig-width: 8
+    fig-height: 5
+    echo: false
+  
+execute:
+  freeze: auto  # re-render only when source changes
+  
+crossref:
+  chapters: true
