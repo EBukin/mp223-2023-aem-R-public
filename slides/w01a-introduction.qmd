@@ -17,31 +17,41 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `r rmarkdown::metadata$subtitle`
+# Introduction
+
+Welcome to {{< meta course >}}
 
 **Author**: {{< meta author >}} [eduard.bukin\@agrar.uni-giessen.de](eduard.bukin@agrar.uni-giessen.de)
 
 -   Institute of Agricultural Policy and Market Research
 -   phone: +49 641 99-37055
--   office: "Zeughaus (Senckenbergstr. 3). Room: 132"
--   hours: "Part time (better to make an appointment)"
-
-# Introduction
-
-Welcome to {{< meta course >}}
+-   office: Zeughaus (Senckenbergstr. 3). Room: 132
+-   hours: Part time (better to make an appointment)
 
 ## Course objectives
 
--   Develop practical skills of applying empirical econometric methods using R, along with rigorous understanding of these methods:
-
+::: columns
+::: {.column width="50%"}
 ::: incremental
 1.  get familiar with fundamental econometric techniques;
-
 2.  develop ability to reason on the appropriation of specific econometric methods;
-
 3.  learn how to apply those econometrics in "R";
-
 4.  exercise interpreting and communicating results;
+:::
+:::
+
+::: {.column width="50%"}
+::: incremental
+
+-   Develop practical skills of applying following empirical econometric methods in R:
+
+    -   Multiple regression analysis;
+    -   Panel regression analysis;
+    -   Binary outcome variable;
+    -   Instrumental variable estimation;
+    -   Impact evaluation (DID and RDD);
+:::
+:::
 :::
 
 # Motivation
