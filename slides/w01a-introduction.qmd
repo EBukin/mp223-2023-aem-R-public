@@ -1,0 +1,281 @@
+---
+title: "Introduction. Organisation. Setup."
+editor: visual
+format:
+  revealjs: 
+    smaller: false
+bibliography: ../bib/references.bib
+---
+
+```{r}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "80%"
+)
+```
+
+# `r rmarkdown::metadata$subtitle`
+
+**Author**: {{< meta author >}} [eduard.bukin\@agrar.uni-giessen.de](eduard.bukin@agrar.uni-giessen.de)
+
+-   Institute of Agricultural Policy and Market Research
+-   phone: +49 641 99-37055
+-   office: "Zeughaus (Senckenbergstr. 3). Room: 132"
+-   hours: "Part time (better to make an appointment)"
+
+# Introduction
+
+Welcome to {{< meta course >}}
+
+## Course objectives
+
+-   Develop practical skills of applying empirical econometric methods using R, along with rigorous understanding of these methods:
+
+::: incremental
+1.  get familiar with fundamental econometric techniques;
+
+2.  develop ability to reason on the appropriation of specific econometric methods;
+
+3.  learn how to apply those econometrics in "R";
+
+4.  exercise interpreting and communicating results;
+:::
+
+# Motivation
+
+## Have you ever heard that "vaccination causes autism"?
+
+::: columns
+::: {.column width="50%"}
+See for example: [@Wakefield1998]
+
+::: incremental
+-   A. Wakefield et, al. "Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children". In: **The Lancet** 351.9103 (Feb. 1998), pp. 637-641. DOI: [10.1016/s0140-6736(97)11096-0](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(97)11096-0/fulltext) web-page.
+
+-   Retracted in February 2010. See [Lancet MMR autism fraud](https://en.wikipedia.org/wiki/Lancet_MMR_autism_fraud).
+:::
+:::
+
+::: {.column width="50%"}
+::: incremental
+-   "The Lancet" is an influential journals
+
+    -   [Impact Factor (IF)](https://en.wikipedia.org/wiki/Impact_factor) in 2020 was **79.32**
+
+-   Each field has own seminal journal:
+
+    -   Ag. Econ - "American Journal of Agricultural Economics" with IF 2.245 (2017)
+
+    -   Econometrics - "Econometrica" with IF 5.84 (2020)
+
+    -   Development economics - "World Development" has the IF 5.278 (2020)
+:::
+:::
+:::
+
+## @Wakefield1998. Introduction {.smaller}
+
+Research question: Early report on medical cases;
+
+. . .
+
+Data:
+
+-   **12 children** (mean age 6 years \[range 3--10\], 11 boys).
+
+    -   regularly saw a gastroenterologist;
+
+    -   had "... a history of normal development followed by loss of acquired skills, including language \[**autism**\]...";
+
+. . .
+
+Treatment:
+
+-   **Measles** and/or **MMR (measles, mumps, and rubella)** vaccines at the age of 12-16 month;
+
+. . .
+
+Outcome:
+
+-   Autism diagnosis \[Yes/No\] and linguistic disorders in **24 hours** to **2 month after vaccination**
+
+-   Blood and urine sample tests out of norms at the time of research \[3-10 years old\];
+
+. . .
+
+Counterfactual:
+
+-   "Control" group is made post factum, artificially, matching random children of the same age/gender.
+
+## @Wakefield1998. Findings / Contributions
+
+::: columns
+::: {.column width="50%"}
+Vaccinated group (treatment):
+
+::: incremental
+1.  in 8/12 children behavioral problems \[**autism**\].
+
+2.  intestinal **abnormalities** and chronic inflammation;
+
+3.  urine tests are **significantly different** from "control" group;
+:::
+:::
+
+::: {.column width="50%"}
+Counter factual (12 children from the population with the same age/gender):
+
+::: incremental
+1.  no disorders.
+
+2.  no **abnormalities** or inflammation;
+
+3.  good tests;
+:::
+:::
+:::
+
+::: incremental
+-   Contributes with a **theoretical mechanism** of the consequences of the MMR vaccination.
+:::
+
+## @Wakefield1998. Conclusions / Impact:
+
+::: incremental
+1.  Conclusion:
+
+    -   **Mumps or MMR vaccination causes autism**.
+
+2.  Societal impact
+
+    -   Misinformation;
+
+    -   [Vaccine hesitancy](https://en.wikipedia.org/wiki/Vaccine_hesitancy) and `anti-vax` movements;
+
+    -   [FT: The true toll of the antivax movement](https://www.ft.com/content/a1b5350a-4dba-40f4-833b-1e35199e2e9b);
+
+    -   Societal segregation. [Which Americans are against the jab?](https://www.economist.com/graphic-detail/2021/07/30/which-americans-are-against-the-jab)
+:::
+
+## What is wrong with @Wakefield1998 ?
+
+::: incremental
+-   Any guesses?
+
+-   Let us use the whiteboard...
+
+-   By the end of this lecture, we should (ideally) be able to reason about this!
+:::
+
+# The people
+
+## Lecturers: Eduard Bukin
+
+Data science enthusiast, econometrics practitioner. PhD Student.
+
+> Institute of Agricultural Policy and Market Research
+
+2015 -- MS in Rural Development:
+
+-   Ghent University, Belgium
+
+Research interests:
+
+-   Agricultural structures and productivity
+
+-   Land and labor in agriculture
+
+-   Spatial econometrics
+
+## Lecturers: **Christoph Funk** {.smaller}
+
+[Christoph.Funk\@wirtschaft.uni-giessen.de](mailto:Christoph.Funk@wirtschaft.uni-giessen.de). [Website](https://www.uni-giessen.de/fbz/zentren/zeu/Team/zeumembersall/Christoph_Funk/dpfunk).
+
+Post Doc.
+
+> Center for international Development and Environmental Research (ZEU) Justus Liebig Universität
+
+2020 - PhD in economics from Justus Liebig University Giessen
+
+Research interests: - SDG monitoring - Climate change vulnerability - Adaptation strategies - Energy economics - Econometric modelling
+
+## Lecturers: **Vladimir Otrachshenko** {.smaller}
+
+[Vladimir.Otrachshenko\@zeu.uni-giessen.de](mailto:Vladimir.Otrachshenko@zeu.uni-giessen.de). [Website](https://www.uni-giessen.de/fbz/zentren/zeu/Team/zeumembersall/Vladimir_Otrachshenko/dpotrachshenko).
+
+Senior Researcher.
+
+> Center for international Development and Environmental Research (ZEU) Justus Liebig Universität
+
+2013 - PhD in Economics from Nova School of Business and Economics, Lisbon, Portugal
+
+Research interests:
+
+-   Environmental and Resource Economics
+-   Climate Change
+-   Health and Population Economics
+
+## Your turn!
+
+::: incremental
+-   **Please introduce yourself**
+
+    -   **What is your name?**
+    -   **Where do you come from?**
+    -   **What do you study?**
+
+-   **What is your background?**
+
+-   **What are your expectations?**
+:::
+
+# Organization
+
+## Course structure (1/4)
+
+### **in presence**
+
+-   Every Wednesday 14:00 - 18:00, Room: Senckenbergstr. 03, 216 (Ze-PC2)
+
+## Course structure (2/4)
+
+Online resources:
+
+-   [Ilias](https://ilias.uni-giessen.de/goto.php?target=crs_350157&client_id=JLUG) is used for materials dissemination.
+
+-   [Code and materials mirror: github.com/EBukin/mp223-2023-aem-R-public](https://github.com/EBukin/mp223-2023-aem-R-public)
+
+-   [StudIP](https://studip.uni-giessen.de/dispatch.php/course/details?sem_id=f6e2c09067e60ef3c084b358d4a490cd&again=yes) is only used for announcements.
+
+## Course structure (3/4)
+
+-   **Lectures** in person
+
+    -   Slides on Ilias.
+
+-   **Exercises** (in class or at home)
+
+    -   Sometimes have pre requisites (watch a video, read a paper)
+
+    -   Sometimes require preparation in advance;
+
+    -   Sometimes are also pre-recorded.
+
+## Course structure (4/4)
+
+Examination:
+
+-   60% written exam (90 minutes in the time of examination session)
+
+-   40% practical homework.
+
+    -   2 short individual assignments (20% + 20%).
+
+    -   Students are expected to develop econometric analysis in R and submit it's results (and code).
+
+    -   Homework build on the materials form the class and demonstrate ability to perform selected econometric analysis independently.
+
+# References {.smaller}
