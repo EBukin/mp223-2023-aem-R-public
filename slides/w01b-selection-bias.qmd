@@ -17,40 +17,185 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
-
 > KWAI CHANG CAINE: What happens in a man's life is already written. A man must move through life as his destiny wills.
 >
 > OLD MAN: Yet each is free to live as he chooses. Though they seem opposite, both are true.
 >
 > Kung Fu, Pilot [@Angrist2014]
 
-## Why?
+. . .
 
--   Econometricians search and reveal the **average causal effects of treatment**!
+Slides are based on two recommended readings:
 
--   Average Treatment Effect (ATE) - true causal effect is the difference between potential outcomes:
+1. Ch. 1 in [@Angrist2014]
+
+2. Ch. 2 in [@Angrist2008]
+
+# Why?
+
+-   Econometricians search and reveal the **average causal effects of treatment**
+
+. . .
+
+-   Often refereed as **Average Treatment Effect (ATE)**: $\rho$.
+
+. . .
+
+-   But the ATE is always hidden from us behind the **Selection Bias**!
+
+. . .
+
+>(How) Can we learn both potential outcomes of a choice of the same person?
+
+# Rubin's causal model
+
+## Rubin's causal model
+
+. . .
+
+$Y_i$ is the outcome for an individual $i$; 
+
+. . .
+
+$D_i=\{0,1\}$ is a treatment that (should) cause a change;
+
+. . .
 
 $$
-\text{ATE} = \text{potential outcome when treated} \\ - \text{potential outcome when not treated}
+\text{Potential outcome} = 
+\begin{cases}
+Y_{1i} & \text{ if } D_i=1 \\ 
+Y_{0i} & \text{ if } D_i=0
+\end{cases} 
 $$
 
 . . .
 
-Let us investigate the effect of the Conditional Cash Transfers on the children mean schooling in years in the household.
+Causal effect:
 
-## The World of Potential Outcomes {.smaller}
+$$
+\rho = Y_{1i} - Y_{0i}
+$$
+
+::: footer
+Seminal papers here are: [@Rubin1974; @Rubin1977; @Holland1986].
+:::
+
+## Actual outcome
+
+$$
+Y_i = 
+\begin{cases}
+Y_{1i} & \text{ if } D_i=1 \\ 
+Y_{0i} & \text{ if } D_i=0
+\end{cases} \\
+= Y_{0i} + \rho \cdot D_i
+$$
+
+. . .
+
+When $D_i=0$, $[Y_i|D_i=0] = Y_{0i} + 0$
+
+. . .
+
+When $D_i=1$, $[Y_i|D_i=1] = Y_{0i} + (Y_{1i} - Y_{0i})$
+
+## Comparison of two individuals/groups
+
+$$
+\begin{align}
+\underbrace{[Y_i|D_i=1] - [Y_i|D_i=0]}_\text{Observed difference} & = \underbrace{[Y_i|D_i=1] - [Y_{0i}|D_i = 1]}_\text{Average treatment effect on treated}  \\
+& + \underbrace{[Y_{0i}|D_i = 1] - [Y_i|D_i=0]}_\text{Selection bias} 
+\end{align}
+$$
+
+. . .
+
+Differences between treated and not treated are always affected by the Selection Bias.
+
+
+# Hypothetical example 1
+
+Does conditional cash transfers (CCT) cause a reduction in children wasting (Z score)?
+
+
+## Two households {.smaller}
+
+::: columns
+::: {.column width="50%"}
+::: {.fragment fragment-index=2}
+Household ($i=1$):
+
+::: incremental
+1.  Received CCT (treatment): 
+
+    -   $D_i=1$
+    
+2.  Observed wasting: 2 SD; 
+    
+    -   Actual outcome = Potential outcome when treated;
+    -   $[Y_i|D_i=1] = [Y_{1i}|D_i=1] = 2$ 
+
+-   Note:
+
+    -   we add $1$ to represent **a potential outcome** on $i$
+    -   $|$ means "$\text{when}$"
+    -   $D_i=1$ means treatment status is $1$
+:::
+:::
+:::
+
+::: {.column width="50%"}
+::: {.fragment fragment-index=3}
+Household ($i=2$):
+
+::: incremental
+1.  No CCT (no treatment): 
+
+    -   $D_i=0$
+    
+2.  Wasting: 1 SD; 
+
+    -   Actual outcome = Potential outcome when NOT treated;
+    -   $[Y_i|D_i=0] = [Y_{0i}|D_i=0] = 1$ 
+
+-   Note:
+
+    -   we add $0$ to represent **a potential outcome** on $i$
+    -   $|$ means "$\text{when}$"
+    -   $D_i=0$ means treatment status is $0$ (no treatment)
+:::
+:::
+:::
+:::
+
+## Comparing two households (the difference)
+
+$$
+\begin{align}
+\text{Difference between two HH} & = [Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0] \\
+& = 2 - 1 \\
+& = 1
+\end{align}
+$$
+
+::: {.fragment fragment-index=4}
+-   Is this an Average Treatment Effect (ATE)?
+:::
+
+
+## Potential Outcomes of two households {.smaller}
 
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
-|                                |                   | Household 1                                                                                    | Household 2                                                                                    |
+|                                |                   | Household $i=1$                                                                                | Household $i=2$                                                                                |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | (Treated)                                                                                      | (Not treated)                                                                                  |
 +================================+:=================:+:==============================================================================================:+:==============================================================================================:+
-| Potential outcome without CCT: | $Y_{0i}$          | 6                                                                                              | 11                                                                                             |
+| Potential outcome without CCT: | $Y_{0i}$          | -2                                                                                             | 1                                                                                              |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Not observed]{.fragment .highlight-red fragment-index="10"}]{.fragment fragment-index="10"}  | [[Observed]{.fragment .highlight-green fragment-index="9"}]{.fragment fragment-index="9"}      |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
-| Potential outcome with CCT:    | $Y_{1i}$          | 9                                                                                              | 11                                                                                             |
+| Potential outcome with CCT:    | $Y_{1i}$          | 2                                                                                              | 1                                                                                              |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Observed]{.fragment .highlight-green fragment-index="8"}]{.fragment fragment-index="8"}      | [[Not observed]{.fragment .highlight-red fragment-index="11"}]{.fragment fragment-index="11"}  |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
@@ -58,23 +203,52 @@ Let us investigate the effect of the Conditional Cash Transfers on the children 
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Observed]{.fragment .highlight-green fragment-index="6"}]{.fragment fragment-index="6"}      | [[Observed]{.fragment .highlight-green fragment-index="7"}]{.fragment fragment-index="7"}      |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
-| Actual outcome:                | $Y_{i}$           | 9                                                                                              | 11                                                                                             |
+| Actual outcome:                | $Y_{i}$           | 2                                                                                              | 1                                                                                              |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Observed]{.fragment .highlight-green fragment-index="4"}]{.fragment fragment-index="4"}      | [[Observed]{.fragment .highlight-green fragment-index="5"}]{.fragment fragment-index="5"}      |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
-| **Treatment effect (ATE):**    | $Y_{1i} - T_{0i}$ | $9-6=3$                                                                                        | $11-11=0$                                                                                      |
+| **Treatment effect:**          | $Y_{1i} - T_{0i}$ | $2-(-2)=4$                                                                                     | $1-1=0$                                                                                        |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Not observed]{.fragment .highlight-red fragment-index="12"}]{.fragment fragment-index="12"}  | [[Not observed]{.fragment .highlight-red fragment-index="13"}]{.fragment fragment-index="13"}  |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
 
 : {tbl-colwidths="[45,15,20,20]"}
 
-::: {.fragment .highlight-green fragment-index="2"}
+::: {.fragment fragment-index="2"}
 **What can we actually observe?**
 :::
 
-::: {.fragment .highlight-red fragment-index="3"}
+::: {.fragment fragment-index="3"}
 **What (from above) can we NOT observe in the real world?**
 :::
+
+
+## Comparing two households (the bias)
+
+
+$$
+\begin{align}
+\text{Difference between two HH} & = [Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0] \\ \\
+& = \underbrace{[Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=1}|D_{i=1}=1]}_\text{Average treatment effect on treated} \\
+& \qquad + \underbrace{[Y_{0,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0]}_\text{Selection bias} \\
+& = \underbrace{2 - (-2)}_\text{4} + \underbrace{(-2) - 1}_\text{-3} = \underbrace{1}_\text{Biased estimate}
+\end{align}
+$$
+
+::: incremental
+-   True causal effect of treatment on treated $i=1$: $4$;
+
+-   True causal effect of treatment on treated $i=2$: $1$;
+
+-   But comparing two groups does not reveal this!
+:::
+
+# Hypothetical example 2
+
+Does conditional cash transfers (CCT) cause **on average** a reduction in children wasting (Z score)?
+
+-   Let us compare two groups of households
+
+## 
 
 # References

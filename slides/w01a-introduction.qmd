@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-Welcome to {{< meta course >}}
+## Welcome to {{< meta course >}}
 
 **Author**: {{< meta author >}} [eduard.bukin\@agrar.uni-giessen.de](eduard.bukin@agrar.uni-giessen.de)
 
@@ -42,13 +42,12 @@ Welcome to {{< meta course >}}
 
 ::: {.column width="50%"}
 ::: incremental
-
 -   Develop practical skills of applying following empirical econometric methods in R:
 
     -   Multiple regression analysis;
     -   Panel regression analysis;
     -   Binary outcome variable;
-    -   Instrumental variable estimation;
+    -   Instrumental variable;
     -   Impact evaluation (DID and RDD);
 :::
 :::
@@ -60,7 +59,7 @@ Welcome to {{< meta course >}}
 
 ::: columns
 ::: {.column width="50%"}
-See for example: [@Wakefield1998]
+See [@Wakefield1998].
 
 ::: incremental
 -   A. Wakefield et, al. "Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children". In: **The Lancet** 351.9103 (Feb. 1998), pp. 637-641. DOI: [10.1016/s0140-6736(97)11096-0](https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(97)11096-0/fulltext) web-page.
@@ -86,7 +85,7 @@ See for example: [@Wakefield1998]
 :::
 :::
 
-## @Wakefield1998. Introduction {.smaller}
+## @Wakefield1998. Introduction (1/2)
 
 Research question: Early report on medical cases;
 
@@ -100,7 +99,9 @@ Data:
 
     -   had "... a history of normal development followed by loss of acquired skills, including language \[**autism**\]...";
 
-. . .
+-   "Control" group is made post factum, artificially, matching 12 random children of the same age/gender.
+
+## @Wakefield1998. Introduction (2/2)
 
 Treatment:
 
@@ -113,12 +114,6 @@ Outcome:
 -   Autism diagnosis \[Yes/No\] and linguistic disorders in **24 hours** to **2 month after vaccination**
 
 -   Blood and urine sample tests out of norms at the time of research \[3-10 years old\];
-
-. . .
-
-Counterfactual:
-
--   "Control" group is made post factum, artificially, matching random children of the same age/gender.
 
 ## @Wakefield1998. Findings / Contributions
 
