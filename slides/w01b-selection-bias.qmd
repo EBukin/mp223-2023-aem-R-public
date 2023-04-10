@@ -1,0 +1,80 @@
+---
+title: "Selection Bias"
+editor: source
+format:
+  revealjs: 
+    smaller: false
+bibliography: ../bib/references.bib
+---
+
+```{r}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "80%"
+)
+```
+
+# Introduction
+
+> KWAI CHANG CAINE: What happens in a man's life is already written. A man must move through life as his destiny wills.
+>
+> OLD MAN: Yet each is free to live as he chooses. Though they seem opposite, both are true.
+>
+> Kung Fu, Pilot [@Angrist2014]
+
+## Why?
+
+-   Econometricians search and reveal the **average causal effects of treatment**!
+
+-   Average Treatment Effect (ATE) - true causal effect is the difference between potential outcomes:
+
+$$
+\text{ATE} = \text{potential outcome when treated} \\ - \text{potential outcome when not treated}
+$$
+
+. . .
+
+Let us investigate the effect of the Conditional Cash Transfers on the children mean schooling in years in the household.
+
+## The World of Potential Outcomes {.smaller}
+
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+|                                |                   | Household 1                                                                                    | Household 2                                                                                    |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | (Treated)                                                                                      | (Not treated)                                                                                  |
++================================+:=================:+:==============================================================================================:+:==============================================================================================:+
+| Potential outcome without CCT: | $Y_{0i}$          | 6                                                                                              | 11                                                                                             |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | [[Not observed]{.fragment .highlight-red fragment-index="10"}]{.fragment fragment-index="10"}  | [[Observed]{.fragment .highlight-green fragment-index="9"}]{.fragment fragment-index="9"}      |
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+| Potential outcome with CCT:    | $Y_{1i}$          | 9                                                                                              | 11                                                                                             |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | [[Observed]{.fragment .highlight-green fragment-index="8"}]{.fragment fragment-index="8"}      | [[Not observed]{.fragment .highlight-red fragment-index="11"}]{.fragment fragment-index="11"}  |
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+| Actual treatment status:       | $D_{i}$           | 1                                                                                              | 0                                                                                              |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | [[Observed]{.fragment .highlight-green fragment-index="6"}]{.fragment fragment-index="6"}      | [[Observed]{.fragment .highlight-green fragment-index="7"}]{.fragment fragment-index="7"}      |
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+| Actual outcome:                | $Y_{i}$           | 9                                                                                              | 11                                                                                             |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | [[Observed]{.fragment .highlight-green fragment-index="4"}]{.fragment fragment-index="4"}      | [[Observed]{.fragment .highlight-green fragment-index="5"}]{.fragment fragment-index="5"}      |
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+| **Treatment effect (ATE):**    | $Y_{1i} - T_{0i}$ | $9-6=3$                                                                                        | $11-11=0$                                                                                      |
+|                                |                   |                                                                                                |                                                                                                |
+|                                |                   | [[Not observed]{.fragment .highlight-red fragment-index="12"}]{.fragment fragment-index="12"}  | [[Not observed]{.fragment .highlight-red fragment-index="13"}]{.fragment fragment-index="13"}  |
++--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
+
+: {tbl-colwidths="[45,15,20,20]"}
+
+::: {.fragment .highlight-green fragment-index="2"}
+**What can we actually observe?**
+:::
+
+::: {.fragment .highlight-red fragment-index="3"}
+**What (from above) can we NOT observe in the real world?**
+:::
+
+# References
