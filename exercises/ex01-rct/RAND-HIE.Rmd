@@ -1,0 +1,121 @@
+---
+title: "Exploratory analysis of the RAND Health Insurance Experiment (HIE) data"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+The RAND Health Insurance Experiment (HIE), which ran from 1974 to 1982, was one of the most influential social experiments in research history. It's purpose was to evaluate the price elasticity of the health insurance plans. The HIE enrolled 3,958 people aged 14 to 61 from six areas of the USA. The results of this randomized experiment could be used for evaluating the causal effect of the health insurance on peoples health. 
+
+Data that we are using is greater details is described in the Chapter 1. Randomized Trials in [Angrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.](https://hds.hebis.de/ubgi/Record/HEB35797798X). For our exercise, we use a somehow simplified data set with only two distinct insurance plans: 
+
+1.  Catastrophic - Analogy of having no insurance
+2.  Free - the most comprehensive insurance plan that allows practically any medical treatment for free.
+
+The question that we want to answer is about the causal effect of insurance of enrolled people health. However, such question is for later in this course. For now, we only want to learn how to make basic data visualization and summary statistics and perform means comparison t-test in R.
+
+## Loading packages and the data
+
+To start working in R, we need to load packages. Sometimes, when we have a fresh new version of R, we need to install libraries before loading them. To install package, one need to run: `install.packages("name_of_the_package")`.
+
+```{r}
+# install.package("psych")   
+library(psych)
+# install.package("tidyverse")
+library(tidyverse)  
+```
+
+Loading data.
+
+```{r}
+pre_dta <- read_csv("rand-hie-pre-treatment.csv")
+```
+
+Inspect the data:
+
+```{r}
+glimpse(pre_dta)
+```
+
+Answer the questions:
+
+-   How many observations are in the data?
+-   What is/are the variable(s) that indicate type of the insurance coverage?
+-   What insurance coverage is an insurance and what coverage is as no-insurance?
+-   What does NA values stand for in some variables?
+
+### Counting number of observations
+
+To count number of observations in each coverage
+
+```{r}
+pre_dta %>% count(plan)
+```
+
+Count number of observations in each coverage and by sex
+
+```{r}
+pre_dta %>% count(plan, female)
+```
+
+Count number of observations in each coverage and by the `non_white` variable.
+
+```{r}
+# Write your code here
+pre_dta %>% count(plan, non_white)
+```
+
+Answer:
+
+-   What does `NA` in the `non_white` column stands for?
+
+## Summary statistics 
+
+```{r}
+describe(pre_dta)
+```
+
+## Checks and balances
+
+The goal of the checks and balances is to understand if the groups compared are truly random. Groups are considered well assigned randomly, when there is no statistically significant difference between them. We can check the differences between groups visually (using box plot) or using statistical test (t-test). 
+
+### Age
+
+Answer, are there any difference in the mean age?
+
+```{r}
+pre_dta %>% 
+  ggplot() + 
+  aes(x = plan, y = age) + 
+  geom_boxplot() + 
+  xlab("Insurance plan type") + 
+  ylab("Age, years") + 
+  labs(title = "Distribution of age of the insurred participants by the coverage plan")
+```
+
+We can also perform a statistical test (t-test) to identify presence of any statistically significant difference between two groups. 
+
+Based on the test below, conclude, what is the difference between means of two groups.
+
+```{r}
+t.test(age ~ plan, data = pre_dta)
+```
+
+### Education years
+
+-   What variable corresponds to the education level?
+-   Make the box plot for education level by insurance.
+-   Perfume a t-test for means difference in education between insurance plans.
+-   Conclude whether there is a significant difference between education of the covered and not covered people.
+
+```{r}
+```
+
+
+
