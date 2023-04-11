@@ -1,5 +1,5 @@
 ---
-title: "Selection Bias"
+title: "Selection Bias and how to fight it"
 editor: source
 format:
   revealjs: 
@@ -17,39 +17,40 @@ knitr::opts_chunk$set(
 )
 ```
 
-> KWAI CHANG CAINE: What happens in a man's life is already written. A man must move through life as his destiny wills.
->
-> OLD MAN: Yet each is free to live as he chooses. Though they seem opposite, both are true.
->
-> Kung Fu, Pilot [@Angrist2014]
 
-. . .
-
-Slides are based on two recommended readings:
+Slides are based on two recommended readings. Read them if you can!
 
 1. Ch. 1 in [@Angrist2014]
 
-2. Ch. 2 in [@Angrist2008]
+2. Ch. 2 in [@Angrist2009]
 
-# Why?
-
--   Econometricians search and reveal the **average causal effects of treatment**
+# What do econometricians do?
 
 . . .
 
--   Often refereed as **Average Treatment Effect (ATE)**: $\rho$.
+-   Econometricians search and reveal the **causal effects**
+
+. . .
+
+-   Often refereed as **Average Treatment Effect (ATE)**:
+
+$$
+\rho
+$$
 
 . . .
 
 -   But the ATE is always hidden from us behind the **Selection Bias**!
 
-. . .
-
->(How) Can we learn both potential outcomes of a choice of the same person?
-
 # Rubin's causal model
 
-## Rubin's causal model
+[@Rubin1974; @Rubin1977; @Holland1986]
+
+## Potential outcomes framework
+
+::: footer
+**Seminal papers are: [@Rubin1974; @Rubin1977; @Holland1986]**.
+:::
 
 . . .
 
@@ -71,55 +72,134 @@ $$
 
 . . .
 
-Causal effect:
+Potential outcome is **what we would measure if we could go back in time and change a person’s treatment status.**
+
+. . .
+
+
+
+### Causal effect of treatment
 
 $$
 \rho = Y_{1i} - Y_{0i}
 $$
 
-::: footer
-Seminal papers here are: [@Rubin1974; @Rubin1977; @Holland1986].
-:::
+### Counterfactual for $Y_{1i}$
+
+$$
+Y_{0i}
+$$
+
 
 ## Actual outcome
 
 $$
-Y_i = 
+\begin{align}
+Y_i & = 
 \begin{cases}
 Y_{1i} & \text{ if } D_i=1 \\ 
 Y_{0i} & \text{ if } D_i=0
 \end{cases} \\
-= Y_{0i} + \rho \cdot D_i
-$$
-
-. . .
-
-When $D_i=0$, $[Y_i|D_i=0] = Y_{0i} + 0$
-
-. . .
-
-When $D_i=1$, $[Y_i|D_i=1] = Y_{0i} + (Y_{1i} - Y_{0i})$
-
-## Comparison of two individuals/groups
-
-$$
-\begin{align}
-\underbrace{[Y_i|D_i=1] - [Y_i|D_i=0]}_\text{Observed difference} & = \underbrace{[Y_i|D_i=1] - [Y_{0i}|D_i = 1]}_\text{Average treatment effect on treated}  \\
-& + \underbrace{[Y_{0i}|D_i = 1] - [Y_i|D_i=0]}_\text{Selection bias} 
+& = Y_{0i} + \rho \cdot D_i
 \end{align}
 $$
 
 . . .
 
-Differences between treated and not treated are always affected by the Selection Bias.
+**Actual outcome: single path that an individual walks.**
+
+. . .
+
+### Actual outcome is Conditional on treatment
+
+-   We use "|" to denote **conditional** on $D_i$;
+
+-   $[Y_i|D_i]$ means actual outcome $Y_i$ conditional on $D_i$
+
+-   When $D_i=0, \;\;\; [Y_i|D_i=0] = Y_{0i} + 0$
+
+-   When $D_i=1, \;\;\; [Y_i|D_i=1] = Y_{0i} + (Y_{1i} - Y_{0i})$
+
+## Comparing of two individuals
+
+$$
+\begin{align}
+\underbrace{[Y_i|D_i=1] - [Y_i|D_i=0]}_\text{Observed difference}
+\end{align}
+$$
+
+. . .
+
+$$
+\begin{align}
+\underbrace{\color{Blue}{[Y_i|D_i=1]} - \color{Red}{[Y_i|D_i=0]}}_\text{Observed difference} & 
+= \underbrace{\color{Blue}{[Y_i|D_i=1]} - [Y_{0i}|\color{Green}{D_i = 1}]}_\text{Average treatment effect on treated} \\
+& + \underbrace{[Y_{0i}|\color{Green}{D_i = 1}] - \color{Red}{[Y_i|D_i=0]}}_\text{Selection bias} 
+\end{align}
+$$
+
+. . .
+
+### Differences between treated and not treated are always affected by the Selection Bias
+
+-   because (see the next slide)
+
+::: notes
+$[Y_{0i}|\color{Green}{D_i = 1}] \ne \color{Red}{[Y_i|D_i=0]}$ or $[Y_{0i}|\color{Green}{D_i = 1}] \ne [Y_{0i}|\color{Red}{D_i=0}]$
+:::
+
+## The origin of the selection bias
+
+In: 
+
+$$
+\begin{align}
+\color{Blue}{[Y_i|D_i=1]} - \color{Red}{[Y_i|D_i=0]} & 
+= \color{Blue}{[Y_i|D_i=1]} -  [Y_{0i}|\color{Green}{D_i = 1}] \\ 
+& +  [Y_{0i}|\color{Green}{D_i = 1}] - \color{Red}{[Y_i|D_i=0]}
+\end{align}
+$$
+
+. . .
+
+-   **actual** outcome of [NO-treatment in NOT treated]{style="color: red"} is the same as **potential** outcome of [NO-treatment in NOT treated]{style="color: red"}.
 
 
-# Hypothetical example 1
+$$
+\color{Red}{[Y_i|D_i=0]} = [Y_{0i}|\color{Red}{D_i=0}]
+$$
+
+. . .
+
+However:
+
+-   **potential** outcome of [NO-treatment in **treated**]{style="color: green"} is **NOT** the same as **potential** outcome of [NO-treatment in NOT treated]{style="color: red"}.
+
+$$
+[Y_{0i}|\color{Green}{D_i = 1}] \ne [Y_{0i}|\color{Red}{D_i = 0}]
+$$
+
+
+## Selection bias in the nutshell
+
+::: incremental
+-   Selection bias arises from the lack of compatibility:
+
+    -   when we compare phenomena that are not comparable;
+    
+    -   like **apples** and **oranges**;
+    
+-   As every person is unique, the potential outcomes of treatment and no treatment are different between people.
+
+-   Selection bias arises when we do not have the Ceteris Paribus!
+:::
+
+
+# Example 1
 
 Does conditional cash transfers (CCT) cause a reduction in children wasting (Z score)?
 
-
-## Two households {.smaller}
+## Two households
 
 ::: columns
 ::: {.column width="50%"}
@@ -131,16 +211,12 @@ Household ($i=1$):
 
     -   $D_i=1$
     
-2.  Observed wasting: 2 SD; 
+2.  Observed wasting: **2 SD**; 
     
-    -   Actual outcome = Potential outcome when treated;
-    -   $[Y_i|D_i=1] = [Y_{1i}|D_i=1] = 2$ 
+    -   Actual outcome = Potential outcome when **treated**;
+    
+    -   $[Y_i|D_i=1] = [Y_{1i}|D_i=1]$ 
 
--   Note:
-
-    -   we add $1$ to represent **a potential outcome** on $i$
-    -   $|$ means "$\text{when}$"
-    -   $D_i=1$ means treatment status is $1$
 :::
 :::
 :::
@@ -154,26 +230,30 @@ Household ($i=2$):
 
     -   $D_i=0$
     
-2.  Wasting: 1 SD; 
+2.  Wasting: **1 SD**; 
 
-    -   Actual outcome = Potential outcome when NOT treated;
-    -   $[Y_i|D_i=0] = [Y_{0i}|D_i=0] = 1$ 
+    -   Actual outcome = Potential outcome when **NOT treated**;
+    
+    -   $[Y_i|D_i=0] = [Y_{0i}|D_i=0]$ 
+:::
+:::
+:::
+:::
 
--   Note:
+. . .
 
-    -   we add $0$ to represent **a potential outcome** on $i$
-    -   $|$ means "$\text{when}$"
-    -   $D_i=0$ means treatment status is $0$ (no treatment)
-:::
-:::
-:::
-:::
+### What are the similarities between two household?
+
+. . .
+
+### What are the differences?
 
 ## Comparing two households (the difference)
 
 $$
 \begin{align}
-\text{Difference between two HH} & = [Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0] \\
+\text{Difference between two HH} & = \\
+& = [Y_{i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0] \\
 & = 2 - 1 \\
 & = 1
 \end{align}
@@ -181,6 +261,10 @@ $$
 
 ::: {.fragment fragment-index=4}
 -   Is this an Average Treatment Effect (ATE)?
+:::
+
+::: {.fragment fragment-index=5}
+-   Vote?
 :::
 
 
@@ -207,7 +291,7 @@ $$
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Observed]{.fragment .highlight-green fragment-index="4"}]{.fragment fragment-index="4"}      | [[Observed]{.fragment .highlight-green fragment-index="5"}]{.fragment fragment-index="5"}      |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
-| **Treatment effect:**          | $Y_{1i} - T_{0i}$ | $2-(-2)=4$                                                                                     | $1-1=0$                                                                                        |
+| Treatment effect on treated:   | $Y_{1i} - Y_{0i}$ | $2-(-2)=4$                                                                                     | $1-1=0$                                                                                        |
 |                                |                   |                                                                                                |                                                                                                |
 |                                |                   | [[Not observed]{.fragment .highlight-red fragment-index="12"}]{.fragment fragment-index="12"}  | [[Not observed]{.fragment .highlight-red fragment-index="13"}]{.fragment fragment-index="13"}  |
 +--------------------------------+-------------------+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+
@@ -215,40 +299,417 @@ $$
 : {tbl-colwidths="[45,15,20,20]"}
 
 ::: {.fragment fragment-index="2"}
-**What can we actually observe?**
+**What can we actually observe?** **What (from above) can we NOT observe in the real world?**
 :::
 
-::: {.fragment fragment-index="3"}
-**What (from above) can we NOT observe in the real world?**
+::: {.fragment fragment-index="20"}
+Potential outcomes are different for two HHs.
+:::
+
+::: {.fragment fragment-index="20"}
+-   Why is that so?
 :::
 
 
 ## Comparing two households (the bias)
 
+$$
+\begin{align}
+\text{Diff. between two HH} & = [Y_{i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0] \\ \\
+& = \underbrace{[Y_{i=1}|D_{i=1}=1] - [Y_{0,i=1}|D_{i=1}=1]}_\text{Average treatment effect on treated} \\
+& \qquad + \underbrace{[Y_{0,i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0]}_\text{Selection bias}
+\end{align}
+$$
+
+. . .
 
 $$
 \begin{align}
-\text{Difference between two HH} & = [Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0] \\ \\
-& = \underbrace{[Y_{1,i=1}|D_{i=1}=1] - [Y_{0,i=1}|D_{i=1}=1]}_\text{Average treatment effect on treated} \\
-& \qquad + \underbrace{[Y_{0,i=1}|D_{i=1}=1] - [Y_{0,i=2}|D_{i=2}=0]}_\text{Selection bias} \\
-& = \underbrace{2 - (-2)}_\text{4} + \underbrace{(-2) - 1}_\text{-3} = \underbrace{1}_\text{Biased estimate}
+\text{Diff. between two HH} & = \underbrace{2 - (-2)}_\text{4} + \underbrace{(-2) - 1}_\text{-3} = \underbrace{1}_\text{Biased effect of a treatment}
 \end{align}
 $$
 
 ::: incremental
--   True causal effect of treatment on treated $i=1$: $4$;
-
--   True causal effect of treatment on treated $i=2$: $1$;
-
+-   True causal effect of treatment on treated in $i=1$ is $4$ and in $i=2$ is $0$;
 -   But comparing two groups does not reveal this!
+-   Instead, we have [a negative bias]{style="color: red"} of a HH who is OK without treatment.
+-   Such negative selection bias can mask true causal effect completely.
 :::
 
-# Hypothetical example 2
+# Example 2
 
 Does conditional cash transfers (CCT) cause **on average** a reduction in children wasting (Z score)?
 
--   Let us compare two groups of households
+::: incremental
+-   Let us compare **two groups of households**;
 
-## 
+-   One group is from one village that received CCT; another group is from another village that did not receive CCT.
+
+-   What could be the similarities between the two groups?
+
+-   What could be the difference between the two groups?
+
+-   If groups averages are different, does it mean that CCT caused this difference?
+:::
+
+## Average treatment effect
+
+. . .
+
+### The constant-effects assumption!
+
+$$
+Y_{1i} = \rho + Y_{0i}
+$$
+
+-   The treatment has a constant effect $\rho$ on all individuals.
+
+. . .
+
+When we reveal the causal effect $\rho$ we assume that it is constant for all treated an not treated individuals. 
+
+## Bias of the group means difference {.smaller}
+
+$$
+\begin{align}
+\text{Diff. in group means} & = \color{Blue}{E[Y_{i}|D_{i}=1]} - \color{Red}{E[Y_{i}|D_{i}=0]} \\ \\
+& = \underbrace{\color{Blue}{E[Y_{i}|D_{i}=1]} - \color{Green}{E[Y_{0i}|D_{i}=1]}}_\text{Average causal effect} \\
+& \qquad + \underbrace{\color{Green}{E[Y_{0i}|D_{i}=1]} - \color{Red}{E[Y_{i}|D_{i}=0]}}_\text{Selection bias} 
+\end{align}
+$$
+
+. . .
+
+$$
+\begin{align}
+\text{Diff. in group means} & = \rho + \text{Selection bias}
+\end{align}
+$$
+
+. . .
+
+Because:
+
+-   *average outcome* of [no-treatment in **not treated**]{style="color: red"}is the same as *average potential outcome* of [**no-treatment in not treated**]{style="color: red"}.
+
+$$
+\color{Red}{E[Y_i|D_i=0]} = \color{Red}{E[Y_{0i}|D_{i}=0]}
+$$
+
+. . .
+
+However:
+
+-   *average potential outcome* of [no-treatment in **treated**]{style="color: green"} is **NOT** the same as *average potential outcome* of [**no-treatment in not treated**]{style="color: red"}.
+
+$$
+\color{Green}{E[Y_{0i}|D_{i}=1]} \ne \color{Red}{E[Y_{0i}|D_{i}=0]}
+$$
+
+
+## Selection Bias: conclusions
+
+::: incremental
+
+-   Mortal enemy of the causal inference: leads to interpreting naive difference as causal effects.
+
+-   **Exists in any comparison, where there are systematic difference between the groups compared.**
+
+-   Appears when individuals are being "selected" for the comparison, thus:
+
+    -   on average, individuals are not the same, or
+    
+    -   there is no Ceteris Paribus.
+:::
+
+# Example 3: [@Wakefield1998]
+
+## What is wrong with [@Wakefield1998]?
+
+Remember: (1) treatment is the MMR vaccination. (2) outcome is the autism/inflation.
+
+::: columns
+::: {.column width="50%"}
+::: incremental
+Treated group:
+
+-   12 children with bad symptoms (all are vaccinated);
+
+Counter factual:
+
+-   12 "random" children with same age and gender (not vaccinated);
+
+Comparison:
+
+-   Mean prevalence of autism and inflammations by MMR vaccination status;
+
+:::
+:::
+
+::: {.column width="50%"}
+::: incremental
+-   What is wrong?
+    
+    -   Ideas?...
+    
+    -   Counterfactuals are not the same as treated.
+    
+    -   Counterfactuals do not represent the population (nearly everyong is vaccinated against MMR).
+    
+    -   Selection bias affects the means comparison.
+    
+    -   Does not reviel the causal effect.
+:::
+:::
+:::
+
+# Solutions to the Seletion Bias
+
+> Mathematically, there is no solution to the selection bias.
+
+. . .
+
+1.  We cannot rearrange numbers or variables to resolve it.
+
+. . .
+
+2.  Once a individual wanks the path, it cannot go back and take another turn.
+
+. . .
+
+> KWAI CHANG CAINE: What happens in a man's life is already written. A man must move through life as his destiny wills.
+
+> OLD MAN: Yet each is free to live as he chooses. Though they seem opposite, both are true.
+
+> Kung Fu, Pilot [@Angrist2014]
+
+## Solutions to the Selection Bias
+
+The only way to resolve it is:
+
+-   To **design the research** so that **the design eliminates the selection bias**.
+
+. . .
+
+Using **econometrics** enhanced by **statistics** and appropriate **research design**, we can:
+
+. . .
+
+-   ensure the Ceteris Paribus by
+-   "making" groups of comparison as similar as possible
+-   and controlling the differences.
+
+## Furious Five econometric methods 
+
+For ensuring ceteris paribus econometricians use:
+
+::: incremental
+-  Random assignment (RCT)
+
+-  Regression
+
+-  Instrumental Variable
+
+-  Difference-in-difference
+
+-  Regression Discontinuity Design
+:::
+
+# The power of a random assignment
+
+. . .
+
+[**Selection** bias]{style="color: red"} is the bias that appear when [individuals are **selected**]{style="color: red"} to treatment and control groups.
+
+. . .
+
+Random assignment [kills "selection"]{style="color: blue"} by [randomly assigning groups]{style="color: blue"} of treatment and control.
+
+. . .
+
+Random assignment makes treatment $D_i$ independent of potential outcomes.
+
+
+## Random assignment (1/3)
+
+Remember, we **had** to non randomly assigned groups:
+
+$$
+\text{Diff. in group means}  =  \color{Blue}{E[Y_{i}|D_{i}=1]} - \color{Red}{E[Y_{i}|D_{i}=0]} \\
+= \underbrace{E[Y_{1i}|\color{Blue}{D_{i}=1}] - E[Y_{0i}|\color{Green}{D_{i}=1}]}_\text{Average causal effect} 
++ \underbrace{E[Y_{0i}|\color{Green}{D_{i}=1}] - E[Y_{0i}|\color{Red}{D_{i}=0}]}_\text{Selection bias},
+$$
+
+. . .
+
+$$
+\text{where} \;\;\; \color{Red}{E[Y_{i}|D_{i}=0]} = E[Y_{0i}|\color{Red}{D_{i}=0}], \;\;\; \text{but} \;\;\; E[Y_{0i}|\color{Green}{D_{i}=1}] \ne E[Y_{0i}|\color{Red}{D_{i}=0}]
+$$
+
+. . .
+
+The random assignment of $D_i$ makes:
+
+$$
+E[Y_{0i}|\color{Green}{D_{i}=1}] = E[Y_{0i}|\color{Red}{D_{i}=0}]
+$$
+
+## Random assignment (2/3)
+
+Now with $E[Y_{0i}|\color{Green}{D_{i}=1}] = E[Y_{0i}|\color{Red}{D_{i}=0}]$, we have:
+
+. . .
+
+$$
+\text{Diff. in group means}  =  \underbrace{E[Y_{1i}|\color{Blue}{D_{i}=1}] - E[Y_{0i}|\color{Red}{D_{i}=0}]}_{\rho} 
++ \underbrace{E[Y_{0i}|\color{Green}{D_{i}=1}] - E[Y_{0i}|\color{Red}{D_{i}=0}]}_{0}
+$$
+
+$$
+= \underbrace{E[Y_{0i} + \rho|\color{Blue}{D_{i}=1}]}_{E[Y_{1i}|\color{Blue}{D_{i}=1}]} - E[Y_{0i}|\color{Red}{D_{i}=0}] 
+$$
+
+. . .
+
+$$
+= \rho + \underbrace{E[Y_{0i}|\color{Green}{D_{i}=1}] - E[Y_{0i}|\color{Red}{D_{i}=0}]}_{0} \\
+= \rho = \text{ATE}
+$$
+
+
+## Random assignment (3/3)
+
+With random assignment, $\text{Diff. in group means} = \text{ATE}$ works because of the Law of Large Numbers (LLN)!
+
+. . .
+
+1.  Provided that two samples are large enough for the LLN to work
+
+. . .
+
+2.  LLN ensures that such large random samples asymptotically approximate the population.
+
+. . .
+
+3.  Thus, samples are also same between each other.
+
+. . .
+
+4.  **Research Design + LLN**, ensures that $E[Y_{0i}|\color{Green}{D_{i}=1}] = E[Y_{0i}|\color{Red}{D_{i}=0}]$. 
+
+# The Randomized Control Trials (RCT)
+
+Randomized control trials is a powerful tool of causal inference. 
+
+### Key redings:
+
+Key papers:
+
+1.  @Duflo2007. Using Randomization in Development Economics Research: A Toolkit
+2.  @Athey2017. The Econometrics of Randomized Experiments
+
+RCT in development:
+
+1.  @Fiszbein2009. Conditional Cash Transfers : Reducing Present and Future Poverty (book)
+2.  @Imbens2015. Causal Inference in Statistics, Social, and Biomedical Sciences An Introduction (book)
+
+RCT in economics:
+
+1.  See reference in [@Athey2017; @Angrist2014, chapter 1; @Angrist2009, chapter 2]
+
+## RCT's criticism
+
+This research design is not ultimate and one needs to be critical to it as well!
+
+See [@Deaton2018]:
+
+-   RCT does not ultimately equalize everything because of the sample size and randomization strategy. Other factors (covariates) must be controlled for.
+
+-   External validity of the RCT could be very limited.
+
+-   Building RCT should include prior knowledge.
+
+-   RCT's finding may be contemporary.
+
+
+# Food for thought (Homework)
+
+## Homework
+
+### Watch these videos on youtube and read
+
+::: columns
+::: {.column width="50%"}
+Video 1: [Selection Bias]( https://youtu.be/6YrIDhaUQOE)
+{{< video https://youtu.be/6YrIDhaUQOE >}}
+:::
+
+::: {.column width="50%"}
+Video 2: [Randomized Trials](https://youtu.be/eGRd8jBdNYg)
+{{< video https://youtu.be/eGRd8jBdNYg >}}
+:::
+:::
+
+### Read (Optional): 
+
+[@Angrist2014, chapter 1; @Angrist2009, chapter 2]
+
+## Homwork: Discuss the following causal questions  {.smaller}
+
+1.   Many farms, particularly in Europe, are small and owned and run by families. In Eastern Europe, Soviet legacy left large scale farm. Are small scale farms more efficient and productive then the large one?
+
+2.   What is the effect of Conditional Cash Transfers rather then support with goods in kind on the extreme poverty in developing countries?
+
+3.   What is the effect of Global Food prices surge on the number of the food security in the low income countries?
+
+. . .
+
+For each of these questions answer the following:
+
+-   What is the outcome variable and what is the treatment?
+
+-   Define the counterfactual outcomes $Y_{0i}$ and $Y_{1i}$ .
+
+-   What plausible causal channel(s) runs directly from the treatment to the outcome?
+
+-   What are possible sources of selection bias in the raw comparison of outcomes by treatment status? 
+
+-   Does the selection bias overestimate the difference or underestimates it? 
+
+# Takeaways / Exam topics that require understanding
+
+## Takeaways:
+
+1.  Average treatment effect;
+
+2.  Selection bias of means comparison;
+
+3.  Actual and potential outcomes framework;
+
+4.  Counterfactual;
+
+5.  Role of research dsign in fighting with the selection bias.
+
+6.  __Furious Five__ econometric methods;
+
+7.  Random assignment;
+
 
 # References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
