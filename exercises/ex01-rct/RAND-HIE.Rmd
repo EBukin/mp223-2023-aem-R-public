@@ -13,12 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The RAND Health Insurance Experiment (HIE), which ran from 1974 to 1982, was one of the most influential social experiments in research history. It's purpose was to evaluate the price elasticity of the health insurance plans. The HIE enrolled 3,958 people aged 14 to 61 from six areas of the USA. The results of this randomized experiment could be used for evaluating the causal effect of the health insurance on peoples health. 
 
-Data that we are using is greater details is described in the Chapter 1. Randomized Trials in [Angrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.](https://hds.hebis.de/ubgi/Record/HEB35797798X). For our exercise, we use a somehow simplified data set with only two distinct insurance plans: 
+Data that we are using in greater details is described in the Chapter 1. Randomized Trials in [Angrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.](https://hds.hebis.de/ubgi/Record/HEB35797798X). For our exercise, we use a somehow simplified data set with only two distinct insurance plans: 
 
 1.  Catastrophic - Analogy of having no insurance
 2.  Free - the most comprehensive insurance plan that allows practically any medical treatment for free.
 
-The question that we want to answer is about the causal effect of insurance of enrolled people health. However, such question is for later in this course. For now, we only want to learn how to make basic data visualization and summary statistics and perform means comparison t-test in R.
+The question that we ideally want to answer is about the causal effect of insurance of enrolled people health. However, such question is for later in this course. For now, we only want to learn how to explore this data in R with visualization and summary statistics and perform means comparison t-test.
 
 ## Loading packages and the data
 
@@ -50,15 +50,19 @@ Answer the questions:
 -   What insurance coverage is an insurance and what coverage is as no-insurance?
 -   What does NA values stand for in some variables?
 
-### Counting number of observations
+After running the previous bits, in the console below type `View(pre_dta)`. 
 
-To count number of observations in each coverage
+-   What does it show to us?
+
+## Count number of observations by groups
+
+To count number of observations in each insurance plan
 
 ```{r}
 pre_dta %>% count(plan)
 ```
 
-Count number of observations in each coverage and by sex
+Count number of observations in each insurance plan and by sex
 
 ```{r}
 pre_dta %>% count(plan, female)
@@ -77,15 +81,42 @@ Answer:
 
 ## Summary statistics 
 
+We can summaries individual variables with build in commands like `sum()` or `mean()` or `sd()`. 
+
+For example line below gives the share of female in the sample.
+
+```{r}
+mean(pre_dta$female)
+```
+
+We can save this number into a variable and reuse it in calculations. See the code below, for example, and explain what did it do:
+
+
+```{r}
+frac_female <- mean(pre_dta$female)
+total_participants <- nrow(pre_dta)
+frac_female * total_participants
+total_participants - frac_female * total_participants
+```
+
+Do the same, but this time with the variable `non_white` instead of female. Explain your results.
+
+```{r}
+
+```
+
+
+### Summary statistics for entire dataset
+
 ```{r}
 describe(pre_dta)
 ```
 
 ## Checks and balances
 
-The goal of the checks and balances is to understand if the groups compared are truly random. Groups are considered well assigned randomly, when there is no statistically significant difference between them. We can check the differences between groups visually (using box plot) or using statistical test (t-test). 
+The goal of the checks and balances is to understand if the treatment and control groups are truly random. Groups are considered well assigned randomly, when there is no statistically significant difference between them. We can check the differences between groups visually (using box plot or histogram) or using statistical test (t-test). 
 
-### Age
+### Visual inspections
 
 Answer, are there any difference in the mean age?
 
@@ -99,22 +130,45 @@ pre_dta %>%
   labs(title = "Distribution of age of the insurred participants by the coverage plan")
 ```
 
+We can also display the distribution of the age variable by treatment using the histogram.
+
+-   Run the code and see what it does.
+-   Remove argument `position = "dodge"` and explain the difference in he histogram.
+-   Substitute age variable with another continuous variable.
+
+```{r}
+pre_dta %>% 
+  ggplot() + 
+  aes(x = age, fill = plan) + 
+  geom_histogram(position = "dodge") + 
+  xlab("Age, years") + 
+  ylab("Frequencies of each age group") + 
+  labs(title = "Distribution of age of the insurred participants by the coverage plan")
+```
+
+### Statistical tests
+
 We can also perform a statistical test (t-test) to identify presence of any statistically significant difference between two groups. 
 
-Based on the test below, conclude, what is the difference between means of two groups.
+-   Based on the test below, discuss what are the differences between means of two groups.
+-   Try to explain what you see.
 
 ```{r}
 t.test(age ~ plan, data = pre_dta)
 ```
 
-### Education years
+## Exploring education level
+
+Here, in space below explore, the education level variable in the same fashion as in the example above. 
 
 -   What variable corresponds to the education level?
--   Make the box plot for education level by insurance.
+-   Make the box plot and a histogram for education level by insurance.
 -   Perfume a t-test for means difference in education between insurance plans.
 -   Conclude whether there is a significant difference between education of the covered and not covered people.
 
 ```{r}
+# Develop your code here.
+
 ```
 
 
