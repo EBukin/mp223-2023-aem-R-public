@@ -17,8 +17,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
-
 ## Welcome to {{< meta course >}}
 
 **Author**: {{< meta author >}} [eduard.bukin\@agrar.uni-giessen.de](eduard.bukin@agrar.uni-giessen.de)
@@ -251,7 +249,7 @@ Research interests:
 
 ## Course structure (1/4)
 
-### **In presence** {.style=\"color: .blue\"}
+### **[In presence]{style="color: blue"}**
 
 -   Every Wednesday 14:00 - 18:00, Room: Senckenbergstr. 03, 216 (Ze-PC2)
 

@@ -8,7 +8,7 @@ This is an approximate course plan that is updated before each lecture with the 
 
 ### Week 1. April 12. Lecture: Introduction. Ceteris Paribus and Selection Bias.
 
-Slides: [w01a-introduction](/docs/slides/w01b-selection-bias.html){.target=\"_blank\"}, [w01b-selection-bias](/docs/slides/w01b-selection-bias.html){.target=\"_blank\"}.
+Slides: [w01a-introduction](/docs/slides/w01b-selection-bias.pdf), [w01b-selection-bias](/docs/slides/w01b-selection-bias.pdf).
 
 Exercises:
 
