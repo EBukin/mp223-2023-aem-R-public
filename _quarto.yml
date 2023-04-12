@@ -38,7 +38,7 @@ bibliography: "./bib/references.bib"
 format:
   revealjs: 
     width: 1280
-    height: 1024
+    height: 800
     margin: 0.05
     transition: fade
     slide-number: true
