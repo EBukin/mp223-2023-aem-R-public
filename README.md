@@ -12,12 +12,12 @@ Slides:
 
 -   [w01a-introduction](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01a-introduction.pdf)
 -   [w01b-selection-bias](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01b-selection-bias.pdf)
--   [w01c-r-rstudio-intro.qmd](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01c-r-rstudio-intro.pdf)
+-   [w01c-r-rstudio-intro](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01c-r-rstudio-intro.pdf)
 
 Exercises: 
 
 -   [ex01-rct.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex01-rct.zip) - the R project with code and data
--   Supplementary recording on how to execute the analysis []().
+-   Supplementary recording on how to execute the analysis [https://youtu.be/-ednrypEv4o](https://youtu.be/-ednrypEv4o).
 
 ### Week 2. April 19. Lecture: Multiple regression
 

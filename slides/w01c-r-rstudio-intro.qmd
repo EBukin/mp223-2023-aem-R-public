@@ -83,7 +83,7 @@ To learn more about R and RStudio, use [R For Data Science (Second Edition)](htt
 
 ![](img/w01c-rstudio-intro/Rstudio-rmd-editor-knit.png)
 
-# Practical Exercise 01. Checks an balances in teh RCT
+# Practical Exercise 01. Checks and balances in the RCT
 
 ## Application Exercise 01
 
