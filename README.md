@@ -12,6 +12,7 @@ Slides:
 
 -   [w01a-introduction](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01a-introduction.pdf)
 -   [w01b-selection-bias](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01b-selection-bias.pdf)
+-   [w01c-r-rstudio-intro.qmd](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01c-r-rstudio-intro.pdf)
 
 Exercises: 
 
