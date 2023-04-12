@@ -205,7 +205,17 @@ Post Doc.
 
 2020 - PhD in economics from Justus Liebig University Giessen
 
-Research interests: - SDG monitoring - Climate change vulnerability - Adaptation strategies - Energy economics - Econometric modelling
+Research interests:
+
+-   SDG monitoring
+
+-   Climate change vulnerability
+
+-   Adaptation strategies
+
+-   Energy economics
+
+-   Econometric modelling
 
 ## Lecturers: **Vladimir Otrachshenko** {.smaller}
 
@@ -241,7 +251,7 @@ Research interests:
 
 ## Course structure (1/4)
 
-### **in presence**
+### **In presence** {.style=\"color: .blue\"}
 
 -   Every Wednesday 14:00 - 18:00, Room: Senckenbergstr. 03, 216 (Ze-PC2)
 
