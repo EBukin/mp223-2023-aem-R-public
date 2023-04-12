@@ -8,9 +8,15 @@ This is an approximate course plan that is updated before each lecture with the 
 
 ### Week 1. April 12. Lecture: Introduction. Ceteris Paribus and Selection Bias.
 
-Slides: [w01a-introduction](/docs/slides/w01b-selection-bias.pdf), [w01b-selection-bias](/docs/slides/w01b-selection-bias.pdf).
+Slides:
 
-Exercises:
+-   [w01a-introduction](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01a-introduction.pdf)
+-   [w01b-selection-bias](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01b-selection-bias.pdf)
+
+Exercises: 
+
+-   [ex01-rct.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex01-rct.zip) - the R project with code and data
+-   Supplementary recording on how to execute the analysis []().
 
 ### Week 2. April 19. Lecture: Multiple regression
 
