@@ -19,30 +19,30 @@ Exercises:
 -   [ex01-rct.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex01-rct.zip) - the R project with code and data
 -   Supplementary recording on how to execute the analysis [https://youtu.be/-ednrypEv4o](https://youtu.be/-ednrypEv4o).
 
-### Week 2. April 19. Lecture: Multiple regression
+### Week 2. April. 19. MLR - Multiple Linear Regression (Lecture)
 
-### Week 3. April 26. R: Data Wrangling. Descriptive Statistics. 
+### Week 3. April. 26. R: Data Wrangling. Descriptive Statistics. 
 
-### Week 4. May 3. R: Multiple regression. Linear transformation. Missing data.
+### Week 4. May 3. Reduced Form Estimation (Lecture) + R: MLR. Linear transformation. Missing data.
 
-### Week 5. May 10. Lecture: Omitted Variable Bias + R: OBV formula
+### Week 5. May 10. Impact Evaluation: Counterfactual (Lecture) + R: MRL
 
-### Week 6. May 17. Lecture: Impact evaluation + R: Sharp RDD
+### Week 6. May 17. DID - Difference in Difference (Lecture) + R: DID
 
-### Week 7. May 24. Lecture: Binary outcome variable
+### Week 7. May 24. RDD - Regression Discontinuity (Lecture) + R: RDD 
 
-### Week 8. May 31. R: Binary outcome variable
+### Week 8. May 31. OVB - Omitted Variable Bias (Lecture) + R: OBV formula
 
-### Week 9. June 7 Lecture: Panel Regression and Difference in Difference + R: Panel Regression
+### Week 9. June 7. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
 
-### Week 10. June 14 R: Panel Regression and DiD
+### Week 10. June 14. IV - Instrumental Variable (Lecture) + R: IV
 
-### Week 11. June 21 Lecture: Instrumental Variable (IV) + R: IV
+### Week 11. June 21. Fuzzy RDD (Lecture) + R: Fuzzy RDD
 
-### Week 12. June 28 R: IV
+### Week 12. June 28. Binary outcome variable (Lecture)
 
-### Week 13. July 5 Lecture: Fuzzy RDD + R: Fuzzy RDD
+### Week 13. July 5. R: Binary outcome variable
 
-### Week 14. July 12 
+### Week 14. July 12. No class (POssible QA session on demand)
 
 ### Week 15. July 19. Final Exam
