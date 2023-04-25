@@ -193,11 +193,13 @@ Fill in page 2 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
 
 # Where does the regression equation come from?
 
--   We do not make regression equations because we like how they look. 
+::: incremental
+-   We do not make regression equations because we like how they look.
 
 -   We base them on theory:
 
     -   on economic theory as well as underlining natural and biological processes.
+:::
 
 ## Hedonic Model
 
@@ -253,14 +255,14 @@ $$
 
 ## @Palmquist1989 approach to land prices
 
-@Palmquist1989 relies on the partial equiblitium framework:
+@Palmquist1989 relies on the partial equilibrium framework:
 
 ::: columns
 ::: {.column width="50%"}
 **Supply**
 
 ::: fragment
--   Land owner whats to maximize own profit from renting land out. 
+-   Land owner whats to maximize own profit from renting land out.
 
 -   Owner's **offer** function:
 :::
@@ -278,14 +280,13 @@ $\tilde{z}$ - land characteristics in control of land owner;
 
 $R(\cdot)$ - realized land price (rental of sales);
 :::
-
 :::
+
 ::: {.column width="50%"}
 **Demand**
 
-
 ::: fragment
--   Farmer whats to maximize agricultural profit from land 
+-   Farmer whats to maximize agricultural profit from land
 -   Farmer's **bid** function"
 :::
 
@@ -302,18 +303,16 @@ $\beta$ - technologies and opportunities such as credit availability;
 
 $\pi^{S^{'}}$ - expected profit of agricultural producers from land;
 :::
-
 :::
 :::
 
 ## Structural model of the realized prices
 
 ::: fragment
-Supply-demand equilibrium: 
+Supply-demand equilibrium:
 
 $$\phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) = R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta)$$
 :::
-
 
 ::: fragment
 Observed prices $R$ are the equilibrium between bid and offer (demand and supply).
@@ -354,7 +353,7 @@ $$R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$$
 :::
 
 ::: fragment
-3.  Theory specifies key determinants of the outcome: 
+3.  Theory specifies key determinants of the outcome:
 
     -   AKA what are our regressors.
 :::
@@ -397,20 +396,21 @@ Read more in: @Ashenfelter1995
     -   Way of drinking
 :::
 
-## Let us see what regression tells us about wine
+## Let us see what regression tells us about wine {.smaller}
 
 $$
-
-
+Price = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{HarvestRain} + \beta_4 \text{WinterRain} + e
 $$
 
-Year: year in which grapes were harvested to make wine.
-Price: logarithm of the average market price for Bordeaux vintages according to a series of auctions. The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded.
-WinterRain: winter rainfall (in mm).
-AGST: Average Growing Season Temperature (in Celsius degrees).
-HarvestRain: harvest rainfall (in mm).
-Age: age of the wine, measured in 1983 as the number of years stored in a cask.
-FrancePop: population of France at Year (in thousands).
+What are our expectations about signs of $\beta$ s?
+
+### Data 
+
+-   `Price`: average market price for Bordeaux vintages according to a series of auctions (USD). The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded. 
+-   `WinterRain`: winter rainfall (in mm). 
+-   `AGST`: Average Growing Season Temperature (in Celsius degrees).
+-   `HarvestRain`: harvest rainfall (in mm). 
+-   `Age`: age of the wine, measured in 1983 as the number of years stored in a cask.
 
 
 # Multiple Linear Regression
@@ -578,7 +578,7 @@ $$
 :::
 
 ::: {.fragment fragment-index="4"}
-When a confounder correlated with outcome $Cov(c,y) \ne 0$ and other regressors $Cov(c,u) \ne 0$ and $Cov(c,x) \ne 0$.
+When a confounded correlated with outcome $Cov(c,y) \ne 0$ and other regressors $Cov(c,u) \ne 0$ and $Cov(c,x) \ne 0$.
 :::
 
 ::: {.fragment fragment-index="6"}
@@ -595,9 +595,9 @@ Absence of the Ceteris Paribus in a regression is called **omitted variable bias
 
 ## OVB: The long model
 
-Supposed that our **ideal regression** 
+Supposed that our **ideal regression**
 
--   the true model 
+-   the true model
 -   population regression
 -   **long model** is
 
@@ -797,7 +797,7 @@ ggpredict(mod1, term = c("educ"))
 ggpredict(mod1, term = c("educ", "female")) 
 ```
 :::
-::: 
+:::
 
 ::: {.column width="50%"}
 ::: r-stack
@@ -815,9 +815,8 @@ ggeffect(mod1, term = c("educ", "female")) %>% plot()
 ```
 :::
 :::
-::: 
-::: 
-
+:::
+:::
 
 ## Conclude
 
@@ -847,7 +846,6 @@ $$
 
 ## Elasticity in a linear model
 
-
 $$
 \text{wage} = \beta_0 + \beta_1 \text{educ} + \beta_2 \text{exper} + \beta_3 \text{black} + e
 $$
@@ -864,11 +862,11 @@ $$
 
 . . .
 
-where: $\beta_1 =  \frac{\partial y}{\partial x}$
+where: $\beta_1 = \frac{\partial y}{\partial x}$
 
 . . .
 
-Therefore, elasticity of wage depends on on the value of $x$ and $y$. 
+Therefore, elasticity of wage depends on on the value of $x$ and $y$.
 
 . . .
 
@@ -923,7 +921,6 @@ bp1 + bp2
 :::
 
 ::: {.column width="50%"}
-
 Elasticity at mean:
 
 ```{r}
@@ -941,7 +938,6 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 ```
 :::
 :::
-
 
 # Regression assumptions
 
@@ -971,9 +967,9 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 -   Typical plots:
 
     -   Scatter plots of dependent and independent variables;
-    
+
     -   **observed** versus **predicted/fitted** values;
-    
+
     -   **residuals** versus **predicted/fitted** values;
 :::
 
@@ -990,33 +986,30 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 ## Common linear transformations {.smaller}
 
 ::: incremental
-
--   Interaction term: $y = \beta_0 + \beta_1 x_1 \cdot  x_2 + \beta_2 x_3 + e$
+-   Interaction term: $y = \beta_0 + \beta_1 x_1 \cdot x_2 + \beta_2 x_3 + e$
 
 -   Natural logarithm: $\log y = \beta_0 + \beta_2 \log x_1 + \beta_2 x_2 + \beta_3 \log x_3 + e$
 
 -   Power transformation and polynomial: $y = \beta_0 + \beta_2 x_1 ^ 2 + \beta_2 x_2 ^ 3 + \beta_3 \sqrt x_3 + e$
 
     -   Box-Cox transformation.
-    
+
     -   Tailor expansion (Cobb-Douglas, Trans-log).
 
 -   Reciprocal: $\log y = \beta_0 + \beta_2 \frac{1}{x_1} + \beta_2 x_2 + \beta_3 \log x_3 + e$
 
 -   Standardized variables $\frac{y - \bar y}{S_y} = \beta_0 + \beta_1 \frac{x_1 - \bar x_1}{S_{x_1}} + \beta_2 \frac{x_2 - \bar x_2}{S_{x_2}} + e$
-
 :::
 
 ## Log {.smaller}
 
-|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                  Interpretation                   |                    Elasticity                     |
+|     Model     | Dep. var. | Indep. var. |             Equation              |              Slope              |            Interpretation             |                    Elasticity                     |
 |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |                                                   | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
-|     Level - level      |             $y$              |             $y$              |      $y=\beta_0 + \beta_1 x$      |            $\beta_1$            |           $\Delta y = \beta_1 \Delta x$           |               $\beta_1 \frac{x}{y}$               |
-|      Level - log       |             $y$              |           $\log x$           |   $\log y=\beta_0 + \beta_1 x$    |           $\beta_1 y$           |       $\Delta y = (\beta_1/100)\% \Delta x$       |                    $\beta_1 x$                    |
-|      Log - level       |           $\log y$           |             $x$              |   $y=\beta_0 + \beta_1 \log x$    |      $\beta_1 \frac{1}{x}$      |       $\% \Delta y = 100 \beta_1 \Delta x$        |               $\beta_1 \frac{1}{y}$               |
-|       Log - log        |           $\log y$           |           $\log x$           | $\log y=\beta_0 + \beta_1 \log x$ |      $\beta_1 \frac{y}{x}$      |        $\% \Delta y = \% \beta_1 \Delta x$        |                     $\beta_1$                     |
-
+|               |           |             |                                   | $\frac{\partial y}{\partial x}$ |                                       | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+| Level - level |    $y$    |     $y$     |      $y=\beta_0 + \beta_1 x$      |            $\beta_1$            |     $\Delta y = \beta_1 \Delta x$     |               $\beta_1 \frac{x}{y}$               |
+|  Level - log  |    $y$    |  $\log x$   |   $\log y=\beta_0 + \beta_1 x$    |           $\beta_1 y$           | $\Delta y = (\beta_1/100)\% \Delta x$ |                    $\beta_1 x$                    |
+|  Log - level  | $\log y$  |     $x$     |   $y=\beta_0 + \beta_1 \log x$    |      $\beta_1 \frac{1}{x}$      | $\% \Delta y = 100 \beta_1 \Delta x$  |               $\beta_1 \frac{1}{y}$               |
+|   Log - log   | $\log y$  |  $\log x$   | $\log y=\beta_0 + \beta_1 \log x$ |      $\beta_1 \frac{y}{x}$      |  $\% \Delta y = \% \beta_1 \Delta x$  |                     $\beta_1$                     |
 
 ## Log: Key limitations
 
@@ -1024,13 +1017,12 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 
 -   what is the $\log(x)$, when $x < 0$?
 
+## Variables standardiztion to the standard normal distribution {.smaller}
 
-## Variables standardiztion to the standard normal distribution  {.smaller}
-
-|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                  Interpretation                   |                    Elasticity                     |
+|         Model          |           Dep. var.            |          Indep. var.           |          Equation           |                Slope                |                  Interpretation                   |                    Elasticity                     |
 |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |                                                   | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
-| Standardized variables | $y^* = \frac{y - \bar y}{S_y}$ | $x^* = \frac{x - \bar x}{S_x}$ |     $y^*=\beta_0 + \beta_1 x^*$      |    $\frac{\partial y^*}{\partial x^*}$   | $\text{SD} \Delta y = \text{SD} \beta_1 \Delta x$ |         DIY                      |
+|                        |                                |                                |                             |   $\frac{\partial y}{\partial x}$   |                                                   | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+| Standardized variables | $y^* = \frac{y - \bar y}{S_y}$ | $x^* = \frac{x - \bar x}{S_x}$ | $y^*=\beta_0 + \beta_1 x^*$ | $\frac{\partial y^*}{\partial x^*}$ | $\text{SD} \Delta y = \text{SD} \beta_1 \Delta x$ |                        DIY                        |
 
 . . .
 
@@ -1040,17 +1032,16 @@ Key limitations:
 
 ## Reciprocal
 
-|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                          Elasticity                     |
-|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |         $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
-|       Reciprocal       |             $y$              |        $\frac{1}{x}$         | $y=\beta_0 + \beta_1 \frac{1}{x}$ |    $-\beta_1 \frac{1}{x^2}$     |                    $-\beta_1 \frac{1}{xy}$              |
+|   Model    | Dep. var. |  Indep. var.  |             Equation              |              Slope              |                    Elasticity                     |
+|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|
+|            |           |               |                                   | $\frac{\partial y}{\partial x}$ | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+| Reciprocal |    $y$    | $\frac{1}{x}$ | $y=\beta_0 + \beta_1 \frac{1}{x}$ |    $-\beta_1 \frac{1}{x^2}$     |              $-\beta_1 \frac{1}{xy}$              |
 
 Interpretation:
 
 -   When $x$ increases to infinity, $y$ reaches asymptotically $\beta_0$
 
 See @Gujarati2004 Chapter 6.7 for more details on interpreting the reciprocal relationship.
-
 
 ## Linearity in the wage equation
 
@@ -1075,8 +1066,8 @@ summary(mod2)
 #| fig-asp: 1
 check_model(mod1, check = "linearity") 
 ```
+:::
 
-::: 
 ::: {.column width="50%"}
 ::: fragment
 ```{r}
@@ -1167,7 +1158,6 @@ dta <-
 glimpse(dta)
 ```
 
-
 ## Perfect collinearity with dummy variable (2)
 
 ```{r}
@@ -1195,7 +1185,6 @@ my_summary <- function(x) {
 
 list(fit1, fit2, fit3, fit5, fit6) %>% my_summary()
 ```
-
 
 ## Perfect collinearity with dummy variable (2)
 
@@ -1229,13 +1218,11 @@ Re watch video 2: [Selection Bias](https://youtu.be/6YrIDhaUQOE) or this link: <
 
 Follow pre-recorded videos in the order below. Please note that slides below supplement some of those practical works.
 
--   Ex.03 Wine regressions
 -   Ex.03a Regression basics
 -   Ex.03b Wage education
 -   Ex.03c Hedonic Land Prices Model
 :::
 :::
-
 
 # HW Slides for: Ex.03a Regression basics
 
@@ -1361,7 +1348,7 @@ $$
 
 ::: columns
 ::: {.column width="50%"}
-Measure of variance in the estimated parameters $\beta$. Compouted based on the **Variance Covariance** matrix
+Measure of variance in the estimated parameters $\beta$. Computed based on the **Variance Covariance** matrix
 
 $$
 Var(\hat \beta) = (\pmb{x}^T \pmb{x})^{-1} \hat \sigma_e
@@ -1409,6 +1396,4 @@ Get comfortable with the terminology:
 
 Regression components and how do one produce them:
 
-         
 -   $x$, $y$, $\beta$, standard errors.
-
