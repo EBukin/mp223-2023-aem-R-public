@@ -1,0 +1,1202 @@
+---
+title: "Multiple Linear Regression: practical aspects"
+editor: source
+format:
+  revealjs: 
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(ggdag)      # For plotting DAGs
+library(dagitty)    # For working with DAG logic
+library(ggpubr)
+library(wooldridge)
+library(here)
+```
+
+```{r eval=FALSE}
+#| eval: false
+#| echo: false
+#| message: false
+#| error: false
+#| warning: false
+fgwd = 7
+fghg = 3
+w_e_gad <- dagify(y ~ x,
+                  exposure = "x",
+                  outcome = "y",
+                  labels = c(y = "Wage", x = "Education"),
+                  coords = list(x = c(x = 1, y = 3),
+                                y = c(x = 2, y = 2)))
+
+w03_dag_gg_1 <- 
+  ggdag_status(w_e_gad, use_labels = "label", text = FALSE) +
+  guides(fill = FALSE, color = FALSE) +  # Disable the legend
+  theme_dag()
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-01.png"), 
+       plot = w03_dag_gg_1, width = fgwd, height = fghg, bg = "white")
+
+dag_2 <- 
+  dagify(
+    y ~ x + u,
+    x ~ u,
+    u ~ x, 
+    exposure = "x",
+    outcome = "y",
+    labels = c(y = "Wage", x = "Education", u = "Confounder"),
+    coords = list(x = c(x = 1, y = 3, u = 2),
+                  y = c(x = 2, y = 2, u = 3)))
+
+w03_dag_gg_2 <-
+  dag_2 %>% 
+  ggdag_status(use_labels = "label", text = TRUE) +
+  guides(fill = FALSE, color = FALSE) +  
+  theme_dag_blank()
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-02.png"), 
+       plot = w03_dag_gg_2, width = fgwd, height = fghg, bg = "white")
+
+dag_3 <- 
+  dagify(
+    y ~ x + u,
+    x ~ u, 
+    u ~ x, 
+    latent = "u",
+    exposure = "x",
+    outcome = "y",
+    labels = c(y = "Wage", x = "Education", u = "Tenure"),
+    coords = list(x = c(x = 1, y = 3, u = 2),
+                  y = c(x = 2, y = 2, u = 3)))
+gg_dag3 <- 
+  dag_3 %>% 
+  ggdag_status(use_labels = "label", text = TRUE) +
+  guides(fill = FALSE, color = FALSE) +  
+  theme_dag_blank()
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-03.png"), 
+       plot = gg_dag3, width = fgwd, height = fghg, bg = "white")
+
+gg_dag3a <- 
+  gg_dag3 + 
+  annotate('text', x = 1.40, y = 2.5, label = "italic(Cov)(x, u)", 
+           parse = TRUE, angle = 50, size = 7)
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-03a.png"), 
+       plot = gg_dag3a, width = fgwd, height = fghg, bg = "white")
+
+gg_dag3b <- 
+  gg_dag3 + 
+  annotate('text', x = 1.40, y = 2.5, label = "italic(Cov)(x, u)", 
+           parse = TRUE, angle = 50, size = 7) + 
+  annotate('text', x = 2.6, y = 2.5, label = "gamma", 
+           parse = TRUE, angle = -50, size = 7)
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-03b.png"), 
+       plot = gg_dag3b, width = fgwd, height = fghg, bg = "white")
+
+
+gg_dag3c <- 
+  gg_dag3 + 
+  annotate('text', x = 1.40, y = 2.5, label = "italic(Cov)(x, u)", 
+           parse = TRUE, angle = 50, size = 7) + 
+  annotate('text', x = 2.6, y = 2.5, label = "gamma", 
+           parse = TRUE, angle = -50, size = 7) + 
+  annotate('text', x = 2, y = 2.05, label = "beta", 
+           parse = TRUE, angle = 0, size = 7) 
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-03c.png"), 
+       plot = gg_dag3c, width = fgwd, height = fghg, bg = "white")
+
+dag_4a <- 
+  dagify(
+    y ~ x + u + c,
+    x ~ u + c, 
+    u ~ c + x,
+    latent = "u",
+    exposure = "x",
+    outcome = "y",
+    labels = c(y = "Wage", x = "Education", u = "Tenure", c = "Confounder"),
+    coords = list(x = c(x = 1, y = 3, u = 2, c = 0.5),
+                  y = c(x = 2, y = 2, u = 3, c = 3)))
+gg_dag4 <- 
+  dag_4a %>% 
+  ggdag_status(use_labels = "label", text = TRUE) +
+  guides(fill = FALSE, color = FALSE) +  
+  theme_dag_blank()
+  
+gg_dag4a <-
+  dag_4a %>% 
+  ggdag_status(use_labels = "label", text = TRUE) +
+  guides(fill = FALSE, color = FALSE) +  
+  theme_dag_blank() + 
+  annotate('text', x = 1.44, y = 2.5, label = "italic(Cov(x, u))", 
+           parse = TRUE, angle = 55, size = 5) + 
+  annotate('text', x = 1.24, y = 2.75, label = "italic(Cov(c, y))", 
+           parse = TRUE, angle = -35, size = 5) + 
+  annotate('text', x = 1.2, y = 3.03, label = "italic(Cov(c, u))", 
+           parse = TRUE, angle = 0, size = 5) + 
+  annotate('text', x = 0.8, y = 2.5, label = "italic(Cov(c, x))", 
+           parse = TRUE, angle = -70, size = 5) 
+
+gg_dag4b <- 
+  gg_dag4a + 
+  annotate('text', x = 2.6, y = 2.5, label = "tilde(gamma)", 
+           parse = TRUE, angle = -50, size = 5) + 
+  annotate('text', x = 2, y = 2.05, label = "tilde(beta)", 
+           parse = TRUE, angle = 0, size = 5) 
+
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-04.png"), 
+       plot = gg_dag4, width = 7, height = 4, bg = "white")
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-04a.png"), 
+       plot = gg_dag4a, width = 7, height = 4, bg = "white")
+
+set.seed(112)
+ggsave(filename =  here("slides", "img", "w03", "dag-04b.png"), 
+       plot = gg_dag4b, width = 7, height = 4, bg = "white")
+
+```
+
+# Recap
+
+## Recap: Ceteris Paribus
+
+Fill in page 1 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
+
+## Recap: Multiple regression
+
+Fill in page 2 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
+
+
+# Multiple Linear Regression
+
+> "Regression is the tool that masters pick up first, if only to provide a benchmark for more elaborate empirical strategies." [@Angrist2014]
+
+# Why regression?
+
+> "... regression estimates are weighted averages of multiple matched comparisons of the sort constructed for the groups in our stylized matching matrix." [@Angrist2014]
+
+## Wage \~ Education: equation
+
+$$
+Y_i = \alpha + \beta \, P_i + e_i,
+$$
+
+where:
+
+-   $Y_i$ is wage in Euro per week
+
+-   $P_i$ is education in years
+
+-   $\alpha$ is the intercept
+
+-   $\beta$ is the slope or **causal effect of interest**
+
+## Wage \~ Education.
+
+::: footer
+Causal directed acyclic graph.
+:::
+
+![](img/w03/dag-01.png){fig-align="center" width="100%"}
+
+## Relationship
+
+```{r}
+#| echo: false
+wage_dta <-
+  wooldridge::wage2 %>%
+  as_tibble() %>%
+  select(wage, educ, exper, black)
+
+wage_plt <-
+  wage_dta %>% ggplot() + 
+  aes(x = educ, y = wage) + 
+  geom_jitter(alpha = 0.5, width  = 0.2) + 
+  theme_minimal() + 
+  xlab("Education, years") + 
+  ylab("Wage, USD / week") + 
+  geom_smooth(method = "lm", se = FALSE, formula = y~x) +
+  stat_regline_equation(
+    aes(label =  paste(after_stat(eq.label), after_stat(adj.rr.label), sep = "~~~~")),
+    formula = y~x
+  ) +
+  theme_bw()
+```
+
+::: columns
+::: {.column width="75%"}
+```{r}
+#| echo: false
+#| fig-asp: 0.9
+wage_plt
+```
+:::
+
+::: {.column width="25%"}
+::: incremental
+-   Interpret the effect of education on wage.
+
+-   Is this a causal effect on education on wage?
+
+    -   Explain why?
+:::
+:::
+:::
+
+## Wage \~ Education: Is there a ceteris paribus?
+
+::: r-stack
+::: fragment
+![](img/w03/dag-01.png){fig-align="center" width="100%"}
+:::
+
+::: fragment
+![](img/w03/dag-02.png){fig-align="center" width="100%"}
+:::
+
+::: fragment
+![](img/w03/dag-03.png){fig-align="center" width="100%"}
+:::
+
+::: fragment
+![](img/w03/dag-03a.png){fig-align="center" width="100%"}
+:::
+
+::: fragment
+![](img/w03/dag-03b.png){fig-align="center" width="100%"}
+:::
+
+::: fragment
+![](img/w03/dag-03c.png){fig-align="center" width="100%"}
+:::
+:::
+
+::: fragment
+> Regression accounts for the observed (included) confounders by attributing variance in $y$ to the variance in $x$ (variable of interest) and $u$ (control variables).
+:::
+
+## Why regression?
+
+::: fragment
+-   In multiple regression, Ceteris Paribus is achieved by introducing **control variables** ($A_i$).
+:::
+
+::: fragment
+$$
+Y_i = \alpha + \beta \, P_i + \gamma \, A_i + e_i,
+$$
+:::
+
+::: incremental
+-   Regression **controls** the variance in $Y_i$ with observed $P_i$ and $A_i$.
+
+-   In the context of the variable of interest ($P_i$):
+
+    -   Regression controls other variables ($A_i$) fixed,
+
+    -   ensuring that $\beta$ reviels causal effect Ceteris Paribus.
+:::
+
+## Wage \~ Education: Really? Is there a ceteris paribus? {.smaller}
+
+::: columns
+::: {.column width="75%"}
+::: r-stack
+::: {.fragment fragment-index="2"}
+![](img/w03/dag-04.png){fig-align="center" width="100%"}
+:::
+
+::: {.fragment fragment-index="5"}
+![](img/w03/dag-04a.png){fig-align="center" width="100%"}
+:::
+
+::: {.fragment fragment-index="7"}
+![](img/w03/dag-04b.png){fig-align="center" width="100%"}
+:::
+:::
+:::
+
+::: {.column width="25%"}
+::: {.fragment fragment-index="1"}
+-   Not every confounded could be observed or measures.
+
+-   There are unobserved ones:
+
+    -   ...
+:::
+
+::: {.fragment fragment-index="3"}
+-   Ability, attitude, effort.
+:::
+:::
+:::
+
+::: {.fragment fragment-index="4"}
+When a confounder correlated with outcome $Cov(c,y) \ne 0$ and other regressors $Cov(c,u) \ne 0$ and $Cov(c,x) \ne 0$.
+:::
+
+::: {.fragment fragment-index="6"}
+-   Estimates of $\beta$ and $\gamma$ are no longer ceteris paribus!
+
+    -   They are biased: $\tilde{\beta}$ and $\tilde{\gamma}$
+:::
+
+# Selection bias in regression analysis
+
+. . .
+
+Absence of the Ceteris Paribus in a regression is called **omitted variable bias**
+
+## OVB: The long model
+
+Supposed that our **ideal regression** 
+
+-   the true model 
+-   population regression
+-   **long model** is
+
+. . .
+
+$$
+Y_i = \alpha ^ l + \beta ^ l P_i + \gamma A_i + e^l_i,
+$$
+
+. . .
+
+We cannot measure $A_i$, but:
+
+. . .
+
+-   $Cov(A_i, Y_i) \ne 0$ or $E[Y_i|A_i] \ne 0$: $A_i$ affects $Y_i$; and
+
+. . .
+
+-   $Cov(A_i, P_i) \ne 0$ or $E[P_i|A_i] \ne 0$: $A_i$ correlated with $P_i$.
+
+## OVB: The short model
+
+Because of the **omitted variable**, we cannot estimate the **long model**. Instead, we estimate a **short model**:
+
+. . .
+
+$$
+Y_i = \alpha ^ s + \beta^s P_i + e^s_i
+$$
+
+. . .
+
+where omitted variable is implicit in the residuals:
+
+. . .
+
+$$
+e^s_i = e^l_i + A_i
+$$
+
+## Bias of variable ommition
+
+$$
+\text{OVB} = \beta^s - \beta^l
+$$
+
+To be continued on the OVB in another week
+
+## Fighting selection bias with regression?
+
+. . .
+
+Any ideas?
+
+. . .
+
+Any ideas?
+
+. . .
+
+We include control variables to reduce or defeat the omitted variable bias.
+
+# Wage \~ Education example
+
+## Introduction
+
+::: footer
+See @wooldridge2020introductory
+:::
+
+We use data from (Blackburn and Neumark, 1992) on wage determinants. Variables present are:
+
+-   $wage$ - monthly earnings in USD;
+-   $educ$ - years of education;
+-   $exper$ - years of experiences;
+-   $black$ - dummy variable representing individuals which are not Caucasian;
+-   $female$ - dummy variable representing females;
+
+. . .
+
+Our goal is to identify the causal effect of education on wage estimating following equation:
+
+$$
+\text{wage} = \beta_0 + \beta_1 \text{educ} + \beta_2 \text{exper} + \beta_3 \text{black} + \beta_4 \text{female} + e
+$$
+
+## Loading data
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+library(tidyverse)
+library(GGally)
+library(modelsummary)
+library(ggeffects)
+library(patchwork)
+wage_dta <- 
+  here::here("exercises", "ex03-regression-part1", "wage-full.csv") %>% 
+  read_csv() %>%
+  mutate(caucasian = ifelse(black, "no", "yes"),
+         caucasian = as.factor(caucasian))
+```
+
+```{r}
+glimpse(wage_dta)
+```
+
+## Exploratory data analysis (1/3)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+datasummary_skim(wage_dta, output = "markdown")
+```
+
+## Exploratory data analysis (2/3)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+wage_dta %>% 
+  select(-black, -white) %>% 
+  ggpairs(aes(color = caucasian)) + theme_bw()
+```
+
+## Exploratory data analysis (3/3)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+wage_dta %>% 
+  ggplot() +
+  aes(x = educ, y = wage, colour = caucasian) +
+  geom_jitter(alpha = 0.5, width  = 0.2) +
+  theme_minimal() +
+  xlab("Education, years") +
+  ylab("Wage, USD / month") +
+  geom_smooth(method = "lm", se = FALSE, formula = y ~ x, aes(colour = NULL), colour = "black") +
+  stat_regline_equation(
+    aes(colour = NULL, 
+        label =  paste(after_stat(eq.label), after_stat(adj.rr.label), sep = "~~~~")),
+    formula = y ~ x) +
+  theme_bw()
+```
+
+## Estimating regression
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| results: markup
+mod1 <- lm(wage ~ educ + exper + black + female, data = wage_dta)
+mod1
+```
+
+## Interpreting the results (1)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| results: markup
+summary(mod1)
+```
+
+## Interpreting the results (2): fancy summary
+
+```{r}
+modelsummary(list(`Model 1` = mod1), 
+             estimate = "{estimate} ({std.error}){stars}", 
+             statistic = NULL, 
+            output = "markdown")
+```
+
+## Interpreting the results (3): Effect of a dummy variables {.smaller}
+
+::: columns
+::: {.column width="50%"}
+::: {.fragment fragment-index="1"}
+```{r}
+#| echo: true
+ggpredict(mod1, term = c("educ")) 
+```
+:::
+
+::: {.fragment fragment-index="3"}
+```{r}
+#| echo: true
+ggpredict(mod1, term = c("educ", "female")) 
+```
+:::
+::: 
+
+::: {.column width="50%"}
+::: r-stack
+::: {.fragment fragment-index="2"}
+```{r}
+#| fig-asp: 1
+ggpredict(mod1, term = c("educ")) %>% plot()
+```
+:::
+
+::: {.fragment fragment-index="4"}
+```{r}
+#| fig-asp: 1
+ggeffect(mod1, term = c("educ", "female")) %>% plot()
+```
+:::
+:::
+::: 
+::: 
+
+
+## Conclude
+
+-   Is model 1 a good predictor of wage based on education?
+
+-   Is the effect of education causal?
+
+# Elasticity
+
+## Elasticity
+
+Elasticity is a unit-less measure of change in one variable as a result of a change in the other.
+
+. . .
+
+Elasticity of $y$ with response to $x$ ($x$ elasticity of $y$):
+
+$$
+\epsilon = \frac{\partial y / y}{\partial x / x} =  \frac{\partial y}{\partial x}  \frac{x}{y}
+$$
+
+. . .
+
+$$
+\epsilon = \frac{ \frac{y_2 - y_1}{y_1} }{ \frac{x_2 - x_1}{x_1}}
+$$
+
+## Elasticity in a linear model
+
+
+$$
+\text{wage} = \beta_0 + \beta_1 \text{educ} + \beta_2 \text{exper} + \beta_3 \text{black} + e
+$$
+
+. . .
+
+Let us compute elasticity of $\text{wage}$ in response to $\text{educ}$:
+
+. . .
+
+$$
+\epsilon_{\text{wage},\text{educ}} = \frac{\partial y}{\partial x}  \frac{x}{y}, 
+$$
+
+. . .
+
+where: $\beta_1 =  \frac{\partial y}{\partial x}$
+
+. . .
+
+Therefore, elasticity of wage depends on on the value of $x$ and $y$. 
+
+. . .
+
+When elasticity depends on a valued of another variable, we evaluate it at mean (or other quantiles) values of these variables.
+
+## Eslimating elasticity in a linear model (1/2)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+q2 <- . %>% fivenum() %>% `[[`(2)
+q4 <- . %>% fivenum() %>% `[[`(4)
+datasummary(mean + q2 + median + q4 ~ wage + educ , wage_dta, 
+            output = "markdown")
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+#| fig-asp: 1
+bp1 <- wage_dta %>% ggplot() + geom_boxplot() + aes(y = wage) + theme_bw()
+bp2 <- wage_dta %>% ggplot() + geom_boxplot() + aes(y = educ) + theme_bw()
+library(patchwork)
+bp1 + bp2
+```
+:::
+:::
+
+## Eslimating elasticity in a linear model (1/2)
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| error: false
+#| fig-asp: 1
+bp1 <- wage_dta %>% ggplot() + geom_boxplot() + aes(y = wage) + theme_bw()
+bp2 <- wage_dta %>% ggplot() + geom_boxplot() + aes(y = educ) + theme_bw()
+library(patchwork)
+bp1 + bp2
+```
+:::
+
+::: {.column width="50%"}
+
+Elasticity at mean:
+
+```{r}
+#| echo: true
+coef(mod1)[2] * (mean(wage_dta$educ) / mean(wage_dta$wage))
+```
+
+Elasticity at 2nd, 3rd and 4th quartiles:
+
+```{r}
+#| echo: true
+coef(mod1)[2] * (fivenum(wage_dta$educ)[[2]] / fivenum(wage_dta$wage)[[2]])
+coef(mod1)[2] * (fivenum(wage_dta$educ)[[3]] / fivenum(wage_dta$wage)[[3]])
+coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
+```
+:::
+:::
+
+
+# Regression assumptions
+
+# Linearity
+
+## Linearity: meaning
+
+::: incremental
+-   the expected value of dependent variable is a straight-line function of the independent variable
+
+-   If linearity is violated:
+
+    -   **estimates are biased**
+
+    -   inappropriate representation of the dependent variable
+:::
+
+## Linearity: detection
+
+::: incremental
+-   How to detect a non-linearity?
+
+    -   no accepted statistical tests, but
+
+    -   the visual inspection
+
+-   Typical plots:
+
+    -   Scatter plots of dependent and independent variables;
+    
+    -   **observed** versus **predicted/fitted** values;
+    
+    -   **residuals** versus **predicted/fitted** values;
+:::
+
+## Linearity: resolutions
+
+1.  (non) linear transformation to the dependent and/or independent variables;
+
+    -   **it does change the way how we must interpret coefficients**;
+
+2.  find a different independent variable;
+
+3.  propose a different functional form;
+
+## Common linear transformations {.smaller}
+
+::: incremental
+
+-   Interaction term: $y = \beta_0 + \beta_1 x_1 \cdot  x_2 + \beta_2 x_3 + e$
+
+-   Natural logarithm: $\log y = \beta_0 + \beta_2 \log x_1 + \beta_2 x_2 + \beta_3 \log x_3 + e$
+
+-   Power transformation and polynomial: $y = \beta_0 + \beta_2 x_1 ^ 2 + \beta_2 x_2 ^ 3 + \beta_3 \sqrt x_3 + e$
+
+    -   Box-Cox transformation.
+    
+    -   Tailor expansion (Cobb-Douglas, Trans-log).
+
+-   Reciprocal: $\log y = \beta_0 + \beta_2 \frac{1}{x_1} + \beta_2 x_2 + \beta_3 \log x_3 + e$
+
+-   Standardized variables $\frac{y - \bar y}{S_y} = \beta_0 + \beta_1 \frac{x_1 - \bar x_1}{S_{x_1}} + \beta_2 \frac{x_2 - \bar x_2}{S_{x_2}} + e$
+
+:::
+
+## Log {.smaller}
+
+|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                  Interpretation                   |                    Elasticity                     |
+|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
+|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |                                                   | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+|     Level - level      |             $y$              |             $y$              |      $y=\beta_0 + \beta_1 x$      |            $\beta_1$            |           $\Delta y = \beta_1 \Delta x$           |               $\beta_1 \frac{x}{y}$               |
+|      Level - log       |             $y$              |           $\log x$           |   $\log y=\beta_0 + \beta_1 x$    |           $\beta_1 y$           |       $\Delta y = (\beta_1/100)\% \Delta x$       |                    $\beta_1 x$                    |
+|      Log - level       |           $\log y$           |             $x$              |   $y=\beta_0 + \beta_1 \log x$    |      $\beta_1 \frac{1}{x}$      |       $\% \Delta y = 100 \beta_1 \Delta x$        |               $\beta_1 \frac{1}{y}$               |
+|       Log - log        |           $\log y$           |           $\log x$           | $\log y=\beta_0 + \beta_1 \log x$ |      $\beta_1 \frac{y}{x}$      |        $\% \Delta y = \% \beta_1 \Delta x$        |                     $\beta_1$                     |
+
+
+## Log: Key limitations
+
+-   $\log(0) = - \infty$;
+
+-   what is the $\log(x)$, when $x < 0$?
+
+. . .
+
+Interpretation of a dummy variable: 
+
+-   
+
+. . .
+
+Interpretation of a change that is more than 1%.
+
+## Variables standardiztion to the standard normal distribution  {.smaller}
+
+|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                  Interpretation                   |                    Elasticity                     |
+|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
+|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |                                                   | $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+| Standardized variables | $y^* = \frac{y - \bar y}{S_y}$ | $x^* = \frac{x - \bar x}{S_x}$ |     $y^*=\beta_0 + \beta_1 x^*$      |    $\frac{\partial y^*}{\partial x^*}$   | $\text{SD} \Delta y = \text{SD} \beta_1 \Delta x$ |         DIY                      |
+
+. . .
+
+Key limitations:
+
+-   Not intuitive interpretation
+
+## Reciprocal
+
+|         Model          |          Dep. var.           |         Indep. var.          |             Equation              |              Slope              |                          Elasticity                     |
+|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
+|                        |                              |                              |                                   | $\frac{\partial y}{\partial x}$ |         $\frac{\partial y}{\partial x} \cdot \frac{x}{y}$ |
+|       Reciprocal       |             $y$              |        $\frac{1}{x}$         | $y=\beta_0 + \beta_1 \frac{1}{x}$ |    $-\beta_1 \frac{1}{x^2}$     |                    $-\beta_1 \frac{1}{xy}$              |
+
+Interpretation:
+
+-   When $x$ increases to infinity, $y$ reaches asymptotically $\beta_0$
+
+See @Gujarati2004 Chapter 6.7 for more details on interpreting the reciprocal relationship.
+
+
+## Linearity in the wage equation
+
+```{r}
+library(performance)
+check_model(mod1, check = "linearity") 
+```
+
+## Wage equaition update
+
+```{r}
+mod2 <- lm(log(wage) ~ educ + exper + black + female, data = wage_dta)
+mod2
+summary(mod2)
+```
+
+## Non-linearity change
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-asp: 1
+check_model(mod1, check = "linearity") 
+```
+
+::: 
+::: {.column width="50%"}
+::: fragment
+```{r}
+#| fig-asp: 1
+check_model(mod2, check = "linearity") 
+```
+:::
+:::
+:::
+
+## Interpretation
+
+```{r}
+modelsummary(
+  list(`Model 1 (level-level)` = mod1,
+       `Model 2 (log(wage)-level)` = mod2), 
+  estimate = "{estimate} ({std.error}){stars}", 
+  statistic = NULL, 
+  output = "markdown")
+```
+
+```{r}
+anova(mod1, mod2)
+```
+
+# Perfect Collinearity
+
+## Collinearity or Muticollinearity
+
+-   No collinearity means
+
+    -   none of the regressors can be written as an exact linear combinations of some other regressors in the model.
+
+-   For example:
+
+    -   in $Y = \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3$ ,
+    -   where $X_3 = X_2 + X_1$ ,
+    -   all $X$ are collinear.
+
+## Consequence of collinearity:
+
+-   biased estimates of the collinear variables
+
+-   over-significant results;
+
+## Detection of collinearity:
+
+-   Scatter plot; Correlation matrix;
+
+-   Model specification;
+
+-   Step-wise regression approach;
+
+-   Variance Inflation Factor;
+
+## Solution to collinearity:
+
+-   Re specify the model;
+
+-   Choose different regressors;
+
+-   See also:
+
+    -   Overview: "Assumption AMLR.3 No Perfect Collinearity" in [@wooldridge2020introductory] ;
+
+    -   Examples of causes in Chapter 9.5 [@wooldridge2020introductory] ;
+
+    -   Chapter 9.4-9.5 in [@weisberg2005a];
+
+## Perfect collinearity with dummy variables
+
+-   We want to build a naive regression, where the wage is a function of sex (female and male):
+
+-   $\text{wage} = \beta_0 + \beta_1 \cdot \text{female} + \beta_2 \cdot \text{male}$
+
+-   The data is fictional:
+
+. . .
+
+```{r}
+library(tidyverse)
+n <- 14
+set.seed(122)
+dta <- 
+    tibble(female = as.integer(round(runif(n), 0))) %>% 
+    mutate(male = as.integer(1 - female),
+           wage = 10 - 3 * male + runif(n, -3, 3))
+glimpse(dta)
+```
+
+
+## Perfect collinearity with dummy variable (2)
+
+```{r}
+fit1 <- lm(wage ~ male, dta)
+fit2 <- lm(wage ~ female, dta)
+fit3 <- lm(wage ~ female + male, dta)
+# fit4 <- lm(wage ~ male + female, dta)
+fit5 <- lm(wage ~ 0 + female + male, dta)
+fit6 <- lm(wage ~ 0 + male + female, dta)
+
+my_summary <- function(x) {
+  x <- set_names(x, str_c("Model ", seq_along(x)))
+  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, ": ", as.character(.x$call)[[2]])}) %>% 
+    str_c(collapse = "</br>")
+  
+  modelsummary(
+    x,
+    estimate = "{estimate}{stars} ({std.error})",
+    statistic = NULL,
+    output = "markdown",
+    gof_omit =  c("AIC|BIC|Log|F|RMS"),
+    notes = all_eq
+  )
+}
+
+list(fit1, fit2, fit3, fit5, fit6) %>% my_summary()
+```
+
+
+## Perfect collinearity with dummy variable (2)
+
+```{r}
+list(fit1, fit2, fit3) %>% my_summary()
+```
+
+## Perfect collinearity with dummy variable (2)
+
+```{r}
+list(fit1, fit2, fit3, fit5) %>% my_summary()
+```
+
+# Homeworks:
+
+### Watch these videos on youtube and read
+
+::: columns
+::: {.column width="50%"}
+Video 1: [Ceteris Paribus: Public vs. Private University](https://youtu.be/iPBV3BlV7jk) or this link: <https://youtu.be/iPBV3BlV7jk>
+
+Re watch video 2: [Selection Bias](https://youtu.be/6YrIDhaUQOE) or this link: <https://youtu.be/6YrIDhaUQOE>
+:::
+
+::: {.column width="50%"}
+### Read:
+
+[@Angrist2014, chapter 2; optional @Angrist2009, chapter 3]
+
+### Do:
+
+Follow pre-recorded videos in the order below. Please note that slides below supplement some of those practical works.
+
+-   Ex.03 Wine regressions
+-   Ex.03a Regression basics
+-   Ex.03b Wage education
+-   Ex.03c Hedonic Land Prices Model
+:::
+:::
+
+
+# HW Slides for: Ex.03a Regression basics
+
+## HW03a Regression basics
+
+$$
+\pmb{y} = \pmb{x}\beta+\pmb{e}
+$$
+
+where
+
+$$
+\pmb{e} = \pmb{y} - \pmb{x}\hat \beta
+$$
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+Dependent variable:
+
+$$
+\pmb{y} = \begin{bmatrix} 
+y_1 \\ y_2 \\ \vdots \\ y_k 
+\end{bmatrix}
+$$
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+Independent variables:
+
+$$
+\pmb{x} = \begin{bmatrix} 
+1 & x_{11} & x_{12} & \dots & x_{1n} \\
+1 & x_{21} & x_{22} & \dots & x_{2n} \\
+\vdots  & \vdots & \vdots  & \ddots & \vdots  \\
+1 & x_{k1} & x_{k2} & \dots&  x_{kn} \\
+\end{bmatrix}
+$$
+:::
+:::
+:::
+
+$$
+\hat \beta = \begin{bmatrix} \hat \beta_0 \\ \hat \beta_1 \\ \hat \beta_2 \\ \vdots \\ \hat \beta_n \end{bmatrix}
+$$
+
+## Where do $\beta$ come from?
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+$$
+\pmb{y} = \pmb{x}\hat\beta
+$$
+:::
+
+::: fragment
+$$
+\pmb{x}^{T} \pmb{y} = \pmb{x}^{T} \pmb{x_i}\hat\beta
+$$
+:::
+
+::: fragment
+$$
+\frac{1}{ \pmb{x}^{T} \pmb{x_i}} \pmb{x}^{T} \pmb{y} = \frac{1}{ \pmb{x}^{T} \pmb{x_i}}\pmb{x}^{T} \pmb{x_i}\hat\beta
+$$
+:::
+
+::: fragment
+$$
+(\pmb{x}^{T} \pmb{x_i}) ^ {-1} \pmb{x}^{T} \pmb{y} = \hat\beta 
+$$
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+where:
+
+-   $\pmb{x}^{T}$ is the transposed matrix $\pmb{x}$
+
+-   $(\cdot) ^ {-1}$ is the inverse of a matrix
+:::
+:::
+:::
+
+## Fitted values
+
+$$
+\pmb{\hat y} =
+\pmb{x} \hat\beta =
+\begin{bmatrix}
+1 & x_{11} & x_{12} & \dots & x_{1n} \\
+1 & x_{21} & x_{22} & \dots & x_{2n} \\
+\vdots  & \vdots & \vdots  & \ddots & \vdots  \\
+1 & x_{k1} & x_{k2} & \dots&  x_{kn} \\
+\end{bmatrix}
+\begin{bmatrix} \hat \beta_0 \\ \hat \beta_1 \\ \hat \beta_2 \\ \vdots \\ \hat \beta_n \end{bmatrix} =
+$$
+
+$$
+\begin{bmatrix} 
+\beta_0 +  \beta_1 x_{11} +  \beta_2 x_{12} + \dots + \beta_n x_{1n} \\
+\beta_0 +  \beta_1 x_{21} +  \beta_2 x_{22} + \dots + \beta_n x_{2n} \\
+\vdots  \\
+\beta_0 +  \beta_1 x_{k1} +  \beta_2 x_{k2} + \dots + \beta_n x_{kn} \\
+\end{bmatrix} =
+\begin{bmatrix} \hat y_1 \\ \hat y_2 \\ \vdots \\ \hat y_k
+\end{bmatrix}
+$$
+
+## Error terms
+
+$$
+\pmb{\hat e} = \pmb{y} - \pmb{\hat y} = 
+\begin{bmatrix} y_1 - \hat y_1 \\ y_2 - \hat y_2 \\ \vdots \\ y_k - \hat y_k \end{bmatrix} = 
+\begin{bmatrix} \hat e_1 \\ \hat e_2 \\ \vdots \\ \hat e_k \end{bmatrix}
+$$
+
+## Standard Errors
+
+::: columns
+::: {.column width="50%"}
+Measure of variance in the estimated parameters $\beta$. Compouted based on the **Variance Covariance** matrix
+
+$$
+Var(\hat \beta) = (\pmb{x}^T \pmb{x})^{-1} \hat \sigma_e
+$$
+
+where $\hat \sigma_e$ is the estimate of the variance in error terms:
+
+$$
+\hat \sigma_e = \frac{\pmb{\hat e}^T\pmb{\hat e}}{n-r}
+$$
+
+$n$ - number of observations and $r$ number of regressors including intercept.
+:::
+
+::: {.column width="50%"}
+Standard Errors:
+
+$$
+\text{SE} = \sqrt{\text{diag}(Var(\hat \beta) )}
+$$
+:::
+:::
+
+## Why do we need standard errors?
+
+::: incremental
+-   SE are needed for the inference!
+
+-   To conclude about the population based on the sample regression results.
+:::
+
+# Takeaways
+
+## Takeaways
+
+Get comfortable with the terminology:
+
+-   Control variables for creating Ceteris Paribus
+
+-   Selection Bias in Regression:
+
+    -   OVB;
+
+    -   Long and Short models;
+
+Regression components and how do one produce them:
+
+         
+-   $x$, $y$, $\beta$, standard errors.
+
