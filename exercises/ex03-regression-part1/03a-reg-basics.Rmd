@@ -1,0 +1,116 @@
+---
+title: "Regression basics"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r include=FALSE}
+```
+
+## Introduction
+
+We us use the wage and education example data to run regression analysis manually.
+
+```{r message=FALSE}
+```
+
+### Estimate regression coefficeints manually
+
+#### $y$ matrix
+
+```{r}
+```
+
+#### $x$ matrix
+
+```{r}
+```
+
+#### Estimated regression coefficients $\beta$
+
+```{r}
+```
+
+Same but using built-in R functions:
+
+```{r}
+```
+
+### Fitted values
+
+```{r}
+```
+
+or 
+
+```{r}
+```
+
+### Error terms
+
+```{r}
+```
+
+or using `resid()` or `residuals()``
+
+```{r}
+```
+
+
+### Estimating standard errors
+
+Variance covariance matrix
+
+```{r}
+```
+
+or
+
+```{r}
+```
+
+## Ammending data with fitted values and residuals
+
+```{r}
+```
+
+### Residuals vs fitted plot
+
+```{r}
+wage_small_extended %>% 
+  ggplot() + 
+  aes(x = fitted, y = error_terms) + 
+  geom_point()
+```
+
+## Homework
+
+Estimate coefficients of a multiple regression and standard errors using matrices. Estimate following regression model:
+
+$$
+\text{wage} = \beta_0 + \beta_1 \text{education} + \beta_2{exper}+\beta_3{white}
+$$
+
+```{r}
+
+```
+
+Add regressor `black` to the model above and estimate it again using matrices and `lm()`.
+
+```{r}
+
+```
+
+What is different between two estimations?
+
+Why one is working and another one does not?
+
+Remove an intercept and estimate regression: 
+
+$$\text{wage} = \beta_1 \text{education} + \beta_2{exper}+\beta_3{white}+\beta_3{black}$$.
+
+```{r}
+```
+
+Why does it work?

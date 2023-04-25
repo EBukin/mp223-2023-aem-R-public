@@ -1,0 +1,125 @@
+---
+title: "Wine regression"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Using data published in 
+
+-    Orley Ashenfelter , David Ashmore & Robert Lalonde (1995) Bordeaux Wine Vintage Quality and the Weather, CHANCE, 8:4, 7-14, DOI: 10.1080/09332480.1995.10542468
+
+we would like to estimate what are the determinants of wine prices.
+
+Following variables are present in the data: 
+
+-   `Year`: year in which grapes were harvested to make wine.
+-   `Price`: average market price for Bordeaux vintages according to a series of auctions. The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded.
+-   `WinterRain`: winter rainfall (in mm).
+-   `AGST`: Average Growing Season Temperature (in Celsius degrees).
+-   `HarvestRain`: harvest rainfall (in mm).
+-   `Age`: age of the wine, measured in 1983 as the number of years stored in a cask.
+-   `FrancePop`: population of France at Year (in thousands).
+
+## Setup
+
+Load (install) packages below and load the data. Packages are: 
+
+-   `tidyverse`
+-   `GGally`
+-   `modelsummary`
+-   `correlation`
+-   `performance`
+
+```{r}
+# library()
+# library()
+# library()
+# library()
+# library()
+# wine_dta <- 
+```
+
+## The data
+
+```{r}
+glimpse(wine_dta)
+```
+
+### Descreptive statistics
+
+```{r}
+```
+
+
+### Correlation matrix
+
+```{r}
+```
+
+
+### Visual inspection
+
+- Remove columns year and population and plot data pairs
+
+```{r message=FALSE}
+```
+
+## Regression analysis
+
+### Molde 1: level-level
+
+$\text{Price} = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{WinterRain} + \beta_4 \text{HarvestRain} +e$
+
+```{r}
+```
+
+
+Fancy layout
+
+```{r}
+```
+
+
+#### Checking the linearity assumption
+
+```{r}
+```
+### Model 2 Log-level
+
+$\log (\text{Price}) = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{WinterRain} + \beta_4 \text{HarvestRain} +e$
+
+```{r}
+```
+
+#### Checking linearity again
+
+```{r}
+```
+
+### Model 3 Log-level with age only
+
+Estimate model: $\log (\text{Price}) = \beta_0 + \beta_1 \text{Age} +e$
+
+```{r}
+
+```
+
+
+## Reporting regressions results sude-by-side
+
+```{r}
+```
+
+
+## Solutions
+
+```{r eval=FALSE}
+```
+
