@@ -191,6 +191,227 @@ Fill in page 1 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
 
 Fill in page 2 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
 
+# Where does the regression equation come from?
+
+-   We do not make regression equations because we like how they look. 
+
+-   We base them on theory:
+
+    -   on economic theory as well as underlining natural and biological processes.
+
+## Hedonic Model
+
+To understand where the regression equation comes from, let us follow an example of
+
+### Hedonic Model
+
+## Hedonic Model overview
+
+Hedonic prices is an econometric approach of quantifying monetary values of **differentiated characteristics** of goods and services, which are subjects of economic exchange.
+
+. . .
+
+For example, agricultural land
+
+-   has such characteristics as: location, slope, environmental limitation, farmers' accessibility, climate, expected rainfall, soil salinity, nutrient content, irrigation availability and other.
+
+. . .
+
+Hedonic equation is based on the theory that takes its roots to supply and demand.
+
+## Supply and demand theory: a structural approach
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+Demand function:
+
+$$Q_{t}^D = \alpha_0 + \alpha_1 P_t + u_{1t}, \;\; \text{with} \; \alpha_1 < 0$$
+:::
+
+::: fragment
+Supply function:
+
+$$Q_{t}^S = \beta_0 + \beta_1 P_t + u_{2t}, \;\; \text{with} \; \beta_1 >0$$
+:::
+
+::: fragment
+Equilibrium condition:
+
+$$
+Q_{t}^S = Q_{t}^D
+$$
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+![](img/w03/supply-demand.PNG){fig-align="center"}
+:::
+:::
+:::
+
+## @Palmquist1989 approach to land prices
+
+@Palmquist1989 relies on the partial equiblitium framework:
+
+::: columns
+::: {.column width="50%"}
+**Supply**
+
+::: fragment
+-   Land owner whats to maximize own profit from renting land out. 
+
+-   Owner's **offer** function:
+:::
+
+::: fragment
+$$
+\phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)
+$$
+:::
+
+::: fragment
+$\hat{z}$ - land characteristics exogenous to land owner;
+
+$\tilde{z}$ - land characteristics in control of land owner;
+
+$R(\cdot)$ - realized land price (rental of sales);
+:::
+
+:::
+::: {.column width="50%"}
+**Demand**
+
+
+::: fragment
+-   Farmer whats to maximize agricultural profit from land 
+-   Farmer's **bid** function"
+:::
+
+::: fragment
+$$
+\pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta)
+$$
+:::
+
+::: fragment
+$r$ - inputs prices;
+
+$\beta$ - technologies and opportunities such as credit availability;
+
+$\pi^{S^{'}}$ - expected profit of agricultural producers from land;
+:::
+
+:::
+:::
+
+## Structural model of the realized prices
+
+::: fragment
+Supply-demand equilibrium: 
+
+$$\phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) = R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta)$$
+:::
+
+
+::: fragment
+Observed prices $R$ are the equilibrium between bid and offer (demand and supply).
+:::
+
+## Hedonic econometric modell
+
+In order to explain causes behind price changes, we can estimate a **reduced form** equation that will look at supply or demand sides separately.
+
+::: columns
+::: {.column width="50%"}
+**Reduced form supply side**
+
+$$
+R = \phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) + e
+$$
+:::
+
+::: {.column width="50%"}
+**Reduced form demand side**
+
+$$
+R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta) + e
+$$
+:::
+:::
+
+## Relevance of the theory
+
+::: fragment
+1.  Theory provides a rationale behind causal relationship
+
+$$R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$$
+:::
+
+::: fragment
+2.  Theory suggests a functional form.
+:::
+
+::: fragment
+3.  Theory specifies key determinants of the outcome: 
+
+    -   AKA what are our regressors.
+:::
+
+## What are the differentiated land characteristics?
+
+In $R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$, what are these independent and dependent variables?
+
+### $\tilde{z}$ Affected by land owner:
+
+-   a\.
+-   b\.
+-   c\.
+
+### $\hat{z}$ Not affected by land owner:
+
+-   a\.
+-   b\.
+-   c\.
+
+# Practical example
+
+## What makes wine so expensive?
+
+{{< video https://www.youtube.com/embed/8WMRj9mTQtI >}}
+
+Read more in: @Ashenfelter1995
+
+## Let us summarize the causes of wine prices
+
+::: incremental
+-   Any guesses?
+
+-   Weather
+
+-   Any unobserved characteristics?
+
+    -   Art of the winemaker
+    -   Storage
+    -   Way of drinking
+:::
+
+## Let us see what regression tells us about wine
+
+$$
+
+
+$$
+
+Year: year in which grapes were harvested to make wine.
+Price: logarithm of the average market price for Bordeaux vintages according to a series of auctions. The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded.
+WinterRain: winter rainfall (in mm).
+AGST: Average Growing Season Temperature (in Celsius degrees).
+HarvestRain: harvest rainfall (in mm).
+Age: age of the wine, measured in 1983 as the number of years stored in a cask.
+FrancePop: population of France at Year (in thousands).
+
 
 # Multiple Linear Regression
 
@@ -803,15 +1024,6 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 
 -   what is the $\log(x)$, when $x < 0$?
 
-. . .
-
-Interpretation of a dummy variable: 
-
--   
-
-. . .
-
-Interpretation of a change that is more than 1%.
 
 ## Variables standardiztion to the standard normal distribution  {.smaller}
 
