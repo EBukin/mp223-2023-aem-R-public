@@ -14,22 +14,40 @@ Slides:
 -   [w01b-selection-bias](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01b-selection-bias.pdf)
 -   [w01c-r-rstudio-intro](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w01c-r-rstudio-intro.pdf)
 
-Exercises: 
+Exercises:
 
 -   [ex01-rct.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex01-rct.zip) - the R project with code and data
--   Supplementary recording on how to execute the analysis [https://youtu.be/-ednrypEv4o](https://youtu.be/-ednrypEv4o).
+-   Supplementary recording on how to execute the analysis <https://youtu.be/-ednrypEv4o>.
 
 ### Week 2. April. 19. MLR - Multiple Linear Regression (Lecture)
 
-### Week 3. April. 26. R: Data Wrangling. Descriptive Statistics. 
+Slides: See Ilias.
+
+### Week 3. April. 26. MLR and where it comes from? Hedonic model. Practice with MLR.
+
+Slides:
+
+-   [w03-mlr-part1](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/docs/slides/w03-mlr-part1.pdf)
+
+Exercises:
+
+-   [ex03-regression-part1.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex03-regression-part1.zip) - the R project with code and data
+
+    -   Recordings:
+
+    -   ex.03.a Regression basics <https://youtu.be/rUlpdHsXPRw>
+
+    -   ex.03.b Wage and Education <https://youtu.be/5zwYnnjnZXo>
+
+    -   ex.03.c Hedonic regression <https://youtu.be/-tIylFJUNX4>
 
 ### Week 4. May 3. Reduced Form Estimation (Lecture) + R: MLR. Linear transformation. Missing data.
 
-### Week 5. May 10. Impact Evaluation: Counterfactual (Lecture) + R: MRL
+### Week 5. May 10. Impact Evaluation: Counterfactual and DID (Lecture)
 
-### Week 6. May 17. DID - Difference in Difference (Lecture) + R: DID
+### Week 6. May 17. R: DID and MLR
 
-### Week 7. May 24. RDD - Regression Discontinuity (Lecture) + R: RDD 
+### Week 7. May 24. RDD - Regression Discontinuity (Lecture) + R: RDD
 
 ### Week 8. May 31. OVB - Omitted Variable Bias (Lecture) + R: OBV formula
 

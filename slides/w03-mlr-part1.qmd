@@ -199,23 +199,34 @@ Fill in page 2 here: [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
 -   We base them on theory:
 
     -   on economic theory as well as underlining natural and biological processes.
+    
+-   Here is one of many examples: Hedonic Model
 :::
 
 ## Hedonic Model
 
-To understand where the regression equation comes from, let us follow an example of
+To understand where the regression equation comes from, let us follow an example of:
 
 ### Hedonic Model
 
+-   Any idea what this is?
+
 ## Hedonic Model overview
 
-Hedonic prices is an econometric approach of quantifying monetary values of **differentiated characteristics** of goods and services, which are subjects of economic exchange.
+Hedonic prices is an econometric approach of quantifying monetary values of **differentiated characteristics** ($x_i$) of goods and services, which are subjects of economic exchange (and stochastic variation $u$).
+
+
+$$
+\text{Price} = f(x_1, x_2, \cdots , x_i, u)
+$$
 
 . . .
 
-For example, agricultural land
+For example, **agricultural land** has such characteristics as: ...
 
--   has such characteristics as: location, slope, environmental limitation, farmers' accessibility, climate, expected rainfall, soil salinity, nutrient content, irrigation availability and other.
+. . .
+
+Land quality (location, slope,  soil salinity, nutrient content, irrigation availability, rainfall, climate) environmental limitation, farmers' accessibility, and other.
 
 . . .
 
@@ -253,17 +264,19 @@ $$
 :::
 :::
 
-## @Palmquist1989 approach to land prices
+## Hedonic land prices model
 
-@Palmquist1989 relies on the partial equilibrium framework:
+Relies on the partial equilibrium framework [@Palmquist1989], where
+
+-   $R(\cdot)$ - realized land price (rental of sales), are modeled from two sides:
 
 ::: columns
 ::: {.column width="50%"}
-**Supply**
 
 ::: fragment
--   Land owner whats to maximize own profit from renting land out.
+**Supply**
 
+-   Land owner whats to **maximize own profit** from renting land out.
 -   Owner's **offer** function:
 :::
 
@@ -278,15 +291,14 @@ $\hat{z}$ - land characteristics exogenous to land owner;
 
 $\tilde{z}$ - land characteristics in control of land owner;
 
-$R(\cdot)$ - realized land price (rental of sales);
 :::
 :::
 
 ::: {.column width="50%"}
+::: fragment
 **Demand**
 
-::: fragment
--   Farmer whats to maximize agricultural profit from land
+-   Farmer whats to **maximize agricultural profit** from land
 -   Farmer's **bid** function"
 :::
 
@@ -315,12 +327,16 @@ $$\phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) = R = \pi^{S^{'}} + C(\hat{z},
 :::
 
 ::: fragment
-Observed prices $R$ are the equilibrium between bid and offer (demand and supply).
+Observed prices $R$ are the equilibrium between **bid** and **offer** (demand and supply).
 :::
 
-## Hedonic econometric modell
+::: fragment
+### This is called a Structural Model
+:::
 
-In order to explain causes behind price changes, we can estimate a **reduced form** equation that will look at supply or demand sides separately.
+## Econometric modell
+
+To explain causes behind price changes, we can deconstruct **structural model** into **reduced form** equations, which can be estimated:
 
 ::: columns
 ::: {.column width="50%"}
@@ -340,6 +356,14 @@ $$
 :::
 :::
 
+::: fragment
+When we run a hedonic prices model
+
+$$R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$$
+
+we estimate one of the reduced forms and select independent variables based on the hedonic prices theory (differentiated land qualities).
+:::
+
 ## Relevance of the theory
 
 ::: fragment
@@ -353,9 +377,13 @@ $$R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$$
 :::
 
 ::: fragment
-3.  Theory specifies key determinants of the outcome:
+3.  Theory stipulates the dependent variable.
+:::
 
-    -   AKA what are our regressors.
+::: fragment
+4.  Theory specifies key determinants of the outcome:
+
+    -   AKA what our regressors/independnet variables.
 :::
 
 ## What are the differentiated land characteristics?
@@ -364,23 +392,142 @@ In $R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)$, what are these independen
 
 ### $\tilde{z}$ Affected by land owner:
 
--   a\.
--   b\.
--   c\.
+::: incremental
+-   To enroll for subsidies or not.
+-   To install irrigation or not.
+-   Fertilize land
+-   Improve the landscape
+:::
 
 ### $\hat{z}$ Not affected by land owner:
 
--   a\.
--   b\.
--   c\.
+::: incremental
+-   Weather
+-   Location
+-   Restrictions
+:::
+
+# Example of a hedonic land prices model: `03c-hedonic-land-prices.Rmd`.
+
+## Problem
+
+We would like to assess the effect of the "Conservation Reserve Program" (CPR) on the agricultural land prices in Minnesota in 2002-2011.
+
+Conservation Reserve Program
+
+-   is a subsidy
+-   obligates farms NOT TO GROW ANY CROPS on the enrolled land
+-   pays monetary compensation in exchange;
+
+## Regression equation
+
+$$
+\log (\text{acrePrice}) = \beta_0 +  \beta_1 \text{crpPct} + \log(\beta_2 \text{acres}) + \beta_3 \text{region} \\
++ \beta_4 \text{year} + \beta_4 \text{tillable} + \beta_5 \text{productivity} + \beta_6 \text{improvements}  + e
+$$
+
+-   `acrePrice` - sale price in dollars per acre;
+-   `acres` - size of the farm in acres;
+-   `region` - region in the state Minnesota;
+-   `year` - year of the land sales translation;
+-   `crpPct` - the percentage of all farm acres enrolled in CRP;
+-   `tillable` - percentage of farm acreage that is rated arable by the assessor;
+-   `productivity` - average agronomic productivity scaled 1 to 100, with larger numbers for more productive land;
+-   `improvements` - percentage of property value due to improvements (infrastructure)
+
+## Regression results {.smaller}
+
+```{r}
+library(tidyverse)
+library(modelsummary)
+land_dta <- 
+  alr4::MinnLand %>% as_tibble() %>% 
+  left_join(
+    tibble(
+      year = 2002:2011,
+      defl = c(77.47, 78.91, 81.03, 83.56, 86.09, 88.4, 90.12, 90.8, 91.86, 93.78)
+      ),
+    by = "year"
+    ) %>% 
+  mutate(acrePrice = acrePrice / (defl / 100)) %>% 
+  mutate(year = as.factor(year)) 
+
+
+fit1 <- lm(
+  log(acrePrice) ~ crpPct + log(acres) + tillable + productivity + region + year + improvements,
+  data = land_dta
+)
+
+# fit0 <- lm(`log(acrePrice)` ~ 1, data = model.frame(fit1))
+
+fit2 <- lm(
+  log(acrePrice) ~ crpPct + log(acres) + tillable + region + year + improvements,
+  data = land_dta
+)
+
+# fit3 <- lm(
+#   log(acrePrice) ~ crpPct + log(acres) * tillable + region + year + improvements ,
+#   data = land_dta
+# )
+
+modelsummary(
+  list(`log(Price per acre)` = fit1, `log(Price per acre)` = fit2#, `log(Price per acre)` = fit3
+       ), 
+  fmt = fmt_significant(2),
+  output = "markdown",
+  estimate = "{estimate} {stars} ({std.error})", 
+  coef_omit = "year",
+  coef_map = c("(Intercept)" = "Intercept", 
+               "crpPct" = "Subsidy (0|1)",
+               "log(acres)" = "Area (log), acres",
+               "tillable" = "Tillable area, % (0-100)",
+               "log(acres):tillable" = "log area × tillable %",
+               "improvements" = "Improvements, (0-100)",
+               "productivity" = "Productivity, (0-100)",
+               "regionWest Central" = "West Central (0|1)",
+               "regionCentral" = "Central (0|1)",
+               "regionSouth West" = "South West	(0|1)",
+               "regionSouth Central" = "South Central (0|1)",
+               "regionSouth East" = "South East (0|1)"
+               ),
+  gof_omit = "BIC|Log|^R2$|RMSE|Std|F|AIC",
+  statistic = NULL,
+  vcov = "robust", 
+  notes = "Year-specific dummy variables are omitted. Heteroscedasticity consistent standard errors are reported in parentheses. P-values are coded as: * p=0.05, ** p=0.01, *** p<0.001"
+)
+```
+
+## Goodness of fit: $R^2$ adjusted
+
+Shows the share of variance explained by a model adjusted to the number of independent variables. 
+
+::: incremental
+-   If the number of independent variables increases, but variables do not explain $y$ better, $R^2$ adjusted could shrink to 0 or a negative number.
+
+-   We generally want to have it as high as possible, however!
+
+-   $R^2$ adjusted has nothing to do with the coefficients' significance and their causal meaning. 
+
+-   If the goal of regression is to explain causes, rather than predict outcomes, $R^2$ adjusted has not much relevance.
+
+:::
+
+
+```{r}
+# ## The effect of interaction term `log(acres) * tillable`
+# library(ggeffects)
+# ggeffect(fit3, terms = c("acres", "tillable")) %>%
+#   plot() + ylab("Price per acre, USD") + xlab("Tillable farmland, %")
+```
 
 # Practical example
 
-## What makes wine so expensive?
+Base on [@Ashenfelter1995]
 
-{{< video https://www.youtube.com/embed/8WMRj9mTQtI >}}
+> **What makes wine so expensive?**
 
-Read more in: @Ashenfelter1995
+[youtu.be/8WMRj9mTQtI](https://youtu.be/8WMRj9mTQtI)
+
 
 ## Let us summarize the causes of wine prices
 
@@ -404,7 +551,8 @@ $$
 
 What are our expectations about signs of $\beta$ s?
 
-### Data 
+
+### Variable 
 
 -   `Price`: average market price for Bordeaux vintages according to a series of auctions (USD). The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded. 
 -   `WinterRain`: winter rainfall (in mm). 
@@ -412,6 +560,9 @@ What are our expectations about signs of $\beta$ s?
 -   `HarvestRain`: harvest rainfall (in mm). 
 -   `Age`: age of the wine, measured in 1983 as the number of years stored in a cask.
 
+## Let us regress wine in the class
+
+> Exercise: `03-wine-regression.Rmd`
 
 # Multiple Linear Regression
 
@@ -492,9 +643,7 @@ wage_plt
 ## Wage \~ Education: Is there a ceteris paribus?
 
 ::: r-stack
-::: fragment
 ![](img/w03/dag-01.png){fig-align="center" width="100%"}
-:::
 
 ::: fragment
 ![](img/w03/dag-02.png){fig-align="center" width="100%"}
@@ -591,15 +740,13 @@ When a confounded correlated with outcome $Cov(c,y) \ne 0$ and other regressors 
 
 . . .
 
-Absence of the Ceteris Paribus in a regression is called **omitted variable bias**
+> Absence of the Ceteris Paribus in a regression is called **omitted variable bias**
 
 ## OVB: The long model
 
 Supposed that our **ideal regression**
 
--   the true model
--   population regression
--   **long model** is
+-   the true model / population regression / **long model** is:
 
 . . .
 
@@ -613,15 +760,23 @@ We cannot measure $A_i$, but:
 
 . . .
 
--   $Cov(A_i, Y_i) \ne 0$ or $E[Y_i|A_i] \ne 0$: $A_i$ affects $Y_i$; and
+-   $A_i$ has a causal effect on $Y_i$: $(E[Y_i|A_i] \ne 0)$, and
 
 . . .
 
--   $Cov(A_i, P_i) \ne 0$ or $E[P_i|A_i] \ne 0$: $A_i$ correlated with $P_i$.
+-   $A_i$ correlated with $P_i$: $(E[P_i|A_i] \ne 0)$:
 
 ## OVB: The short model
 
-Because of the **omitted variable**, we cannot estimate the **long model**. Instead, we estimate a **short model**:
+Because of the **omitted variable**, 
+
+. . . 
+
+we cannot estimate the **long model**.
+
+. . .
+
+Instead, we estimate a **short model**:
 
 . . .
 
@@ -639,7 +794,15 @@ $$
 e^s_i = e^l_i + A_i
 $$
 
-## Bias of variable ommition
+## Bias of variable omission
+
+Omitted variable causes bias of all estimates!
+
+. . .
+
+This bias can be measured as $\text{OVB}$:
+
+. . .
 
 $$
 \text{OVB} = \beta^s - \beta^l
@@ -647,7 +810,7 @@ $$
 
 To be continued on the OVB in another week
 
-## Fighting selection bias with regression?
+## How does regression fights selection bias?
 
 . . .
 
@@ -774,10 +937,13 @@ summary(mod1)
 ## Interpreting the results (2): fancy summary
 
 ```{r}
-modelsummary(list(`Model 1` = mod1), 
-             estimate = "{estimate} ({std.error}){stars}", 
-             statistic = NULL, 
-            output = "markdown")
+modelsummary(
+  list(`Model 1` = mod1),
+  estimate = "{estimate} ({std.error}){stars}",
+  statistic = NULL,
+  output = "markdown",
+  gof_omit = "BIC|Log|^R2$|RMSE|Std|AIC"
+)
 ```
 
 ## Interpreting the results (3): Effect of a dummy variables {.smaller}
@@ -820,17 +986,30 @@ ggeffect(mod1, term = c("educ", "female")) %>% plot()
 
 ## Conclude
 
+::: columns
+::: {.column width="50%"}
 -   Is model 1 a good predictor of wage based on education?
 
 -   Is the effect of education causal?
+:::
+::: {.column width="50%"}
+```{r}
+modelsummary(
+  list(`Model 1` = mod1),
+  estimate = "{estimate} ({std.error}){stars}",
+  statistic = NULL,
+  output = "markdown",
+  gof_omit = "BIC|Log|^R2$|RMSE|Std|AIC"
+)
+```
+:::
+:::
 
 # Elasticity
 
+> Elasticity is a unit-less measure of change in one variable as a result of a change in the other.
+
 ## Elasticity
-
-Elasticity is a unit-less measure of change in one variable as a result of a change in the other.
-
-. . .
 
 Elasticity of $y$ with response to $x$ ($x$ elasticity of $y$):
 
@@ -941,12 +1120,40 @@ coef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])
 
 # Regression assumptions
 
+Go to the page 2 to refresh motivation for regression assumptions
+
+-   [bit.ly/41R1YpL](https://bit.ly/41R1YpL)
+
+## Asymptotic properties of the OLS (simplified) {.smaller}
+
+OLS results with consistent (unbiased) and efficient estimates of population parameters when sample size is finite ($n \rightarrow \infty$)
+
+-   $\hat \beta \rightarrow \beta$ 
+
+-   $Var(\hat \beta) \rightarrow 0$
+
+. . .
+
+When the sample size is finite and all Gauss-Markov assumptions are satisfied:
+
+-   $\hat \beta$ - estimates vary from sample to sample, but
+
+-   $Var(\hat \beta)$ is distributed according to the **`t` - distribution**.
+
+-   Variances of two estimates $Var(\hat \beta_1)$ and $Var(\hat \beta_2)$ are distributed according to the **`F` - distribution**.
+
+. . .
+
+When GM assumptions are not satisfied:
+
+-   `t` and `F` distributions are no longer relevant and we cannot perform conduct inference.
+
 # Linearity
 
 ## Linearity: meaning
 
 ::: incremental
--   the expected value of dependent variable is a straight-line function of the independent variable
+-   the expected value of a dependent variable is a straight-line function of the independent variable
 
 -   If linearity is violated:
 
@@ -1079,18 +1286,16 @@ check_model(mod2, check = "linearity")
 :::
 
 ## Interpretation
-
+ 
 ```{r}
 modelsummary(
   list(`Model 1 (level-level)` = mod1,
-       `Model 2 (log(wage)-level)` = mod2), 
-  estimate = "{estimate} ({std.error}){stars}", 
-  statistic = NULL, 
-  output = "markdown")
-```
-
-```{r}
-anova(mod1, mod2)
+       `Model 2 (log(wage)-level)` = mod2),
+  estimate = "{estimate} ({std.error}){stars}",
+  statistic = NULL,
+  output = "markdown",
+  gof_omit = "BIC|Log|^R2$|RMSE|Std|AIC"
+)
 ```
 
 # Perfect Collinearity
@@ -1268,7 +1473,7 @@ $$
 :::
 
 $$
-\hat \beta = \begin{bmatrix} \hat \beta_0 \\ \hat \beta_1 \\ \hat \beta_2 \\ \vdots \\ \hat \beta_n \end{bmatrix}
+\hat \beta = \begin{bmatrix} \hat \beta_0 & \hat \beta_1 & \hat \beta_2 & \cdots & \hat \beta_n \end{bmatrix}
 $$
 
 ## Where do $\beta$ come from?
@@ -1397,3 +1602,13 @@ Get comfortable with the terminology:
 Regression components and how do one produce them:
 
 -   $x$, $y$, $\beta$, standard errors.
+
+Why assumptions are important?
+
+Linearity and how to detect it?
+
+-   Log transformation and its interpretation.
+
+What is perfect collinearity?
+
+## References

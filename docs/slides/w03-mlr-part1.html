@@ -443,22 +443,29 @@
 <ul>
 <li class="fragment">on economic theory as well as underlining natural and biological processes.</li>
 </ul></li>
+<li class="fragment"><p>Here is one of many examples: Hedonic Model</p></li>
 </ul>
 </div>
 </section>
 <section id="hedonic-model" class="slide level2">
 <h2>Hedonic Model</h2>
-<p>To understand where the regression equation comes from, let us follow an example of</p>
+<p>To understand where the regression equation comes from, let us follow an example of:</p>
 <h3 id="hedonic-model-1">Hedonic Model</h3>
+<ul>
+<li>Any idea what this is?</li>
+</ul>
 </section>
 <section id="hedonic-model-overview" class="slide level2">
 <h2>Hedonic Model overview</h2>
-<p>Hedonic prices is an econometric approach of quantifying monetary values of <strong>differentiated characteristics</strong> of goods and services, which are subjects of economic exchange.</p>
+<p>Hedonic prices is an econometric approach of quantifying monetary values of <strong>differentiated characteristics</strong> (<span class="math inline">\(x_i\)</span>) of goods and services, which are subjects of economic exchange (and stochastic variation <span class="math inline">\(u\)</span>).</p>
+<p><span class="math display">\[
+\text{Price} = f(x_1, x_2, \cdots , x_i, u)
+\]</span></p>
 <div class="fragment">
-<p>For example, agricultural land</p>
-<ul>
-<li>has such characteristics as: location, slope, environmental limitation, farmers’ accessibility, climate, expected rainfall, soil salinity, nutrient content, irrigation availability and other.</li>
-</ul>
+<p>For example, <strong>agricultural land</strong> has such characteristics as: …</p>
+</div>
+<div class="fragment">
+<p>Land quality (location, slope, soil salinity, nutrient content, irrigation availability, rainfall, climate) environmental limitation, farmers’ accessibility, and other.</p>
 </div>
 <div class="fragment">
 <p>Hedonic equation is based on the theory that takes its roots to supply and demand.</p>
@@ -493,16 +500,19 @@ Q_{t}^S = Q_{t}^D
 </div>
 </div>
 </section>
-<section id="palmquist1989-approach-to-land-prices" class="slide level2">
-<h2><span class="citation" data-cites="Palmquist1989">Palmquist (<a href="#/takeaways-1" role="doc-biblioref" onclick="">1989</a>)</span> approach to land prices</h2>
-<p><span class="citation" data-cites="Palmquist1989">Palmquist (<a href="#/takeaways-1" role="doc-biblioref" onclick="">1989</a>)</span> relies on the partial equilibrium framework:</p>
+<section id="hedonic-land-prices-model" class="slide level2">
+<h2>Hedonic land prices model</h2>
+<p>Relies on the partial equilibrium framework <span class="citation" data-cites="Palmquist1989">(<a href="#/references" role="doc-biblioref" onclick="">Palmquist, 1989</a>)</span>, where</p>
+<ul>
+<li><span class="math inline">\(R(\cdot)\)</span> - realized land price (rental of sales), are modeled from two sides:</li>
+</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Supply</strong></p>
 <div class="fragment">
+<p><strong>Supply</strong></p>
 <ul>
-<li><p>Land owner whats to maximize own profit from renting land out.</p></li>
-<li><p>Owner’s <strong>offer</strong> function:</p></li>
+<li>Land owner whats to <strong>maximize own profit</strong> from renting land out.</li>
+<li>Owner’s <strong>offer</strong> function:</li>
 </ul>
 </div>
 <div class="fragment">
@@ -513,13 +523,12 @@ Q_{t}^S = Q_{t}^D
 <div class="fragment">
 <p><span class="math inline">\(\hat{z}\)</span> - land characteristics exogenous to land owner;</p>
 <p><span class="math inline">\(\tilde{z}\)</span> - land characteristics in control of land owner;</p>
-<p><span class="math inline">\(R(\cdot)\)</span> - realized land price (rental of sales);</p>
 </div>
 </div><div class="column" style="width:50%;">
-<p><strong>Demand</strong></p>
 <div class="fragment">
+<p><strong>Demand</strong></p>
 <ul>
-<li>Farmer whats to maximize agricultural profit from land</li>
+<li>Farmer whats to <strong>maximize agricultural profit</strong> from land</li>
 <li>Farmer’s <strong>bid</strong> function”</li>
 </ul>
 </div>
@@ -543,12 +552,16 @@ Q_{t}^S = Q_{t}^D
 <p><span class="math display">\[\phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) = R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta)\]</span></p>
 </div>
 <div class="fragment">
-<p>Observed prices <span class="math inline">\(R\)</span> are the equilibrium between bid and offer (demand and supply).</p>
+<p>Observed prices <span class="math inline">\(R\)</span> are the equilibrium between <strong>bid</strong> and <strong>offer</strong> (demand and supply).</p>
+</div>
+<div class="fragment">
+<!-- -->
+<h3 id="this-is-called-a-structural-model">This is called a Structural Model</h3>
 </div>
 </section>
-<section id="hedonic-econometric-modell" class="slide level2">
-<h2>Hedonic econometric modell</h2>
-<p>In order to explain causes behind price changes, we can estimate a <strong>reduced form</strong> equation that will look at supply or demand sides separately.</p>
+<section id="econometric-modell" class="slide level2">
+<h2>Econometric modell</h2>
+<p>To explain causes behind price changes, we can deconstruct <strong>structural model</strong> into <strong>reduced form</strong> equations, which can be estimated:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Reduced form supply side</strong></p>
@@ -561,6 +574,11 @@ R = \phi(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta) + e
 R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta) + e
 \]</span></p>
 </div>
+</div>
+<div class="fragment">
+<p>When we run a hedonic prices model</p>
+<p><span class="math display">\[R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)\]</span></p>
+<p>we estimate one of the reduced forms and select independent variables based on the hedonic prices theory (differentiated land qualities).</p>
 </div>
 </section>
 <section id="relevance-of-the-theory" class="slide level2">
@@ -578,9 +596,14 @@ R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta) + e
 </div>
 <div class="fragment">
 <ol start="3" type="1">
+<li>Theory stipulates the dependent variable.</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="4" type="1">
 <li><p>Theory specifies key determinants of the outcome:</p>
 <ul>
-<li>AKA what are our regressors.</li>
+<li>AKA what our regressors/independnet variables.</li>
 </ul></li>
 </ol>
 </div>
@@ -589,27 +612,167 @@ R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta) + e
 <h2>What are the differentiated land characteristics?</h2>
 <p>In <span class="math inline">\(R = R(\hat{z}, \tilde{z}, \pi^{S^{'}}, r, \beta)\)</span>, what are these independent and dependent variables?</p>
 <h3 id="tildez-affected-by-land-owner"><span class="math inline">\(\tilde{z}\)</span> Affected by land owner:</h3>
+<div>
 <ul>
-<li>a.</li>
-<li>b.</li>
-<li>c.</li>
+<li class="fragment">To enroll for subsidies or not.</li>
+<li class="fragment">To install irrigation or not.</li>
+<li class="fragment">Fertilize land</li>
+<li class="fragment">Improve the landscape</li>
 </ul>
+</div>
 <h3 id="hatz-not-affected-by-land-owner"><span class="math inline">\(\hat{z}\)</span> Not affected by land owner:</h3>
+<div>
 <ul>
-<li>a.</li>
-<li>b.</li>
-<li>c.</li>
+<li class="fragment">Weather</li>
+<li class="fragment">Location</li>
+<li class="fragment">Restrictions</li>
 </ul>
+</div>
+</section></section>
+<section>
+<section id="example-of-a-hedonic-land-prices-model-03c-hedonic-land-prices.rmd." class="title-slide slide level1 center">
+<h1>Example of a hedonic land prices model: <code>03c-hedonic-land-prices.Rmd</code>.</h1>
+
+</section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<p>We would like to assess the effect of the “Conservation Reserve Program” (CPR) on the agricultural land prices in Minnesota in 2002-2011.</p>
+<p>Conservation Reserve Program</p>
+<ul>
+<li>is a subsidy</li>
+<li>obligates farms NOT TO GROW ANY CROPS on the enrolled land</li>
+<li>pays monetary compensation in exchange;</li>
+</ul>
+</section>
+<section id="regression-equation" class="slide level2">
+<h2>Regression equation</h2>
+<p><span class="math display">\[
+\log (\text{acrePrice}) = \beta_0 +  \beta_1 \text{crpPct} + \log(\beta_2 \text{acres}) + \beta_3 \text{region} \\
++ \beta_4 \text{year} + \beta_4 \text{tillable} + \beta_5 \text{productivity} + \beta_6 \text{improvements}  + e
+\]</span></p>
+<ul>
+<li><code>acrePrice</code> - sale price in dollars per acre;</li>
+<li><code>acres</code> - size of the farm in acres;</li>
+<li><code>region</code> - region in the state Minnesota;</li>
+<li><code>year</code> - year of the land sales translation;</li>
+<li><code>crpPct</code> - the percentage of all farm acres enrolled in CRP;</li>
+<li><code>tillable</code> - percentage of farm acreage that is rated arable by the assessor;</li>
+<li><code>productivity</code> - average agronomic productivity scaled 1 to 100, with larger numbers for more productive land;</li>
+<li><code>improvements</code> - percentage of property value due to improvements (infrastructure)</li>
+</ul>
+</section>
+<section id="regression-results" class="slide level2 smaller">
+<h2>Regression results</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+<colgroup>
+<col style="width: 34%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">log(Price per acre)</th>
+<th style="text-align: center;">log(Price per acre)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: center;">6.099 *** (0.051)</td>
+<td style="text-align: center;">6.507 *** (0.034)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Subsidy (0|1)</td>
+<td style="text-align: center;">-0.00370 *** (0.00027)</td>
+<td style="text-align: center;">-0.00488 *** (0.00017)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Area (log), acres</td>
+<td style="text-align: center;">-0.0587 *** (0.0058)</td>
+<td style="text-align: center;">-0.0913 *** (0.0051)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tillable area, % (0-100)</td>
+<td style="text-align: center;">0.00421 *** (0.00036)</td>
+<td style="text-align: center;">0.00550 *** (0.00018)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Improvements, (0-100)</td>
+<td style="text-align: center;">0.01567 *** (0.00062)</td>
+<td style="text-align: center;">0.01414 *** (0.00033)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Productivity, (0-100)</td>
+<td style="text-align: center;">0.0094 *** (0.0004)</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">West Central (0|1)</td>
+<td style="text-align: center;">0.633 *** (0.016)</td>
+<td style="text-align: center;">0.746 *** (0.011)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Central (0|1)</td>
+<td style="text-align: center;">0.885 *** (0.018)</td>
+<td style="text-align: center;">1.041 *** (0.013)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South West (0|1)</td>
+<td style="text-align: center;">0.734 *** (0.016)</td>
+<td style="text-align: center;">1.019 *** (0.011)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">South Central (0|1)</td>
+<td style="text-align: center;">0.854 *** (0.017)</td>
+<td style="text-align: center;">1.191 *** (0.011)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South East (0|1)</td>
+<td style="text-align: center;">0.897 *** (0.018)</td>
+<td style="text-align: center;">1.234 *** (0.012)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">8770</td>
+<td style="text-align: center;">17441</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.700</td>
+<td style="text-align: center;">0.646</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> ^^ Year-specific dummy variables are omitted. Heteroscedasticity consistent standard errors are reported in parentheses. P-values are coded as: * p=0.05, ** p=0.01, *** p&lt;0.001</p>
+</div>
+</div>
+</section>
+<section id="goodness-of-fit-r2-adjusted" class="slide level2">
+<h2>Goodness of fit: <span class="math inline">\(R^2\)</span> adjusted</h2>
+<p>Shows the share of variance explained by a model adjusted to the number of independent variables.</p>
+<div>
+<ul>
+<li class="fragment"><p>If the number of independent variables increases, but variables do not explain <span class="math inline">\(y\)</span> better, <span class="math inline">\(R^2\)</span> adjusted could shrink to 0 or a negative number.</p></li>
+<li class="fragment"><p>We generally want to have it as high as possible, however!</p></li>
+<li class="fragment"><p><span class="math inline">\(R^2\)</span> adjusted has nothing to do with the coefficients’ significance and their causal meaning.</p></li>
+<li class="fragment"><p>If the goal of regression is to explain causes, rather than predict outcomes, <span class="math inline">\(R^2\)</span> adjusted has not much relevance.</p></li>
+</ul>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
 </section></section>
 <section>
 <section id="practical-example" class="title-slide slide level1 center">
 <h1>Practical example</h1>
-
-</section>
-<section id="what-makes-wine-so-expensive" class="slide level2">
-<h2>What makes wine so expensive?</h2>
-<p></p>
-<p>Read more in: <span class="citation" data-cites="Ashenfelter1995">Ashenfelter, Ashmore, &amp; Lalonde (<a href="#/takeaways-1" role="doc-biblioref" onclick="">1995</a>)</span></p>
+<p>Base on <span class="citation" data-cites="Ashenfelter1995">(<a href="#/references" role="doc-biblioref" onclick="">Ashenfelter, Ashmore, &amp; Lalonde, 1995</a>)</span></p>
+<blockquote>
+<p><strong>What makes wine so expensive?</strong></p>
+</blockquote>
+<p><a href="https://youtu.be/8WMRj9mTQtI">youtu.be/8WMRj9mTQtI</a></p>
 </section>
 <section id="let-us-summarize-the-causes-of-wine-prices" class="slide level2">
 <h2>Let us summarize the causes of wine prices</h2>
@@ -632,7 +795,7 @@ R = \pi^{S^{'}} + C(\hat{z}, \tilde{z}, r, \beta) + e
 Price = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{HarvestRain} + \beta_4 \text{WinterRain} + e
 \]</span></p>
 <p>What are our expectations about signs of <span class="math inline">\(\beta\)</span> s?</p>
-<h3 id="data">Data</h3>
+<h3 id="variable">Variable</h3>
 <ul>
 <li><code>Price</code>: average market price for Bordeaux vintages according to a series of auctions (USD). The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded.</li>
 <li><code>WinterRain</code>: winter rainfall (in mm).</li>
@@ -640,11 +803,17 @@ Price = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{Harve
 <li><code>HarvestRain</code>: harvest rainfall (in mm).</li>
 <li><code>Age</code>: age of the wine, measured in 1983 as the number of years stored in a cask.</li>
 </ul>
+</section>
+<section id="let-us-regress-wine-in-the-class" class="slide level2">
+<h2>Let us regress wine in the class</h2>
+<blockquote>
+<p>Exercise: <code>03-wine-regression.Rmd</code></p>
+</blockquote>
 </section></section>
 <section id="multiple-linear-regression" class="title-slide slide level1 center">
 <h1>Multiple Linear Regression</h1>
 <blockquote>
-<p>“Regression is the tool that masters pick up first, if only to provide a benchmark for more elaborate empirical strategies.” <span class="citation" data-cites="Angrist2014">(<a href="#/takeaways-1" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014</a>)</span></p>
+<p>“Regression is the tool that masters pick up first, if only to provide a benchmark for more elaborate empirical strategies.” <span class="citation" data-cites="Angrist2014">(<a href="#/references" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014</a>)</span></p>
 </blockquote>
 </section>
 
@@ -652,7 +821,7 @@ Price = \beta_0 + \beta_1 \text{Age} + \beta_2 \text{AGST} + \beta_3 \text{Harve
 <section id="why-regression" class="title-slide slide level1 center">
 <h1>Why regression?</h1>
 <blockquote>
-<p>“… regression estimates are weighted averages of multiple matched comparisons of the sort constructed for the groups in our stylized matching matrix.” <span class="citation" data-cites="Angrist2014">(<a href="#/takeaways-1" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014</a>)</span></p>
+<p>“… regression estimates are weighted averages of multiple matched comparisons of the sort constructed for the groups in our stylized matching matrix.” <span class="citation" data-cites="Angrist2014">(<a href="#/references" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014</a>)</span></p>
 </blockquote>
 </section>
 <section id="wage-education-equation" class="slide level2">
@@ -686,7 +855,7 @@ Y_i = \alpha + \beta \, P_i + e_i,
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -707,12 +876,10 @@ Y_i = \alpha + \beta \, P_i + e_i,
 <section id="wage-education-is-there-a-ceteris-paribus" class="slide level2">
 <h2>Wage ~ Education: Is there a ceteris paribus?</h2>
 <div class="r-stack">
-<div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/w03/dag-01.png" style="width:100.0%"></p>
 </figure>
-</div>
 </div>
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
@@ -839,16 +1006,16 @@ Y_i = \alpha + \beta \, P_i + \gamma \, A_i + e_i,
 <section id="selection-bias-in-regression-analysis" class="title-slide slide level1 center">
 <h1>Selection bias in regression analysis</h1>
 <div class="fragment">
+<blockquote>
 <p>Absence of the Ceteris Paribus in a regression is called <strong>omitted variable bias</strong></p>
+</blockquote>
 </div>
 </section>
 <section id="ovb-the-long-model" class="slide level2">
 <h2>OVB: The long model</h2>
 <p>Supposed that our <strong>ideal regression</strong></p>
 <ul>
-<li>the true model</li>
-<li>population regression</li>
-<li><strong>long model</strong> is</li>
+<li>the true model / population regression / <strong>long model</strong> is:</li>
 </ul>
 <div class="fragment">
 <p><span class="math display">\[
@@ -860,18 +1027,24 @@ Y_i = \alpha ^ l + \beta ^ l P_i + \gamma A_i + e^l_i,
 </div>
 <div class="fragment">
 <ul>
-<li><span class="math inline">\(Cov(A_i, Y_i) \ne 0\)</span> or <span class="math inline">\(E[Y_i|A_i] \ne 0\)</span>: <span class="math inline">\(A_i\)</span> affects <span class="math inline">\(Y_i\)</span>; and</li>
+<li><span class="math inline">\(A_i\)</span> has a causal effect on <span class="math inline">\(Y_i\)</span>: <span class="math inline">\((E[Y_i|A_i] \ne 0)\)</span>, and</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><span class="math inline">\(Cov(A_i, P_i) \ne 0\)</span> or <span class="math inline">\(E[P_i|A_i] \ne 0\)</span>: <span class="math inline">\(A_i\)</span> correlated with <span class="math inline">\(P_i\)</span>.</li>
+<li><span class="math inline">\(A_i\)</span> correlated with <span class="math inline">\(P_i\)</span>: <span class="math inline">\((E[P_i|A_i] \ne 0)\)</span>:</li>
 </ul>
 </div>
 </section>
 <section id="ovb-the-short-model" class="slide level2">
 <h2>OVB: The short model</h2>
-<p>Because of the <strong>omitted variable</strong>, we cannot estimate the <strong>long model</strong>. Instead, we estimate a <strong>short model</strong>:</p>
+<p>Because of the <strong>omitted variable</strong>,</p>
+<div class="fragment">
+<p>we cannot estimate the <strong>long model</strong>.</p>
+</div>
+<div class="fragment">
+<p>Instead, we estimate a <strong>short model</strong>:</p>
+</div>
 <div class="fragment">
 <p><span class="math display">\[
 Y_i = \alpha ^ s + \beta^s P_i + e^s_i
@@ -886,15 +1059,21 @@ e^s_i = e^l_i + A_i
 \]</span></p>
 </div>
 </section>
-<section id="bias-of-variable-ommition" class="slide level2">
-<h2>Bias of variable ommition</h2>
+<section id="bias-of-variable-omission" class="slide level2">
+<h2>Bias of variable omission</h2>
+<p>Omitted variable causes bias of all estimates!</p>
+<div class="fragment">
+<p>This bias can be measured as <span class="math inline">\(\text{OVB}\)</span>:</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
 \text{OVB} = \beta^s - \beta^l
 \]</span></p>
 <p>To be continued on the OVB in another week</p>
+</div>
 </section>
-<section id="fighting-selection-bias-with-regression" class="slide level2">
-<h2>Fighting selection bias with regression?</h2>
+<section id="how-does-regression-fights-selection-bias" class="slide level2">
+<h2>How does regression fights selection bias?</h2>
 <div class="fragment">
 <p>Any ideas?</p>
 </div>
@@ -913,7 +1092,7 @@ e^s_i = e^l_i + A_i
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <div class="footer">
-<p>See <span class="citation" data-cites="wooldridge2020introductory">Wooldridge (<a href="#/takeaways-1" role="doc-biblioref" onclick="">2020</a>)</span></p>
+<p>See <span class="citation" data-cites="wooldridge2020introductory">Wooldridge (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
 </div>
 <p>We use data from (Blackburn and Neumark, 1992) on wage determinants. Variables present are:</p>
 <ul>
@@ -1035,11 +1214,11 @@ $ caucasian &lt;fct&gt; yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, y
 <section id="exploratory-data-analysis-23" class="slide level2">
 <h2>Exploratory data analysis (2/3)</h2>
 
-<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="exploratory-data-analysis-33" class="slide level2">
 <h2>Exploratory data analysis (3/3)</h2>
 
-<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="estimating-regression" class="slide level2">
 <h2>Estimating regression</h2>
 <div class="cell" data-layout-align="center">
@@ -1126,32 +1305,12 @@ F-statistic: 58.34 on 4 and 521 DF,  p-value: &lt; 2.2e-16</code></pre>
 <td style="text-align: center;">526</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.309</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">R2 Adj.</td>
 <td style="text-align: center;">0.304</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">AIC</td>
-<td style="text-align: center;">2683.4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BIC</td>
-<td style="text-align: center;">2709.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Log.Lik.</td>
-<td style="text-align: center;">-1335.718</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F</td>
 <td style="text-align: center;">58.341</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">RMSE</td>
-<td style="text-align: center;">3.07</td>
 </tr>
 </tbody>
 </table>
@@ -1227,7 +1386,7 @@ Adjusted for:
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1238,7 +1397,7 @@ Adjusted for:
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1250,25 +1409,75 @@ Adjusted for:
 </section>
 <section id="conclude" class="slide level2">
 <h2>Conclude</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li><p>Is model 1 a good predictor of wage based on education?</p></li>
 <li><p>Is the effect of education causal?</p></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Model 1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: center;">-1.715 (0.762)*</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">educ</td>
+<td style="text-align: center;">0.602 (0.051)***</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">exper</td>
+<td style="text-align: center;">0.064 (0.010)***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">black</td>
+<td style="text-align: center;">-0.084 (0.444)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td style="text-align: center;">-2.156 (0.271)***</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: center;">526</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2 Adj.</td>
+<td style="text-align: center;">0.304</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F</td>
+<td style="text-align: center;">58.341</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="elasticity" class="title-slide slide level1 center">
 <h1>Elasticity</h1>
-
+<blockquote>
+<p>Elasticity is a unit-less measure of change in one variable as a result of a change in the other.</p>
+</blockquote>
 </section>
 <section id="elasticity-1" class="slide level2">
 <h2>Elasticity</h2>
-<p>Elasticity is a unit-less measure of change in one variable as a result of a change in the other.</p>
-<div class="fragment">
 <p>Elasticity of <span class="math inline">\(y\)</span> with response to <span class="math inline">\(x\)</span> (<span class="math inline">\(x\)</span> elasticity of <span class="math inline">\(y\)</span>):</p>
 <p><span class="math display">\[
 \epsilon = \frac{\partial y / y}{\partial x / x} =  \frac{\partial y}{\partial x}  \frac{x}{y}
 \]</span></p>
-</div>
 <div class="fragment">
 <p><span class="math display">\[
 \epsilon = \frac{ \frac{y_2 - y_1}{y_1} }{ \frac{x_2 - x_1}{x_1}}
@@ -1342,7 +1551,7 @@ Adjusted for:
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1358,7 +1567,7 @@ Adjusted for:
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1393,11 +1602,36 @@ Adjusted for:
 </div>
 </div>
 </section></section>
+<section>
 <section id="regression-assumptions" class="title-slide slide level1 center">
 <h1>Regression assumptions</h1>
-
+<p>Go to the page 2 to refresh motivation for regression assumptions</p>
+<ul>
+<li><a href="https://bit.ly/41R1YpL">bit.ly/41R1YpL</a></li>
+</ul>
 </section>
-
+<section id="asymptotic-properties-of-the-ols-simplified" class="slide level2 smaller">
+<h2>Asymptotic properties of the OLS (simplified)</h2>
+<p>OLS results with consistent (unbiased) and efficient estimates of population parameters when sample size is finite (<span class="math inline">\(n \rightarrow \infty\)</span>)</p>
+<ul>
+<li><p><span class="math inline">\(\hat \beta \rightarrow \beta\)</span></p></li>
+<li><p><span class="math inline">\(Var(\hat \beta) \rightarrow 0\)</span></p></li>
+</ul>
+<div class="fragment">
+<p>When the sample size is finite and all Gauss-Markov assumptions are satisfied:</p>
+<ul>
+<li><p><span class="math inline">\(\hat \beta\)</span> - estimates vary from sample to sample, but</p></li>
+<li><p><span class="math inline">\(Var(\hat \beta)\)</span> is distributed according to the <strong><code>t</code> - distribution</strong>.</p></li>
+<li><p>Variances of two estimates <span class="math inline">\(Var(\hat \beta_1)\)</span> and <span class="math inline">\(Var(\hat \beta_2)\)</span> are distributed according to the <strong><code>F</code> - distribution</strong>.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>When GM assumptions are not satisfied:</p>
+<ul>
+<li><code>t</code> and <code>F</code> distributions are no longer relevant and we cannot perform conduct inference.</li>
+</ul>
+</div>
+</section></section>
 <section>
 <section id="linearity" class="title-slide slide level1 center">
 <h1>Linearity</h1>
@@ -1407,7 +1641,7 @@ Adjusted for:
 <h2>Linearity: meaning</h2>
 <div>
 <ul>
-<li class="fragment"><p>the expected value of dependent variable is a straight-line function of the independent variable</p></li>
+<li class="fragment"><p>the expected value of a dependent variable is a straight-line function of the independent variable</p></li>
 <li class="fragment"><p>If linearity is violated:</p>
 <ul>
 <li class="fragment"><p><strong>estimates are biased</strong></p></li>
@@ -1635,12 +1869,12 @@ Adjusted for:
 <ul>
 <li>When <span class="math inline">\(x\)</span> increases to infinity, <span class="math inline">\(y\)</span> reaches asymptotically <span class="math inline">\(\beta_0\)</span></li>
 </ul>
-<p>See <span class="citation" data-cites="Gujarati2004">Gujarati (<a href="#/takeaways-1" role="doc-biblioref" onclick="">2004</a>)</span> Chapter 6.7 for more details on interpreting the reciprocal relationship.</p>
+<p>See <span class="citation" data-cites="Gujarati2004">Gujarati (<a href="#/references" role="doc-biblioref" onclick="">2004</a>)</span> Chapter 6.7 for more details on interpreting the reciprocal relationship.</p>
 </section>
 <section id="linearity-in-the-wage-equation" class="slide level2">
 <h2>Linearity in the wage equation</h2>
 
-<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+<img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
 <section id="wage-equaition-update" class="slide level2">
 <h2>Wage equaition update</h2>
 <div class="cell" data-layout-align="center">
@@ -1686,7 +1920,7 @@ F-statistic: 70.93 on 4 and 521 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1697,7 +1931,7 @@ F-statistic: 70.93 on 4 and 521 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-25-1.png" style="width:100.0%"></p>
+<p><img data-src="w03-mlr-part1_files/figure-revealjs/unnamed-chunk-28-1.png" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1750,57 +1984,17 @@ F-statistic: 70.93 on 4 and 521 DF,  p-value: &lt; 2.2e-16</code></pre>
 <td style="text-align: center;">526</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">R2</td>
-<td style="text-align: center;">0.309</td>
-<td style="text-align: center;">0.353</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">R2 Adj.</td>
 <td style="text-align: center;">0.304</td>
 <td style="text-align: center;">0.348</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">AIC</td>
-<td style="text-align: center;">2683.4</td>
-<td style="text-align: center;">2317.9</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BIC</td>
-<td style="text-align: center;">2709.0</td>
-<td style="text-align: center;">2343.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Log.Lik.</td>
-<td style="text-align: center;">-1335.718</td>
-<td style="text-align: center;">-299.096</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F</td>
 <td style="text-align: center;">58.341</td>
 <td style="text-align: center;">70.934</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">RMSE</td>
-<td style="text-align: center;">3.07</td>
-<td style="text-align: center;">0.43</td>
-</tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: wage
-           Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
-educ        1 1179.7 1179.73 124.2869 &lt; 2.2e-16 ***
-exper       1  432.5  432.52  45.5670 3.943e-11 ***
-black       1    0.0    0.01   0.0013    0.9709    
-female      1  602.8  602.81  63.5075 1.014e-14 ***
-Residuals 521 4945.3    9.49                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section></section>
@@ -1847,9 +2041,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>Choose different regressors;</p></li>
 <li><p>See also:</p>
 <ul>
-<li><p>Overview: “Assumption AMLR.3 No Perfect Collinearity” in <span class="citation" data-cites="wooldridge2020introductory">(<a href="#/takeaways-1" role="doc-biblioref" onclick="">Wooldridge, 2020</a>)</span> ;</p></li>
-<li><p>Examples of causes in Chapter 9.5 <span class="citation" data-cites="wooldridge2020introductory">(<a href="#/takeaways-1" role="doc-biblioref" onclick="">Wooldridge, 2020</a>)</span> ;</p></li>
-<li><p>Chapter 9.4-9.5 in <span class="citation" data-cites="weisberg2005a">(<a href="#/takeaways-1" role="doc-biblioref" onclick=""><strong>weisberg2005a?</strong></a>)</span>;</p></li>
+<li><p>Overview: “Assumption AMLR.3 No Perfect Collinearity” in <span class="citation" data-cites="wooldridge2020introductory">(<a href="#/references" role="doc-biblioref" onclick="">Wooldridge, 2020</a>)</span> ;</p></li>
+<li><p>Examples of causes in Chapter 9.5 <span class="citation" data-cites="wooldridge2020introductory">(<a href="#/references" role="doc-biblioref" onclick="">Wooldridge, 2020</a>)</span> ;</p></li>
+<li><p>Chapter 9.4-9.5 in <span class="citation" data-cites="weisberg2005a">(<a href="#/references" role="doc-biblioref" onclick=""><strong>weisberg2005a?</strong></a>)</span>;</p></li>
 </ul></li>
 </ul>
 </section>
@@ -2088,7 +2282,7 @@ $ wage   &lt;dbl&gt; 10.847522, 7.167989, 4.941890, 7.477957, 9.391538, 8.087289
 <p>Re watch video 2: <a href="https://youtu.be/6YrIDhaUQOE">Selection Bias</a> or this link: <a href="https://youtu.be/6YrIDhaUQOE" class="uri">https://youtu.be/6YrIDhaUQOE</a></p>
 </div><div class="column" style="width:50%;">
 <h3 id="read">Read:</h3>
-<p><span class="citation" data-cites="Angrist2014 Angrist2009">(<a href="#/takeaways-1" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014, Chapter 2</a>; optional <a href="#/takeaways-1" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2009, Chapter 3</a>)</span></p>
+<p><span class="citation" data-cites="Angrist2014 Angrist2009">(<a href="#/references" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014, Chapter 2</a>; optional <a href="#/references" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2009, Chapter 3</a>)</span></p>
 <h3 id="do">Do:</h3>
 <p>Follow pre-recorded videos in the order below. Please note that slides below supplement some of those practical works.</p>
 <ul>
@@ -2137,7 +2331,7 @@ y_1 \\ y_2 \\ \vdots \\ y_k
 </div>
 </div>
 <p><span class="math display">\[
-\hat \beta = \begin{bmatrix} \hat \beta_0 \\ \hat \beta_1 \\ \hat \beta_2 \\ \vdots \\ \hat \beta_n \end{bmatrix}
+\hat \beta = \begin{bmatrix} \hat \beta_0 &amp; \hat \beta_1 &amp; \hat \beta_2 &amp; \cdots &amp; \hat \beta_n \end{bmatrix}
 \]</span></p>
 </section>
 <section id="where-do-beta-come-from" class="slide level2">
@@ -2242,7 +2436,7 @@ Var(\hat \beta) = (\pmb{x}^T \pmb{x})^{-1} \hat \sigma_e
 <h1>Takeaways</h1>
 
 </section>
-<section id="takeaways-1" class="slide level2 smaller scrollable">
+<section id="takeaways-1" class="slide level2">
 <h2>Takeaways</h2>
 <p>Get comfortable with the terminology:</p>
 <ul>
@@ -2257,6 +2451,15 @@ Var(\hat \beta) = (\pmb{x}^T \pmb{x})^{-1} \hat \sigma_e
 <ul>
 <li><span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, <span class="math inline">\(\beta\)</span>, standard errors.</li>
 </ul>
+<p>Why assumptions are important?</p>
+<p>Linearity and how to detect it?</p>
+<ul>
+<li>Log transformation and its interpretation.</li>
+</ul>
+<p>What is perfect collinearity?</p>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 
 <img src="../img/jlu-logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>MP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | <a href="https://github.com/EBukin/mp223-2023-aem-R-public">GitHub</a> | <a href="https://studip.uni-giessen.de/dispatch.php/course/details?sem_id=f6e2c09067e60ef3c084b358d4a490cd&amp;again=yes">StudIP</a> | <a href="https://ilias.uni-giessen.de/goto.php?target=crs_350157&amp;client_id=JLUG">ILIAS</a>.</p>
