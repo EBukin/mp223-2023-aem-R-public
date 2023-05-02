@@ -1,0 +1,802 @@
+---
+title: "Multiple Linear Regression: practical aspects"
+editor: source
+format:
+  revealjs: 
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(ggdag)      # For plotting DAGs
+library(dagitty)    # For working with DAG logic
+library(ggpubr)
+library(wooldridge)
+library(here)
+theme_set(theme_bw())
+```
+
+# Relevance of a theory in econometric models
+
+## The Basic Theory of Production [@Sadoulet1995, Chapter 3]
+
+::: notes
+Explain why production function should be zero. 
+-   Intensive to use all variables factors to produce goods.
+-   Leaving underutilized production factors makes production inefficient.
+:::
+
+**Farm's production function**
+
+$$
+h(q,x,z) = 0,
+$$
+
+where: 
+
+-   $q$ - output quantities (agricultural produce)
+
+-   $x$ - variable input quantities (fertilizers, labor, seed, water, ...)
+
+-   $z$ - fixed factors (private: land, equipment; public: infrastructure, extension; exogenous features ...)
+
+
+## Farm's optimization problem
+
+::: notes
+Ask what is the optimization problem. Ask how the profit is being defined on the farm.
+:::
+
+Prices of **inputs $w^{'}$** and **outputs $p^{'}$** affect farmers decisions of:
+
+-   what and how much to **produce $q$**, and 
+
+-   what and how much to use as the **input $x$**.
+
+. . .
+
+Farm's objective function is **to maximize own profit**:
+
+. . .
+
+$$
+\max_{x,q} \;\;\; p^{'}q-w^{'}x, \\ \text{s.t.} \;\; h(q,x,z) = 0
+$$
+
+## Solution to the producer's optimization problem
+
+$$
+\max_{x,q} \;\;\; p^{'}q-w^{'}x, \\ \text{s.t.} \;\; h(q,x,z) = 0
+$$
+
+Is a set of **input demand** and **output supply** functions:
+
+$$
+\begin{cases}
+x = x(p,w,z), & \text{factor demand function} \\
+q = q(p,w,z), & \text{supply function}
+\end{cases}
+$$
+
+
+## Farm's optimization problem is
+
+::: columns
+::: {.column width="50%"}
+**Structural form**
+
+$$
+\max_{x,q} \;\;\; p^{'}q-w^{'}x, \\ \text{s.t.} \;\; h(q,x,z) = 0
+$$
+
+::: 
+::: {.column width="50%"}
+
+**Reduced forms**
+$$
+\begin{cases}
+x = x(p,w,z), & \text{factor demand function} \\
+q = q(p,w,z), & \text{supply function}
+\end{cases}
+$$
+::: 
+::: 
+
+# Farm's Production Function [@Sadoulet1995, Appendix A.4]
+
+Mathematical function that transforms inputs quantities $x$ into output $q$.
+
+## Taylor Expansion
+
+Value of any function could be approximated at an arbitrary point $x_0$ with a Taylor expansion:
+
+$$
+f(x) \approx f(x_0) + f^{'}(x_0)(x - x_0) + \frac{f^{''}(x_0)}{2!}(x - x_0)^2 + \cdots .
+$$
+
+. . .
+
+For example: 
+
+$$
+e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} \approx 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+$$
+
+. . .
+
+$$
+e^{0.4} \approx 1 + .4 + \frac{.4^2}{2!} + \frac{.4^3}{3!} + \frac{.4^4}{4!} + \frac{.4^5}{5!} \\ 
+\approx 1 + .4 + .16/2 + 0.064/6 + 0.0256/24 + 0.01024 / 120 \\
+\approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6) 
+$$
+
+
+## First order Taylor approximation
+
+$q \approx f(x)$ at $x_0$.
+
+$$
+f(x) \approx 
+\underbrace{f(x_0) - x_0}_{\alpha} + \underbrace{f^{'}(x_0)}_{\beta}\, x
+$$
+
+. . .
+
+$$
+q \approx \alpha + \beta \, x 
+$$
+
+. . .
+
+$q \approx f(x_1, x_2)$ at $a, b$
+
+$$
+f(x_1, x_2) \approx
+\underbrace{f(a,b) - a - b}_{\alpha} + \underbrace{f_{x_1}^{'}(a,b)}_{\beta_1}\, x_1 + \underbrace{f_{x_2}^{'}(a,b)}_{\beta_2}\, x_2 
+$$
+
+. . .
+
+$$
+q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2
+$$
+
+
+## Second and greater order Taylor approximation
+
+Results in polynomial functions with interaction terms:
+
+$$
+q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2 + \beta_3 \, x_1^2 + \beta_4 \, x_2^2 + \beta_5 x_1 x_2
+$$
+
+## Non-linear production functions
+
+Consider 
+
+$$q = f(x_i)$$
+
+(function of several variables $x_i$), where 
+
+
+$$x_i = e^{\ln x_i}$$
+
+. . .
+
+Then, 
+
+$$
+\ln q = \ln f(e^{\ln x_i}) \; \; \; \; \text{or} \; \; \; \; \ln q = g(\ln x_i)
+$$
+
+. . .
+
+Let us approximate $\ln q = g(\ln x_i)$ using the Taylor expansion.
+
+## Fist order Taylor approximation
+
+. . .
+
+$$
+\ln q \approx \alpha + \sum_i \beta_i \ln x_i
+$$
+
+. . .
+
+**This is a Cobb-Douglas production function**:
+
+. . .
+
+$$
+q \approx e^\alpha \prod_i x_i^{\beta_i}
+$$
+
+
+## Second order Taylor approximation
+
+. . .
+
+$$
+\ln q \approx \alpha + \sum_i \beta_i  \ln x_i + \sum_{ij} \gamma_{ij} \ln x_{ij}
+$$
+
+. . .
+
+**This is a translog production function**
+
+# Example 1. production function
+
+## Problem and research question {.smaller}
+
+::: columns
+::: {.column width="50%"}
+::: incremental
+-   Policy makers are considering to abolish the share-cropping land tenure.
+
+-   As an alternative either owner-cultivation with hired labor or pure rental relationship should be established. 
+
+-   Main rationale is in the president's statement that sharecropping is inefficient farm structure.
+:::
+:::
+::: {.column width="50%"}
+::: incremental
+**Theoretical debate**
+
+-   Contract theory [@Dasgupta1999] sees sharecropping as a form of the optimal risks and incentives sharing contract.
+
+-   It is a **second best contract** in agriculture after pure rental of hired labor contract.
+
+-   Sharecropping can be as efficient as rental/labor contracts, when interlinked credit and insurance markets fail.
+:::
+:::
+:::
+
+. . .
+
+**Research question:**
+
+Is there any negative effect of sharecropping on farms productivity?
+
+## How to answer this question? {.smaller}
+
+. . .
+
+**Regression**
+
+. . .
+
+
+
+Let us estimate a simple production function of a rice-producing farm. 
+
+$$\text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \text{land} + \beta_4 \text{labor} + e$$
+
+. . .
+
+
+where: 
+
+$\text{output}$ is gross output of rice in kg
+
+$\text{land}$ the total area cultivated with rice, measured in hectares
+
+$\text{labor}$ total labor inputs (excluding harvest labor) in hours
+
+$\text{status}$ land tenure system on the farm: owner-operated, Share-cropping and mixed
+
+. . .
+
+Data set covers a sample of the rice-cultivating farmers in India. Source: [@Feng2010].
+
+## Data (1)
+
+```{r echo=FALSE}
+library(tidyverse)
+library(GGally)
+data("RiceFarms", package = "splm")
+farm_dta <- RiceFarms %>% as_tibble() %>%
+  select(output = goutput, land = size, labor = totlabor, status)
+
+# fit1 <- lm(output ~ land + labor + status,  data =  farm_dta)
+# fit1 %>% summary()
+```
+
+```{r echo=TRUE}
+library(tidyverse)
+library(GGally)
+library(modelsummary)
+glimpse(farm_dta)
+```
+
+## Exploratory staistics (1)
+
+```{r echo=TRUE}
+datasummary_skim(farm_dta, output = "markdown")
+datasummary_skim(farm_dta, "categorical", output = "markdown")
+```
+
+## Exploratory staistics (2)
+
+```{r echo=TRUE}
+datasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = "markdown")
+```
+
+## Exploratory staistics (3)
+
+```{r echo=TRUE}
+#| fig-asp: 0.5
+ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
+```
+
+## Regression and interpretation
+
+```{r echo=TRUE}
+#| output-location: slide
+fit1 <- lm(output ~ status + land + labor, 
+           data = farm_dta)
+
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1),
+  estimate = "{estimate} {stars} ({std.error})",
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS"),
+  output  = "markdown"
+)
+```
+
+## Fitted values (1) {auto-animate="true"}
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+#| echo: true
+#| output-location: column-fragment
+farm_dta %>% 
+  mutate(fitted = fitted(fit1)) %>% 
+  ggplot() + 
+  aes(x = land,
+      y = output,
+      colour = "Observed") +
+  xlab("Land area, ha") + 
+  ylab("Rice output, kg")
+```
+
+## Fitted values (1) {auto-animate="true"}
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+#| echo: true
+#| output-location: column-fragment
+farm_dta %>% 
+  mutate(fitted = fitted(fit1)) %>% 
+  ggplot() + 
+  aes(x = land,
+      y = output,
+      colour = "Observed") +
+  xlab("Land area, ha") + 
+  ylab("Rice output, kg") +
+  geom_point(alpha = 0.3) + 
+  theme(legend.position = c(0.1, 0.9)) + 
+  scale_color_manual(values = c('#BF382A', '#0C4B8E'))
+```
+
+## Fitted values (1) {auto-animate="true"}
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+#| echo: true
+#| output-location: column-fragment
+farm_dta %>%
+  mutate(fitted = fitted(fit1)) %>%
+  ggplot() +
+  aes(x = land,
+      y = output,
+      colour = "Observed") +
+  xlab("Land area, ha") + 
+  ylab("Rice output, kg") +
+  geom_point(alpha = 0.3) +
+  theme(legend.position = c(0.1, 0.9)) + 
+  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +
+  geom_point(aes(y = fitted, colour = "Gitted"),
+             alpha = 0.3)
+```
+
+## Fitted values (1) {auto-animate="true"}
+
+```{r}
+#| fig-width: 6
+#| fig-height: 6
+#| echo: true
+#| output-location: column-fragment
+farm_dta %>%
+  mutate(fitted = fitted(fit1)) %>%
+  ggplot() +
+  aes(x = land,
+      y = output,
+      colour = "Observed") +
+  xlab("Land area, ha") + 
+  ylab("Rice output, kg") +
+  geom_point(alpha = 0.3) +
+  theme(legend.position = c(0.1, 0.9)) + 
+  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +
+  geom_point(aes(y = fitted, colour = "Gitted"),
+             alpha = 0.3) + 
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+## Actual values 3D
+
+```{r}
+library(plotly)
+set.seed(1)
+ply_dta <- farm_dta %>% mutate(fitted = fitted(fit1)) %>% 
+  filter(output < 3000) %>% sample_n(100)
+plot_ly(
+  data = ply_dta, 
+  x = ~land, 
+  y = ~labor, 
+  z = ~output , 
+  color = ~status, 
+  colors = c('#BF382A', '#0C4B8E', '#2abf38')) %>%
+  add_markers(opacity = 0.5) %>%
+  layout(scene = list(
+    xaxis = list(title = 'x1: Land, ha'),
+    yaxis = list(title = 'x2: Labor, hours'),
+    zaxis = list(title = 'y: Output, kg')
+  ))
+```
+
+## Actual + Fitted values 3D
+
+```{r}
+plot_ly(
+  data = ply_dta,
+  x = ~ land,
+  y = ~ labor,
+  z = ~ output ,
+  color = "Observed"
+) %>%
+  add_markers(#
+    opacity = 0.5,
+    marker = list(
+      color = '#0C4B8E',
+      size = 5,
+      opacity = 0.5
+    )) %>%
+  add_markers(
+    z = ~ fitted ,
+    color = "Fitted",
+    marker = list(
+      color = '#BF382A',
+      size = 5,
+      opacity = 0.5
+    )
+  ) %>%
+  layout(scene = list(
+    xaxis = list(title = 'x1: Land, ha'),
+    yaxis = list(title = 'x2: Labor, hours'),
+    zaxis = list(title = 'y: Output, kg')
+  ))
+```
+
+## Fitted values 3D v.2
+
+```{r}
+x_values <- ply_dta$land %>% round(3)
+y_values <- ply_dta$labor %>% round(3)
+z_values <- ply_dta$output %>% round(3)
+x_grid <- seq(from = min(x_values), to = max(x_values), length = 10)
+y_grid <- seq(from = min(y_values), to = max(y_values), length = 10)
+z_grid <-
+  tibble(
+    land =  seq(from = min(x_values), to = max(x_values), length = 10),
+    labor = seq(from = min(y_values), to = max(y_values), length = 10)
+  ) %>% 
+  expand(land, labor) %>% 
+  mutate(status = unique(ply_dta$status[[1]])) %>% 
+  mutate(plane = predict(fit1, newdata = .)) %>% 
+  pull(plane) %>% 
+  matrix(nrow = length(x_grid)) %>%
+  t()
+
+
+plot_ly() %>%
+  # 3D scatterplot:
+  add_markers(
+    x = x_values,
+    y = y_values,
+    z = z_values,
+    marker = list(size = 5)
+  ) %>%
+  # Regression plane:
+  add_surface(
+    x = x_grid,
+    y = y_grid,
+    z = z_grid,
+    opacity = 0.5
+  ) %>%
+  # Axes labels and title:
+  layout(
+    title = "3D scatterplot and regression plane",
+    scene = list(
+      zaxis = list(title = "y: log10(price)"),
+      yaxis = list(title = "x2: year"),
+      xaxis = list(title = "x1: log10(size)")
+    )
+  )
+```
+
+# Assumptions
+
+## Linearity
+
+```{r eval=FALSE}
+#| echo: true
+library(performance)
+check_model(fit1, check = "linearity", panel = FALSE)
+```
+
+```{r eval=FALSE}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 6
+#| output-location: column-fragment
+library(performance)
+plot(check_model(fit1, check = "linearity", panel = FALSE))
+```
+
+## Multicolinearity
+
+
+## No perfect collinearity
+
+## No 
+
+## Ne2 slide
+
+
+```{r echo=FALSE}
+library(parameters)
+library(performance)
+library(modelbased)
+
+model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+
+plot(estimate_relation(model))
+slopes <- estimate_slopes(model, trend = "Petal.Length", at = "Species")
+
+plot(slopes)
+
+
+
+fit_tl <- 
+  lm(log(output) ~ status * log(land) * log(labor), 
+    data = farm_dta
+  )
+
+
+
+
+library(modelbased)
+# model <- lm(mpg ~ hp * wt, data = mtcars)
+slopes <- estimate_slopes(fit_tl, trend = "land", at = "status")
+plot(slopes)
+```
+
+
+
+
+
+
+
+```{r eval=FALSE}
+library(tidyverse)
+library(GGally)
+data("RiceFarms", package = "splm")
+farm_dta <- RiceFarms %>% as_tibble() %>%
+  select(output = goutput, land = size, labor = totlabor, status)
+ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
+fit1 <- lm(output ~ land + labor + status,  data =  farm_dta)
+fit1 %>% summary()
+```
+
+
+
+```{r eval=FALSE}
+
+
+fit_cd <- 
+  lm(
+    output ~ land + labor, 
+    data = farm_dta
+  )
+
+plot(fit_cd, which = 1)
+
+# Elasticity of scale ### ### ### ### ### ###
+
+library(car)
+matchCoefs(fit_cd, "log")
+car::linearHypothesis(
+  fit_cd, 
+  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
+)
+car::deltaMethod(
+  fit_cd, 
+  "b2 + b3 + b4 - 1",
+  parameterNames= paste("b", 1:4, sep="")
+)
+
+library(marginaleffects)
+hypotheses(fit_cd)
+hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0")
+hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0", vcov = "HC3")
+
+
+fit_tl <- 
+  lm(
+    log(output) ~ log(land) + log(labor) + log(urea) + 
+      log(land):log(labor) + log(land):log(urea) + log(labor):log(urea), 
+    data = farm_dta
+  )
+
+
+# Marginal Effects at Y
+# hypotheses(fit_tl)
+# hypotheses(fit_tl,  hypothesis = "b2 + b5 + b6 = 0")
+slopes(fit_tl, slope = "dydx", variables = "land", by = c("labor", "urea"))
+
+plot_predictions(fit_tl, condition = list("land", "labor" = "quartile")) + 
+  scale_x_continuous(trans = "log")
+plot_predictions(fit_tl, condition = list("land", "urea" = "quartile"), transform  = exp, vcov = "HC3")
+
+avg_slopes(fit_tl, slope = "eyex")
+slopes(fit_tl, slope = "dydx", by = "land")
+hypotheses(fit_tl,  hypothesis = "b2 + b3 + b4 - 1 = 0")
+
+
+
+matchCoefs(fit_cd, "log")
+
+car::linearHypothesis(
+  fit_cd, 
+  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
+)
+
+car::deltaMethod(
+  fit_cd, 
+  "b2 + b3 + b4 - 1",
+  parameterNames= paste("b", 1:4, sep="")
+)
+
+
+library(marginaleffects)
+hypotheses(fit_cd)
+hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0")
+hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0", vcov = "HC3")
+
+
+fit_plmtl <- 
+  plm(
+    log(output) ~ log(land) + log(labor) + log(urea) + 
+      log(land):log(labor) + log(land):log(urea) + log(labor):log(urea) , 
+    data = farm_dta, model = "within", effect = "individual", index = c("id", "time")
+  )
+
+library(modelsummary)
+library(marginaleffects)
+
+modelsummary(
+  list(CD = fit_cd,
+       TL = fit_tl,
+       TL_fe = fit_plmtl),
+  estimate = "{estimate} {stars} ({std.error})",
+  statistic = NULL#,
+  # output  = "markdown"
+)
+
+library(car)
+matchCoefs(fit_cd, "log")
+
+car::linearHypothesis(
+  fit_cd, 
+  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
+)
+
+car::deltaMethod(
+  fit_cd, 
+  "b1 + b2 + b3 - 1",
+  parameterNames= paste("b", 0:3, sep="")
+)
+
+library(marginaleffects)
+hypotheses(fit_cd,  hypothesis = "b1 + b2 + b3 - 1 = ")
+
+
+library("margins")
+mod1 <- lm(mpg ~ log(cyl) * hp + wt, data = mtcars)
+(marg1 <- margins(mod1))
+summary(marg1)
+
+avg_slopes(mod1,  slope = "eyex")
+avg_slopes(mod1,  slope = "dydx")
+
+car::deltaMethod(
+  mod1, "b1 + b3 * 15" ,
+  parameterNames= paste("b", 0:3, sep="")
+)
+
+
+
+
+matchCoefs(fit_tl, "log")
+
+car::deltaMethod(
+  fit_tl, "b1 + b4 + b5" ,
+  parameterNames= paste("b", 0:6, sep="")
+)
+
+car::deltaMethod(
+  fit_tl, "b2 + b4 + b6" ,
+  parameterNames= paste("b", 0:6, sep="")
+)
+
+car::deltaMethod(
+  fit_tl, "b3 + b5 + b6" ,
+  parameterNames= paste("b", 0:6, sep="")
+)
+
+
+avg_slopes(fit_cd,  slope = "eyex")
+avg_slopes(fit_cd,  slope = "dydx")
+
+
+hypotheses(mfx,  hypothesis = "b2 + b3 + b4 + b5 + b6 +  b7 = 1")
+
+
+hypotheses(fit_tl, hypothesis = "b2 + b3 + b4 + b5 + b6 +  b7 = 1")
+
+
+library(ggeffects)
+ggemmeans(fit_tl, terms = c("land", "labor")) %>% plot()
+
+avg_slopes(fit_tl, by = TRUE)
+
+slopes(fit_tl, newdata = datagrid())
+predictions(
+    fit_cd,
+    # newdata = datagrid(wt = 2:3),
+    hypothesis = "b1 + b2 + b3 = 1")
+
+slopes(fit_tl, newdata = datagrid(land = c(1, 10, 100)))
+
+
+avg_slopes(fit_tl,
+           slope = "eyex",
+           variables = "labor",
+           by = "land")
+
+```
+
+
+
+
+# References
+
+## References
