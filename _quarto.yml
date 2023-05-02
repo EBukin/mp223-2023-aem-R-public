@@ -1,5 +1,9 @@
 project:
+  type: website
   output-dir: docs
+  render:
+    - "slides/"
+    - "!exercises/"
   
 author:
   - name: Eduard Bukin

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.1.251">
 
   <meta name="author" content="Eduard Bukin">
-  <title>Practical Exercise 1 + R and R Studio Setup</title>
+  <title>Week 02. Homework supplementary materials</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +27,25 @@
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
+    }
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
     }
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
@@ -325,7 +344,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Practical Exercise 1 + R and R Studio Setup</h1>
+  <h1 class="title">Week 02. Homework supplementary materials</h1>
   <p class="author">Eduard Bukin</p>
 </section>
 
@@ -334,147 +353,32 @@
 <div class="cell">
 
 </div>
+<p>These slides supplement the homework on checks and balances tables in R.</p>
+<p>The goals of this homework is to reproduce the analysis of the RAND Health Insurance Experiment (HIE) present in tables 1.3 amd 1.4 in Mastering’metrics <span class="citation" data-cites="Angrist2014">(<a href="#/references" role="doc-biblioref" onclick="">Angrist &amp; Pischke, 2014</a>)</span></p>
 </section>
+<section id="table-1.3-check-and-balance" class="slide level2">
+<h2>Table 1.3 Check and balance</h2>
+
+<img data-src="img/w02/mm-t1.3.PNG" class="r-stretch"></section>
+<section id="table-1.4-intervention-evaluation" class="slide level2">
+<h2>Table 1.4 Intervention evaluation</h2>
+
+<img data-src="img/w02/mm-t1.4.PNG" class="r-stretch"></section>
 <section>
-<section id="installing-r-and-r-studio" class="title-slide slide level1 center">
-<h1>Installing R and R Studio</h1>
+<section id="tools" class="title-slide slide level1 center">
+<h1>Tools</h1>
+<p>Here we briefly summarize the tools one need to make this HW.</p>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
 
-</section>
-<section id="about-the-r-and-rstudio" class="slide level2 smaller">
-<h2>About the R and RStudio</h2>
-<p>To learn more about R and RStudio, use <a href="https://r4ds.hadley.nz">R For Data Science (Second Edition)</a>, specifically <a href="https://r4ds.hadley.nz/intro.html#prerequisites">R4DS Chapter “Intro”, section 1.4 Prerequisites</a></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="img/w01c-rstudio-intro/R-logo.png" width="258"></p>
-<ul>
-<li><p>R is an open-source statistical programming language</p></li>
-<li><p>R is also an environment for statistical computing and graphics</p></li>
-<li><p>It’s easily extensible with packages, see: <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="img/w01c-rstudio-intro/RStudio-logo.png"></p>
-<ul>
-<li><p>RStudio is an IDE (integrated development environment) for R</p></li>
-<li><p>RStudio is not a requirement for programming with R, but it’s commonly used by R programmers and data scientists <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a></p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="r-rstudio-installation" class="slide level2">
-<h2>R + RStudio Installation</h2>
-<ol type="1">
-<li><p><strong>Download R</strong> from here: <a href="https://cran.r-project.org/">cran.r-project.org</a></p></li>
-<li><p><strong>Install R</strong> by double click on the installation file and clicking next…</p></li>
-<li><p><strong>Download free version of R Studio</strong> from here: <a href="https://www.rstudio.com/products/rstudio/download/#download">rstudio.com</a></p></li>
-<li><p><strong>Install RStudio</strong> by double click on the installation file and clicking next…</p></li>
-<li><p><strong>Check that RStudio</strong> has been installed by typing “RStudio” in the start menu or Windows search.</p></li>
-<li><p>(Optional) <strong>Check that R</strong> has been installed by typing “R x” in the start menu or Windows search.</p></li>
-</ol>
-</section>
-<section id="r-and-r-studio-introduction-and-interface" class="slide level2 smaller">
-<h2>R and R Studio: introduction and interface</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p><img data-src="img/w01c-rstudio-intro/Rstudio-panels.png"></p>
-</div><div class="column" style="width:30%;">
-<ul>
-<li><p>Console (left bottom) - to type the R code into</p></li>
-<li><p>Editor (left top) - to <strong>write</strong> and <strong>SAVE</strong> scripts, analysis and documentation.</p></li>
-<li><p>Environment (right top) - overview of the r session and objects in there</p></li>
-<li><p>Plots, Files and Viewer (right bottom) - files navigation, plots export and inspection.</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="scripts-editor" class="slide level2">
-<h2>Scripts editor</h2>
 
-<img data-src="img/w01c-rstudio-intro/Rstudio-scripts-editor.png" class="r-stretch"></section>
-<section id="r-markdown-editor" class="slide level2">
-<h2>R Markdown editor</h2>
-
-<img data-src="img/w01c-rstudio-intro/Rstudio-rmd-editor-knit.png" class="r-stretch"></section></section>
-<section>
-<section id="practical-exercise-01.-checks-and-balances-in-the-rct" class="title-slide slide level1 center">
-<h1>Practical Exercise 01. Checks and balances in the RCT</h1>
-
-</section>
-<section id="application-exercise-01" class="slide level2">
-<h2>Application Exercise 01</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<h3 id="in-the-classroom">In the classroom:</h3>
-<p><strong>Turn on your PC</strong></p>
-<p>Use these log in and password.</p>
-<div class="callout callout-important callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>Login: <code>ZH-user-pcl</code></p>
-<p>Password: <code>V5-senc!3ken</code></p>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<ol type="1">
-<li><p>Go to: <a href="https://bit.ly/3GD8Oap">bit.ly/3GD8Oap</a></p></li>
-<li><p>Scroll and download <code>ex01-rct.zip</code>.</p></li>
-<li><p><strong>DON’T OPEN IT!</strong> setup your working folders first (next slide).</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="setup-working-folders" class="slide level2">
-<h2>Setup working folders</h2>
-<p>Navigate to your user folder: <code>C &gt; Users &gt; Name of your user account</code>;</p>
-<div class="fragment">
-<ul>
-<li><p>Create there a <strong>course folder</strong> names <code>{your initial}-mk223-2023</code>.</p>
-<ul>
-<li>Use it for your course for all in-class work;</li>
-<li>on my pc the course folder is called <code>eb-mk223-2023</code>;</li>
-<li>the full path is <code>C:\Users\ZH-user-pcl\eb-mk223-2023</code>;</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Paste <code>ex01-rct.zip</code> from downloads to the <strong>course folder</strong>;</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Unzip <code>ex01-rct.zip</code> into ex01-rct;</li>
-</ul>
-</div>
-</section>
-<section id="launch-the-r-studio-from-the-project-ae01-soft-intro-to-r" class="slide level2">
-<h2>Launch the R Studio from the project “ae01-soft-intro-to-R”</h2>
-<div class="fragment">
-<ul>
-<li>Navigate to <code>ex01-rct</code> in your <strong>course folder</strong></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Open <code>ex01-rct.Rproj</code> that has R studio icon and <code>.Rproj</code> extension:</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img data-src="img/w01c-rstudio-intro/RStud-icon.PNG"></p>
-</div><div class="column" style="width:50%;">
-<p><img data-src="img/w01c-rstudio-intro/RStud-icon-2.PNG"></p>
-</div>
-</div>
-
-<p><img src="../img/jlu-logo.png" class="slide-logo"></p>
-<div class="footer footer-default">
+<img src="../img/jlu-logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>MP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | <a href="https://github.com/EBukin/mp223-2023-aem-R-public">GitHub</a> | <a href="https://studip.uni-giessen.de/dispatch.php/course/details?sem_id=f6e2c09067e60ef3c084b358d4a490cd&amp;again=yes">StudIP</a> | <a href="https://ilias.uni-giessen.de/goto.php?target=crs_350157&amp;client_id=JLUG">ILIAS</a>.</p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-Angrist2014" class="csl-entry" role="doc-biblioentry">
+Angrist, J. D., &amp; Pischke, J.-S. (2014). <em>Mastering’metrics: The path from cause to effect</em>. Princeton University Press.
 </div>
 </div>
 </section></section>

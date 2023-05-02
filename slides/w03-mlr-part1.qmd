@@ -1340,7 +1340,7 @@ modelsummary(
 
     -   Examples of causes in Chapter 9.5 [@wooldridge2020introductory] ;
 
-    -   Chapter 9.4-9.5 in [@weisberg2005a];
+    -   Chapter 9.4-9.5 in [@weisberg2005applied];
 
 ## Perfect collinearity with dummy variables
 

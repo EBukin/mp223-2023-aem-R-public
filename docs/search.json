@@ -1,0 +1,1087 @@
+[
+  {
+    "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
+    "href": "slides/w01a-introduction.html#welcome-to-meta-course",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Welcome to MP-223-EN Applied Econometrics Methods for the Social Sciences (SoSe 2023)",
+    "text": "Welcome to MP-223-EN Applied Econometrics Methods for the Social Sciences (SoSe 2023)\nAuthor: Eduard Bukin eduard.bukin@agrar.uni-giessen.de\n\nInstitute of Agricultural Policy and Market Research\nphone: +49 641 99-37055\noffice: Zeughaus (Senckenbergstr. 3). Room: 132\nhours: Part time (better to make an appointment)"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#course-objectives",
+    "href": "slides/w01a-introduction.html#course-objectives",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Course objectives",
+    "text": "Course objectives\n\n\n\n\nget familiar with fundamental econometric techniques;\ndevelop ability to reason on the appropriation of specific econometric methods;\nlearn how to apply those econometrics in “R”;\nexercise interpreting and communicating results;\n\n\n\n\n\nDevelop practical skills of applying following empirical econometric methods in R:\n\nMultiple regression analysis;\nPanel regression analysis;\nBinary outcome variable;\nInstrumental variable;\nImpact evaluation (DID and RDD);"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#have-you-ever-heard-that-vaccination-causes-autism",
+    "href": "slides/w01a-introduction.html#have-you-ever-heard-that-vaccination-causes-autism",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Have you ever heard that “vaccination causes autism”?",
+    "text": "Have you ever heard that “vaccination causes autism”?\n\n\nSee (Wakefield et al., 1998).\n\n\nA. Wakefield et, al. “Ileal-lymphoid-nodular hyperplasia, non-specific colitis, and pervasive developmental disorder in children”. In: The Lancet 351.9103 (Feb. 1998), pp. 637-641. DOI: 10.1016/s0140-6736(97)11096-0 web-page.\nRetracted in February 2010. See Lancet MMR autism fraud.\n\n\n\n\n\n“The Lancet” is an influential journals\n\nImpact Factor (IF) in 2020 was 79.32\n\nEach field has own seminal journal:\n\nAg. Econ - “American Journal of Agricultural Economics” with IF 2.245 (2017)\nEconometrics - “Econometrica” with IF 5.84 (2020)\nDevelopment economics - “World Development” has the IF 5.278 (2020)"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#wakefield1998.-introduction-12",
+    "href": "slides/w01a-introduction.html#wakefield1998.-introduction-12",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Wakefield et al. (1998). Introduction (1/2)",
+    "text": "Wakefield et al. (1998). Introduction (1/2)\nResearch question: Early report on medical cases;\n\nData:\n\n12 children (mean age 6 years [range 3–10], 11 boys).\n\nregularly saw a gastroenterologist;\nhad “… a history of normal development followed by loss of acquired skills, including language [autism]…”;\n\n“Control” group is made post factum, artificially, matching 12 random children of the same age/gender."
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#wakefield1998.-introduction-22",
+    "href": "slides/w01a-introduction.html#wakefield1998.-introduction-22",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Wakefield et al. (1998). Introduction (2/2)",
+    "text": "Wakefield et al. (1998). Introduction (2/2)\nTreatment:\n\nMeasles and/or MMR (measles, mumps, and rubella) vaccines at the age of 12-16 month;\n\n\nOutcome:\n\nAutism diagnosis [Yes/No] and linguistic disorders in 24 hours to 2 month after vaccination\nBlood and urine sample tests out of norms at the time of research [3-10 years old];"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#wakefield1998.-findings-contributions",
+    "href": "slides/w01a-introduction.html#wakefield1998.-findings-contributions",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Wakefield et al. (1998). Findings / Contributions",
+    "text": "Wakefield et al. (1998). Findings / Contributions\n\n\nVaccinated group (treatment):\n\n\nin 8/12 children behavioral problems [autism].\nintestinal abnormalities and chronic inflammation;\nurine tests are significantly different from “control” group;\n\n\n\nCounter factual (12 children from the population with the same age/gender):\n\n\nno disorders.\nno abnormalities or inflammation;\ngood tests;\n\n\n\n\n\n\nContributes with a theoretical mechanism of the consequences of the MMR vaccination."
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#wakefield1998.-conclusions-impact",
+    "href": "slides/w01a-introduction.html#wakefield1998.-conclusions-impact",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Wakefield et al. (1998). Conclusions / Impact:",
+    "text": "Wakefield et al. (1998). Conclusions / Impact:\n\n\nConclusion:\n\nMumps or MMR vaccination causes autism.\n\nSocietal impact\n\nMisinformation;\nVaccine hesitancy and anti-vax movements;\nFT: The true toll of the antivax movement;\nSocietal segregation. Which Americans are against the jab?"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#what-is-wrong-with-wakefield1998",
+    "href": "slides/w01a-introduction.html#what-is-wrong-with-wakefield1998",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "What is wrong with Wakefield et al. (1998) ?",
+    "text": "What is wrong with Wakefield et al. (1998) ?\n\n\nAny guesses?\nLet us use the whiteboard…\nBy the end of this lecture, we should (ideally) be able to reason about this!"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#lecturers-eduard-bukin",
+    "href": "slides/w01a-introduction.html#lecturers-eduard-bukin",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Lecturers: Eduard Bukin",
+    "text": "Lecturers: Eduard Bukin\nData science enthusiast, econometrics practitioner. PhD Student.\n\nInstitute of Agricultural Policy and Market Research\n\n2015 – MS in Rural Development:\n\nGhent University, Belgium\n\nResearch interests:\n\nAgricultural structures and productivity\nLand and labor in agriculture\nSpatial econometrics"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#lecturers-christoph-funk",
+    "href": "slides/w01a-introduction.html#lecturers-christoph-funk",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Lecturers: Christoph Funk",
+    "text": "Lecturers: Christoph Funk\nChristoph.Funk@wirtschaft.uni-giessen.de. Website.\nPost Doc.\n\nCenter for international Development and Environmental Research (ZEU) Justus Liebig Universität\n\n2020 - PhD in economics from Justus Liebig University Giessen\nResearch interests:\n\nSDG monitoring\nClimate change vulnerability\nAdaptation strategies\nEnergy economics\nEconometric modelling"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#lecturers-vladimir-otrachshenko",
+    "href": "slides/w01a-introduction.html#lecturers-vladimir-otrachshenko",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Lecturers: Vladimir Otrachshenko",
+    "text": "Lecturers: Vladimir Otrachshenko\nVladimir.Otrachshenko@zeu.uni-giessen.de. Website.\nSenior Researcher.\n\nCenter for international Development and Environmental Research (ZEU) Justus Liebig Universität\n\n2013 - PhD in Economics from Nova School of Business and Economics, Lisbon, Portugal\nResearch interests:\n\nEnvironmental and Resource Economics\nClimate Change\nHealth and Population Economics"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#your-turn",
+    "href": "slides/w01a-introduction.html#your-turn",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Your turn!",
+    "text": "Your turn!\n\n\nPlease introduce yourself\n\nWhat is your name?\nWhere do you come from?\nWhat do you study?\n\nWhat is your background?\nWhat are your expectations?"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#course-structure-14",
+    "href": "slides/w01a-introduction.html#course-structure-14",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Course structure (1/4)",
+    "text": "Course structure (1/4)\nIn presence\n\nEvery Wednesday 14:00 - 18:00, Room: Senckenbergstr. 03, 216 (Ze-PC2)"
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#course-structure-24",
+    "href": "slides/w01a-introduction.html#course-structure-24",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Course structure (2/4)",
+    "text": "Course structure (2/4)\nOnline resources:\n\nIlias is used for materials dissemination.\nCode and materials mirror: github.com/EBukin/mp223-2023-aem-R-public\nStudIP is only used for announcements."
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#course-structure-34",
+    "href": "slides/w01a-introduction.html#course-structure-34",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Course structure (3/4)",
+    "text": "Course structure (3/4)\n\nLectures in person\n\nSlides on Ilias.\n\nExercises (in class or at home)\n\nSometimes have pre requisites (watch a video, read a paper)\nSometimes require preparation in advance;\nSometimes are also pre-recorded."
+  },
+  {
+    "objectID": "slides/w01a-introduction.html#course-structure-44",
+    "href": "slides/w01a-introduction.html#course-structure-44",
+    "title": "Introduction. Organisation. Setup.",
+    "section": "Course structure (4/4)",
+    "text": "Course structure (4/4)\nExamination:\n\n60% written exam (90 minutes in the time of examination session)\n40% practical homework.\n\n2 short individual assignments (20% + 20%).\nStudents are expected to develop econometric analysis in R and submit it’s results (and code).\nHomework build on the materials form the class and demonstrate ability to perform selected econometric analysis independently."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#potential-outcomes-framework",
+    "href": "slides/w01b-selection-bias.html#potential-outcomes-framework",
+    "title": "Selection Bias and how to fight it",
+    "section": "Potential outcomes framework",
+    "text": "Potential outcomes framework\n\nSeminal papers are: (Holland, 1986; Rubin, 1974, 1977).\n\n\n\\(D_i=\\{0,1\\}\\) is a treatment that causes a change in the actual outcome \\(Y_i\\);\n\n\n\\(Y_{\\color{Red}{0}i}\\) and \\(Y_{\\color{Red}{1}i}\\) are two potential outcomes for an individual \\(i\\);\n\n\n\\[\n\\text{Potential outcome} =\n\\begin{cases}\nY_{\\color{Red}{1}i} & \\text{ if } D_i=1 \\\\\nY_{\\color{Red}{0}i} & \\text{ if } D_i=0\n\\end{cases}\n\\]\n\n\nPotential outcome is what we would measure if we could go back in time and change a person’s treatment status.\n\n\nWe observe:\n\n\\(Y_i = Y_{\\color{Red}{1}i}\\), when \\(D_i=1\\)\n\\(Y_i = Y_{\\color{Red}{0}i}\\), when \\(D_i=0\\)"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#causal-effect-of-a-treatment",
+    "href": "slides/w01b-selection-bias.html#causal-effect-of-a-treatment",
+    "title": "Selection Bias and how to fight it",
+    "section": "Causal effect of a treatment",
+    "text": "Causal effect of a treatment\n\nIs the difference between two potential outcomes:\n\n\n\\[\n\\rho = Y_{1i} - Y_{0i}\n\\]\n\n\nDepending on what we observe as a factual:\n\n\n\n\\(Y_{0i}\\) is the counterfactual for \\(Y_{1i}\\)\n\n\n\n\n\\(Y_{1i}\\) is the counterfactual for \\(Y_{0i}\\)"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#actual-outcome",
+    "href": "slides/w01b-selection-bias.html#actual-outcome",
+    "title": "Selection Bias and how to fight it",
+    "section": "Actual outcome",
+    "text": "Actual outcome\n\\[\n\\begin{align}\nY_i & =\n\\begin{cases}\nY_{1i} & \\text{ if } D_i=1 \\\\\nY_{0i} & \\text{ if } D_i=0\n\\end{cases} \\\\\n& = Y_{0i} + \\rho \\cdot D_i\n\\end{align}\n\\]\n\nActual outcome: single path that an individual walks."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#conditional-expectation",
+    "href": "slides/w01b-selection-bias.html#conditional-expectation",
+    "title": "Selection Bias and how to fight it",
+    "section": "Conditional Expectation:",
+    "text": "Conditional Expectation:\nActual outcome is Conditional on treatment\n\n\nWe use “|” to denote conditional on something (\\(D_i\\));\n\n\n\n\n\\([Y_i|D_i]\\) means actual outcome \\(Y_i\\) conditional on \\(D_i\\)\n\n\n\n\nWhen \\(D_i=0, \\;\\;\\; [Y_i|D_i=0] = Y_{0i} + 0\\)\n\n\n\n\nWhen \\(D_i=1, \\;\\;\\; [Y_i|D_i=1] = Y_{0i} + (Y_{1i} - Y_{0i})\\)"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#comparing-of-two-individuals",
+    "href": "slides/w01b-selection-bias.html#comparing-of-two-individuals",
+    "title": "Selection Bias and how to fight it",
+    "section": "Comparing of two individuals",
+    "text": "Comparing of two individuals\n\nAsk: what is the difference between two individuals. \\([Y_{0i}|\\color{Green}{D_i = 1}] \\ne \\color{Red}{[Y_i|D_i=0]}\\) or \\([Y_{0i}|\\color{Green}{D_i = 1}] \\ne [Y_{0i}|\\color{Red}{D_i=0}]\\)\n\nWe have two individuals with actually observed outcomes:\n\n\\([Y_i|D_i=1]\\)\n\\([Y_i|D_i=0]\\)\n\n\n\\[\n\\begin{align}\n\\underbrace{[Y_i|D_i=1] - [Y_i|D_i=0]}_\\text{Observed difference}\n\\end{align}\n\\]\n\n\n\\[\n\\begin{align}\n\\underbrace{\\color{Blue}{[Y_i|D_i=1]} - \\color{Red}{[Y_i|D_i=0]}}_\\text{Observed difference} &\n= \\underbrace{\\color{Blue}{[Y_i|D_i=1]} - [Y_{0i}|\\color{Green}{D_i = 1}]}_\\text{Average treatment effect on treated} \\\\\n& + \\underbrace{[Y_{0i}|\\color{Green}{D_i = 1}] - \\color{Red}{[Y_i|D_i=0]}}_\\text{Selection bias}\n\\end{align}\n\\]\n\n\nDifferences between treated and not treated are always affected by the Selection Bias"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#the-origin-of-the-selection-bias",
+    "href": "slides/w01b-selection-bias.html#the-origin-of-the-selection-bias",
+    "title": "Selection Bias and how to fight it",
+    "section": "The origin of the selection bias",
+    "text": "The origin of the selection bias\nIn:\n\\[\n\\begin{align}\n\\color{Blue}{[Y_i|D_i=1]} - \\color{Red}{[Y_i|D_i=0]} &\n= \\color{Blue}{[Y_i|D_i=1]} -  [Y_{0i}|\\color{Green}{D_i = 1}] \\\\\n& +  [Y_{0i}|\\color{Green}{D_i = 1}] - \\color{Red}{[Y_i|D_i=0]}\n\\end{align}\n\\]\n\n\nactual outcome of NO-treatment in NOT treated is the same as potential outcome of NO-treatment in NOT treated.\n\n\\[\n\\color{Red}{[Y_i|D_i=0]} = [Y_{0i}|\\color{Red}{D_i=0}]\n\\]\n\n\nHowever:\n\npotential outcome of NO-treatment in treated is NOT the same as potential outcome of NO-treatment in NOT treated.\n\n\\[\n[Y_{0i}|\\color{Green}{D_i = 1}] \\ne [Y_{0i}|\\color{Red}{D_i = 0}]\n\\]"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#selection-bias-in-the-nutshell",
+    "href": "slides/w01b-selection-bias.html#selection-bias-in-the-nutshell",
+    "title": "Selection Bias and how to fight it",
+    "section": "Selection bias in the nutshell",
+    "text": "Selection bias in the nutshell\n\n\nSelection bias arises from the lack of compatibility:\n\nwhen we compare phenomena that are not comparable;\nlike apples and oranges;\n\nAs every person is unique, the potential outcomes of treatment and no treatment are different between people.\nSelection bias arises when we do not have the Ceteris Paribus!"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#two-households",
+    "href": "slides/w01b-selection-bias.html#two-households",
+    "title": "Selection Bias and how to fight it",
+    "section": "Two households",
+    "text": "Two households\n\n\n\nHousehold (\\(i=1\\)):\n\n\nReceived CCT (treatment):\n\n\\(D_i=1\\)\n\nObserved wasting: 2 SD;\n\nActual outcome = Potential outcome when treated;\n\\[\n[Y_{i=1}|D_{i=1}=1] \\\\= [Y_{1,i=1}|D_{i=1}=1] = 2\n\\]\n\n\n\n\n\n\nHousehold (\\(i=2\\)):\n\n\nNo CCT (no treatment):\n\n\\(D_i=0\\)\n\nWasting: 1 SD;\n\nActual outcome = Potential outcome when NOT treated;\n\\[\n[Y_{i=2}|D_{i=2}=0] \\\\= [Y_{0,i=2}|D_{i=2}=0] = 1\n\\]\n\n\n\n\n\n\n\nWhat are the similarities between two household?\nWhat are the differences?"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#comparing-two-households-the-difference",
+    "href": "slides/w01b-selection-bias.html#comparing-two-households-the-difference",
+    "title": "Selection Bias and how to fight it",
+    "section": "Comparing two households (the difference)",
+    "text": "Comparing two households (the difference)\n\\[\n\\begin{align}\n\\text{Difference between two HH} & = \\\\\n& = [Y_{i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0] \\\\\n& = 2 - 1 \\\\\n& = 1\n\\end{align}\n\\]\n\n\nIs this an Average Treatment Effect (ATE)?\n\n\n\n\nIs this the Treatment Effect on Treated?\n\n\n\n\nVote?"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#potential-outcomes-of-two-households-12",
+    "href": "slides/w01b-selection-bias.html#potential-outcomes-of-two-households-12",
+    "title": "Selection Bias and how to fight it",
+    "section": "Potential Outcomes of two households (1/2)",
+    "text": "Potential Outcomes of two households (1/2)\n\n\n\n\n\n\n\n\n\n\n\nHousehold \\(i=1\\)\n(Treated)\nHousehold \\(i=2\\)\n(Not treated)\n\n\n\n\nPotential outcome without CCT:\n\\(Y_{0i}\\)\n-2\nNot observed\n1\nObserved\n\n\nPotential outcome with CCT:\n\\(Y_{1i}\\)\n2\nObserved\n1\nNot observed\n\n\nActual treatment status:\n\\(D_{i}\\)\n1\nObserved\n0\nObserved\n\n\nActual outcome:\n\\(Y_{i}\\)\n2\nObserved\n1\nObserved\n\n\nTreatment effect on treated:\n\\(Y_{1i} - Y_{0i}\\)\n\\(2-(-2)=4\\)\nNot observed\n\\(1-1=0\\)\nNot observed\n\n\n\n\nWhat can we actually observe? What (from above) can we NOT observe in the real world?\n\n\nPotential outcomes are different for two HHs.\n\n\n\nWhy are they different that so?"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#potential-outcomes-of-two-households-22",
+    "href": "slides/w01b-selection-bias.html#potential-outcomes-of-two-households-22",
+    "title": "Selection Bias and how to fight it",
+    "section": "Potential Outcomes of two households (2/2)",
+    "text": "Potential Outcomes of two households (2/2)\n\n\n\n\n\n\n\n\n\n\n\nHousehold \\(i=1\\)\n(Treated)\nHousehold \\(i=2\\)\n(Not treated)\n\n\n\n\nPotential outcome without CCT:\n\\(Y_{0i}\\)\n-2\n1\n\n\nPotential outcome with CCT:\n\\(Y_{1i}\\)\n2\n1\n\n\nActual treatment status:\n\\(D_{i}\\)\n1\n0\n\n\nActual outcome:\n\\(Y_{i}\\)\n2\n1\n\n\nEffect of treatment on treated:\n\\(Y_{1i} - Y_{0i}\\)\n\\(2-(-2)=4\\)\n\\(1-1=0\\)\n\n\n\n\nTreatment causes different effects:\n\n\n\nEffect of treatment on the treated:\n\n\\[\n\\text{ETT}_i = Y_{1i} - Y_{0i}\\\\\n\\text{ETT}_1 = Y_{1,i=1} - Y_{0,i=1} = 2 - (-2) = 4\\\\\n\\text{ETT}_2 = Y_{1,i=2} - Y_{0,i=2} = 1 - 1 = 0\n\\]\n\n\n\nAverage Treatment Effect (ATE):\n\n\\[\n\\text{ATE} = E[\\text{ETT}_i] = E[Y_{1i} - Y_{0i}] = \\frac{1}{2}[2-(-2) + 1 - 1] = 2\n\\]\n\n\nBut the difference in the actual outcomes shows a biased effect: \\(Y_{1,i=1}-Y_{0,i=0} = 2-1 = 0\\)"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#comparing-two-households-the-bias",
+    "href": "slides/w01b-selection-bias.html#comparing-two-households-the-bias",
+    "title": "Selection Bias and how to fight it",
+    "section": "Comparing two households (the bias)",
+    "text": "Comparing two households (the bias)\n\\[\n\\begin{align}\n\\text{Diff. between two HH} & = [Y_{i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0] \\\\\n& = \\underbrace{[Y_{i=1}|D_{i=1}=1] - [Y_{0,i=1}|D_{i=1}=1]}_\\text{Effect of treatment on treated (ETT)} \\\\\n& \\qquad + \\underbrace{[Y_{0,i=1}|D_{i=1}=1] - [Y_{i=2}|D_{i=2}=0]}_\\text{Selection bias}\n\\end{align}\n\\]\n\n\\[\n\\begin{align}\n\\text{Diff. between two HH} & = \\underbrace{2 - (-2)}_\\text{4} + \\underbrace{(-2) - 1}_\\text{-3} = \\underbrace{1}_\\text{Biased effect}\n\\end{align}\n\\]\n\n\nTrue causal effect of treatment on treated in \\(i=1\\) is \\(4\\) and in \\(i=2\\) is \\(0\\);\nBut comparing two groups does not reveal this!\nInstead, we have a negative bias of a HH who is OK without treatment.\nSuch negative selection bias can mask true causal effect completely."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#average-treatment-effect",
+    "href": "slides/w01b-selection-bias.html#average-treatment-effect",
+    "title": "Selection Bias and how to fight it",
+    "section": "Average treatment effect",
+    "text": "Average treatment effect\n\nThe constant-effects assumption!\n\\[\nY_{1i} = \\rho + Y_{0i}\n\\]\n\nThe treatment has a constant effect \\(\\rho\\) on all individuals.\n\n\nWhen we reveal the causal effect \\(\\rho\\) we assume that it is constant for all treated an not treated individuals."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#bias-of-the-group-means-difference",
+    "href": "slides/w01b-selection-bias.html#bias-of-the-group-means-difference",
+    "title": "Selection Bias and how to fight it",
+    "section": "Bias of the group means difference",
+    "text": "Bias of the group means difference\n\\[\n\\begin{align}\n\\text{Diff. in group means} & = \\color{Blue}{E[Y_{i}|D_{i}=1]} - \\color{Red}{E[Y_{i}|D_{i}=0]} \\\\ \\\\\n& = \\underbrace{\\color{Blue}{E[Y_{i}|D_{i}=1]} - \\color{Green}{E[Y_{0i}|D_{i}=1]}}_\\text{Average treatment effect (ATE)} \\\\\n& \\qquad + \\underbrace{\\color{Green}{E[Y_{0i}|D_{i}=1]} - \\color{Red}{E[Y_{i}|D_{i}=0]}}_\\text{Selection bias}\n\\end{align}\n\\]\n\n\\[\n\\begin{align}\n\\text{Diff. in group means} & = \\rho + \\text{Selection bias}\n\\end{align}\n\\]\n\n\nBecause:\n\naverage outcome of no-treatment in not treatedis the same as average potential outcome of no-treatment in not treated.\n\n\\[\n\\color{Red}{E[Y_i|D_i=0]} = \\color{Red}{E[Y_{0i}|D_{i}=0]}\n\\]\n\n\nHowever:\n\naverage potential outcome of no-treatment in treated is NOT the same as average potential outcome of no-treatment in not treated.\n\n\\[\n\\color{Green}{E[Y_{0i}|D_{i}=1]} \\ne \\color{Red}{E[Y_{0i}|D_{i}=0]}\n\\]"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#selection-bias-conclusions",
+    "href": "slides/w01b-selection-bias.html#selection-bias-conclusions",
+    "title": "Selection Bias and how to fight it",
+    "section": "Selection Bias: conclusions",
+    "text": "Selection Bias: conclusions\n\n\nMortal enemy of the causal inference: leads to interpreting naive difference as causal effects.\nExists in any comparison, where there are systematic difference between the groups compared.\nAppears when individuals are being “selected” for the comparison, thus:\n\non average, individuals are not the same, or\nthere is no Ceteris Paribus."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#what-is-wrong-with-wakefield1998",
+    "href": "slides/w01b-selection-bias.html#what-is-wrong-with-wakefield1998",
+    "title": "Selection Bias and how to fight it",
+    "section": "What is wrong with (Wakefield et al., 1998)?",
+    "text": "What is wrong with (Wakefield et al., 1998)?\nRemember: (1) treatment is the MMR vaccination. (2) outcome is the autism/inflation.\n\n\n\nTreated group:\n\n12 children with bad symptoms (all are vaccinated);\n\nCounter factual:\n\n12 “random” children with same age and gender (not vaccinated);\n\nComparison:\n\nMean prevalence of autism and inflammations by MMR vaccination status;\n\n\n\n\n\nWhat is wrong?\n\nIdeas?…\nCounterfactuals are not the same as treated.\nCounterfactuals do not represent the population (nearly everyong is vaccinated against MMR).\nSelection bias affects the means comparison.\nDoes not reviel the causal effect."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#solutions-to-the-selection-bias",
+    "href": "slides/w01b-selection-bias.html#solutions-to-the-selection-bias",
+    "title": "Selection Bias and how to fight it",
+    "section": "Solutions to the Selection Bias",
+    "text": "Solutions to the Selection Bias\nThe only way to resolve it is:\n\nTo design the research so that the design eliminates the selection bias.\n\n\nUsing econometrics enhanced by statistics and appropriate research design, we can:\n\n\n\nensure the Ceteris Paribus by\n“making” groups of comparison as similar as possible\nand controlling the differences."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#furious-five-econometric-methods",
+    "href": "slides/w01b-selection-bias.html#furious-five-econometric-methods",
+    "title": "Selection Bias and how to fight it",
+    "section": "Furious Five econometric methods",
+    "text": "Furious Five econometric methods\nFor ensuring ceteris paribus econometricians use:\n\n\nRandom assignment (RCT)\nRegression\nInstrumental Variable\nDifference-in-difference\nRegression Discontinuity Design"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#random-assignment-13",
+    "href": "slides/w01b-selection-bias.html#random-assignment-13",
+    "title": "Selection Bias and how to fight it",
+    "section": "Random assignment (1/3)",
+    "text": "Random assignment (1/3)\nRemember, we had to non randomly assigned groups:\n\\[\n\\text{Diff. in group means}  =  \\color{Blue}{E[Y_{i}|D_{i}=1]} - \\color{Red}{E[Y_{i}|D_{i}=0]} \\\\\n= \\underbrace{E[Y_{1i}|\\color{Blue}{D_{i}=1}] - E[Y_{0i}|\\color{Green}{D_{i}=1}]}_\\text{Average causal effect}\n+ \\underbrace{E[Y_{0i}|\\color{Green}{D_{i}=1}] - E[Y_{0i}|\\color{Red}{D_{i}=0}]}_\\text{Selection bias},\n\\]\n\n\\[\n\\text{where} \\; \\color{Red}{E[Y_{i}|D_{i}=0]} = E[Y_{0i}|\\color{Red}{D_{i}=0}], \\; \\text{but} \\\\ E[Y_{0i}|\\color{Green}{D_{i}=1}] \\ne E[Y_{0i}|\\color{Red}{D_{i}=0}]\n\\]\n\n\nThe random assignment of \\(D_i\\) makes:\n\\[\nE[Y_{0i}|\\color{Green}{D_{i}=1}] = E[Y_{0i}|\\color{Red}{D_{i}=0}]\n\\]"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#random-assignment-23",
+    "href": "slides/w01b-selection-bias.html#random-assignment-23",
+    "title": "Selection Bias and how to fight it",
+    "section": "Random assignment (2/3)",
+    "text": "Random assignment (2/3)\nNow with \\(E[Y_{0i}|\\color{Green}{D_{i}=1}] = E[Y_{0i}|\\color{Red}{D_{i}=0}]\\), we have:\n\n\\[\n\\begin{align}\n\\text{Diff. in group means}  & =  \\underbrace{E[Y_{1i}|\\color{Blue}{D_{i}=1}] - E[Y_{0i}|\\color{Red}{D_{i}=0}]}_{\\rho} \\\\\n& + \\underbrace{E[Y_{0i}|\\color{Green}{D_{i}=1}] - E[Y_{0i}|\\color{Red}{D_{i}=0}]}_{0}\n\\end{align}\n\\]\n\n\n\\[\n\\begin{align}\n& = \\overbrace{\\underbrace{E[Y_{0i} + \\rho|\\color{Blue}{D_{i}=1}]}_{E[Y_{1i}|\\color{Blue}{D_{i}=1}]} - E[Y_{0i}|\\color{Red}{D_{i}=0}]}^{\\rho}\n\\end{align}\n\\]\n\n\n\\[\n\\begin{align}\n& = \\rho + \\underbrace{E[Y_{0i}|\\color{Green}{D_{i}=1}] - E[Y_{0i}|\\color{Red}{D_{i}=0}]}_{0} \\\\\n\\end{align}\n\\]\n\n\n\\[\n\\begin{align}\n& = \\rho = \\text{ATE}\n\\end{align}\n\\]"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#random-assignment-33",
+    "href": "slides/w01b-selection-bias.html#random-assignment-33",
+    "title": "Selection Bias and how to fight it",
+    "section": "Random assignment (3/3)",
+    "text": "Random assignment (3/3)\nWith random assignment,\n\n\\(\\text{Diff. in group means} = \\text{ATE}\\) works because of\nthe Law of Large Numbers (LLN).\n\n\n\nProvided that two samples are large enough for the LLN to work\n\n\n\n\nLLN ensures that such large random samples asymptotically approximate the population.\n\n\n\n\nThus, samples are also same between each other.\n\n\n\n\nResearch Design + LLN, ensures that \\(E[Y_{0i}|\\color{Green}{D_{i}=1}] = E[Y_{0i}|\\color{Red}{D_{i}=0}]\\)."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#key-redings-on-rct",
+    "href": "slides/w01b-selection-bias.html#key-redings-on-rct",
+    "title": "Selection Bias and how to fight it",
+    "section": "Key redings on RCT",
+    "text": "Key redings on RCT\nKey papers:\n\n\nUsing Randomization in Development Economics Research: A Toolkit\n\n\nThe Econometrics of Randomized Experiments\n\n\nRCT in development:\n\n\nConditional Cash Transfers : Reducing Present and Future Poverty (book)\n\n\nCausal Inference in Statistics, Social, and Biomedical Sciences An Introduction (book)\n\n\nRCT in economics:\n\nSee reference in (Angrist & Pischke, 2009, Chapter 2; 2014, Chapter 1; Athey & Imbens, 2017)"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#rcts-criticism",
+    "href": "slides/w01b-selection-bias.html#rcts-criticism",
+    "title": "Selection Bias and how to fight it",
+    "section": "RCT’s criticism",
+    "text": "RCT’s criticism\nThis research design is not ultimate and one needs to be critical to it as well!\nSee (Deaton & Cartwright, 2018):\n\nRCT does not ultimately equalize everything because of the sample size and randomization strategy. Other factors (covariates) must be controlled for.\nExternal validity of the RCT could be very limited.\nBuilding RCT should include prior knowledge.\nRCT’s finding may be contemporary."
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#homework",
+    "href": "slides/w01b-selection-bias.html#homework",
+    "title": "Selection Bias and how to fight it",
+    "section": "Homework",
+    "text": "Homework\nWatch these videos on youtube and read\n\n\nVideo 1: Selection Bias or this link: https://youtu.be/6YrIDhaUQOE\n\nVideo 2: Randomized Trials or this link: https://youtu.be/eGRd8jBdNYg\n\n\nRead:\n(Angrist & Pischke, 2014, Chapter 1; optional Angrist & Pischke, 2009, Chapter 2)\nFinish the in-class exercise"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#homwork-discuss-the-following-causal-questions",
+    "href": "slides/w01b-selection-bias.html#homwork-discuss-the-following-causal-questions",
+    "title": "Selection Bias and how to fight it",
+    "section": "Homwork: Discuss the following causal questions",
+    "text": "Homwork: Discuss the following causal questions\n\nMany farms, particularly in Europe, are small and owned and run by families. In Eastern Europe, Soviet legacy left large scale farm. Are small scale farms more efficient and productive then the large one?\nWhat is the effect of Conditional Cash Transfers rather then support with goods in kind on the extreme poverty in developing countries?\nWhat is the effect of Global Food prices surge on the number of the food security in the low income countries?\n\n\nFor each of these questions answer the following:\n\nWhat is the outcome variable and what is the treatment?\nDefine the counterfactual outcomes \\(Y_{0i}\\) and \\(Y_{1i}\\) .\nWhat plausible causal channel(s) runs directly from the treatment to the outcome?\nWhat are possible sources of selection bias in the raw comparison of outcomes by treatment status?\nDoes the selection bias overestimate the difference or underestimates it?"
+  },
+  {
+    "objectID": "slides/w01b-selection-bias.html#takeaways",
+    "href": "slides/w01b-selection-bias.html#takeaways",
+    "title": "Selection Bias and how to fight it",
+    "section": "Takeaways:",
+    "text": "Takeaways:\n\nAverage treatment effect (ATE) and Effect of Treatment on Treated (ETT);\nSelection bias of means comparison and the lack of Ceteris Paribus;\nWhat is the Ceteris Paribus (Watch a video is needed);\nActual and potential outcomes framework;\nFactual and Counterfactual;\nRole of research design in fighting with the selection bias;\nFurious Five econometric methods;\nRandom assignment;"
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#about-the-r-and-rstudio",
+    "href": "slides/w01c-r-rstudio-intro.html#about-the-r-and-rstudio",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "About the R and RStudio",
+    "text": "About the R and RStudio\nTo learn more about R and RStudio, use R For Data Science (Second Edition), specifically R4DS Chapter “Intro”, section 1.4 Prerequisites\n\n\n\n\nR is an open-source statistical programming language\nR is also an environment for statistical computing and graphics\nIt’s easily extensible with packages, see: https://cran.r-project.org/\n\n\n\n\nRStudio is an IDE (integrated development environment) for R\nRStudio is not a requirement for programming with R, but it’s commonly used by R programmers and data scientists https://www.rstudio.com/"
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#r-rstudio-installation",
+    "href": "slides/w01c-r-rstudio-intro.html#r-rstudio-installation",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "R + RStudio Installation",
+    "text": "R + RStudio Installation\n\nDownload R from here: cran.r-project.org\nInstall R by double click on the installation file and clicking next…\nDownload free version of R Studio from here: rstudio.com\nInstall RStudio by double click on the installation file and clicking next…\nCheck that RStudio has been installed by typing “RStudio” in the start menu or Windows search.\n(Optional) Check that R has been installed by typing “R x” in the start menu or Windows search."
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#r-and-r-studio-introduction-and-interface",
+    "href": "slides/w01c-r-rstudio-intro.html#r-and-r-studio-introduction-and-interface",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "R and R Studio: introduction and interface",
+    "text": "R and R Studio: introduction and interface\n\n\n\n\n\nConsole (left bottom) - to type the R code into\nEditor (left top) - to write and SAVE scripts, analysis and documentation.\nEnvironment (right top) - overview of the r session and objects in there\nPlots, Files and Viewer (right bottom) - files navigation, plots export and inspection."
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#scripts-editor",
+    "href": "slides/w01c-r-rstudio-intro.html#scripts-editor",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "Scripts editor",
+    "text": "Scripts editor"
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#r-markdown-editor",
+    "href": "slides/w01c-r-rstudio-intro.html#r-markdown-editor",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "R Markdown editor",
+    "text": "R Markdown editor"
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#application-exercise-01",
+    "href": "slides/w01c-r-rstudio-intro.html#application-exercise-01",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "Application Exercise 01",
+    "text": "Application Exercise 01\n\n\nIn the classroom:\nTurn on your PC\nUse these log in and password.\n\n\n\n\n\n\nImportant\n\n\nLogin: ZH-user-pcl\nPassword: V5-senc!3ken\n\n\n\n\n\nGo to: bit.ly/3GD8Oap\nScroll and download ex01-rct.zip.\nDON’T OPEN IT! setup your working folders first (next slide)."
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#setup-working-folders",
+    "href": "slides/w01c-r-rstudio-intro.html#setup-working-folders",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "Setup working folders",
+    "text": "Setup working folders\nNavigate to your user folder: C > Users > Name of your user account;\n\n\nCreate there a course folder names {your initial}-mk223-2023.\n\nUse it for your course for all in-class work;\non my pc the course folder is called eb-mk223-2023;\nthe full path is C:\\Users\\ZH-user-pcl\\eb-mk223-2023;\n\n\n\n\n\nPaste ex01-rct.zip from downloads to the course folder;\n\n\n\n\nUnzip ex01-rct.zip into ex01-rct;"
+  },
+  {
+    "objectID": "slides/w01c-r-rstudio-intro.html#launch-the-r-studio-from-the-project-ae01-soft-intro-to-r",
+    "href": "slides/w01c-r-rstudio-intro.html#launch-the-r-studio-from-the-project-ae01-soft-intro-to-r",
+    "title": "Practical Exercise 1 + R and R Studio Setup",
+    "section": "Launch the R Studio from the project “ae01-soft-intro-to-R”",
+    "text": "Launch the R Studio from the project “ae01-soft-intro-to-R”\n\n\nNavigate to ex01-rct in your course folder\n\n\n\n\nOpen ex01-rct.Rproj that has R studio icon and .Rproj extension:\n\n\n\n\n\n\n\n\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS."
+  },
+  {
+    "objectID": "slides/w02-homework-supplement.html#table-1.3-check-and-balance",
+    "href": "slides/w02-homework-supplement.html#table-1.3-check-and-balance",
+    "title": "Week 02. Homework supplementary materials",
+    "section": "Table 1.3 Check and balance",
+    "text": "Table 1.3 Check and balance"
+  },
+  {
+    "objectID": "slides/w02-homework-supplement.html#table-1.4-intervention-evaluation",
+    "href": "slides/w02-homework-supplement.html#table-1.4-intervention-evaluation",
+    "title": "Week 02. Homework supplementary materials",
+    "section": "Table 1.4 Intervention evaluation",
+    "text": "Table 1.4 Intervention evaluation"
+  },
+  {
+    "objectID": "slides/w02-homework-supplement.html#references",
+    "href": "slides/w02-homework-supplement.html#references",
+    "title": "Week 02. Homework supplementary materials",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#recap-ceteris-paribus",
+    "href": "slides/w03-mlr-part1.html#recap-ceteris-paribus",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Recap: Ceteris Paribus",
+    "text": "Recap: Ceteris Paribus\nFill in page 1 here: bit.ly/41R1YpL"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#recap-multiple-regression",
+    "href": "slides/w03-mlr-part1.html#recap-multiple-regression",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Recap: Multiple regression",
+    "text": "Recap: Multiple regression\nFill in page 2 here: bit.ly/41R1YpL"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#hedonic-model",
+    "href": "slides/w03-mlr-part1.html#hedonic-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Hedonic Model",
+    "text": "Hedonic Model\nTo understand where the regression equation comes from, let us follow an example of:\nHedonic Model\n\nAny idea what this is?"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#hedonic-model-overview",
+    "href": "slides/w03-mlr-part1.html#hedonic-model-overview",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Hedonic Model overview",
+    "text": "Hedonic Model overview\nHedonic prices is an econometric approach of quantifying monetary values of differentiated characteristics (\\(x_i\\)) of goods and services, which are subjects of economic exchange (and stochastic variation \\(u\\)).\n\\[\n\\text{Price} = f(x_1, x_2, \\cdots , x_i, u)\n\\]\n\nFor example, agricultural land has such characteristics as: …\n\n\nLand quality (location, slope, soil salinity, nutrient content, irrigation availability, rainfall, climate) environmental limitation, farmers’ accessibility, and other.\n\n\nHedonic equation is based on the theory that takes its roots to supply and demand."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#supply-and-demand-theory-a-structural-approach",
+    "href": "slides/w03-mlr-part1.html#supply-and-demand-theory-a-structural-approach",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Supply and demand theory: a structural approach",
+    "text": "Supply and demand theory: a structural approach\n\n\n\nDemand function:\n\\[Q_{t}^D = \\alpha_0 + \\alpha_1 P_t + u_{1t}, \\;\\; \\text{with} \\; \\alpha_1 < 0\\]\n\n\nSupply function:\n\\[Q_{t}^S = \\beta_0 + \\beta_1 P_t + u_{2t}, \\;\\; \\text{with} \\; \\beta_1 >0\\]\n\n\nEquilibrium condition:\n\\[\nQ_{t}^S = Q_{t}^D\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#hedonic-land-prices-model",
+    "href": "slides/w03-mlr-part1.html#hedonic-land-prices-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Hedonic land prices model",
+    "text": "Hedonic land prices model\nRelies on the partial equilibrium framework (Palmquist, 1989), where\n\n\\(R(\\cdot)\\) - realized land price (rental of sales), are modeled from two sides:\n\n\n\n\nSupply\n\nLand owner whats to maximize own profit from renting land out.\nOwner’s offer function:\n\n\n\n\\[\n\\phi(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta)\n\\]\n\n\n\\(\\hat{z}\\) - land characteristics exogenous to land owner;\n\\(\\tilde{z}\\) - land characteristics in control of land owner;\n\n\n\nDemand\n\nFarmer whats to maximize agricultural profit from land\nFarmer’s bid function”\n\n\n\n\\[\n\\pi^{S^{'}} + C(\\hat{z}, \\tilde{z}, r, \\beta)\n\\]\n\n\n\\(r\\) - inputs prices;\n\\(\\beta\\) - technologies and opportunities such as credit availability;\n\\(\\pi^{S^{'}}\\) - expected profit of agricultural producers from land;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#structural-model-of-the-realized-prices",
+    "href": "slides/w03-mlr-part1.html#structural-model-of-the-realized-prices",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Structural model of the realized prices",
+    "text": "Structural model of the realized prices\n\nSupply-demand equilibrium:\n\\[\\phi(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta) = R = \\pi^{S^{'}} + C(\\hat{z}, \\tilde{z}, r, \\beta)\\]\n\n\nObserved prices \\(R\\) are the equilibrium between bid and offer (demand and supply).\n\n\n\nThis is called a Structural Model"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#econometric-modell",
+    "href": "slides/w03-mlr-part1.html#econometric-modell",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Econometric modell",
+    "text": "Econometric modell\nTo explain causes behind price changes, we can deconstruct structural model into reduced form equations, which can be estimated:\n\n\nReduced form supply side\n\\[\nR = \\phi(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta) + e\n\\]\n\nReduced form demand side\n\\[\nR = \\pi^{S^{'}} + C(\\hat{z}, \\tilde{z}, r, \\beta) + e\n\\]\n\n\n\nWhen we run a hedonic prices model\n\\[R = R(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta)\\]\nwe estimate one of the reduced forms and select independent variables based on the hedonic prices theory (differentiated land qualities)."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#relevance-of-the-theory",
+    "href": "slides/w03-mlr-part1.html#relevance-of-the-theory",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Relevance of the theory",
+    "text": "Relevance of the theory\n\n\nTheory provides a rationale behind causal relationship\n\n\\[R = R(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta)\\]\n\n\n\nTheory suggests a functional form.\n\n\n\n\nTheory stipulates the dependent variable.\n\n\n\n\nTheory specifies key determinants of the outcome:\n\nAKA what our regressors/independnet variables."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#what-are-the-differentiated-land-characteristics",
+    "href": "slides/w03-mlr-part1.html#what-are-the-differentiated-land-characteristics",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "What are the differentiated land characteristics?",
+    "text": "What are the differentiated land characteristics?\nIn \\(R = R(\\hat{z}, \\tilde{z}, \\pi^{S^{'}}, r, \\beta)\\), what are these independent and dependent variables?\n\\(\\tilde{z}\\) Affected by land owner:\n\n\nTo enroll for subsidies or not.\nTo install irrigation or not.\nFertilize land\nImprove the landscape\n\n\n\\(\\hat{z}\\) Not affected by land owner:\n\n\nWeather\nLocation\nRestrictions"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#problem",
+    "href": "slides/w03-mlr-part1.html#problem",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Problem",
+    "text": "Problem\nWe would like to assess the effect of the “Conservation Reserve Program” (CPR) on the agricultural land prices in Minnesota in 2002-2011.\nConservation Reserve Program\n\nis a subsidy\nobligates farms NOT TO GROW ANY CROPS on the enrolled land\npays monetary compensation in exchange;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#regression-equation",
+    "href": "slides/w03-mlr-part1.html#regression-equation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Regression equation",
+    "text": "Regression equation\n\\[\n\\log (\\text{acrePrice}) = \\beta_0 +  \\beta_1 \\text{crpPct} + \\log(\\beta_2 \\text{acres}) + \\beta_3 \\text{region} \\\\\n+ \\beta_4 \\text{year} + \\beta_4 \\text{tillable} + \\beta_5 \\text{productivity} + \\beta_6 \\text{improvements}  + e\n\\]\n\nacrePrice - sale price in dollars per acre;\nacres - size of the farm in acres;\nregion - region in the state Minnesota;\nyear - year of the land sales translation;\ncrpPct - the percentage of all farm acres enrolled in CRP;\ntillable - percentage of farm acreage that is rated arable by the assessor;\nproductivity - average agronomic productivity scaled 1 to 100, with larger numbers for more productive land;\nimprovements - percentage of property value due to improvements (infrastructure)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#regression-results",
+    "href": "slides/w03-mlr-part1.html#regression-results",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Regression results",
+    "text": "Regression results\n\n\n\n\n\n\n\n\n\n\n\nlog(Price per acre)\nlog(Price per acre)\n\n\n\n\nIntercept\n6.099 *** (0.051)\n6.507 *** (0.034)\n\n\nSubsidy (0|1)\n-0.00370 *** (0.00027)\n-0.00488 *** (0.00017)\n\n\nArea (log), acres\n-0.0587 *** (0.0058)\n-0.0913 *** (0.0051)\n\n\nTillable area, % (0-100)\n0.00421 *** (0.00036)\n0.00550 *** (0.00018)\n\n\nImprovements, (0-100)\n0.01567 *** (0.00062)\n0.01414 *** (0.00033)\n\n\nProductivity, (0-100)\n0.0094 *** (0.0004)\n\n\n\nWest Central (0|1)\n0.633 *** (0.016)\n0.746 *** (0.011)\n\n\nCentral (0|1)\n0.885 *** (0.018)\n1.041 *** (0.013)\n\n\nSouth West (0|1)\n0.734 *** (0.016)\n1.019 *** (0.011)\n\n\nSouth Central (0|1)\n0.854 *** (0.017)\n1.191 *** (0.011)\n\n\nSouth East (0|1)\n0.897 *** (0.018)\n1.234 *** (0.012)\n\n\nNum.Obs.\n8770\n17441\n\n\nR2 Adj.\n0.700\n0.646\n\n\n\nNote: ^^ Year-specific dummy variables are omitted. Heteroscedasticity consistent standard errors are reported in parentheses. P-values are coded as: * p=0.05, ** p=0.01, *** p<0.001"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#goodness-of-fit-r2-adjusted",
+    "href": "slides/w03-mlr-part1.html#goodness-of-fit-r2-adjusted",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Goodness of fit: \\(R^2\\) adjusted",
+    "text": "Goodness of fit: \\(R^2\\) adjusted\nShows the share of variance explained by a model adjusted to the number of independent variables.\n\n\nIf the number of independent variables increases, but variables do not explain \\(y\\) better, \\(R^2\\) adjusted could shrink to 0 or a negative number.\nWe generally want to have it as high as possible, however!\n\\(R^2\\) adjusted has nothing to do with the coefficients’ significance and their causal meaning.\nIf the goal of regression is to explain causes, rather than predict outcomes, \\(R^2\\) adjusted has not much relevance."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#let-us-summarize-the-causes-of-wine-prices",
+    "href": "slides/w03-mlr-part1.html#let-us-summarize-the-causes-of-wine-prices",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Let us summarize the causes of wine prices",
+    "text": "Let us summarize the causes of wine prices\n\n\nAny guesses?\nWeather\nAny unobserved characteristics?\n\nArt of the winemaker\nStorage\nWay of drinking"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#let-us-see-what-regression-tells-us-about-wine",
+    "href": "slides/w03-mlr-part1.html#let-us-see-what-regression-tells-us-about-wine",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Let us see what regression tells us about wine",
+    "text": "Let us see what regression tells us about wine\n\\[\nPrice = \\beta_0 + \\beta_1 \\text{Age} + \\beta_2 \\text{AGST} + \\beta_3 \\text{HarvestRain} + \\beta_4 \\text{WinterRain} + e\n\\]\nWhat are our expectations about signs of \\(\\beta\\) s?\nVariable\n\nPrice: average market price for Bordeaux vintages according to a series of auctions (USD). The price is relative to the price of the 1961 vintage, regarded as the best one ever recorded.\nWinterRain: winter rainfall (in mm).\nAGST: Average Growing Season Temperature (in Celsius degrees).\nHarvestRain: harvest rainfall (in mm).\nAge: age of the wine, measured in 1983 as the number of years stored in a cask."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#let-us-regress-wine-in-the-class",
+    "href": "slides/w03-mlr-part1.html#let-us-regress-wine-in-the-class",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Let us regress wine in the class",
+    "text": "Let us regress wine in the class\n\nExercise: 03-wine-regression.Rmd"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#wage-education-equation",
+    "href": "slides/w03-mlr-part1.html#wage-education-equation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Wage ~ Education: equation",
+    "text": "Wage ~ Education: equation\n\\[\nY_i = \\alpha + \\beta \\, P_i + e_i,\n\\]\nwhere:\n\n\\(Y_i\\) is wage in Euro per week\n\\(P_i\\) is education in years\n\\(\\alpha\\) is the intercept\n\\(\\beta\\) is the slope or causal effect of interest"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#wage-education.",
+    "href": "slides/w03-mlr-part1.html#wage-education.",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Wage ~ Education.",
+    "text": "Wage ~ Education.\n\nCausal directed acyclic graph."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#relationship",
+    "href": "slides/w03-mlr-part1.html#relationship",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Relationship",
+    "text": "Relationship\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpret the effect of education on wage.\nIs this a causal effect on education on wage?\n\nExplain why?"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#wage-education-is-there-a-ceteris-paribus",
+    "href": "slides/w03-mlr-part1.html#wage-education-is-there-a-ceteris-paribus",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Wage ~ Education: Is there a ceteris paribus?",
+    "text": "Wage ~ Education: Is there a ceteris paribus?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegression accounts for the observed (included) confounders by attributing variance in \\(y\\) to the variance in \\(x\\) (variable of interest) and \\(u\\) (control variables)."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#why-regression-1",
+    "href": "slides/w03-mlr-part1.html#why-regression-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Why regression?",
+    "text": "Why regression?\n\n\nIn multiple regression, Ceteris Paribus is achieved by introducing control variables (\\(A_i\\)).\n\n\n\n\\[\nY_i = \\alpha + \\beta \\, P_i + \\gamma \\, A_i + e_i,\n\\]\n\n\n\nRegression controls the variance in \\(Y_i\\) with observed \\(P_i\\) and \\(A_i\\).\nIn the context of the variable of interest (\\(P_i\\)):\n\nRegression controls other variables (\\(A_i\\)) fixed,\nensuring that \\(\\beta\\) reviels causal effect Ceteris Paribus."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#wage-education-really-is-there-a-ceteris-paribus",
+    "href": "slides/w03-mlr-part1.html#wage-education-really-is-there-a-ceteris-paribus",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Wage ~ Education: Really? Is there a ceteris paribus?",
+    "text": "Wage ~ Education: Really? Is there a ceteris paribus?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNot every confounded could be observed or measures.\nThere are unobserved ones:\n\n…\n\n\n\n\n\nAbility, attitude, effort.\n\n\n\n\n\nWhen a confounded correlated with outcome \\(Cov(c,y) \\ne 0\\) and other regressors \\(Cov(c,u) \\ne 0\\) and \\(Cov(c,x) \\ne 0\\).\n\n\n\nEstimates of \\(\\beta\\) and \\(\\gamma\\) are no longer ceteris paribus!\n\nThey are biased: \\(\\tilde{\\beta}\\) and \\(\\tilde{\\gamma}\\)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#ovb-the-long-model",
+    "href": "slides/w03-mlr-part1.html#ovb-the-long-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "OVB: The long model",
+    "text": "OVB: The long model\nSupposed that our ideal regression\n\nthe true model / population regression / long model is:\n\n\n\\[\nY_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma A_i + e^l_i,\n\\]\n\n\nWe cannot measure \\(A_i\\), but:\n\n\n\n\\(A_i\\) has a causal effect on \\(Y_i\\): \\((E[Y_i|A_i] \\ne 0)\\), and\n\n\n\n\n\\(A_i\\) correlated with \\(P_i\\): \\((E[P_i|A_i] \\ne 0)\\):"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#ovb-the-short-model",
+    "href": "slides/w03-mlr-part1.html#ovb-the-short-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "OVB: The short model",
+    "text": "OVB: The short model\nBecause of the omitted variable,\n\nwe cannot estimate the long model.\n\n\nInstead, we estimate a short model:\n\n\n\\[\nY_i = \\alpha ^ s + \\beta^s P_i + e^s_i\n\\]\n\n\nwhere omitted variable is implicit in the residuals:\n\n\n\\[\ne^s_i = e^l_i + A_i\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#bias-of-variable-omission",
+    "href": "slides/w03-mlr-part1.html#bias-of-variable-omission",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Bias of variable omission",
+    "text": "Bias of variable omission\nOmitted variable causes bias of all estimates!\n\nThis bias can be measured as \\(\\text{OVB}\\):\n\n\n\\[\n\\text{OVB} = \\beta^s - \\beta^l\n\\]\nTo be continued on the OVB in another week"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#how-does-regression-fights-selection-bias",
+    "href": "slides/w03-mlr-part1.html#how-does-regression-fights-selection-bias",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "How does regression fights selection bias?",
+    "text": "How does regression fights selection bias?\n\nAny ideas?\n\n\nAny ideas?\n\n\nWe include control variables to reduce or defeat the omitted variable bias."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#introduction",
+    "href": "slides/w03-mlr-part1.html#introduction",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Introduction",
+    "text": "Introduction\n\nSee Wooldridge (2020)\n\nWe use data from (Blackburn and Neumark, 1992) on wage determinants. Variables present are:\n\n\\(wage\\) - monthly earnings in USD;\n\\(educ\\) - years of education;\n\\(exper\\) - years of experiences;\n\\(black\\) - dummy variable representing individuals which are not Caucasian;\n\\(female\\) - dummy variable representing females;\n\n\nOur goal is to identify the causal effect of education on wage estimating following equation:\n\\[\n\\text{wage} = \\beta_0 + \\beta_1 \\text{educ} + \\beta_2 \\text{exper} + \\beta_3 \\text{black} + \\beta_4 \\text{female} + e\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#loading-data",
+    "href": "slides/w03-mlr-part1.html#loading-data",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Loading data",
+    "text": "Loading data\n\n\n\n\n\nRows: 526\nColumns: 7\n$ wage      <dbl> 3.10, 3.24, 3.00, 6.00, 5.30, 8.75, 11.25, 5.00, 3.60, 18.18…\n$ educ      <dbl> 11, 12, 11, 8, 12, 16, 18, 12, 12, 17, 16, 13, 12, 12, 12, 1…\n$ exper     <dbl> 2, 22, 2, 44, 7, 9, 15, 5, 26, 22, 8, 3, 15, 18, 31, 14, 10,…\n$ black     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ white     <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ female    <dbl> 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, …\n$ caucasian <fct> yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, …"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#exploratory-data-analysis-13",
+    "href": "slides/w03-mlr-part1.html#exploratory-data-analysis-13",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory data analysis (1/3)",
+    "text": "Exploratory data analysis (1/3)\n\n\n\n\n\n\nUnique (#)\nMissing (%)\nMean\nSD\nMin\nMedian\nMax\n\n\n\n\nwage\n241\n0\n5.9\n3.7\n0.5\n4.7\n25.0\n\n\neduc\n18\n0\n12.6\n2.8\n0.0\n12.0\n18.0\n\n\nexper\n51\n0\n17.0\n13.6\n1.0\n13.5\n51.0\n\n\nblack\n2\n0\n0.1\n0.3\n0.0\n0.0\n1.0\n\n\nwhite\n2\n0\n0.9\n0.3\n0.0\n1.0\n1.0\n\n\nfemale\n2\n0\n0.5\n0.5\n0.0\n0.0\n1.0"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#exploratory-data-analysis-23",
+    "href": "slides/w03-mlr-part1.html#exploratory-data-analysis-23",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory data analysis (2/3)",
+    "text": "Exploratory data analysis (2/3)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#exploratory-data-analysis-33",
+    "href": "slides/w03-mlr-part1.html#exploratory-data-analysis-33",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory data analysis (3/3)",
+    "text": "Exploratory data analysis (3/3)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#estimating-regression",
+    "href": "slides/w03-mlr-part1.html#estimating-regression",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Estimating regression",
+    "text": "Estimating regression\n\nmod1 <- lm(wage ~ educ + exper + black + female, data = wage_dta)\nmod1\n\n\n\n\nCall:\nlm(formula = wage ~ educ + exper + black + female, data = wage_dta)\n\nCoefficients:\n(Intercept)         educ        exper        black       female  \n   -1.71453      0.60175      0.06422     -0.08389     -2.15649"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#interpreting-the-results-1",
+    "href": "slides/w03-mlr-part1.html#interpreting-the-results-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Interpreting the results (1)",
+    "text": "Interpreting the results (1)\n\nsummary(mod1)\n\n\n\n\nCall:\nlm(formula = wage ~ educ + exper + black + female, data = wage_dta)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.3666 -1.9740 -0.4936  1.1248 14.8123 \n\nCoefficients:\n            Estimate Std. Error t value Pr(>|t|)    \n(Intercept) -1.71453    0.76169  -2.251   0.0248 *  \neduc         0.60175    0.05135  11.718  < 2e-16 ***\nexper        0.06422    0.01041   6.168 1.39e-09 ***\nblack       -0.08389    0.44430  -0.189   0.8503    \nfemale      -2.15649    0.27060  -7.969 1.01e-14 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.081 on 521 degrees of freedom\nMultiple R-squared:  0.3094,    Adjusted R-squared:  0.304 \nF-statistic: 58.34 on 4 and 521 DF,  p-value: < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#interpreting-the-results-2-fancy-summary",
+    "href": "slides/w03-mlr-part1.html#interpreting-the-results-2-fancy-summary",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Interpreting the results (2): fancy summary",
+    "text": "Interpreting the results (2): fancy summary\n\n\n\n\n\n\nModel 1\n\n\n\n\n(Intercept)\n-1.715 (0.762)*\n\n\neduc\n0.602 (0.051)***\n\n\nexper\n0.064 (0.010)***\n\n\nblack\n-0.084 (0.444)\n\n\nfemale\n-2.156 (0.271)***\n\n\nNum.Obs.\n526\n\n\nR2 Adj.\n0.304\n\n\nF\n58.341"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#interpreting-the-results-3-effect-of-a-dummy-variables",
+    "href": "slides/w03-mlr-part1.html#interpreting-the-results-3-effect-of-a-dummy-variables",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Interpreting the results (3): Effect of a dummy variables",
+    "text": "Interpreting the results (3): Effect of a dummy variables\n\n\n\n\nggpredict(mod1, term = c(\"educ\")) \n\n# Predicted values of wage\n\neduc | Predicted |         95% CI\n---------------------------------\n   0 |     -1.66 | [-2.96, -0.37]\n   3 |      0.14 | [-0.86,  1.14]\n   5 |      1.35 | [ 0.54,  2.15]\n   7 |      2.55 | [ 1.93,  3.17]\n  10 |      4.35 | [ 3.99,  4.72]\n  12 |      5.56 | [ 5.29,  5.83]\n  14 |      6.76 | [ 6.46,  7.06]\n  18 |      9.17 | [ 8.56,  9.78]\n\nAdjusted for:\n*  exper = 17.02\n*  black =  0.10\n* female =  0.48\n\n\n\n\n\nggpredict(mod1, term = c(\"educ\", \"female\")) \n\n# Predicted values of wage\n\n# female = 0\n\neduc | Predicted |         95% CI\n---------------------------------\n   0 |     -0.63 | [-1.97,  0.71]\n   4 |      1.78 | [ 0.82,  2.74]\n   7 |      3.58 | [ 2.89,  4.27]\n  10 |      5.39 | [ 4.92,  5.85]\n  12 |      6.59 | [ 6.22,  6.96]\n  18 |     10.20 | [ 9.57, 10.84]\n\n# female = 1\n\neduc | Predicted |         95% CI\n---------------------------------\n   0 |     -2.79 | [-4.08, -1.49]\n   4 |     -0.38 | [-1.30,  0.54]\n   7 |      1.43 | [ 0.77,  2.08]\n  10 |      3.23 | [ 2.79,  3.67]\n  12 |      4.43 | [ 4.05,  4.82]\n  18 |      8.04 | [ 7.35,  8.73]\n\nAdjusted for:\n* exper = 17.02\n* black =  0.10"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#conclude",
+    "href": "slides/w03-mlr-part1.html#conclude",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Conclude",
+    "text": "Conclude\n\n\n\nIs model 1 a good predictor of wage based on education?\nIs the effect of education causal?\n\n\n\n\n\n\n\n\nModel 1\n\n\n\n\n(Intercept)\n-1.715 (0.762)*\n\n\neduc\n0.602 (0.051)***\n\n\nexper\n0.064 (0.010)***\n\n\nblack\n-0.084 (0.444)\n\n\nfemale\n-2.156 (0.271)***\n\n\nNum.Obs.\n526\n\n\nR2 Adj.\n0.304\n\n\nF\n58.341"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#elasticity-1",
+    "href": "slides/w03-mlr-part1.html#elasticity-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Elasticity",
+    "text": "Elasticity\nElasticity of \\(y\\) with response to \\(x\\) (\\(x\\) elasticity of \\(y\\)):\n\\[\n\\epsilon = \\frac{\\partial y / y}{\\partial x / x} =  \\frac{\\partial y}{\\partial x}  \\frac{x}{y}\n\\]\n\n\\[\n\\epsilon = \\frac{ \\frac{y_2 - y_1}{y_1} }{ \\frac{x_2 - x_1}{x_1}}\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#elasticity-in-a-linear-model",
+    "href": "slides/w03-mlr-part1.html#elasticity-in-a-linear-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Elasticity in a linear model",
+    "text": "Elasticity in a linear model\n\\[\n\\text{wage} = \\beta_0 + \\beta_1 \\text{educ} + \\beta_2 \\text{exper} + \\beta_3 \\text{black} + e\n\\]\n\nLet us compute elasticity of \\(\\text{wage}\\) in response to \\(\\text{educ}\\):\n\n\n\\[\n\\epsilon_{\\text{wage},\\text{educ}} = \\frac{\\partial y}{\\partial x}  \\frac{x}{y},\n\\]\n\n\nwhere: \\(\\beta_1 = \\frac{\\partial y}{\\partial x}\\)\n\n\nTherefore, elasticity of wage depends on on the value of \\(x\\) and \\(y\\).\n\n\nWhen elasticity depends on a valued of another variable, we evaluate it at mean (or other quantiles) values of these variables."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#eslimating-elasticity-in-a-linear-model-12",
+    "href": "slides/w03-mlr-part1.html#eslimating-elasticity-in-a-linear-model-12",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Eslimating elasticity in a linear model (1/2)",
+    "text": "Eslimating elasticity in a linear model (1/2)\n\n\n\n\n\n\n\n\nwage\neduc\n\n\n\n\nmean\n5.90\n12.56\n\n\nq2\n3.33\n12.00\n\n\nmedian\n4.65\n12.00\n\n\nq4\n6.88\n14.00"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#eslimating-elasticity-in-a-linear-model-12-1",
+    "href": "slides/w03-mlr-part1.html#eslimating-elasticity-in-a-linear-model-12-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Eslimating elasticity in a linear model (1/2)",
+    "text": "Eslimating elasticity in a linear model (1/2)\n\n\n\n\n\n\n\n\n\n\n\n\nElasticity at mean:\n\ncoef(mod1)[2] * (mean(wage_dta$educ) / mean(wage_dta$wage))\n\n    educ \n1.282137 \n\n\nElasticity at 2nd, 3rd and 4th quartiles:\n\ncoef(mod1)[2] * (fivenum(wage_dta$educ)[[2]] / fivenum(wage_dta$wage)[[2]])\n\n    educ \n2.168464 \n\ncoef(mod1)[2] * (fivenum(wage_dta$educ)[[3]] / fivenum(wage_dta$wage)[[3]])\n\n  educ \n1.5529 \n\ncoef(mod1)[2] * (fivenum(wage_dta$educ)[[4]] / fivenum(wage_dta$wage)[[4]])\n\n    educ \n1.224489"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#asymptotic-properties-of-the-ols-simplified",
+    "href": "slides/w03-mlr-part1.html#asymptotic-properties-of-the-ols-simplified",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Asymptotic properties of the OLS (simplified)",
+    "text": "Asymptotic properties of the OLS (simplified)\nOLS results with consistent (unbiased) and efficient estimates of population parameters when sample size is finite (\\(n \\rightarrow \\infty\\))\n\n\\(\\hat \\beta \\rightarrow \\beta\\)\n\\(Var(\\hat \\beta) \\rightarrow 0\\)\n\n\nWhen the sample size is finite and all Gauss-Markov assumptions are satisfied:\n\n\\(\\hat \\beta\\) - estimates vary from sample to sample, but\n\\(Var(\\hat \\beta)\\) is distributed according to the t - distribution.\nVariances of two estimates \\(Var(\\hat \\beta_1)\\) and \\(Var(\\hat \\beta_2)\\) are distributed according to the F - distribution.\n\n\n\nWhen GM assumptions are not satisfied:\n\nt and F distributions are no longer relevant and we cannot perform conduct inference."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#linearity-meaning",
+    "href": "slides/w03-mlr-part1.html#linearity-meaning",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity: meaning",
+    "text": "Linearity: meaning\n\n\nthe expected value of a dependent variable is a straight-line function of the independent variable\nIf linearity is violated:\n\nestimates are biased\ninappropriate representation of the dependent variable"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#linearity-detection",
+    "href": "slides/w03-mlr-part1.html#linearity-detection",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity: detection",
+    "text": "Linearity: detection\n\n\nHow to detect a non-linearity?\n\nno accepted statistical tests, but\nthe visual inspection\n\nTypical plots:\n\nScatter plots of dependent and independent variables;\nobserved versus predicted/fitted values;\nresiduals versus predicted/fitted values;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#linearity-resolutions",
+    "href": "slides/w03-mlr-part1.html#linearity-resolutions",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity: resolutions",
+    "text": "Linearity: resolutions\n\n(non) linear transformation to the dependent and/or independent variables;\n\nit does change the way how we must interpret coefficients;\n\nfind a different independent variable;\npropose a different functional form;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#common-linear-transformations",
+    "href": "slides/w03-mlr-part1.html#common-linear-transformations",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Common linear transformations",
+    "text": "Common linear transformations\n\n\nInteraction term: \\(y = \\beta_0 + \\beta_1 x_1 \\cdot x_2 + \\beta_2 x_3 + e\\)\nNatural logarithm: \\(\\log y = \\beta_0 + \\beta_2 \\log x_1 + \\beta_2 x_2 + \\beta_3 \\log x_3 + e\\)\nPower transformation and polynomial: \\(y = \\beta_0 + \\beta_2 x_1 ^ 2 + \\beta_2 x_2 ^ 3 + \\beta_3 \\sqrt x_3 + e\\)\n\nBox-Cox transformation.\nTailor expansion (Cobb-Douglas, Trans-log).\n\nReciprocal: \\(\\log y = \\beta_0 + \\beta_2 \\frac{1}{x_1} + \\beta_2 x_2 + \\beta_3 \\log x_3 + e\\)\nStandardized variables \\(\\frac{y - \\bar y}{S_y} = \\beta_0 + \\beta_1 \\frac{x_1 - \\bar x_1}{S_{x_1}} + \\beta_2 \\frac{x_2 - \\bar x_2}{S_{x_2}} + e\\)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#log",
+    "href": "slides/w03-mlr-part1.html#log",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Log",
+    "text": "Log\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nDep. var.\nIndep. var.\nEquation\nSlope\nInterpretation\nElasticity\n\n\n\n\n\n\n\n\n\\(\\frac{\\partial y}{\\partial x}\\)\n\n\\(\\frac{\\partial y}{\\partial x} \\cdot \\frac{x}{y}\\)\n\n\nLevel - level\n\\(y\\)\n\\(y\\)\n\\(y=\\beta_0 + \\beta_1 x\\)\n\\(\\beta_1\\)\n\\(\\Delta y = \\beta_1 \\Delta x\\)\n\\(\\beta_1 \\frac{x}{y}\\)\n\n\nLevel - log\n\\(y\\)\n\\(\\log x\\)\n\\(\\log y=\\beta_0 + \\beta_1 x\\)\n\\(\\beta_1 y\\)\n\\(\\Delta y = (\\beta_1/100)\\% \\Delta x\\)\n\\(\\beta_1 x\\)\n\n\nLog - level\n\\(\\log y\\)\n\\(x\\)\n\\(y=\\beta_0 + \\beta_1 \\log x\\)\n\\(\\beta_1 \\frac{1}{x}\\)\n\\(\\% \\Delta y = 100 \\beta_1 \\Delta x\\)\n\\(\\beta_1 \\frac{1}{y}\\)\n\n\nLog - log\n\\(\\log y\\)\n\\(\\log x\\)\n\\(\\log y=\\beta_0 + \\beta_1 \\log x\\)\n\\(\\beta_1 \\frac{y}{x}\\)\n\\(\\% \\Delta y = \\% \\beta_1 \\Delta x\\)\n\\(\\beta_1\\)"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#log-key-limitations",
+    "href": "slides/w03-mlr-part1.html#log-key-limitations",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Log: Key limitations",
+    "text": "Log: Key limitations\n\n\\(\\log(0) = - \\infty\\);\nwhat is the \\(\\log(x)\\), when \\(x < 0\\)?"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#variables-standardiztion-to-the-standard-normal-distribution",
+    "href": "slides/w03-mlr-part1.html#variables-standardiztion-to-the-standard-normal-distribution",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Variables standardiztion to the standard normal distribution",
+    "text": "Variables standardiztion to the standard normal distribution\n\n\n\n\n\n\n\n\n\n\n\n\nModel\nDep. var.\nIndep. var.\nEquation\nSlope\nInterpretation\nElasticity\n\n\n\n\n\n\n\n\n\\(\\frac{\\partial y}{\\partial x}\\)\n\n\\(\\frac{\\partial y}{\\partial x} \\cdot \\frac{x}{y}\\)\n\n\nStandardized variables\n\\(y^* = \\frac{y - \\bar y}{S_y}\\)\n\\(x^* = \\frac{x - \\bar x}{S_x}\\)\n\\(y^*=\\beta_0 + \\beta_1 x^*\\)\n\\(\\frac{\\partial y^*}{\\partial x^*}\\)\n\\(\\text{SD} \\Delta y = \\text{SD} \\beta_1 \\Delta x\\)\nDIY\n\n\n\n\nKey limitations:\n\nNot intuitive interpretation"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#reciprocal",
+    "href": "slides/w03-mlr-part1.html#reciprocal",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Reciprocal",
+    "text": "Reciprocal\n\n\n\n\n\n\n\n\n\n\n\nModel\nDep. var.\nIndep. var.\nEquation\nSlope\nElasticity\n\n\n\n\n\n\n\n\n\\(\\frac{\\partial y}{\\partial x}\\)\n\\(\\frac{\\partial y}{\\partial x} \\cdot \\frac{x}{y}\\)\n\n\nReciprocal\n\\(y\\)\n\\(\\frac{1}{x}\\)\n\\(y=\\beta_0 + \\beta_1 \\frac{1}{x}\\)\n\\(-\\beta_1 \\frac{1}{x^2}\\)\n\\(-\\beta_1 \\frac{1}{xy}\\)\n\n\n\nInterpretation:\n\nWhen \\(x\\) increases to infinity, \\(y\\) reaches asymptotically \\(\\beta_0\\)\n\nSee Gujarati (2004) Chapter 6.7 for more details on interpreting the reciprocal relationship."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#linearity-in-the-wage-equation",
+    "href": "slides/w03-mlr-part1.html#linearity-in-the-wage-equation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity in the wage equation",
+    "text": "Linearity in the wage equation"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#wage-equaition-update",
+    "href": "slides/w03-mlr-part1.html#wage-equaition-update",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Wage equaition update",
+    "text": "Wage equaition update\n\n\n\nCall:\nlm(formula = log(wage) ~ educ + exper + black + female, data = wage_dta)\n\nCoefficients:\n(Intercept)         educ        exper        black       female  \n   0.483188     0.091192     0.009411    -0.009889    -0.343712  \n\n\n\nCall:\nlm(formula = log(wage) ~ educ + exper + black + female, data = wage_dta)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.89689 -0.26333 -0.03394  0.26654  1.28131 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept)  0.483188   0.106141   4.552 6.61e-06 ***\neduc         0.091192   0.007156  12.743  < 2e-16 ***\nexper        0.009411   0.001451   6.487 2.04e-10 ***\nblack       -0.009889   0.061913  -0.160    0.873    \nfemale      -0.343712   0.037709  -9.115  < 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.4293 on 521 degrees of freedom\nMultiple R-squared:  0.3526,    Adjusted R-squared:  0.3476 \nF-statistic: 70.93 on 4 and 521 DF,  p-value: < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#non-linearity-change",
+    "href": "slides/w03-mlr-part1.html#non-linearity-change",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Non-linearity change",
+    "text": "Non-linearity change"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#interpretation",
+    "href": "slides/w03-mlr-part1.html#interpretation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Interpretation",
+    "text": "Interpretation\n\n\n\n\n\n\nModel 1 (level-level)\nModel 2 (log(wage)-level)\n\n\n\n\n(Intercept)\n-1.715 (0.762)*\n0.483 (0.106)***\n\n\neduc\n0.602 (0.051)***\n0.091 (0.007)***\n\n\nexper\n0.064 (0.010)***\n0.009 (0.001)***\n\n\nblack\n-0.084 (0.444)\n-0.010 (0.062)\n\n\nfemale\n-2.156 (0.271)***\n-0.344 (0.038)***\n\n\nNum.Obs.\n526\n526\n\n\nR2 Adj.\n0.304\n0.348\n\n\nF\n58.341\n70.934"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#collinearity-or-muticollinearity",
+    "href": "slides/w03-mlr-part1.html#collinearity-or-muticollinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Collinearity or Muticollinearity",
+    "text": "Collinearity or Muticollinearity\n\nNo collinearity means\n\nnone of the regressors can be written as an exact linear combinations of some other regressors in the model.\n\nFor example:\n\nin \\(Y = \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3\\) ,\nwhere \\(X_3 = X_2 + X_1\\) ,\nall \\(X\\) are collinear."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#consequence-of-collinearity",
+    "href": "slides/w03-mlr-part1.html#consequence-of-collinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Consequence of collinearity:",
+    "text": "Consequence of collinearity:\n\nbiased estimates of the collinear variables\nover-significant results;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#detection-of-collinearity",
+    "href": "slides/w03-mlr-part1.html#detection-of-collinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Detection of collinearity:",
+    "text": "Detection of collinearity:\n\nScatter plot; Correlation matrix;\nModel specification;\nStep-wise regression approach;\nVariance Inflation Factor;"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#solution-to-collinearity",
+    "href": "slides/w03-mlr-part1.html#solution-to-collinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Solution to collinearity:",
+    "text": "Solution to collinearity:\n\nRe specify the model;\nChoose different regressors;\nSee also:\n\nOverview: “Assumption AMLR.3 No Perfect Collinearity” in (Wooldridge, 2020) ;\nExamples of causes in Chapter 9.5 (Wooldridge, 2020) ;\nChapter 9.4-9.5 in (weisberg2005a?);"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variables",
+    "href": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variables",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity with dummy variables",
+    "text": "Perfect collinearity with dummy variables\n\nWe want to build a naive regression, where the wage is a function of sex (female and male):\n\\(\\text{wage} = \\beta_0 + \\beta_1 \\cdot \\text{female} + \\beta_2 \\cdot \\text{male}\\)\nThe data is fictional:\n\n\n\n\nRows: 14\nColumns: 3\n$ female <int> 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1\n$ male   <int> 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0\n$ wage   <dbl> 10.847522, 7.167989, 4.941890, 7.477957, 9.391538, 8.087289, 9.…"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2",
+    "href": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity with dummy variable (2)",
+    "text": "Perfect collinearity with dummy variable (2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\nModel 4\nModel 5\n\n\n\n\n(Intercept)\n8.747*** (0.468)\n6.094*** (0.628)\n6.094*** (0.628)\n\n\n\n\nmale\n-2.652** (0.784)\n\n\n6.094*** (0.628)\n6.094*** (0.628)\n\n\nfemale\n\n2.652** (0.784)\n2.652** (0.784)\n8.747*** (0.468)\n8.747*** (0.468)\n\n\nNum.Obs.\n14\n14\n14\n14\n14\n\n\nR2\n0.488\n0.488\n0.488\n0.974\n0.974\n\n\nR2 Adj.\n0.446\n0.446\n0.446\n0.969\n0.969\n\n\n\nNote: ^^ Model 1: wage ~ maleModel 2: wage ~ femaleModel 3: wage ~ female + maleModel 4: wage ~ 0 + female + maleModel 5: wage ~ 0 + male + female"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2-1",
+    "href": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity with dummy variable (2)",
+    "text": "Perfect collinearity with dummy variable (2)\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n8.747*** (0.468)\n6.094*** (0.628)\n6.094*** (0.628)\n\n\nmale\n-2.652** (0.784)\n\n\n\n\nfemale\n\n2.652** (0.784)\n2.652** (0.784)\n\n\nNum.Obs.\n14\n14\n14\n\n\nR2\n0.488\n0.488\n0.488\n\n\nR2 Adj.\n0.446\n0.446\n0.446\n\n\n\nNote: ^^ Model 1: wage ~ maleModel 2: wage ~ femaleModel 3: wage ~ female + male"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2-2",
+    "href": "slides/w03-mlr-part1.html#perfect-collinearity-with-dummy-variable-2-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity with dummy variable (2)",
+    "text": "Perfect collinearity with dummy variable (2)\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\nModel 4\n\n\n\n\n(Intercept)\n8.747*** (0.468)\n6.094*** (0.628)\n6.094*** (0.628)\n\n\n\nmale\n-2.652** (0.784)\n\n\n6.094*** (0.628)\n\n\nfemale\n\n2.652** (0.784)\n2.652** (0.784)\n8.747*** (0.468)\n\n\nNum.Obs.\n14\n14\n14\n14\n\n\nR2\n0.488\n0.488\n0.488\n0.974\n\n\nR2 Adj.\n0.446\n0.446\n0.446\n0.969\n\n\n\nNote: ^^ Model 1: wage ~ maleModel 2: wage ~ femaleModel 3: wage ~ female + maleModel 4: wage ~ 0 + female + male"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#homeworks-1",
+    "href": "slides/w03-mlr-part1.html#homeworks-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Homeworks:",
+    "text": "Homeworks:\nWatch these videos on youtube and read\n\n\nVideo 1: Ceteris Paribus: Public vs. Private University or this link: https://youtu.be/iPBV3BlV7jk\nRe watch video 2: Selection Bias or this link: https://youtu.be/6YrIDhaUQOE\n\nRead:\n(Angrist & Pischke, 2014, Chapter 2; optional Angrist & Pischke, 2009, Chapter 3)\nDo:\nFollow pre-recorded videos in the order below. Please note that slides below supplement some of those practical works.\n\nEx.03a Regression basics\nEx.03b Wage education\nEx.03c Hedonic Land Prices Model"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#hw03a-regression-basics",
+    "href": "slides/w03-mlr-part1.html#hw03a-regression-basics",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "HW03a Regression basics",
+    "text": "HW03a Regression basics\n\\[\n\\pmb{y} = \\pmb{x}\\beta+\\pmb{e}\n\\]\nwhere\n\\[\n\\pmb{e} = \\pmb{y} - \\pmb{x}\\hat \\beta\n\\]\n\n\n\nDependent variable:\n\\[\n\\pmb{y} = \\begin{bmatrix}\ny_1 \\\\ y_2 \\\\ \\vdots \\\\ y_k\n\\end{bmatrix}\n\\]\n\n\n\nIndependent variables:\n\\[\n\\pmb{x} = \\begin{bmatrix}\n1 & x_{11} & x_{12} & \\dots & x_{1n} \\\\\n1 & x_{21} & x_{22} & \\dots & x_{2n} \\\\\n\\vdots  & \\vdots & \\vdots  & \\ddots & \\vdots  \\\\\n1 & x_{k1} & x_{k2} & \\dots&  x_{kn} \\\\\n\\end{bmatrix}\n\\]\n\n\n\n\\[\n\\hat \\beta = \\begin{bmatrix} \\hat \\beta_0 & \\hat \\beta_1 & \\hat \\beta_2 & \\cdots & \\hat \\beta_n \\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#where-do-beta-come-from",
+    "href": "slides/w03-mlr-part1.html#where-do-beta-come-from",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Where do \\(\\beta\\) come from?",
+    "text": "Where do \\(\\beta\\) come from?\n\n\n\n\\[\n\\pmb{y} = \\pmb{x}\\hat\\beta\n\\]\n\n\n\\[\n\\pmb{x}^{T} \\pmb{y} = \\pmb{x}^{T} \\pmb{x_i}\\hat\\beta\n\\]\n\n\n\\[\n\\frac{1}{ \\pmb{x}^{T} \\pmb{x_i}} \\pmb{x}^{T} \\pmb{y} = \\frac{1}{ \\pmb{x}^{T} \\pmb{x_i}}\\pmb{x}^{T} \\pmb{x_i}\\hat\\beta\n\\]\n\n\n\\[\n(\\pmb{x}^{T} \\pmb{x_i}) ^ {-1} \\pmb{x}^{T} \\pmb{y} = \\hat\\beta\n\\]\n\n\n\nwhere:\n\n\\(\\pmb{x}^{T}\\) is the transposed matrix \\(\\pmb{x}\\)\n\\((\\cdot) ^ {-1}\\) is the inverse of a matrix"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#fitted-values",
+    "href": "slides/w03-mlr-part1.html#fitted-values",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values",
+    "text": "Fitted values\n\\[\n\\pmb{\\hat y} =\n\\pmb{x} \\hat\\beta =\n\\begin{bmatrix}\n1 & x_{11} & x_{12} & \\dots & x_{1n} \\\\\n1 & x_{21} & x_{22} & \\dots & x_{2n} \\\\\n\\vdots  & \\vdots & \\vdots  & \\ddots & \\vdots  \\\\\n1 & x_{k1} & x_{k2} & \\dots&  x_{kn} \\\\\n\\end{bmatrix}\n\\begin{bmatrix} \\hat \\beta_0 \\\\ \\hat \\beta_1 \\\\ \\hat \\beta_2 \\\\ \\vdots \\\\ \\hat \\beta_n \\end{bmatrix} =\n\\]\n\\[\n\\begin{bmatrix}\n\\beta_0 +  \\beta_1 x_{11} +  \\beta_2 x_{12} + \\dots + \\beta_n x_{1n} \\\\\n\\beta_0 +  \\beta_1 x_{21} +  \\beta_2 x_{22} + \\dots + \\beta_n x_{2n} \\\\\n\\vdots  \\\\\n\\beta_0 +  \\beta_1 x_{k1} +  \\beta_2 x_{k2} + \\dots + \\beta_n x_{kn} \\\\\n\\end{bmatrix} =\n\\begin{bmatrix} \\hat y_1 \\\\ \\hat y_2 \\\\ \\vdots \\\\ \\hat y_k\n\\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#error-terms",
+    "href": "slides/w03-mlr-part1.html#error-terms",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Error terms",
+    "text": "Error terms\n\\[\n\\pmb{\\hat e} = \\pmb{y} - \\pmb{\\hat y} =\n\\begin{bmatrix} y_1 - \\hat y_1 \\\\ y_2 - \\hat y_2 \\\\ \\vdots \\\\ y_k - \\hat y_k \\end{bmatrix} =\n\\begin{bmatrix} \\hat e_1 \\\\ \\hat e_2 \\\\ \\vdots \\\\ \\hat e_k \\end{bmatrix}\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#standard-errors",
+    "href": "slides/w03-mlr-part1.html#standard-errors",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Standard Errors",
+    "text": "Standard Errors\n\n\nMeasure of variance in the estimated parameters \\(\\beta\\). Computed based on the Variance Covariance matrix\n\\[\nVar(\\hat \\beta) = (\\pmb{x}^T \\pmb{x})^{-1} \\hat \\sigma_e\n\\]\nwhere \\(\\hat \\sigma_e\\) is the estimate of the variance in error terms:\n\\[\n\\hat \\sigma_e = \\frac{\\pmb{\\hat e}^T\\pmb{\\hat e}}{n-r}\n\\]\n\\(n\\) - number of observations and \\(r\\) number of regressors including intercept.\n\nStandard Errors:\n\\[\n\\text{SE} = \\sqrt{\\text{diag}(Var(\\hat \\beta) )}\n\\]"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#why-do-we-need-standard-errors",
+    "href": "slides/w03-mlr-part1.html#why-do-we-need-standard-errors",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Why do we need standard errors?",
+    "text": "Why do we need standard errors?\n\n\nSE are needed for the inference!\nTo conclude about the population based on the sample regression results."
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#takeaways-1",
+    "href": "slides/w03-mlr-part1.html#takeaways-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Takeaways",
+    "text": "Takeaways\nGet comfortable with the terminology:\n\nControl variables for creating Ceteris Paribus\nSelection Bias in Regression:\n\nOVB;\nLong and Short models;\n\n\nRegression components and how do one produce them:\n\n\\(x\\), \\(y\\), \\(\\beta\\), standard errors.\n\nWhy assumptions are important?\nLinearity and how to detect it?\n\nLog transformation and its interpretation.\n\nWhat is perfect collinearity?"
+  },
+  {
+    "objectID": "slides/w03-mlr-part1.html#references",
+    "href": "slides/w03-mlr-part1.html#references",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nAshenfelter, O., Ashmore, D., & Lalonde, R. (1995). Bordeaux wine vintage quality and the weather. CHANCE, 8(4), 7–14. http://doi.org/10.1080/09332480.1995.10542468\n\n\nGujarati, D. N. (2004). Basic econometrics. (F. edition, Ed.). McGraw Hill.\n\n\nPalmquist, R. B. (1989). Land as a differentiated factor of production: A hedonic model and its implications for welfare measurement. Land Economics, 65(1), 23. http://doi.org/10.2307/3146260\n\n\nWooldridge, J. M. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#the-basic-theory-of-production-sadoulet1995-chapter-3",
+    "href": "slides/w04-mlr-part2.html#the-basic-theory-of-production-sadoulet1995-chapter-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "The Basic Theory of Production (Sadoulet & de Janvry, 1995, Chapter 3)",
+    "text": "The Basic Theory of Production (Sadoulet & de Janvry, 1995, Chapter 3)\n\nExplain why production function should be zero. - Intensive to use all variables factors to produce goods. - Leaving underutilized production factors makes production inefficient.\n\nFarm’s production function\n\\[\nh(q,x,z) = 0,\n\\]\nwhere:\n\n\\(q\\) - output quantities (agricultural produce)\n\\(x\\) - variable input quantities (fertilizers, labor, seed, water, …)\n\\(z\\) - fixed factors (private: land, equipment; public: infrastructure, extension; exogenous features …)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#farms-optimization-problem",
+    "href": "slides/w04-mlr-part2.html#farms-optimization-problem",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Farm’s optimization problem",
+    "text": "Farm’s optimization problem\n\nAsk what is the optimization problem. Ask how the profit is being defined on the farm.\n\nPrices of inputs \\(w^{'}\\) and outputs \\(p^{'}\\) affect farmers decisions of:\n\nwhat and how much to produce \\(q\\), and\nwhat and how much to use as the input \\(x\\).\n\n\nFarm’s objective function is to maximize own profit:\n\n\n\\[\n\\max_{x,q} \\;\\;\\; p^{'}q-w^{'}x, \\\\ \\text{s.t.} \\;\\; h(q,x,z) = 0\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#solution-to-the-producers-optimization-problem",
+    "href": "slides/w04-mlr-part2.html#solution-to-the-producers-optimization-problem",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Solution to the producer’s optimization problem",
+    "text": "Solution to the producer’s optimization problem\n\\[\n\\max_{x,q} \\;\\;\\; p^{'}q-w^{'}x, \\\\ \\text{s.t.} \\;\\; h(q,x,z) = 0\n\\]\nIs a set of input demand and output supply functions:\n\\[\n\\begin{cases}\nx = x(p,w,z), & \\text{factor demand function} \\\\\nq = q(p,w,z), & \\text{supply function}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#farms-optimization-problem-is",
+    "href": "slides/w04-mlr-part2.html#farms-optimization-problem-is",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Farm’s optimization problem is",
+    "text": "Farm’s optimization problem is\n\n\nStructural form\n\\[\n\\max_{x,q} \\;\\;\\; p^{'}q-w^{'}x, \\\\ \\text{s.t.} \\;\\; h(q,x,z) = 0\n\\]\n\nReduced forms \\[\n\\begin{cases}\nx = x(p,w,z), & \\text{factor demand function} \\\\\nq = q(p,w,z), & \\text{supply function}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#taylor-expansion",
+    "href": "slides/w04-mlr-part2.html#taylor-expansion",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Taylor Expansion",
+    "text": "Taylor Expansion\nValue of any function could be approximated at an arbitrary point \\(x_0\\) with a Taylor expansion:\n\\[\nf(x) \\approx f(x_0) + f^{'}(x_0)(x - x_0) + \\frac{f^{''}(x_0)}{2!}(x - x_0)^2 + \\cdots .\n\\]\n\nFor example:\n\\[\ne^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!} \\approx 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots\n\\]\n\n\n\\[\ne^{0.4} \\approx 1 + .4 + \\frac{.4^2}{2!} + \\frac{.4^3}{3!} + \\frac{.4^4}{4!} + \\frac{.4^5}{5!} \\\\\n\\approx 1 + .4 + .16/2 + 0.064/6 + 0.0256/24 + 0.01024 / 120 \\\\\n\\approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6)\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#first-order-taylor-approximation",
+    "href": "slides/w04-mlr-part2.html#first-order-taylor-approximation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "First order Taylor approximation",
+    "text": "First order Taylor approximation\n\\(q \\approx f(x)\\) at \\(x_0\\).\n\\[\nf(x) \\approx\n\\underbrace{f(x_0) - x_0}_{\\alpha} + \\underbrace{f^{'}(x_0)}_{\\beta}\\, x\n\\]\n\n\\[\nq \\approx \\alpha + \\beta \\, x\n\\]\n\n\n\\(q \\approx f(x_1, x_2)\\) at \\(a, b\\)\n\\[\nf(x_1, x_2) \\approx\n\\underbrace{f(a,b) - a - b}_{\\alpha} + \\underbrace{f_{x_1}^{'}(a,b)}_{\\beta_1}\\, x_1 + \\underbrace{f_{x_2}^{'}(a,b)}_{\\beta_2}\\, x_2\n\\]\n\n\n\\[\nq \\approx \\alpha + \\beta_1 \\, x_1 + \\beta_2 \\, x_2\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#second-and-greater-order-taylor-approximation",
+    "href": "slides/w04-mlr-part2.html#second-and-greater-order-taylor-approximation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Second and greater order Taylor approximation",
+    "text": "Second and greater order Taylor approximation\nResults in polynomial functions with interaction terms:\n\\[\nq \\approx \\alpha + \\beta_1 \\, x_1 + \\beta_2 \\, x_2 + \\beta_3 \\, x_1^2 + \\beta_4 \\, x_2^2 + \\beta_5 x_1 x_2\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#non-linear-production-functions",
+    "href": "slides/w04-mlr-part2.html#non-linear-production-functions",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Non-linear production functions",
+    "text": "Non-linear production functions\nConsider\n\\[q = f(x_i)\\]\n(function of several variables \\(x_i\\)), where\n\\[x_i = e^{\\ln x_i}\\]\n\nThen,\n\\[\n\\ln q = \\ln f(e^{\\ln x_i}) \\; \\; \\; \\; \\text{or} \\; \\; \\; \\; \\ln q = g(\\ln x_i)\n\\]\n\n\nLet us approximate \\(\\ln q = g(\\ln x_i)\\) using the Taylor expansion."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fist-order-taylor-approximation",
+    "href": "slides/w04-mlr-part2.html#fist-order-taylor-approximation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fist order Taylor approximation",
+    "text": "Fist order Taylor approximation\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i \\ln x_i\n\\]\n\n\nThis is a Cobb-Douglas production function:\n\n\n\\[\nq \\approx e^\\alpha \\prod_i x_i^{\\beta_i}\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#second-order-taylor-approximation",
+    "href": "slides/w04-mlr-part2.html#second-order-taylor-approximation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Second order Taylor approximation",
+    "text": "Second order Taylor approximation\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i  \\ln x_i + \\sum_{ij} \\gamma_{ij} \\ln x_{ij}\n\\]\n\n\nThis is a translog production function"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#problem-and-research-question",
+    "href": "slides/w04-mlr-part2.html#problem-and-research-question",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Problem and research question",
+    "text": "Problem and research question\n\n\n\n\nPolicy makers are considering to abolish the share-cropping land tenure.\nAs an alternative either owner-cultivation with hired labor or pure rental relationship should be established.\nMain rationale is in the president’s statement that sharecropping is inefficient farm structure.\n\n\n\n\nTheoretical debate\n\nContract theory (Dasgupta, Knight, & Love, 1999) sees sharecropping as a form of the optimal risks and incentives sharing contract.\nIt is a second best contract in agriculture after pure rental of hired labor contract.\nSharecropping can be as efficient as rental/labor contracts, when interlinked credit and insurance markets fail.\n\n\n\n\n\nResearch question:\nIs there any negative effect of sharecropping on farms productivity?"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#how-to-answer-this-question",
+    "href": "slides/w04-mlr-part2.html#how-to-answer-this-question",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "How to answer this question?",
+    "text": "How to answer this question?\n\nRegression\n\n\nLet us estimate a simple production function of a rice-producing farm.\n\\[\\text{output} = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\text{land} + \\beta_4 \\text{labor} + e\\]\n\n\nwhere:\n\\(\\text{output}\\) is gross output of rice in kg\n\\(\\text{land}\\) the total area cultivated with rice, measured in hectares\n\\(\\text{labor}\\) total labor inputs (excluding harvest labor) in hours\n\\(\\text{status}\\) land tenure system on the farm: owner-operated, Share-cropping and mixed\n\n\nData set covers a sample of the rice-cultivating farmers in India. Source: (Feng & Horrace, 2010)."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#data-1",
+    "href": "slides/w04-mlr-part2.html#data-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Data (1)",
+    "text": "Data (1)\n\n\n\n\nlibrary(tidyverse)\nlibrary(GGally)\nlibrary(modelsummary)\nglimpse(farm_dta)\n\nRows: 1,026\nColumns: 4\n$ output <int> 7980, 4083, 2650, 4500, 16300, 17424, 3840, 2800, 950, 240, 150…\n$ land   <dbl> 3.000, 2.000, 1.000, 2.000, 3.572, 3.572, 1.420, 1.420, 0.428, …\n$ labor  <int> 2915, 2155, 1075, 2091, 3889, 3519, 810, 855, 460, 109, 230, 18…\n$ status <fct> owner, owner, owner, owner, share, share, mixed, mixed, mixed, …"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-1",
+    "href": "slides/w04-mlr-part2.html#exploratory-staistics-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory staistics (1)",
+    "text": "Exploratory staistics (1)\n\ndatasummary_skim(farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnique (#)\nMissing (%)\nMean\nSD\nMin\nMedian\nMax\n\n\n\n\noutput\n482\n0\n1405.2\n1921.8\n42.0\n886.5\n20960.0\n\n\nland\n300\n0\n0.4\n0.5\n0.0\n0.3\n5.3\n\n\nlabor\n544\n0\n388.4\n484.2\n17.0\n252.0\n4774.0\n\n\n\n\ndatasummary_skim(farm_dta, \"categorical\", output = \"markdown\")\n\n\n\n\nstatus\nN\n%\n\n\n\n\nowner\n736\n71.7\n\n\nshare\n79\n7.7\n\n\nmixed\n211\n20.6"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-2",
+    "href": "slides/w04-mlr-part2.html#exploratory-staistics-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory staistics (2)",
+    "text": "Exploratory staistics (2)\n\ndatasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nowner / mean\nowner / sd\nshare / mean\nshare / sd\nmixed / mean\nmixed / sd\n\n\n\n\nland\n0.44\n0.58\n0.36\n0.56\n0.44\n0.39\n\n\nlabor\n395.42\n522.12\n315.51\n566.17\n391.44\n262.63\n\n\noutput\n1435.68\n2014.60\n1250.65\n2639.25\n1356.59\n1104.10"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-3",
+    "href": "slides/w04-mlr-part2.html#exploratory-staistics-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory staistics (3)",
+    "text": "Exploratory staistics (3)\n\nggpairs(farm_dta, aes(colour = status, alpha = 0.2))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#regression-and-interpretation",
+    "href": "slides/w04-mlr-part2.html#regression-and-interpretation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Regression and interpretation",
+    "text": "Regression and interpretation\n\nfit1 <- lm(output ~ status + land + labor, \n           data = farm_dta)\n\nmodelsummary(\n  list(`Linear prod.fn. (level-level)` = fit1),\n  estimate = \"{estimate} {stars} ({std.error})\",\n  statistic = NULL,\n  gof_omit =  c(\"AIC|BIC|Log|RMS\"),\n  output  = \"markdown\"\n)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#regression-and-interpretation-output",
+    "href": "slides/w04-mlr-part2.html#regression-and-interpretation-output",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Regression and interpretation",
+    "text": "Regression and interpretation\n\n\n\n\n\nLinear prod.fn. (level-level)\n\n\n\n\n(Intercept)\n6.203 (36.845)\n\n\nstatusshare\n87.849 (96.953)\n\n\nstatusmixed\n-90.608 (63.901)\n\n\nland\n2145.659 *** (111.521)\n\n\nlabor\n1.248 *** (0.126)\n\n\nNum.Obs.\n1026\n\n\nR2\n0.819\n\n\nR2 Adj.\n0.819\n\n\nF\n1158.652"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fitted-values-1",
+    "href": "slides/w04-mlr-part2.html#fitted-values-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values (1)",
+    "text": "Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\")"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fitted-values-1-1",
+    "href": "slides/w04-mlr-part2.html#fitted-values-1-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values (1)",
+    "text": "Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) + \n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E'))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fitted-values-1-2",
+    "href": "slides/w04-mlr-part2.html#fitted-values-1-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values (1)",
+    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +\n  geom_point(aes(y = fitted, colour = \"Gitted\"),\n             alpha = 0.3)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fitted-values-1-3",
+    "href": "slides/w04-mlr-part2.html#fitted-values-1-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values (1)",
+    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +\n  geom_point(aes(y = fitted, colour = \"Gitted\"),\n             alpha = 0.3) + \n  scale_x_log10() +\n  scale_y_log10()"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#actual-values-3d",
+    "href": "slides/w04-mlr-part2.html#actual-values-3d",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Actual values 3D",
+    "text": "Actual values 3D"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#actual-fitted-values-3d",
+    "href": "slides/w04-mlr-part2.html#actual-fitted-values-3d",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Actual + Fitted values 3D",
+    "text": "Actual + Fitted values 3D"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#fitted-values-3d-v.2",
+    "href": "slides/w04-mlr-part2.html#fitted-values-3d-v.2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Fitted values 3D v.2",
+    "text": "Fitted values 3D v.2"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity",
+    "href": "slides/w04-mlr-part2.html#linearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity",
+    "text": "Linearity\n\nlibrary(performance)\ncheck_model(fit1, check = \"linearity\", panel = FALSE)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicolinearity",
+    "href": "slides/w04-mlr-part2.html#multicolinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicolinearity",
+    "text": "Multicolinearity"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#no-perfect-collinearity",
+    "href": "slides/w04-mlr-part2.html#no-perfect-collinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "No perfect collinearity",
+    "text": "No perfect collinearity"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#no",
+    "href": "slides/w04-mlr-part2.html#no",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "No",
+    "text": "No"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#ne2-slide",
+    "href": "slides/w04-mlr-part2.html#ne2-slide",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Ne2 slide",
+    "text": "Ne2 slide"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#references-1",
+    "href": "slides/w04-mlr-part2.html#references-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nDasgupta, S., Knight, T. O., & Love, H. A. (1999). Evolution of Agricultural Land Leasing Models: A Survey of the Literature. Applied Economic Perspectives and Policy, 21(1), 148–176. http://doi.org/10.2307/1349978\n\n\nFeng, Q., & Horrace, W. C. (2010). Alternative technical efficiency measures: Skew, bias and scale. Journal of Applied Econometrics, 27(2), 253–268. http://doi.org/10.1002/jae.1190\n\n\nSadoulet, E., & de Janvry, A. (1995). Quantitative Development Policy Analysis. THE JOHNS HOPKINS UNIVERSITY PRESS BALTIMORE AND LONDON."
+  }
+]
