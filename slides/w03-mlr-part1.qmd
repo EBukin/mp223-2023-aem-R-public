@@ -1405,7 +1405,10 @@ list(fit1, fit2, fit3, fit5) %>% my_summary()
 
 # Homeworks:
 
-### Watch these videos on youtube and read
+
+## Homeworks:
+
+**Watch these videos on youtube and read**
 
 ::: columns
 ::: {.column width="50%"}
@@ -1415,11 +1418,11 @@ Re watch video 2: [Selection Bias](https://youtu.be/6YrIDhaUQOE) or this link: <
 :::
 
 ::: {.column width="50%"}
-### Read:
+**Read:**
 
 [@Angrist2014, chapter 2; optional @Angrist2009, chapter 3]
 
-### Do:
+**Do:**
 
 Follow pre-recorded videos in the order below. Please note that slides below supplement some of those practical works.
 
