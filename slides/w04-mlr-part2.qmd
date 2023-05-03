@@ -52,7 +52,6 @@ where:
 
 . . .
 
-
 -   $q$ - output quantities (agricultural produce)
 
 -   $x$ - variable input quantities (fertilizers, labor, seed, water, ...)
@@ -167,7 +166,7 @@ $$
 
 $$
 \approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6) 
-$$ 
+$$
 
 . . .
 
@@ -340,32 +339,31 @@ library(modelsummary)
 glimpse(farm_dta)
 ```
 
-## Exploratory staistics (1)
+## Exploratory statistics (1)
 
 ```{r echo=TRUE}
 datasummary_skim(farm_dta, output = "markdown")
 ```
 
-## Exploratory staistics (2)
+## Exploratory statistics (2)
 
 ```{r echo=TRUE}
 datasummary_skim(farm_dta, output = "markdown", "categorical")
 ```
 
-## Exploratory staistics (3)
+## Exploratory statistics (3)
 
 ```{r echo=TRUE}
 datasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = "markdown")
 ```
 
-## Exploratory staistics (3)
+## Exploratory statistics (3)
 
 ```{r echo=TRUE}
 ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
 ```
 
 ## Regression and interpretation {.smaller}
-
 
 ::: columns
 ::: {.column width="50%"}
@@ -383,8 +381,8 @@ modelsummary(
   statistic = NULL
 )
 ```
-
 :::
+
 ::: {.column width="50%"}
 ```{r echo=FALSE}
 fit1 <- lm(output ~ status + land + labor, 
@@ -409,7 +407,6 @@ modelsummary(
   output  = "markdown"
 )
 ```
-
 :::
 :::
 
@@ -791,7 +788,7 @@ modelsummary(
 )
 ```
 
-## Change in the lineariy assumption
+## Change in the linearity assumption
 
 ::: columns
 ::: {.column width="50%"}
@@ -1059,13 +1056,13 @@ modelsummary(
 ::: incremental
 1.  Variance Inflation Factor
 
-    -   Not a statistical test, only an informatice number.
+    -   Not a statistical test, only an informative number.
     -   This shows by how much, the SE of the collinear variables are larger than what they could have been if there was no collinearity.
 
 2.  Step-wise regression approach:
 
     -   Include collinear variables one by one and together, and
-    -   observe how the $R^2$, and var's significances changes
+    -   observe how the $R^2$, and variables significance changes
 :::
 
 ## Solutions
@@ -1180,17 +1177,16 @@ $$
 ## Problem and detection
 
 ::: incremental
--   **Problem:** when $Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) \ne \sigma^2$ 
-    
+-   **Problem:** when $Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) \ne \sigma^2$
+
     -   Estimates are not biased, but;
     -   Standard errors are inefficient;
     -   Inference is misleading and false.
-    
+
 -   **Detection:**
 
     -   Graphical: residuals vs regressors and fitted values plots;
     -   Statistical tests: Breusch-Pagan, White test, Goldfeld-Quandt.
-    
 :::
 
 ## Solutions
@@ -1198,24 +1194,21 @@ $$
 ::: incremental
 -   Re-specify the model/ choose different regressors;
 
--   Correct SE with alternative estimation procedures 
-    
+-   Correct SE with alternative estimation procedures
+
     -   robust: use heteroskedasticity-consistent (robust) standard errors.
     -   cluster: use clustered standard errors.
 
 -   Use a weighted regression estimated with Generalized Linear Model (GLM) estimator instead of OLS;
 
-    - Generally discouraged for small samples (n < 5000) as GLM have weaker asymptotic properties as compared to the OLS.
-    
+    -   Generally discouraged for small samples (n \< 5000) as GLM have weaker asymptotic properties as compared to the OLS.
+
 -   See also: [@Angrist2009, Ch. 3.4], "Assumption AMLR.5" in [@wooldridge2020introductory]
-
 :::
-
 
 ## Heteroscedasticity example (1)
 
 ![](img/w04/het-02.png)
-
 
 ## Heteroscedasticity (2). Production function
 
@@ -1227,7 +1220,6 @@ fit1$call
 #| echo: true
 check_model(fit1, check = c("linearity", "homogeneity"))
 ```
-
 
 ## Heteroscedasticity (2). Partial transformation
 
@@ -1267,8 +1259,8 @@ fit1$call
 library(lmtest)
 bptest(fit1)
 ```
-
 :::
+
 ::: {.column width="50%"}
 ```{r}
 fit2_cd$call
@@ -1290,7 +1282,6 @@ $$
 \text{residuals} = \log(\text{land}) + \log(\text{labor}) + \log(\text{land}) ^ 2 + \log(\text{labor})^2
 $$
 
-
 ::: columns
 ::: {.column width="50%"}
 ```{r}
@@ -1303,8 +1294,8 @@ bptest(fit1,
        ~ land * labor + I(labor^2) + I(labor^2), 
        data = farm_dta)
 ```
-
 :::
+
 ::: {.column width="50%"}
 ```{r}
 fit2_cd$call
@@ -1319,7 +1310,6 @@ bptest(fit1,
 ```
 :::
 :::
-
 
 ## Robust standard errors (1)
 
@@ -1355,7 +1345,7 @@ Robust estimators for variance covariance matrix:
     -   `HC3` - optimal one as per [@Long2000a]
     -   `HC1` - default in `Stata`
 
-## Example of the robust vcov
+## An example of robust vcov {.smaller}
 
 ```{r}
 fit1$call
@@ -1374,8 +1364,8 @@ vcov(fit1)
 ```{r}
 vcov(fit1) %>% knitr::kable(digits = 2)
 ```
-
 :::
+
 ::: {.column width="50%"}
 **Robust vcov**
 
@@ -1394,8 +1384,7 @@ vcovHC(fit1, type = "HC1") %>%
 :::
 :::
 
-
-## Effect of robust SE on inference
+## Effect of robust SE on inference {.smaller}
 
 ```{r}
 fit1$call
@@ -1419,8 +1408,8 @@ modelsummary(
   output  = "markdown", 
 )
 ```
-
 :::
+
 ::: {.column width="50%"}
 ```{r}
 modelsummary(
@@ -1439,11 +1428,10 @@ modelsummary(
   vcov = "HC3"
 )
 ```
-
 :::
 :::
 
-## Effect of robust SE on inference
+## Effect of robust SE on inference {.smaller}
 
 ```{r}
 fit2_cd$call
@@ -1467,8 +1455,8 @@ modelsummary(
   output  = "markdown", 
 )
 ```
-
 :::
+
 ::: {.column width="50%"}
 ```{r}
 modelsummary(
@@ -1487,23 +1475,21 @@ modelsummary(
   vcov = "HC3"
 )
 ```
-
 :::
 :::
-
 
 # Homework
 
-Watch: 
+Watch:
 
--   ![](http://www.masteringmetrics.com/wp-content/themes/easybakeV2/img/book.png){width="23" height="35"} ![](https://emojipedia-us.s3.amazonaws.com/content/2020/04/05/yt.png){width="20"} [Regression Part I: Call in the CIA](https://youtu.be/OwNxEaOF8yY?t=2) (or here: [https://youtu.be/OwNxEaOF8yY](https://youtu.be/OwNxEaOF8yY))
--   ![](http://www.masteringmetrics.com/wp-content/themes/easybakeV2/img/book.png){width="23" height="35"} ![](https://emojipedia-us.s3.amazonaws.com/content/2020/04/05/yt.png){width="20"} [Regression Part II: Theory](https://youtu.be/KKJ-2_UUhnc?t=1)  (or here: [https://youtu.be/KKJ-2_UUhnc](https://youtu.be/KKJ-2_UUhnc))
+-   [Regression Part I: Call in the CIA](https://youtu.be/OwNxEaOF8yY?t=2) (or here: <https://youtu.be/OwNxEaOF8yY>)
+-   [Regression Part II: Theory](https://youtu.be/KKJ-2_UUhnc?t=1) (or here: <https://youtu.be/KKJ-2_UUhnc>)
 
+Reproduce analysis from the slides in R.
 
-Reproduce analysis from the sildes in R.
+-   Make complex production function exercise.
 
-
-# Takeawyas
+# Takeaways
 
 1.  Assumptions and how to validated them.
 

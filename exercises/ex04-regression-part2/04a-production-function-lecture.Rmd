@@ -1,0 +1,55 @@
+---
+title: "Simple Production Function"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE
+  )
+```
+
+## Reproducing CD production function from the slides
+
+Estimate a simplified Cobb-Douglas production using code from the slides and validate all relevant assumptions.
+
+$$
+\ln (\text{output}) = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \ln (\text{land}) + \beta_4 \ln (\text{labor}) + e
+$$
+
+### Setup and data loading
+
+```{r}
+library(tidyverse)
+library(GGally)
+library(modelsummary)
+library(performance)
+library(lmtest)
+
+farms <- read_csv("rice.csv")
+farm_dta <- farms %>% select(output, land, labor, status)
+```
+
+### Exploratory data analysis
+
+```{r}
+farm_dta %>% datasummary_skim()
+```
+
+### Estimating regression
+
+```{r}
+fit2_cd <- lm(output ~ 1, data = farm_dta)
+```
+
+### Validating assumptions
+
+### Reporting regression results
+
+```{r}
+summary(fit2_cd)
+```
