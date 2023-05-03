@@ -37,9 +37,7 @@ theme_set(theme_bw())
 ## The Basic Theory of Production [@Sadoulet1995, Chapter 3]
 
 ::: notes
-Explain why production function should be zero. 
--   Intensive to use all variables factors to produce goods.
--   Leaving underutilized production factors makes production inefficient.
+Explain why production function should be zero. - Intensive to use all variables factors to produce goods. - Leaving underutilized production factors makes production inefficient.
 :::
 
 **Farm's production function**
@@ -49,9 +47,11 @@ Explain why production function should be zero.
 $$
 h(q,x,z) = 0,
 $$
+
+where:
+
 . . .
 
-where: 
 
 -   $q$ - output quantities (agricultural produce)
 
@@ -65,11 +65,11 @@ where:
 Ask what is the optimization problem. Ask how the profit is being defined on the farm.
 :::
 
-Prices of **inputs $w^{'}$** and **outputs $p^{'}$** affect farmers decisions of:
+Prices of **inputs** $w^{'}$ and **outputs** $p^{'}$ affect farmers decisions of:
 
--   what and how much to **produce $q$**, and 
+-   what and how much to **produce** $q$, and
 
--   what and how much to use as the **input $x$**.
+-   what and how much to use as the **input** $x$.
 
 . . .
 
@@ -96,23 +96,22 @@ q = q(p,w,z), & \text{supply function}
 \end{cases}
 $$
 
-
 ## Farm's optimization problem is
 
 ::: columns
 ::: {.column width="50%"}
-**Structural form**
+**Structural form**.
 
 $$
 \max_{x,q} \;\;\; p^{'}q-w^{'}x, \\ \text{s.t.} \;\; h(q,x,z) = 0
 $$
 
 -   Models that we can simulate with linear programming, structural equation modelling
+:::
 
-::: 
 ::: {.column width="50%"}
+**Reduced forms**.
 
-**Reduced forms**
 $$
 \begin{cases}
 x = x(p,w,z), & \text{factor demand function} \\
@@ -121,8 +120,8 @@ q = q(p,w,z), & \text{supply function}
 $$
 
 -   Models that we estimate with regressions
-::: 
-::: 
+:::
+:::
 
 # The Production Function [@Sadoulet1995, Appendix A.4]
 
@@ -142,7 +141,7 @@ $$
 f(x) \approx f(x_0) + f^{'}(x_0)(x - x_0) + \frac{f^{''}(x_0)}{2!}(x - x_0)^2 + \cdots .
 $$
 
-## Taylor expansion example: 
+## Taylor expansion example:
 
 What is the value of $e^{0.4}$?
 
@@ -168,7 +167,8 @@ $$
 
 $$
 \approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6) 
-$$
+$$ 
+
 . . .
 
 $$
@@ -207,7 +207,6 @@ $$
 
 Multiple regression: $q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2$
 
-
 ## Second and greater order Taylor approximation
 
 Results in polynomial functions with interaction terms:
@@ -218,12 +217,11 @@ $$
 
 ## Production functions
 
-Consider 
+Consider
 
 $$q = f(x_i)$$
 
-Production function of several inputs $x_i$, where 
-
+Production function of several inputs $x_i$, where
 
 $$x_i = e^{\ln x_i}$$
 
@@ -231,7 +229,7 @@ and $q$ is the quantity of goods produced.
 
 . . .
 
-Then, 
+Then,
 
 $$
 \ln q = \ln f(e^{\ln x_i}) \; \; \; \; \text{or} \; \; \; \; \ln q = g(\ln x_i)
@@ -252,7 +250,6 @@ $$
 . . .
 
 **This is a Cobb-Douglas production function**: $q \approx e^\alpha \prod_i x_i^{\beta_i}$
-
 
 ## Second order Taylor approximation
 
@@ -277,11 +274,12 @@ $$
 ::: incremental
 -   Policy makers are considering to abolish the share-cropping land tenure system.
 
--   As an alternative either owner-cultivation with hired labor or pure rental relationship should be established. 
+-   As an alternative either owner-cultivation with hired labor or pure rental relationship should be established.
 
 -   Main rationale is in the claim that sharecropping is an inefficient farm structure.
 :::
 :::
+
 ::: {.column width="50%"}
 ::: incremental
 -   **Theoretical debate**
@@ -312,7 +310,7 @@ Data that we have covers a sample of the rice-cultivating farmers in India [@Fen
 
 . . .
 
-Let us estimate a simple production function of a rice-producing farm using linear form and Cobb-Douglas function. 
+Let us estimate a simple production function of a rice-producing farm using linear form and Cobb-Douglas function.
 
 . . .
 
@@ -320,7 +318,7 @@ $$\text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status 
 
 . . .
 
-$$\text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \ln \text{land} + \beta_4 \ln \text{labor} + e$$
+$$\ln \text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \ln \text{land} + \beta_4 \ln \text{labor} + e$$
 
 ## Data (1)
 
@@ -368,8 +366,10 @@ ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
 
 ## Regression and interpretation {.smaller}
 
+
+::: columns
+::: {.column width="50%"}
 ```{r echo=TRUE, eval=FALSE}
-#| output-location: column-fragment
 fit1 <- lm(output ~ status + land + labor, 
            data = farm_dta)
 
@@ -384,8 +384,9 @@ modelsummary(
 )
 ```
 
+:::
+::: {.column width="50%"}
 ```{r echo=FALSE}
-#| output-location: column-fragment
 fit1 <- lm(output ~ status + land + labor, 
            data = farm_dta)
 
@@ -409,8 +410,10 @@ modelsummary(
 )
 ```
 
-## Conclusion {.smaller}
+:::
+:::
 
+## Conclusion {.smaller}
 
 ::: columns
 ::: {.column width="50%"}
@@ -431,9 +434,8 @@ modelsummary(
   output  = "markdown"
 )
 ```
+:::
 
-
-::: 
 ::: {.column width="50%"}
 ::: incremental
 -   Interpret coefficients in both models.
@@ -446,7 +448,6 @@ modelsummary(
 :::
 :::
 :::
-
 
 ## Entertainment: Fitted values (1)
 
@@ -651,7 +652,6 @@ plot_ly() %>%
 # Assumptions
 
 ::: incremental
-
 1.  Linearity - **validated using data**
 
 2.  Random sampling - "accepted based on faith in data collectors"
@@ -663,7 +663,6 @@ plot_ly() %>%
 5.  Homoscedasticity (No heteroscedasticity) - **validated using data**
 
 6.  Normality - **validated using data**
-
 :::
 
 # Linearity
@@ -682,8 +681,7 @@ plot_ly() %>%
 
 **Resolved:** with a linear transformation.
 
-
-## Linearity detection: scatter plots 
+## Linearity detection: scatter plots
 
 ::: columns
 ::: {.column width="70%"}
@@ -706,7 +704,7 @@ farm_dta %>% select(-status) %>% ggpairs()
 :::
 :::
 
-## Linearity detection: fitted values vs residuals 
+## Linearity detection: fitted values vs residuals
 
 ```{r eval=FALSE}
 #| echo: true
@@ -732,10 +730,9 @@ plot(check_model(fit1, check = "ncv", panel = FALSE))$NCV +
 plot(fit1, which = 1)
 ```
 
-
 ## Linearity Conclusion
 
-Model: 
+Model:
 
 ```{r}
 fit1$call
@@ -798,7 +795,6 @@ modelsummary(
 
 ::: columns
 ::: {.column width="50%"}
-
 **Without log-log**
 
 ```{r}
@@ -807,10 +803,9 @@ modelsummary(
 plot(check_model(fit1, check = "linearity", panel = FALSE))$NCV + 
   labs(caption = str_replace(as.character(fit1$call)[[2]], "~", "="))
 ```
-
 :::
-::: {.column width="50%"}
 
+::: {.column width="50%"}
 **With log-log**
 
 ```{r}
@@ -819,7 +814,6 @@ plot(check_model(fit1, check = "linearity", panel = FALSE))$NCV +
 plot(check_model(fit2_cd, check = "linearity", panel = FALSE))$NCV + 
   labs(caption = str_replace(as.character(fit2_cd$call)[[2]], "~", "="))
 ```
-
 :::
 :::
 
@@ -900,7 +894,6 @@ modelsummary(
 )
 ```
 
-
 ## Partial transformation (2)
 
 ```{r}
@@ -924,13 +917,13 @@ Two sub-problems:
 
 2.  Near-perfect collinearity: regression works, but inference is misleading.
 
-
 # No Perfect Collinearity
 
 ::: incremental
 **Problem:**
 
 -   none of the regressors can be written as an **exact linear combinations** of some other regressors in the model.
+
 -   For example:
 
     -   in $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$ ,
@@ -946,7 +939,6 @@ Two sub-problems:
 
 **Solution:** model re-specification.
 
-
 ## Perfect Collinearity Example 1
 
 $$
@@ -957,7 +949,7 @@ $$
 $$
 
 ::: incremental
--   $male  + female = 1$
+-   $male + female = 1$
 
 -   Is there a multicollinearity problem here?
 :::
@@ -976,7 +968,7 @@ $$
 -   Is there a multicollinearity problem here?
 
 -   Coefficient $\hat\beta_5$ is aliased and wont be estimated
-::: 
+:::
 
 ## Perfect Collinearity Example 3
 
@@ -990,7 +982,6 @@ $$
 
 where $total = seeds + fertilizers + others$
 
-
 ::: incremental
 -   Is there a multicollinearity problem here?
 
@@ -999,11 +990,8 @@ where $total = seeds + fertilizers + others$
 -   $log(a) + log(b) = log(a * b)$
 
 -   ::: callout-caution
-    No, there is no collinearity because $\ln (seeds) + \ln (fertilizers) + \ln (others) \ne \ln (total)$. 
-    This is not a linear combination!
-    $\ln (seeds \cdot fertilizers \cdot others) \ne \ln (total)$
+    No, there is no collinearity because $\ln (seeds) + \ln (fertilizers) + \ln (others) \ne \ln (total)$. This is not a linear combination! $\ln (seeds \cdot fertilizers \cdot others) \ne \ln (total)$
     :::
-    
 :::
 
 ## Perfect Collinearity Example 4 {.smaller}
@@ -1070,7 +1058,7 @@ modelsummary(
 
 ::: incremental
 1.  Variance Inflation Factor
-    
+
     -   Not a statistical test, only an informatice number.
     -   This shows by how much, the SE of the collinear variables are larger than what they could have been if there was no collinearity.
 
@@ -1095,19 +1083,20 @@ modelsummary(
 ## Multicollinearity Example 1. Production Function
 
 ```{r}
+#| echo: true
 library(performance)
 check_collinearity(fit2_cd)
 ```
 
 . . .
 
-If VIF > 10, we may suspect multicollinearity.
+If VIF \> 10, we may suspect multicollinearity.
 
 . . .
 
-Removing land or labor will cause the OVB (omitted variable bias), we must keep both variables. 
+Removing land or labor will cause the OVB (omitted variable bias), we must keep both variables.
 
-## Multicollinearity Example 2 {.smaller}
+## Multicollinearity Example 2
 
 $$
 \begin{aligned}
@@ -1117,24 +1106,27 @@ $$
 
 ::: incremental
 -   where $seeds$ and $fertilizers$ highly correlate between each other (r=0.9),
--   VIF of $seeds$ and $fertilizers$ is > 12.2
+
+-   VIF of $seeds$ and $fertilizers$ is \> 12.2
+
 -   our key-interest variable is $land$.
--   As $fertilizers$ is a control variable and we may have OVB if we remove it, 
+
+-   As $fertilizers$ is a control variable and we may have OVB if we remove it,
+
 -   If we really want to reduce VIF...:
 
     -   Dis-aggregate fertilizers into mineral and organic, for example.
     -   Aggregate fertilizers and seeds
-    
-::: 
+:::
 
-## Multicollinearity Example 3 {.smaller}
+## Multicollinearity Example 3
 
 Same model but with a quadratic term:
 
 $$\hat{output} = \hat\beta_1 land + \hat\beta_2 land^2 + \hat\beta_3 seeds + \hat\beta_4 fertilizers + \hat\beta_5 others$$
 
 ::: incremental
--   VIF of $land$ and $land^2$ is > 25
+-   VIF of $land$ and $land^2$ is \> 25
 -   Is there a multicollinearity problem here?
 -   Think!
 -   Not really
@@ -1177,257 +1169,345 @@ my_summary <- function(x) {
 my_summary(list(fit3.1, fit3.2, fit3.3, fit3.4))
 ```
 
-
 # Homoscedasticity (No heteroscedasticity)
 
 $$
 Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) = \sigma^2
 $$
 
+![](img/w04/het-01.png)
 
+## Problem and detection
+
+::: incremental
+-   **Problem:** when $Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) \ne \sigma^2$ 
+    
+    -   Estimates are not biased, but;
+    -   Standard errors are inefficient;
+    -   Inference is misleading and false.
+    
+-   **Detection:**
+
+    -   Graphical: residuals vs regressors and fitted values plots;
+    -   Statistical tests: Breusch-Pagan, White test, Goldfeld-Quandt.
+    
+:::
+
+## Solutions
+
+::: incremental
+-   Re-specify the model/ choose different regressors;
+
+-   Correct SE with alternative estimation procedures 
+    
+    -   robust: use heteroskedasticity-consistent (robust) standard errors.
+    -   cluster: use clustered standard errors.
+
+-   Use a weighted regression estimated with Generalized Linear Model (GLM) estimator instead of OLS;
+
+    - Generally discouraged for small samples (n < 5000) as GLM have weaker asymptotic properties as compared to the OLS.
+    
+-   See also: [@Angrist2009, Ch. 3.4], "Assumption AMLR.5" in [@wooldridge2020introductory]
+
+:::
+
+
+## Heteroscedasticity example (1)
+
+![](img/w04/het-02.png)
+
+
+## Heteroscedasticity (2). Production function
 
 ```{r}
-#| echo: false
-#| fig-asp: 0.4
-knitr::include_graphics("img/het-01.png")
+fit1$call
 ```
 
-## Problem
-
-
-
-## Ne2 slide
-
-
-```{r echo=FALSE}
-library(parameters)
-library(performance)
-library(modelbased)
-
-model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
-
-plot(estimate_relation(model))
-slopes <- estimate_slopes(model, trend = "Petal.Length", at = "Species")
-
-plot(slopes)
-
-
-
-fit_tl <- 
-  lm(log(output) ~ status * log(land) * log(labor), 
-    data = farm_dta
-  )
-
-
-
-
-library(modelbased)
-# model <- lm(mpg ~ hp * wt, data = mtcars)
-slopes <- estimate_slopes(fit_tl, trend = "land", at = "status")
-plot(slopes)
+```{r }
+#| echo: true
+check_model(fit1, check = c("linearity", "homogeneity"))
 ```
 
 
+## Heteroscedasticity (2). Partial transformation
 
-
-
-
-
-```{r eval=FALSE}
-library(tidyverse)
-library(GGally)
-data("RiceFarms", package = "splm")
-farm_dta <- RiceFarms %>% as_tibble() %>%
-  select(output = goutput, land = size, labor = totlabor, status)
-ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
-fit1 <- lm(output ~ land + labor + status,  data =  farm_dta)
-fit1 %>% summary()
+```{r}
+fit3_level_log$call
 ```
 
+```{r }
+#| echo: true
+check_model(fit3_level_log, check = c("linearity", "homogeneity"))
+```
+
+## Heteroscedasticity (2). CD production function
+
+```{r}
+fit2_cd$call
+```
+
+```{r }
+#| echo: true
+check_model(fit2_cd, check = c("linearity", "homogeneity"))
+```
+
+## Statistical tests (1): Breusch-Pagan
+
+-   $H_0:$ variance is constant; $H_1$ non constant variance.
+-   If $H_0$ is rejected, we have a Heteroscedasticity.
+
+::: columns
+::: {.column width="50%"}
+```{r}
+fit1$call
+```
+
+```{r}
+#| echo: true
+library(lmtest)
+bptest(fit1)
+```
+
+:::
+::: {.column width="50%"}
+```{r}
+fit2_cd$call
+```
+
+```{r}
+#| echo: true
+library(lmtest)
+bptest(fit2_cd)
+```
+:::
+:::
+
+## Statistical tests (2): White test
+
+Same idea as Breusch-Pagan test. Assumes that residuals variance is a function of polynomial of regressors:
+
+$$
+\text{residuals} = \log(\text{land}) + \log(\text{labor}) + \log(\text{land}) ^ 2 + \log(\text{labor})^2
+$$
 
 
-```{r eval=FALSE}
+::: columns
+::: {.column width="50%"}
+```{r}
+fit1$call
+```
+
+```{r}
+#| echo: true
+bptest(fit1, 
+       ~ land * labor + I(labor^2) + I(labor^2), 
+       data = farm_dta)
+```
+
+:::
+::: {.column width="50%"}
+```{r}
+fit2_cd$call
+```
+
+```{r}
+#| echo: true
+bptest(fit1, 
+       ~ log(land) * log(labor) + 
+         I(log(labor)^2) + I(log(labor)^2), 
+       data = farm_dta)
+```
+:::
+:::
 
 
-fit_cd <- 
-  lm(
-    output ~ land + labor, 
-    data = farm_dta
-  )
+## Robust standard errors (1)
 
-plot(fit_cd, which = 1)
+Methods of correcting the variance-covariance matrix.
 
-# Elasticity of scale ### ### ### ### ### ###
+. . .
 
-library(car)
-matchCoefs(fit_cd, "log")
-car::linearHypothesis(
-  fit_cd, 
-  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
-)
-car::deltaMethod(
-  fit_cd, 
-  "b2 + b3 + b4 - 1",
-  parameterNames= paste("b", 1:4, sep="")
-)
+```{r}
+#| echo: true
+#| eval: false
+vcov(fit1)
+```
 
-library(marginaleffects)
-hypotheses(fit_cd)
-hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0")
-hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0", vcov = "HC3")
+```{r}
+vcov(fit1) %>% 
+  knitr::kable(digits = 2)
+```
+
+## Common methods of robust standard errors
+
+Robust estimators for variance covariance matrix:
+
+-   `sandwich::vcovHC` - heteroskedasticity consistent
+
+-   `sandwich::vcovCL` - clustered SE
+
+-   `clubSandwich::vcovCR` - clustered heteroskedasticity consistent SE
+
+-   `sandwich::vcovHAC` - heteroskedasticity and autocorrelation consistent
+
+-   Estimation methods:
+
+    -   `HC3` - optimal one as per [@Long2000a]
+    -   `HC1` - default in `Stata`
+
+## Example of the robust vcov
+
+```{r}
+fit1$call
+```
+
+::: columns
+::: {.column width="50%"}
+**Regular vcov**
+
+```{r}
+#| echo: true
+#| eval: false
+vcov(fit1)
+```
+
+```{r}
+vcov(fit1) %>% knitr::kable(digits = 2)
+```
+
+:::
+::: {.column width="50%"}
+**Robust vcov**
+
+```{r}
+#| echo: true
+#| eval: false
+library(sandwich)
+vcovHC(fit1, type = "HC3")
+```
+
+```{r}
+library(sandwich)
+vcovHC(fit1, type = "HC1") %>% 
+  knitr::kable(digits = 2)
+```
+:::
+:::
 
 
-fit_tl <- 
-  lm(
-    log(output) ~ log(land) + log(labor) + log(urea) + 
-      log(land):log(labor) + log(land):log(urea) + log(labor):log(urea), 
-    data = farm_dta
-  )
+## Effect of robust SE on inference
 
+```{r}
+fit1$call
+```
 
-# Marginal Effects at Y
-# hypotheses(fit_tl)
-# hypotheses(fit_tl,  hypothesis = "b2 + b5 + b6 = 0")
-slopes(fit_tl, slope = "dydx", variables = "land", by = c("labor", "urea"))
-
-plot_predictions(fit_tl, condition = list("land", "labor" = "quartile")) + 
-  scale_x_continuous(trans = "log")
-plot_predictions(fit_tl, condition = list("land", "urea" = "quartile"), transform  = exp, vcov = "HC3")
-
-avg_slopes(fit_tl, slope = "eyex")
-slopes(fit_tl, slope = "dydx", by = "land")
-hypotheses(fit_tl,  hypothesis = "b2 + b3 + b4 - 1 = 0")
-
-
-
-matchCoefs(fit_cd, "log")
-
-car::linearHypothesis(
-  fit_cd, 
-  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
-)
-
-car::deltaMethod(
-  fit_cd, 
-  "b2 + b3 + b4 - 1",
-  parameterNames= paste("b", 1:4, sep="")
-)
-
-
-library(marginaleffects)
-hypotheses(fit_cd)
-hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0")
-hypotheses(fit_cd,  hypothesis = "b2 + b3 + b4 - 1 = 0", vcov = "HC3")
-
-
-fit_plmtl <- 
-  plm(
-    log(output) ~ log(land) + log(labor) + log(urea) + 
-      log(land):log(labor) + log(land):log(urea) + log(labor):log(urea) , 
-    data = farm_dta, model = "within", effect = "individual", index = c("id", "time")
-  )
-
-library(modelsummary)
-library(marginaleffects)
-
+::: columns
+::: {.column width="50%"}
+```{r}
 modelsummary(
-  list(CD = fit_cd,
-       TL = fit_tl,
-       TL_fe = fit_plmtl),
-  estimate = "{estimate} {stars} ({std.error})",
-  statistic = NULL#,
-  # output  = "markdown"
+  list(`Linear prod.fn. (level-level) regular SE` = fit1),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS|F|^R2$"),
+  output  = "markdown", 
 )
-
-library(car)
-matchCoefs(fit_cd, "log")
-
-car::linearHypothesis(
-  fit_cd, 
-  hypothesis.matrix = "log(land) + log(labor) + log(urea) = 1" 
-)
-
-car::deltaMethod(
-  fit_cd, 
-  "b1 + b2 + b3 - 1",
-  parameterNames= paste("b", 0:3, sep="")
-)
-
-library(marginaleffects)
-hypotheses(fit_cd,  hypothesis = "b1 + b2 + b3 - 1 = ")
-
-
-library("margins")
-mod1 <- lm(mpg ~ log(cyl) * hp + wt, data = mtcars)
-(marg1 <- margins(mod1))
-summary(marg1)
-
-avg_slopes(mod1,  slope = "eyex")
-avg_slopes(mod1,  slope = "dydx")
-
-car::deltaMethod(
-  mod1, "b1 + b3 * 15" ,
-  parameterNames= paste("b", 0:3, sep="")
-)
-
-
-
-
-matchCoefs(fit_tl, "log")
-
-car::deltaMethod(
-  fit_tl, "b1 + b4 + b5" ,
-  parameterNames= paste("b", 0:6, sep="")
-)
-
-car::deltaMethod(
-  fit_tl, "b2 + b4 + b6" ,
-  parameterNames= paste("b", 0:6, sep="")
-)
-
-car::deltaMethod(
-  fit_tl, "b3 + b5 + b6" ,
-  parameterNames= paste("b", 0:6, sep="")
-)
-
-
-avg_slopes(fit_cd,  slope = "eyex")
-avg_slopes(fit_cd,  slope = "dydx")
-
-
-hypotheses(mfx,  hypothesis = "b2 + b3 + b4 + b5 + b6 +  b7 = 1")
-
-
-hypotheses(fit_tl, hypothesis = "b2 + b3 + b4 + b5 + b6 +  b7 = 1")
-
-
-library(ggeffects)
-ggemmeans(fit_tl, terms = c("land", "labor")) %>% plot()
-
-avg_slopes(fit_tl, by = TRUE)
-
-slopes(fit_tl, newdata = datagrid())
-predictions(
-    fit_cd,
-    # newdata = datagrid(wt = 2:3),
-    hypothesis = "b1 + b2 + b3 = 1")
-
-slopes(fit_tl, newdata = datagrid(land = c(1, 10, 100)))
-
-
-avg_slopes(fit_tl,
-           slope = "eyex",
-           variables = "labor",
-           by = "land")
-
 ```
+
+:::
+::: {.column width="50%"}
+```{r}
+modelsummary(
+  list(`Linear prod.fn. (level-level) robust SE` = fit1),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS|F|^R2$"),
+  output  = "markdown", 
+  vcov = "HC3"
+)
+```
+
+:::
+:::
+
+## Effect of robust SE on inference
+
+```{r}
+fit2_cd$call
+```
+
+::: columns
+::: {.column width="50%"}
+```{r}
+modelsummary(
+  list(`CD prod.fn. (level-level) regular SE` = fit2_cd),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS|F|^R2$"),
+  output  = "markdown", 
+)
+```
+
+:::
+::: {.column width="50%"}
+```{r}
+modelsummary(
+  list(`CD prod.fn. (level-level) robust SE` = fit2_cd),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS|F|^R2$"),
+  output  = "markdown", 
+  vcov = "HC3"
+)
+```
+
+:::
+:::
+
+
+# Homework
+
+Watch: 
+
+-   ![](http://www.masteringmetrics.com/wp-content/themes/easybakeV2/img/book.png){width="23" height="35"} ![](https://emojipedia-us.s3.amazonaws.com/content/2020/04/05/yt.png){width="20"} [Regression Part I: Call in the CIA](https://youtu.be/OwNxEaOF8yY?t=2) (or here: [https://youtu.be/OwNxEaOF8yY](https://youtu.be/OwNxEaOF8yY))
+-   ![](http://www.masteringmetrics.com/wp-content/themes/easybakeV2/img/book.png){width="23" height="35"} ![](https://emojipedia-us.s3.amazonaws.com/content/2020/04/05/yt.png){width="20"} [Regression Part II: Theory](https://youtu.be/KKJ-2_UUhnc?t=1)  (or here: [https://youtu.be/KKJ-2_UUhnc](https://youtu.be/KKJ-2_UUhnc))
+
+
+Reproduce analysis from the sildes in R.
 
 
 # Takeawyas
 
 1.  Assumptions and how to validated them.
 
-2.  Statistical plots, measures (VIF) and tests and howto interprete them.
+2.  Statistical plots, measures (VIF), statistical tests and how to interpret them.
 
 # References
 
