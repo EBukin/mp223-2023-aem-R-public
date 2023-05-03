@@ -1168,6 +1168,8 @@ my_summary(list(fit3.1, fit3.2, fit3.3, fit3.4))
 
 # Homoscedasticity (No heteroscedasticity)
 
+## Homoscedasticity
+
 $$
 Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) = \sigma^2
 $$
@@ -1351,8 +1353,6 @@ Robust estimators for variance covariance matrix:
 fit1$call
 ```
 
-::: columns
-::: {.column width="50%"}
 **Regular vcov**
 
 ```{r}
@@ -1364,9 +1364,8 @@ vcov(fit1)
 ```{r}
 vcov(fit1) %>% knitr::kable(digits = 2)
 ```
-:::
 
-::: {.column width="50%"}
+
 **Robust vcov**
 
 ```{r}
@@ -1381,8 +1380,7 @@ library(sandwich)
 vcovHC(fit1, type = "HC1") %>% 
   knitr::kable(digits = 2)
 ```
-:::
-:::
+
 
 ## Effect of robust SE on inference {.smaller}
 
