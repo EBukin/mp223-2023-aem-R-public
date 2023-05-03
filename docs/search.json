@@ -879,7 +879,7 @@
     "href": "slides/w04-mlr-part2.html#the-basic-theory-of-production-sadoulet1995-chapter-3",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "The Basic Theory of Production (Sadoulet & de Janvry, 1995, Chapter 3)",
-    "text": "The Basic Theory of Production (Sadoulet & de Janvry, 1995, Chapter 3)\n\nExplain why production function should be zero. - Intensive to use all variables factors to produce goods. - Leaving underutilized production factors makes production inefficient.\n\nFarm’s production function\n\\[\nh(q,x,z) = 0,\n\\]\nwhere:\n\n\\(q\\) - output quantities (agricultural produce)\n\\(x\\) - variable input quantities (fertilizers, labor, seed, water, …)\n\\(z\\) - fixed factors (private: land, equipment; public: infrastructure, extension; exogenous features …)"
+    "text": "The Basic Theory of Production (Sadoulet & de Janvry, 1995, Chapter 3)\n\nExplain why production function should be zero. - Intensive to use all variables factors to produce goods. - Leaving underutilized production factors makes production inefficient.\n\nFarm’s production function\n\n\\[\nh(q,x,z) = 0,\n\\]\nwhere:\n\n\n\n\\(q\\) - output quantities (agricultural produce)\n\\(x\\) - variable input quantities (fertilizers, labor, seed, water, …)\n\\(z\\) - fixed factors (private: land, equipment; public: infrastructure, extension; exogenous features …)"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#farms-optimization-problem",
@@ -900,7 +900,7 @@
     "href": "slides/w04-mlr-part2.html#farms-optimization-problem-is",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Farm’s optimization problem is",
-    "text": "Farm’s optimization problem is\n\n\nStructural form\n\\[\n\\max_{x,q} \\;\\;\\; p^{'}q-w^{'}x, \\\\ \\text{s.t.} \\;\\; h(q,x,z) = 0\n\\]\n\nReduced forms \\[\n\\begin{cases}\nx = x(p,w,z), & \\text{factor demand function} \\\\\nq = q(p,w,z), & \\text{supply function}\n\\end{cases}\n\\]"
+    "text": "Farm’s optimization problem is\n\n\nStructural form.\n\\[\n\\max_{x,q} \\;\\;\\; p^{'}q-w^{'}x, \\\\ \\text{s.t.} \\;\\; h(q,x,z) = 0\n\\]\n\nModels that we can simulate with linear programming, structural equation modelling\n\n\nReduced forms.\n\\[\n\\begin{cases}\nx = x(p,w,z), & \\text{factor demand function} \\\\\nq = q(p,w,z), & \\text{supply function}\n\\end{cases}\n\\]\n\nModels that we estimate with regressions"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#taylor-expansion",
@@ -914,7 +914,7 @@
     "href": "slides/w04-mlr-part2.html#first-order-taylor-approximation",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "First order Taylor approximation",
-    "text": "First order Taylor approximation\n\\(q \\approx f(x)\\) at \\(x_0\\).\n\\[\nf(x) \\approx\n\\underbrace{f(x_0) - x_0}_{\\alpha} + \\underbrace{f^{'}(x_0)}_{\\beta}\\, x\n\\]\n\n\\[\nq \\approx \\alpha + \\beta \\, x\n\\]\n\n\n\\(q \\approx f(x_1, x_2)\\) at \\(a, b\\)\n\\[\nf(x_1, x_2) \\approx\n\\underbrace{f(a,b) - a - b}_{\\alpha} + \\underbrace{f_{x_1}^{'}(a,b)}_{\\beta_1}\\, x_1 + \\underbrace{f_{x_2}^{'}(a,b)}_{\\beta_2}\\, x_2\n\\]\n\n\n\\[\nq \\approx \\alpha + \\beta_1 \\, x_1 + \\beta_2 \\, x_2\n\\]"
+    "text": "First order Taylor approximation\n\\(q \\approx f(x)\\) at \\(x_0\\).\n\\[\nf(x) \\approx  f(x_0) + f^{'}(x_0)(x-x_0) \\\\ \\approx\n\\underbrace{f(x_0) - f^{'}(x_0) x_0}_{\\alpha} + \\underbrace{f^{'}(x_0)}_{\\beta}\\, x\n\\]\n\nSimple regression: \\(q \\approx \\alpha + \\beta \\, x\\)\n\n\n\\(q \\approx f(x_1, x_2)\\) at \\(a, b\\)\n\\[\nf(x_1, x_2) \\approx\n\\underbrace{f(a,b) - f_{x_1}^{'}(a,b)a - f_{x_2}^{'}(a,b)b}_{\\alpha} + \\underbrace{f_{x_1}^{'}(a,b)}_{\\beta_1}\\, x_1 + \\underbrace{f_{x_2}^{'}(a,b)}_{\\beta_2}\\, x_2\n\\]\n\n\nMultiple regression: \\(q \\approx \\alpha + \\beta_1 \\, x_1 + \\beta_2 \\, x_2\\)"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#second-and-greater-order-taylor-approximation",
@@ -935,28 +935,28 @@
     "href": "slides/w04-mlr-part2.html#fist-order-taylor-approximation",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Fist order Taylor approximation",
-    "text": "Fist order Taylor approximation\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i \\ln x_i\n\\]\n\n\nThis is a Cobb-Douglas production function:\n\n\n\\[\nq \\approx e^\\alpha \\prod_i x_i^{\\beta_i}\n\\]"
+    "text": "Fist order Taylor approximation\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i \\ln x_i\n\\]\n\n\nThis is a Cobb-Douglas production function: \\(q \\approx e^\\alpha \\prod_i x_i^{\\beta_i}\\)"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#second-order-taylor-approximation",
     "href": "slides/w04-mlr-part2.html#second-order-taylor-approximation",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Second order Taylor approximation",
-    "text": "Second order Taylor approximation\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i  \\ln x_i + \\sum_{ij} \\gamma_{ij} \\ln x_{ij}\n\\]\n\n\nThis is a translog production function"
+    "text": "Second order Taylor approximation\nof \\(\\ln q = g(\\ln x_i)\\) around an arbitrary point \\(x_{i0} \\ne 0\\)\n\n\\[\n\\ln q \\approx \\alpha + \\sum_i \\beta_i  \\ln x_i + \\frac{1}{2}\\sum_{ij} \\gamma_{ij} \\ln x_{i} \\ln x_{j}\n\\]\n\n\nThis is a trans-log production function"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#problem-and-research-question",
     "href": "slides/w04-mlr-part2.html#problem-and-research-question",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Problem and research question",
-    "text": "Problem and research question\n\n\n\n\nPolicy makers are considering to abolish the share-cropping land tenure.\nAs an alternative either owner-cultivation with hired labor or pure rental relationship should be established.\nMain rationale is in the president’s statement that sharecropping is inefficient farm structure.\n\n\n\n\nTheoretical debate\n\nContract theory (Dasgupta, Knight, & Love, 1999) sees sharecropping as a form of the optimal risks and incentives sharing contract.\nIt is a second best contract in agriculture after pure rental of hired labor contract.\nSharecropping can be as efficient as rental/labor contracts, when interlinked credit and insurance markets fail.\n\n\n\n\n\nResearch question:\nIs there any negative effect of sharecropping on farms productivity?"
+    "text": "Problem and research question\n\n\n\n\nPolicy makers are considering to abolish the share-cropping land tenure system.\nAs an alternative either owner-cultivation with hired labor or pure rental relationship should be established.\nMain rationale is in the claim that sharecropping is an inefficient farm structure.\n\n\n\n\n\nTheoretical debate\nContract theory (Dasgupta, Knight, & Love, 1999) sees sharecropping as a form of the optimal risks and incentives sharing contract.\nIt is a second best contract in agriculture after pure rental of hired labor contract.\nSharecropping can be as efficient as rental/labor contracts, when interlinked labor, resources, credit and insurance markets fail.\n\n\n\n\n\nResearch question: Is there any negative effect of sharecropping on farms productivity?"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#how-to-answer-this-question",
     "href": "slides/w04-mlr-part2.html#how-to-answer-this-question",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "How to answer this question?",
-    "text": "How to answer this question?\n\nRegression\n\n\nLet us estimate a simple production function of a rice-producing farm.\n\\[\\text{output} = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\text{land} + \\beta_4 \\text{labor} + e\\]\n\n\nwhere:\n\\(\\text{output}\\) is gross output of rice in kg\n\\(\\text{land}\\) the total area cultivated with rice, measured in hectares\n\\(\\text{labor}\\) total labor inputs (excluding harvest labor) in hours\n\\(\\text{status}\\) land tenure system on the farm: owner-operated, Share-cropping and mixed\n\n\nData set covers a sample of the rice-cultivating farmers in India. Source: (Feng & Horrace, 2010)."
+    "text": "How to answer this question?\n\nLet us estimate a simple production function of a rice-producing farm.\n\\[\\text{output} = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\text{land} + \\beta_4 \\text{labor} + e\\]\n\n\nwhere:\n\\(\\text{output}\\) is gross output of rice in kg\n\\(\\text{land}\\) the total area cultivated with rice, measured in hectares\n\\(\\text{labor}\\) total labor inputs (excluding harvest labor) in hours\n\\(\\text{status}\\) land tenure system on the farm: owner-operated, Share-cropping and mixed\n\n\nData set covers a sample of the rice-cultivating farmers in India. Source: (Feng & Horrace, 2010)."
   },
   {
     "objectID": "slides/w04-mlr-part2.html#data-1",
@@ -970,28 +970,28 @@
     "href": "slides/w04-mlr-part2.html#exploratory-staistics-1",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Exploratory staistics (1)",
-    "text": "Exploratory staistics (1)\n\ndatasummary_skim(farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnique (#)\nMissing (%)\nMean\nSD\nMin\nMedian\nMax\n\n\n\n\noutput\n482\n0\n1405.2\n1921.8\n42.0\n886.5\n20960.0\n\n\nland\n300\n0\n0.4\n0.5\n0.0\n0.3\n5.3\n\n\nlabor\n544\n0\n388.4\n484.2\n17.0\n252.0\n4774.0\n\n\n\n\ndatasummary_skim(farm_dta, \"categorical\", output = \"markdown\")\n\n\n\n\nstatus\nN\n%\n\n\n\n\nowner\n736\n71.7\n\n\nshare\n79\n7.7\n\n\nmixed\n211\n20.6"
+    "text": "Exploratory staistics (1)\n\ndatasummary_skim(farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnique (#)\nMissing (%)\nMean\nSD\nMin\nMedian\nMax\n\n\n\n\noutput\n482\n0\n1405.2\n1921.8\n42.0\n886.5\n20960.0\n\n\nland\n300\n0\n0.4\n0.5\n0.0\n0.3\n5.3\n\n\nlabor\n544\n0\n388.4\n484.2\n17.0\n252.0\n4774.0"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-2",
     "href": "slides/w04-mlr-part2.html#exploratory-staistics-2",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Exploratory staistics (2)",
-    "text": "Exploratory staistics (2)\n\ndatasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nowner / mean\nowner / sd\nshare / mean\nshare / sd\nmixed / mean\nmixed / sd\n\n\n\n\nland\n0.44\n0.58\n0.36\n0.56\n0.44\n0.39\n\n\nlabor\n395.42\n522.12\n315.51\n566.17\n391.44\n262.63\n\n\noutput\n1435.68\n2014.60\n1250.65\n2639.25\n1356.59\n1104.10"
+    "text": "Exploratory staistics (2)\n\ndatasummary_skim(farm_dta, output = \"markdown\", \"categorical\")\n\n\n\n\nstatus\nN\n%\n\n\n\n\nowner\n736\n71.7\n\n\nshare\n79\n7.7\n\n\nmixed\n211\n20.6"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-3",
     "href": "slides/w04-mlr-part2.html#exploratory-staistics-3",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Exploratory staistics (3)",
-    "text": "Exploratory staistics (3)\n\nggpairs(farm_dta, aes(colour = status, alpha = 0.2))"
+    "text": "Exploratory staistics (3)\n\ndatasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nowner / mean\nowner / sd\nshare / mean\nshare / sd\nmixed / mean\nmixed / sd\n\n\n\n\nland\n0.44\n0.58\n0.36\n0.56\n0.44\n0.39\n\n\nlabor\n395.42\n522.12\n315.51\n566.17\n391.44\n262.63\n\n\noutput\n1435.68\n2014.60\n1250.65\n2639.25\n1356.59\n1104.10"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#regression-and-interpretation",
     "href": "slides/w04-mlr-part2.html#regression-and-interpretation",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Regression and interpretation",
-    "text": "Regression and interpretation\n\nfit1 <- lm(output ~ status + land + labor, \n           data = farm_dta)\n\nmodelsummary(\n  list(`Linear prod.fn. (level-level)` = fit1),\n  estimate = \"{estimate} {stars} ({std.error})\",\n  statistic = NULL,\n  gof_omit =  c(\"AIC|BIC|Log|RMS\"),\n  output  = \"markdown\"\n)"
+    "text": "Regression and interpretation\n\n\n\nfit1 <- lm(output ~ status + land + labor, \n           data = farm_dta)\n\nfit2_cd <- lm(output ~ status + log(land) + log(labor), \n           data = farm_dta)\n\nmodelsummary(\n  list(`Linear prod.fn. (level-level)` = fit1,\n       `CD prod.fn. (log-log)` = fit2_cd),\n  estimate = \"{estimate} {stars} ({std.error})\", \n  statistic = NULL\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nLinear prod.fn. (level-level)\nCD prod.fn. (log-log)\n\n\n\n\n(Intercept)\n6.203  (36.845)\n-2549.390 ***  (666.234)\n\n\nSharecropping\n87.849  (96.953)\n132.761  (154.889)\n\n\nMixed\n-90.608  (63.901)\n-480.042 ***  (102.642)\n\n\nLand, ha\n2145.659 ***  (111.521)\n743.287 ***  (89.588)\n\n\nLabor, hours\n1.248 ***  (0.126)\n901.025 ***  (100.797)\n\n\nNum.Obs.\n1026\n1026\n\n\nR2\n0.819\n0.540\n\n\nR2 Adj.\n0.819\n0.538\n\n\nF\n1158.652\n299.783"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#regression-and-interpretation-output",
@@ -1012,21 +1012,21 @@
     "href": "slides/w04-mlr-part2.html#fitted-values-1-1",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Fitted values (1)",
-    "text": "Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) + \n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E'))"
+    "text": "Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) + \n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E'))"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#fitted-values-1-2",
     "href": "slides/w04-mlr-part2.html#fitted-values-1-2",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Fitted values (1)",
-    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +\n  geom_point(aes(y = fitted, colour = \"Gitted\"),\n             alpha = 0.3)"
+    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E')) +\n  geom_point(\n    aes(y = fitted, colour = \"Gitted\"),\n    alpha = 0.3)"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#fitted-values-1-3",
     "href": "slides/w04-mlr-part2.html#fitted-values-1-3",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Fitted values (1)",
-    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +\n  geom_point(aes(y = fitted, colour = \"Gitted\"),\n             alpha = 0.3) + \n  scale_x_log10() +\n  scale_y_log10()"
+    "text": "Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E')) +\n  geom_point(\n    aes(y = fitted, colour = \"Gitted\"),\n    alpha = 0.3) + \n  scale_x_log10() +\n  scale_y_log10()"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#actual-values-3d",
@@ -1068,7 +1068,7 @@
     "href": "slides/w04-mlr-part2.html#no-perfect-collinearity",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "No perfect collinearity",
-    "text": "No perfect collinearity"
+    "text": "No perfect collinearity\n\n\n\n\nnone of the regressors can be written as an exact linear combinations of some other regressors in the model.\nFor example:\n\nin \\(Y = \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_3\\) ,\nwhere \\(X_3 = X_2 + X_1\\) ,\nall \\(X\\) are collinear.\n\n\n\n\n\n\nConsequence of collinearity:\n\nbiased estimates of the collinear variables\nover-significant results;"
   },
   {
     "objectID": "slides/w04-mlr-part2.html#no",
@@ -1089,6 +1089,524 @@
     "href": "slides/w04-mlr-part2.html#references-1",
     "title": "Multiple Linear Regression: practical aspects",
     "section": "References",
-    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nDasgupta, S., Knight, T. O., & Love, H. A. (1999). Evolution of Agricultural Land Leasing Models: A Survey of the Literature. Applied Economic Perspectives and Policy, 21(1), 148–176. http://doi.org/10.2307/1349978\n\n\nFeng, Q., & Horrace, W. C. (2010). Alternative technical efficiency measures: Skew, bias and scale. Journal of Applied Econometrics, 27(2), 253–268. http://doi.org/10.1002/jae.1190\n\n\nSadoulet, E., & de Janvry, A. (1995). Quantitative Development Policy Analysis. THE JOHNS HOPKINS UNIVERSITY PRESS BALTIMORE AND LONDON."
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nDasgupta, S., Knight, T. O., & Love, H. A. (1999). Evolution of Agricultural Land Leasing Models: A Survey of the Literature. Applied Economic Perspectives and Policy, 21(1), 148–176. http://doi.org/10.2307/1349978\n\n\nFeng, Q., & Horrace, W. C. (2010). Alternative technical efficiency measures: Skew, bias and scale. Journal of Applied Econometrics, 27(2), 253–268. http://doi.org/10.1002/jae.1190\n\n\nLong, J. S., & Ervin, L. H. (2000). Using heteroscedasticity consistent standard errors in the linear regression model. The American Statistician, 54(3), 217–224. http://doi.org/10.1080/00031305.2000.10474549\n\n\nSadoulet, E., & de Janvry, A. (1995). Quantitative Development Policy Analysis. THE JOHNS HOPKINS UNIVERSITY PRESS BALTIMORE AND LONDON.\n\n\nWooldridge, J. M. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-detection-scatter-plots",
+    "href": "slides/w04-mlr-part2.html#linearity-detection-scatter-plots",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity detection: scatter plots",
+    "text": "Linearity detection: scatter plots\n\n\n\nfarm_dta %>% select(-status) %>% ggpairs()\n\n\n\n\n\n\n\n\n\n\n\nNote the magnitude of \\(x\\) and \\(y\\)\nFrom min to max \\(y\\) increases about 5000 times.\nIf a variable increases more than 10 times between min and max, \\(log\\) transformation may be needed."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals",
+    "href": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity detection: fitted values vs residuals",
+    "text": "Linearity detection: fitted values vs residuals\n\nlibrary(performance)\ncheck_model(fit1, check = \"linearity\", panel = FALSE)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-1",
+    "href": "slides/w04-mlr-part2.html#linearity-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity",
+    "text": "Linearity\n\nlibrary(performance)\ncheck_model(fit1, check = \"linearity\", panel = FALSE)\n\n\n\n\n\nIs the linearity assumption fulfilled?"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#what-could-be-done-to-improve-the-model",
+    "href": "slides/w04-mlr-part2.html#what-could-be-done-to-improve-the-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "What could be done to improve the model?",
+    "text": "What could be done to improve the model?\n\nLinear transformation with log: partial (level-log or log-level) or full (log-log).\n\n\n\\[\\ln (\\text{output}) = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\ln (\\text{land}) + \\beta_4 \\ln (\\text{labor}) + e\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals-1",
+    "href": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity detection: fitted values vs residuals",
+    "text": "Linearity detection: fitted values vs residuals\n\nplot(fit1, which = 1)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals-v2",
+    "href": "slides/w04-mlr-part2.html#linearity-detection-fitted-values-vs-residuals-v2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity detection: fitted values vs residuals (v2)",
+    "text": "Linearity detection: fitted values vs residuals (v2)\n\nplot(fit1, which = 1)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#taylor-expansion-sadoulet1995-appendix-a.2",
+    "href": "slides/w04-mlr-part2.html#taylor-expansion-sadoulet1995-appendix-a.2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Taylor expansion (Sadoulet & de Janvry, 1995, Appendix A.2)",
+    "text": "Taylor expansion (Sadoulet & de Janvry, 1995, Appendix A.2)\nIntroduced by Brook Taylor in 1715 …\n\nValue of any function could be approximated at an arbitrary point \\(x_0\\) with a Taylor expansion:\n\n\n\\[\nf(x) \\approx f(x_0) + f^{'}(x_0)(x - x_0) + \\frac{f^{''}(x_0)}{2!}(x - x_0)^2 + \\cdots .\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#taylor-expansion-example",
+    "href": "slides/w04-mlr-part2.html#taylor-expansion-example",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Taylor expansion example:",
+    "text": "Taylor expansion example:\nWhat is the value of \\(e^{0.4}\\)?\n\n\\[\ne^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!} \\approx 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots\n\\]\n\n\n\\[\ne^{0.4} \\approx 1 + .4 + \\frac{.4^2}{2!} + \\frac{.4^3}{3!} + \\frac{.4^4}{4!} + \\frac{.4^5}{5!}\n\\]\n\n\n\\[\n\\approx 1 + .4 + .16/2 + 0.064/6 + 0.0256/24 + 0.01024 / 120\n\\]\n\n\n\\[\n\\approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6)\n\\]\n\n\n\\[\n\\approx  1.491819  \n\\]\n\n\n\\[\n\\text{exp(0.4)} = 1.491825\n\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#production-functions",
+    "href": "slides/w04-mlr-part2.html#production-functions",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Production functions",
+    "text": "Production functions\nConsider\n\\[q = f(x_i)\\]\nProduction function of several inputs \\(x_i\\), where\n\\[x_i = e^{\\ln x_i}\\]\nand \\(q\\) is the quantity of goods produced.\n\nThen,\n\\[\n\\ln q = \\ln f(e^{\\ln x_i}) \\; \\; \\; \\; \\text{or} \\; \\; \\; \\; \\ln q = g(\\ln x_i)\n\\]\n\n\nLet us approximate \\(\\ln q = g(\\ln x_i)\\) using Taylor expansion."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#how-to-answer-this-question-any-ideas",
+    "href": "slides/w04-mlr-part2.html#how-to-answer-this-question-any-ideas",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "How to answer this question? (Any ideas)",
+    "text": "How to answer this question? (Any ideas)\n\nData that we have covers a sample of the rice-cultivating farmers in India (Feng & Horrace, 2010):\n\n\\(\\text{output}\\) is gross output of rice in kg\n\\(\\text{land}\\) the total area cultivated with rice, measured in hectares\n\\(\\text{labor}\\) total labor inputs (excluding harvest labor) in hours\n\\(\\text{status}\\) land tenure system on the farm: owner-operated, Share-cropping and mixed\n\n\n\nLet us estimate a simple production function of a rice-producing farm using linear form and Cobb-Douglas function.\n\n\n\\[\\text{output} = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\text{land} + \\beta_4 \\text{labor} + e\\]\n\n\n\\[\\ln \\text{output} = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} + \\beta_3 \\ln \\text{land} + \\beta_4 \\ln \\text{labor} + e\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linearity-conclusion",
+    "href": "slides/w04-mlr-part2.html#linearity-conclusion",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linearity Conclusion",
+    "text": "Linearity Conclusion\nModel:\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\nIs the linearity assumption fulfilled?\n\n\nWhat could be done to improve the model?\n\n\nLinear transformation with log: partial (level-log or log-level) or full (log-log).\n\n\n\\[\\ln (\\text{output}) = \\alpha + \\beta_1 \\text{status : share} + \\beta_2 \\text{status : mixed} \\\\ + \\beta_3 \\ln (\\text{land}) + \\beta_4 \\ln (\\text{labor}) + e\\]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linear-transformation-of-the-model",
+    "href": "slides/w04-mlr-part2.html#linear-transformation-of-the-model",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linear transformation of the model",
+    "text": "Linear transformation of the model\n\nfit1 <- lm(output ~ status + land + labor, \n           data = farm_dta)\n\nfit2_cd <- lm(output ~ status + log(land) + log(labor), \n           data = farm_dta)\n\nmodelsummary(\n  list(`Linear prod.fn. (level-level)` = fit1,\n       `CD prod.fn. (log-log)` = fit2_cd),\n  estimate = \"{estimate} {stars} ({std.error})\", \n  statistic = NULL\n)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linear-transformation-of-the-model-output",
+    "href": "slides/w04-mlr-part2.html#linear-transformation-of-the-model-output",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linear transformation of the model",
+    "text": "Linear transformation of the model\n\n\n\n\n\nLinear prod.fn. (level-level)\nCD prod.fn. (log-log)\n\n\n\n\n(Intercept)\n6.203 (36.845)\n5.703 *** (0.202)\n\n\nSharecropping\n87.849 (96.953)\n0.004 (0.047)\n\n\nMixed\n-90.608 (63.901)\n0.017 (0.031)\n\n\nLand, ha\n2145.659 *** (111.521)\n0.679 *** (0.027)\n\n\nLabor, hours\n1.248 *** (0.126)\n0.344 *** (0.030)\n\n\nNum.Obs.\n1026\n1026\n\n\nR2\n0.819\n0.843\n\n\nR2 Adj.\n0.819\n0.842\n\n\nF\n1158.652\n1369.377"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#change-in-the-lineariy-assumption",
+    "href": "slides/w04-mlr-part2.html#change-in-the-lineariy-assumption",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Change in the lineariy assumption",
+    "text": "Change in the lineariy assumption\n\n\nWithout log-log\n\n\n\n\n\n\n\n\n\n\nWith log-log"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#change-in-fitted-values-3d-v.2",
+    "href": "slides/w04-mlr-part2.html#change-in-fitted-values-3d-v.2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Change in Fitted values 3D v.2",
+    "text": "Change in Fitted values 3D v.2"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#consequence-and-solutions",
+    "href": "slides/w04-mlr-part2.html#consequence-and-solutions",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Consequence and Solutions",
+    "text": "Consequence and Solutions\n\n\n\n\nConsequence\n\nbiased estimates of the collinear variables\n\nDetection\n\nScatter plot; Correlation matrix;\nModel specification (formula);\nStep-wise regression approach;\nVariance Inflation Factor;\n\n\n\n\n\n\nSolution to collinearity\n\nRe specify the model;\nChoose different regressors;\n\nSee also\n\nOverview: “Assumption AMLR.3 No Perfect Collinearity” in (Wooldridge, 2020) ;\nExamples of causes in Chapter 9.5 (Wooldridge, 2020) ;\nChapter 9.4-9.5 in (Weisberg, 2005);"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-based-on-reg.-equation",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-based-on-reg.-equation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity based on reg. equation",
+    "text": "Perfect collinearity based on reg. equation\n\\[\n\\begin{aligned}\n\\hat{output} & = \\alpha + \\hat\\beta_1 land + \\hat\\beta_2 seeds + \\hat\\beta_3 fertilizers \\\\ &  + \\hat\\beta_4 others + \\hat\\beta_5 total\n\\end{aligned}\n\\]\n\n\nwhere \\(total = seeds + fertilizers + others\\)\nIs there a multicollinearity problem here?\nCoefficient \\(\\hat\\beta_5\\) is aliased and wont be estimated"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-based-on-reg.-equation-2",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-based-on-reg.-equation-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect collinearity based on reg. equation (2)",
+    "text": "Perfect collinearity based on reg. equation (2)\n\\[\n\\begin{aligned}\n\\hat{wage} & = \\alpha + \\hat\\beta_1 education + \\hat\\beta_2 experience \\\\\n& + \\hat\\beta_3 male  + \\hat\\beta_4 female\n\\end{aligned}\n\\]\n\n\n\\(male + female = 1\\)\nIs there a multicollinearity problem here?"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#variance-inflation-factor",
+    "href": "slides/w04-mlr-part2.html#variance-inflation-factor",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Variance Inflation Factor",
+    "text": "Variance Inflation Factor\n\n\n               GVIF Df GVIF^(1/(2*Df))\nstatus     1.019559  2        1.004854\nlog(land)  4.364616  1        2.089166\nlog(labor) 4.380305  1        2.092918\n\n\n# Check for Multicollinearity\n\nLow Correlation\n\n       Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n     status 1.02 [1.00, 1.49]         1.01      0.98     [0.67, 1.00]\n  log(land) 4.36 [3.93, 4.87]         2.09      0.23     [0.21, 0.25]\n log(labor) 4.38 [3.94, 4.89]         2.09      0.23     [0.20, 0.25]"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#collinearity-example-0.2",
+    "href": "slides/w04-mlr-part2.html#collinearity-example-0.2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Collinearity Example 0.2",
+    "text": "Collinearity Example 0.2\n\\[\n\\begin{aligned}\n\\hat{output} = \\hat\\beta_1 land + \\hat\\beta_2 seeds + \\hat\\beta_3 fertilizers + \\hat\\beta_4 others\n\\end{aligned}\n\\]\n::: incremental - where \\(seeds\\) and \\(fertilizers\\) highly correlate between each other (r=0.9), - VIF of \\(seeds\\) and \\(fertilizers\\) is > 12.2 - our key-interest variable is \\(land\\). - As \\(fertilizers\\) is a control variable and we may have OVB if we remove it,\n\nIf we really want to reduce VIF…:\n\nDis-aggregate fertilizers into mineral and organic, for example.\nAggregate fertilizers and seeds"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#example-0.3",
+    "href": "slides/w04-mlr-part2.html#example-0.3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Example 0.3",
+    "text": "Example 0.3\nSame model but in log:\n\\[log(\\hat{output}) = \\hat\\beta_1 log(land) + \\hat\\beta_2 log(seeds) + \\hat\\beta_3 log(fertilizers) + \\\\ \\hat\\beta_4 log(others) + \\hat\\beta_5 log(total) \\]\nwhere \\(total = seeds + fertilizers + others\\)\n\n\n\n\n\n\n\nImportant\n\n\nIs there a multicollinearity problem here?\n\n\n\nThink!\n\\(log(a) + log(b) = log(a * b)\\)\n\n\n\n\n\n\nDanger\n\n\nNot really"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#example-0.4",
+    "href": "slides/w04-mlr-part2.html#example-0.4",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Example 0.4",
+    "text": "Example 0.4\nSame model but with a quadratic term:\n\\[\\hat{output} = \\hat\\beta_1 land + \\hat\\beta_2 land^2 + \\hat\\beta_3 seeds + \\hat\\beta_4 fertilizers + \\hat\\beta_5 others\\]\n\n\n\n\n\n\n\nImportant\n\n\nIs there a multicollinearity problem here?\n\n\n\nThink!\n\n\n\n\n\n\nDanger\n\n\nNot really\n\n\n\n\\(land^2\\) is not a linear combination of \\(land\\) ;\nLinear combination is when \\(land + land\\) not when \\(land \\times land\\) ;"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#no-perfect-collinearity-1",
+    "href": "slides/w04-mlr-part2.html#no-perfect-collinearity-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "No perfect collinearity",
+    "text": "No perfect collinearity"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#conclusion",
+    "href": "slides/w04-mlr-part2.html#conclusion",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Conclusion",
+    "text": "Conclusion\n\n\n\n\n\n\n\n\n\n\n\n\n\nLinear prod. fn. (level-level)\nCD prod. fn. (log-log)\n\n\n\n\n(Intercept)\n6.203  (36.845)\n-2549.390 ***  (666.234)\n\n\nSharecropping\n87.849  (96.953)\n132.761  (154.889)\n\n\nMixed\n-90.608  (63.901)\n-480.042 ***  (102.642)\n\n\nLand, ha\n2145.659 ***  (111.521)\n743.287 ***  (89.588)\n\n\nLabor, hours\n1.248 ***  (0.126)\n901.025 ***  (100.797)\n\n\nNum.Obs.\n1026\n1026\n\n\nR2\n0.819\n0.540\n\n\nR2 Adj.\n0.819\n0.538\n\n\nF\n1158.652\n299.783\n\n\n\n\n\n\n\n\nInterpret coefficients in both models.\nWhat is the estimated effect of share-cropping?\nIs this model shows causal effects of \\(x\\) on \\(y\\)?\nIs there a ceteris paribus?"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-staistics-3-1",
+    "href": "slides/w04-mlr-part2.html#exploratory-staistics-3-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory staistics (3)",
+    "text": "Exploratory staistics (3)\n\nggpairs(farm_dta, aes(colour = status, alpha = 0.2))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-fitted-values-1",
+    "href": "slides/w04-mlr-part2.html#entertainment-fitted-values-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Fitted values (1)",
+    "text": "Entertainment: Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\")"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-1",
+    "href": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Fitted values (1)",
+    "text": "Entertainment: Fitted values (1)\n\n\nfarm_dta %>% \n  mutate(fitted = fitted(fit1)) %>% \n  ggplot() + \n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) + \n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E'))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-2",
+    "href": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Fitted values (1)",
+    "text": "Entertainment: Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E')) +\n  geom_point(\n    aes(y = fitted, colour = \"Gitted\"),\n    alpha = 0.3)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-3",
+    "href": "slides/w04-mlr-part2.html#entertainment-fitted-values-1-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Fitted values (1)",
+    "text": "Entertainment: Fitted values (1)\n\n\nfarm_dta %>%\n  mutate(fitted = fitted(fit1)) %>%\n  ggplot() +\n  aes(x = land,\n      y = output,\n      colour = \"Observed\") +\n  xlab(\"Land area, ha\") + \n  ylab(\"Rice output, kg\") +\n  geom_point(alpha = 0.3) +\n  theme(legend.position = c(0.1, 0.9)) + \n  scale_color_manual(\n    values = c('#BF382A', '#0C4B8E')) +\n  geom_point(\n    aes(y = fitted, colour = \"Gitted\"),\n    alpha = 0.3) + \n  scale_x_log10() +\n  scale_y_log10()"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-actual-values-3d",
+    "href": "slides/w04-mlr-part2.html#entertainment-actual-values-3d",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Actual values 3D",
+    "text": "Entertainment: Actual values 3D"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-actual-fitted-values-3d",
+    "href": "slides/w04-mlr-part2.html#entertainment-actual-fitted-values-3d",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Actual + Fitted values 3D",
+    "text": "Entertainment: Actual + Fitted values 3D"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#entertainment-fitted-values-3d-v.2",
+    "href": "slides/w04-mlr-part2.html#entertainment-fitted-values-3d-v.2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Entertainment: Fitted values 3D v.2",
+    "text": "Entertainment: Fitted values 3D v.2"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#partial-transformation-1",
+    "href": "slides/w04-mlr-part2.html#partial-transformation-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Partial transformation (1)",
+    "text": "Partial transformation (1)\n\nfit3_level_log <- lm(output ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\n\n\n\n\n\n\n\n\n\n\nLinear prod.fn. (level-level)\nCD prod.fn. (log-log)\nLevel-log prod.fn. (level-log)\n\n\n\n\n(Intercept)\n6.203 (36.845)\n5.703 *** (0.202)\n-2549.390 *** (666.234)\n\n\nSharecropping\n87.849 (96.953)\n0.004 (0.047)\n132.761 (154.889)\n\n\nMixed\n-90.608 (63.901)\n0.017 (0.031)\n-480.042 *** (102.642)\n\n\nLand, ha\n2145.659 *** (111.521)\n0.679 *** (0.027)\n743.287 *** (89.588)\n\n\nLabor, hours\n1.248 *** (0.126)\n0.344 *** (0.030)\n901.025 *** (100.797)\n\n\nNum.Obs.\n1026\n1026\n1026\n\n\nR2\n0.819\n0.843\n0.540\n\n\nR2 Adj.\n0.819\n0.842\n0.538\n\n\nF\n1158.652\n1369.377\n299.783"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#partial-transformation-2",
+    "href": "slides/w04-mlr-part2.html#partial-transformation-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Partial transformation (2)",
+    "text": "Partial transformation (2)\n\ncheck_model(fit3_level_log, check = \"linearity\", panel = FALSE)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-1",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 1",
+    "text": "Perfect Collinearity Example 1\n\\[\n\\begin{aligned}\n\\hat{wage} & = \\alpha + \\hat\\beta_1 education + \\hat\\beta_2 experience \\\\\n& + \\hat\\beta_3 male  + \\hat\\beta_4 female\n\\end{aligned}\n\\]\n\n\n\\(male + female = 1\\)\nIs there a multicollinearity problem here?"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-2",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 2",
+    "text": "Perfect Collinearity Example 2\n\\[\n\\begin{aligned}\n\\hat{output} & = \\alpha + \\hat\\beta_1 land + \\hat\\beta_2 seeds + \\hat\\beta_3 fertilizers \\\\ &  + \\hat\\beta_4 others + \\hat\\beta_5 total\n\\end{aligned}\n\\]\n\n\nwhere \\(total = seeds + fertilizers + others\\)\nIs there a multicollinearity problem here?\nCoefficient \\(\\hat\\beta_5\\) is aliased and wont be estimated"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-3",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 3",
+    "text": "Perfect Collinearity Example 3\nSame model but in log:\n\\[\n\\begin{aligned}\n\\ln (\\hat{output})&  = \\hat\\beta_1 \\ln (land) + \\hat\\beta_2 \\ln (seeds) + \\hat\\beta_3 \\ln (fertilizers) \\\\ & + \\hat\\beta_4 \\ln (others) + \\hat\\beta_5 \\ln (total)\n\\end{aligned}\n\\]\nwhere \\(total = seeds + fertilizers + others\\)\n\n\nIs there a multicollinearity problem here?\nThink!\n\\(log(a) + log(b) = log(a * b)\\)\n\n\n\n\n\n\nDanger\n\n\nNo, there is no collinearity because \\(\\ln (seeds) + \\ln (fertilizers) + \\ln (others) \\ne \\ln (total)\\). This is not a linear combination! \\(\\ln (seeds \\cdot fertilizers \\cdot others) \\ne \\ln (total)\\)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-4",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-4",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 4",
+    "text": "Perfect Collinearity Example 4\nUsing the production function estimated above, let us convert tenure type into a set of dummy variables:\n\nfarm_dta_coll <- \n  farm_dta %>% \n  mutate(\n    status_owner = ifelse(status == \"owner\", 1, 0),\n    status_share = as.integer(status == \"share\"),\n    status_mixed = as.integer(status == \"mixed\")\n    )\nglimpse(farm_dta_coll)\n\nRows: 1,026\nColumns: 7\n$ output       <int> 7980, 4083, 2650, 4500, 16300, 17424, 3840, 2800, 950, 24…\n$ land         <dbl> 3.000, 2.000, 1.000, 2.000, 3.572, 3.572, 1.420, 1.420, 0…\n$ labor        <int> 2915, 2155, 1075, 2091, 3889, 3519, 810, 855, 460, 109, 2…\n$ status       <fct> owner, owner, owner, owner, share, share, mixed, mixed, m…\n$ status_owner <dbl> 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, …\n$ status_share <int> 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, …\n$ status_mixed <int> 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-4-1",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-4-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 4",
+    "text": "Perfect Collinearity Example 4\n\n\n\nCall:\nlm(formula = output ~ status_owner + status_share + status_mixed + \n    land + labor, data = farm_dta_coll)\n\nCoefficients:\n (Intercept)  status_owner  status_share  status_mixed          land  \n     -84.405        90.608       178.457            NA      2145.659  \n       labor  \n       1.248  \n\n\n\nCall:\nlm(formula = output ~ status_mixed + status_owner + status_share + \n    land + labor, data = farm_dta_coll)\n\nCoefficients:\n (Intercept)  status_mixed  status_owner  status_share          land  \n      94.052      -178.457       -87.849            NA      2145.659  \n       labor  \n       1.248"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#perfect-collinearity-example-4-2",
+    "href": "slides/w04-mlr-part2.html#perfect-collinearity-example-4-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Perfect Collinearity Example 4",
+    "text": "Perfect Collinearity Example 4\n\n\n\n\n\n\n\n\n\n\n\n\nLinear prod.fn. (level-level)\nLinear prod.fn. with dummies 1\nLinear prod.fn. with dummies 2\n\n\n\n\n(Intercept)\n6.203 (36.845)\n-84.405 (60.186)\n94.052 (93.612)\n\n\nstatusshare\n87.849 (96.953)\n\n\n\n\nstatusmixed\n-90.608 (63.901)\n\n\n\n\nland\n2145.659 *** (111.521)\n2145.659 *** (111.521)\n2145.659 *** (111.521)\n\n\nlabor\n1.248 *** (0.126)\n1.248 *** (0.126)\n1.248 *** (0.126)\n\n\nstatus_owner\n\n90.608 (63.901)\n-87.849 (96.953)\n\n\nstatus_share\n\n178.457 + (107.992)\n\n\n\nstatus_mixed\n\n\n-178.457 + (107.992)\n\n\nNum.Obs.\n1026\n1026\n1026\n\n\nR2\n0.819\n0.819\n0.819\n\n\nR2 Adj.\n0.819\n0.819\n0.819\n\n\nF\n1158.652"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicollinearity-near-perfect-collinearity",
+    "href": "slides/w04-mlr-part2.html#multicollinearity-near-perfect-collinearity",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicollinearity: Near-perfect collinearity",
+    "text": "Multicollinearity: Near-perfect collinearity"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#no-perfect-collinearity-2",
+    "href": "slides/w04-mlr-part2.html#no-perfect-collinearity-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "No perfect collinearity",
+    "text": "No perfect collinearity"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#linear-transformation-of-the-model-1",
+    "href": "slides/w04-mlr-part2.html#linear-transformation-of-the-model-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Linear transformation of the model",
+    "text": "Linear transformation of the model\n\n\n\n\n\n\nLinear prod.fn. (level-level)\nCD prod.fn. (log-log)\n\n\n\n\n(Intercept)\n6.203 (36.845)\n5.703 *** (0.202)\n\n\nSharecropping\n87.849 (96.953)\n0.004 (0.047)\n\n\nMixed\n-90.608 (63.901)\n0.017 (0.031)\n\n\nLand, ha\n2145.659 *** (111.521)\n0.679 *** (0.027)\n\n\nLabor, hours\n1.248 *** (0.126)\n0.344 *** (0.030)\n\n\nNum.Obs.\n1026\n1026\n\n\nR2\n0.819\n0.843\n\n\nR2 Adj.\n0.819\n0.842\n\n\nF\n1158.652\n1369.377"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#origin",
+    "href": "slides/w04-mlr-part2.html#origin",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Origin",
+    "text": "Origin\n\n\nWhen two variables \\(x_1\\) and \\(x_2\\) are highly correlated.\nAnd both (\\(x_1\\) and \\(x_2\\)) affect \\(y\\) significantly.\n\\(x_1\\) and \\(x_2\\) are collinear\nEstimated Standard Errors are inflated (larger then they could be).\nInference about \\(x_1\\) and \\(x_2\\) (only) is misleading."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#detection",
+    "href": "slides/w04-mlr-part2.html#detection",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Detection",
+    "text": "Detection\n\n\nVariance Inflation Factor\n\nNot a statistical test, only an informative number.\nThis shows by how much, the SE of the collinear variables are larger than what they could have been if there was no collinearity.\n\nStep-wise regression approach:\n\nInclude collinear variables one by one and together, and\nobserve how the \\(R^2\\), and variables significance changes"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#problem",
+    "href": "slides/w04-mlr-part2.html#problem",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Problem",
+    "text": "Problem\n\n\nWhen two variables \\(x_1\\) and \\(x_2\\) are highly correlated.\nAnd both (\\(x_1\\) and \\(x_2\\)) affect \\(y\\) significantly.\n\\(x_1\\) and \\(x_2\\) are collinear\nEstimated Standard Errors are inflated (larger then they could be).\nInference about \\(x_1\\) and \\(x_2\\) (only) is misleading."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#solutions",
+    "href": "slides/w04-mlr-part2.html#solutions",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Solutions",
+    "text": "Solutions\n\n\nFind different independent variables.\nDrop one if it is redundant and repeating.\nKeep both and ignore if \\(x_1\\) and \\(x_2\\) are just control variables.\nKeep is removing may cause the OVB."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicollinearity-example-1.-production-function",
+    "href": "slides/w04-mlr-part2.html#multicollinearity-example-1.-production-function",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicollinearity Example 1. Production Function",
+    "text": "Multicollinearity Example 1. Production Function\n\nlibrary(performance)\ncheck_collinearity(fit2_cd)\n\n# Check for Multicollinearity\n\nLow Correlation\n\n       Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n     status 1.02 [1.00, 1.49]         1.01      0.98     [0.67, 1.00]\n  log(land) 4.36 [3.93, 4.87]         2.09      0.23     [0.21, 0.25]\n log(labor) 4.38 [3.94, 4.89]         2.09      0.23     [0.20, 0.25]\n\n\n\nIf VIF > 10, we may suspect multicollinearity.\n\n\nRemoving land or labor will cause the OVB (omitted variable bias), we must keep both variables."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicollinearity-example-2",
+    "href": "slides/w04-mlr-part2.html#multicollinearity-example-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicollinearity Example 2",
+    "text": "Multicollinearity Example 2\n\\[\n\\begin{aligned}\n\\hat{output} = \\hat\\beta_1 land + \\hat\\beta_2 seeds + \\hat\\beta_3 fertilizers + \\hat\\beta_4 others\n\\end{aligned}\n\\]\n\n\nwhere \\(seeds\\) and \\(fertilizers\\) highly correlate between each other (r=0.9),\nVIF of \\(seeds\\) and \\(fertilizers\\) is > 12.2\nour key-interest variable is \\(land\\).\nAs \\(fertilizers\\) is a control variable and we may have OVB if we remove it,\nIf we really want to reduce VIF…:\n\nDis-aggregate fertilizers into mineral and organic, for example.\nAggregate fertilizers and seeds"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicollinearity-example-3",
+    "href": "slides/w04-mlr-part2.html#multicollinearity-example-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicollinearity Example 3",
+    "text": "Multicollinearity Example 3\nSame model but with a quadratic term:\n\\[\\hat{output} = \\hat\\beta_1 land + \\hat\\beta_2 land^2 + \\hat\\beta_3 seeds + \\hat\\beta_4 fertilizers + \\hat\\beta_5 others\\]\n\n\nVIF of \\(land\\) and \\(land^2\\) is > 25\nIs there a multicollinearity problem here?\nThink!\nNot really\n\\(land^2\\) is not a linear combination of \\(land\\) ;\nLinear combination is when \\(land + land\\) not when \\(land \\times land\\) ;"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#multicollinearity-example-4",
+    "href": "slides/w04-mlr-part2.html#multicollinearity-example-4",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Multicollinearity Example 4",
+    "text": "Multicollinearity Example 4\nStep-wise approach to regression analysis:\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\nModel 4\n\n\n\n\n(Intercept)\n4.997*** (0.098)\n-20.158*** (2.726)\n-10.254*** (1.553)\n-1.278 (11.509)\n\n\nmuniPrecip\n-0.009+ (0.005)\n-0.010*** (0.002)\n-0.010*** (0.002)\n-0.011*** (0.002)\n\n\nyear\n\n0.013*** (0.001)\n\n-0.011 (0.014)\n\n\nlog(muniPop)\n\n\n1.025*** (0.104)\n1.917 (1.138)\n\n\nNum.Obs.\n24\n24\n24\n24\n\n\nR2\n0.148\n0.832\n0.848\n0.852\n\n\nR2 Adj.\n0.110\n0.815\n0.833\n0.830\n\n\n\nNote: ^^ Model 1: log(muniUse) ~ muniPrecipModel 2: log(muniUse) ~ muniPrecip + yearModel 3: log(muniUse) ~ muniPrecip + log(muniPop)Model 4: log(muniUse) ~ muniPrecip + year + log(muniPop)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#problem-and-detection",
+    "href": "slides/w04-mlr-part2.html#problem-and-detection",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Problem and detection",
+    "text": "Problem and detection\n\n\nProblem: when \\(Var(u|x_{i1}, x_{i2}, \\cdots , x_{ik}) \\ne \\sigma^2\\)\n\nEstimates are not biased, but;\nStandard errors are inefficient;\nInference is misleading and false.\n\nDetection:\n\nGraphical: residuals vs regressors and fitted values plots;\nStatistical tests: Breusch-Pagan, White test, Goldfeld-Quandt."
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#solutions-1",
+    "href": "slides/w04-mlr-part2.html#solutions-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Solutions",
+    "text": "Solutions\n\n\nRe-specify the model/ choose different regressors;\nCorrect SE with alternative estimation procedures\n\nrobust: use heteroskedasticity-consistent (robust) standard errors.\ncluster: use clustered standard errors.\n\nUse a weighted regression estimated with Generalized Linear Model (GLM) estimator instead of OLS;\n\nGenerally discouraged for small samples (n < 5000) as GLM have weaker asymptotic properties as compared to the OLS.\n\nSee also: (Angrist & Pischke, 2009, Ch. 3.4), “Assumption AMLR.5” in (Wooldridge, 2020)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-example-1",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-example-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity example (1)",
+    "text": "Heteroscedasticity example (1)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-example-2",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-example-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity example (2)",
+    "text": "Heteroscedasticity example (2)"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-3.-production-function",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-3.-production-function",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (3). Production function",
+    "text": "Heteroscedasticity (3). Production function\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\ncheck_model(fit1, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-3.-partial-transformation",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-3.-partial-transformation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (3). Partial transformation",
+    "text": "Heteroscedasticity (3). Partial transformation\n\n\nlm(formula = output ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\ncheck_model(fit3_level_log, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-3.-cd-production-function",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-3.-cd-production-function",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (3). CD production function",
+    "text": "Heteroscedasticity (3). CD production function\n\n\nlm(formula = log(output) ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\ncheck_model(fit2_cd, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#statistical-tests-1-breusch-pagan",
+    "href": "slides/w04-mlr-part2.html#statistical-tests-1-breusch-pagan",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Statistical tests (1): Breusch-Pagan",
+    "text": "Statistical tests (1): Breusch-Pagan\n\n\\(H_0:\\) variance is constant; \\(H_1\\) non constant variance.\nIf \\(H_0\\) is rejected, we have a Heteroscedasticity.\n\n\n\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\nlibrary(lmtest)\nbptest(fit1)\n\n\n    studentized Breusch-Pagan test\n\ndata:  fit1\nBP = 348.57, df = 4, p-value < 2.2e-16\n\n\n\n\n\nlm(formula = log(output) ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\nlibrary(lmtest)\nbptest(fit2_cd)\n\n\n    studentized Breusch-Pagan test\n\ndata:  fit2_cd\nBP = 19.776, df = 4, p-value = 0.0005528"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#statistical-tests-2-white-test",
+    "href": "slides/w04-mlr-part2.html#statistical-tests-2-white-test",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Statistical tests (2): White test",
+    "text": "Statistical tests (2): White test\nSame idea as Breusch-Pagan test. Assumes that residuals variance is a function of polynomial of regressors:\n\\[\n\\text{residuals} = \\log(\\text{land}) + \\log(\\text{labor}) + \\log(\\text{land}) ^ 2 + \\log(\\text{labor})^2\n\\]\n\n\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\nbptest(fit1, \n       ~ land * labor + I(labor^2) + I(labor^2), \n       data = farm_dta)\n\n\n    studentized Breusch-Pagan test\n\ndata:  fit1\nBP = 364.4, df = 4, p-value < 2.2e-16\n\n\n\n\n\nlm(formula = log(output) ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\nbptest(fit1, \n       ~ log(land) * log(labor) + \n         I(log(labor)^2) + I(log(labor)^2), \n       data = farm_dta)\n\n\n    studentized Breusch-Pagan test\n\ndata:  fit1\nBP = 309.24, df = 4, p-value < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-2.-production-function",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-2.-production-function",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (2). Production function",
+    "text": "Heteroscedasticity (2). Production function\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\ncheck_model(fit1, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-2.-partial-transformation",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-2.-partial-transformation",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (2). Partial transformation",
+    "text": "Heteroscedasticity (2). Partial transformation\n\n\nlm(formula = output ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\ncheck_model(fit3_level_log, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#heteroscedasticity-2.-cd-production-function",
+    "href": "slides/w04-mlr-part2.html#heteroscedasticity-2.-cd-production-function",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Heteroscedasticity (2). CD production function",
+    "text": "Heteroscedasticity (2). CD production function\n\n\nlm(formula = log(output) ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\ncheck_model(fit2_cd, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#robust-standard-errors-1",
+    "href": "slides/w04-mlr-part2.html#robust-standard-errors-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Robust standard errors (1)",
+    "text": "Robust standard errors (1)\nMethods of correcting the variance-covariance matrix.\n\n\nvcov(fit1)\n\n\n\n\n\n \n  \n      \n    (Intercept) \n    statusshare \n    statusmixed \n    land \n    labor \n  \n \n\n  \n    (Intercept) \n    1357.56 \n    -997.12 \n    -909.30 \n    -383.44 \n    -0.71 \n  \n  \n    statusshare \n    -997.12 \n    9399.81 \n    910.48 \n    -15.30 \n    0.24 \n  \n  \n    statusmixed \n    -909.30 \n    910.48 \n    4083.37 \n    -146.28 \n    0.16 \n  \n  \n    land \n    -383.44 \n    -15.30 \n    -146.28 \n    12437.02 \n    -12.75 \n  \n  \n    labor \n    -0.71 \n    0.24 \n    0.16 \n    -12.75 \n    0.02"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#common-methods-of-robust-standard-errors",
+    "href": "slides/w04-mlr-part2.html#common-methods-of-robust-standard-errors",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Common methods of robust standard errors",
+    "text": "Common methods of robust standard errors\nRobust estimators for variance covariance matrix:\n\nsandwich::vcovHC - heteroskedasticity consistent\nsandwich::vcovCL - clustered SE\nclubSandwich::vcovCR - clustered heteroskedasticity consistent SE\nsandwich::vcovHAC - heteroskedasticity and autocorrelation consistent\nEstimation methods:\n\nHC3 - optimal one as per (Long & Ervin, 2000)\nHC1 - default in Stata"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#example-of-the-robust-vcov",
+    "href": "slides/w04-mlr-part2.html#example-of-the-robust-vcov",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Example of the robust vcov",
+    "text": "Example of the robust vcov\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\n\nRegular vcov\n\nvcov(fit1)\n\n\n\n\n\n \n  \n      \n    (Intercept) \n    statusshare \n    statusmixed \n    land \n    labor \n  \n \n\n  \n    (Intercept) \n    1357.56 \n    -997.12 \n    -909.30 \n    -383.44 \n    -0.71 \n  \n  \n    statusshare \n    -997.12 \n    9399.81 \n    910.48 \n    -15.30 \n    0.24 \n  \n  \n    statusmixed \n    -909.30 \n    910.48 \n    4083.37 \n    -146.28 \n    0.16 \n  \n  \n    land \n    -383.44 \n    -15.30 \n    -146.28 \n    12437.02 \n    -12.75 \n  \n  \n    labor \n    -0.71 \n    0.24 \n    0.16 \n    -12.75 \n    0.02 \n  \n\n\n\n\n\n\nRobust vcov\n\nlibrary(sandwich)\nvcovHC(fit1, type = \"HC3\")\n\n\n\n\n\n \n  \n      \n    (Intercept) \n    statusshare \n    statusmixed \n    land \n    labor \n  \n \n\n  \n    (Intercept) \n    4235.06 \n    -3084.98 \n    249.07 \n    -6038.87 \n    -5.91 \n  \n  \n    statusshare \n    -3084.98 \n    11437.98 \n    799.53 \n    -2421.05 \n    8.76 \n  \n  \n    statusmixed \n    249.07 \n    799.53 \n    2692.17 \n    1349.86 \n    -4.71 \n  \n  \n    land \n    -6038.87 \n    -2421.05 \n    1349.86 \n    75901.71 \n    -62.24 \n  \n  \n    labor \n    -5.91 \n    8.76 \n    -4.71 \n    -62.24 \n    0.09"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#effect-of-robust-se-on-inference",
+    "href": "slides/w04-mlr-part2.html#effect-of-robust-se-on-inference",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Effect of robust SE on inference",
+    "text": "Effect of robust SE on inference\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\n\n\n\n\n\n\n\nLinear prod.fn. (level-level) regular SE\n\n\n\n\n(Intercept)\n6.203  (36.845)\n\n\nSharecropping\n87.849  (96.953)\n\n\nMixed\n-90.608  (63.901)\n\n\nLand, ha\n2145.659 ***  (111.521)\n\n\nLabor, hours\n1.248 ***  (0.126)\n\n\nNum.Obs.\n1026\n\n\nR2 Adj.\n0.819\n\n\n\n\n\n\n\n\n\n\n\n\nLinear prod.fn. (level-level) robust SE\n\n\n\n\n(Intercept)\n6.203  (68.312)\n\n\nSharecropping\n87.849  (111.881)\n\n\nMixed\n-90.608 +  (53.100)\n\n\nLand, ha\n2145.659 ***  (291.480)\n\n\nLabor, hours\n1.248 ***  (0.312)\n\n\nNum.Obs.\n1026\n\n\nR2 Adj.\n0.819\n\n\nStd.Errors\nHC3"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#effect-of-robust-se-on-inference-1",
+    "href": "slides/w04-mlr-part2.html#effect-of-robust-se-on-inference-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Effect of robust SE on inference",
+    "text": "Effect of robust SE on inference\n\n\nlm(formula = log(output) ~ status + log(land) + log(labor), data = farm_dta)\n\n\n\n\n\n\n\n\n\n\nCD prod.fn. (level-level) regular SE\n\n\n\n\n(Intercept)\n5.703 ***  (0.202)\n\n\nSharecropping\n0.004  (0.047)\n\n\nMixed\n0.017  (0.031)\n\n\nLand, ha\n0.679 ***  (0.027)\n\n\nLabor, hours\n0.344 ***  (0.030)\n\n\nNum.Obs.\n1026\n\n\nR2 Adj.\n0.842\n\n\n\n\n\n\n\n\n\n\n\n\nCD prod.fn. (level-level) robust SE\n\n\n\n\n(Intercept)\n5.703 ***  (0.263)\n\n\nSharecropping\n0.004  (0.048)\n\n\nMixed\n0.017  (0.028)\n\n\nLand, ha\n0.679 ***  (0.036)\n\n\nLabor, hours\n0.344 ***  (0.039)\n\n\nNum.Obs.\n1026\n\n\nR2 Adj.\n0.842\n\n\nStd.Errors\nHC3"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-statistics-1",
+    "href": "slides/w04-mlr-part2.html#exploratory-statistics-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory statistics (1)",
+    "text": "Exploratory statistics (1)\n\ndatasummary_skim(farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUnique (#)\nMissing (%)\nMean\nSD\nMin\nMedian\nMax\n\n\n\n\noutput\n482\n0\n1405.2\n1921.8\n42.0\n886.5\n20960.0\n\n\nland\n300\n0\n0.4\n0.5\n0.0\n0.3\n5.3\n\n\nlabor\n544\n0\n388.4\n484.2\n17.0\n252.0\n4774.0"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-statistics-2",
+    "href": "slides/w04-mlr-part2.html#exploratory-statistics-2",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory statistics (2)",
+    "text": "Exploratory statistics (2)\n\ndatasummary_skim(farm_dta, output = \"markdown\", \"categorical\")\n\n\n\n\nstatus\nN\n%\n\n\n\n\nowner\n736\n71.7\n\n\nshare\n79\n7.7\n\n\nmixed\n211\n20.6"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-statistics-3",
+    "href": "slides/w04-mlr-part2.html#exploratory-statistics-3",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory statistics (3)",
+    "text": "Exploratory statistics (3)\n\ndatasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nowner / mean\nowner / sd\nshare / mean\nshare / sd\nmixed / mean\nmixed / sd\n\n\n\n\nland\n0.44\n0.58\n0.36\n0.56\n0.44\n0.39\n\n\nlabor\n395.42\n522.12\n315.51\n566.17\n391.44\n262.63\n\n\noutput\n1435.68\n2014.60\n1250.65\n2639.25\n1356.59\n1104.10"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#exploratory-statistics-3-1",
+    "href": "slides/w04-mlr-part2.html#exploratory-statistics-3-1",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Exploratory statistics (3)",
+    "text": "Exploratory statistics (3)\n\nggpairs(farm_dta, aes(colour = status, alpha = 0.2))"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#change-in-the-linearity-assumption",
+    "href": "slides/w04-mlr-part2.html#change-in-the-linearity-assumption",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "Change in the linearity assumption",
+    "text": "Change in the linearity assumption\n\n\nWithout log-log\n\n\n\n\n\n\n\n\n\n\nWith log-log"
+  },
+  {
+    "objectID": "slides/w04-mlr-part2.html#an-example-of-robust-vcov",
+    "href": "slides/w04-mlr-part2.html#an-example-of-robust-vcov",
+    "title": "Multiple Linear Regression: practical aspects",
+    "section": "An example of robust vcov",
+    "text": "An example of robust vcov\n\n\nlm(formula = output ~ status + land + labor, data = farm_dta)\n\n\n\n\nRegular vcov\n\nvcov(fit1)\n\n\n\n\n\n \n  \n      \n    (Intercept) \n    statusshare \n    statusmixed \n    land \n    labor \n  \n \n\n  \n    (Intercept) \n    1357.56 \n    -997.12 \n    -909.30 \n    -383.44 \n    -0.71 \n  \n  \n    statusshare \n    -997.12 \n    9399.81 \n    910.48 \n    -15.30 \n    0.24 \n  \n  \n    statusmixed \n    -909.30 \n    910.48 \n    4083.37 \n    -146.28 \n    0.16 \n  \n  \n    land \n    -383.44 \n    -15.30 \n    -146.28 \n    12437.02 \n    -12.75 \n  \n  \n    labor \n    -0.71 \n    0.24 \n    0.16 \n    -12.75 \n    0.02 \n  \n\n\n\n\n\n\nRobust vcov\n\nlibrary(sandwich)\nvcovHC(fit1, type = \"HC3\")\n\n\n\n\n\n \n  \n      \n    (Intercept) \n    statusshare \n    statusmixed \n    land \n    labor \n  \n \n\n  \n    (Intercept) \n    4235.06 \n    -3084.98 \n    249.07 \n    -6038.87 \n    -5.91 \n  \n  \n    statusshare \n    -3084.98 \n    11437.98 \n    799.53 \n    -2421.05 \n    8.76 \n  \n  \n    statusmixed \n    249.07 \n    799.53 \n    2692.17 \n    1349.86 \n    -4.71 \n  \n  \n    land \n    -6038.87 \n    -2421.05 \n    1349.86 \n    75901.71 \n    -62.24 \n  \n  \n    labor \n    -5.91 \n    8.76 \n    -4.71 \n    -62.24 \n    0.09"
   }
 ]
