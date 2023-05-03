@@ -6,6 +6,9 @@ format:
     smaller: false
     scrollable: false
     code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
 bibliography: ../bib/references.bib
 editor_options: 
   chunk_output_type: console
@@ -14,7 +17,7 @@ editor_options:
 ```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
   fig.align = "center",
-  fig.width = 8,
+  fig.width = 7,
   fig.asp = 0.618,
   fig.retina = 3,
   out.width = "100%"
@@ -41,9 +44,12 @@ Explain why production function should be zero.
 
 **Farm's production function**
 
+. . .
+
 $$
 h(q,x,z) = 0,
 $$
+. . .
 
 where: 
 
@@ -52,7 +58,6 @@ where:
 -   $x$ - variable input quantities (fertilizers, labor, seed, water, ...)
 
 -   $z$ - fixed factors (private: land, equipment; public: infrastructure, extension; exogenous features ...)
-
 
 ## Farm's optimization problem
 
@@ -102,6 +107,8 @@ $$
 \max_{x,q} \;\;\; p^{'}q-w^{'}x, \\ \text{s.t.} \;\; h(q,x,z) = 0
 $$
 
+-   Models that we can simulate with linear programming, structural equation modelling
+
 ::: 
 ::: {.column width="50%"}
 
@@ -112,24 +119,34 @@ x = x(p,w,z), & \text{factor demand function} \\
 q = q(p,w,z), & \text{supply function}
 \end{cases}
 $$
+
+-   Models that we estimate with regressions
 ::: 
 ::: 
 
-# Farm's Production Function [@Sadoulet1995, Appendix A.4]
+# The Production Function [@Sadoulet1995, Appendix A.4]
 
 Mathematical function that transforms inputs quantities $x$ into output $q$.
 
-## Taylor Expansion
+## Taylor expansion [@Sadoulet1995, Appendix A.2]
+
+Introduced by Brook Taylor in 1715 ...
+
+. . .
 
 Value of any function could be approximated at an arbitrary point $x_0$ with a Taylor expansion:
+
+. . .
 
 $$
 f(x) \approx f(x_0) + f^{'}(x_0)(x - x_0) + \frac{f^{''}(x_0)}{2!}(x - x_0)^2 + \cdots .
 $$
 
-. . .
+## Taylor expansion example: 
 
-For example: 
+What is the value of $e^{0.4}$?
+
+. . .
 
 $$
 e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} \approx 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
@@ -138,26 +155,44 @@ $$
 . . .
 
 $$
-e^{0.4} \approx 1 + .4 + \frac{.4^2}{2!} + \frac{.4^3}{3!} + \frac{.4^4}{4!} + \frac{.4^5}{5!} \\ 
-\approx 1 + .4 + .16/2 + 0.064/6 + 0.0256/24 + 0.01024 / 120 \\
-\approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6) 
+e^{0.4} \approx 1 + .4 + \frac{.4^2}{2!} + \frac{.4^3}{3!} + \frac{.4^4}{4!} + \frac{.4^5}{5!} 
 $$
 
+. . .
+
+$$
+\approx 1 + .4 + .16/2 + 0.064/6 + 0.0256/24 + 0.01024 / 120
+$$
+
+. . .
+
+$$
+\approx  1 + .4 + .08 + 0.0106(6) + 0.00106(6) + 0.000106(6) 
+$$
+. . .
+
+$$
+\approx  1.491819  
+$$
+
+. . .
+
+$$
+\text{exp(0.4)} = 1.491825
+$$
 
 ## First order Taylor approximation
 
 $q \approx f(x)$ at $x_0$.
 
 $$
-f(x) \approx 
-\underbrace{f(x_0) - x_0}_{\alpha} + \underbrace{f^{'}(x_0)}_{\beta}\, x
+f(x) \approx  f(x_0) + f^{'}(x_0)(x-x_0) \\ \approx 
+\underbrace{f(x_0) - f^{'}(x_0) x_0}_{\alpha} + \underbrace{f^{'}(x_0)}_{\beta}\, x
 $$
 
 . . .
 
-$$
-q \approx \alpha + \beta \, x 
-$$
+Simple regression: $q \approx \alpha + \beta \, x$
 
 . . .
 
@@ -165,14 +200,12 @@ $q \approx f(x_1, x_2)$ at $a, b$
 
 $$
 f(x_1, x_2) \approx
-\underbrace{f(a,b) - a - b}_{\alpha} + \underbrace{f_{x_1}^{'}(a,b)}_{\beta_1}\, x_1 + \underbrace{f_{x_2}^{'}(a,b)}_{\beta_2}\, x_2 
+\underbrace{f(a,b) - f_{x_1}^{'}(a,b)a - f_{x_2}^{'}(a,b)b}_{\alpha} + \underbrace{f_{x_1}^{'}(a,b)}_{\beta_1}\, x_1 + \underbrace{f_{x_2}^{'}(a,b)}_{\beta_2}\, x_2 
 $$
 
 . . .
 
-$$
-q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2
-$$
+Multiple regression: $q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2$
 
 
 ## Second and greater order Taylor approximation
@@ -183,16 +216,18 @@ $$
 q \approx \alpha + \beta_1 \, x_1 + \beta_2 \, x_2 + \beta_3 \, x_1^2 + \beta_4 \, x_2^2 + \beta_5 x_1 x_2
 $$
 
-## Non-linear production functions
+## Production functions
 
 Consider 
 
 $$q = f(x_i)$$
 
-(function of several variables $x_i$), where 
+Production function of several inputs $x_i$, where 
 
 
 $$x_i = e^{\ln x_i}$$
+
+and $q$ is the quantity of goods produced.
 
 . . .
 
@@ -204,7 +239,7 @@ $$
 
 . . .
 
-Let us approximate $\ln q = g(\ln x_i)$ using the Taylor expansion.
+Let us approximate $\ln q = g(\ln x_i)$ using Taylor expansion.
 
 ## Fist order Taylor approximation
 
@@ -216,90 +251,76 @@ $$
 
 . . .
 
-**This is a Cobb-Douglas production function**:
-
-. . .
-
-$$
-q \approx e^\alpha \prod_i x_i^{\beta_i}
-$$
+**This is a Cobb-Douglas production function**: $q \approx e^\alpha \prod_i x_i^{\beta_i}$
 
 
 ## Second order Taylor approximation
 
-. . .
-
-$$
-\ln q \approx \alpha + \sum_i \beta_i  \ln x_i + \sum_{ij} \gamma_{ij} \ln x_{ij}
-$$
+of $\ln q = g(\ln x_i)$ around an arbitrary point $x_{i0} \ne 0$
 
 . . .
 
-**This is a translog production function**
+$$
+\ln q \approx \alpha + \sum_i \beta_i  \ln x_i + \frac{1}{2}\sum_{ij} \gamma_{ij} \ln x_{i} \ln x_{j}
+$$
+
+. . .
+
+**This is a trans-log production function**
 
 # Example 1. production function
 
-## Problem and research question {.smaller}
+## Problem and research question
 
 ::: columns
 ::: {.column width="50%"}
 ::: incremental
--   Policy makers are considering to abolish the share-cropping land tenure.
+-   Policy makers are considering to abolish the share-cropping land tenure system.
 
 -   As an alternative either owner-cultivation with hired labor or pure rental relationship should be established. 
 
--   Main rationale is in the president's statement that sharecropping is inefficient farm structure.
+-   Main rationale is in the claim that sharecropping is an inefficient farm structure.
 :::
 :::
 ::: {.column width="50%"}
 ::: incremental
-**Theoretical debate**
+-   **Theoretical debate**
 
 -   Contract theory [@Dasgupta1999] sees sharecropping as a form of the optimal risks and incentives sharing contract.
 
 -   It is a **second best contract** in agriculture after pure rental of hired labor contract.
 
--   Sharecropping can be as efficient as rental/labor contracts, when interlinked credit and insurance markets fail.
+-   Sharecropping can be as efficient as rental/labor contracts, when interlinked labor, resources, credit and insurance markets fail.
 :::
 :::
 :::
 
 . . .
 
-**Research question:**
+**Research question:** Is there any negative effect of sharecropping on farms productivity?
 
-Is there any negative effect of sharecropping on farms productivity?
-
-## How to answer this question? {.smaller}
+## How to answer this question? (Any ideas)
 
 . . .
 
-**Regression**
+Data that we have covers a sample of the rice-cultivating farmers in India [@Feng2010]:
+
+-   $\text{output}$ is gross output of rice in kg
+-   $\text{land}$ the total area cultivated with rice, measured in hectares
+-   $\text{labor}$ total labor inputs (excluding harvest labor) in hours
+-   $\text{status}$ land tenure system on the farm: owner-operated, Share-cropping and mixed
 
 . . .
 
+Let us estimate a simple production function of a rice-producing farm using linear form and Cobb-Douglas function. 
 
-
-Let us estimate a simple production function of a rice-producing farm. 
+. . .
 
 $$\text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \text{land} + \beta_4 \text{labor} + e$$
 
 . . .
 
-
-where: 
-
-$\text{output}$ is gross output of rice in kg
-
-$\text{land}$ the total area cultivated with rice, measured in hectares
-
-$\text{labor}$ total labor inputs (excluding harvest labor) in hours
-
-$\text{status}$ land tenure system on the farm: owner-operated, Share-cropping and mixed
-
-. . .
-
-Data set covers a sample of the rice-cultivating farmers in India. Source: [@Feng2010].
+$$\text{output} = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} + \beta_3 \ln \text{land} + \beta_4 \ln \text{labor} + e$$
 
 ## Data (1)
 
@@ -325,10 +346,15 @@ glimpse(farm_dta)
 
 ```{r echo=TRUE}
 datasummary_skim(farm_dta, output = "markdown")
-datasummary_skim(farm_dta, "categorical", output = "markdown")
 ```
 
 ## Exploratory staistics (2)
+
+```{r echo=TRUE}
+datasummary_skim(farm_dta, output = "markdown", "categorical")
+```
+
+## Exploratory staistics (3)
 
 ```{r echo=TRUE}
 datasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output = "markdown")
@@ -337,31 +363,96 @@ datasummary( (land  + labor  + output) ~ status * (mean + sd), farm_dta, output 
 ## Exploratory staistics (3)
 
 ```{r echo=TRUE}
-#| fig-asp: 0.5
 ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
 ```
 
-## Regression and interpretation
+## Regression and interpretation {.smaller}
 
-```{r echo=TRUE}
-#| output-location: slide
+```{r echo=TRUE, eval=FALSE}
+#| output-location: column-fragment
 fit1 <- lm(output ~ status + land + labor, 
            data = farm_dta)
 
+fit2_cd <- lm(output ~ status + log(land) + log(labor), 
+           data = farm_dta)
+
 modelsummary(
-  list(`Linear prod.fn. (level-level)` = fit1),
-  estimate = "{estimate} {stars} ({std.error})",
+  list(`Linear prod.fn. (level-level)` = fit1,
+       `CD prod.fn. (log-log)` = fit2_cd),
+  estimate = "{estimate} {stars} ({std.error})", 
+  statistic = NULL
+)
+```
+
+```{r echo=FALSE}
+#| output-location: column-fragment
+fit1 <- lm(output ~ status + land + labor, 
+           data = farm_dta)
+
+fit2_cd <- lm(output ~ status + log(land) + log(labor), 
+           data = farm_dta)
+
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1,
+       `CD prod.fn. (log-log)` = fit2_cd),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
   statistic = NULL,
   gof_omit =  c("AIC|BIC|Log|RMS"),
   output  = "markdown"
 )
 ```
 
-## Fitted values (1) {auto-animate="true"}
+## Conclusion {.smaller}
+
+
+::: columns
+::: {.column width="50%"}
+```{r}
+modelsummary(
+  list(`Linear prod. fn. (level-level)` = fit1,
+       `CD prod. fn. (log-log)` = fit2_cd),
+  estimate = "{estimate} {stars} </br> ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS"),
+  output  = "markdown"
+)
+```
+
+
+::: 
+::: {.column width="50%"}
+::: incremental
+-   Interpret coefficients in both models.
+
+-   What is the estimated effect of share-cropping?
+
+-   Is this model shows causal effects of $x$ on $y$?
+
+-   Is there a ceteris paribus?
+:::
+:::
+:::
+
+
+## Entertainment: Fitted values (1)
 
 ```{r}
-#| fig-width: 6
-#| fig-height: 6
+#| fig-asp: 1.2
+#| fig-width: 5.5
 #| echo: true
 #| output-location: column-fragment
 farm_dta %>% 
@@ -374,13 +465,13 @@ farm_dta %>%
   ylab("Rice output, kg")
 ```
 
-## Fitted values (1) {auto-animate="true"}
+## Entertainment: Fitted values (1)
 
 ```{r}
-#| fig-width: 6
-#| fig-height: 6
+#| fig-asp: 1.2
+#| fig-width: 5.5
 #| echo: true
-#| output-location: column-fragment
+#| output-location: column
 farm_dta %>% 
   mutate(fitted = fitted(fit1)) %>% 
   ggplot() + 
@@ -391,16 +482,17 @@ farm_dta %>%
   ylab("Rice output, kg") +
   geom_point(alpha = 0.3) + 
   theme(legend.position = c(0.1, 0.9)) + 
-  scale_color_manual(values = c('#BF382A', '#0C4B8E'))
+  scale_color_manual(
+    values = c('#BF382A', '#0C4B8E'))
 ```
 
-## Fitted values (1) {auto-animate="true"}
+## Entertainment: Fitted values (1)
 
 ```{r}
-#| fig-width: 6
-#| fig-height: 6
+#| fig-asp: 1.2
+#| fig-width: 5.5
 #| echo: true
-#| output-location: column-fragment
+#| output-location: column
 farm_dta %>%
   mutate(fitted = fitted(fit1)) %>%
   ggplot() +
@@ -411,18 +503,20 @@ farm_dta %>%
   ylab("Rice output, kg") +
   geom_point(alpha = 0.3) +
   theme(legend.position = c(0.1, 0.9)) + 
-  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +
-  geom_point(aes(y = fitted, colour = "Gitted"),
-             alpha = 0.3)
+  scale_color_manual(
+    values = c('#BF382A', '#0C4B8E')) +
+  geom_point(
+    aes(y = fitted, colour = "Gitted"),
+    alpha = 0.3)
 ```
 
-## Fitted values (1) {auto-animate="true"}
+## Entertainment: Fitted values (1)
 
 ```{r}
-#| fig-width: 6
-#| fig-height: 6
+#| fig-asp: 1.2
+#| fig-width: 5.5
 #| echo: true
-#| output-location: column-fragment
+#| output-location: column
 farm_dta %>%
   mutate(fitted = fitted(fit1)) %>%
   ggplot() +
@@ -433,14 +527,16 @@ farm_dta %>%
   ylab("Rice output, kg") +
   geom_point(alpha = 0.3) +
   theme(legend.position = c(0.1, 0.9)) + 
-  scale_color_manual(values = c('#BF382A', '#0C4B8E')) +
-  geom_point(aes(y = fitted, colour = "Gitted"),
-             alpha = 0.3) + 
+  scale_color_manual(
+    values = c('#BF382A', '#0C4B8E')) +
+  geom_point(
+    aes(y = fitted, colour = "Gitted"),
+    alpha = 0.3) + 
   scale_x_log10() +
   scale_y_log10()
 ```
 
-## Actual values 3D
+## Entertainment: Actual values 3D
 
 ```{r}
 library(plotly)
@@ -455,14 +551,18 @@ plot_ly(
   color = ~status, 
   colors = c('#BF382A', '#0C4B8E', '#2abf38')) %>%
   add_markers(opacity = 0.5) %>%
-  layout(scene = list(
+  layout(
+    autosize = F, 
+    width = 800, 
+    height = 750,
+    scene = list(
     xaxis = list(title = 'x1: Land, ha'),
     yaxis = list(title = 'x2: Labor, hours'),
     zaxis = list(title = 'y: Output, kg')
   ))
 ```
 
-## Actual + Fitted values 3D
+## Entertainment: Actual + Fitted values 3D
 
 ```{r}
 plot_ly(
@@ -488,14 +588,18 @@ plot_ly(
       opacity = 0.5
     )
   ) %>%
-  layout(scene = list(
+  layout(
+    autosize = F, 
+    width = 800, 
+    height = 750,
+    scene = list(
     xaxis = list(title = 'x1: Land, ha'),
     yaxis = list(title = 'x2: Labor, hours'),
     zaxis = list(title = 'y: Output, kg')
   ))
 ```
 
-## Fitted values 3D v.2
+## Entertainment: Fitted values 3D v.2
 
 ```{r}
 x_values <- ply_dta$land %>% round(3)
@@ -533,18 +637,76 @@ plot_ly() %>%
   ) %>%
   # Axes labels and title:
   layout(
-    title = "3D scatterplot and regression plane",
+    autosize = F, 
+    width = 800, 
+    height = 750,
     scene = list(
-      zaxis = list(title = "y: log10(price)"),
-      yaxis = list(title = "x2: year"),
-      xaxis = list(title = "x1: log10(size)")
+      xaxis = list(title = 'x1: Land, ha'),
+      yaxis = list(title = 'x2: Labor, hours'),
+      zaxis = list(title = 'y: Output, kg')
     )
   )
 ```
 
 # Assumptions
 
-## Linearity
+::: incremental
+
+1.  Linearity - **validated using data**
+
+2.  Random sampling - "accepted based on faith in data collectors"
+
+3.  No (Perfect) Collinearity - **validated using data**
+
+4.  No Endogeneity - OVB
+
+5.  Homoscedasticity (No heteroscedasticity) - **validated using data**
+
+6.  Normality - **validated using data**
+
+:::
+
+# Linearity
+
+**Means:** in $y = \alpha + \beta x$; $y$ is a linear function of $x$.
+
+. . .
+
+**If violated:** $\alpha$ and $\beta$ are biased and inefficient.
+
+. . .
+
+**Detected:** with scatter plots: $y$ against $x$, observed/residuals against fitted).
+
+. . .
+
+**Resolved:** with a linear transformation.
+
+
+## Linearity detection: scatter plots 
+
+::: columns
+::: {.column width="70%"}
+```{r}
+#| echo: true
+#| output-location: fragment
+#| fig-asp: 0.8
+farm_dta %>% select(-status) %>% ggpairs()
+```
+:::
+
+::: {.column width="30%"}
+::: incremental
+-   Note the magnitude of $x$ and $y$
+
+-   From min to max $y$ increases about 5000 times.
+
+-   If a variable increases more than 10 times between min and max, $log$ transformation may be needed.
+:::
+:::
+:::
+
+## Linearity detection: fitted values vs residuals 
 
 ```{r eval=FALSE}
 #| echo: true
@@ -552,21 +714,487 @@ library(performance)
 check_model(fit1, check = "linearity", panel = FALSE)
 ```
 
-```{r eval=FALSE}
+```{r}
 #| echo: false
-#| fig-width: 6
-#| fig-height: 6
-#| output-location: column-fragment
+#| output-location: fragment
 library(performance)
-plot(check_model(fit1, check = "linearity", panel = FALSE))
+plot(check_model(fit1, check = "ncv", panel = FALSE))$NCV + 
+  labs(caption = str_replace(as.character(fit1$call)[[2]], "~", "="))
 ```
 
-## Multicolinearity
+## Linearity detection: fitted values vs residuals (v2)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| fig-asp: 0.6
+#| fig-width: 8
+plot(fit1, which = 1)
+```
 
 
-## No perfect collinearity
+## Linearity Conclusion
 
-## No 
+Model: 
+
+```{r}
+fit1$call
+```
+
+. . .
+
+**Is the linearity assumption fulfilled?**
+
+. . .
+
+**What could be done to improve the model?**
+
+. . .
+
+Linear transformation with log: partial (level-log or log-level) or full (log-log).
+
+. . .
+
+$$\ln (\text{output}) = \alpha + \beta_1 \text{status : share} + \beta_2 \text{status : mixed} \\ + \beta_3 \ln (\text{land}) + \beta_4 \ln (\text{labor}) + e$$
+
+## Linear transformation of the model
+
+```{r echo=TRUE, eval = FALSE}
+fit1 <- lm(output ~ status + land + labor, 
+           data = farm_dta)
+
+fit2_cd <- lm(output ~ status + log(land) + log(labor), 
+           data = farm_dta)
+
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1,
+       `CD prod.fn. (log-log)` = fit2_cd),
+  estimate = "{estimate} {stars} ({std.error})", 
+  statistic = NULL
+)
+```
+
+## Linear transformation of the model
+
+```{r echo=FALSE, eval = TRUE}
+fit2_cd <- lm(log(output) ~ status + log(land) + log(labor), data = farm_dta)
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1, `CD prod.fn. (log-log)` = fit2_cd),
+  estimate = "{estimate} {stars} ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS"),
+  output  = "markdown"
+)
+```
+
+## Change in the lineariy assumption
+
+::: columns
+::: {.column width="50%"}
+
+**Without log-log**
+
+```{r}
+#| echo: false
+#| fig-asp: 1.1
+plot(check_model(fit1, check = "linearity", panel = FALSE))$NCV + 
+  labs(caption = str_replace(as.character(fit1$call)[[2]], "~", "="))
+```
+
+:::
+::: {.column width="50%"}
+
+**With log-log**
+
+```{r}
+#| echo: false
+#| fig-asp: 1.1
+plot(check_model(fit2_cd, check = "linearity", panel = FALSE))$NCV + 
+  labs(caption = str_replace(as.character(fit2_cd$call)[[2]], "~", "="))
+```
+
+:::
+:::
+
+## Change in Fitted values 3D v.2
+
+```{r}
+ply_dta2 <- farm_dta %>% mutate(fitted = (fitted(fit2_cd)))# %>% sample_n(500)
+x_values <- ply_dta2$land %>% round(3)
+y_values <- ply_dta2$labor %>% round(3)
+z_values <- ply_dta2$output %>% round(3)
+
+x_grid <- seq(from = min(x_values), to = max(x_values), length = 50)
+y_grid <- seq(from = min(y_values), to = max(y_values), length = 50)
+z_grid <-
+  tibble(
+    land =  seq(from = min(x_values), to = max(x_values), length = 50),
+    labor = seq(from = min(y_values), to = max(y_values), length = 50)
+  ) %>% 
+  expand(land, labor) %>% 
+  mutate(status = unique(ply_dta2$status[[1]])) %>% 
+  mutate(plane = exp(predict(fit2_cd, newdata = .))) %>% 
+  pull(plane) %>% 
+  matrix(nrow = length(x_grid)) %>%
+  t()
+
+library(plotly)
+plot_ly() %>%
+  # 3D scatterplot:
+  add_markers(
+    x = (x_values),
+    y = (y_values),
+    z = (z_values),
+    marker = list(size = 5)
+  ) %>%
+  # Regression plane:
+  add_surface(
+    x = (x_grid),
+    y = (y_grid),
+    z = (z_grid),
+    opacity = 0.5
+  ) %>%
+  # Axes labels and title:
+  layout(
+    autosize = F, 
+    width = 800, 
+    height = 750,
+    scene = list(
+      xaxis = list(title = 'x1: Land, ha'),
+      yaxis = list(title = 'x2: Labor, hours'),
+      zaxis = list(title = 'y: Output, kg')
+    )
+  )
+```
+
+## Partial transformation (1) {.smaller}
+
+```{r}
+#| echo: true
+fit3_level_log <- lm(output ~ status + log(land) + log(labor), data = farm_dta)
+```
+
+```{r}
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1, 
+       `CD prod.fn. (log-log)` = fit2_cd,
+       `Level-log prod.fn. (level-log)` = fit3_level_log),
+  estimate = "{estimate} {stars} ({std.error})", 
+  coef_map = c("(Intercept)" = "(Intercept)", 
+               "statusshare" = "Sharecropping", 
+               "statusmixed" = "Mixed", 
+               "land" = "Land, ha", 
+               "log(land)" = "Land, ha", 
+               "labor" = "Labor, hours", 
+               "log(labor)" = "Labor, hours"),
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS"),
+  output  = "markdown"
+)
+```
+
+
+## Partial transformation (2)
+
+```{r}
+#| eval: false
+#| echo: true
+check_model(fit3_level_log, check = "linearity", panel = FALSE)
+```
+
+```{r}
+#| echo: false
+#| output-location: fragment
+plot(check_model(fit3_level_log, check = "ncv", panel = FALSE))$NCV + 
+  labs(caption = str_replace(as.character(fit1$call)[[2]], "~", "="))
+```
+
+# No (perfect) collinearity (multicollinearity)
+
+Two sub-problems:
+
+1.  Perfect collinearity: when present regression will not be estimated.
+
+2.  Near-perfect collinearity: regression works, but inference is misleading.
+
+
+# No Perfect Collinearity
+
+::: incremental
+**Problem:**
+
+-   none of the regressors can be written as an **exact linear combinations** of some other regressors in the model.
+-   For example:
+
+    -   in $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3$ ,
+    -   where $x_3 = x_2 + x_1$,
+    -   all $x_i$ are collinear.
+:::
+
+. . .
+
+**Detection:** Through a regression equation
+
+. . .
+
+**Solution:** model re-specification.
+
+
+## Perfect Collinearity Example 1
+
+$$
+\begin{aligned}
+\hat{wage} & = \alpha + \hat\beta_1 education + \hat\beta_2 experience \\ 
+& + \hat\beta_3 male  + \hat\beta_4 female
+\end{aligned}
+$$
+
+::: incremental
+-   $male  + female = 1$
+
+-   Is there a multicollinearity problem here?
+:::
+
+## Perfect Collinearity Example 2
+
+$$
+\begin{aligned}
+\hat{output} & = \alpha + \hat\beta_1 land + \hat\beta_2 seeds + \hat\beta_3 fertilizers \\ &  + \hat\beta_4 others + \hat\beta_5 total
+\end{aligned}
+$$
+
+::: incremental
+-   where $total = seeds + fertilizers + others$
+
+-   Is there a multicollinearity problem here?
+
+-   Coefficient $\hat\beta_5$ is aliased and wont be estimated
+::: 
+
+## Perfect Collinearity Example 3
+
+Same model but in log:
+
+$$
+\begin{aligned}
+\ln (\hat{output})&  = \hat\beta_1 \ln (land) + \hat\beta_2 \ln (seeds) + \hat\beta_3 \ln (fertilizers) \\ & + \hat\beta_4 \ln (others) + \hat\beta_5 \ln (total) 
+\end{aligned}
+$$
+
+where $total = seeds + fertilizers + others$
+
+
+::: incremental
+-   Is there a multicollinearity problem here?
+
+-   Think!
+
+-   $log(a) + log(b) = log(a * b)$
+
+-   ::: callout-caution
+    No, there is no collinearity because $\ln (seeds) + \ln (fertilizers) + \ln (others) \ne \ln (total)$. 
+    This is not a linear combination!
+    $\ln (seeds \cdot fertilizers \cdot others) \ne \ln (total)$
+    :::
+    
+:::
+
+## Perfect Collinearity Example 4 {.smaller}
+
+Using the production function estimated above, let us convert tenure type into a set of dummy variables:
+
+```{r}
+#| echo: true
+farm_dta_coll <- 
+  farm_dta %>% 
+  mutate(
+    status_owner = ifelse(status == "owner", 1, 0),
+    status_share = as.integer(status == "share"),
+    status_mixed = as.integer(status == "mixed")
+    )
+glimpse(farm_dta_coll)
+```
+
+## Perfect Collinearity Example 4
+
+```{r}
+fit1_coll_1 <- 
+  lm(output ~ status_owner + status_share + status_mixed + land + labor, 
+     data = farm_dta_coll)
+fit1_coll_1
+
+fit1_coll_2 <- 
+  lm(output ~ status_mixed + status_owner + status_share  + land + labor, 
+     data = farm_dta_coll)
+fit1_coll_2
+```
+
+## Perfect Collinearity Example 4 {.smaller}
+
+```{r echo=FALSE}
+modelsummary(
+  list(`Linear prod.fn. (level-level)` = fit1,
+       `Linear prod.fn. with dummies 1` = fit1_coll_1,
+       `Linear prod.fn. with dummies 2` = fit1_coll_2),
+  estimate = "{estimate} {stars} ({std.error})", 
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|RMS"),
+  output  = "markdown"
+)
+```
+
+# Multicollinearity: Near-perfect collinearity
+
+## Problem
+
+::: incremental
+-   When two variables $x_1$ and $x_2$ are highly correlated.
+
+-   And both ($x_1$ and $x_2$) affect $y$ significantly.
+
+-   $x_1$ and $x_2$ are collinear
+
+-   Estimated Standard Errors are inflated (larger then they could be).
+
+-   Inference about $x_1$ and $x_2$ (only) is misleading.
+:::
+
+## Detection
+
+::: incremental
+1.  Variance Inflation Factor
+    
+    -   Not a statistical test, only an informatice number.
+    -   This shows by how much, the SE of the collinear variables are larger than what they could have been if there was no collinearity.
+
+2.  Step-wise regression approach:
+
+    -   Include collinear variables one by one and together, and
+    -   observe how the $R^2$, and var's significances changes
+:::
+
+## Solutions
+
+::: incremental
+1.  Find different independent variables.
+
+2.  Drop one if it is redundant and repeating.
+
+3.  Keep both and ignore if $x_1$ and $x_2$ are just control variables.
+
+4.  Keep is removing may cause the OVB.
+:::
+
+## Multicollinearity Example 1. Production Function
+
+```{r}
+library(performance)
+check_collinearity(fit2_cd)
+```
+
+. . .
+
+If VIF > 10, we may suspect multicollinearity.
+
+. . .
+
+Removing land or labor will cause the OVB (omitted variable bias), we must keep both variables. 
+
+## Multicollinearity Example 2 {.smaller}
+
+$$
+\begin{aligned}
+\hat{output} = \hat\beta_1 land + \hat\beta_2 seeds + \hat\beta_3 fertilizers + \hat\beta_4 others
+\end{aligned}
+$$
+
+::: incremental
+-   where $seeds$ and $fertilizers$ highly correlate between each other (r=0.9),
+-   VIF of $seeds$ and $fertilizers$ is > 12.2
+-   our key-interest variable is $land$.
+-   As $fertilizers$ is a control variable and we may have OVB if we remove it, 
+-   If we really want to reduce VIF...:
+
+    -   Dis-aggregate fertilizers into mineral and organic, for example.
+    -   Aggregate fertilizers and seeds
+    
+::: 
+
+## Multicollinearity Example 3 {.smaller}
+
+Same model but with a quadratic term:
+
+$$\hat{output} = \hat\beta_1 land + \hat\beta_2 land^2 + \hat\beta_3 seeds + \hat\beta_4 fertilizers + \hat\beta_5 others$$
+
+::: incremental
+-   VIF of $land$ and $land^2$ is > 25
+-   Is there a multicollinearity problem here?
+-   Think!
+-   Not really
+-   $land^2$ is not a linear combination of $land$ ;
+-   Linear combination is when $land + land$ not when $land \times land$ ;
+:::
+
+## Multicollinearity Example 4 {.smaller}
+
+Step-wise approach to regression analysis:
+
+```{r}
+precip_dta <- 
+    alr4::MinnWater %>%
+    as_tibble() %>% 
+    mutate(`log(muniPop)` = log(muniPop),
+           `log(muniUse)` = log(muniUse)) %>% 
+    select(year, muniPrecip, `log(muniPop)`, `log(muniUse)`) 
+
+fit3.1 <- lm(`log(muniUse)` ~ muniPrecip , precip_dta)
+fit3.2 <- lm(`log(muniUse)` ~ muniPrecip + year, precip_dta)
+fit3.3 <- lm(`log(muniUse)` ~ muniPrecip + `log(muniPop)`, precip_dta)
+fit3.4 <- lm(`log(muniUse)` ~ muniPrecip + year  + `log(muniPop)`, precip_dta)
+
+my_summary <- function(x) {
+  x <- set_names(x, str_c("Model ", seq_along(x)))
+  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, ": ", as.character(.x$call)[[2]])}) %>% 
+    str_c(collapse = "</br>")
+  
+  modelsummary(
+    x,
+    estimate = "{estimate}{stars} ({std.error})",
+    statistic = NULL,
+    output = "markdown",
+    gof_omit =  c("AIC|BIC|Log|F|RMS"),
+    notes = all_eq
+  )
+}
+
+my_summary(list(fit3.1, fit3.2, fit3.3, fit3.4))
+```
+
+
+# Homoscedasticity (No heteroscedasticity)
+
+$$
+Var(u|x_{i1}, x_{i2}, \cdots , x_{ik}) = \sigma^2
+$$
+
+
+
+```{r}
+#| echo: false
+#| fig-asp: 0.4
+knitr::include_graphics("img/het-01.png")
+```
+
+## Problem
+
+
 
 ## Ne2 slide
 
@@ -795,7 +1423,11 @@ avg_slopes(fit_tl,
 ```
 
 
+# Takeawyas
 
+1.  Assumptions and how to validated them.
+
+2.  Statistical plots, measures (VIF) and tests and howto interprete them.
 
 # References
 
