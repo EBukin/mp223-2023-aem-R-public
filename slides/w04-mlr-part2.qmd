@@ -371,7 +371,7 @@ ggpairs(farm_dta, aes(colour = status, alpha = 0.2))
 fit1 <- lm(output ~ status + land + labor, 
            data = farm_dta)
 
-fit2_cd <- lm(output ~ status + log(land) + log(labor), 
+fit2_cd <- lm(log(output) ~ status + log(land) + log(labor), 
            data = farm_dta)
 
 modelsummary(
@@ -388,7 +388,7 @@ modelsummary(
 fit1 <- lm(output ~ status + land + labor, 
            data = farm_dta)
 
-fit2_cd <- lm(output ~ status + log(land) + log(labor), 
+fit2_cd <- lm(log(output) ~ status + log(land) + log(labor), 
            data = farm_dta)
 
 modelsummary(
