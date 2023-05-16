@@ -28,7 +28,7 @@ As this is a risk less income, it may increase the land price. However, if the l
 We would like to estimate a following equation:
 
 $$
-\text{acrePrice} = \beta_0 +  \beta_1 \text{crpPct} + \beta_2 \text{acres} + \beta_3 \text{region} + \beta_4 \text{year} + \beta_4 \text{tillable} + \beta_5 \text{productivity} + e
+\text{acrePrice} = \beta_0 +  \beta_1 \text{crpPct} + \beta_2 \text{acres} + \beta_3 \text{region} + \beta_4 \text{year} + \beta_5 \text{tillable} + \beta_6  \text{productivity} + e
 $$
 
 -   `acrePrice` - sale price in dollars per acre;

@@ -56,17 +56,27 @@ Exercises:
 
 ### Week 5. May 10. Impact Evaluation: Counterfactual and DID (Lecture)
 
-### Week 6. May 17. R: DID and MLR
+Slides: See Ilias.
 
-### Week 7. May 24. RDD - Regression Discontinuity (Lecture) + R: RDD
+### Week 6. May 17. Interaction terms and DiD. R: DID. 
 
-### Week 8. May 31. OVB - Omitted Variable Bias (Lecture) + R: OBV formula
+-   [w06a-interactions](slides/w06a-interactions.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w06a-interactions.pdf)
 
-### Week 9. June 7. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
+-   [w06b-DiD](slides/w06b-DiD.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w06b-did.pdf)
 
-### Week 10. June 14. IV - Instrumental Variable (Lecture) + R: IV
+Exercises:
 
-### Week 11. June 21. Fuzzy RDD (Lecture) + R: Fuzzy RDD
+-   [ex06-did-and-interactions.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex06-did-and-interactions.zip) - the R project with code and data
+
+### Week 7. May 24. OVB - Omitted Variable Bias (Lecture). OBV formula 
+
+### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
+
+### Week 9. June 7. R: FE
+
+### Week 10. June 14. RDD - Regression Discontinuity (Lecture) + R: RDD
+
+### Week 11. June 21. IV - Instrumental Variable (Lecture) + R: IV
 
 ### Week 12. June 28. Binary outcome variable (Lecture)
 

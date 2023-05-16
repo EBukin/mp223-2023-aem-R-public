@@ -1,0 +1,540 @@
+---
+title: "Interaction terms in MLR and Difference in Difference (DID)"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(ggdag)      # For plotting DAGs
+library(dagitty)    # For working with DAG logic
+library(ggpubr)
+library(wooldridge)
+library(here)
+theme_set(theme_bw())
+```
+
+# MLR with an interaction term
+
+## Interaction term
+
+$$
+y = \beta_0 + \beta_1 x_1  + \beta_2 x_2 + \beta_3 (x_1 \cdot x_2) + \beta_4 x_4 + \epsilon
+$$
+
+. . .
+
+Interpretation is only possible through **marginal effects**:
+
+. . .
+
+Marginal effect is a partial derivative of the regression equation with respect to a regressor of interest evaluated at certain value of the interaction term.
+
+. . .
+
+$\frac{\partial y}{\partial x_1} = \beta_1 + \beta_3 x_2$ 
+
+$\frac{\partial y}{\partial x_2} = \beta_2 + \beta_3 x_1$
+
+. . .
+
+Marginal Effect (the slope) of $x_1$ depends on $x_2$ and vice versa.
+
+## Reporting results with marginal effects
+
+1.  Report coefficients $\beta_1$, $\beta_2$, $\beta_3$ as is.
+
+2.  Report marginal effects at mean values of the interaction term(s):
+
+    -   $\text{ME}(\bar x_1) = \beta_1 + \beta_3 \bar x_2$
+
+    -   $\text{ME}(\bar x_2) = \beta_2 + \beta_3 \bar x_1$
+
+3.  To compute standard errors for the marginal effects, we use **delta method**.
+
+Learn more: [@Angrist2009, also Chapter 3]
+
+## Recall the hedonic land prices model:
+
+$$
+\text{acrePrice} = \beta_0 +  \beta_1 \text{crpPct} + \beta_2 \text{acres} + \beta_3 \text{improvements} \\
++ \beta_4 \text{year} + \beta_5 \text{region}  + e
+$$
+
+-   `acrePrice` - sale price in dollars per acre;
+
+-   `crpPct` - the percentage of all farm acres enrolled in CRP;
+
+-   `acres` - size of the farm in acres;
+
+-   `improvements` - share of infrastructure's value in the land price;
+
+-   `development` - dummy variable aliased with `improvements`. Is 1 when improvements > 25% and is 0 otherwise.
+
+-   `region` - region in the state Minnesota;
+
+-   `year` - year of the land sales translation;
+
+## Loading data
+
+```{r echo=FALSE}
+library(tidyverse)
+library(readxl)
+library(modelsummary)
+library(ggeffects)
+library(marginaleffects)
+library(here)
+library(GGally)
+
+## 1. Load the data
+dta <-
+  read_excel(here("exercises", "ex06-did-and-interactions", "land-prices.xlsx")) %>%
+  mutate(improvements  = as.numeric(improvements),
+         development = as.factor(as.integer(improvements > 25)),
+         productivity  = as.numeric(productivity),
+         tillable  = as.numeric(tillable),
+         year = as.factor(year)) %>% 
+  select(acrePrice, crpPct, acres, improvements, development, region, year)
+
+```
+
+```{r eval=FALSE, echo=TRUE}
+library(tidyverse)
+library(readxl)
+library(modelsummary)
+library(ggeffects)
+library(marginaleffects)
+library(GGally)
+options(modelsummary_get = "broom")
+## 1. Load the data
+dta <- read_excel("land-prices.xlsx") %>%
+  mutate(improvements  = as.numeric(improvements),
+         development = as.factor(as.integer(improvements > 25)),
+         productivity  = as.numeric(productivity),
+         tillable  = as.numeric(tillable),
+         year = as.factor(year)) %>% 
+  select(acrePrice, crpPct, acres, improvements, development, region, year)
+
+glimpse(dta)
+```
+
+## Descriptive statistics
+
+```{r echo=TRUE}
+#| output-location: fragment
+datasummary(
+    acrePrice + crpPct + acres + improvements + as.integer(development) ~ 
+      (mean + sd + min + median + max) * 
+      Arguments(na.rm = TRUE),
+    data = dta, 
+    output = "html"
+  )
+```
+
+## Descriptive Plots
+
+```{r eval=TRUE, echo=TRUE}
+#| output-location: fragment
+#| fig-width: 10
+#| fig-asp: 0.6
+dta %>%
+  select(acrePrice, crpPct, acres, improvements, development) %>%
+  ggpairs(aes(colour = development, alpha = 0.2))
+```
+
+## Example 1. Basic regressions
+
+```{r echo=TRUE}
+fit1 <- 
+  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),
+     data = dta)
+
+summ <-
+  function(x, coef_omit = "reg|year", output = "html", notes = NULL, ...) {
+    modelsummary(
+      x,
+      estimate = "{estimate}{stars} ({std.error})",
+      statistic = NULL,
+      output = output,
+      gof_omit =  c("AIC|BIC|Log|F|RMS"),
+      coef_omit = coef_omit,
+      notes = notes,
+      ...
+    )
+  }
+
+cust_summ <- function(x, coef_omit = "reg|year", output = "markdown", ...) {
+  x <- set_names(x, str_c("Model ", seq_along(x)))
+  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, ": ", as.character(.x$call)[[2]])}) %>% 
+    str_c(collapse = "</br>")
+  summ(x, coef_omit = coef_omit, output = output, notes = all_eq, ...)
+}
+```
+
+## Interpret the baseline results {.smaller}
+
+```{r echo=TRUE}
+cust_summ(list(fit1))
+```
+
+## Fitted vs area and development
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+#| output-location: fragment
+library(ggeffects)
+ggpredict(fit1, terms = "acres") %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD")+ 
+  xlab("Parcel size (acres), acres")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+#| output-location: fragment
+ggpredict(fit1, terms = "development") %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD")+ 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+:::
+:::
+
+## Fitted vs area and development (2)
+
+::: columns
+::: {.column width="75%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 0.8
+#| output-location: fragment
+ggpredict(fit1, terms = c("acres", "development")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Parcel size (acres), acres")
+```
+:::
+:::
+
+::: {.column width="25%"}
+::: fragment
+-   Without an interaction term, dummy variables simply cause shifts in the outcome variable.
+:::
+:::
+:::
+
+## Example 2. Interaction term with a binary variable {.smaller}
+
+```{r echo=TRUE}
+#| fig-asp: 0.6
+#| output-location: fragment
+fit2 <- 
+  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),
+     data = dta)
+cust_summ(list(fit1, fit2))
+```
+
+## Fitted vs development with an interaction term
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r  echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE, eval=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [0, 10, 50, 100, 200, 250, 500]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+::: r-stack
+::: fragment
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [1]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+::: fragment
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [1, 10]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+::: fragment
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [, 10, 50]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+::: fragment
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [1, 10, 50, 200]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+::: fragment
+```{r echo=FALSE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("development", "acres [1, 10, 50, 200, 500]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Development, 0 = no 1 = yes")
+```
+:::
+:::
+:::
+:::
+
+## Fitted vs area with an interaction term
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r  echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("acres [0, 10, 50, 100, 200, 250, 500, 1000]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Parcel size (acres), acres")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit2, terms = c("acres [0, 10, 50, 100, 200, 250, 500, 1000]", "development")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Parcel size (acres), acres")
+```
+:::
+:::
+:::
+
+## Marginal Effect `acres` and `development` at means {.smaller}
+
+```{r echo=TRUE, eval=FALSE}
+library(marginaleffects)
+modelsummary(fit2)
+modelsummary(marginaleffects(fit2))
+```
+
+```{r}
+summ(
+  list(`Coef. as is` = fit2,
+       `M.E. at means` = marginaleffects(fit2)),
+  output = "html",
+  coef_map = c(
+    "acres" = "acres",
+    "crpPct" = "crpPct",
+    "development" = "development1",
+    "development1" = "development1",
+    "acres:development1" = "acres * development1"
+  )
+)
+```
+
+## Marginal Effect `acres` and `development` (visually)
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r  echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+plot_slopes(fit2, variables = "acres", condition = "development") + 
+  ylab("Marginal effect of acres (slope)") + xlab("Development, 0 = no 1 = yes")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+plot_slopes(fit2, variables = "development", condition = "acres") + 
+  ylab("Marginal effect of development dummy (slope)") + xlab("Parcel size, acres") + 
+  scale_y_continuous(n.breaks = 10)
+```
+:::
+:::
+:::
+
+## Example 3. Interaction with a continuous variable {.smaller}
+
+```{r echo=TRUE}
+#| fig-asp: 0.6
+#| output-location: fragment
+fit3 <- 
+  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),
+     data = dta)
+cust_summ(list(fit1, fit2, fit3), output = "markdown")
+```
+
+## Fitted vs `area` \* `improvements`
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r  echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit3, terms = c("acres [0, 10, 50, 100, 200, 250, 500, 1000]", "improvements [0, 10, 50, 100]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Parcel size (acres), acres")
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+ggpredict(fit3, terms = c("improvements", "acres [1, 50, 100, 200, 500]")) %>%
+  plot() + 
+  ylab("Predicted price per acre (acrePrice), USD") + 
+  xlab("Improvements, % of price due to infrastructure")
+```
+:::
+:::
+:::
+
+## Marginal Effect `acres` \* `improvements` (visually)
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+```{r  echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+plot_slopes(fit3, variables = "acres", condition = "improvements") + 
+  ylab("Marginal effect of acres (slope)")  + 
+  xlab("Improvements, % of price due to infrastructure")  + 
+  scale_y_continuous(n.breaks = 10) 
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r echo=TRUE}
+#| fig-asp: 1
+#| fig-width: 4.5
+plot_slopes(fit3, variables = "improvements", condition = "acres") + 
+  ylab("Marginal effect of improvements (slope)") + xlab("Parcel size, acres") + 
+  scale_y_continuous(n.breaks = 10)
+```
+:::
+:::
+:::
+
+## Reporting all regressions results {.smaller}
+
+```{r}
+#| output-location: slide
+modelsummary(
+  list(
+    `Model 1 (no interaction)` = fit1,
+    `Model 2 (Area*Development)` = marginaleffects(fit2, vcov = ~ region),
+    `Model 3 (Area*Improvements)` = slopes(fit3, vcov = ~ region)
+    ),
+  vcov = list(~ region, NULL, NULL),
+  estimate = "{estimate}{stars} ({std.error})",
+  statistic = NULL,
+  gof_omit =  c("AIC|BIC|Log|F|RMS|Std"),
+  output = "html",
+  coef_map = c(
+    "acres" = "Area, acres (*)",
+    "crpPct" = "crpPct",
+    "development" = "Development status, dummy (*)",
+    "improvements" = "Share infrastructure in land price, % (*)"
+  ), 
+  notes = "(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."
+)
+```
+
+# Takeaway and homework
+
+
+## Takeaway and homework
+
+-   Marginal effects.
+
+-   Difference between fitted values and marginal effects.
+
+-   Homework:
+
+    -   Reproduce code from the slides.
+
+    -   Follow pre-recorded materials with extra calculations.
+
+# References
+
+## References
