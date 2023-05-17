@@ -68,9 +68,10 @@ Slides: See Ilias.
 Exercises:
 
 -   [ex06-did-and-interactions.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex06-did-and-interactions.zip) - the R project with code and data
--   ex.06.a Interaction terms <https://youtu.be/DMxFupZSzTs>
--   ex.06.b DiD <https://youtu.be/DMxFupZSzTs>
--   ex.06.C DiD Card Krueger <https://youtu.be/DMxFupZSzTs>
+
+-   ex.06.a Interaction terms <https://youtu.be/GJLt36FAj48>
+-   ex.06.b DiD <https://youtu.be/QAI3-Rh1Sok>
+-   ex.06.C DiD Card Krueger <https://youtu.be/ogaVyGCO_6c>
 
 ### Week 7. May 24. OVB - Omitted Variable Bias (Lecture). OBV formula 
 
