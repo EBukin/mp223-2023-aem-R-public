@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\nex.06.a Interaction terms https://youtu.be/DMxFupZSzTs\nex.06.b DiD https://youtu.be/DMxFupZSzTs\nex.06.C DiD Card Krueger https://youtu.be/DMxFupZSzTs"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -1922,7 +1922,7 @@
     "href": "slides/w06b-DiD.html#assumptions",
     "title": "Difference in Difference",
     "section": "Assumptions",
-    "text": "Assumptions\n\nParallel trends\nLinear Additive Effect\nAll other assumption of the linear regression"
+    "text": "Assumptions\n\nParallel trends\nLinear Additive Effect\nAll GM assumption of the linear regression"
   },
   {
     "objectID": "slides/w06b-DiD.html#learn-more-about-did",
@@ -1957,7 +1957,7 @@
     "href": "slides/w06b-DiD.html#practical-exercise-in-r",
     "title": "Difference in Difference",
     "section": "Practical exercise in R",
-    "text": "Practical exercise in R\nFollow pre-recorded video and do it at home."
+    "text": "Practical exercise in R\nLet us estimate \\(\\beta_3\\) now using R and corresponding data."
   },
   {
     "objectID": "slides/w06b-DiD.html#references-1",

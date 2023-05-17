@@ -1,0 +1,139 @@
+---
+title: "Difference in Difference"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(ggdag)      # For plotting DAGs
+library(dagitty)    # For working with DAG logic
+library(ggpubr)
+library(wooldridge)
+library(here)
+theme_set(theme_bw())
+```
+
+# Recap
+
+## The basics:
+
+-   The ceteris Paribus
+
+-   Selection Bias
+
+-   OVB
+
+-   Quasi-experimental design: DID
+
+    -   Why do we need it?
+
+# Difference in Difference
+
+## DID
+
+. . .
+
+![](img/w06/did-01.PNG)
+
+::: footer
+Source: [@Janvry2021, Chapter 4]
+:::
+
+## Assumptions
+
+1.  Parallel trends
+
+2.  Linear Additive Effect
+
+3.  All GM assumption of the linear regression
+
+## Learn more about DID:
+
+Watch: Introduction to Differences-in-Differences <https://youtu.be/eiffOVbYvNc>
+
+Read:
+
+1.  [@Angrist2014, Chapter 5]
+
+2.  [@Angrist2009, also Chapter 5]
+
+3.  [@Janvry2021, Chapter 4]
+
+4.  [@Card1994a]
+
+# Example 1. @Otrachshenko2016
+
+Reproducing:
+
+-   Otrachshenko, V., Popova, O., & Tavares, J. (2016). Psychological costs of currency transition: evidence from the euro adoption. European Journal of Political Economy, 45, 89-100.
+
+# Example 2. @Card1994a
+
+The Minimal Wage debate. See Economist's short "The minimum wage: does it hurt workers?" (<https://youtu.be/8H4yp8Fbi-Y>)
+
+## Research question and the setting
+
+> Causal effect of the minimum wage policy on employmnet is not negative.
+
+. . .
+
+-   Two states: New Jersey (NJ) and Pennsylvanian (PA)
+
+-   Two time periods: Before and after
+
+-   Treatment: Minimal Wage in one state (New Jersey) only
+
+## Geography
+
+![](img/w06/map.jpg)
+
+## Empirical problem
+
+$$
+Y_{jt} = \beta_0 + \beta_1 \text{NJ}_j  + \beta_2 \text{Time}_t  + \beta_3 (\text{NJ}_j \times \text{Time}_t) + \beta_4 X_{jt} + \epsilon_{jt}
+$$
+
+Where:
+
+-   Outcome: $Y_{jt}$ - Employment level at the key fast food chains, Full Time Equivalent persons.
+
+-   Treatment: Minimal wage policy in NJ $\text{NJ}_j$ indicator variable where 1 = NJ, and 0 = PA.
+
+-   Time: $\text{Time}_t$ indicator variable where 0 = before, and 1 = after.
+
+. . .
+
+-   What are we expecting to find?
+
+-   What are the expected values of the coefficients?
+
+    -   If the minimal wage policy reduces employmnet.
+    -   If the minimal wage policy increases employmnet.
+
+## Practical exercise in R
+
+Let us estimate $\beta_3$ now using R and corresponding data.
+
+# References
+
+## References
