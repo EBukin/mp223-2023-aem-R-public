@@ -63,6 +63,8 @@ Slides: See Ilias.
 
 -   [w06a-interactions](slides/w06a-interactions.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w06a-interactions.pdf)
 
+    -   Pre-recorded materials on interaction term <https://youtu.be/2M4LRVGPgoI>
+
 -   [w06b-DiD](slides/w06b-DiD.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w06b-did.pdf)
 
 Exercises:
