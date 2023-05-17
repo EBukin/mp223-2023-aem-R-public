@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -1615,5 +1615,516 @@
     "title": "Multiple Linear Regression: practical aspects",
     "section": "Homoscedasticity",
     "text": "Homoscedasticity\n\\[\nVar(u|x_{i1}, x_{i2}, \\cdots , x_{ik}) = \\sigma^2\n\\]"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#the-basics",
+    "href": "slides/w06-DiD.html#the-basics",
+    "title": "Difference in Difference (DID)",
+    "section": "The basics:",
+    "text": "The basics:\n\nThe ceteris Paribus\nSelection Bias\nOVB"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#did",
+    "href": "slides/w06-DiD.html#did",
+    "title": "Difference in Difference (DID)",
+    "section": "DID",
+    "text": "DID\n\n\n\nSource: (de Janvry & Sadoulet, 2021, Chapter 4)"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#assumptions",
+    "href": "slides/w06-DiD.html#assumptions",
+    "title": "Difference in Difference (DID)",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nParallel trends\nLinear Additive Effect\nAll other assumption of the linear regression"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#learn-more-about-did",
+    "href": "slides/w06-DiD.html#learn-more-about-did",
+    "title": "Difference in Difference (DID)",
+    "section": "Learn more about DID:",
+    "text": "Learn more about DID:\nWatch: Introduction to Differences-in-Differences https://youtu.be/eiffOVbYvNc\nRead:\n\n(Angrist & Pischke, 2014, Chapter 5)\n(Angrist & Pischke, 2009, also Chapter 5)\n(de Janvry & Sadoulet, 2021, Chapter 4)\n(Card & Krueger, 1994)"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#research-question-and-the-setting",
+    "href": "slides/w06-DiD.html#research-question-and-the-setting",
+    "title": "Difference in Difference (DID)",
+    "section": "Research question and the setting",
+    "text": "Research question and the setting\n\n\n\n\n\nTwo states: New Jersey (NJ) and Pennsylvanian (PA)\nTwo time periods: Before and after\nTreatment: Minimal Wage in one state (New Jersey) only"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#geography",
+    "href": "slides/w06-DiD.html#geography",
+    "title": "Difference in Difference (DID)",
+    "section": "Geography",
+    "text": "Geography"
+  },
+  {
+    "objectID": "slides/w06-DiD.html#empirical-problem",
+    "href": "slides/w06-DiD.html#empirical-problem",
+    "title": "Difference in Difference (DID)",
+    "section": "Empirical problem",
+    "text": "Empirical problem\n\\[\nY_{jt} = \\beta_0 + \\beta_1 \\text{NJ}_j  + \\beta_2 \\text{Time}_t  + \\beta_3 (\\text{NJ}_j \\times \\text{Time}_t) + \\beta_4 X_{jt} + \\epsilon_{jt}\n\\]\nWhere:\n\nOutcome: \\(Y_{jt}\\) - Employment level at the key fast food chains, Full Time Equivalent persons.\nTreatment: Minimal wage policy in NJ \\(\\text{NJ}_j\\) indicator variable where 1 = NJ, and 0 = PA\nTime: $ _t$ indicator variable where 0 = before, and 1 = after\n\n\nWhat are we expecting to find?\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nCard, D., & Krueger, A. B. (1994). Minimum wages and employment: A case study of the fast-food industry in new jersey and pennsylvania. The American Economic Review, 84(4), 772–793. Retrieved from http://www.jstor.org/stable/2118030\n\n\nde Janvry, A., & Sadoulet, E. (2021). Development Economics : Theory and Practice. Taylor & Francis Group.\n\n\nOtrachshenko, V., Popova, O., & Tavares, J. (2016). Psychological costs of currency transition: Evidence from the euro adoption. European Journal of Political Economy, 45, 89–100. http://doi.org/10.1016/j.ejpoleco.2016.10.002"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#the-basics",
+    "href": "slides/w06-interactions-DiD.html#the-basics",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "The basics:",
+    "text": "The basics:\n\nThe ceteris Paribus\nSelection Bias\nOVB\nQuasi-experimental design: DID\n\nWhy do we need it?"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#interaction-term",
+    "href": "slides/w06-interactions-DiD.html#interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Interaction term",
+    "text": "Interaction term\n\\[\ny = \\beta_0 + \\beta_1 x_1  + \\beta_2 x_2 + \\beta_3 (x_1 \\cdot x_2) + \\beta_4 x_4 + \\epsilon\n\\]\n\nInterpretation is only possible through marginal effects:\n\nPartial derivative of the regression equation with respect to a regressor of interest.\n\n\\(\\frac{\\partial y}{\\partial x_1} = \\beta_1 + \\beta_3 x_2\\) or \\(\\frac{\\partial y}{\\partial x_2} = \\beta_2 + \\beta_3 x_1\\)\n\n\nEffect (slope) of \\(x_1\\) depends on \\(x_2\\) and vice versa."
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#recall-the-hedonic-land-prices-model",
+    "href": "slides/w06-interactions-DiD.html#recall-the-hedonic-land-prices-model",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Recall the hedonic land prices model:",
+    "text": "Recall the hedonic land prices model:\n\\[\n\\text{acrePrice} = \\beta_0 +  \\beta_1 \\text{crpPct} + \\beta_2 \\text{acres} + \\beta_3 \\text{improvements} \\\\\n+ \\beta_4 \\text{year} + \\beta_5 \\text{region}  + e\n\\]\n\nacrePrice - sale price in dollars per acre;\ncrpPct - the percentage of all farm acres enrolled in CRP;\nacres - size of the farm in acres;\nimprovements - share of infrastructure’s value in the land price;\nregion - region in the state Minnesota;\nyear - year of the land sales translation;"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#loading-data",
+    "href": "slides/w06-interactions-DiD.html#loading-data",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Loading data",
+    "text": "Loading data\n\n\n\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(modelsummary)\nlibrary(ggeffects)\nlibrary(marginaleffects)\nlibrary(GGally)\noptions(modelsummary_get = \"broom\")\n## 1. Load the data\ndta <- read_excel(\"land-prices.xlsx\") %>%\n  mutate(improvements  = as.numeric(improvements),\n         development = as.factor(as.integer(improvements > 25)),\n         productivity  = as.numeric(productivity),\n         tillable  = as.numeric(tillable),\n         year = as.factor(year)) %>% \n  select(acrePrice, crpPct, acres, improvements, development, region, year)\n\nglimpse(dta)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#descriptive-statistics",
+    "href": "slides/w06-interactions-DiD.html#descriptive-statistics",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\ndatasummary(\n    acrePrice + crpPct + acres + improvements + as.integer(development) ~ \n      (mean + sd + min + median + max) * \n      Arguments(na.rm = TRUE),\n    data = dta, \n    output = \"html\"\n  )\n\n\n\n\n\n \n  \n      \n    mean \n    sd \n    min \n    median \n    max \n  \n \n\n  \n    acrePrice \n    2787.33 \n    1914.04 \n    108.00 \n    2442.00 \n    15000.00 \n  \n  \n    crpPct \n    4.16 \n    17.17 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    acres \n    112.69 \n    128.46 \n    1.00 \n    80.00 \n    6970.00 \n  \n  \n    improvements \n    4.49 \n    12.94 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    as.integer(development) \n    1.08 \n    0.26 \n    1.00 \n    1.00 \n    2.00"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#descriptive-plots",
+    "href": "slides/w06-interactions-DiD.html#descriptive-plots",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Descriptive Plots",
+    "text": "Descriptive Plots\n\ndta %>%\n  select(acrePrice, crpPct, acres, improvements, development) %>%\n  ggpairs(aes(colour = development, alpha = 0.2))"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#basic-regressions",
+    "href": "slides/w06-interactions-DiD.html#basic-regressions",
+    "title": "Difference in Difference (DID)",
+    "section": "Basic regressions",
+    "text": "Basic regressions\n\nfit1 <- \n  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),\n     data = dta)\n\n\ncust_summ <- function(x, coef_omit = \"reg|year\", ...) {\n  x <- set_names(x, str_c(\"Model \", seq_along(x)))\n  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, \": \", as.character(.x$call)[[2]])}) %>% \n    str_c(collapse = \"\\n\")\n  \n  modelsummary(\n    x,\n    estimate = \"{estimate}{stars} ({std.error})\",\n    statistic = NULL,\n    output = \"html\",\n    gof_omit =  c(\"AIC|BIC|Log|F|RMS\"), \n    coef_omit = coef_omit,\n    notes = all_eq,\n    ...\n  )\n}"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#interprete-the-baseline-results",
+    "href": "slides/w06-interactions-DiD.html#interprete-the-baseline-results",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Interprete the baseline results",
+    "text": "Interprete the baseline results\n\ncust_summ(list(fit1))\n\n\n\n \n  \n      \n    Model 1 \n  \n \n\n  \n    (Intercept) \n    2019.877*** (65.416) \n  \n  \n    acres \n    −0.857*** (0.086) \n  \n  \n    development1 \n    1555.287*** (41.467) \n  \n  \n    crpPct \n    −8.892*** (0.645) \n  \n  \n    Num.Obs. \n    18650 \n  \n  \n    R2 \n    0.413 \n  \n  \n    R2 Adj. \n    0.412 \n  \n\n\n Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors",
+    "href": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors",
+    "title": "Difference in Difference (DID)",
+    "section": "Fitted values vs predictors",
+    "text": "Fitted values vs predictors\n\n\n\nlibrary(ggeffects)\nggpredict(fit1, terms = \"acres\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\nggpredict(fit1, terms = \"development\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors-2",
+    "href": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors-2",
+    "title": "Difference in Difference (DID)",
+    "section": "Fitted values vs predictors (2)",
+    "text": "Fitted values vs predictors (2)\n\nggpredict(fit1, terms = c(\"acres\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#adding-an-interaction-term",
+    "href": "slides/w06-interactions-DiD.html#adding-an-interaction-term",
+    "title": "Difference in Difference (DID)",
+    "section": "Adding an interaction term",
+    "text": "Adding an interaction term\n\nfit2 <- \n  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2))\n\n\n\n\n\n \n  \n      \n    Model 1 \n     Model 2 \n  \n \n\n  \n    (Intercept) \n    2019.877*** (65.416) \n    1997.055*** (64.413) \n  \n  \n    acres \n    −0.857*** (0.086) \n    −0.652*** (0.085) \n  \n  \n    development1 \n    1555.287*** (41.467) \n    2978.491*** (71.424) \n  \n  \n    crpPct \n    −8.892*** (0.645) \n    −9.073*** (0.635) \n  \n  \n    acres × development1 \n     \n    −18.053*** (0.743) \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n  \n  \n    R2 Adj. \n    0.412 \n    0.430 \n  \n\n\n Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)\nModel 2: acrePrice ~ acres * development + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors-with-interaction-term",
+    "href": "slides/w06-interactions-DiD.html#fitted-values-vs-predictors-with-interaction-term",
+    "title": "Difference in Difference (DID)",
+    "section": "Fitted values vs predictors with interaction term",
+    "text": "Fitted values vs predictors with interaction term\n\n\n\nggpredict(fit2, terms = c(\"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"development\", \"acres [0, 10, 50, 100, 200, 250]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#did",
+    "href": "slides/w06-interactions-DiD.html#did",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "DID",
+    "text": "DID\n\n\n\nSource: (de Janvry & Sadoulet, 2021, Chapter 4)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#assumptions",
+    "href": "slides/w06-interactions-DiD.html#assumptions",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nParallel trends\nLinear Additive Effect\nAll other assumption of the linear regression"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#learn-more-about-did",
+    "href": "slides/w06-interactions-DiD.html#learn-more-about-did",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Learn more about DID:",
+    "text": "Learn more about DID:\nWatch: Introduction to Differences-in-Differences https://youtu.be/eiffOVbYvNc\nRead:\n\n(Angrist & Pischke, 2014, Chapter 5)\n(Angrist & Pischke, 2009, also Chapter 5)\n(de Janvry & Sadoulet, 2021, Chapter 4)\n(Card & Krueger, 1994)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#research-question-and-the-setting",
+    "href": "slides/w06-interactions-DiD.html#research-question-and-the-setting",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Research question and the setting",
+    "text": "Research question and the setting\n\nCausal effect of the minimum wage policy on employmnet is not negative.\n\n\n\nTwo states: New Jersey (NJ) and Pennsylvanian (PA)\nTwo time periods: Before and after\nTreatment: Minimal Wage in one state (New Jersey) only"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#geography",
+    "href": "slides/w06-interactions-DiD.html#geography",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Geography",
+    "text": "Geography"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#empirical-problem",
+    "href": "slides/w06-interactions-DiD.html#empirical-problem",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Empirical problem",
+    "text": "Empirical problem\n\\[\nY_{jt} = \\beta_0 + \\beta_1 \\text{NJ}_j  + \\beta_2 \\text{Time}_t  + \\beta_3 (\\text{NJ}_j \\times \\text{Time}_t) + \\beta_4 X_{jt} + \\epsilon_{jt}\n\\]\nWhere:\n\nOutcome: \\(Y_{jt}\\) - Employment level at the key fast food chains, Full Time Equivalent persons.\nTreatment: Minimal wage policy in NJ \\(\\text{NJ}_j\\) indicator variable where 1 = NJ, and 0 = PA.\nTime: $ _t$ indicator variable where 0 = before, and 1 = after.\n\n\n\nWhat are we expecting to find?\nWhat are the expected values of the coefficients?\n\nIf the minimal wage policy reduces employmnet.\nIf the minimal wage policy increases employmnet."
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#practical-exercise-in-r",
+    "href": "slides/w06-interactions-DiD.html#practical-exercise-in-r",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Practical exercise in R",
+    "text": "Practical exercise in R\nFollow pre-recorded video and do it at home."
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#references-1",
+    "href": "slides/w06-interactions-DiD.html#references-1",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nCard, D., & Krueger, A. B. (1994). Minimum wages and employment: A case study of the fast-food industry in new jersey and pennsylvania. The American Economic Review, 84(4), 772–793. Retrieved from http://www.jstor.org/stable/2118030\n\n\nde Janvry, A., & Sadoulet, E. (2021). Development Economics : Theory and Practice. Taylor & Francis Group.\n\n\nOtrachshenko, V., Popova, O., & Tavares, J. (2016). Psychological costs of currency transition: Evidence from the euro adoption. European Journal of Political Economy, 45, 89–100. http://doi.org/10.1016/j.ejpoleco.2016.10.002"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#reporting-results-with-marginal-effects",
+    "href": "slides/w06-interactions-DiD.html#reporting-results-with-marginal-effects",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Reporting results with marginal effects",
+    "text": "Reporting results with marginal effects\n\nReport coefficients \\(\\beta_1\\), \\(\\beta_2\\), \\(\\beta_3\\) as is.\nReport marginal effects at mean values of the interaction terms:\n\n\\(\\text{ME}(x_1) = \\frac{\\partial y}{\\partial x_1} = \\beta_1 + \\beta_3 \\bar x_2\\)\n\\(\\text{ME}(x_2) = \\frac{\\partial y}{\\partial x_2} = \\beta_2 + \\beta_3 \\bar x_1\\)\n\nTo compute standard errors for the marginal eff, we use:\n\nDelta method or Bootstrapping.\n\n\nLearn more: (Angrist & Pischke, 2009, also Chapter 3)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#example-1.-basic-regressions",
+    "href": "slides/w06-interactions-DiD.html#example-1.-basic-regressions",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 1. Basic regressions",
+    "text": "Example 1. Basic regressions\n\nfit1 <- \n  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),\n     data = dta)\n\nsumm <-\n  function(x, coef_omit = \"reg|year\", output = \"html\", notes = NULL, ...) {\n    modelsummary(\n      x,\n      estimate = \"{estimate}{stars} ({std.error})\",\n      statistic = NULL,\n      output = output,\n      gof_omit =  c(\"AIC|BIC|Log|F|RMS\"),\n      coef_omit = coef_omit,\n      notes = notes,\n      ...\n    )\n  }\n\ncust_summ <- function(x, coef_omit = \"reg|year\", output = \"html\", ...) {\n  x <- set_names(x, str_c(\"Model \", seq_along(x)))\n  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, \": \", as.character(.x$call)[[2]])}) %>% \n    str_c(collapse = \"\\n\")\n  summ(x, coef_omit = coef_omit, output = output, notes = all_eq, ...)\n}"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-vs-area-and-development",
+    "href": "slides/w06-interactions-DiD.html#fitted-vs-area-and-development",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area and development",
+    "text": "Fitted vs area and development\n\n\n\n\nlibrary(ggeffects)\nggpredict(fit1, terms = \"acres\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit1, terms = \"development\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-vs-area-and-development-2",
+    "href": "slides/w06-interactions-DiD.html#fitted-vs-area-and-development-2",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area and development (2)",
+    "text": "Fitted vs area and development (2)\n\nggpredict(fit1, terms = c(\"acres\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nWithout an interaction term, dummy variables simply cause shifts in the outcome variable."
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#example-2.-interaction-term-with-a-binary-variable",
+    "href": "slides/w06-interactions-DiD.html#example-2.-interaction-term-with-a-binary-variable",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 2. Interaction term with a binary variable",
+    "text": "Example 2. Interaction term with a binary variable\n\nfit2 <- \n  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2))\n\n\n\n\n\n \n  \n      \n    Model 1 \n     Model 2 \n  \n \n\n  \n    (Intercept) \n    2019.877*** (65.416) \n    1997.055*** (64.413) \n  \n  \n    acres \n    −0.857*** (0.086) \n    −0.652*** (0.085) \n  \n  \n    development1 \n    1555.287*** (41.467) \n    2978.491*** (71.424) \n  \n  \n    crpPct \n    −8.892*** (0.645) \n    −9.073*** (0.635) \n  \n  \n    acres × development1 \n     \n    −18.053*** (0.743) \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n  \n  \n    R2 Adj. \n    0.412 \n    0.430 \n  \n\n\n Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)\nModel 2: acrePrice ~ acres * development + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-vs-development-with-an-interaction-term",
+    "href": "slides/w06-interactions-DiD.html#fitted-vs-development-with-an-interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs development with an interaction term",
+    "text": "Fitted vs development with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"development\", \"acres [0, 10, 50, 100, 200, 250, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-vs-area-with-an-interaction-term",
+    "href": "slides/w06-interactions-DiD.html#fitted-vs-area-with-an-interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area with an interaction term",
+    "text": "Fitted vs area with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#marginal-effect-acres-and-development-at-means",
+    "href": "slides/w06-interactions-DiD.html#marginal-effect-acres-and-development-at-means",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres and development at means",
+    "text": "Marginal Effect acres and development at means\n\nlibrary(marginaleffects)\nmodelsummary(fit2)\nmodelsummary(marginaleffects(fit2))\n\n\n\n\n\n\n\nCoef. as is.\nM.E. at means\n\n\n\n\nacres\n-0.652*** (0.085)\n-2.017*** (0.097)\n\n\ncrpPct\n-9.073*** (0.635)\n-9.073*** (0.635)\n\n\ndevelopment1\n2978.491*** (71.424)\n944.727*** (47.947)\n\n\nacres * development1\n-18.053*** (0.743)\n\n\n\nNum.Obs.\n18650\n18650\n\n\nR2\n0.431\n0.431\n\n\nR2 Adj.\n0.430\n0.430"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#marginal-effect-acres-and-development-visually",
+    "href": "slides/w06-interactions-DiD.html#marginal-effect-acres-and-development-visually",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres and development (visually)",
+    "text": "Marginal Effect acres and development (visually)\n\n\n\n\nplot_slopes(fit2, variables = \"acres\", condition = \"development\") + \n  ylab(\"Marginal effect of acres (slope)\") + xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit2, variables = \"development\", condition = \"acres\") + \n  ylab(\"Marginal effect of development dummy (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#example-1.-interaction-with-a-continious-variable",
+    "href": "slides/w06-interactions-DiD.html#example-1.-interaction-with-a-continious-variable",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 1. Interaction with a continious variable",
+    "text": "Example 1. Interaction with a continious variable\n\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\nNum.Obs.\n18650\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.412\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year) Model 2: acrePrice ~ acres * development + crpPct + region + factor(year) Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#fitted-vs-area-improvements",
+    "href": "slides/w06-interactions-DiD.html#fitted-vs-area-improvements",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area * improvements",
+    "text": "Fitted vs area * improvements\n\n\n\n\nggpredict(fit3, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"improvements [0, 10, 50, 100]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit3, terms = c(\"improvements\", \"acres [1, 50, 100, 200, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Improvements, % of price due to infrastructure\")"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#marginal-effect-acres-improvements-visually",
+    "href": "slides/w06-interactions-DiD.html#marginal-effect-acres-improvements-visually",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres * improvements (visually)",
+    "text": "Marginal Effect acres * improvements (visually)\n\n\n\n\nplot_slopes(fit3, variables = \"acres\", condition = \"improvements\") + \n  ylab(\"Marginal effect of acres (slope)\")  + \n  xlab(\"Improvements, % of price due to infrastructure\")  + \n  scale_y_continuous(n.breaks = 10) \n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit3, variables = \"improvements\", condition = \"acres\") + \n  ylab(\"Marginal effect of improvements (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#reporting-all-regressions-results",
+    "href": "slides/w06-interactions-DiD.html#reporting-all-regressions-results",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Reporting all regressions results",
+    "text": "Reporting all regressions results\n\n\n\n\n \n  \n      \n    Model 1 (no interaction) \n     Model 2 (Area*Development) \n     Model 3 (Area*Improvements) \n  \n \n\n  \n    Area, acres (*) \n    −0.857* (0.350) \n    −2.017*** (0.097) \n    −1.520*** (0.089) \n  \n  \n    crpPct \n    −8.892*** (1.998) \n    −9.073*** (0.635) \n    −8.980*** (0.631) \n  \n  \n    Development status, dummy (*) \n     \n    944.727*** (47.947) \n     \n  \n  \n    Share infrastructure in land price, % (*) \n     \n     \n    25.490*** (0.984) \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n    0.438 \n  \n  \n    R2 Adj. \n    0.412 \n    0.430 \n    0.438 \n  \n\n\n (*) marginal effects of the coefficeints are reported at means of the corresponding interaction terms. Robist standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."
+  },
+  {
+    "objectID": "slides/w06-interactions-DiD.html#takeaway-and-homework",
+    "href": "slides/w06-interactions-DiD.html#takeaway-and-homework",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Takeaway and homework",
+    "text": "Takeaway and homework\n\nMarginal effects.\nDifference between fitted values and marginal effects.\nHomework:\n\nReproduce code from the slides.\nFollow pre-recorded materials with extra calculations."
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#the-basics",
+    "href": "slides/w06b-DiD.html#the-basics",
+    "title": "Difference in Difference",
+    "section": "The basics:",
+    "text": "The basics:\n\nThe ceteris Paribus\nSelection Bias\nOVB\nQuasi-experimental design: DID\n\nWhy do we need it?"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#did",
+    "href": "slides/w06b-DiD.html#did",
+    "title": "Difference in Difference",
+    "section": "DID",
+    "text": "DID\n\n\n\nSource: (de Janvry & Sadoulet, 2021, Chapter 4)"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#assumptions",
+    "href": "slides/w06b-DiD.html#assumptions",
+    "title": "Difference in Difference",
+    "section": "Assumptions",
+    "text": "Assumptions\n\nParallel trends\nLinear Additive Effect\nAll other assumption of the linear regression"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#learn-more-about-did",
+    "href": "slides/w06b-DiD.html#learn-more-about-did",
+    "title": "Difference in Difference",
+    "section": "Learn more about DID:",
+    "text": "Learn more about DID:\nWatch: Introduction to Differences-in-Differences https://youtu.be/eiffOVbYvNc\nRead:\n\n(Angrist & Pischke, 2014, Chapter 5)\n(Angrist & Pischke, 2009, also Chapter 5)\n(de Janvry & Sadoulet, 2021, Chapter 4)\n(Card & Krueger, 1994)"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#research-question-and-the-setting",
+    "href": "slides/w06b-DiD.html#research-question-and-the-setting",
+    "title": "Difference in Difference",
+    "section": "Research question and the setting",
+    "text": "Research question and the setting\n\nCausal effect of the minimum wage policy on employmnet is not negative.\n\n\n\nTwo states: New Jersey (NJ) and Pennsylvanian (PA)\nTwo time periods: Before and after\nTreatment: Minimal Wage in one state (New Jersey) only"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#geography",
+    "href": "slides/w06b-DiD.html#geography",
+    "title": "Difference in Difference",
+    "section": "Geography",
+    "text": "Geography"
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#empirical-problem",
+    "href": "slides/w06b-DiD.html#empirical-problem",
+    "title": "Difference in Difference",
+    "section": "Empirical problem",
+    "text": "Empirical problem\n\\[\nY_{jt} = \\beta_0 + \\beta_1 \\text{NJ}_j  + \\beta_2 \\text{Time}_t  + \\beta_3 (\\text{NJ}_j \\times \\text{Time}_t) + \\beta_4 X_{jt} + \\epsilon_{jt}\n\\]\nWhere:\n\nOutcome: \\(Y_{jt}\\) - Employment level at the key fast food chains, Full Time Equivalent persons.\nTreatment: Minimal wage policy in NJ \\(\\text{NJ}_j\\) indicator variable where 1 = NJ, and 0 = PA.\nTime: \\(\\text{Time}_t\\) indicator variable where 0 = before, and 1 = after.\n\n\n\nWhat are we expecting to find?\nWhat are the expected values of the coefficients?\n\nIf the minimal wage policy reduces employmnet.\nIf the minimal wage policy increases employmnet."
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#practical-exercise-in-r",
+    "href": "slides/w06b-DiD.html#practical-exercise-in-r",
+    "title": "Difference in Difference",
+    "section": "Practical exercise in R",
+    "text": "Practical exercise in R\nFollow pre-recorded video and do it at home."
+  },
+  {
+    "objectID": "slides/w06b-DiD.html#references-1",
+    "href": "slides/w06b-DiD.html#references-1",
+    "title": "Difference in Difference",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nCard, D., & Krueger, A. B. (1994). Minimum wages and employment: A case study of the fast-food industry in new jersey and pennsylvania. The American Economic Review, 84(4), 772–793. Retrieved from http://www.jstor.org/stable/2118030\n\n\nde Janvry, A., & Sadoulet, E. (2021). Development Economics : Theory and Practice. Taylor & Francis Group.\n\n\nOtrachshenko, V., Popova, O., & Tavares, J. (2016). Psychological costs of currency transition: Evidence from the euro adoption. European Journal of Political Economy, 45, 89–100. http://doi.org/10.1016/j.ejpoleco.2016.10.002"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#the-basics",
+    "href": "slides/w06a-interactions.html#the-basics",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "The basics:",
+    "text": "The basics:\n\nThe ceteris Paribus\nSelection Bias\nOVB\nQuasi-experimental design: DID\n\nWhy do we need it?"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#interaction-term",
+    "href": "slides/w06a-interactions.html#interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Interaction term",
+    "text": "Interaction term\n\\[\ny = \\beta_0 + \\beta_1 x_1  + \\beta_2 x_2 + \\beta_3 (x_1 \\cdot x_2) + \\beta_4 x_4 + \\epsilon\n\\]\n\nInterpretation is only possible through marginal effects:\n\n\nMarginal effect is a partial derivative of the regression equation with respect to a regressor of interest evaluated at certain value of the interaction term.\n\n\n\\(\\frac{\\partial y}{\\partial x_1} = \\beta_1 + \\beta_3 x_2\\)\n\\(\\frac{\\partial y}{\\partial x_2} = \\beta_2 + \\beta_3 x_1\\)\n\n\nMarginal Effect (the slope) of \\(x_1\\) depends on \\(x_2\\) and vice versa."
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#reporting-results-with-marginal-effects",
+    "href": "slides/w06a-interactions.html#reporting-results-with-marginal-effects",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Reporting results with marginal effects",
+    "text": "Reporting results with marginal effects\n\nReport coefficients \\(\\beta_1\\), \\(\\beta_2\\), \\(\\beta_3\\) as is.\nReport marginal effects at mean values of the interaction term(s):\n\n\\(\\text{ME}(\\bar x_1) = \\beta_1 + \\beta_3 \\bar x_2\\)\n\\(\\text{ME}(\\bar x_2) = \\beta_2 + \\beta_3 \\bar x_1\\)\n\nTo compute standard errors for the marginal effects, we use delta method.\n\nLearn more: (Angrist & Pischke, 2009, also Chapter 3)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#recall-the-hedonic-land-prices-model",
+    "href": "slides/w06a-interactions.html#recall-the-hedonic-land-prices-model",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Recall the hedonic land prices model:",
+    "text": "Recall the hedonic land prices model:\n\\[\n\\text{acrePrice} = \\beta_0 +  \\beta_1 \\text{crpPct} + \\beta_2 \\text{acres} + \\beta_3 \\text{improvements} \\\\\n+ \\beta_4 \\text{year} + \\beta_5 \\text{region}  + e\n\\]\n\nacrePrice - sale price in dollars per acre;\ncrpPct - the percentage of all farm acres enrolled in CRP;\nacres - size of the farm in acres;\nimprovements - share of infrastructure’s value in the land price;\ndevelopment - dummy variable aliased with improvements. Is 1 when improvements > 25% and is 0 otherwise.\nregion - region in the state Minnesota;\nyear - year of the land sales translation;"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#loading-data",
+    "href": "slides/w06a-interactions.html#loading-data",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Loading data",
+    "text": "Loading data\n\n\n\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(modelsummary)\nlibrary(ggeffects)\nlibrary(marginaleffects)\nlibrary(GGally)\noptions(modelsummary_get = \"broom\")\n## 1. Load the data\ndta <- read_excel(\"land-prices.xlsx\") %>%\n  mutate(improvements  = as.numeric(improvements),\n         development = as.factor(as.integer(improvements > 25)),\n         productivity  = as.numeric(productivity),\n         tillable  = as.numeric(tillable),\n         year = as.factor(year)) %>% \n  select(acrePrice, crpPct, acres, improvements, development, region, year)\n\nglimpse(dta)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#descriptive-statistics",
+    "href": "slides/w06a-interactions.html#descriptive-statistics",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Descriptive statistics",
+    "text": "Descriptive statistics\n\ndatasummary(\n    acrePrice + crpPct + acres + improvements + as.integer(development) ~ \n      (mean + sd + min + median + max) * \n      Arguments(na.rm = TRUE),\n    data = dta, \n    output = \"html\"\n  )\n\n\n\n\n\n \n  \n      \n    mean \n    sd \n    min \n    median \n    max \n  \n \n\n  \n    acrePrice \n    2787.33 \n    1914.04 \n    108.00 \n    2442.00 \n    15000.00 \n  \n  \n    crpPct \n    4.16 \n    17.17 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    acres \n    112.69 \n    128.46 \n    1.00 \n    80.00 \n    6970.00 \n  \n  \n    improvements \n    4.49 \n    12.94 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    as.integer(development) \n    1.08 \n    0.26 \n    1.00 \n    1.00 \n    2.00"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#descriptive-plots",
+    "href": "slides/w06a-interactions.html#descriptive-plots",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Descriptive Plots",
+    "text": "Descriptive Plots\n\ndta %>%\n  select(acrePrice, crpPct, acres, improvements, development) %>%\n  ggpairs(aes(colour = development, alpha = 0.2))"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#example-1.-basic-regressions",
+    "href": "slides/w06a-interactions.html#example-1.-basic-regressions",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 1. Basic regressions",
+    "text": "Example 1. Basic regressions\n\nfit1 <- \n  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),\n     data = dta)\n\nsumm <-\n  function(x, coef_omit = \"reg|year\", output = \"html\", notes = NULL, ...) {\n    modelsummary(\n      x,\n      estimate = \"{estimate}{stars} ({std.error})\",\n      statistic = NULL,\n      output = output,\n      gof_omit =  c(\"AIC|BIC|Log|F|RMS\"),\n      coef_omit = coef_omit,\n      notes = notes,\n      ...\n    )\n  }\n\ncust_summ <- function(x, coef_omit = \"reg|year\", output = \"markdown\", ...) {\n  x <- set_names(x, str_c(\"Model \", seq_along(x)))\n  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, \": \", as.character(.x$call)[[2]])}) %>% \n    str_c(collapse = \"</br>\")\n  summ(x, coef_omit = coef_omit, output = output, notes = all_eq, ...)\n}"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#interpret-the-baseline-results",
+    "href": "slides/w06a-interactions.html#interpret-the-baseline-results",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Interpret the baseline results",
+    "text": "Interpret the baseline results\n\ncust_summ(list(fit1))\n\n\n\n\n\nModel 1\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n\n\nacres\n-0.857*** (0.086)\n\n\ndevelopment1\n1555.287*** (41.467)\n\n\ncrpPct\n-8.892*** (0.645)\n\n\nNum.Obs.\n18650\n\n\nR2\n0.413\n\n\nR2 Adj.\n0.412\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#fitted-vs-area-and-development",
+    "href": "slides/w06a-interactions.html#fitted-vs-area-and-development",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area and development",
+    "text": "Fitted vs area and development\n\n\n\n\nlibrary(ggeffects)\nggpredict(fit1, terms = \"acres\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit1, terms = \"development\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#fitted-vs-area-and-development-2",
+    "href": "slides/w06a-interactions.html#fitted-vs-area-and-development-2",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area and development (2)",
+    "text": "Fitted vs area and development (2)\n\n\n\n\nggpredict(fit1, terms = c(\"acres\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nWithout an interaction term, dummy variables simply cause shifts in the outcome variable."
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#example-2.-interaction-term-with-a-binary-variable",
+    "href": "slides/w06a-interactions.html#example-2.-interaction-term-with-a-binary-variable",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 2. Interaction term with a binary variable",
+    "text": "Example 2. Interaction term with a binary variable\n\nfit2 <- \n  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2))\n\n\n\n\n\n\n\nModel 1\nModel 2\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\nNum.Obs.\n18650\n18650\n\n\nR2\n0.413\n0.431\n\n\nR2 Adj.\n0.412\n0.430\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#fitted-vs-development-with-an-interaction-term",
+    "href": "slides/w06a-interactions.html#fitted-vs-development-with-an-interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs development with an interaction term",
+    "text": "Fitted vs development with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"development\", \"acres [0, 10, 50, 100, 200, 250, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#fitted-vs-area-with-an-interaction-term",
+    "href": "slides/w06a-interactions.html#fitted-vs-area-with-an-interaction-term",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area with an interaction term",
+    "text": "Fitted vs area with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#marginal-effect-acres-and-development-at-means",
+    "href": "slides/w06a-interactions.html#marginal-effect-acres-and-development-at-means",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres and development at means",
+    "text": "Marginal Effect acres and development at means\n\nlibrary(marginaleffects)\nmodelsummary(fit2)\nmodelsummary(marginaleffects(fit2))\n\n\n\n\n\n \n  \n      \n    Coef. as is \n    M.E. at means \n  \n \n\n  \n    acres \n    −0.652*** (0.085) \n    −2.017*** (0.097) \n  \n  \n    crpPct \n    −9.073*** (0.635) \n    −9.073*** (0.635) \n  \n  \n    development1 \n    2978.491*** (71.424) \n    944.727*** (47.947) \n  \n  \n    acres * development1 \n    −18.053*** (0.743) \n     \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n  \n  \n    R2 \n    0.431 \n    0.431 \n  \n  \n    R2 Adj. \n    0.430 \n    0.430"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#marginal-effect-acres-and-development-visually",
+    "href": "slides/w06a-interactions.html#marginal-effect-acres-and-development-visually",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres and development (visually)",
+    "text": "Marginal Effect acres and development (visually)\n\n\n\n\nplot_slopes(fit2, variables = \"acres\", condition = \"development\") + \n  ylab(\"Marginal effect of acres (slope)\") + xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit2, variables = \"development\", condition = \"acres\") + \n  ylab(\"Marginal effect of development dummy (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#example-1.-interaction-with-a-continuous-variable",
+    "href": "slides/w06a-interactions.html#example-1.-interaction-with-a-continuous-variable",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 1. Interaction with a continuous variable",
+    "text": "Example 1. Interaction with a continuous variable\n\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\nNum.Obs.\n18650\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.412\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year) Model 2: acrePrice ~ acres * development + crpPct + region + factor(year) Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#fitted-vs-area-improvements",
+    "href": "slides/w06a-interactions.html#fitted-vs-area-improvements",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Fitted vs area * improvements",
+    "text": "Fitted vs area * improvements\n\n\n\n\nggpredict(fit3, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"improvements [0, 10, 50, 100]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit3, terms = c(\"improvements\", \"acres [1, 50, 100, 200, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Improvements, % of price due to infrastructure\")"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#marginal-effect-acres-improvements-visually",
+    "href": "slides/w06a-interactions.html#marginal-effect-acres-improvements-visually",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Marginal Effect acres * improvements (visually)",
+    "text": "Marginal Effect acres * improvements (visually)\n\n\n\n\nplot_slopes(fit3, variables = \"acres\", condition = \"improvements\") + \n  ylab(\"Marginal effect of acres (slope)\")  + \n  xlab(\"Improvements, % of price due to infrastructure\")  + \n  scale_y_continuous(n.breaks = 10) \n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit3, variables = \"improvements\", condition = \"acres\") + \n  ylab(\"Marginal effect of improvements (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#reporting-all-regressions-results",
+    "href": "slides/w06a-interactions.html#reporting-all-regressions-results",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Reporting all regressions results",
+    "text": "Reporting all regressions results\n\n\n\n\n \n  \n      \n    Model 1 (no interaction) \n     Model 2 (Area*Development) \n     Model 3 (Area*Improvements) \n  \n \n\n  \n    Area, acres (*) \n    −0.857* (0.350) \n    −2.017*** (0.097) \n    −1.520*** (0.089) \n  \n  \n    crpPct \n    −8.892*** (1.998) \n    −9.073*** (0.635) \n    −8.980*** (0.631) \n  \n  \n    Development status, dummy (*) \n     \n    944.727*** (47.947) \n     \n  \n  \n    Share infrastructure in land price, % (*) \n     \n     \n    25.490*** (0.984) \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n    0.438 \n  \n  \n    R2 Adj. \n    0.412 \n    0.430 \n    0.438 \n  \n\n\n (*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#takeaway-and-homework-1",
+    "href": "slides/w06a-interactions.html#takeaway-and-homework-1",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Takeaway and homework",
+    "text": "Takeaway and homework\n\nMarginal effects.\nDifference between fitted values and marginal effects.\nHomework:\n\nReproduce code from the slides.\nFollow pre-recorded materials with extra calculations."
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#references-1",
+    "href": "slides/w06a-interactions.html#references-1",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828"
+  },
+  {
+    "objectID": "slides/w06a-interactions.html#example-3.-interaction-with-a-continuous-variable",
+    "href": "slides/w06a-interactions.html#example-3.-interaction-with-a-continuous-variable",
+    "title": "Interaction terms in MLR and Difference in Difference (DID)",
+    "section": "Example 3. Interaction with a continuous variable",
+    "text": "Example 3. Interaction with a continuous variable\n\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\nNum.Obs.\n18650\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.412\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
   }
 ]

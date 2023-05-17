@@ -1,0 +1,98 @@
+---
+title: "Reproducing the psychological costs of currency transition: evidence from the euro adoption papre."
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE
+  )
+```
+
+## Introduction
+
+The goal of this exercise is to reproduce results of the paper "Psychological costs of currency transition: evidence from the euro adoption" published by Otrachshenko et al in 2016 in the European Journal of Political Economy. This paper employed a difference in difference (DID/DD) approach for estimating a causal effect of transition to Euro in Slovakia on the individuals' satisfaction with their economy.
+
+Authors estimate a simple model of individuals $i$ satisfaction with the economic situation in the sub-region $j$ and time period $t$ as a function of control variables $x^{'}_{ijt}$, regional fixed effect $\text{Region}^{'}_{j}$, indicator variable for Slovakia $\text{Slovak}_i$ and dummy variable that indicates that time period 2010 ($\text{y2010}_t$), after the transition to euro currency. 
+
+$$
+\text{Satisfaction}_{ijt} = \beta_0 + \beta_1 \text{y2010}_t + \beta_2  \text{Slovak}_i +  \alpha_{DD} (\text{Slovak}_i \cdot \text{y2010}_t) + \gamma x^{'}_{ijt}+ \eta \text{Region}^{'}_{j} + \epsilon_{ijt}
+$$
+
+
+
+-   What is our variable of interest?
+
+-   What effect do we expect to find?
+
+## Load and explore the data
+
+```{r}
+library(tidyverse)
+library(modelsummary)
+library(car)
+library(performance)
+dta <- read_dta("otrachshenko2016.dta")
+```
+
+
+Glimpse at the data and identify, what does each observations stands for?
+
+```{r}
+```
+
+
+## Explore the data
+
+Using `count()` calculate how many observations are in each country/region/year.
+
+
+```{r}
+```
+
+Plot a distribution of the satisfaction variable (add a country and year dimension).
+
+```{r}
+```
+
+
+Plot a box plot of the satisfaction by region and year.
+
+```{r}
+```
+
+
+### Symmary statistics
+
+Descriptive statistics by year of some key variables:
+
+```{r}
+```
+
+## Regression analysis
+
+```{r}
+```
+
+
+### Testing the assumptions
+
+#### Visually
+
+```{r}
+```
+
+#### Varience homogeneity
+
+```{r}
+```
+
+#### Collinearity
+
+```{r}
+```
+

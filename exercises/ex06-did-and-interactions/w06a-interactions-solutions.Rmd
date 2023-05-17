@@ -1,0 +1,265 @@
+---
+title: "Interaction terms"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE
+  )
+```
+
+Our goal is to improve on the regression covered in the class and resolve the non-linearity problem that is present there. Then we will proceed to interpreting the interaction terms.
+
+# Loading and exploring data
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(modelsummary)
+library(ggeffects)
+library(marginaleffects)
+library(performance)
+library(GGally)
+library(car)
+
+## 1. Load the data
+dta <-
+  read_excel("land-prices.xlsx") %>%
+  mutate(improvements  = as.numeric(improvements),
+         development = as.factor(as.integer(improvements > 25)),
+         productivity  = as.numeric(productivity),
+         tillable  = as.numeric(tillable),
+         year = as.factor(year)) %>% 
+  select(acrePrice, crpPct, acres, improvements, development, region, year)
+
+```
+
+## Summary statistics
+
+```{r}
+n_nonmis <- function(x, ...) as.character(round(sum(!is.na(x)), 0))
+datasummary(
+    acrePrice + log(acrePrice) + 
+      crpPct + 
+      acres + log(acres) +
+      improvements ~ 
+      ((`N non-missing` = n_nonmis) + mean + sd + min + median + max) * 
+      Arguments(na.rm = TRUE),
+    data = dta
+  )
+```
+
+## Base linear regression
+
+```{r}
+fit3 <- lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),
+           data = dta)
+check_model(fit3, check = c("linearity", "homogeneity"))
+```
+
+Calculating marginal effects manually
+
+```{r}
+coef(fit3)[["acres"]] + coef(fit3)[["acres:improvements"]] * mean(dta$improvements, na.rm = TRUE) 
+coef(fit3)[["improvements"]] + coef(fit3)[["acres:improvements"]] * mean(dta$acres, na.rm = TRUE) 
+```
+
+Calculating standard errors using delta method
+
+```{r}
+library(car)
+library(sandwich)
+deltaMethod(fit3, g. = "acres + `acres:improvements` * 4.492922")
+
+# With clustered SE
+deltaMethod(fit3, g. = "acres + `acres:improvements` * 4.492922",
+            vcov. = sandwich::vcovCL(fit3, cluster = ~region))
+
+deltaMethod(fit3, g. = "improvements + `acres:improvements` * 112.6855")
+
+# With clustered SE
+deltaMethod(fit3, g. = "improvements + `acres:improvements` * 112.6855",
+            vcov. = sandwich::vcovCL(fit3, cluster = ~region))
+```
+
+Same using `slopes` function:
+
+```{r}
+slopes(fit3, variables = c("acres", "improvements"), 
+       slope = "dydx", 
+       newdata = "mean")
+slopes(fit3, variables = c("acres", "improvements"), 
+       slope = "dydx", newdata = "mean", 
+       vcov = ~region)
+```
+
+Displaying model results and marginal effects.
+
+```{r}
+modelsummary(
+  list(
+    `Regression as is` = fit3,
+    `Marginal Effects` =
+      slopes(fit3, variables = c("acres", "improvements", "crpPct"), 
+             slope = "dydx", newdata = "mean", 
+             vcov = ~region)
+  ), 
+  estimate = "{estimate}{stars} ({std.error})",
+  fmt = 1,
+  statistic = NULL,
+  vcov = list(~region, NULL), 
+  coef_omit = "reg|year",
+  coef_map = c("acres" = "Area, ha",
+               "improvements" = "Improvements, %",
+               "crpPct" = "Subsidy, ha",
+               "acres:improvements" = "Area * Improvements"
+               ),
+  gof_omit = "AIC|BIC|F|Log|RMS"
+  )
+```
+
+Marginal effects at an arbitrary point of the interaction term.
+
+```{r}
+slopes(fit3, 
+       variables = c("improvements"), 
+       slope = "dydx", 
+       vcov = ~ region, 
+       newdata = datagrid(acres = fivenum(dta$acres)))
+```
+
+## Log-log regression
+
+```{r}
+fit4a <- 
+  lm(lprice  ~ larea * improvements + crpPct + region + factor(year),
+     data = dta %>% mutate(larea = log(acres), lprice = log(acrePrice)))
+```
+
+Marginal effect of the $\log x$ on the $\log y$ (elasticity): $\frac{\partial \log y}{\partial \log x}$.
+
+Using `margins` package:
+
+```{r}
+library(margins)
+summary(margins(fit4a,
+                variables  = c("larea", "improvements"),
+                vcov = sandwich::vcovCL(fit4a, cluster = ~region)))
+```
+
+ME with slopes
+
+```{r}
+slopes(fit4a,
+       variables = c("larea", "improvements"), 
+       slope = "dydx", 
+       vcov = ~ region, 
+       newdata = "mean")
+```
+
+ME manually
+
+```{r}
+mean(model.frame(fit4a)$improvements)
+deltaMethod(fit4a, g. = "larea + `larea:improvements` * 4.492922",
+            vcov. = sandwich::vcovCL(fit4a, cluster = ~region))
+
+mean(model.frame(fit4a)$larea)
+deltaMethod(
+  fit4a, g. = "improvements + `larea:improvements` * 4.419874",
+  vcov. = sandwich::vcovCL(fit4a, cluster = ~region))
+```
+
+Me at specific values of interaction terms
+
+```{r}
+# ME with slopes
+slopes(
+  fit4a,
+  variables = c("improvements"),
+  slope = "dydx",
+  vcov = ~ region,
+  newdata = datagrid(larea = log(fivenum(dta$acres)))
+)
+
+slopes(
+  fit4a,
+  variables = c("larea"),
+  slope = "dydx",
+  vcov = ~ region,
+  newdata = datagrid(improvements = c(1, 25, 50, 75, 100))
+)
+```
+
+
+Marginal effect of $x$ on $y$ level-level equivalent: $\frac{\partial y}{\partial x}$.
+
+```{r}
+fit4 <- 
+  lm(log(acrePrice) ~ log(acres) * improvements + crpPct + region + factor(year),
+     data = dta)
+
+# using margins package
+summary(margins(fit4, variables  = c("acres", "improvements")))
+
+# using Margins package
+avg_slopes(
+  fit4,
+  variables = c("acres", "improvements"),
+  slope = "dydx"
+)
+```
+
+
+Me at specific values of interaction terms.
+
+```{r}
+# ME with slopes
+slopes(
+  fit4,
+  variables = c("improvements"),
+  slope = "dydx",
+  vcov = ~ region,
+  newdata = datagrid(acres = fivenum(dta$acres))
+)
+```
+
+## Reporting and interpreting the results
+
+```{r}
+modelsummary(
+  list(
+    `Level-level` = fit3,
+    `Log-log` = fit4a,
+    `Level-level (ME)` = 
+      slopes(fit3,
+             variables = c("acres", "crpPct", "improvements"), 
+             slope = "dydx", vcov = ~ region, newdata = "mean"),
+    `Log-log (ME)` = 
+      slopes(fit4a,
+             variables = c("larea", "crpPct", "improvements"), 
+             slope = "dydx", vcov = ~ region, newdata = "mean")
+      
+  ), 
+  estimate = "{estimate}{stars} ({std.error})",
+  # fmt = fmt_significant(2),
+  statistic = NULL,
+  vcov = list(~region, ~region, NULL, NULL), 
+  coef_omit = "reg|year",
+  coef_map = c("acres" = "Area, ha",
+               "larea" = "Area, ha",
+               "improvements" = "Improvements, %",
+               "crpPct" = "Subsidy, ha",
+               "acres:improvements" = "Area * Improvements"
+               ),
+  gof_omit = "AIC|BIC|F|Log|RMS"
+  )
+```
+

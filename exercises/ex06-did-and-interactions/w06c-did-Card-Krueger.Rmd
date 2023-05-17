@@ -1,0 +1,75 @@
+---
+title: "Reproducing Card and Krueger 1994 paper"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE
+  )
+```
+
+# Loading and exploring data
+
+```{r}
+library(tidyverse)
+library(GGally)
+library(modelsummary)
+library(performance)
+library(lmtest)
+
+dta <- read_rds("CardKrueger1994.rds") %>% 
+  select(NJ, time, ncalls, inctime, firstinc, open, emptot, 
+         pct_fte, wage_st, hrsopen, nregs, nregs11, bonus, chain, co_owned,
+         observation, state, sheet)
+glimpse(dta)
+```
+
+Present variables:
+
+-   sheet - sheet number (unique store id) 
+-   chain - chain 1=bk; 2=kfc; 3=roys; 4=wendys 
+-   co_owned - 1 if company owned 
+-   state - 1 if NJ; 0 if Pa 
+-   ncalls - number of call-backs*
+-   wage_st - starting wage ($/hr) 
+-   inctime - months to usual first raise 
+-   firstinc - usual amount of first raise ($/hr) 
+-   bonus - 1 if cash bounty for new workers 
+-   pctaff - % employees affected by new minimum 
+-   meals - free/reduced price code 
+-   open - hour of opening 
+-   hrsopen - number hrs open per day 
+-   psoda - price of medium soda, including tax 
+-   pfry - price of small fries, including tax 
+-   pentree - price of entree, including tax 
+-   nregs - number of cash registers in store 
+-   nregs11 - number of registers open at 11:00 am 
+-   region - region of restaurant 
+-   emptot - Total employment in a firm, FTE
+-   pct_fte - Share of permanent employees, %
+-   hrsopen - number hrs open per day
+
+
+## Descriptive statistics
+
+Summarize key variables 
+
+```{r}
+```
+
+Perform t-test of means difference between groups by treatment status and the state.
+
+```{r}
+```
+
+## DiD estimators
+
+```{r}
+```
+
+
