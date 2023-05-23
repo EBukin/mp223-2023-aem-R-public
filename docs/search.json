@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nw07-OVB + pdf\nex07-ovb.zip - R project with code and data"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -2126,5 +2126,159 @@
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Example 3. Interaction with a continuous variable",
     "text": "Example 3. Interaction with a continuous variable\n\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\nNum.Obs.\n18650\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.412\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#long-model",
+    "href": "slides/w07-OVB.html#long-model",
+    "title": "Omitted Variable Bias",
+    "section": "Long Model",
+    "text": "Long Model\n\nA regression model that we wish to have.\n\n\n\\[Y_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma A_i + e^l_i\\]\nwhere:\n\n\n\\(Y_i\\) is the outcome variable;\n\\(P_i\\) is the key variable of interest;\n\\(A_i\\) is the omitted variable;\n\\(\\alpha ^ l\\) , \\(\\beta ^ l\\) are true regression coefficients;\n\\(\\gamma\\) is the effect of omitted variable in long;\n\\(e^l_i\\) true error terms."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#short-model",
+    "href": "slides/w07-OVB.html#short-model",
+    "title": "Omitted Variable Bias",
+    "section": "Short model",
+    "text": "Short model\n\nIs a model that we actually have, which omits one important variable (\\(A_i\\)) from the long model.\n\n\n\\[Y_i = \\alpha ^ s + \\beta^s P_i + e^s_i\\]\nwhere:\n\n\n\\(Y_i\\) is the outcome variable;\n\\(P_i\\) is the key variable of interest;\n\\(\\alpha ^ s\\) , \\(\\beta ^ s\\) are the estimates of regression coefficients in the short model;\n\\(e^s_i\\) error terms."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#omitted-variable-bias-1",
+    "href": "slides/w07-OVB.html#omitted-variable-bias-1",
+    "title": "Omitted Variable Bias",
+    "section": "Omitted Variable Bias (1)",
+    "text": "Omitted Variable Bias (1)\nOmitting variable \\(A_i\\) in the short model causes bias of \\(\\beta^s\\).\n\n\\[\n\\beta^s = \\beta^l + \\text{OVB}\n\\]\n\n\nWe can measure Omitted Variable Bias (\\(\\text{OVB}\\)) as:\n\\[\n\\text{OVB} =  \\beta^s - \\beta^l\n\\]"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#omitted-variable-bias-happens-when",
+    "href": "slides/w07-OVB.html#omitted-variable-bias-happens-when",
+    "title": "Omitted Variable Bias",
+    "section": "Omitted Variable Bias happens when:",
+    "text": "Omitted Variable Bias happens when:\n\n\n\\(P_i\\) and \\(A_i\\) relates to each other:\n\n\\(E[A_i|P_i] \\neq 0\\) ; or\n\n\\(A_i\\) and \\(Y_i\\) relates to each other:\n\n\\(E[Y_i| A_i] \\neq 0\\) in the long regression or \\(\\gamma \\neq 0\\);"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#auxiliary-regression",
+    "href": "slides/w07-OVB.html#auxiliary-regression",
+    "title": "Omitted Variable Bias",
+    "section": "Auxiliary regression",
+    "text": "Auxiliary regression\n\nIs a regression of omitted variable (\\(A_i\\)) on treatment \\(P_i\\) and other regressors in short (if any).\n\n\n\\[\nA_i = \\pi_0 + \\pi_1 P_i + u_i\n\\]\n\n\n\nAuxiliary regression helps us to calculate the \\(\\text{OVB}\\)."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#omitted-variable-bias-2",
+    "href": "slides/w07-OVB.html#omitted-variable-bias-2",
+    "title": "Omitted Variable Bias",
+    "section": "Omitted Variable Bias (2)",
+    "text": "Omitted Variable Bias (2)\nWith:\n\nLong: \\(Y_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma A_i + e^l_i\\);\nShort: \\(Y_i = \\alpha ^ s + \\beta^s P_i + e^s_i\\);\nAuxiliary: \\(A_i = \\pi_0 + \\pi_1 P_i + u_i\\);\n\n\nWe can measure Omitted Variable Bias as:\n\\[\\text{OVB} = \\beta^s - \\beta^l\\]\n\n\n\\[\\text{OVB} = \\pi_1 \\times \\gamma\\]"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#math-behind-the-ovb",
+    "href": "slides/w07-OVB.html#math-behind-the-ovb",
+    "title": "Omitted Variable Bias",
+    "section": "Math behind the OVB",
+    "text": "Math behind the OVB\n\nLong: \\(Y_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma A_i + e^l_i\\);\nShort: \\(Y_i = \\alpha ^ s + \\beta^s P_i + e^s_i\\);\nAuxiliary: \\(A_i = \\pi_0 + \\pi_1 P_i + u_i\\);\n\n\n\nLet us substitute \\(A_i\\) in the long with Auxiliary regression:\n\n\n\n\\[\n\\Rightarrow Y_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma \\{\\pi_0 + \\pi_1 P_i + u \\} + e^l_i\n\\]\n\n\n\\[\n\\Rightarrow Y_i = \\underbrace{\\alpha ^ l +  \\gamma \\pi_0}_{\\alpha ^ s}\n+ \\underbrace{(\\beta ^ l  + \\gamma \\pi_1)}_{\\beta^s} P_i\n+ \\underbrace{e^l_i + \\gamma u_i}_{e^s_i}\n\\]\n\nWe obtain our short regression, where every estimate is biased."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#how-to-resolve-the-ovb",
+    "href": "slides/w07-OVB.html#how-to-resolve-the-ovb",
+    "title": "Omitted Variable Bias",
+    "section": "How to resolve the OVB?",
+    "text": "How to resolve the OVB?\n\n\nNo solution!\n\nProxies;\nResearch design (Panel Regression/DiD, RDD);\n\nAcknowledge presence of the OVB;\nDiscuss the bias;"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#mincer-equation",
+    "href": "slides/w07-OVB.html#mincer-equation",
+    "title": "Omitted Variable Bias",
+    "section": "Mincer equation",
+    "text": "Mincer equation\nIn 1970, Jacob Mincer in his work Schooling, Experience, and Earnings (Mincer, 1974) attempted to quantify the premium of schooling on wage. He used the following regression equation:\n\\[\n\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i+ \\epsilon_i\n\\]\n\nProve that omitting experience causes OBV!"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#step-1.-write-long-short-and-auxiliary-regressions",
+    "href": "slides/w07-OVB.html#step-1.-write-long-short-and-auxiliary-regressions",
+    "title": "Omitted Variable Bias",
+    "section": "Step 1. Write long, short and auxiliary regressions:",
+    "text": "Step 1. Write long, short and auxiliary regressions:\n\nLong: \\(\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i+ \\epsilon_i\\)\n\n\nShort: \\(\\log \\text{wage}_i = \\beta_0^s + \\beta_1^s \\text{educ}_i \\epsilon_i^s\\)\n\n\nAuxiliary: \\(\\log \\text{exper}_i = \\rho_0 + \\rho_1 \\text{educ}_i u_i\\)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#step-2.-hypothesize-about-crucial-effects",
+    "href": "slides/w07-OVB.html#step-2.-hypothesize-about-crucial-effects",
+    "title": "Omitted Variable Bias",
+    "section": "Step 2. Hypothesize about crucial effects:",
+    "text": "Step 2. Hypothesize about crucial effects:\n\nUse literature and other empirical research to reinforce your claims.\n\n\nEffect of experience on wage (\\(\\beta_2\\))\n\n\n\\[\\beta_2 > 0\\]\n\nMore years of experience, higher wage\n\n\n\n\nEffect of education on experience (\\(\\rho_1\\))\n\n\n\n\\[\\rho_1 < 0\\]\n\nMore time person spend in education, less time is left to work and gain experience."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#step-3.-write-down-an-obv-formula",
+    "href": "slides/w07-OVB.html#step-3.-write-down-an-obv-formula",
+    "title": "Omitted Variable Bias",
+    "section": "Step 3. Write down an OBV formula",
+    "text": "Step 3. Write down an OBV formula\n\\[\\text{OVB} = \\beta_2 \\times \\rho_1\\]\n\nGiven our previous hypotheses:\n\n\\(\\beta_2 > 0 = +\\)\n\\(\\rho_1 < 0 = -\\)\n\n\n\n\\[\\text{OVB} = (+) \\times (-) < 0\\]\n\n\n\nOmitting experience in short regression might cause a downward bias on the estimated effect of education. As a result, we may:\n\nunderestimate the effect of education.\nfind the effect of education insignificant or negative."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#wage-and-education",
+    "href": "slides/w07-OVB.html#wage-and-education",
+    "title": "Omitted Variable Bias",
+    "section": "Wage and Education",
+    "text": "Wage and Education\nSupposed that we have estimates equation:\n\\(\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i + \\beta_3 \\text{exper}^2_i+ \\epsilon_i\\)\n\n\nCould there be any other OVB in the wage-education relationship?"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#checking-obv-empirically",
+    "href": "slides/w07-OVB.html#checking-obv-empirically",
+    "title": "Omitted Variable Bias",
+    "section": "Checking OBV empirically",
+    "text": "Checking OBV empirically\n\n\n[1] -0.01794277\n\n\n[1] -0.01794277\n\n\n\n\n[1] -0.01794277\n\n\n[1] -0.01794277"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#takeaways",
+    "href": "slides/w07-OVB.html#takeaways",
+    "title": "Omitted Variable Bias",
+    "section": "Takeaways",
+    "text": "Takeaways\n\nOVB Formula (Short, Long and Auxiliary regressions)\nBe ready to demonstrate how to use the OVB formula for making an educated guess about the direction of the bias during the exam."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#diy-example-1.",
+    "href": "slides/w07-OVB.html#diy-example-1.",
+    "title": "Omitted Variable Bias",
+    "section": "DIY Example 1.",
+    "text": "DIY Example 1.\nYou want to estimate the causal effect of union membership on employees’ wages. And you estimate the following regression equation:\n\\[\n\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{union} + \\beta_2 \\text{experience} + \\beta_3 \\text{experience}^2 \\\\\n+ \\beta_4 \\text{married} + \\beta_5 \\text{female} + \\beta_6 \\text{hours per week} + \\epsilon_i\n\\]\nYour colleagues suggest that you should include an individual’s education in the list of control variables as omitting such regressor biases the estimate.\n\nUsing OVB formula prove that omitting education causes/does not causes the OVB.\nCalculate the extent of the OVB."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#omitted-variable-bias-2-the-key",
+    "href": "slides/w07-OVB.html#omitted-variable-bias-2-the-key",
+    "title": "Omitted Variable Bias",
+    "section": "Omitted Variable Bias (2) the key",
+    "text": "Omitted Variable Bias (2) the key\nWith:\n\nLong: \\(Y_i = \\alpha ^ l + \\beta ^ l P_i + \\gamma A_i + e^l_i\\);\nShort: \\(Y_i = \\alpha ^ s + \\beta^s P_i + e^s_i\\);\nAuxiliary: \\(A_i = \\pi_0 + \\pi_1 P_i + u_i\\);\n\n\nWe can measure Omitted Variable Bias as:\n\\[\\text{OVB} = \\beta^s - \\beta^l\\]\n\n\n\\[\\text{OVB} = \\pi_1 \\times \\gamma\\]"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#why-ovb-formula-is-important-1",
+    "href": "slides/w07-OVB.html#why-ovb-formula-is-important-1",
+    "title": "Omitted Variable Bias",
+    "section": "Why OVB formula is important (1)",
+    "text": "Why OVB formula is important (1)\n\nPresence of OVB in regression renders all our estimates biased/useless.\n\n\n\nOmitted Variable - means that we cannot have it in the regression, we can’t use data.\nHaving knowledge of mathematics behind OVB, we can make an educated guess about consequences of the variable omission: the BIAS (Angrist & Pischke, 2014)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#why-ovb-2",
+    "href": "slides/w07-OVB.html#why-ovb-2",
+    "title": "Omitted Variable Bias",
+    "section": "Why OVB (2)",
+    "text": "Why OVB (2)\n\n\nwrite down Short, Long and Auxiliary regressions\nJustify potential signs of \\(\\pi_1\\) and \\(\\gamma\\);\nConclude how the OV biases our regression based on the formula: \\(\\text{OVB} = \\pi_1 \\times \\gamma\\).\nOBV can bias estimates:\n\nupwards (\\(\\text{OVB} > 0\\)): increasing the effect of \\(P_i\\)\ndownwards (\\(\\text{OVB} < 0\\)): decreeing the effect of \\(P_i\\)\nrendering the effect of \\(P_i\\) insignificant"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#how-to-tcheck-the-ovb-2",
+    "href": "slides/w07-OVB.html#how-to-tcheck-the-ovb-2",
+    "title": "Omitted Variable Bias",
+    "section": "How to tcheck the OVB (2)",
+    "text": "How to tcheck the OVB (2)\n\n\nWrite down Short, Long and Auxiliary regressions\nJustify potential signs of \\(\\pi_1\\) and \\(\\gamma\\);\nConclude how the OV biases our regression based on the formula: \\(\\text{OVB} = \\pi_1 \\times \\gamma\\).\nOBV can bias estimates:\n\nupwards (\\(\\text{OVB} > 0\\)): increasing the effect of \\(P_i\\)\ndownwards (\\(\\text{OVB} < 0\\)): decreeing the effect of \\(P_i\\)\nrendering the effect of \\(P_i\\) insignificant"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#checking-obv-based-on-the-data",
+    "href": "slides/w07-OVB.html#checking-obv-based-on-the-data",
+    "title": "Omitted Variable Bias",
+    "section": "Checking OBV based on the data",
+    "text": "Checking OBV based on the data\n\n\n\n\nlibrary(tidyverse)\ndta <-read_csv(\"wage.csv\")\n\nshort <- lm(log(wage) ~ educ, data = dta)\nlong <- lm(log(wage) ~ educ + exper, data = dta)\naux <- lm(exper ~ educ, data = dta)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#estimating-the-bias",
+    "href": "slides/w07-OVB.html#estimating-the-bias",
+    "title": "Omitted Variable Bias",
+    "section": "Estimating the bias",
+    "text": "Estimating the bias\n\ncoef(aux)[[\"educ\"]] * coef(long)[[\"exper\"]]\n\n[1] -0.01794277\n\n\nChecking the difference between long and short.\n\ncoef(short)[[\"educ\"]] - coef(long)[[\"educ\"]]\n\n[1] -0.01794277"
   }
 ]

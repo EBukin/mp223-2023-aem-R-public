@@ -1,0 +1,367 @@
+---
+title: "Omitted Variable Bias"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(ggdag)      # For plotting DAGs
+library(dagitty)    # For working with DAG logic
+library(ggpubr)
+library(wooldridge)
+library(here)
+theme_set(theme_bw())
+```
+
+# Omitted Variable Bias
+
+In multiple regression, the Ceteris Paribus is achieved by introducing control variables.
+
+. . .
+
+::: callout-warning
+Having **bad controls** / insufficient / not right controls leaves us with the Selection Bias.
+:::
+
+. . .
+
+In the context of regression analysis, selection bias is called **OVB - Omitted Variable Bias**.
+
+## Long Model
+
+-   A regression model that we wish to have.
+
+. . .
+
+$$Y_i = \alpha ^ l + \beta ^ l P_i + \gamma A_i + e^l_i$$
+
+where:
+
+::: incremental
+-   $Y_i$ is the outcome variable;
+
+-   $P_i$ is the key variable of interest;
+
+-   $A_i$ is the **omitted variable**;
+
+-   $\alpha ^ l$ , $\beta ^ l$ are true regression coefficients;
+
+-   $\gamma$ is the effect of omitted variable in long;
+
+-   $e^l_i$ true error terms.
+:::
+
+## Short model
+
+-   Is a model that we actually have, which omits one important variable ($A_i$) from the long model.
+
+. . .
+
+$$Y_i = \alpha ^ s + \beta^s P_i + e^s_i$$
+
+where:
+
+::: incremental
+-   $Y_i$ is the outcome variable;
+
+-   $P_i$ is the key variable of interest;
+
+-   $\alpha ^ s$ , $\beta ^ s$ are the estimates of regression coefficients in the short model;
+
+-   $e^s_i$ error terms.
+:::
+
+## Omitted Variable Bias (1)
+
+Omitting variable $A_i$ in the short model causes **bias** of $\beta^s$.
+
+. . .
+
+$$
+\beta^s = \beta^l + \text{OVB}
+$$
+
+. . .
+
+We can measure Omitted Variable Bias ($\text{OVB}$) as:
+
+$$
+\text{OVB} =  \beta^s - \beta^l
+$$
+
+## Omitted Variable Bias happens when:
+
+::: incremental
+1.  $P_i$ and $A_i$ relates to each other:
+
+    -   $E[A_i|P_i] \neq 0$ ; or
+
+2.  $A_i$ and $Y_i$ relates to each other:
+
+    -   $E[Y_i| A_i] \neq 0$ in the long regression or $\gamma \neq 0$;
+:::
+
+## Auxiliary regression
+
+-   Is a regression of **omitted variable** ($A_i$) on treatment $P_i$ and other regressors in short (if any).
+
+. . .
+
+$$
+A_i = \pi_0 + \pi_1 P_i + u_i
+$$
+
+. . .
+
+-   Auxiliary regression helps us to calculate the $\text{OVB}$.
+
+## Omitted Variable Bias (2) the key
+
+With:
+
+-   **Long:** $Y_i = \alpha ^ l + \beta ^ l P_i + \gamma A_i + e^l_i$;
+
+-   **Short:** $Y_i = \alpha ^ s + \beta^s P_i + e^s_i$;
+
+-   **Auxiliary:** $A_i = \pi_0 + \pi_1 P_i + u_i$;
+
+. . .
+
+We can measure Omitted Variable Bias as:
+
+$$\text{OVB} = \beta^s - \beta^l$$
+
+. . .
+
+$$\text{OVB} = \pi_1 \times \gamma$$
+
+## Math behind the OVB
+
+-   **Long:** $Y_i = \alpha ^ l + \beta ^ l P_i + \gamma A_i + e^l_i$;
+-   **Short:** $Y_i = \alpha ^ s + \beta^s P_i + e^s_i$;
+-   **Auxiliary:** $A_i = \pi_0 + \pi_1 P_i + u_i$;
+
+. . .
+
+-   Let us substitute $A_i$ in the long with Auxiliary regression:
+
+. . .
+
+$$
+\Rightarrow Y_i = \alpha ^ l + \beta ^ l P_i + \gamma \{\pi_0 + \pi_1 P_i + u \} + e^l_i
+$$
+
+. . .
+
+$$
+\Rightarrow Y_i = \underbrace{\alpha ^ l +  \gamma \pi_0}_{\alpha ^ s}
++ \underbrace{(\beta ^ l  + \gamma \pi_1)}_{\beta^s} P_i 
++ \underbrace{e^l_i + \gamma u_i}_{e^s_i}
+$$
+
+-   We obtain our short regression, where every estimate is biased.
+
+## Why OVB formula is important (1)
+
+-   Presence of OVB in regression renders all our estimates biased/useless.
+
+::: incremental
+-   **Omitted Variable** - means that we cannot have it in the regression, we can't use data.
+
+-   Having knowledge of mathematics behind OVB, we can **make an educated guess about consequences of the variable omission: the BIAS** [@Angrist2014]
+:::
+
+## How to tcheck the OVB (2)
+
+::: incremental
+1.  Write down Short, Long and Auxiliary regressions
+
+2.  Justify potential signs of $\pi_1$ and $\gamma$;
+
+3.  Conclude how the OV biases our regression based on the formula: $\text{OVB} = \pi_1 \times \gamma$.
+
+4.  OBV can bias estimates:
+
+    -   upwards ($\text{OVB} > 0$): increasing the effect of $P_i$
+
+    -   downwards ($\text{OVB} < 0$): decreeing the effect of $P_i$
+
+    -   rendering the effect of $P_i$ insignificant
+:::
+
+## How to resolve the OVB?
+
+::: incremental
+-   No solution!
+
+    -   Proxies;
+
+    -   Research design (Panel Regression/DiD, RDD);
+
+-   Acknowledge presence of the OVB;
+
+-   Discuss the bias;
+:::
+
+# Example 1. Education and Experience
+
+## Mincer equation
+
+In 1970, Jacob Mincer in his work Schooling, Experience, and Earnings [@mincer1974schooling] attempted to quantify the premium of schooling on wage. He used the following regression equation:
+
+$$
+\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i+ \epsilon_i
+$$
+
+. . .
+
+**Prove that omitting experience causes OBV!**
+
+## Step 1. Write long, short and auxiliary regressions:
+
+. . .
+
+Long: $\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i+ \epsilon_i$
+
+. . .
+
+Short: $\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i \epsilon_i^s$
+
+. . .
+
+Auxiliary: $\log \text{exper}_i = \rho_0 + \rho_1 \text{educ}_i u_i$
+
+## Step 2. Hypothesize about crucial effects:
+
+> Use literature and other empirical research to reinforce your claims.
+
+1.  Effect of **experience** on **wage** ($\beta_2$)
+
+. . .
+
+$$\beta_2 > 0$$
+
+-   More years of experience, higher wage
+
+. . .
+
+2.  Effect of **education** on **experience** ($\rho_1$)
+
+. . .
+
+$$\rho_1 < 0$$
+
+-   More time person spend in education, less time is left to work and gain experience.
+
+## Step 3. Write down an OBV formula
+
+$$\text{OVB} = \beta_2 \times \rho_1$$
+
+. . .
+
+Given our previous hypotheses:
+
+-   $\beta_2 > 0 = +$
+
+-   $\rho_1 < 0 = -$
+
+. . .
+
+$$\text{OVB} = (+) \times (-) < 0$$
+
+. . .
+
+-   Omitting experience in short regression might cause a downward bias on the estimated effect of education. As a result, we may:
+
+    -   underestimate the effect of education.
+    -   find the effect of education insignificant or negative.
+
+## Wage and Education
+
+Supposed that we have estimates equation:
+
+$\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i + \beta_3 \text{exper}^2_i+ \epsilon_i$
+
+. . .
+
+-   Could there be any other OVB in the wage-education relationship?
+
+## Checking OBV based on the data
+
+```{r}
+dta <- wooldridge::wage2 %>% as_tibble()
+short <- lm(log(wage) ~ educ, data = dta)
+long <- lm(log(wage) ~ educ + exper, data = dta)
+aux <- lm(exper ~ educ, data = dta)
+
+```
+
+```{r echo=TRUE, eval=FALSE}
+library(tidyverse)
+dta <-read_csv("wage.csv")
+
+short <- lm(log(wage) ~ educ, data = dta)
+long <- lm(log(wage) ~ educ + exper, data = dta)
+aux <- lm(exper ~ educ, data = dta)
+```
+
+## Estimating the bias 
+
+```{r echo=TRUE}
+coef(aux)[["educ"]] * coef(long)[["exper"]]
+```
+
+Checking the difference between long and short.
+
+```{r echo=TRUE}
+coef(short)[["educ"]] - coef(long)[["educ"]]
+```
+
+# Example 2. Ability bias
+
+Show how omitting ability biases the estimates of the effect of education on wages.
+
+# Takeaways and homework
+
+## Takeaways
+
+1.  OVB Formula (Short, Long and Auxiliary regressions)
+
+2.  Be ready to demonstrate how to use the OVB formula for making an educated guess about the direction of the bias during the exam.
+
+## DIY Example 1. {.smaller}
+
+You want to estimate the causal effect of union membership on employees' wages. And you estimate the following regression equation:
+
+$$
+\log \text{wage}_i = \beta_0 + \beta_1 \text{union} + \beta_2 \text{experience} + \beta_3 \text{experience}^2 \\
++ \beta_4 \text{married} + \beta_5 \text{female} + \beta_6 \text{hours per week} + \epsilon_i
+$$
+
+Your colleagues suggest that you should include an individual's education in the list of control variables as omitting such regressor biases the estimate.
+
+1.  Using OVB formula prove that omitting education causes/does not causes the OVB.
+
+2.  Calculate the extent of the OVB.
+
+# References

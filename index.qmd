@@ -77,6 +77,9 @@ Exercises:
 
 ### Week 7. May 24. OVB - Omitted Variable Bias (Lecture). OBV formula 
 
+-   [w07-OVB](slides/w07-OVB.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w07-OVB.pdf)
+-   [ex07-ovb.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex07-ovb.zip) - R project with code and data
+
 ### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
 
 ### Week 9. June 7. R: FE

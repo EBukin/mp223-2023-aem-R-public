@@ -1,0 +1,288 @@
+---
+title: "Interaction terms"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE
+  )
+```
+
+Our goal is to improve on the regression covered in the class and resolve the non-linearity problem that is present there. Then we will proceed to interpreting the interaction terms.
+
+# Loading and exploring data
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(modelsummary)
+library(performance)
+library(GGally)
+library(car)
+library(lmtest)
+
+## 1. Load the data
+dta <- read_csv("wage.csv") 
+```
+
+# Goals:
+
+-   Demonstrate the effect of the OVB;
+-   Make an educated guess about the effect of OVB;
+
+Data used here comes form: M. Blackburn and D. Neumark (1992), "Unobserved Ability, Efficiency Wages, and Interindustry Wage Differentials," Quarterly Journal of Economics 107, 1421-1436.
+
+## Glimpe at the data
+
+```{r}
+
+```
+
+## Compute
+
+-   total amount of parents education `paredu` as a sum of years of their education
+-   wage per hour `wagehour` as wage divided by average daily hours and 21 working days month. assume that each week has 5 working days.
+-   select `wage`, `wagehour`, `educ`, `exper`, `tenure`, `age`, `paredu` and `black`, `married`, `urban`, and `IQ`.
+
+```{r}
+# dta1 <- 
+#   ________ %>% 
+#   ________(paredu = ________,
+#            wagehour = ________) %>% 
+#   select(________)
+```
+
+## Explore data visually and using descriptive statistics
+
+```{r}
+# ________(dta1)
+```
+
+```{r}
+# dta1 %>% ________()
+```
+
+## Create a scatter plot of wage vs IQ
+
+Add a non-parametric smoothing line
+
+```{r}
+
+```
+
+
+
+## Short regression: `wage` on all but `IQ`
+
+Why is IQ important?
+
+```{r}
+# fit_s <- lm()
+```
+
+
+## Auxiliary regression: `IQ` on all but `wage`
+
+```{r}
+# fit_aux <- lm()
+```
+
+## Long regression: `wage` on all including `IQ`
+
+```{r}
+# fit_l <- lm()
+```
+
+## Compare all models together with `modelsummary::modelsummary`
+
+```{r}
+
+```
+
+## Compute the omitted variables bias
+
+```{r}
+# coef(fit_s)[["educ"]] - coef(fit_l)[["educ"]]
+# coef(fit_aux)[["educ"]] * coef(fit_l)[["IQ"]]
+```
+
+## Interpret the effect of education
+
+# Exercise 2. Homework
+
+## Check the linearity assumption in the long model
+
+## Improve the long model
+
+-   create object `fil_l2`;
+-   use `wagehour` as a dependent variable;
+-   add `age^2` to the model by including `I(age^2)` to the regression equation
+
+```{r}
+
+```
+
+### Check the linearity assumption again
+
+```{r}
+```
+
+## Check the multicollinearity assumption in the long model
+
+`?car::vif`
+
+```{r}
+# _____(_____)
+```
+
+## Conclude on the final functional form
+
+## Check the residual homogeneity
+
+### Visually
+
+```{r}
+# _____(_____, _____ = "homogeneity")
+```
+
+### Statistical test
+
+`lmtest::bptest`
+
+```{r}
+```
+
+## Check the robustness of regression again sample selectivity
+
+-   Inspect closely the descriptive statistics on the subject of missing observations.
+-   Why regression has fewer observations than the data?
+-   Built regression for the complete data set.
+-   Compare all estimates.
+-   Discuss bias caused by OVB if present.
+
+```{r}
+# fit_l3 <- lm(_____)
+# _____(fit_l, fit_l2, fit_l3, style = "se_p")
+```
+
+
+# Solutions Ex. 1
+
+```{r}
+#| code-fold: true
+## 1 Load data
+dta <- read_csv("wage.csv") 
+
+## 2 Compute 
+dta1 <- 
+  dta %>% 
+  mutate(paredu = meduc + feduc,
+         wagehour = wage / (hours / 5 * 21)) %>% 
+  select(wagehour, wage, educ, exper, tenure, 
+         age, paredu, black, married, urban, IQ)
+
+## 3 Built pairs plot and descriptive statistics
+library(GGally)
+ggpairs(dta1)
+dta1 %>% datasummary_skim()
+
+dta1 %>% 
+  ggplot() + 
+  aes(x = IQ, y = wagehour  ) + 
+  geom_point() + 
+  geom_smooth()
+
+## 1.4 Short regression: `wage)` on all but `IQ`
+fit_s <- lm(
+  wage ~ educ + exper + tenure + age + 
+    paredu + black + married, 
+  data = dta1
+  )
+
+## 1.6 Auxiliary regression: `IQ` on all but `log(wagehour)`
+fit_aux <- lm(
+  IQ ~ educ + exper + tenure + age + 
+    paredu + black + married, 
+  data = dta1
+)
+
+## Long regression: `wage)` on all including `IQ`
+fit_l <- lm(
+  wage ~ educ + exper + tenure + age + 
+    paredu + black + married + IQ, 
+  data = dta1
+  )
+
+## Compare all models together 
+
+# Summarise the models
+library(modelsummary)
+all_mods <- list(
+  `Short (dep: wage)` = fit_s, 
+  `Auxilary (dep: IQ)` = fit_aux, 
+  `Long (dep: wage)` = fit_l
+  )
+modelsummary(all_mods)
+
+## Compute the omited variables bias
+coef(fit_s)[["educ"]] - coef(fit_l)[["educ"]]
+coef(fit_aux)[["educ"]] * coef(fit_l)[["IQ"]]
+```
+
+# Solutions Ex. 2
+
+```{r}
+#| eval: false
+#| code-fold: true
+
+## Check the linearity assumption in the long model
+
+### Visually
+plot(fit_l, which = 1)
+check_model(fit_l, check = "linearity")
+
+
+## Improve long model:
+fit_l2 <-  lm(
+  wagehour ~ educ + exper + tenure + age + I(age^2) + 
+    paredu + black + married + IQ, 
+  data = dta1
+  )
+
+### Check the linearity assumption again
+check_model(fit_l2, check = "linearity")
+
+## Check the multicollinearity assumption in the long model
+vif(fit_l2)
+
+## Check the residual homogeneity
+### Visually
+check_model(fit_l2, check = "homogeneity")
+
+### statistical test
+library(lmtest)
+bptest(fit_l2)
+
+## Check the robustnes of regression agains sample selectivity
+nrow(dta1)
+df.residual(fit_l2)
+
+fit_l3 <- lm(
+  wagehour ~ educ + exper + tenure + age + I(age^2) + 
+    black + married + IQ, 
+  data = dta1
+)
+
+compare_parameters(fit_l, fit_l2, fit_l3, style = "se_p")
+
+## Construct prediced values plot for age variable in model `fit_l2`
+library(ggeffects)
+ggpredict(fit_l2, terms = "age") %>% plot()
+```
