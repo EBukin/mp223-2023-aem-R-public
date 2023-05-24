@@ -80,6 +80,10 @@ Exercises:
 -   [w07-OVB](slides/w07-OVB.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w07-OVB.pdf)
 -   [ex07-ovb.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex07-ovb.zip) - R project with code and data
 
+-   w07 OVB Lecture <https://youtu.be/AM6fhMby0W4>
+-   ex.07.a Wage, Education and ability <https://youtu.be/x3g9z63xqFE>
+-   ex.07.b Wage, union membership and education <https://youtu.be/EJhmkJGLsBc>
+
 ### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
 
 ### Week 9. June 7. R: FE
