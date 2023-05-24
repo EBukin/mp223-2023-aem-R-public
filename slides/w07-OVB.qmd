@@ -114,7 +114,7 @@ $$
 ::: incremental
 1.  $P_i$ and $A_i$ relates to each other:
 
-    -   $E[A_i|P_i] \neq 0$ ; or
+    -   $E[A_i|P_i] \neq 0$ ;
 
 2.  $A_i$ and $Y_i$ relates to each other:
 
@@ -191,7 +191,7 @@ $$
 -   Having knowledge of mathematics behind OVB, we can **make an educated guess about consequences of the variable omission: the BIAS** [@Angrist2014]
 :::
 
-## How to tcheck the OVB (2)
+## How to check the OVB (2)
 
 ::: incremental
 1.  Write down Short, Long and Auxiliary regressions
@@ -245,11 +245,11 @@ Long: $\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{expe
 
 . . .
 
-Short: $\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i \epsilon_i^s$
+Short: $\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \epsilon_i^s$
 
 . . .
 
-Auxiliary: $\log \text{exper}_i = \rho_0 + \rho_1 \text{educ}_i u_i$
+Auxiliary: $\text{exper}_i = \rho_0 + \rho_1 \text{educ}_i + u_i$
 
 ## Step 2. Hypothesize about crucial effects:
 
@@ -313,23 +313,35 @@ dta <- wooldridge::wage2 %>% as_tibble()
 short <- lm(log(wage) ~ educ, data = dta)
 long <- lm(log(wage) ~ educ + exper, data = dta)
 aux <- lm(exper ~ educ, data = dta)
-
 ```
 
 ```{r echo=TRUE, eval=FALSE}
 library(tidyverse)
-dta <-read_csv("wage.csv")
-
-short <- lm(log(wage) ~ educ, data = dta)
-long <- lm(log(wage) ~ educ + exper, data = dta)
-aux <- lm(exper ~ educ, data = dta)
+dta <- read_csv("wage.csv")
 ```
 
-## Estimating the bias 
+```{r echo=TRUE}
+short <- lm(log(wage) ~ educ, data = dta)
+short
+```
+
+```{r echo=TRUE}
+long <- lm(log(wage) ~ educ + exper, data = dta)
+long
+```
+
+```{r echo=TRUE}
+aux <- lm(exper ~ educ, data = dta)
+aux
+```
+
+## Estimating the bias
 
 ```{r echo=TRUE}
 coef(aux)[["educ"]] * coef(long)[["exper"]]
 ```
+
+. . .
 
 Checking the difference between long and short.
 
@@ -341,6 +353,92 @@ coef(short)[["educ"]] - coef(long)[["educ"]]
 
 Show how omitting ability biases the estimates of the effect of education on wages.
 
+## The problem
+
+Supposed that we have estimated the following regression:
+
+$$
+\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \beta_2^s \text{exper}_i + \beta_3^s \text{exper}^2_i + \epsilon_i
+$$
+
+. . .
+
+What the other variables that are omitted and that may cause the bias to our estimates?
+
+-   Note that OV should correlate with $\log \text{wage}_i$ and $\text{educ}_i$;
+
+. . .
+
+These are other human capital related variables: age, ability, motivation.
+
+## Show that omitting ability causes the OVB
+
+::: incremental
+1.  Write short, long and auxiliary regression
+
+    -   short:
+
+    -   long:
+
+    -   auxiliary:
+
+2.  Write the OVB formula:
+
+    -   $\text{OVB} = \cdot$
+
+3.  Make Hypothesis about the effect of included on omitted and omitted on dependent:
+
+    -   Argument your statements.
+
+4.  Conclude about the bias:
+
+    -   $\text{OVB} = \cdot$   
+:::
+
+## Solution
+
+::: incremental
+1.  Write short, long and auxiliary regression
+
+    -   short: $\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \beta_2^s \text{exper}_i + \beta_3^s \text{exper}^2_i + \epsilon_i$
+
+    -   long: $\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i + \beta_3 \text{exper}^2_i + \gamma \text{ability}_i + \epsilon_i$
+
+    -   auxiliary: $\text{ability}_i = \rho_0 + \rho_1 \text{educ}_i + \rho_2 \text{exper}_i + \rho_3 \text{exper}^2_i + u_i$
+
+2.  Write the OVB formula:
+
+    -   $\text{OVB} = \beta_1^s - \beta_1 = \rho_1 \times \gamma$
+
+3.  Make Hypothesis about $\gamma$ and $\rho_1$.
+
+    -   $\rho_1 > 0$ as more years of education are usually associated with higher abilities;
+
+    -   $\gamma$ Higher abilities are usually rewarded with higher salary.
+
+4.  Conclude about the bias;
+
+    -   $\text{OVB} = (+) \times (+) > 0$ 
+:::
+
+## 4.  Conclude about the bias;
+
+::: incremental
+-   We might have an upwards bias of the estimates in our regression.
+
+-   Specifically the effect of education is overestimated. 
+
+-   In the long model we might observe a lower effect of education on wage.
+:::
+
+## Check this conclusion empirically in R
+
+1.  Estimate the short model
+
+2.  Estimate the long model where instead of abilities the IQ level is used as a proxy.
+
+3.  Calculate the extent of the OVB
+
 # Takeaways and homework
 
 ## Takeaways
@@ -349,19 +447,33 @@ Show how omitting ability biases the estimates of the effect of education on wag
 
 2.  Be ready to demonstrate how to use the OVB formula for making an educated guess about the direction of the bias during the exam.
 
-## DIY Example 1. {.smaller}
+# Homework
+
+## Watch several videos about
+
+Dale, S. B., & Krueger, A. B. (2002). Estimating the payoff to attending a more selective college: An application of selection on observables and unobservables. The Quarterly Journal of Economics, 117(4), 1491-1527.
+
+
+1.  Video 1. Selection Bias: Will You Make More Going to a Private University? **From minute 6:30** to the end. [https://youtu.be/6YrIDhaUQOE](https://youtu.be/6YrIDhaUQOE?t=389)
+
+2.  Video 2. **From 47:22** [2017 AEA Cross-Section Econometrics. Part 2](https://www.aeaweb.org/conference/webcasts/2017/Cross-Section-Econometrics-View-Part-2)
+
+    -   Note that other videos and handouts are available here [2017 AEA Cross-Section Econometrics](https://www.aeaweb.org/conference/cont-ed/2017-webcasts) 
+
+
+## Do the OVB analysis on your own {.smaller}
 
 You want to estimate the causal effect of union membership on employees' wages. And you estimate the following regression equation:
 
 $$
 \log \text{wage}_i = \beta_0 + \beta_1 \text{union} + \beta_2 \text{experience} + \beta_3 \text{experience}^2 \\
-+ \beta_4 \text{married} + \beta_5 \text{female} + \beta_6 \text{hours per week} + \epsilon_i
++ \beta_4 \text{married} + \beta_5 \text{sex} + \beta_6 \text{hours per week} + \epsilon_i
 $$
 
 Your colleagues suggest that you should include an individual's education in the list of control variables as omitting such regressor biases the estimate.
 
 1.  Using OVB formula prove that omitting education causes/does not causes the OVB.
 
-2.  Calculate the extent of the OVB.
+2.  Calculate the extent of the OVB
 
 # References

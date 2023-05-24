@@ -2153,7 +2153,7 @@
     "href": "slides/w07-OVB.html#omitted-variable-bias-happens-when",
     "title": "Omitted Variable Bias",
     "section": "Omitted Variable Bias happens when:",
-    "text": "Omitted Variable Bias happens when:\n\n\n\\(P_i\\) and \\(A_i\\) relates to each other:\n\n\\(E[A_i|P_i] \\neq 0\\) ; or\n\n\\(A_i\\) and \\(Y_i\\) relates to each other:\n\n\\(E[Y_i| A_i] \\neq 0\\) in the long regression or \\(\\gamma \\neq 0\\);"
+    "text": "Omitted Variable Bias happens when:\n\n\n\\(P_i\\) and \\(A_i\\) relates to each other:\n\n\\(E[A_i|P_i] \\neq 0\\) ;\n\n\\(A_i\\) and \\(Y_i\\) relates to each other:\n\n\\(E[Y_i| A_i] \\neq 0\\) in the long regression or \\(\\gamma \\neq 0\\);"
   },
   {
     "objectID": "slides/w07-OVB.html#auxiliary-regression",
@@ -2195,7 +2195,7 @@
     "href": "slides/w07-OVB.html#step-1.-write-long-short-and-auxiliary-regressions",
     "title": "Omitted Variable Bias",
     "section": "Step 1. Write long, short and auxiliary regressions:",
-    "text": "Step 1. Write long, short and auxiliary regressions:\n\nLong: \\(\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i+ \\epsilon_i\\)\n\n\nShort: \\(\\log \\text{wage}_i = \\beta_0^s + \\beta_1^s \\text{educ}_i \\epsilon_i^s\\)\n\n\nAuxiliary: \\(\\log \\text{exper}_i = \\rho_0 + \\rho_1 \\text{educ}_i u_i\\)"
+    "text": "Step 1. Write long, short and auxiliary regressions:\n\nLong: \\(\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i+ \\epsilon_i\\)\n\n\nShort: \\(\\log \\text{wage}_i = \\beta_0^s + \\beta_1^s \\text{educ}_i + \\epsilon_i^s\\)\n\n\nAuxiliary: \\(\\text{exper}_i = \\rho_0 + \\rho_1 \\text{educ}_i + u_i\\)"
   },
   {
     "objectID": "slides/w07-OVB.html#step-2.-hypothesize-about-crucial-effects",
@@ -2272,13 +2272,83 @@
     "href": "slides/w07-OVB.html#checking-obv-based-on-the-data",
     "title": "Omitted Variable Bias",
     "section": "Checking OBV based on the data",
-    "text": "Checking OBV based on the data\n\n\n\n\nlibrary(tidyverse)\ndta <-read_csv(\"wage.csv\")\n\nshort <- lm(log(wage) ~ educ, data = dta)\nlong <- lm(log(wage) ~ educ + exper, data = dta)\naux <- lm(exper ~ educ, data = dta)"
+    "text": "Checking OBV based on the data\n\n\n\n\nlibrary(tidyverse)\ndta <- read_csv(\"wage.csv\")\n\n\nshort <- lm(log(wage) ~ educ, data = dta)\nshort\n\n\nCall:\nlm(formula = log(wage) ~ educ, data = dta)\n\nCoefficients:\n(Intercept)         educ  \n    5.97306      0.05984  \n\n\n\nlong <- lm(log(wage) ~ educ + exper, data = dta)\nlong\n\n\nCall:\nlm(formula = log(wage) ~ educ + exper, data = dta)\n\nCoefficients:\n(Intercept)         educ        exper  \n    5.50271      0.07778      0.01978  \n\n\n\naux <- lm(exper ~ educ, data = dta)\naux\n\n\nCall:\nlm(formula = exper ~ educ, data = dta)\n\nCoefficients:\n(Intercept)         educ  \n    23.7831      -0.9073"
   },
   {
     "objectID": "slides/w07-OVB.html#estimating-the-bias",
     "href": "slides/w07-OVB.html#estimating-the-bias",
     "title": "Omitted Variable Bias",
     "section": "Estimating the bias",
-    "text": "Estimating the bias\n\ncoef(aux)[[\"educ\"]] * coef(long)[[\"exper\"]]\n\n[1] -0.01794277\n\n\nChecking the difference between long and short.\n\ncoef(short)[[\"educ\"]] - coef(long)[[\"educ\"]]\n\n[1] -0.01794277"
+    "text": "Estimating the bias\n\ncoef(aux)[[\"educ\"]] * coef(long)[[\"exper\"]]\n\n[1] -0.01794277\n\n\n\nChecking the difference between long and short.\n\ncoef(short)[[\"educ\"]] - coef(long)[[\"educ\"]]\n\n[1] -0.01794277"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#how-to-check-the-ovb-2",
+    "href": "slides/w07-OVB.html#how-to-check-the-ovb-2",
+    "title": "Omitted Variable Bias",
+    "section": "How to check the OVB (2)",
+    "text": "How to check the OVB (2)\n\n\nWrite down Short, Long and Auxiliary regressions\nJustify potential signs of \\(\\pi_1\\) and \\(\\gamma\\);\nConclude how the OV biases our regression based on the formula: \\(\\text{OVB} = \\pi_1 \\times \\gamma\\).\nOBV can bias estimates:\n\nupwards (\\(\\text{OVB} > 0\\)): increasing the effect of \\(P_i\\)\ndownwards (\\(\\text{OVB} < 0\\)): decreeing the effect of \\(P_i\\)\nrendering the effect of \\(P_i\\) insignificant"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#the-problem",
+    "href": "slides/w07-OVB.html#the-problem",
+    "title": "Omitted Variable Bias",
+    "section": "The problem",
+    "text": "The problem\nSupposed that we have estimated the following regression:\n\\[\n\\log \\text{wage}_i = \\beta_0^s + \\beta_1^s \\text{educ}_i + \\beta_2^s \\text{exper}_i + \\beta_3^s \\text{exper}^2_i + \\epsilon_i\n\\]\n\nWhat the other variables that are omitted and that may cause the bias to our estimates?\n\nNote that OV should correlate with \\(\\log \\text{wage}_i\\) and \\(\\text{educ}_i\\);\n\n\n\nThese are other human capital related variables: age, ability, motivation."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#show-that-omitting-ability-causes-the-ovb",
+    "href": "slides/w07-OVB.html#show-that-omitting-ability-causes-the-ovb",
+    "title": "Omitted Variable Bias",
+    "section": "Show that omitting ability causes the OVB",
+    "text": "Show that omitting ability causes the OVB\n\n\nWrite short, long and auxiliary regression\n\nshort:\nlong:\nauxiliary:\n\nWrite the OVB formula:\n\n\\(\\text{OVB} = \\cdot\\)\n\nMake Hypothesis about the effect of included on omitted and omitted on dependent:\n\nArgument your statements.\n\nConclude about the bias:\n\n\\(\\text{OVB} = \\cdot\\)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#solution",
+    "href": "slides/w07-OVB.html#solution",
+    "title": "Omitted Variable Bias",
+    "section": "Solution",
+    "text": "Solution\n\n\nWrite short, long and auxiliary regression\n\nshort: \\(\\log \\text{wage}_i = \\beta_0^s + \\beta_1^s \\text{educ}_i + \\beta_2^s \\text{exper}_i + \\beta_3^s \\text{exper}^2_i + \\epsilon_i\\)\nlong: \\(\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{educ}_i + \\beta_2 \\text{exper}_i + \\beta_3 \\text{exper}^2_i + \\gamma \\text{ability}_i + \\epsilon_i\\)\nauxiliary: \\(\\text{ability}_i = \\rho_0 + \\rho_1 \\text{educ}_i + \\rho_2 \\text{exper}_i + \\rho_3 \\text{exper}^2_i + u_i\\)\n\nWrite the OVB formula:\n\n\\(\\text{OVB} = \\beta_1^s - \\beta_1 = \\rho_1 \\times \\gamma\\)\n\nMake Hypothesis about \\(\\gamma\\) and \\(\\rho_1\\).\n\n\\(\\rho_1 > 0\\) as more years of education are usually associated with higher abilities;\n\\(\\gamma\\) Higher abilities are usually rewarded with higher salary.\n\nConclude about the bias;\n\n\\(\\text{OVB} = (+) \\times (+) > 0\\)"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#check-this-conclusion-empirically",
+    "href": "slides/w07-OVB.html#check-this-conclusion-empirically",
+    "title": "Omitted Variable Bias",
+    "section": "Check this conclusion empirically",
+    "text": "Check this conclusion empirically\n\nEstimate the short model\nEstimate the long model where instead of abilities the IQ level is used as a proxy.\nCalculate the extent of the OVB."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#conclude-about-the-bias",
+    "href": "slides/w07-OVB.html#conclude-about-the-bias",
+    "title": "Omitted Variable Bias",
+    "section": "4. Conclude about the bias;",
+    "text": "4. Conclude about the bias;\n\n\nWe might have an upwards bias of the estimates in our regression.\nSpecifically the effect of education is overestimated.\nIn the long model we might observe a lower effect of education on wage."
+  },
+  {
+    "objectID": "slides/w07-OVB.html#check-this-conclusion-empirically-in-r",
+    "href": "slides/w07-OVB.html#check-this-conclusion-empirically-in-r",
+    "title": "Omitted Variable Bias",
+    "section": "Check this conclusion empirically in R",
+    "text": "Check this conclusion empirically in R\n\nEstimate the short model\nEstimate the long model where instead of abilities the IQ level is used as a proxy.\nCalculate the extent of the OVB"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#watch-several-videos-about",
+    "href": "slides/w07-OVB.html#watch-several-videos-about",
+    "title": "Omitted Variable Bias",
+    "section": "Watch several videos about",
+    "text": "Watch several videos about\nDale, S. B., & Krueger, A. B. (2002). Estimating the payoff to attending a more selective college: An application of selection on observables and unobservables. The Quarterly Journal of Economics, 117(4), 1491-1527.\n\nVideo 1. Selection Bias: Will You Make More Going to a Private University? From minute 6:30 to the end. https://youtu.be/6YrIDhaUQOE\nVideo 2. From 47:22 2017 AEA Cross-Section Econometrics. Part 2\n\nNote that other videos and handouts are available here 2017 AEA Cross-Section Econometrics"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#homework-1.",
+    "href": "slides/w07-OVB.html#homework-1.",
+    "title": "Omitted Variable Bias",
+    "section": "Homework 1.",
+    "text": "Homework 1.\nYou want to estimate the causal effect of union membership on employees’ wages. And you estimate the following regression equation:\n\\[\n\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{union} + \\beta_2 \\text{experience} + \\beta_3 \\text{experience}^2 \\\\\n+ \\beta_4 \\text{married} + \\beta_5 \\text{female} + \\beta_6 \\text{hours per week} + \\epsilon_i\n\\]\nYour colleagues suggest that you should include an individual’s education in the list of control variables as omitting such regressor biases the estimate.\n\nUsing OVB formula prove that omitting education causes/does not causes the OVB.\nCalculate the extent of the OVB"
+  },
+  {
+    "objectID": "slides/w07-OVB.html#do-the-ovb-analysis-on-your-own",
+    "href": "slides/w07-OVB.html#do-the-ovb-analysis-on-your-own",
+    "title": "Omitted Variable Bias",
+    "section": "Do the OVB analysis on your own",
+    "text": "Do the OVB analysis on your own\nYou want to estimate the causal effect of union membership on employees’ wages. And you estimate the following regression equation:\n\\[\n\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{union} + \\beta_2 \\text{experience} + \\beta_3 \\text{experience}^2 \\\\\n+ \\beta_4 \\text{married} + \\beta_5 \\text{sex} + \\beta_6 \\text{hours per week} + \\epsilon_i\n\\]\nYour colleagues suggest that you should include an individual’s education in the list of control variables as omitting such regressor biases the estimate.\n\nUsing OVB formula prove that omitting education causes/does not causes the OVB.\nCalculate the extent of the OVB"
   }
 ]

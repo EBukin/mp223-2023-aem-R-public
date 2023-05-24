@@ -500,7 +500,7 @@
 <ol type="1">
 <li class="fragment"><p><span class="math inline">\(P_i\)</span> and <span class="math inline">\(A_i\)</span> relates to each other:</p>
 <ul>
-<li class="fragment"><span class="math inline">\(E[A_i|P_i] \neq 0\)</span> ; or</li>
+<li class="fragment"><span class="math inline">\(E[A_i|P_i] \neq 0\)</span> ;</li>
 </ul></li>
 <li class="fragment"><p><span class="math inline">\(A_i\)</span> and <span class="math inline">\(Y_i\)</span> relates to each other:</p>
 <ul>
@@ -581,8 +581,8 @@ A_i = \pi_0 + \pi_1 P_i + u_i
 </ul>
 </div>
 </section>
-<section id="how-to-tcheck-the-ovb-2" class="slide level2">
-<h2>How to tcheck the OVB (2)</h2>
+<section id="how-to-check-the-ovb-2" class="slide level2">
+<h2>How to check the OVB (2)</h2>
 <div>
 <ol type="1">
 <li class="fragment"><p>Write down Short, Long and Auxiliary regressions</p></li>
@@ -632,10 +632,10 @@ A_i = \pi_0 + \pi_1 P_i + u_i
 <p>Long: <span class="math inline">\(\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i+ \epsilon_i\)</span></p>
 </div>
 <div class="fragment">
-<p>Short: <span class="math inline">\(\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i \epsilon_i^s\)</span></p>
+<p>Short: <span class="math inline">\(\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \epsilon_i^s\)</span></p>
 </div>
 <div class="fragment">
-<p>Auxiliary: <span class="math inline">\(\log \text{exper}_i = \rho_0 + \rho_1 \text{educ}_i u_i\)</span></p>
+<p>Auxiliary: <span class="math inline">\(\text{exper}_i = \rho_0 + \rho_1 \text{educ}_i + u_i\)</span></p>
 </div>
 </section>
 <section id="step-2.-hypothesize-about-crucial-effects" class="slide level2">
@@ -704,34 +704,157 @@ A_i = \pi_0 + \pi_1 P_i + u_i
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>dta <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"wage.csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>short <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ, <span class="at">data =</span> dta)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>long <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper, <span class="at">data =</span> dta)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>aux <span class="ot">&lt;-</span> <span class="fu">lm</span>(exper <span class="sc">~</span> educ, <span class="at">data =</span> dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a>dta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"wage.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>short <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ, <span class="at">data =</span> dta)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>short</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(wage) ~ educ, data = dta)
+
+Coefficients:
+(Intercept)         educ  
+    5.97306      0.05984  </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>long <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper, <span class="at">data =</span> dta)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>long</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(wage) ~ educ + exper, data = dta)
+
+Coefficients:
+(Intercept)         educ        exper  
+    5.50271      0.07778      0.01978  </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>aux <span class="ot">&lt;-</span> <span class="fu">lm</span>(exper <span class="sc">~</span> educ, <span class="at">data =</span> dta)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>aux</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = exper ~ educ, data = dta)
+
+Coefficients:
+(Intercept)         educ  
+    23.7831      -0.9073  </code></pre>
+</div>
 </div>
 </section>
 <section id="estimating-the-bias" class="slide level2">
 <h2>Estimating the bias</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">coef</span>(aux)[[<span class="st">"educ"</span>]] <span class="sc">*</span> <span class="fu">coef</span>(long)[[<span class="st">"exper"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">coef</span>(aux)[[<span class="st">"educ"</span>]] <span class="sc">*</span> <span class="fu">coef</span>(long)[[<span class="st">"exper"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.01794277</code></pre>
 </div>
 </div>
+<div class="fragment">
 <p>Checking the difference between long and short.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">coef</span>(short)[[<span class="st">"educ"</span>]] <span class="sc">-</span> <span class="fu">coef</span>(long)[[<span class="st">"educ"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">coef</span>(short)[[<span class="st">"educ"</span>]] <span class="sc">-</span> <span class="fu">coef</span>(long)[[<span class="st">"educ"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.01794277</code></pre>
+</div>
 </div>
 </div>
 </section></section>
+<section>
 <section id="example-2.-ability-bias" class="title-slide slide level1 center">
 <h1>Example 2. Ability bias</h1>
 <p>Show how omitting ability biases the estimates of the effect of education on wages.</p>
 </section>
-
+<section id="the-problem" class="slide level2">
+<h2>The problem</h2>
+<p>Supposed that we have estimated the following regression:</p>
+<p><span class="math display">\[
+\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \beta_2^s \text{exper}_i + \beta_3^s \text{exper}^2_i + \epsilon_i
+\]</span></p>
+<div class="fragment">
+<p>What the other variables that are omitted and that may cause the bias to our estimates?</p>
+<ul>
+<li class="fragment">Note that OV should correlate with <span class="math inline">\(\log \text{wage}_i\)</span> and <span class="math inline">\(\text{educ}_i\)</span>;</li>
+</ul>
+</div>
+<div class="fragment">
+<p>These are other human capital related variables: age, ability, motivation.</p>
+</div>
+</section>
+<section id="show-that-omitting-ability-causes-the-ovb" class="slide level2">
+<h2>Show that omitting ability causes the OVB</h2>
+<div>
+<ol type="1">
+<li class="fragment"><p>Write short, long and auxiliary regression</p>
+<ul>
+<li class="fragment"><p>short:</p></li>
+<li class="fragment"><p>long:</p></li>
+<li class="fragment"><p>auxiliary:</p></li>
+</ul></li>
+<li class="fragment"><p>Write the OVB formula:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\text{OVB} = \cdot\)</span></li>
+</ul></li>
+<li class="fragment"><p>Make Hypothesis about the effect of included on omitted and omitted on dependent:</p>
+<ul>
+<li class="fragment">Argument your statements.</li>
+</ul></li>
+<li class="fragment"><p>Conclude about the bias:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\text{OVB} = \cdot\)</span><br>
+</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<div>
+<ol type="1">
+<li class="fragment"><p>Write short, long and auxiliary regression</p>
+<ul>
+<li class="fragment"><p>short: <span class="math inline">\(\log \text{wage}_i = \beta_0^s + \beta_1^s \text{educ}_i + \beta_2^s \text{exper}_i + \beta_3^s \text{exper}^2_i + \epsilon_i\)</span></p></li>
+<li class="fragment"><p>long: <span class="math inline">\(\log \text{wage}_i = \beta_0 + \beta_1 \text{educ}_i + \beta_2 \text{exper}_i + \beta_3 \text{exper}^2_i + \gamma \text{ability}_i + \epsilon_i\)</span></p></li>
+<li class="fragment"><p>auxiliary: <span class="math inline">\(\text{ability}_i = \rho_0 + \rho_1 \text{educ}_i + \rho_2 \text{exper}_i + \rho_3 \text{exper}^2_i + u_i\)</span></p></li>
+</ul></li>
+<li class="fragment"><p>Write the OVB formula:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\text{OVB} = \beta_1^s - \beta_1 = \rho_1 \times \gamma\)</span></li>
+</ul></li>
+<li class="fragment"><p>Make Hypothesis about <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\rho_1\)</span>.</p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\rho_1 &gt; 0\)</span> as more years of education are usually associated with higher abilities;</p></li>
+<li class="fragment"><p><span class="math inline">\(\gamma\)</span> Higher abilities are usually rewarded with higher salary.</p></li>
+</ul></li>
+<li class="fragment"><p>Conclude about the bias;</p>
+<ul>
+<li class="fragment"><span class="math inline">\(\text{OVB} = (+) \times (+) &gt; 0\)</span></li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="conclude-about-the-bias" class="slide level2">
+<h2>4. Conclude about the bias;</h2>
+<div>
+<ul>
+<li class="fragment"><p>We might have an upwards bias of the estimates in our regression.</p></li>
+<li class="fragment"><p>Specifically the effect of education is overestimated.</p></li>
+<li class="fragment"><p>In the long model we might observe a lower effect of education on wage.</p></li>
+</ul>
+</div>
+</section>
+<section id="check-this-conclusion-empirically-in-r" class="slide level2">
+<h2>Check this conclusion empirically in R</h2>
+<ol type="1">
+<li class="fragment"><p>Estimate the short model</p></li>
+<li class="fragment"><p>Estimate the long model where instead of abilities the IQ level is used as a proxy.</p></li>
+<li class="fragment"><p>Calculate the extent of the OVB</p></li>
+</ol>
+</section></section>
 <section>
 <section id="takeaways-and-homework" class="title-slide slide level1 center">
 <h1>Takeaways and homework</h1>
@@ -743,18 +866,34 @@ A_i = \pi_0 + \pi_1 P_i + u_i
 <li class="fragment"><p>OVB Formula (Short, Long and Auxiliary regressions)</p></li>
 <li class="fragment"><p>Be ready to demonstrate how to use the OVB formula for making an educated guess about the direction of the bias during the exam.</p></li>
 </ol>
+</section></section>
+<section>
+<section id="homework" class="title-slide slide level1 center">
+<h1>Homework</h1>
+
 </section>
-<section id="diy-example-1." class="slide level2 smaller">
-<h2>DIY Example 1.</h2>
+<section id="watch-several-videos-about" class="slide level2">
+<h2>Watch several videos about</h2>
+<p>Dale, S. B., &amp; Krueger, A. B. (2002). Estimating the payoff to attending a more selective college: An application of selection on observables and unobservables. The Quarterly Journal of Economics, 117(4), 1491-1527.</p>
+<ol type="1">
+<li class="fragment"><p>Video 1. Selection Bias: Will You Make More Going to a Private University? <strong>From minute 6:30</strong> to the end. <a href="https://youtu.be/6YrIDhaUQOE?t=389">https://youtu.be/6YrIDhaUQOE</a></p></li>
+<li class="fragment"><p>Video 2. <strong>From 47:22</strong> <a href="https://www.aeaweb.org/conference/webcasts/2017/Cross-Section-Econometrics-View-Part-2">2017 AEA Cross-Section Econometrics. Part 2</a></p>
+<ul>
+<li class="fragment">Note that other videos and handouts are available here <a href="https://www.aeaweb.org/conference/cont-ed/2017-webcasts">2017 AEA Cross-Section Econometrics</a></li>
+</ul></li>
+</ol>
+</section>
+<section id="do-the-ovb-analysis-on-your-own" class="slide level2 smaller">
+<h2>Do the OVB analysis on your own</h2>
 <p>You want to estimate the causal effect of union membership on employees’ wages. And you estimate the following regression equation:</p>
 <p><span class="math display">\[
 \log \text{wage}_i = \beta_0 + \beta_1 \text{union} + \beta_2 \text{experience} + \beta_3 \text{experience}^2 \\
-+ \beta_4 \text{married} + \beta_5 \text{female} + \beta_6 \text{hours per week} + \epsilon_i
++ \beta_4 \text{married} + \beta_5 \text{sex} + \beta_6 \text{hours per week} + \epsilon_i
 \]</span></p>
 <p>Your colleagues suggest that you should include an individual’s education in the list of control variables as omitting such regressor biases the estimate.</p>
 <ol type="1">
 <li class="fragment"><p>Using OVB formula prove that omitting education causes/does not causes the OVB.</p></li>
-<li class="fragment"><p>Calculate the extent of the OVB.</p></li>
+<li class="fragment"><p>Calculate the extent of the OVB</p></li>
 </ol>
 </section></section>
 <section id="references" class="title-slide slide level1 smaller scrollable">
