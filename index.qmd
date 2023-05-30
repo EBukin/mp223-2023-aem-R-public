@@ -86,6 +86,16 @@ Exercises:
 
 ### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
 
+-   [w08a - Panel Regression Analysis](slides/)
+    -   [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
+    -   w08 Panel Regression Analysis Lecture
+    
+    
+-   [w08b - Panel Regression Analysis: production function](slides/)
+    -   [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
+    -   w08 Panel Regression Analysis: production function Lecture
+
+
 ### Week 9. June 7. R: FE
 
 ### Week 10. June 14. RDD - Regression Discontinuity (Lecture) + R: RDD

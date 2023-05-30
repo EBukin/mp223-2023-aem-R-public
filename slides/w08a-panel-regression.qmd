@@ -1,0 +1,1343 @@
+---
+title: "Panel Regression Analysis"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(modelsummary)
+library(palmerpenguins)
+library(ggpubr)
+library(wooldridge)
+library(here)
+library(parameters)
+library(performance)
+library(lmtest)
+theme_set(theme_bw())
+penguins <- penguins
+```
+
+# Recap
+
+::: incremental
+-   Ceteris paribus!?
+
+    -   Why multiple regression is "good"?
+    -   What variables are important when establishing a causal effect of a treatment (key variable)?
+    -   What if we do not have an important variable?
+
+-   Selection bias = OVB! In multiple regression analysis.
+
+    -   What does OVB to our regression estimates?
+    -   Bias (inconsistency) of estimates!
+:::
+
+# Simpson's paradox
+
+See: Simpson, E. H. (1951). The Interpretation of Interaction in Contingency Tables. Journal of the Royal Statistical Society: Series B (Methodological), 13(2), 238--241. https://doi.org/10.1111/j.2517-6161.1951.tb00088.x
+
+## Simpson's paradox (with penguins) {background-image="img/w08/lter_penguins.png" background-size="80%"}
+
+## Let us investigate...
+
+The relationship between bill length and depth in penguins...
+
+. . .
+
+![](img/w08/culmen_depth.png)
+
+## The data
+
+```{r eval=FALSE, echo=TRUE}
+library(tidyverse)
+library(modelsummary)
+penguins <- read_csv("penguins")
+penguins %>% glimpse()
+```
+
+```{r echo=FALSE}
+penguins %>% glimpse()
+```
+
+## The relationship {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-asp: 0.5
+#| output-location: fragment
+gg_bill <- 
+  penguins %>% ggplot() + 
+  aes(x = bill_length_mm, y = bill_depth_mm) +
+  xlab("Bill length, mm") + ylab("Bill depth, mm") +
+  geom_point()
+gg_bill
+```
+
+## The trend {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-asp: 0.5
+#| output-location: fragment
+gg_bill + 
+  geom_smooth(method = "lm", formula = y ~ x, colour = "black")
+```
+
+## Is this the true trend? {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-asp: 0.5
+#| output-location: fragment
+gg_bill + 
+  geom_smooth(method = "lm", formula = y ~ x, colour = "black") + 
+  aes(colour = species)
+```
+
+## The true trends {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| fig-asp: 0.5
+#| output-location: fragment
+gg_bill + 
+  geom_smooth(method = "lm", formula = y ~ x, colour = "black") + 
+  aes(colour = species) + 
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE)
+```
+
+## Regression results {.smaller auto-animate="true"}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+fit1 <- lm(bill_depth_mm ~ bill_length_mm, data = penguins)
+fit2 <- lm(bill_depth_mm ~ bill_length_mm + species, data = penguins)
+fit3 <- lm(bill_depth_mm ~ -1 + bill_length_mm + species, data = penguins)
+modelsummary(
+  list(fit1, fit2, fit3),
+  estimate = "{estimate}{stars} ({std.error})", 
+  statistic = NULL, 
+  gof_map = c("nobs", "adj.r.squared")
+)
+```
+
+## Simpson's paradox conclusion
+
+. . .
+
+Trends or relationships are observed in the whole population, but they reverse or disappear, when each group is treated separately.
+
+. . .
+
+**Causes:**
+
+-   Unobserved heterogeneity/differences between groups.
+
+-   Underlining processes that are different between parts of the population.
+
+. . .
+
+**Resolutions to the paradox:**
+
+-   Control variables in the MRL.
+
+-   Panel data.
+
+# Data Types
+
+## Cross-sectional data
+
+::: columns
+::: {.column width="50%"}
+::: fargment
+|    ID    |    Y     |     X1      |     X2      |
+|:--------:|:--------:|:-----------:|:-----------:|
+|   $1$    | $y_{1}$  | $x^{1}_{1}$ | $x^{2}_{1}$ |
+|   $2$    | $y_{2}$  | $x^{1}_{2}$ | $x^{2}_{2}$ |
+|   $3$    | $y_{3}$  | $x^{1}_{3}$ | $x^{2}_{3}$ |
+|   $4$    | $y_{4}$  | $x^{1}_{4}$ | $x^{2}_{4}$ |
+|   $5$    | $y_{5}$  | $x^{1}_{5}$ | $x^{2}_{5}$ |
+|   $6$    | $y_{6}$  | $x^{1}_{6}$ | $x^{2}_{6}$ |
+| $\vdots$ | $\vdots$ |  $\vdots$   |  $\vdots$   |
+|   $N$    | $y_{N}$  | $x^{1}_{N}$ | $x^{2}_{N}$ |
+:::
+:::
+
+::: {.column width="50%"}
+-   Data that we usually collect in a single data collection.
+
+    -   Each individual is represented by one observation.
+
+-   Could be repeatedly collected multiple times (repeated cross-section),
+
+    -   but, in every repetition, there are different individuals!
+:::
+:::
+
+## Panel data
+
+::: columns
+::: {.column width="60%"}
+|    ID    |   Time   |    Y     |      X1      |      X2      |
+|:--------:|:--------:|:--------:|:------------:|:------------:|
+|   $1$    |   $1$    | $y_{11}$ | $x^{1}_{11}$ | $x^{2}_{11}$ |
+|   $1$    |   $2$    | $y_{12}$ | $x^{1}_{12}$ | $x^{2}_{12}$ |
+|   $1$    |   $3$    | $y_{13}$ | $x^{1}_{13}$ | $x^{2}_{13}$ |
+|   $2$    |   $2$    | $y_{22}$ | $x^{1}_{22}$ | $x^{2}_{22}$ |
+|   $2$    |   $3$    | $y_{23}$ | $x^{1}_{23}$ | $x^{2}_{23}$ |
+|   $3$    |   $1$    | $y_{31}$ | $x^{1}_{31}$ | $x^{2}_{31}$ |
+|   $3$    |   $2$    | $y_{32}$ | $x^{1}_{32}$ | $x^{2}_{32}$ |
+| $\vdots$ | $\vdots$ | $\vdots$ |   $\vdots$   |   $\vdots$   |
+|   $N$    |   $1$    | $y_{N1}$ | $x^{1}_{N1}$ | $x^{1}_{N1}$ |
+| $\vdots$ | $\vdots$ | $\vdots$ |   $\vdots$   |   $\vdots$   |
+|   $N$    |   $T$    | $y_{NT}$ | $x^{1}_{NT}$ | $x^{2}_{NT}$ |
+:::
+
+::: {.column width="40%"}
+-   table with data, where
+
+-   **each individual** (cohort, e.i. region, country)
+
+-   is represented by **multiple observations** at **different time periods**.
+:::
+:::
+
+## Panel data: Balanced and Unbalanced {.smaller}
+
+::: columns
+::: {.column width="50%"}
+**Balanced**
+
+Each individual is represented in all time periods.
+
+| $\text{ID}$ | $\text{Time}$ |   $Y$    |   $X$    |
+|:-----------:|:-------------:|:--------:|:--------:|
+|      1      |       1       | $Y_{11}$ | $X_{11}$ |
+|      1      |       2       | $Y_{12}$ | $X_{12}$ |
+|  $\vdots$   |   $\vdots$    | $\vdots$ | $\vdots$ |
+|      1      |      $T$      | $Y_{1T}$ | $X_{1T}$ |
+|      2      |       1       | $Y_{21}$ | $X_{21}$ |
+|      2      |       2       | $Y_{22}$ | $X_{22}$ |
+|  $\vdots$   |   $\vdots$    | $\vdots$ | $\vdots$ |
+|      2      |      $T$      | $Y_{2T}$ | $X_{2T}$ |
+|      3      |       1       | $Y_{31}$ | $X_{31}$ |
+|  $\vdots$   |   $\vdots$    | $\vdots$ | $\vdots$ |
+|     $N$     |      $T$      | $Y_{NT}$ | $X_{NT}$ |
+:::
+
+::: {.column width="50%"}
+**Un balanced**
+
+Each individual only appears in some time periods (not all).
+
+| $\text{ID}$ | $\text{Time}$ |   $Y$    |   $X$    |
+|:-----------:|:-------------:|:--------:|:--------:|
+|      1      |       1       | $Y_{11}$ | $X_{11}$ |
+|      1      |       2       | $Y_{12}$ | $X_{12}$ |
+|      2      |       2       | $Y_{22}$ | $X_{22}$ |
+|      2      |       3       | $Y_{23}$ | $X_{23}$ |
+|      3      |       3       | $Y_{33}$ | $X_{33}$ |
+|      4      |       1       | $Y_{41}$ | $X_{41}$ |
+|      5      |       2       | $Y_{52}$ | $X_{52}$ |
+|  $\vdots$   |   $\vdots$    | $\vdots$ | $\vdots$ |
+|     $N$     |      $T$      | $Y_{NT}$ | $X_{NT}$ |
+
+:::
+:::
+
+# Regressions with Panel Data
+
+. . .
+
+::: callout-important
+is a strategy to **control** for unobserved/omitted but fixed heterogeneity using **time** or **cohort (individual)** dimensions.
+:::
+
+. . .
+
+There are:
+
+1.  Pooled regression
+
+2.  Least-squares dummy variable (LSDV) model
+
+3.  **Fixed Effect** Panel Regression (within, first-difference and between)
+
+4.  **Random Effect** Panel Regression
+
+# Example 1: Effect of an employee's union membership on wage
+
+## Problem setting
+
+Does the collective bargaining (union membership) has any effect on wages?
+
+-   See: [@Freeman1984; @Card1996]
+
+. . .
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+$$
+
+where $i$ is the individual and $t$ is the time dimension;
+
+## Is there an endogeneity problem?
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+$$
+
+-   Is there a source of endogeneity / selection bias here?
+
+    -   Any ideas?
+
+-   $\text{Ability}_{i}$ not observable and not measurable;
+
+    -   time invariant;
+    -   correlates with $X$ and $Y$;
+
+-   Omitting ability causes bias
+
+## One of the solutions:
+
+-   Ability are **time-invariant** and **unique to each individual**;
+
+    -   If we have multiple observation per each individual (**panel data**),
+
+    -   we can introduce dummy variables for each individual, to approximate ability.
+
+-   This is also called Fixed Effect - regression model
+
+    -   or a **within transformation** model
+
+    -   or **Difference in Difference**
+
+## Other solutions:
+
+-   Any ideas?
+
+-   Introduce **control variables** that are **proxy** of ability.
+
+-   Employ specific **research design**:
+
+    -   RCT
+
+    -   RDD
+
+## Empirical example
+
+```{r eval=FALSE, echo=TRUE}
+library(tidyverse)
+library(modelsummary)
+wage_dta <- read_csv("wage_unon_panel.csv")
+glimpse(wage_dta)
+```
+
+```{r}
+#| output-location: fragment
+options(modelsummary_get = "broom")
+wage_dta <-
+  here("exercises", "ex08-panel-regression", "wage_unon_panel.csv") %>% 
+  read_csv()
+glimpse(wage_dta)
+```
+
+## The data {.smaller}
+
+```{r}
+wage_dta %>% 
+  filter(id %in% c(5, 168)) %>% 
+  kableExtra::kbl()
+```
+
+## Pooled Regression
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \epsilon_{it}
+$$
+
+. . .
+
+-   Regression model on all observations in the **panel data set** without any individual effects.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fit_0 <- lm(log(wage) ~ union + educ + exper + I(exper^2) + hours , 
+                  data = wage_dta)
+union_fit_0
+```
+
+## Least-squares dummy variable (LSDV)
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+$$
+
+. . .
+
+-   Pooled regression plus dummy variable for each individual.
+
+-   This is not a Fixed Effect Panel Regression!
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fit_1 <- lm(log(wage) ~ union + educ + exper + I(exper^2) + hours + factor(id), 
+                  data = wage_dta)
+union_fit_1
+```
+
+## Data structure in the LSDV
+
+|    ID    |   Time   |    Y     |      X1      |      X2      | $\delta_1$ | $\delta_2$ | $\delta_N$ |
+|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+|   $1$    |   $1$    | $y_{11}$ | $x^{1}_{11}$ | $x^{2}_{11}$ |     1      |     0      |     0      |
+|   $1$    |   $2$    | $y_{12}$ | $x^{1}_{12}$ | $x^{2}_{12}$ |     1      |     0      |     0      |
+|   $1$    |   $3$    | $y_{13}$ | $x^{1}_{13}$ | $x^{2}_{13}$ |     1      |     0      |     0      |
+|   $2$    |   $2$    | $y_{22}$ | $x^{1}_{22}$ | $x^{2}_{22}$ |     0      |     1      |     0      |
+|   $2$    |   $3$    | $y_{23}$ | $x^{1}_{23}$ | $x^{2}_{23}$ |     0      |     1      |     0      |
+| $\vdots$ | $\vdots$ | $\vdots$ |   $\vdots$   |   $\vdots$   |  $\vdots$  |  $\vdots$  |  $\vdots$  |
+|   $N$    |   $1$    | $y_{N1}$ | $x^{1}_{N1}$ | $x^{1}_{N1}$ |     0      |     0      |     1      |
+|   $N$    |   $2$    | $y_{N2}$ | $x^{1}_{N2}$ | $x^{2}_{N2}$ |     0      |     0      |     1      |
+
+## Results {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+modelsummary(
+  list(
+    `Pooled` = union_fit_0, 
+    `Least-squares dummy variable` = union_fit_1),
+  estimate = "{estimate}{stars} ({std.error})", 
+  statistic = NULL,
+  coef_map = c("(Intercept)", "union", "educ", "exper", "hours", "tenure"),
+  gof_map = c("nobs", "adj.r.squared" , "df"),
+  notes = "In the Least-squares dummy variable model we omitted all individual-related variables"
+)
+```
+
+## Cross-sectional data and LSDV (1)
+
+::: fragment
+Can we run a LSDV model with the cross-sectional data?
+:::
+
+-   Any ideas?
+
+-   Why?....
+
+-   NO...
+
+-   Because the **number of independent variables have to be less then or equal to the number of observations**.
+
+## Cross-sectional data and LSDV (2)
+
+|    ID    |    Y     |     X1      |     X2      | $\delta_1$ | $\delta_2$ | $\delta_3$ | $\delta_N$ |
+|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+|   $1$    | $y_{1}$  | $x^{1}_{1}$ | $x^{2}_{1}$ |     1      |     0      |     0      |     0      |
+|   $2$    | $y_{2}$  | $x^{1}_{2}$ | $x^{2}_{2}$ |     0      |     1      |     0      |     0      |
+|   $3$    | $y_{3}$  | $x^{1}_{3}$ | $x^{2}_{3}$ |     0      |     0      |     1      |     0      |
+| $\vdots$ | $\vdots$ |  $\vdots$   |  $\vdots$   |  $\vdots$  |  $\vdots$  |  $\vdots$  |  $\vdots$  |
+|   $N$    | $y_{N}$  | $x^{1}_{N}$ | $x^{1}_{N}$ |     0      |     0      |     0      |     1      |
+
+## Panel data and LSDV
+
+LSDV model works with the panel data, but...
+
+::: fragment
+it is inefficient! Any ideas why?...
+
+-   Number of dummy variables is equal to the number of individuals + control variables.
+
+    -   If we have 5,000 individuals, we have 5,000+ regression coefficients.
+    -   What if we have 100,000 individuals?
+
+-   Having too many regressors remains unbiased, but complicates inference:
+
+    -   number of degrees of freedom increases;
+    -   adjusted $R^2$ may shrink to zero;
+:::
+
+# Panel regression: brief theory
+
+## Readings
+
+. . .
+
+#### Key readings:
+
+-   @Mundlak1961
+-   @Angrist2009 Ch. 5
+-   @Wooldridge2010;
+-   @wooldridge2020introductory;
+-   @Soederbom2014, Ch. 9-11
+
+. . .
+
+#### Other readings:
+
+-   @Croissant2018
+
+## Terminology
+
+Panel data has $i$ individuals (groups) and $t$ time periods **for each individual**;
+
+-   **Pooled** OLS (regression without any panel structure);
+
+-   **Fixed Effect**:
+
+    -   **Least-squares dummy variable** (Pooled OLS + individual dummies);
+
+-   Panel Regression **Fixed Effect**:
+
+    -   **Within**-transformation **most commonly used**
+    -   **First-difference**, Between transformation (look it up in [@Croissant2018])
+
+-   Panel Regression **Random Effect**
+
+## Pooled OLS
+
+$$
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  +  \epsilon_{it}
+$$
+
+-   Estimates are biased because of the OVB.
+
+-   We assume the OVB to be time-invariant [@Mundlak1961].
+
+## Least-squares dummy variable model
+
+$$
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+$$
+
+-   Introduces a vector of dummy variables $\color{Red}{\delta}$ and estimated coefficients for each dummy variable $\gamma_i$.
+
+-   Estimates and unbiased (consistent) but inefficient.
+
+## Fixed Effect Model (notations)
+
+**Individual** Fixed effect model:
+
+$$
+y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \epsilon_{it}
+$$
+
+-   $\color{Red}{ \alpha_i }$ is the individual-specific fixed effect;
+
+-   usually wihtout the intercept $\beta_0$;
+
+. . .
+
+**Two-ways** fixed effect model (individual + time effect):
+
+$$
+y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
+$$
+
+**Time** Fixed Effect model:
+
+$$
+y_{it} =  \beta_1 \cdot x_{it} + \color{Blue}{ \eta_t } + \epsilon_{it}
+$$
+
+## Fixed Effect Model: Within transformation
+
+**Within-transformation** subtracts **group means** from each observation and run the regression.
+
+. . .
+
+$$
+\begin{aligned}
+log(\text{Wage}_{it} - \overline{\text{Wage}_{i}}) & =  \beta_0 \\
+& + \beta_1 \cdot (\text{Union}_{it} -  \overline{\text{Union}_{i}}) \\ 
+& + \beta_2 \cdot (X_{it} - \overline{\text{X}_{i}}) \\
+& +  \beta_3 \cdot (\text{Ability}_{i} - \overline{\text{Ability}_{i}}) \\
+& +  \color{Red}{\alpha_{i}} \\
+& +  (\epsilon_{it} - \overline{\epsilon_{i}})
+\end{aligned}
+$$
+
+::: fragment
+Note that **time-invariant effects disappear**. 
+
+-   Any examples and ideas why?
+-   $\text{Ability}_{i} - \overline{\text{Ability}_{i}} = 0$.
+-   Gender, race, individual characteristics ...
+-   FE (Within) estimates are identical to the LSDV, but SE are more efficient;
+:::
+
+## Fixed Effect Model: First Difference transformation
+
+$$
+\begin{aligned}
+log(\text{Wage}_{it} - {\text{Wage}_{i,t-1}}) & = \beta_0 \\
+& + \beta_1 \cdot (\text{Union}_{it} -  {\text{Union}_{it-1}}) \\
+& + \beta_2 \cdot (X_{it} - {{X}_{i,t-1}}) \\
+& + \beta_3 \cdot (\text{Ability}_{i} - {\text{Ability}_{i,t-1}}) \\
+& + (\epsilon_{it} - {\epsilon_{i,t-1}})
+\end{aligned}
+$$
+
+Note:
+
+-   Similar to the within transformation, but sacrifices at least one time dimension.
+
+-   Relaxes the autocorrelation assumption.
+
+-   May be not possible with unbalanced data.
+
+## Fixed Effect Model: assumptions (1)
+
+-   **NOT ZERO CORRELATION between effects and regressors**: 
+
+    -   $Cov(\delta_{i},{X}_{it}) \neq 0$
+
+-   **Strict exogeneity (No endogeneity):** 
+
+    -   $E[\epsilon_{is}| {X}_{it}, \delta_{i}] = 0$
+
+    -   $Cov(\epsilon_{is}, {X}_{it}) = 0$ and 
+    
+    -   $Cov(\epsilon_{it}, {X}_{jt}) = 0$ , where $j\neq i$ and $s\neq t$ ;
+
+    -   Residuals ($\epsilon$) do not correlate with all explanatory variable ($X$) in all time periods ($t$) and for all individuals ($i$).
+
+        -   No autocorrelation/serial correlation: $Cov(\epsilon_{it}, {X}_{i,t-1}) = 0$;
+
+        -   No cross-sectional dependence: $Cov(\epsilon_{it}, {X}_{j,t}) = 0$ (when individual observations react similarly to the common shocks or correlate in space);
+
+## Panel Regression FE model not less important assumptions (2)
+
+-   All Gauss-Markov assumptions
+
+    -   Linearity
+
+    -   Random sampling
+
+    -   No endogeneity
+
+    -   No collinearity
+
+-   Homoscedasticity of error terms: $Var(\delta_{i}|{X}_{it}) = \sigma^2_{\delta}$
+
+-   Normality of the residuals
+
+## Fixed effect application: literature
+
+Seminal papers: [@Mundlak1961]
+
+Climate and agriculture: [@Mendelsohn1994, @Blanc2017, @Bozzola2017]
+
+Choice of irrigation: [@Kurukulasuriya2011, @Chatzopoulos2015]
+
+Crop choice: [@Kurukulasuriya2008, @Seo2008b,]
+
+Livestock choice: [@Seo2008a, @Seo2008]
+
+Cross-sectional dependence: [@Conley1999]
+
+## Random Effect Model (individual, time and two-ways)
+
+-   Introduce random components $\color{Red}{v_i}$ and/or $\color{Blue}{u_{t}}$
+
+. . .
+
+$$
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
+$$
+
+-   Difference from the fixed effect model:
+
+    -   Assumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:
+
+        -   $Cov(v_{i},{X}_{it}) = 0$
+
+    -   Ignoring RE causes no bias to the estimates;
+
+## Summary on the Panel Regression
+
+::: columns
+::: {.column width="50%"}
+Fixed Effect (within transformation)
+
+-   Assumes that Fixed Effects correlate with regressors!
+
+-   Partially resolves the OVB.
+
+-   Ignoring FE (using pooled regression) causes bias of estimates.
+:::
+
+::: {.column width="50%"}
+Random Effect
+
+-   Assumes that Random Effects do NOT correlate with regressors
+
+-   Do NOT resolved any OVB.
+
+-   Provides additional control strategy, but ignoring RE causes NO bias.
+:::
+:::
+
+-   Both require valid Gauss--Markov assumptions.
+
+. . .
+
+#### Limitations of the Fixed and Random effect models
+
+-   NOT the ultimate solution to Endogeneity.
+
+-   OVB may still remain after applying the fixed effects.
+
+-   Measurement error is a problem in panel data.
+
+# Panel Regression Example: Union and wages
+
+
+## Problem setting
+
+Does the collective bargaining (union membership) has any effect on wages?
+
+-   See: [@Freeman1984; @Card1996]
+
+. . .
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+$$
+
+where $i$ is the individual and $t$ is the time dimension;
+
+
+## General algorithm {.smaller}
+
+1.  Pooled OLS
+
+    -   Choose an appropriate functional form (log/level);
+
+    -   Validate gauss-Markov assumption validation: Linearity, Collinearity, Random Sampling; Homoscedasticity;
+
+    -   Note on the 'No endogeneity' assumption (if not validated, shows importance of the FE model)
+
+2.  FE: Fixed Effect. Within-transformation. Individual, Time or Two-ways effects;
+
+    -   `F-test` on FE consistency against pooled.
+
+    -   `LM test` on FE Individual, Time or Two-ways effects consistency against each other.
+
+    -   If tests suggest the pooled model, but the theory emphasizes FE, discus and reason your choice.
+
+3.  RE: Random Effect;
+
+    -   `Hausman test` on effects' correlation with regressors of RE consistency against the FE;
+
+    -   Similar `Chamberlain test`, `Angrist and Newey` tests.
+
+4.  Serial correlation and cross-sectional dependence tests;
+
+    -   `Wooldridge's`, `Locally–Robust LM Test`, `Breusch–Godfrey Test`,
+
+    -   t \> 3, we may have a serial correlation problem. Check it with a test.
+
+    -   Could individuals be affected by common shocks? We might have a cross-sectional dependence problem.
+
+5.  Use robust standard errors to correct for serial correlation and/or cross-sectional dependence:
+
+    -   Clustered SE and/or heteroscedasticity and/or autocorrelation robust SE;
+
+6.  Summary and interpretation;
+
+## Step 1.a Pooled OLS
+
+```{r eval=FALSE, echo=TRUE}
+library(tidyverse)
+library(modelsummary)
+library(parameters)
+library(performance)
+library(lmtest)
+wage_dta <- read_csv("wage_unon_panel.csv")
+glimpse(wage_dta)
+```
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fit_0 <- 
+  lm(log(wage) ~ union + educ + exper + I(exper^2) + hours , 
+     data = wage_dta)
+union_fit_0
+```
+
+## Step 1.b Assumptions (Linearity + Homoscedasticity)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| fig-asp: 0.5
+check_model(union_fit_0, check = c("linearity", "homogeneity"))
+```
+
+## Step 1.b Assumptions (Homoscedasticity)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+check_heteroscedasticity(union_fit_0) 
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| output-location: fragment
+bptest(union_fit_0)
+```
+
+## Step 1.b Assumptions (Collinearity)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+check_collinearity(union_fit_0)
+```
+
+## Step 1.b Assumptions (No endogeneity)
+
+$$
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+$$
+
+$\text{Ability}_{i}$ not observable and not measurable.
+
+Omitting the ability may cause the OVB.
+
+-   No endogeneity assumption cannot be satisfied.
+
+-   We should exploit the panel data structure.
+
+## Step 2. FE: Fixed Effect (within)
+
+#### Note, the new package: `plm` used for running panel regressions.
+
+```{r}
+#| echo: true
+library(plm)
+```
+
+. . .
+
+#### Declare data to be panel.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+wage_dta_pan <- pdata.frame(wage_dta, index = c("id", "year"))
+```
+
+. . .
+
+#### Check panel dimensions.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+pdim(wage_dta_pan)
+```
+
+## Step 2. FE: Fixed Effect (within) (1)
+
+**Rerun the pooled regression with `plm`:**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_pooled <- 
+  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,
+      data = wage_dta, model = "pooling")
+union_pooled
+```
+
+. . .
+
+**Fixed Effect (individual) model**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fe_ind <- 
+  plm(log(wage)  ~ union + educ + exper + I(exper^2) + hours ,
+      data = wage_dta, model = "within", effect = "individual")
+union_fe_ind
+```
+
+## Step 2. FE: Fixed Effect (within) (2)
+
+**Fixed Effect (time) model**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fe_time <- 
+  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,
+      data = wage_dta, model = "within", effect = "time")
+union_fe_time
+```
+
+. . .
+
+**Fixed Effect (Two-ways) model**
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_fe_twoways <- 
+  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,
+      data = wage_dta, model = "within", effect = "twoways")
+union_fe_twoways
+```
+
+## Step 2. `F-test` (1)
+
+Which model to choose: Pooled or FE?
+
+::: columns
+::: {.column width="50%"}
+-   Compares FE models (individual, time, two-ways) vs pooled
+
+    -   Pooled is always consistent vs FE
+
+-   Test logic:
+
+    -   H0: One model is inconsistent. (no individual/time/two-way effects)
+
+    -   H1: Both models are equally consistent.
+:::
+
+::: {.column width="50%"}
+-   Run the test. Check the p-value
+
+    -   p-value \< 0.05: FE is as good as pooled. Not using the FE model may lead to the bias.
+
+    -   p-value \>= 0.05: Pooled is better than the FE model. Use pooled for interpretation.
+:::
+:::
+
+## Step 2. `F-test` (2)
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+#| output-location: fragment
+pFtest(union_fe_ind, union_pooled)
+```
+:::
+
+::: {.column width="35%"}
+-   FE is preferred (pooled is biased)
+:::
+:::
+
+. . .
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+#| output-location: fragment
+pFtest(union_fe_twoways, union_pooled)
+```
+:::
+
+::: {.column width="35%"}
+-   Two-ways is preferred (pooled is biased)
+:::
+:::
+
+. . .
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+#| output-location: fragment
+pFtest(union_fe_time, union_pooled)
+```
+:::
+
+::: {.column width="35%"}
+-   Time FE is preferred (pooled is biased)
+:::
+:::
+
+-   `F-test` leads us to stick with the FE individual, two-ways or time regression. 
+
+## Step 2. `LM test`: Lagrange multiplier test (2)
+
+Which FE model to choose: individual, time or two-way?
+
+::: columns
+::: {.column width="50%"}
+-   Exist to compare FE models between each other assuming that:
+
+    -   **Pooled is always consistent** in pooled vs individual FE
+    -   **Individual FE always consistent** in individual FE vs time or two-way FE
+
+-   Test logic:
+
+    -   H0: One model is inconsistent.
+    -   H1: Both models are equally consistent.
+:::
+
+::: {.column width="50%"}
+-   Run the test (one or another or both). Check p-value:
+
+    -   p-value \< 0.05: 
+    
+        -   Individual FE is as good as pooled;
+        -   Time or Two-ways model is as good as individual FE;
+
+    -   p-value \>= 0.05: Pooled or individual FE is better than the alternative
+
+:::
+:::
+
+## Step 2. `LM test`Lagrange multiplier (2)
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+plmtest(union_pooled, effect = "individual")
+plmtest(union_pooled, effect = "twoway")
+plmtest(union_pooled, effect = "time")
+```
+:::
+
+::: {.column width="35%"}
+-   Individual FE is preferred (pooled is biased)
+-   Individual FE and two-ways are both consistent. We can choose any of those two.
+-   Individual FE and time FE are both consistent. We can choose any of those two.
+:::
+:::
+
+-   All tests suggest that individual, time and two-ways fixed effect models are equally consistent.
+
+## Step 3. Random Effect model (individual)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+union_rand_ind <- 
+  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,
+      data = wage_dta, model = "random", effect = "individual")
+union_rand_ind
+```
+
+## Step 3. Hausman test
+
+Which model to choose: Fixed effect or Random effect?
+
+::: columns
+::: {.column width="50%"}
+-   Compares Fixed Effect model with Random Effect:
+
+    -   Fixed effect model is always consistent
+
+-   Test logic:
+
+    -   H0: One model is inconsistent. Use FE!
+
+    -   H1: Both models are equally consistent. RE is as good as FE.
+:::
+
+::: {.column width="50%"}
+-   Run the test. Check the p-value.
+
+    -   p-value \< 0.05: Use FE or RE, both are good.
+
+    -   p-value \>= 0.05: Use FE, discard RE.
+:::
+:::
+
+. . .
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+phtest(union_fe_ind, union_rand_ind)
+```
+:::
+
+::: {.column width="35%"}
+-   FE is preferred instead of the RE model.
+:::
+:::
+
+## Step 4.1 Wooldridge's test (1)
+
+Is there serial correlation / cross-sectional dependence in the data?
+
+::: columns
+::: {.column width="50%"}
+-   Wooldridge's test for unobserved individual effects
+
+    -   H0: no unobserved effects
+
+    -   H1: some effects exist due to cross-sectional dependence and/or serial correlation
+:::
+
+::: {.column width="50%"}
+-   Run the test Check the p-value.
+
+    -   p-value \< 0.05: cross-sectional dependence and/or serial correlation are present
+
+    -   p-value \>= 0.05: No cross-sectional dependency and/or serial correlation
+:::
+:::
+
+
+## Step 4.1 Wooldridge's test (2)
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+pwtest(union_pooled, effect = "individual")
+pwtest(union_pooled, effect = "time")
+```
+:::
+
+::: {.column width="35%"}
+-   cross-sectional dependence is present
+-   serial correlation is present
+:::
+:::
+
+## Step 4.2 Lagrange-Multiplier tests (1)
+
+Is there serial correlation in the data?
+
+::: columns
+::: {.column width="50%"}
+-   Locally--Robust Lagrange Multiplier Tests for serial correlation
+
+    -   H0: serial correlation is zero
+
+    -   H1: some serial correlation is present
+:::
+
+::: {.column width="50%"}
+-   Run the test Check the p-value.
+
+    -   p-value \< 0.05: serial correlation need to be addressed
+
+    -   p-value \>= 0.05: no serial correlation
+:::
+:::
+
+## Step 4.2 Lagrange-Multiplier tests (2)
+
+::: columns
+::: {.column width="65%"}
+```{r}
+#| echo: true
+pbsytest(union_pooled, test = "ar")
+```
+:::
+
+::: {.column width="35%"}
+-   serial correlation is present
+:::
+:::
+
+
+## Step 5. Robust inference
+
+Serial correlation and/or cross-sectional dependence render our Standard errors useless.
+
+-   Cross-sectional dependence and/or serial correlation violate the variance homogeneity assumption:
+
+    -   Estimates are unbiased, but inefficient.
+    
+    -   Standard errors need to be corrected.
+
+. . .
+
+We need to use:
+
+-   **Robust Standard Errors**, and/or
+
+-   Clustered SE at the individual (group) level
+
+## Step 5. Robust Standard Error (1)
+
+```{r}
+#| echo: true
+library(lmtest)
+library(car)
+library(sandwich)
+options(digits = 3, scipen = 6)
+union_fe_ind
+```
+
+**Correcting cross-sectional dependence:**
+
+::: columns
+::: {.column width="50%"}
+**Regular SE**
+
+```{r}
+#| echo: true
+coeftest(union_fe_ind, 
+         vcov. = vcov(union_fe_ind))
+```
+:::
+
+::: {.column width="50%"}
+**Robust SE**
+
+```{r}
+#| echo: true
+coeftest(union_fe_ind, 
+         vcov. = vcovHC(union_fe_ind, method = "white1", 
+                        type = "HC0", cluster = "group"))
+```
+:::
+:::
+
+## Step 5. Robust Standard Error (2)
+
+We produce new Variance-covariance matrix:
+
+```{r}
+#| echo: true
+vcovHC(union_fe_ind, 
+       method = "white1", 
+       type = "HC0", 
+       cluster = "group")
+```
+
+-   `methods` for cross--sectional dependence "white1" and "white2" and for cross--sectional dependence and autocorrelation "arellano";
+
+-   `type` for sample size correction: "HC0", "sss", "HC1", "HC2", "HC3", "HC4" ("HC3" is recommended);
+
+-   `cluster` enabled by default ("group" or "time");
+
+## Step 6. Reporting results (1)
+
+```{r}
+#| echo: true
+pooled_robust <- 
+  coeftest(union_pooled,
+           vcov. = vcovHC(union_pooled, method = "arellano",
+                          type = "HC3", cluster = "group"))
+
+pooled_cs_robust <- 
+  coeftest(union_fe_ind,
+           vcov. = vcovHC(union_fe_ind, method = "white1", 
+                          type = "HC0", cluster = "group"))
+
+pooled_csac_robust <- 
+  coeftest(union_fe_ind,
+           vcov. = vcovHC(union_fe_ind, method = "arellano", 
+                          type = "HC3", cluster = "group"))
+```
+
+```{r}
+#| echo: true
+#| eval: false
+modelsummary(
+  list(
+    `Pooled (no SE correction)` = coeftest(union_pooled),
+    `Pooled (c/s dep. and aut.)` = pooled_robust,
+    `Ind. FE (no SE correction)` = coeftest(union_fe_ind),
+    `Ind. FE (c/s dep.)` = pooled_cs_robust, 
+    `Ind. FE (c/s dep. and aut.)` = pooled_csac_robust
+    ), 
+  fmt = 4, statistic = NULL,
+  estimate = "{estimate}{stars} ({std.error})")
+```
+
+
+## Step 6. Reporting results (1) {.smaller}
+
+```{r}
+#| echo: false
+#| eval: true
+modelsummary(
+  list(
+    `Pooled (no SE correction)` = coeftest(union_pooled),
+    `Pooled (c/s dep. and aut.)` = pooled_robust,
+    `Ind. FE (no SE correction)` = coeftest(union_fe_ind),
+    `Ind. FE (c/s dep.)` = pooled_cs_robust, 
+    `Ind. FE (c/s dep. and aut.)` = pooled_csac_robust
+    ), 
+  fmt = 4, statistic = NULL,
+  estimate = "{estimate}{stars} ({std.error})")
+```
+
+## Step 6. Reporting GOF (1)
+
+```{r}
+#| echo: true
+#| output-location: fragment
+library(performance)
+compare_performance(list(Pooled = union_pooled, FE = union_fe_ind))
+```
+
+
+# Takeaways
+
+## Takeaways for the exam {.smaller}
+
+1.  Simpson's paradox. What are the causes of it and solutions.
+
+2.  Data types (cross-section, repeated cross-section, balanced panel, unbalanced panel)
+
+3.  Panel Regression
+
+    -   Pooled;
+    -   Least Squared Dummy Variable model;
+    -   Fixed effect (within transformation);
+    -   Why FE is so important?
+    -   What is the key difference between FE and RE?
+    -   When FE and when RE are appropriate?
+
+4.  Panel Regression tests `F-test`, `LM-test`, `Hausman test`
+
+5.  Robust and Clustered SE: 
+
+    -   Why these are important and when do we need to use one?
+
+## Homework
+
+1.  Reproduce code from the slides
+
+2.  Perform practical exercises.
+
+## References {.smaller}

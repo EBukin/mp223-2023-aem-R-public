@@ -1,0 +1,3484 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.1.251">
+
+  <meta name="author" content="Eduard Bukin">
+  <title>Panel Regression Analysis</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <link href="custom.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Panel Regression Analysis</h1>
+  <p class="author">Eduard Bukin</p>
+</section>
+
+<section class="slide level2">
+
+<div class="cell">
+
+</div>
+</section>
+<section id="recap" class="title-slide slide level1 center">
+<h1>Recap</h1>
+<div>
+<ul>
+<li class="fragment"><p>Ceteris paribus!?</p>
+<ul>
+<li class="fragment">Why multiple regression is “good”?</li>
+<li class="fragment">What variables are important when establishing a causal effect of a treatment (key variable)?</li>
+<li class="fragment">What if we do not have an important variable?</li>
+</ul></li>
+<li class="fragment"><p>Selection bias = OVB! In multiple regression analysis.</p>
+<ul>
+<li class="fragment">What does OVB to our regression estimates?</li>
+<li class="fragment">Bias (inconsistency) of estimates!</li>
+</ul></li>
+</ul>
+</div>
+</section>
+
+<section>
+<section id="simpsons-paradox" class="title-slide slide level1 center">
+<h1>Simpson’s paradox</h1>
+<p>See: Simpson, E. H. (1951). The Interpretation of Interaction in Contingency Tables. Journal of the Royal Statistical Society: Series B (Methodological), 13(2), 238–241. https://doi.org/10.1111/j.2517-6161.1951.tb00088.x</p>
+</section>
+<section id="simpsons-paradox-with-penguins" class="slide level2" data-background-image="img/w08/lter_penguins.png" data-background-size="80%">
+<h2>Simpson’s paradox (with penguins)</h2>
+</section>
+<section id="let-us-investigate" class="slide level2">
+<h2>Let us investigate…</h2>
+<p>The relationship between bill length and depth in penguins…</p>
+<div class="fragment">
+<p><img data-src="img/w08/culmen_depth.png"></p>
+</div>
+</section>
+<section id="the-data" class="slide level2">
+<h2>The data</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"penguins"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>penguins <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+</div>
+</div>
+</section>
+<section id="the-relationship" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The relationship</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href="#cb3-1"></a>gg_bill <span class="ot">&lt;-</span> </span>
+<span id="cb3-2" class="hljs-ln-code"><a href="#cb3-2"></a>  penguins <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb3-3" class="hljs-ln-code"><a href="#cb3-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm) <span class="sc">+</span></span>
+<span id="cb3-4" class="hljs-ln-code"><a href="#cb3-4"></a>  <span class="fu">xlab</span>(<span class="st">"Bill length, mm"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Bill depth, mm"</span>) <span class="sc">+</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a href="#cb3-5"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb3-6" class="hljs-ln-code"><a href="#cb3-6"></a>gg_bill</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="w08a-panel-regression_files/figure-revealjs/unnamed-chunk-4-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-trend" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The trend</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href="#cb4-1"></a>gg_bill <span class="sc">+</span> </span>
+<span id="cb4-2" class="hljs-ln-code"><a href="#cb4-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">colour =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="w08a-panel-regression_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="is-this-the-true-trend" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Is this the true trend?</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb5-1" class="hljs-ln-code"><a href="#cb5-1"></a>gg_bill <span class="sc">+</span> </span>
+<span id="cb5-2" class="hljs-ln-code"><a href="#cb5-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb5-3" class="hljs-ln-code"><a href="#cb5-3"></a>  <span class="fu">aes</span>(<span class="at">colour =</span> species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="w08a-panel-regression_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-true-trends" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">The true trends</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb6-1" class="hljs-ln-code"><a href="#cb6-1"></a>gg_bill <span class="sc">+</span> </span>
+<span id="cb6-2" class="hljs-ln-code"><a href="#cb6-2"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> </span>
+<span id="cb6-3" class="hljs-ln-code"><a href="#cb6-3"></a>  <span class="fu">aes</span>(<span class="at">colour =</span> species) <span class="sc">+</span> </span>
+<span id="cb6-4" class="hljs-ln-code"><a href="#cb6-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="w08a-panel-regression_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="regression-results" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Regression results</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb7-1" class="hljs-ln-code"><a href="#cb7-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bill_depth_mm <span class="sc">~</span> bill_length_mm, <span class="at">data =</span> penguins)</span>
+<span id="cb7-2" class="hljs-ln-code"><a href="#cb7-2"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bill_depth_mm <span class="sc">~</span> bill_length_mm <span class="sc">+</span> species, <span class="at">data =</span> penguins)</span>
+<span id="cb7-3" class="hljs-ln-code"><a href="#cb7-3"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bill_depth_mm <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> bill_length_mm <span class="sc">+</span> species, <span class="at">data =</span> penguins)</span>
+<span id="cb7-4" class="hljs-ln-code"><a href="#cb7-4"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb7-5" class="hljs-ln-code"><a href="#cb7-5"></a>  <span class="fu">list</span>(fit1, fit2, fit3),</span>
+<span id="cb7-6" class="hljs-ln-code"><a href="#cb7-6"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>, </span>
+<span id="cb7-7" class="hljs-ln-code"><a href="#cb7-7"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-8" class="hljs-ln-code"><a href="#cb7-8"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"adj.r.squared"</span>)</span>
+<span id="cb7-9" class="hljs-ln-code"><a href="#cb7-9"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> &nbsp;(1) </th>
+   <th style="text-align:center;"> &nbsp;&nbsp;(2) </th>
+   <th style="text-align:center;"> &nbsp;&nbsp;(3) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 20.885*** (0.844) </td>
+   <td style="text-align:center;"> 10.592*** (0.683) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> bill_length_mm </td>
+   <td style="text-align:center;"> −0.085*** (0.019) </td>
+   <td style="text-align:center;"> 0.200*** (0.017) </td>
+   <td style="text-align:center;"> 0.200*** (0.017) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> speciesChinstrap </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> −1.933*** (0.224) </td>
+   <td style="text-align:center;"> 8.659*** (0.862) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> speciesGentoo </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> −5.106*** (0.191) </td>
+   <td style="text-align:center;"> 5.486*** (0.835) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px"> speciesAdelie </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 10.592*** (0.683) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 342 </td>
+   <td style="text-align:center;"> 342 </td>
+   <td style="text-align:center;"> 342 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.052 </td>
+   <td style="text-align:center;"> 0.767 </td>
+   <td style="text-align:center;"> 0.997 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="simpsons-paradox-conclusion" class="slide level2">
+<h2>Simpson’s paradox conclusion</h2>
+<div class="fragment">
+<p>Trends or relationships are observed in the whole population, but they reverse or disappear, when each group is treated separately.</p>
+</div>
+<div class="fragment">
+<p><strong>Causes:</strong></p>
+<ul>
+<li class="fragment"><p>Unobserved heterogeneity/differences between groups.</p></li>
+<li class="fragment"><p>Underlining processes that are different between parts of the population.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Resolutions to the paradox:</strong></p>
+<ul>
+<li class="fragment"><p>Control variables in the MRL.</p></li>
+<li class="fragment"><p>Panel data.</p></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="data-types" class="title-slide slide level1 center">
+<h1>Data Types</h1>
+
+</section>
+<section id="cross-sectional-data" class="slide level2">
+<h2>Cross-sectional data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fargment">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;">Y</th>
+<th style="text-align: center;">X1</th>
+<th style="text-align: center;">X2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{2}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{3}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{3}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{3}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{4}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{4}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{5}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{5}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{6}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{N}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{N}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Data that we usually collect in a single data collection.</p>
+<ul>
+<li class="fragment">Each individual is represented by one observation.</li>
+</ul></li>
+<li class="fragment"><p>Could be repeatedly collected multiple times (repeated cross-section),</p>
+<ul>
+<li class="fragment">but, in every repetition, there are different individuals!</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="panel-data" class="slide level2">
+<h2>Panel data</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;">Time</th>
+<th style="text-align: center;">Y</th>
+<th style="text-align: center;">X1</th>
+<th style="text-align: center;">X2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{11}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{12}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{13}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{13}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{13}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{22}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{23}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{23}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{23}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{31}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{31}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{31}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{32}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{32}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{32}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{N1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N1}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{NT}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{NT}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{NT}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:40%;">
+<ul>
+<li class="fragment"><p>table with data, where</p></li>
+<li class="fragment"><p><strong>each individual</strong> (cohort, e.i. region, country)</p></li>
+<li class="fragment"><p>is represented by <strong>multiple observations</strong> at <strong>different time periods</strong>.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="panel-data-balanced-and-unbalanced" class="slide level2 smaller">
+<h2>Panel data: Balanced and Unbalanced</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Balanced</strong></p>
+<p>Each individual is represented in all time periods.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\text{ID}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\text{Time}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(X\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{11}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{12}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(Y_{1T}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{1T}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{21}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{21}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{22}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(Y_{2T}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{2T}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{31}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{31}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(Y_{NT}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{NT}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p><strong>Un balanced</strong></p>
+<p>Each individual only appears in some time periods (not all).</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\text{ID}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\text{Time}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Y\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(X\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{11}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{12}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{22}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{23}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{23}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{33}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{33}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{41}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{41}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(Y_{52}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{52}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(Y_{NT}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(X_{NT}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section></section>
+<section id="regressions-with-panel-data" class="title-slide slide level1 center">
+<h1>Regressions with Panel Data</h1>
+<div class="fragment">
+<div class="callout callout-important callout-captioned callout-style-default">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>is a strategy to <strong>control</strong> for unobserved/omitted but fixed heterogeneity using <strong>time</strong> or <strong>cohort (individual)</strong> dimensions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>There are:</p>
+<ol type="1">
+<li class="fragment"><p>Pooled regression</p></li>
+<li class="fragment"><p>Least-squares dummy variable (LSDV) model</p></li>
+<li class="fragment"><p><strong>Fixed Effect</strong> Panel Regression (within, first-difference and between)</p></li>
+<li class="fragment"><p><strong>Random Effect</strong> Panel Regression</p></li>
+</ol>
+</div>
+</section>
+
+<section>
+<section id="example-1-effect-of-an-employees-union-membership-on-wage" class="title-slide slide level1 center">
+<h1>Example 1: Effect of an employee’s union membership on wage</h1>
+
+</section>
+<section id="problem-setting" class="slide level2">
+<h2>Problem setting</h2>
+<p>Does the collective bargaining (union membership) has any effect on wages?</p>
+<ul>
+<li class="fragment">See: <span class="citation" data-cites="Freeman1984 Card1996">(<a href="#/references" role="doc-biblioref" onclick="">Card, 1996</a>; <a href="#/references" role="doc-biblioref" onclick="">Freeman, 1984</a>)</span></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+\]</span></p>
+<p>where <span class="math inline">\(i\)</span> is the individual and <span class="math inline">\(t\)</span> is the time dimension;</p>
+</div>
+</section>
+<section id="is-there-an-endogeneity-problem" class="slide level2">
+<h2>Is there an endogeneity problem?</h2>
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+\]</span></p>
+<ul>
+<li class="fragment"><p>Is there a source of endogeneity / selection bias here?</p>
+<ul>
+<li class="fragment">Any ideas?</li>
+</ul></li>
+<li class="fragment"><p><span class="math inline">\(\text{Ability}_{i}\)</span> not observable and not measurable;</p>
+<ul>
+<li class="fragment">time invariant;</li>
+<li class="fragment">correlates with <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>;</li>
+</ul></li>
+<li class="fragment"><p>Omitting ability causes bias</p></li>
+</ul>
+</section>
+<section id="one-of-the-solutions" class="slide level2">
+<h2>One of the solutions:</h2>
+<ul>
+<li class="fragment"><p>Ability are <strong>time-invariant</strong> and <strong>unique to each individual</strong>;</p>
+<ul>
+<li class="fragment"><p>If we have multiple observation per each individual (<strong>panel data</strong>),</p></li>
+<li class="fragment"><p>we can introduce dummy variables for each individual, to approximate ability.</p></li>
+</ul></li>
+<li class="fragment"><p>This is also called Fixed Effect - regression model</p>
+<ul>
+<li class="fragment"><p>or a <strong>within transformation</strong> model</p></li>
+<li class="fragment"><p>or <strong>Difference in Difference</strong></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="other-solutions" class="slide level2">
+<h2>Other solutions:</h2>
+<ul>
+<li class="fragment"><p>Any ideas?</p></li>
+<li class="fragment"><p>Introduce <strong>control variables</strong> that are <strong>proxy</strong> of ability.</p></li>
+<li class="fragment"><p>Employ specific <strong>research design</strong>:</p>
+<ul>
+<li class="fragment"><p>RCT</p></li>
+<li class="fragment"><p>RDD</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="empirical-example" class="slide level2">
+<h2>Empirical example</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>wage_dta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"wage_unon_panel.csv"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">glimpse</span>(wage_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4,165
+Columns: 15
+$ id      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,…
+$ year    &lt;dbl&gt; 82, 83, 84, 85, 86, 87, 88, 82, 83, 84, 85, 86, 87, 88, 82, 83…
+$ exper   &lt;dbl&gt; 3, 4, 5, 6, 7, 8, 9, 30, 31, 32, 33, 34, 35, 36, 6, 7, 8, 9, 1…
+$ hours   &lt;dbl&gt; 32, 43, 40, 39, 42, 35, 32, 34, 27, 33, 30, 30, 37, 30, 50, 51…
+$ bluecol &lt;chr&gt; "no", "no", "no", "no", "no", "no", "no", "yes", "yes", "yes",…
+$ ind     &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ south   &lt;chr&gt; "yes", "yes", "yes", "yes", "yes", "yes", "yes", "no", "no", "…
+$ smsa    &lt;chr&gt; "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "n…
+$ married &lt;chr&gt; "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes", "yes",…
+$ union   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,…
+$ educ    &lt;dbl&gt; 9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 1…
+$ black   &lt;chr&gt; "no", "no", "no", "no", "no", "no", "no", "no", "no", "no", "n…
+$ lwage   &lt;dbl&gt; 5.56068, 5.72031, 5.99645, 5.99645, 6.06146, 6.17379, 6.24417,…
+$ female  &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ wage    &lt;dbl&gt; 259.9996, 304.9995, 401.9992, 401.9992, 429.0013, 480.0019, 51…</code></pre>
+</div>
+</div>
+</section>
+<section id="the-data-1" class="slide level2 smaller">
+<h2>The data</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:right;"> exper </th>
+   <th style="text-align:right;"> hours </th>
+   <th style="text-align:left;"> bluecol </th>
+   <th style="text-align:right;"> ind </th>
+   <th style="text-align:left;"> south </th>
+   <th style="text-align:left;"> smsa </th>
+   <th style="text-align:left;"> married </th>
+   <th style="text-align:right;"> union </th>
+   <th style="text-align:right;"> educ </th>
+   <th style="text-align:left;"> black </th>
+   <th style="text-align:right;"> lwage </th>
+   <th style="text-align:right;"> female </th>
+   <th style="text-align:right;"> wage </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.43775 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 624.9990 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.62007 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 749.9976 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.63332 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 760.0012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.98286 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1077.9970 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 7.04752 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1150.0032 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 87 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 7.31322 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1499.9994 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 49 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 7.29574 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1474.0073 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 82 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.23245 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 509.0010 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 83 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.57925 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 719.9991 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 84 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.65286 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 774.9977 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 6.74524 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 850.0031 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 7.49554 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1799.9965 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 87 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 48 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 8.16052 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3500.0061 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 168 </td>
+   <td style="text-align:right;"> 88 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:left;"> yes </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:left;"> no </td>
+   <td style="text-align:right;"> 8.30820 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4057.0038 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="pooled-regression" class="slide level2">
+<h2>Pooled Regression</h2>
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \epsilon_{it}
+\]</span></p>
+<div class="fragment">
+<ul>
+<li class="fragment">Regression model on all observations in the <strong>panel data set</strong> without any individual effects.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>union_fit_0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours , </span>
+<span id="cb10-2"><a href="#cb10-2"></a>                  <span class="at">data =</span> wage_dta)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>union_fit_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(wage) ~ union + educ + exper + I(exper^2) + 
+    hours, data = wage_dta)
+
+Coefficients:
+(Intercept)        union         educ        exper   I(exper^2)        hours  
+  4.7054380    0.1261467    0.0819744    0.0437155   -0.0006932    0.0077042  </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="least-squares-dummy-variable-lsdv" class="slide level2">
+<h2>Least-squares dummy variable (LSDV)</h2>
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+\]</span></p>
+<div class="fragment">
+<ul>
+<li class="fragment"><p>Pooled regression plus dummy variable for each individual.</p></li>
+<li class="fragment"><p>This is not a Fixed Effect Panel Regression!</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>union_fit_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours <span class="sc">+</span> <span class="fu">factor</span>(id), </span>
+<span id="cb12-2"><a href="#cb12-2"></a>                  <span class="at">data =</span> wage_dta)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>union_fit_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(wage) ~ union + educ + exper + I(exper^2) + 
+    hours + factor(id), data = wage_dta)
+
+Coefficients:
+  (Intercept)          union           educ          exper     I(exper^2)  
+    4.3485732      0.0300295      0.1023231      0.1137052     -0.0004234  
+        hours    factor(id)2    factor(id)3    factor(id)4    factor(id)5  
+    0.0007980     -2.2946317     -0.1234092     -2.3978310     -0.5366805  
+  factor(id)6    factor(id)7    factor(id)8    factor(id)9   factor(id)10  
+   -1.4597761     -1.2411420     -1.5180049      0.2078530     -0.1734390  
+ factor(id)11   factor(id)12   factor(id)13   factor(id)14   factor(id)15  
+   -1.4704689     -1.3608691     -1.3890339     -1.0439450     -0.9439428  
+ factor(id)16   factor(id)17   factor(id)18   factor(id)19   factor(id)20  
+   -1.5809655     -0.9700846     -1.3922150     -3.0892451     -1.8367302  
+ factor(id)21   factor(id)22   factor(id)23   factor(id)24   factor(id)25  
+   -1.7226414     -1.4223248      0.0054199     -0.8357823     -0.6064977  
+ factor(id)26   factor(id)27   factor(id)28   factor(id)29   factor(id)30  
+   -0.7379286     -0.2772751     -1.8216457     -1.8871665     -1.3042601  
+ factor(id)31   factor(id)32   factor(id)33   factor(id)34   factor(id)35  
+   -1.4134898     -1.8734643     -0.6413820     -3.7105381     -0.1984895  
+ factor(id)36   factor(id)37   factor(id)38   factor(id)39   factor(id)40  
+   -0.3421001     -0.3410200     -0.7597065     -0.0688068     -1.7787978  
+ factor(id)41   factor(id)42   factor(id)43   factor(id)44   factor(id)45  
+   -1.0532843     -2.2573678      0.1550164      0.0478652     -0.9543507  
+ factor(id)46   factor(id)47   factor(id)48   factor(id)49   factor(id)50  
+   -0.2541933     -1.7069053     -1.8137723     -1.9258846     -2.4484643  
+ factor(id)51   factor(id)52   factor(id)53   factor(id)54   factor(id)55  
+   -1.9760363     -1.6064527     -0.4646712     -0.4521180     -1.7422486  
+ factor(id)56   factor(id)57   factor(id)58   factor(id)59   factor(id)60  
+   -1.9282946     -1.6643194     -2.8323912     -1.7329928     -1.6527519  
+ factor(id)61   factor(id)62   factor(id)63   factor(id)64   factor(id)65  
+   -1.9914748     -0.1579195     -0.2806420     -2.6926172     -1.7074951  
+ factor(id)66   factor(id)67   factor(id)68   factor(id)69   factor(id)70  
+   -1.0021172     -2.5046091     -2.5941980     -2.0777134     -0.4562135  
+ factor(id)71   factor(id)72   factor(id)73   factor(id)74   factor(id)75  
+   -0.0984012     -0.9192300     -0.9709685     -0.7050966     -1.7193154  
+ factor(id)76   factor(id)77   factor(id)78   factor(id)79   factor(id)80  
+   -1.1672133     -0.7934024     -3.4592869     -0.8823052     -0.0604197  
+ factor(id)81   factor(id)82   factor(id)83   factor(id)84   factor(id)85  
+   -0.2728831     -1.3694580     -0.8873794     -3.4094508     -0.6181149  
+ factor(id)86   factor(id)87   factor(id)88   factor(id)89   factor(id)90  
+    0.3230099     -0.6208690     -0.0384965     -0.7156531      0.2819298  
+ factor(id)91   factor(id)92   factor(id)93   factor(id)94   factor(id)95  
+    0.2219382     -0.0389122     -2.2703900     -0.6713527     -2.5658913  
+ factor(id)96   factor(id)97   factor(id)98   factor(id)99  factor(id)100  
+   -1.8929945     -2.3668088     -1.0815051     -1.2371669     -0.3689453  
+factor(id)101  factor(id)102  factor(id)103  factor(id)104  factor(id)105  
+   -2.0715701      0.2419079     -1.0534000     -1.2417073     -0.3892415  
+factor(id)106  factor(id)107  factor(id)108  factor(id)109  factor(id)110  
+    0.0013452     -1.8143890     -0.9852634     -1.4033012     -2.7813619  
+factor(id)111  factor(id)112  factor(id)113  factor(id)114  factor(id)115  
+   -0.1122968     -0.8453668     -1.8469750     -2.9350313     -0.4420842  
+factor(id)116  factor(id)117  factor(id)118  factor(id)119  factor(id)120  
+   -0.7258607     -1.2304082     -1.3950810     -0.3204476     -0.7104122  
+factor(id)121  factor(id)122  factor(id)123  factor(id)124  factor(id)125  
+   -0.3685394     -0.6871320     -1.5356558     -1.9044675     -0.9214093  
+factor(id)126  factor(id)127  factor(id)128  factor(id)129  factor(id)130  
+    0.1863200     -1.8088881     -2.3404805     -2.3327080     -1.8672439  
+factor(id)131  factor(id)132  factor(id)133  factor(id)134  factor(id)135  
+   -1.7733156     -1.2515247     -1.2618072     -0.2715418     -0.5405965  
+factor(id)136  factor(id)137  factor(id)138  factor(id)139  factor(id)140  
+   -0.9040781     -1.2464677     -1.3348897      0.0546240     -0.1468334  
+factor(id)141  factor(id)142  factor(id)143  factor(id)144  factor(id)145  
+   -0.9653104     -2.8803152     -2.5587496     -0.3057205     -1.1895399  
+factor(id)146  factor(id)147  factor(id)148  factor(id)149  factor(id)150  
+   -2.5564297     -0.3336869     -0.2135711     -0.2358201     -0.9902041  
+factor(id)151  factor(id)152  factor(id)153  factor(id)154  factor(id)155  
+   -1.8371688     -0.3919091     -0.9059245     -0.8288426      0.2639585  
+factor(id)156  factor(id)157  factor(id)158  factor(id)159  factor(id)160  
+   -2.3669688     -0.1579770     -1.9607783     -2.2903756     -2.0867318  
+factor(id)161  factor(id)162  factor(id)163  factor(id)164  factor(id)165  
+   -0.4052899     -0.5879060     -0.7129091     -0.5237673     -3.0691480  
+factor(id)166  factor(id)167  factor(id)168  factor(id)169  factor(id)170  
+   -0.3346194     -1.2951818      0.3693013     -1.6563817     -2.1460479  
+factor(id)171  factor(id)172  factor(id)173  factor(id)174  factor(id)175  
+   -1.0321605     -0.2130777     -1.7902925      0.1377581     -0.0160055  
+factor(id)176  factor(id)177  factor(id)178  factor(id)179  factor(id)180  
+    0.2569786     -1.6326400      0.4028510     -2.3587711     -0.3845946  
+factor(id)181  factor(id)182  factor(id)183  factor(id)184  factor(id)185  
+   -0.4108327     -0.9834346     -1.0972550     -1.6781968     -1.5026082  
+factor(id)186  factor(id)187  factor(id)188  factor(id)189  factor(id)190  
+   -2.1577766     -1.1647283     -0.1239156     -1.7815425      0.2619762  
+factor(id)191  factor(id)192  factor(id)193  factor(id)194  factor(id)195  
+   -1.4993833      0.0160729     -2.2211180     -0.4287428     -0.8272276  
+factor(id)196  factor(id)197  factor(id)198  factor(id)199  factor(id)200  
+    0.1178582     -1.5464632     -1.9258471     -0.1875497     -0.3310429  
+factor(id)201  factor(id)202  factor(id)203  factor(id)204  factor(id)205  
+   -1.4934470     -0.5369335     -1.5108323     -2.0658719     -1.6709767  
+factor(id)206  factor(id)207  factor(id)208  factor(id)209  factor(id)210  
+   -0.0090120     -0.5221725     -1.6804807     -2.0796591     -2.0767268  
+factor(id)211  factor(id)212  factor(id)213  factor(id)214  factor(id)215  
+   -1.4748328     -0.0448817     -1.4898530     -1.9329652     -3.5076699  
+factor(id)216  factor(id)217  factor(id)218  factor(id)219  factor(id)220  
+   -1.1255642     -0.2327264     -0.6513809     -0.8178650     -2.4156438  
+factor(id)221  factor(id)222  factor(id)223  factor(id)224  factor(id)225  
+   -2.1017309      0.0331950     -1.0231728     -1.4645738     -0.5458016  
+factor(id)226  factor(id)227  factor(id)228  factor(id)229  factor(id)230  
+   -3.0261551     -2.2929047      0.2832356     -1.3169281      0.2964316  
+factor(id)231  factor(id)232  factor(id)233  factor(id)234  factor(id)235  
+   -1.0946220     -2.2743788     -1.8237789     -1.6554734     -1.2081230  
+factor(id)236  factor(id)237  factor(id)238  factor(id)239  factor(id)240  
+   -0.0145449     -0.6384647     -2.1569987     -1.4416687     -2.0393688  
+factor(id)241  factor(id)242  factor(id)243  factor(id)244  factor(id)245  
+   -0.5874512     -0.5934676      0.2367489     -1.4340693     -2.3045132  
+factor(id)246  factor(id)247  factor(id)248  factor(id)249  factor(id)250  
+   -2.7880182     -0.7003395     -1.1107962     -2.4985511     -1.3364049  
+factor(id)251  factor(id)252  factor(id)253  factor(id)254  factor(id)255  
+   -0.6067969     -1.5576645     -0.0986338     -2.6540530      0.0383125  
+factor(id)256  factor(id)257  factor(id)258  factor(id)259  factor(id)260  
+   -0.2349775     -2.1928398     -2.3075449     -0.7143545     -0.1095476  
+factor(id)261  factor(id)262  factor(id)263  factor(id)264  factor(id)265  
+   -0.7968060     -0.5774167     -0.6080097     -0.1404218     -0.6091514  
+factor(id)266  factor(id)267  factor(id)268  factor(id)269  factor(id)270  
+   -1.5381684     -0.6415396     -0.8257309     -0.9420411     -0.8422041  
+factor(id)271  factor(id)272  factor(id)273  factor(id)274  factor(id)275  
+   -0.4524016     -0.2456966     -1.7472768     -1.0506405     -0.0310502  
+factor(id)276  factor(id)277  factor(id)278  factor(id)279  factor(id)280  
+    0.3472376     -2.0224341      0.1895913     -0.6614986     -2.7705095  
+factor(id)281  factor(id)282  factor(id)283  factor(id)284  factor(id)285  
+    0.2245524     -1.3899214     -2.7102791     -2.2411764      0.2478444  
+factor(id)286  factor(id)287  factor(id)288  factor(id)289  factor(id)290  
+   -0.3704373     -0.5927907     -0.2396347     -1.6533998     -0.0958892  
+factor(id)291  factor(id)292  factor(id)293  factor(id)294  factor(id)295  
+   -2.5107176     -1.7989286     -0.5703390     -1.2011109     -1.4576638  
+factor(id)296  factor(id)297  factor(id)298  factor(id)299  factor(id)300  
+   -1.9986368     -0.5870901     -0.7176117     -3.2822239     -2.7838597  
+factor(id)301  factor(id)302  factor(id)303  factor(id)304  factor(id)305  
+   -0.3324034     -1.0640144      0.2979783     -0.4636494     -1.1197335  
+factor(id)306  factor(id)307  factor(id)308  factor(id)309  factor(id)310  
+   -1.2954014      0.8212389     -1.8036660     -1.3745703     -0.7606135  
+factor(id)311  factor(id)312  factor(id)313  factor(id)314  factor(id)315  
+    0.2105132     -0.8752712     -0.6629730     -0.4802000     -1.0600291  
+factor(id)316  factor(id)317  factor(id)318  factor(id)319  factor(id)320  
+   -1.9089897     -0.9238980     -0.6972992     -1.6439082     -0.9770545  
+factor(id)321  factor(id)322  factor(id)323  factor(id)324  factor(id)325  
+   -0.2597240     -0.3929224     -0.8099876      0.2160266     -3.1693716  
+factor(id)326  factor(id)327  factor(id)328  factor(id)329  factor(id)330  
+   -1.3707289     -0.8099548     -1.9741880     -3.2232714     -2.9081193  
+factor(id)331  factor(id)332  factor(id)333  factor(id)334  factor(id)335  
+   -2.4720627     -3.4967480      0.0880504     -2.4198878     -2.0780789  
+factor(id)336  factor(id)337  factor(id)338  factor(id)339  factor(id)340  
+   -2.3475630      0.5764727     -0.6084878     -0.8872653     -1.9636734  
+factor(id)341  factor(id)342  factor(id)343  factor(id)344  factor(id)345  
+    0.0883837     -1.8502495     -1.4848842     -0.9710595     -1.2319603  
+factor(id)346  factor(id)347  factor(id)348  factor(id)349  factor(id)350  
+   -1.7024146     -1.3434399     -1.3863174      0.4956454     -2.5654191  
+factor(id)351  factor(id)352  factor(id)353  factor(id)354  factor(id)355  
+   -1.3784243      0.0816134     -1.7059876     -1.3627206     -0.4565893  
+factor(id)356  factor(id)357  factor(id)358  factor(id)359  factor(id)360  
+    0.3603776     -0.9685689     -1.3991295     -3.0412550     -1.6851473  
+factor(id)361  factor(id)362  factor(id)363  factor(id)364  factor(id)365  
+   -0.7058692     -0.9195798     -1.0953487     -1.4769641     -2.6742985  
+factor(id)366  factor(id)367  factor(id)368  factor(id)369  factor(id)370  
+   -0.6578946     -1.2999971     -0.3382028      0.3863243     -0.0720030  
+factor(id)371  factor(id)372  factor(id)373  factor(id)374  factor(id)375  
+   -1.9432209     -0.6223422     -1.1822873     -0.9548354     -2.0004202  
+factor(id)376  factor(id)377  factor(id)378  factor(id)379  factor(id)380  
+   -1.9659526     -1.0630786      0.2863626     -0.9885524     -2.2528915  
+factor(id)381  factor(id)382  factor(id)383  factor(id)384  factor(id)385  
+   -1.8595097     -1.5724380     -1.8713639     -2.5344664     -0.1624537  
+factor(id)386  factor(id)387  factor(id)388  factor(id)389  factor(id)390  
+   -0.6421035     -0.3629400     -2.3279087     -1.1232122     -1.7657519  
+factor(id)391  factor(id)392  factor(id)393  factor(id)394  factor(id)395  
+   -2.5207200     -1.6091356     -0.8136357      0.2210733     -2.2452954  
+factor(id)396  factor(id)397  factor(id)398  factor(id)399  factor(id)400  
+   -0.6756564      0.1621353     -0.8481867     -1.7341285     -0.3817257  
+factor(id)401  factor(id)402  factor(id)403  factor(id)404  factor(id)405  
+    0.2949123     -0.8927519     -0.9338798     -0.7166768      0.3456415  
+factor(id)406  factor(id)407  factor(id)408  factor(id)409  factor(id)410  
+    0.2419052     -1.8216061     -0.4228484     -2.9393318     -2.0225911  
+factor(id)411  factor(id)412  factor(id)413  factor(id)414  factor(id)415  
+   -0.4310985      0.4951506     -0.3954707     -2.8343863     -1.6226128  
+factor(id)416  factor(id)417  factor(id)418  factor(id)419  factor(id)420  
+   -2.2101251     -0.3836277     -2.0551281     -0.3642385     -0.4022928  
+factor(id)421  factor(id)422  factor(id)423  factor(id)424  factor(id)425  
+   -1.4834110     -0.5625562     -0.6107236      0.1691667      0.3211209  
+factor(id)426  factor(id)427  factor(id)428  factor(id)429  factor(id)430  
+    0.2279390     -1.8875790     -3.0841075     -0.6159943     -0.3415796  
+factor(id)431  factor(id)432  factor(id)433  factor(id)434  factor(id)435  
+   -0.7118149     -1.5641616     -1.9801839      0.1450722     -0.2017439  
+factor(id)436  factor(id)437  factor(id)438  factor(id)439  factor(id)440  
+   -0.3145338     -1.1190083     -1.7823379     -0.3957654     -0.9003941  
+factor(id)441  factor(id)442  factor(id)443  factor(id)444  factor(id)445  
+   -2.3437182     -3.4028128     -1.7003478      0.7524891     -1.0873692  
+factor(id)446  factor(id)447  factor(id)448  factor(id)449  factor(id)450  
+   -0.5228583     -1.8009627     -2.2900269     -0.2715184      0.1416728  
+factor(id)451  factor(id)452  factor(id)453  factor(id)454  factor(id)455  
+   -0.3214500     -0.7690325     -2.2657456     -0.0174455     -1.6515788  
+factor(id)456  factor(id)457  factor(id)458  factor(id)459  factor(id)460  
+   -1.4418559     -2.8946224     -0.9420793     -1.4296444      0.1185207  
+factor(id)461  factor(id)462  factor(id)463  factor(id)464  factor(id)465  
+   -2.2330238     -2.5544505     -0.9337258     -3.5688408     -0.2714708  
+factor(id)466  factor(id)467  factor(id)468  factor(id)469  factor(id)470  
+   -2.2471530     -1.8575604     -3.0165280     -4.3707337     -0.1020631  
+factor(id)471  factor(id)472  factor(id)473  factor(id)474  factor(id)475  
+   -2.2962452     -0.4362524     -0.0682312     -0.7113828     -0.6509739  
+factor(id)476  factor(id)477  factor(id)478  factor(id)479  factor(id)480  
+   -2.2159030     -0.3722269     -0.1277137     -0.8617902     -1.3784264  
+factor(id)481  factor(id)482  factor(id)483  factor(id)484  factor(id)485  
+   -1.2668125     -0.3221145     -0.3694822      0.3742597     -1.1971520  
+factor(id)486  factor(id)487  factor(id)488  factor(id)489  factor(id)490  
+   -1.7667638     -0.3340940     -1.7205133     -2.2568467     -1.8137394  
+factor(id)491  factor(id)492  factor(id)493  factor(id)494  factor(id)495  
+   -0.0582747     -1.9190715     -0.6342174     -3.6974693     -0.3921098  
+factor(id)496  factor(id)497  factor(id)498  factor(id)499  factor(id)500  
+   -1.5298775     -0.5476525     -1.4930554     -2.5228905     -0.2511241  
+factor(id)501  factor(id)502  factor(id)503  factor(id)504  factor(id)505  
+   -2.0783921     -1.0366267      0.3891613     -0.0326843     -1.4013691  
+factor(id)506  factor(id)507  factor(id)508  factor(id)509  factor(id)510  
+    0.1109218     -1.7455372     -2.6679473     -1.1284840      0.1729925  
+factor(id)511  factor(id)512  factor(id)513  factor(id)514  factor(id)515  
+   -0.8348753      0.4589049     -2.5682984     -0.9878010     -0.5940622  
+factor(id)516  factor(id)517  factor(id)518  factor(id)519  factor(id)520  
+   -1.7425469     -0.8692734     -1.1061395     -0.2754527     -2.0568223  
+factor(id)521  factor(id)522  factor(id)523  factor(id)524  factor(id)525  
+   -1.2248788      0.4854992      0.3539625     -0.4260779     -0.6468819  
+factor(id)526  factor(id)527  factor(id)528  factor(id)529  factor(id)530  
+   -0.0903952     -0.2045723     -0.4261753     -2.0586098     -0.1378354  
+factor(id)531  factor(id)532  factor(id)533  factor(id)534  factor(id)535  
+    0.5090071     -0.3524712     -2.7228941     -0.5025199     -1.0624910  
+factor(id)536  factor(id)537  factor(id)538  factor(id)539  factor(id)540  
+   -0.3035858     -0.4137570     -0.5286483      0.1598279     -1.4470984  
+factor(id)541  factor(id)542  factor(id)543  factor(id)544  factor(id)545  
+   -0.3111554     -1.0187912     -0.1758000      0.3356895     -2.5147919  
+factor(id)546  factor(id)547  factor(id)548  factor(id)549  factor(id)550  
+   -0.2690522      0.0699535     -0.3780972     -0.5916537     -0.1192377  
+factor(id)551  factor(id)552  factor(id)553  factor(id)554  factor(id)555  
+   -0.4489108     -0.5228657     -0.2531003     -1.4951698     -1.6801842  
+factor(id)556  factor(id)557  factor(id)558  factor(id)559  factor(id)560  
+    0.3760810     -1.0286751     -1.1760088     -3.2089989     -2.5710271  
+factor(id)561  factor(id)562  factor(id)563  factor(id)564  factor(id)565  
+    0.0315641      0.1818021     -2.2825744      0.0822954     -1.1950727  
+factor(id)566  factor(id)567  factor(id)568  factor(id)569  factor(id)570  
+    0.1940021     -3.5865482     -0.2442893     -1.0425527     -0.7318057  
+factor(id)571  factor(id)572  factor(id)573  factor(id)574  factor(id)575  
+   -0.0624118      0.0528832     -0.1803426      0.2557702     -0.6287755  
+factor(id)576  factor(id)577  factor(id)578  factor(id)579  factor(id)580  
+    0.2609783     -0.8120050     -0.0670469     -0.4403119      0.0559130  
+factor(id)581  factor(id)582  factor(id)583  factor(id)584  factor(id)585  
+   -0.3724249      0.3466553      0.1053244      0.0263852     -0.1070240  
+factor(id)586  factor(id)587  factor(id)588  factor(id)589  factor(id)590  
+   -1.3060257     -0.3438155     -0.2917004     -2.1209831      0.3472921  
+factor(id)591  factor(id)592  factor(id)593  factor(id)594  factor(id)595  
+   -2.2030413      0.0168668     -1.0857457     -0.0342374             NA  </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="data-structure-in-the-lsdv" class="slide level2">
+<h2>Data structure in the LSDV</h2>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;">Time</th>
+<th style="text-align: center;">Y</th>
+<th style="text-align: center;">X1</th>
+<th style="text-align: center;">X2</th>
+<th style="text-align: center;"><span class="math inline">\(\delta_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_N\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{11}\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{12}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{12}\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{13}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{13}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{13}\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{22}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{22}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{23}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{23}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{23}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{N1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N1}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{N2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{N2}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="results" class="slide level2 smaller">
+<h2>Results</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">list</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    <span class="st">`</span><span class="at">Pooled</span><span class="st">`</span> <span class="ot">=</span> union_fit_0, </span>
+<span id="cb14-4"><a href="#cb14-4"></a>    <span class="st">`</span><span class="at">Least-squares dummy variable</span><span class="st">`</span> <span class="ot">=</span> union_fit_1),</span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>, </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"union"</span>, <span class="st">"educ"</span>, <span class="st">"exper"</span>, <span class="st">"hours"</span>, <span class="st">"tenure"</span>),</span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"adj.r.squared"</span> , <span class="st">"df"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="at">notes =</span> <span class="st">"In the Least-squares dummy variable model we omitted all individual-related variables"</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Pooled </th>
+   <th style="text-align:center;"> Least-squares dummy variable </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 4.705*** (0.070) </td>
+   <td style="text-align:center;"> 4.349*** (0.289) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> union </td>
+   <td style="text-align:center;"> 0.126*** (0.013) </td>
+   <td style="text-align:center;"> 0.030* (0.015) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> educ </td>
+   <td style="text-align:center;"> 0.082*** (0.002) </td>
+   <td style="text-align:center;"> 0.102*** (0.027) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> exper </td>
+   <td style="text-align:center;"> 0.044*** (0.002) </td>
+   <td style="text-align:center;"> 0.114*** (0.002) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px"> hours </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.008*** (0.001) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.001 (0.001) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 4165 </td>
+   <td style="text-align:center;"> 4165 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.298 </td>
+   <td style="text-align:center;"> 0.891 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> DF </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> 598 </td>
+  </tr>
+</tbody>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<sup></sup> In the Least-squares dummy variable model we omitted all individual-related variables</td></tr></tfoot>
+</table>
+
+</div>
+</div>
+</section>
+<section id="cross-sectional-data-and-lsdv-1" class="slide level2">
+<h2>Cross-sectional data and LSDV (1)</h2>
+<div class="fragment">
+<p>Can we run a LSDV model with the cross-sectional data?</p>
+</div>
+<ul>
+<li class="fragment"><p>Any ideas?</p></li>
+<li class="fragment"><p>Why?….</p></li>
+<li class="fragment"><p>NO…</p></li>
+<li class="fragment"><p>Because the <strong>number of independent variables have to be less then or equal to the number of observations</strong>.</p></li>
+</ul>
+</section>
+<section id="cross-sectional-data-and-lsdv-2" class="slide level2">
+<h2>Cross-sectional data and LSDV (2)</h2>
+<table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;">Y</th>
+<th style="text-align: center;">X1</th>
+<th style="text-align: center;">X2</th>
+<th style="text-align: center;"><span class="math inline">\(\delta_1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_3\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\delta_N\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{1}\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{2}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{3}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{3}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{2}_{3}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(y_{N}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(x^{1}_{N}\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="panel-data-and-lsdv" class="slide level2">
+<h2>Panel data and LSDV</h2>
+<p>LSDV model works with the panel data, but…</p>
+<div class="fragment">
+<p>it is inefficient! Any ideas why?…</p>
+<ul>
+<li class="fragment"><p>Number of dummy variables is equal to the number of individuals + control variables.</p>
+<ul>
+<li class="fragment">If we have 5,000 individuals, we have 5,000+ regression coefficients.</li>
+<li class="fragment">What if we have 100,000 individuals?</li>
+</ul></li>
+<li class="fragment"><p>Having too many regressors remains unbiased, but complicates inference:</p>
+<ul>
+<li class="fragment">number of degrees of freedom increases;</li>
+<li class="fragment">adjusted <span class="math inline">\(R^2\)</span> may shrink to zero;</li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="panel-regression-brief-theory" class="title-slide slide level1 center">
+<h1>Panel regression: brief theory</h1>
+
+</section>
+<section id="readings" class="slide level2">
+<h2>Readings</h2>
+<div class="fragment">
+<h4 id="key-readings">Key readings:</h4>
+<ul>
+<li class="fragment"><span class="citation" data-cites="Mundlak1961">Mundlak (<a href="#/references" role="doc-biblioref" onclick="">1961</a>)</span></li>
+<li class="fragment"><span class="citation" data-cites="Angrist2009">Angrist &amp; Pischke (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> Ch. 5</li>
+<li class="fragment"><span class="citation" data-cites="Wooldridge2010">J. M. Wooldridge (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span>;</li>
+<li class="fragment"><span class="citation" data-cites="wooldridge2020introductory">M. J. Wooldridge (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>;</li>
+<li class="fragment"><span class="citation" data-cites="Soederbom2014">Söderbom, Teal, &amp; Eberhardt (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>, Ch. 9-11</li>
+</ul>
+<h4 id="other-readings">Other readings:</h4>
+<ul>
+<li class="fragment"><span class="citation" data-cites="Croissant2018">Croissant &amp; Millo (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></li>
+</ul>
+</div>
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<p>Panel data has <span class="math inline">\(i\)</span> individuals (groups) and <span class="math inline">\(t\)</span> time periods <strong>for each individual</strong>;</p>
+<ul>
+<li class="fragment"><p><strong>Pooled</strong> OLS (regression without any panel structure);</p></li>
+<li class="fragment"><p><strong>Fixed Effect</strong>:</p>
+<ul>
+<li class="fragment"><strong>Least-squares dummy variable</strong> (Pooled OLS + individual dummies);</li>
+</ul></li>
+<li class="fragment"><p>Panel Regression <strong>Fixed Effect</strong>:</p>
+<ul>
+<li class="fragment"><strong>Within</strong>-transformation <strong>most commonly used</strong></li>
+<li class="fragment"><strong>First-difference</strong>, Between transformation (look it up in <span class="citation" data-cites="Croissant2018">(<a href="#/references" role="doc-biblioref" onclick="">Croissant &amp; Millo, 2018</a>)</span>)</li>
+</ul></li>
+<li class="fragment"><p>Panel Regression <strong>Random Effect</strong></p></li>
+</ul>
+</section>
+<section id="pooled-ols" class="slide level2">
+<h2>Pooled OLS</h2>
+<p><span class="math display">\[
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  +  \epsilon_{it}
+\]</span></p>
+<ul>
+<li class="fragment"><p>Estimates are biased because of the OVB.</p></li>
+<li class="fragment"><p>We assume the OVB to be time-invariant <span class="citation" data-cites="Mundlak1961">(<a href="#/references" role="doc-biblioref" onclick="">Mundlak, 1961</a>)</span>.</p></li>
+</ul>
+</section>
+<section id="least-squares-dummy-variable-model" class="slide level2">
+<h2>Least-squares dummy variable model</h2>
+<p><span class="math display">\[
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+\]</span></p>
+<ul>
+<li class="fragment"><p>Introduces a vector of dummy variables <span class="math inline">\(\color{Red}{\delta}\)</span> and estimated coefficients for each dummy variable <span class="math inline">\(\gamma_i\)</span>.</p></li>
+<li class="fragment"><p>Estimates and unbiased (consistent) but inefficient.</p></li>
+</ul>
+</section>
+<section id="fixed-effect-model-notations" class="slide level2">
+<h2>Fixed Effect Model (notations)</h2>
+<p><strong>Individual</strong> Fixed effect model:</p>
+<p><span class="math display">\[
+y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \epsilon_{it}
+\]</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{Red}{ \alpha_i }\)</span> is the individual-specific fixed effect;</p></li>
+<li class="fragment"><p>usually wihtout the intercept <span class="math inline">\(\beta_0\)</span>;</p></li>
+</ul>
+<div class="fragment">
+<p><strong>Two-ways</strong> fixed effect model (individual + time effect):</p>
+<p><span class="math display">\[
+y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
+\]</span></p>
+<p><strong>Time</strong> Fixed Effect model:</p>
+<p><span class="math display">\[
+y_{it} =  \beta_1 \cdot x_{it} + \color{Blue}{ \eta_t } + \epsilon_{it}
+\]</span></p>
+</div>
+</section>
+<section id="fixed-effect-model-within-transformation" class="slide level2">
+<h2>Fixed Effect Model: Within transformation</h2>
+<p><strong>Within-transformation</strong> subtracts <strong>group means</strong> from each observation and run the regression.</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+log(\text{Wage}_{it} - \overline{\text{Wage}_{i}}) &amp; =  \beta_0 \\
+&amp; + \beta_1 \cdot (\text{Union}_{it} -  \overline{\text{Union}_{i}}) \\
+&amp; + \beta_2 \cdot (X_{it} - \overline{\text{X}_{i}}) \\
+&amp; +  \beta_3 \cdot (\text{Ability}_{i} - \overline{\text{Ability}_{i}}) \\
+&amp; +  \color{Red}{\alpha_{i}} \\
+&amp; +  (\epsilon_{it} - \overline{\epsilon_{i}})
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>Note that <strong>time-invariant effects disappear</strong>.</p>
+<ul>
+<li class="fragment">Any examples and ideas why?</li>
+<li class="fragment"><span class="math inline">\(\text{Ability}_{i} - \overline{\text{Ability}_{i}} = 0\)</span>.</li>
+<li class="fragment">Gender, race, individual characteristics …</li>
+<li class="fragment">FE (Within) estimates are identical to the LSDV, but SE are more efficient;</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="fixed-effect-model-first-difference-transformation" class="slide level2">
+<h2>Fixed Effect Model: First Difference transformation</h2>
+<p><span class="math display">\[
+\begin{aligned}
+log(\text{Wage}_{it} - {\text{Wage}_{i,t-1}}) &amp; = \beta_0 \\
+&amp; + \beta_1 \cdot (\text{Union}_{it} -  {\text{Union}_{it-1}}) \\
+&amp; + \beta_2 \cdot (X_{it} - {{X}_{i,t-1}}) \\
+&amp; + \beta_3 \cdot (\text{Ability}_{i} - {\text{Ability}_{i,t-1}}) \\
+&amp; + (\epsilon_{it} - {\epsilon_{i,t-1}})
+\end{aligned}
+\]</span></p>
+<p>Note:</p>
+<ul>
+<li class="fragment"><p>Similar to the within transformation, but sacrifices at least one time dimension.</p></li>
+<li class="fragment"><p>Relaxes the autocorrelation assumption.</p></li>
+<li class="fragment"><p>May be not possible with unbalanced data.</p></li>
+</ul>
+</section>
+<section id="fixed-effect-model-assumptions-1" class="slide level2">
+<h2>Fixed Effect Model: assumptions (1)</h2>
+<ul>
+<li class="fragment"><p><strong>NOT ZERO CORRELATION between effects and regressors</strong>:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(Cov(\delta_{i},{X}_{it}) \neq 0\)</span></li>
+</ul></li>
+<li class="fragment"><p><strong>Strict exogeneity (No endogeneity):</strong></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(E[\epsilon_{is}| {X}_{it}, \delta_{i}] = 0\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(Cov(\epsilon_{is}, {X}_{it}) = 0\)</span> and</p></li>
+<li class="fragment"><p><span class="math inline">\(Cov(\epsilon_{it}, {X}_{jt}) = 0\)</span> , where <span class="math inline">\(j\neq i\)</span> and <span class="math inline">\(s\neq t\)</span> ;</p></li>
+<li class="fragment"><p>Residuals (<span class="math inline">\(\epsilon\)</span>) do not correlate with all explanatory variable (<span class="math inline">\(X\)</span>) in all time periods (<span class="math inline">\(t\)</span>) and for all individuals (<span class="math inline">\(i\)</span>).</p>
+<ul>
+<li class="fragment"><p>No autocorrelation/serial correlation: <span class="math inline">\(Cov(\epsilon_{it}, {X}_{i,t-1}) = 0\)</span>;</p></li>
+<li class="fragment"><p>No cross-sectional dependence: <span class="math inline">\(Cov(\epsilon_{it}, {X}_{j,t}) = 0\)</span> (when individual observations react similarly to the common shocks or correlate in space);</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="panel-regression-fe-model-not-less-important-assumptions-2" class="slide level2">
+<h2>Panel Regression FE model not less important assumptions (2)</h2>
+<ul>
+<li class="fragment"><p>All Gauss-Markov assumptions</p>
+<ul>
+<li class="fragment"><p>Linearity</p></li>
+<li class="fragment"><p>Random sampling</p></li>
+<li class="fragment"><p>No endogeneity</p></li>
+<li class="fragment"><p>No collinearity</p></li>
+</ul></li>
+<li class="fragment"><p>Homoscedasticity of error terms: <span class="math inline">\(Var(\delta_{i}|{X}_{it}) = \sigma^2_{\delta}\)</span></p></li>
+<li class="fragment"><p>Normality of the residuals</p></li>
+</ul>
+</section>
+<section id="fixed-effect-application-literature" class="slide level2">
+<h2>Fixed effect application: literature</h2>
+<p>Seminal papers: <span class="citation" data-cites="Mundlak1961">(<a href="#/references" role="doc-biblioref" onclick="">Mundlak, 1961</a>)</span></p>
+<p>Climate and agriculture: <span class="citation" data-cites="Mendelsohn1994">Bozzola, Massetti, Mendelsohn, &amp; Capitanio (<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span></p>
+<p>Choice of irrigation: <span class="citation" data-cites="Kurukulasuriya2011">Chatzopoulos &amp; Lippert (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span></p>
+<p>Crop choice: <span class="citation" data-cites="Kurukulasuriya2008">Seo &amp; Mendelsohn (<a href="#/references" role="doc-biblioref" onclick="">2008b</a>)</span></p>
+<p>Livestock choice: <span class="citation" data-cites="Seo2008a">Seo &amp; Mendelsohn (<a href="#/references" role="doc-biblioref" onclick="">2008a</a>)</span></p>
+<p>Cross-sectional dependence: <span class="citation" data-cites="Conley1999">(<a href="#/references" role="doc-biblioref" onclick="">Conley, 1999</a>)</span></p>
+</section>
+<section id="random-effect-model-individual-time-and-two-ways" class="slide level2">
+<h2>Random Effect Model (individual, time and two-ways)</h2>
+<ul>
+<li class="fragment">Introduce random components <span class="math inline">\(\color{Red}{v_i}\)</span> and/or <span class="math inline">\(\color{Blue}{u_{t}}\)</span></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
+\]</span></p>
+<ul>
+<li class="fragment"><p>Difference from the fixed effect model:</p>
+<ul>
+<li class="fragment"><p>Assumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(Cov(v_{i},{X}_{it}) = 0\)</span></li>
+</ul></li>
+<li class="fragment"><p>Ignoring RE causes no bias to the estimates;</p></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="summary-on-the-panel-regression" class="slide level2">
+<h2>Summary on the Panel Regression</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Fixed Effect (within transformation)</p>
+<ul>
+<li class="fragment"><p>Assumes that Fixed Effects correlate with regressors!</p></li>
+<li class="fragment"><p>Partially resolves the OVB.</p></li>
+<li class="fragment"><p>Ignoring FE (using pooled regression) causes bias of estimates.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Random Effect</p>
+<ul>
+<li class="fragment"><p>Assumes that Random Effects do NOT correlate with regressors</p></li>
+<li class="fragment"><p>Do NOT resolved any OVB.</p></li>
+<li class="fragment"><p>Provides additional control strategy, but ignoring RE causes NO bias.</p></li>
+</ul>
+</div>
+</div>
+<ul>
+<li class="fragment">Both require valid Gauss–Markov assumptions.</li>
+</ul>
+<div class="fragment">
+<h4 id="limitations-of-the-fixed-and-random-effect-models">Limitations of the Fixed and Random effect models</h4>
+<ul>
+<li class="fragment"><p>NOT the ultimate solution to Endogeneity.</p></li>
+<li class="fragment"><p>OVB may still remain after applying the fixed effects.</p></li>
+<li class="fragment"><p>Measurement error is a problem in panel data.</p></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="panel-regression-example-union-and-wages" class="title-slide slide level1 center">
+<h1>Panel Regression Example: Union and wages</h1>
+
+</section>
+<section id="problem-setting-1" class="slide level2">
+<h2>Problem setting</h2>
+<p>Does the collective bargaining (union membership) has any effect on wages?</p>
+<ul>
+<li class="fragment">See: <span class="citation" data-cites="Freeman1984 Card1996">(<a href="#/references" role="doc-biblioref" onclick="">Card, 1996</a>; <a href="#/references" role="doc-biblioref" onclick="">Freeman, 1984</a>)</span></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+\]</span></p>
+<p>where <span class="math inline">\(i\)</span> is the individual and <span class="math inline">\(t\)</span> is the time dimension;</p>
+</div>
+</section>
+<section id="general-algorithm" class="slide level2 smaller">
+<h2>General algorithm</h2>
+<ol type="1">
+<li class="fragment"><p>Pooled OLS</p>
+<ul>
+<li class="fragment"><p>Choose an appropriate functional form (log/level);</p></li>
+<li class="fragment"><p>Validate gauss-Markov assumption validation: Linearity, Collinearity, Random Sampling; Homoscedasticity;</p></li>
+<li class="fragment"><p>Note on the ‘No endogeneity’ assumption (if not validated, shows importance of the FE model)</p></li>
+</ul></li>
+<li class="fragment"><p>FE: Fixed Effect. Within-transformation. Individual, Time or Two-ways effects;</p>
+<ul>
+<li class="fragment"><p><code>F-test</code> on FE consistency against pooled.</p></li>
+<li class="fragment"><p><code>LM test</code> on FE Individual, Time or Two-ways effects consistency against each other.</p></li>
+<li class="fragment"><p>If tests suggest the pooled model, but the theory emphasizes FE, discus and reason your choice.</p></li>
+</ul></li>
+<li class="fragment"><p>RE: Random Effect;</p>
+<ul>
+<li class="fragment"><p><code>Hausman test</code> on effects’ correlation with regressors of RE consistency against the FE;</p></li>
+<li class="fragment"><p>Similar <code>Chamberlain test</code>, <code>Angrist and Newey</code> tests.</p></li>
+</ul></li>
+<li class="fragment"><p>Serial correlation and cross-sectional dependence tests;</p>
+<ul>
+<li class="fragment"><p><code>Wooldridge's</code>, <code>Locally–Robust LM Test</code>, <code>Breusch–Godfrey Test</code>,</p></li>
+<li class="fragment"><p>t &gt; 3, we may have a serial correlation problem. Check it with a test.</p></li>
+<li class="fragment"><p>Could individuals be affected by common shocks? We might have a cross-sectional dependence problem.</p></li>
+</ul></li>
+<li class="fragment"><p>Use robust standard errors to correct for serial correlation and/or cross-sectional dependence:</p>
+<ul>
+<li class="fragment">Clustered SE and/or heteroscedasticity and/or autocorrelation robust SE;</li>
+</ul></li>
+<li class="fragment"><p>Summary and interpretation;</p></li>
+</ol>
+</section>
+<section id="step-1.a-pooled-ols" class="slide level2">
+<h2>Step 1.a Pooled OLS</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">library</span>(parameters)</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">library</span>(performance)</span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb15-6"><a href="#cb15-6"></a>wage_dta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"wage_unon_panel.csv"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="fu">glimpse</span>(wage_dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>union_fit_0 <span class="ot">&lt;-</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours , </span>
+<span id="cb16-3"><a href="#cb16-3"></a>     <span class="at">data =</span> wage_dta)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>union_fit_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(wage) ~ union + educ + exper + I(exper^2) + 
+    hours, data = wage_dta)
+
+Coefficients:
+(Intercept)        union         educ        exper   I(exper^2)        hours  
+  4.7054380    0.1261467    0.0819744    0.0437155   -0.0006932    0.0077042  </code></pre>
+</div>
+</div>
+</section>
+<section id="step-1.b-assumptions-linearity-homoscedasticity" class="slide level2">
+<h2>Step 1.b Assumptions (Linearity + Homoscedasticity)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">check_model</span>(union_fit_0, <span class="at">check =</span> <span class="fu">c</span>(<span class="st">"linearity"</span>, <span class="st">"homogeneity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="w08a-panel-regression_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1.b-assumptions-homoscedasticity" class="slide level2">
+<h2>Step 1.b Assumptions (Homoscedasticity)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">check_heteroscedasticity</span>(union_fit_0) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: Error variance appears to be homoscedastic (p = 0.647).</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">bptest</span>(union_fit_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  union_fit_0
+BP = 92.71, df = 5, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1.b-assumptions-collinearity" class="slide level2">
+<h2>Step 1.b Assumptions (Collinearity)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">check_collinearity</span>(union_fit_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+  Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+ union 1.11 [ 1.08,  1.15]         1.05      0.90     [0.87, 0.93]
+  educ 1.13 [ 1.10,  1.18]         1.06      0.88     [0.85, 0.91]
+ hours 1.03 [ 1.01,  1.09]         1.02      0.97     [0.92, 0.99]
+
+High Correlation
+
+       Term   VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+      exper 18.81 [17.73, 19.95]         4.34      0.05     [0.05, 0.06]
+ I(exper^2) 18.81 [17.73, 19.95]         4.34      0.05     [0.05, 0.06]</code></pre>
+</div>
+</div>
+</section>
+<section id="step-1.b-assumptions-no-endogeneity" class="slide level2">
+<h2>Step 1.b Assumptions (No endogeneity)</h2>
+<p><span class="math display">\[
+log(\text{Wage}_{it}) = \beta_0 + \beta_1 \cdot \text{Union}_{it} + \beta_2 \cdot {X_{it}} + \beta_3 \cdot \text{Ability}_{i} + \epsilon_{it}
+\]</span></p>
+<p><span class="math inline">\(\text{Ability}_{i}\)</span> not observable and not measurable.</p>
+<p>Omitting the ability may cause the OVB.</p>
+<ul>
+<li class="fragment"><p>No endogeneity assumption cannot be satisfied.</p></li>
+<li class="fragment"><p>We should exploit the panel data structure.</p></li>
+</ul>
+</section>
+<section id="step-2.-fe-fixed-effect-within" class="slide level2">
+<h2>Step 2. FE: Fixed Effect (within)</h2>
+<h4 id="note-the-new-package-plm-used-for-running-panel-regressions.">Note, the new package: <code>plm</code> used for running panel regressions.</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(plm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<h4 id="declare-data-to-be-panel.">Declare data to be panel.</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>wage_dta_pan <span class="ot">&lt;-</span> <span class="fu">pdata.frame</span>(wage_dta, <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"year"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+
+</div>
+<h4 id="check-panel-dimensions.">Check panel dimensions.</h4>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">pdim</span>(wage_dta_pan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Balanced Panel: n = 595, T = 7, N = 4165</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2.-fe-fixed-effect-within-1" class="slide level2">
+<h2>Step 2. FE: Fixed Effect (within) (1)</h2>
+<p><strong>Rerun the pooled regression with <code>plm</code>:</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>union_pooled <span class="ot">&lt;-</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">plm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours ,</span>
+<span id="cb29-3"><a href="#cb29-3"></a>      <span class="at">data =</span> wage_dta, <span class="at">model =</span> <span class="st">"pooling"</span>)</span>
+<span id="cb29-4"><a href="#cb29-4"></a>union_pooled</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+(Intercept)       union        educ       exper  I(exper^2)       hours 
+ 4.70543801  0.12614668  0.08197441  0.04371549 -0.00069316  0.00770422 </code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Fixed Effect (individual) model</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>union_fe_ind <span class="ot">&lt;-</span> </span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">plm</span>(<span class="fu">log</span>(wage)  <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours ,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>      <span class="at">data =</span> wage_dta, <span class="at">model =</span> <span class="st">"within"</span>, <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a>union_fe_ind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+      union       exper  I(exper^2)       hours 
+ 0.03002946  0.11370518 -0.00042343  0.00079804 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2.-fe-fixed-effect-within-2" class="slide level2">
+<h2>Step 2. FE: Fixed Effect (within) (2)</h2>
+<p><strong>Fixed Effect (time) model</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>union_fe_time <span class="ot">&lt;-</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">plm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours ,</span>
+<span id="cb33-3"><a href="#cb33-3"></a>      <span class="at">data =</span> wage_dta, <span class="at">model =</span> <span class="st">"within"</span>, <span class="at">effect =</span> <span class="st">"time"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4"></a>union_fe_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+      union        educ       exper  I(exper^2)       hours 
+ 0.12428314  0.07944664  0.03582803 -0.00058079  0.00756342 </code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Fixed Effect (Two-ways) model</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>union_fe_twoways <span class="ot">&lt;-</span> </span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">plm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours ,</span>
+<span id="cb35-3"><a href="#cb35-3"></a>      <span class="at">data =</span> wage_dta, <span class="at">model =</span> <span class="st">"within"</span>, <span class="at">effect =</span> <span class="st">"twoways"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4"></a>union_fe_twoways</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+      union  I(exper^2)       hours 
+ 0.02712246 -0.00040431  0.00064611 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2.-f-test-1" class="slide level2">
+<h2>Step 2. <code>F-test</code> (1)</h2>
+<p>Which model to choose: Pooled or FE?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Compares FE models (individual, time, two-ways) vs pooled</p>
+<ul>
+<li class="fragment">Pooled is always consistent vs FE</li>
+</ul></li>
+<li class="fragment"><p>Test logic:</p>
+<ul>
+<li class="fragment"><p>H0: One model is inconsistent. (no individual/time/two-way effects)</p></li>
+<li class="fragment"><p>H1: Both models are equally consistent.</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Run the test. Check the p-value</p>
+<ul>
+<li class="fragment"><p>p-value &lt; 0.05: FE is as good as pooled. Not using the FE model may lead to the bias.</p></li>
+<li class="fragment"><p>p-value &gt;= 0.05: Pooled is better than the FE model. Use pooled for interpretation.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-2.-f-test-2" class="slide level2">
+<h2>Step 2. <code>F-test</code> (2)</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">pFtest</span>(union_fe_ind, union_pooled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test for individual effects
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+F = 39.274, df1 = 593, df2 = 3566, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">FE is preferred (pooled is biased)</li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">pFtest</span>(union_fe_twoways, union_pooled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test for twoways effects
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+F = 39.309, df1 = 598, df2 = 3561, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">Two-ways is preferred (pooled is biased)</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center" data-output-location="fragment">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">pFtest</span>(union_fe_time, union_pooled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test for time effects
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+F = 154.34, df1 = 6, df2 = 4153, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">Time FE is preferred (pooled is biased)</li>
+</ul>
+</div>
+</div>
+<ul>
+<li class="fragment"><code>F-test</code> leads us to stick with the FE individual, two-ways or time regression.</li>
+</ul>
+</div>
+</section>
+<section id="step-2.-lm-test-lagrange-multiplier-test-2" class="slide level2">
+<h2>Step 2. <code>LM test</code>: Lagrange multiplier test (2)</h2>
+<p>Which FE model to choose: individual, time or two-way?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Exist to compare FE models between each other assuming that:</p>
+<ul>
+<li class="fragment"><strong>Pooled is always consistent</strong> in pooled vs individual FE</li>
+<li class="fragment"><strong>Individual FE always consistent</strong> in individual FE vs time or two-way FE</li>
+</ul></li>
+<li class="fragment"><p>Test logic:</p>
+<ul>
+<li class="fragment">H0: One model is inconsistent.</li>
+<li class="fragment">H1: Both models are equally consistent.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Run the test (one or another or both). Check p-value:</p>
+<ul>
+<li class="fragment"><p>p-value &lt; 0.05:</p>
+<ul>
+<li class="fragment">Individual FE is as good as pooled;</li>
+<li class="fragment">Time or Two-ways model is as good as individual FE;</li>
+</ul></li>
+<li class="fragment"><p>p-value &gt;= 0.05: Pooled or individual FE is better than the alternative</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-2.-lm-testlagrange-multiplier-2" class="slide level2">
+<h2>Step 2. <code>LM test</code>Lagrange multiplier (2)</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">plmtest</span>(union_pooled, <span class="at">effect =</span> <span class="st">"individual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lagrange Multiplier Test - (Honda)
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+normal = 70.727, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">plmtest</span>(union_pooled, <span class="at">effect =</span> <span class="st">"twoway"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lagrange Multiplier Test - two-ways effects (Honda)
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+normal = 186.47, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">plmtest</span>(union_pooled, <span class="at">effect =</span> <span class="st">"time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Lagrange Multiplier Test - time effects (Honda)
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+normal = 192.98, p-value &lt; 2.2e-16
+alternative hypothesis: significant effects</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">Individual FE is preferred (pooled is biased)</li>
+<li class="fragment">Individual FE and two-ways are both consistent. We can choose any of those two.</li>
+<li class="fragment">Individual FE and time FE are both consistent. We can choose any of those two.</li>
+</ul>
+</div>
+</div>
+<ul>
+<li class="fragment">All tests suggest that individual, time and two-ways fixed effect models are equally consistent.</li>
+</ul>
+</section>
+<section id="step-3.-random-effect-model-individual" class="slide level2">
+<h2>Step 3. Random Effect model (individual)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>union_rand_ind <span class="ot">&lt;-</span> </span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">plm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> union <span class="sc">+</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> hours ,</span>
+<span id="cb49-3"><a href="#cb49-3"></a>      <span class="at">data =</span> wage_dta, <span class="at">model =</span> <span class="st">"random"</span>, <span class="at">effect =</span> <span class="st">"individual"</span>)</span>
+<span id="cb49-4"><a href="#cb49-4"></a>union_rand_ind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+(Intercept)       union        educ       exper  I(exper^2)       hours 
+ 3.80500063  0.05488827  0.11346029  0.08804403 -0.00077520  0.00095463 </code></pre>
+</div>
+</div>
+</section>
+<section id="step-3.-hausman-test" class="slide level2">
+<h2>Step 3. Hausman test</h2>
+<p>Which model to choose: Fixed effect or Random effect?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Compares Fixed Effect model with Random Effect:</p>
+<ul>
+<li class="fragment">Fixed effect model is always consistent</li>
+</ul></li>
+<li class="fragment"><p>Test logic:</p>
+<ul>
+<li class="fragment"><p>H0: One model is inconsistent. Use FE!</p></li>
+<li class="fragment"><p>H1: Both models are equally consistent. RE is as good as FE.</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Run the test. Check the p-value.</p>
+<ul>
+<li class="fragment"><p>p-value &lt; 0.05: Use FE or RE, both are good.</p></li>
+<li class="fragment"><p>p-value &gt;= 0.05: Use FE, discard RE.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">phtest</span>(union_fe_ind, union_rand_ind)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Hausman Test
+
+data:  log(wage) ~ union + educ + exper + I(exper^2) + hours
+chisq = 6183.7, df = 4, p-value &lt; 2.2e-16
+alternative hypothesis: one model is inconsistent</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">FE is preferred instead of the RE model.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4.1-wooldridges-test-1" class="slide level2">
+<h2>Step 4.1 Wooldridge’s test (1)</h2>
+<p>Is there serial correlation / cross-sectional dependence in the data?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Wooldridge’s test for unobserved individual effects</p>
+<ul>
+<li class="fragment"><p>H0: no unobserved effects</p></li>
+<li class="fragment"><p>H1: some effects exist due to cross-sectional dependence and/or serial correlation</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Run the test Check the p-value.</p>
+<ul>
+<li class="fragment"><p>p-value &lt; 0.05: cross-sectional dependence and/or serial correlation are present</p></li>
+<li class="fragment"><p>p-value &gt;= 0.05: No cross-sectional dependency and/or serial correlation</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-4.1-wooldridges-test-2" class="slide level2">
+<h2>Step 4.1 Wooldridge’s test (2)</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">pwtest</span>(union_pooled, <span class="at">effect =</span> <span class="st">"individual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wooldridge's test for unobserved individual effects
+
+data:  formula
+z = 13.865, p-value &lt; 2.2e-16
+alternative hypothesis: unobserved effect</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">pwtest</span>(union_pooled, <span class="at">effect =</span> <span class="st">"time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wooldridge's test for unobserved time effects
+
+data:  formula
+z = 2.015, p-value = 0.04391
+alternative hypothesis: unobserved effect</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">cross-sectional dependence is present</li>
+<li class="fragment">serial correlation is present</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-4.2-lagrange-multiplier-tests-1" class="slide level2">
+<h2>Step 4.2 Lagrange-Multiplier tests (1)</h2>
+<p>Is there serial correlation in the data?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Locally–Robust Lagrange Multiplier Tests for serial correlation</p>
+<ul>
+<li class="fragment"><p>H0: serial correlation is zero</p></li>
+<li class="fragment"><p>H1: some serial correlation is present</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p>Run the test Check the p-value.</p>
+<ul>
+<li class="fragment"><p>p-value &lt; 0.05: serial correlation need to be addressed</p></li>
+<li class="fragment"><p>p-value &gt;= 0.05: no serial correlation</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-4.2-lagrange-multiplier-tests-2" class="slide level2">
+<h2>Step 4.2 Lagrange-Multiplier tests (2)</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">pbsytest</span>(union_pooled, <span class="at">test =</span> <span class="st">"ar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Bera, Sosa-Escudero and Yoon locally robust test
+
+data:  formula
+chisq = 608.98, df = 1, p-value &lt; 2.2e-16
+alternative hypothesis: AR(1) errors sub random effects</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment">serial correlation is present</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="step-5.-robust-inference" class="slide level2">
+<h2>Step 5. Robust inference</h2>
+<p>Serial correlation and/or cross-sectional dependence render our Standard errors useless.</p>
+<ul>
+<li class="fragment"><p>Cross-sectional dependence and/or serial correlation violate the variance homogeneity assumption:</p>
+<ul>
+<li class="fragment"><p>Estimates are unbiased, but inefficient.</p></li>
+<li class="fragment"><p>Standard errors need to be corrected.</p></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<p>We need to use:</p>
+<ul>
+<li class="fragment"><p><strong>Robust Standard Errors</strong>, and/or</p></li>
+<li class="fragment"><p>Clustered SE at the individual (group) level</p></li>
+</ul>
+</div>
+</section>
+<section id="step-5.-robust-standard-error-1" class="slide level2">
+<h2>Step 5. Robust Standard Error (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="fu">library</span>(car)</span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">3</span>, <span class="at">scipen =</span> <span class="dv">6</span>)</span>
+<span id="cb59-5"><a href="#cb59-5"></a>union_fe_ind</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours
+
+Coefficients:
+     union      exper I(exper^2)      hours 
+  0.030029   0.113705  -0.000423   0.000798 </code></pre>
+</div>
+</div>
+<p><strong>Correcting cross-sectional dependence:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Regular SE</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">coeftest</span>(union_fe_ind, </span>
+<span id="cb61-2"><a href="#cb61-2"></a>         <span class="at">vcov. =</span> <span class="fu">vcov</span>(union_fe_ind))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value Pr(&gt;|t|)    
+union       0.0300295  0.0148074    2.03    0.043 *  
+exper       0.1137052  0.0024681   46.07  &lt; 2e-16 ***
+I(exper^2) -0.0004234  0.0000546   -7.75  1.2e-14 ***
+hours       0.0007980  0.0005997    1.33    0.183    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Robust SE</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">coeftest</span>(union_fe_ind, </span>
+<span id="cb63-2"><a href="#cb63-2"></a>         <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(union_fe_ind, <span class="at">method =</span> <span class="st">"white1"</span>, </span>
+<span id="cb63-3"><a href="#cb63-3"></a>                        <span class="at">type =</span> <span class="st">"HC0"</span>, <span class="at">cluster =</span> <span class="st">"group"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+             Estimate Std. Error t value Pr(&gt;|t|)    
+union       0.0300295  0.0159202    1.89    0.059 .  
+exper       0.1137052  0.0025948   43.82  &lt; 2e-16 ***
+I(exper^2) -0.0004234  0.0000539   -7.86  5.1e-15 ***
+hours       0.0007980  0.0007524    1.06    0.289    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5.-robust-standard-error-2" class="slide level2">
+<h2>Step 5. Robust Standard Error (2)</h2>
+<p>We produce new Variance-covariance matrix:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="fu">vcovHC</span>(union_fe_ind, </span>
+<span id="cb65-2"><a href="#cb65-2"></a>       <span class="at">method =</span> <span class="st">"white1"</span>, </span>
+<span id="cb65-3"><a href="#cb65-3"></a>       <span class="at">type =</span> <span class="st">"HC0"</span>, </span>
+<span id="cb65-4"><a href="#cb65-4"></a>       <span class="at">cluster =</span> <span class="st">"group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   union         exper      I(exper^2)           hours
+union       0.0002534526 -0.0000028527  0.000000054371 -0.000000443094
+exper      -0.0000028527  0.0000067329 -0.000000126361  0.000000043707
+I(exper^2)  0.0000000544 -0.0000001264  0.000000002902  0.000000000683
+hours      -0.0000004431  0.0000000437  0.000000000683  0.000000566054
+attr(,"cluster")
+[1] "group"</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><code>methods</code> for cross–sectional dependence “white1” and “white2” and for cross–sectional dependence and autocorrelation “arellano”;</p></li>
+<li class="fragment"><p><code>type</code> for sample size correction: “HC0”, “sss”, “HC1”, “HC2”, “HC3”, “HC4” (“HC3” is recommended);</p></li>
+<li class="fragment"><p><code>cluster</code> enabled by default (“group” or “time”);</p></li>
+</ul>
+</section>
+<section id="step-6.-reporting-results-1" class="slide level2">
+<h2>Step 6. Reporting results (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>pooled_robust <span class="ot">&lt;-</span> </span>
+<span id="cb67-2"><a href="#cb67-2"></a>  <span class="fu">coeftest</span>(union_pooled,</span>
+<span id="cb67-3"><a href="#cb67-3"></a>           <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(union_pooled, <span class="at">method =</span> <span class="st">"arellano"</span>,</span>
+<span id="cb67-4"><a href="#cb67-4"></a>                          <span class="at">type =</span> <span class="st">"HC3"</span>, <span class="at">cluster =</span> <span class="st">"group"</span>))</span>
+<span id="cb67-5"><a href="#cb67-5"></a></span>
+<span id="cb67-6"><a href="#cb67-6"></a>pooled_cs_robust <span class="ot">&lt;-</span> </span>
+<span id="cb67-7"><a href="#cb67-7"></a>  <span class="fu">coeftest</span>(union_fe_ind,</span>
+<span id="cb67-8"><a href="#cb67-8"></a>           <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(union_fe_ind, <span class="at">method =</span> <span class="st">"white1"</span>, </span>
+<span id="cb67-9"><a href="#cb67-9"></a>                          <span class="at">type =</span> <span class="st">"HC0"</span>, <span class="at">cluster =</span> <span class="st">"group"</span>))</span>
+<span id="cb67-10"><a href="#cb67-10"></a></span>
+<span id="cb67-11"><a href="#cb67-11"></a>pooled_csac_robust <span class="ot">&lt;-</span> </span>
+<span id="cb67-12"><a href="#cb67-12"></a>  <span class="fu">coeftest</span>(union_fe_ind,</span>
+<span id="cb67-13"><a href="#cb67-13"></a>           <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(union_fe_ind, <span class="at">method =</span> <span class="st">"arellano"</span>, </span>
+<span id="cb67-14"><a href="#cb67-14"></a>                          <span class="at">type =</span> <span class="st">"HC3"</span>, <span class="at">cluster =</span> <span class="st">"group"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb68-2"><a href="#cb68-2"></a>  <span class="fu">list</span>(</span>
+<span id="cb68-3"><a href="#cb68-3"></a>    <span class="st">`</span><span class="at">Pooled (no SE correction)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coeftest</span>(union_pooled),</span>
+<span id="cb68-4"><a href="#cb68-4"></a>    <span class="st">`</span><span class="at">Pooled (c/s dep. and aut.)</span><span class="st">`</span> <span class="ot">=</span> pooled_robust,</span>
+<span id="cb68-5"><a href="#cb68-5"></a>    <span class="st">`</span><span class="at">Ind. FE (no SE correction)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">coeftest</span>(union_fe_ind),</span>
+<span id="cb68-6"><a href="#cb68-6"></a>    <span class="st">`</span><span class="at">Ind. FE (c/s dep.)</span><span class="st">`</span> <span class="ot">=</span> pooled_cs_robust, </span>
+<span id="cb68-7"><a href="#cb68-7"></a>    <span class="st">`</span><span class="at">Ind. FE (c/s dep. and aut.)</span><span class="st">`</span> <span class="ot">=</span> pooled_csac_robust</span>
+<span id="cb68-8"><a href="#cb68-8"></a>    ), </span>
+<span id="cb68-9"><a href="#cb68-9"></a>  <span class="at">fmt =</span> <span class="dv">4</span>, <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb68-10"><a href="#cb68-10"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-6.-reporting-results-1-1" class="slide level2 smaller">
+<h2>Step 6. Reporting results (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Pooled (no SE correction) </th>
+   <th style="text-align:center;"> Pooled (c/s dep. and aut.) </th>
+   <th style="text-align:center;"> &nbsp;Ind. FE (no SE correction) </th>
+   <th style="text-align:center;"> &nbsp;Ind. FE (c/s dep.) </th>
+   <th style="text-align:center;"> &nbsp;Ind. FE (c/s dep. and aut.) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:center;"> 4.7054*** (0.0699) </td>
+   <td style="text-align:center;"> 4.7054*** (0.1383) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> union </td>
+   <td style="text-align:center;"> 0.1261*** (0.0131) </td>
+   <td style="text-align:center;"> 0.1261*** (0.0255) </td>
+   <td style="text-align:center;"> 0.0300* (0.0148) </td>
+   <td style="text-align:center;"> 0.0300+ (0.0159) </td>
+   <td style="text-align:center;"> 0.0300 (0.0256) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> educ </td>
+   <td style="text-align:center;"> 0.0820*** (0.0023) </td>
+   <td style="text-align:center;"> 0.0820*** (0.0052) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> exper </td>
+   <td style="text-align:center;"> 0.0437*** (0.0024) </td>
+   <td style="text-align:center;"> 0.0437*** (0.0053) </td>
+   <td style="text-align:center;"> 0.1137*** (0.0025) </td>
+   <td style="text-align:center;"> 0.1137*** (0.0026) </td>
+   <td style="text-align:center;"> 0.1137*** (0.0040) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> I(exper^2) </td>
+   <td style="text-align:center;"> −0.0007*** (0.0001) </td>
+   <td style="text-align:center;"> −0.0007*** (0.0001) </td>
+   <td style="text-align:center;"> −0.0004*** (0.0001) </td>
+   <td style="text-align:center;"> −0.0004*** (0.0001) </td>
+   <td style="text-align:center;"> −0.0004*** (0.0001) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px"> hours </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.0077*** (0.0012) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.0077*** (0.0019) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.0008 (0.0006) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.0008 (0.0008) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.0008 (0.0009) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 4165 </td>
+   <td style="text-align:center;"> 4165 </td>
+   <td style="text-align:center;"> 4165 </td>
+   <td style="text-align:center;"> 4165 </td>
+   <td style="text-align:center;"> 4165 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> AIC </td>
+   <td style="text-align:center;"> 3911.1 </td>
+   <td style="text-align:center;"> 3911.1 </td>
+   <td style="text-align:center;"> −4502.1 </td>
+   <td style="text-align:center;"> −4502.1 </td>
+   <td style="text-align:center;"> −4502.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> BIC </td>
+   <td style="text-align:center;"> 3955.5 </td>
+   <td style="text-align:center;"> 3955.5 </td>
+   <td style="text-align:center;"> −4470.5 </td>
+   <td style="text-align:center;"> −4470.5 </td>
+   <td style="text-align:center;"> −4470.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> -1948.564 </td>
+   <td style="text-align:center;"> -1948.564 </td>
+   <td style="text-align:center;"> 2256.066 </td>
+   <td style="text-align:center;"> 2256.066 </td>
+   <td style="text-align:center;"> 2256.066 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="step-6.-reporting-gof-1" class="slide level2">
+<h2>Step 6. Reporting GOF (1)</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">library</span>(performance)</span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="fu">compare_performance</span>(<span class="fu">list</span>(<span class="at">Pooled =</span> union_pooled, <span class="at">FE =</span> union_fe_ind))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code># Comparison of Model Performance Indices
+
+Name   | Model |   AIC (weights) |  AICc (weights) |   BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma
+--------------------------------------------------------------------------------------------------------
+Pooled |   plm | 59525.1 (&lt;.001) | 59525.1 (&lt;.001) | 59569.4 (&lt;.001) | 0.299 |     0.298 | 0.386 | 0.387
+FE     |   plm | 51111.8 (&gt;.999) | 51111.8 (&gt;.999) | 51143.5 (&gt;.999) | 0.657 |     0.600 | 0.141 | 0.141</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="takeaways" class="title-slide slide level1 center">
+<h1>Takeaways</h1>
+
+</section>
+<section id="takeaways-for-the-exam" class="slide level2 smaller">
+<h2>Takeaways for the exam</h2>
+<ol type="1">
+<li class="fragment"><p>Simpson’s paradox. What are the causes of it and solutions.</p></li>
+<li class="fragment"><p>Data types (cross-section, repeated cross-section, balanced panel, unbalanced panel)</p></li>
+<li class="fragment"><p>Panel Regression</p>
+<ul>
+<li class="fragment">Pooled;</li>
+<li class="fragment">Least Squared Dummy Variable model;</li>
+<li class="fragment">Fixed effect (within transformation);</li>
+<li class="fragment">Why FE is so important?</li>
+<li class="fragment">What is the key difference between FE and RE?</li>
+<li class="fragment">When FE and when RE are appropriate?</li>
+</ul></li>
+<li class="fragment"><p>Panel Regression tests <code>F-test</code>, <code>LM-test</code>, <code>Hausman test</code></p></li>
+<li class="fragment"><p>Robust and Clustered SE:</p>
+<ul>
+<li class="fragment">Why these are important and when do we need to use one?</li>
+</ul></li>
+</ol>
+</section>
+<section id="homework" class="slide level2">
+<h2>Homework</h2>
+<ol type="1">
+<li class="fragment"><p>Reproduce code from the slides</p></li>
+<li class="fragment"><p>Perform practical exercises.</p></li>
+</ol>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+
+
+<img src="../img/jlu-logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<p>MP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | <a href="https://github.com/EBukin/mp223-2023-aem-R-public">GitHub</a> | <a href="https://studip.uni-giessen.de/dispatch.php/course/details?sem_id=f6e2c09067e60ef3c084b358d4a490cd&amp;again=yes">StudIP</a> | <a href="https://ilias.uni-giessen.de/goto.php?target=crs_350157&amp;client_id=JLUG">ILIAS</a>.</p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-Angrist2009" class="csl-entry" role="doc-biblioentry">
+Angrist, J. D., &amp; Pischke, J.-S. (2009). <em>Mostly harmless econometrics</em>. Princeton University Press. http://doi.org/<a href="https://doi.org/10.1515/9781400829828">10.1515/9781400829828</a>
+</div>
+<div id="ref-Blanc2017" class="csl-entry" role="doc-biblioentry">
+Blanc, E., &amp; Schlenker, W. (2017). The use of panel models in assessments of climate impacts on agriculture. <em>Review of Environmental Economics and Policy</em>, <em>11</em>(2), 258–279. http://doi.org/<a href="https://doi.org/10.1093/reep/rex016">10.1093/reep/rex016</a>
+</div>
+<div id="ref-Bozzola2017" class="csl-entry" role="doc-biblioentry">
+Bozzola, M., Massetti, E., Mendelsohn, R., &amp; Capitanio, F. (2017). A ricardian analysis of the impact of climate change on italian agriculture. <em>European Review of Agricultural Economics</em>, <em>45</em>(1), 57–79. http://doi.org/<a href="https://doi.org/10.1093/erae/jbx023">10.1093/erae/jbx023</a>
+</div>
+<div id="ref-Card1996" class="csl-entry" role="doc-biblioentry">
+Card, D. (1996). The effect of unions on the structure of wages: A longitudinal analysis. <em>Econometrica</em>, <em>64</em>(4), 957. http://doi.org/<a href="https://doi.org/10.2307/2171852">10.2307/2171852</a>
+</div>
+<div id="ref-Chatzopoulos2015" class="csl-entry" role="doc-biblioentry">
+Chatzopoulos, T., &amp; Lippert, C. (2015). Endogenous farm-type selection, endogenous irrigation, and spatial effects in ricardian models of climate change. <em>European Review of Agricultural Economics</em>, <em>43</em>(2), 217–235. http://doi.org/<a href="https://doi.org/10.1093/erae/jbv014">10.1093/erae/jbv014</a>
+</div>
+<div id="ref-Conley1999" class="csl-entry" role="doc-biblioentry">
+Conley, T. G. (1999). <span>GMM</span> estimation with cross sectional dependence. <em>Journal of Econometrics</em>, <em>92</em>(1), 1–45. http://doi.org/<a href="https://doi.org/10.1016/s0304-4076(98)00084-0">10.1016/s0304-4076(98)00084-0</a>
+</div>
+<div id="ref-Croissant2018" class="csl-entry" role="doc-biblioentry">
+Croissant, Y., &amp; Millo, G. (2018). <em>Panel data econometrics with r</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-Freeman1984" class="csl-entry" role="doc-biblioentry">
+Freeman, R. B. (1984). Longitudinal analyses of the effects of trade unions. <em>Journal of Labor Economics</em>, <em>2</em>(1), 1–26. http://doi.org/<a href="https://doi.org/10.1086/298021">10.1086/298021</a>
+</div>
+<div id="ref-Kurukulasuriya2011" class="csl-entry" role="doc-biblioentry">
+Kurukulasuriya, P., Kala, N., &amp; Mendelsohn, R. (2011). Adaptation and climate change impacts: A structural ricardian model of irrigation and farm income in africa. <em>Climate Change Economics</em>, <em>2</em>(02), 149–174.
+</div>
+<div id="ref-Kurukulasuriya2008" class="csl-entry" role="doc-biblioentry">
+Kurukulasuriya, P., Mendelsohn, R., Kurukulasuriya, P., &amp; Mendelsohn, R. (2008). Crop switching as a strategy for adapting to climate change. http://doi.org/<a href="https://doi.org/10.22004/AG.ECON.56970">10.22004/AG.ECON.56970</a>
+</div>
+<div id="ref-Mendelsohn1994" class="csl-entry" role="doc-biblioentry">
+Mendelsohn, R., Nordhaus, W. D., &amp; Shaw, D. (1994). The impact of global warming on agriculture: A ricardian analysis. <em>The American Economic Review</em>, 753–771.
+</div>
+<div id="ref-Mundlak1961" class="csl-entry" role="doc-biblioentry">
+Mundlak, Y. (1961). Empirical production function free of management bias. <em>Journal of Farm Economics</em>, <em>43</em>(1), 44. http://doi.org/<a href="https://doi.org/10.2307/1235460">10.2307/1235460</a>
+</div>
+<div id="ref-Seo2008" class="csl-entry" role="doc-biblioentry">
+Seo, S. N., &amp; Mendelsohn, R. (2008a). An analysis of crop choice: Adapting to climate change in south american farms. <em>Ecological Economics</em>, <em>67</em>(1), 109–116. http://doi.org/<a href="https://doi.org/10.1016/j.ecolecon.2007.12.007">10.1016/j.ecolecon.2007.12.007</a>
+</div>
+<div id="ref-Seo2008b" class="csl-entry" role="doc-biblioentry">
+Seo, S. N., &amp; Mendelsohn, R. (2008b). Measuring impacts and adaptations to climate change: A structural ricardian model of african livestock management. <em>Agricultural Economics</em>, <em>38</em>(2), 151–165. http://doi.org/<a href="https://doi.org/10.1111/j.1574-0862.2008.00289.x">10.1111/j.1574-0862.2008.00289.x</a>
+</div>
+<div id="ref-Seo2008a" class="csl-entry" role="doc-biblioentry">
+Seo, S. N., Mendelsohn, R., Seo, S. N., &amp; Mendelsohn, R. (2008). Animal husbandry in africa: Climate change impacts and adaptations. http://doi.org/<a href="https://doi.org/10.22004/AG.ECON.56968">10.22004/AG.ECON.56968</a>
+</div>
+<div id="ref-Soederbom2014" class="csl-entry" role="doc-biblioentry">
+Söderbom, M., Teal, F., &amp; Eberhardt, M. (2014). <em>Empirical development economics</em>. ROUTLEDGE. Retrieved from <a href="https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html">https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html</a>
+</div>
+<div id="ref-Wooldridge2010" class="csl-entry" role="doc-biblioentry">
+Wooldridge, J. M. (2010). <em>Econometric analysis of cross section and panel data</em>. MIT press.
+</div>
+<div id="ref-wooldridge2020introductory" class="csl-entry" role="doc-biblioentry">
+Wooldridge, M. J. (2020). <em>Introductory econometrics: A modern approach</em>. South-Western. Retrieved from <a href="https://www.cengage.uk/shop/isbn/9781337558860">https://www.cengage.uk/shop/isbn/9781337558860</a>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 1024,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>

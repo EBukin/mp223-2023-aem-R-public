@@ -2350,5 +2350,1125 @@
     "title": "Omitted Variable Bias",
     "section": "Do the OVB analysis on your own",
     "text": "Do the OVB analysis on your own\nYou want to estimate the causal effect of union membership on employees’ wages. And you estimate the following regression equation:\n\\[\n\\log \\text{wage}_i = \\beta_0 + \\beta_1 \\text{union} + \\beta_2 \\text{experience} + \\beta_3 \\text{experience}^2 \\\\\n+ \\beta_4 \\text{married} + \\beta_5 \\text{sex} + \\beta_6 \\text{hours per week} + \\epsilon_i\n\\]\nYour colleagues suggest that you should include an individual’s education in the list of control variables as omitting such regressor biases the estimate.\n\nUsing OVB formula prove that omitting education causes/does not causes the OVB.\nCalculate the extent of the OVB"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#cross-sectional-data",
+    "href": "slides/w08-panel-regression.html#cross-sectional-data",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data",
+    "text": "Cross-sectional data\n\n\n\n\n\n\nID\nY\nX1\nX2\n\n\n\n\n\\(1\\)\n\\(y_{1}\\)\n\\(x^{1}_{1}\\)\n\\(x^{2}_{1}\\)\n\n\n\\(2\\)\n\\(y_{2}\\)\n\\(x^{1}_{2}\\)\n\\(x^{2}_{2}\\)\n\n\n\\(3\\)\n\\(y_{3}\\)\n\\(x^{1}_{3}\\)\n\\(x^{2}_{3}\\)\n\n\n\\(4\\)\n\\(y_{4}\\)\n\\(x^{1}_{4}\\)\n\\(x^{2}_{4}\\)\n\n\n\\(5\\)\n\\(y_{5}\\)\n\\(x^{1}_{5}\\)\n\\(x^{2}_{5}\\)\n\n\n\\(6\\)\n\\(y_{6}\\)\n\\(x^{1}_{6}\\)\n\\(x^{2}_{6}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(y_{N}\\)\n\\(x^{1}_{N}\\)\n\\(x^{2}_{N}\\)\n\n\n\n\n\n\nData that we usually collect in a single data collection.\n\nEach individual is represented by one observation.\n\nCould be repeatedly collected multiple times (repeated cross-section),\n\nbut, in every repetition, there are different individuals!"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-data",
+    "href": "slides/w08-panel-regression.html#panel-data",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data",
+    "text": "Panel data\n\n\n\ntable with data, where\neach individual (cohort, e.i. region, country)\nis represented by multiple observations at different time periods.\n\n\n\n\n\n\nID\nTime\nY\nX1\nX2\n\n\n\n\n\\(1\\)\n\\(1\\)\n\\(y_{11}\\)\n\\(x^{1}_{11}\\)\n\\(x^{2}_{11}\\)\n\n\n\\(1\\)\n\\(2\\)\n\\(y_{12}\\)\n\\(x^{1}_{12}\\)\n\\(x^{2}_{12}\\)\n\n\n\\(1\\)\n\\(3\\)\n\\(y_{13}\\)\n\\(x^{1}_{13}\\)\n\\(x^{2}_{13}\\)\n\n\n\\(2\\)\n\\(2\\)\n\\(y_{22}\\)\n\\(x^{1}_{22}\\)\n\\(x^{2}_{22}\\)\n\n\n\\(2\\)\n\\(3\\)\n\\(y_{23}\\)\n\\(x^{1}_{23}\\)\n\\(x^{2}_{23}\\)\n\n\n\\(3\\)\n\\(1\\)\n\\(y_{31}\\)\n\\(x^{1}_{31}\\)\n\\(x^{2}_{31}\\)\n\n\n\\(3\\)\n\\(2\\)\n\\(y_{32}\\)\n\\(x^{1}_{32}\\)\n\\(x^{2}_{32}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(1\\)\n\\(y_{N1}\\)\n\\(x^{1}_{N1}\\)\n\\(x^{1}_{N1}\\)\n\n\n\\(N\\)\n\\(2\\)\n\\(y_{N2}\\)\n\\(x^{1}_{N2}\\)\n\\(x^{2}_{N2}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(y_{NT}\\)\n\\(x^{1}_{NT}\\)\n\\(x^{2}_{NT}\\)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-data-1",
+    "href": "slides/w08-panel-regression.html#panel-data-1",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data",
+    "text": "Panel data\n\n\n\nID\nTime\nY\nX1\nX2\n\n\n\n\n\\(1\\)\n\\(1\\)\n\\(y_{11}\\)\n\\(x^{1}_{11}\\)\n\\(x^{2}_{11}\\)\n\n\n\\(1\\)\n\\(2\\)\n\\(y_{12}\\)\n\\(x^{1}_{12}\\)\n\\(x^{2}_{12}\\)\n\n\n\\(1\\)\n\\(3\\)\n\\(y_{13}\\)\n\\(x^{1}_{13}\\)\n\\(x^{2}_{13}\\)\n\n\n\\(2\\)\n\\(2\\)\n\\(y_{22}\\)\n\\(x^{1}_{22}\\)\n\\(x^{2}_{22}\\)\n\n\n\\(2\\)\n\\(3\\)\n\\(y_{23}\\)\n\\(x^{1}_{23}\\)\n\\(x^{2}_{23}\\)\n\n\n\\(3\\)\n\\(1\\)\n\\(y_{31}\\)\n\\(x^{1}_{31}\\)\n\\(x^{2}_{31}\\)\n\n\n\\(3\\)\n\\(2\\)\n\\(y_{32}\\)\n\\(x^{1}_{32}\\)\n\\(x^{2}_{32}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(1\\)\n\\(y_{N1}\\)\n\\(x^{1}_{N1}\\)\n\\(x^{1}_{N1}\\)\n\n\n\\(N\\)\n\\(2\\)\n\\(y_{N2}\\)\n\\(x^{1}_{N2}\\)\n\\(x^{2}_{N2}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(y_{NT}\\)\n\\(x^{1}_{NT}\\)\n\\(x^{2}_{NT}\\)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-data-balanced-and-unbalanced",
+    "href": "slides/w08-panel-regression.html#panel-data-balanced-and-unbalanced",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data: Balanced and Unbalanced",
+    "text": "Panel data: Balanced and Unbalanced\n\n\nBalanced\n\n\n\n\n\\(\\text{ID}\\)\n\\(\\text{Time}\\)\n\\(Y\\)\n\\(X\\)\n\n\n\n\n1\n1\n\\(Y_{11}\\)\n\\(X_{11}\\)\n\n\n1\n2\n\\(Y_{12}\\)\n\\(X_{12}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n1\n\\(T\\)\n\\(Y_{1T}\\)\n\\(X_{1T}\\)\n\n\n2\n1\n\\(Y_{21}\\)\n\\(X_{21}\\)\n\n\n2\n2\n\\(Y_{22}\\)\n\\(X_{22}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n2\n\\(T\\)\n\\(Y_{2T}\\)\n\\(X_{2T}\\)\n\n\n3\n1\n\\(Y_{31}\\)\n\\(X_{31}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(Y_{NT}\\)\n\\(X_{NT}\\)\n\n\n\n\nEach individual is represented in all time periods.\n\n\n\nUn balanced\n\n\n\n\n\\(\\text{ID}\\)\n\\(\\text{Time}\\)\n\\(Y\\)\n\\(X\\)\n\n\n\n\n1\n1\n\\(Y_{11}\\)\n\\(X_{11}\\)\n\n\n1\n2\n\\(Y_{12}\\)\n\\(X_{12}\\)\n\n\n2\n2\n\\(Y_{22}\\)\n\\(X_{22}\\)\n\n\n2\n3\n\\(Y_{23}\\)\n\\(X_{23}\\)\n\n\n3\n3\n\\(Y_{33}\\)\n\\(X_{33}\\)\n\n\n4\n1\n\\(Y_{41}\\)\n\\(X_{41}\\)\n\n\n5\n2\n\\(Y_{52}\\)\n\\(X_{52}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(Y_{NT}\\)\n\\(X_{NT}\\)\n\n\n\n\nEach individual only appears in some time periods (not all)."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#let-us-investigate",
+    "href": "slides/w08-panel-regression.html#let-us-investigate",
+    "title": "Panel Regression Analysis",
+    "section": "Let us investigate…",
+    "text": "Let us investigate…\nThe relationship between bill length and depth in penguins…"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#the-data",
+    "href": "slides/w08-panel-regression.html#the-data",
+    "title": "Panel Regression Analysis",
+    "section": "The data",
+    "text": "The data\n\nlibrary(tidyverse)\nlibrary(modelsummary)\npenguins <- read_csv(\"penguins\")\npenguins %>% glimpse()\n\n\n\nRows: 344\nColumns: 8\n$ species           <fct> Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…\n$ island            <fct> Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…\n$ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …\n$ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …\n$ flipper_length_mm <int> 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…\n$ body_mass_g       <int> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …\n$ sex               <fct> male, female, female, NA, female, male, female, male…\n$ year              <int> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#the-relationship",
+    "href": "slides/w08-panel-regression.html#the-relationship",
+    "title": "Panel Regression Analysis",
+    "section": "The relationship",
+    "text": "The relationship\n\ngg_bill <- \n  penguins %>% ggplot() + \n  aes(x = bill_length_mm, y = bill_depth_mm) +\n  xlab(\"Bill length, mm\") + ylab(\"Bill depth, mm\") +\n  geom_point()\ngg_bill"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#simpsons-paradox-with-penguins",
+    "href": "slides/w08-panel-regression.html#simpsons-paradox-with-penguins",
+    "title": "Panel Regression Analysis",
+    "section": "Simpson’s paradox (with penguins)",
+    "text": "Simpson’s paradox (with penguins)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#the-trend",
+    "href": "slides/w08-panel-regression.html#the-trend",
+    "title": "Panel Regression Analysis",
+    "section": "The trend",
+    "text": "The trend\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\")"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#is-this-the-true-trend",
+    "href": "slides/w08-panel-regression.html#is-this-the-true-trend",
+    "title": "Panel Regression Analysis",
+    "section": "Is this the true trend?",
+    "text": "Is this the true trend?\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\") + \n  aes(colour = species)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#the-true-trends",
+    "href": "slides/w08-panel-regression.html#the-true-trends",
+    "title": "Panel Regression Analysis",
+    "section": "The true trends",
+    "text": "The true trends\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\") + \n  aes(colour = species) + \n  geom_smooth(method = \"lm\", formula = y ~ x, se = FALSE)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#regression-results",
+    "href": "slides/w08-panel-regression.html#regression-results",
+    "title": "Panel Regression Analysis",
+    "section": "Regression results",
+    "text": "Regression results\n\nfit1 <- lm(bill_depth_mm ~ bill_length_mm, data = penguins)\nfit2 <- lm(bill_depth_mm ~ bill_length_mm + species, data = penguins)\nfit3 <- lm(bill_depth_mm ~ -1 + bill_length_mm + species, data = penguins)\nmodelsummary(\n  list(fit1, fit2, fit3),\n  estimate = \"{estimate}{stars} ({std.error})\", \n  statistic = NULL, \n  gof_map = c(\"nobs\", \"adj.r.squared\")\n)\n\n\n\n\n\n \n  \n      \n     (1) \n      (2) \n      (3) \n  \n \n\n  \n    (Intercept) \n    20.885*** (0.844) \n    10.592*** (0.683) \n     \n  \n  \n    bill_length_mm \n    −0.085*** (0.019) \n    0.200*** (0.017) \n    0.200*** (0.017) \n  \n  \n    speciesChinstrap \n     \n    −1.933*** (0.224) \n    8.659*** (0.862) \n  \n  \n    speciesGentoo \n     \n    −5.106*** (0.191) \n    5.486*** (0.835) \n  \n  \n    speciesAdelie \n     \n     \n    10.592*** (0.683) \n  \n  \n    Num.Obs. \n    342 \n    342 \n    342 \n  \n  \n    R2 Adj. \n    0.052 \n    0.767 \n    0.997"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#simpsons-paradox-conclusion",
+    "href": "slides/w08-panel-regression.html#simpsons-paradox-conclusion",
+    "title": "Panel Regression Analysis",
+    "section": "Simpson’s paradox conclusion",
+    "text": "Simpson’s paradox conclusion\n\nTrends or relationships are observed in the whole population, but they reverse or disappear, when all groups are treated as one.\n\n\nCauses:\n\nUnobserved heterogeneity/differences between groups.\nUnderlining processes that are different between parts of the population.\n\n\n\nResolutions to the paradox:\n\nControl variables in the MRL.\nPanel data."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#problem-setting",
+    "href": "slides/w08-panel-regression.html#problem-setting",
+    "title": "Panel Regression Analysis",
+    "section": "Problem setting",
+    "text": "Problem setting\nDoes the collective bargaining (union membership) has any effect on wages?\n\nSee: (Card, 1996; Freeman, 1984)\n\n\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\nwhere \\(i\\) is the individual and \\(t\\) is the time dimension;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#is-there-an-endogeneity-problem",
+    "href": "slides/w08-panel-regression.html#is-there-an-endogeneity-problem",
+    "title": "Panel Regression Analysis",
+    "section": "Is there an endogeneity problem?",
+    "text": "Is there an endogeneity problem?\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\n\nIs there a source of endogeneity / selection bias here?\n\nAny ideas?\n\n\\(\\text{Ability}_{i}\\) not observable and not measurable;\n\ntime invariant;\ncorrelates with \\(X\\) and \\(Y\\);\n\nOmitting ability causes bias"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#one-solution",
+    "href": "slides/w08-panel-regression.html#one-solution",
+    "title": "Panel Regression Analysis",
+    "section": "One solution:",
+    "text": "One solution:\n\nWage, union membership, skills, experience - all change over time!\nAbility are time-invariant and unique to each individual;\n\nwe can inctorduce a dummy variables for each individual,\nto approximate ability!\n\nBut this is only possible with panel data\n\nWhen each individual is observed multiple times!\n\nAlso called Fixed Effect - Panel Regression model of (Difference in Difference)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#other-solutions",
+    "href": "slides/w08-panel-regression.html#other-solutions",
+    "title": "Panel Regression Analysis",
+    "section": "Other solutions:",
+    "text": "Other solutions:\n\nAny ideas?\nIntroduce control variables that are proxy of ability.\nEmploy specific research design:\n\nRCT\nRDD"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#the-data-1",
+    "href": "slides/w08-panel-regression.html#the-data-1",
+    "title": "Panel Regression Analysis",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n \n  \n    id \n    time \n    exp \n    wks \n    bluecol \n    ind \n    south \n    smsa \n    married \n    union \n    ed \n    black \n    lwage \n    female \n    wage \n  \n \n\n  \n    5 \n    1 \n    10 \n    50 \n    yes \n    0 \n    no \n    no \n    yes \n    yes \n    16 \n    no \n    6.43775 \n    1 \n    624.9990 \n  \n  \n    5 \n    2 \n    11 \n    46 \n    yes \n    0 \n    no \n    no \n    yes \n    yes \n    16 \n    no \n    6.62007 \n    1 \n    749.9976 \n  \n  \n    5 \n    3 \n    12 \n    40 \n    yes \n    0 \n    no \n    no \n    yes \n    yes \n    16 \n    no \n    6.63332 \n    1 \n    760.0012 \n  \n  \n    5 \n    4 \n    13 \n    50 \n    no \n    0 \n    no \n    no \n    yes \n    no \n    16 \n    no \n    6.98286 \n    1 \n    1077.9970 \n  \n  \n    5 \n    5 \n    14 \n    47 \n    yes \n    0 \n    no \n    yes \n    yes \n    no \n    16 \n    no \n    7.04752 \n    1 \n    1150.0032 \n  \n  \n    5 \n    6 \n    15 \n    47 \n    no \n    0 \n    no \n    no \n    yes \n    no \n    16 \n    no \n    7.31322 \n    1 \n    1499.9994 \n  \n  \n    5 \n    7 \n    16 \n    49 \n    no \n    0 \n    no \n    no \n    yes \n    no \n    16 \n    no \n    7.29574 \n    1 \n    1474.0073 \n  \n  \n    168 \n    1 \n    3 \n    40 \n    no \n    0 \n    no \n    yes \n    yes \n    no \n    17 \n    no \n    6.23245 \n    1 \n    509.0010 \n  \n  \n    168 \n    2 \n    4 \n    42 \n    no \n    0 \n    no \n    yes \n    yes \n    no \n    17 \n    no \n    6.57925 \n    1 \n    719.9991 \n  \n  \n    168 \n    3 \n    5 \n    44 \n    no \n    0 \n    no \n    yes \n    yes \n    yes \n    17 \n    no \n    6.65286 \n    1 \n    774.9977 \n  \n  \n    168 \n    4 \n    6 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    yes \n    17 \n    no \n    6.74524 \n    1 \n    850.0031 \n  \n  \n    168 \n    5 \n    7 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    no \n    17 \n    no \n    7.49554 \n    1 \n    1799.9965 \n  \n  \n    168 \n    6 \n    8 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    no \n    17 \n    no \n    8.16052 \n    1 \n    3500.0061 \n  \n  \n    168 \n    7 \n    9 \n    50 \n    no \n    0 \n    no \n    yes \n    yes \n    no \n    17 \n    no \n    8.30820 \n    1 \n    4057.0038"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#pooled-regression",
+    "href": "slides/w08-panel-regression.html#pooled-regression",
+    "title": "Panel Regression Analysis",
+    "section": "Pooled Regression",
+    "text": "Pooled Regression\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\epsilon_{it}\n\\]\n\n\nRegression model on all observations in the panel data set without any individual effects.\n\n\nunion_fit_0 <- lm(log(wage) ~ union + ed + exp + wks, data = wage_dta)\nunion_fit_0\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + ed + exp + wks, data = wage_dta)\n\nCoefficients:\n(Intercept)     unionyes           ed          exp          wks  \n   4.904952     0.133921     0.082861     0.013193     0.008467"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#least-squares-dummy-variable-regression",
+    "href": "slides/w08-panel-regression.html#least-squares-dummy-variable-regression",
+    "title": "Panel Regression Analysis",
+    "section": "Least-squares dummy variable regression",
+    "text": "Least-squares dummy variable regression\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\nPooled regression plus dummy variable for each individual.\nThis is not a Fixed Effect Panel Regression model, but a form of it.\n\n\nunion_fit_1 <- lm(log(wage) ~ union + ed + exp + wks + factor(id), data = wage_dta)\ncoef(union_fit_1)\n\n\n\n  (Intercept)      unionyes            ed           exp           wks \n 4.5080309947  0.0310063771  0.0926571158  0.0968921019  0.0011035227 \n  factor(id)2   factor(id)3   factor(id)4   factor(id)5   factor(id)6 \n-2.2655221864 -0.0679307502 -2.3947793449 -0.4109418992 -1.3874674503 \n  factor(id)7   factor(id)8   factor(id)9  factor(id)10  factor(id)11 \n-1.1362785960 -1.4477135171  0.2723291673 -0.1075227973 -1.3842484712 \n factor(id)12  factor(id)13  factor(id)14  factor(id)15  factor(id)16 \n-1.2616563373 -1.3172925638 -0.8889020189 -0.8432575405 -1.4745899376 \n factor(id)17  factor(id)18  factor(id)19  factor(id)20  factor(id)21 \n-0.8441587959 -1.2742692661 -3.2082101697 -1.7193081621 -1.7458225333 \n factor(id)22  factor(id)23  factor(id)24  factor(id)25  factor(id)26 \n-1.2996715867  0.1362158912 -0.7882521921 -0.4824654849 -0.6052144027 \n factor(id)27  factor(id)28  factor(id)29  factor(id)30  factor(id)31 \n-0.1639394268 -1.7505153234 -1.8458437659 -1.1971050753 -1.2688614236 \n factor(id)32  factor(id)33  factor(id)34  factor(id)35  factor(id)36 \n-1.8010348079 -0.4993946191 -3.9776169750 -0.1144740507 -0.2558972243 \n factor(id)37  factor(id)38  factor(id)39  factor(id)40  factor(id)41 \n-0.2249786188 -0.6736263981 -0.0025109045 -1.7826220350 -0.9121282370 \n factor(id)42  factor(id)43  factor(id)44  factor(id)45  factor(id)46 \n-2.2237936635  0.2413936161  0.1624657380 -0.8444194003 -0.1974056530 \n factor(id)47  factor(id)48  factor(id)49  factor(id)50  factor(id)51 \n-1.6159192305 -1.7035416114 -1.8647062443 -2.4251811715 -1.9049737011 \n factor(id)52  factor(id)53  factor(id)54  factor(id)55  factor(id)56 \n-1.4889956316 -0.3542162186 -0.3625391918 -1.7719093066 -1.8379124593 \n factor(id)57  factor(id)58  factor(id)59  factor(id)60  factor(id)61 \n-1.5742321625 -2.8782348123 -1.6128342792 -1.5560016659 -1.8558689251 \n factor(id)62  factor(id)63  factor(id)64  factor(id)65  factor(id)66 \n-0.0537704902 -0.1401364357 -2.7097225771 -1.7119738693 -0.9377652717 \n factor(id)67  factor(id)68  factor(id)69  factor(id)70  factor(id)71 \n-2.4506638129 -2.6116256913 -2.0043879179 -0.3437942805  0.0062279026 \n factor(id)72  factor(id)73  factor(id)74  factor(id)75  factor(id)76 \n-0.7770392581 -0.8324925145 -0.6702293878 -1.6657642886 -1.0769968570 \n factor(id)77  factor(id)78  factor(id)79  factor(id)80  factor(id)81 \n-0.7243244748 -3.5242010580 -0.8338248371  0.0349689517 -0.1776675032 \n factor(id)82  factor(id)83  factor(id)84  factor(id)85  factor(id)86 \n-1.2737000464 -0.7906868358 -3.4418176841 -0.5622796402  0.3499130686 \n factor(id)87  factor(id)88  factor(id)89  factor(id)90  factor(id)91 \n-0.5045389733  0.0380401475 -0.6233464898  0.2826280518  0.2620449272 \n factor(id)92  factor(id)93  factor(id)94  factor(id)95  factor(id)96 \n 0.0289977222 -2.3216403929 -0.5280709628 -2.6695298324 -1.8101171540 \n factor(id)97  factor(id)98  factor(id)99 factor(id)100 factor(id)101 \n-2.3424909985 -0.9272796237 -1.1399774230 -0.3052923053 -2.0064100169 \nfactor(id)102 factor(id)103 factor(id)104 factor(id)105 factor(id)106 \n 0.3157008827 -0.9088377852 -1.1835804053 -0.2772538384  0.0581496528 \nfactor(id)107 factor(id)108 factor(id)109 factor(id)110 factor(id)111 \n-1.7912635929 -0.8796058507 -1.3243770872 -2.8463802275 -0.0460009045 \nfactor(id)112 factor(id)113 factor(id)114 factor(id)115 factor(id)116 \n-0.7305311839 -1.7335454885 -2.8425752763 -0.3387170812 -0.6042258392 \nfactor(id)117 factor(id)118 factor(id)119 factor(id)120 factor(id)121 \n-1.0761445880 -1.3451630729 -0.1660476107 -0.6073506039 -0.2294792380 \nfactor(id)122 factor(id)123 factor(id)124 factor(id)125 factor(id)126 \n-0.5827050570 -1.5103279045 -1.8115963996 -0.8185827116  0.2118703253 \nfactor(id)127 factor(id)128 factor(id)129 factor(id)130 factor(id)131 \n-1.7356276361 -2.2764190892 -2.3502707273 -1.8838901593 -1.7774889180 \nfactor(id)132 factor(id)133 factor(id)134 factor(id)135 factor(id)136 \n-1.1039651819 -1.1578763217 -0.2356162218 -0.4350180955 -0.7918763863 \nfactor(id)137 factor(id)138 factor(id)139 factor(id)140 factor(id)141 \n-1.1654461065 -1.2049708577  0.1297104422 -0.0892275833 -0.8983086258 \nfactor(id)142 factor(id)143 factor(id)144 factor(id)145 factor(id)146 \n-2.8736569247 -2.5763786160 -0.2206851710 -1.0460117682 -2.5755773652 \nfactor(id)147 factor(id)148 factor(id)149 factor(id)150 factor(id)151 \n-0.2364974230 -0.1573802939 -0.1374446850 -0.8807032960 -1.6957509318 \nfactor(id)152 factor(id)153 factor(id)154 factor(id)155 factor(id)156 \n-0.3889136714 -0.8036953530 -0.6832796416  0.3284782420 -2.3604419579 \nfactor(id)157 factor(id)158 factor(id)159 factor(id)160 factor(id)161 \n-0.0855476488 -1.9158229929 -2.2570550641 -1.9574349185 -0.3252021885 \nfactor(id)162 factor(id)163 factor(id)164 factor(id)165 factor(id)166 \n-0.5140633822 -0.6273090766 -0.4458525807 -3.1347772728 -0.2183026348 \nfactor(id)167 factor(id)168 factor(id)169 factor(id)170 factor(id)171 \n-1.2239655304  0.4438625670 -1.5297736706 -2.0895503730 -0.9346219685 \nfactor(id)172 factor(id)173 factor(id)174 factor(id)175 factor(id)176 \n-0.0871821856 -1.6966359127  0.1864583479  0.0095012507  0.3129948360 \nfactor(id)177 factor(id)178 factor(id)179 factor(id)180 factor(id)181 \n-1.4989523797  0.3993597409 -2.2172222793 -0.2925061489 -0.3059554133 \nfactor(id)182 factor(id)183 factor(id)184 factor(id)185 factor(id)186 \n-0.8910018832 -1.0454580196 -1.5991940535 -1.4123302001 -2.1886562071 \nfactor(id)187 factor(id)188 factor(id)189 factor(id)190 factor(id)191 \n-1.0673557123 -0.0366403620 -1.6422195644  0.2895208379 -1.4791178455 \nfactor(id)192 factor(id)193 factor(id)194 factor(id)195 factor(id)196 \n 0.0743443142 -2.1729539630 -0.3371512760 -0.6968243523  0.1549563657 \nfactor(id)197 factor(id)198 factor(id)199 factor(id)200 factor(id)201 \n-1.4919082370 -1.8806299735 -0.1043902382 -0.2540378231 -1.4008995546 \nfactor(id)202 factor(id)203 factor(id)204 factor(id)205 factor(id)206 \n-0.4715792510 -1.4354460647 -2.0841559662 -1.5908389011  0.0974942925 \nfactor(id)207 factor(id)208 factor(id)209 factor(id)210 factor(id)211 \n-0.3734463538 -1.5833722358 -1.9386342238 -2.1330802475 -1.4607569689 \nfactor(id)212 factor(id)213 factor(id)214 factor(id)215 factor(id)216 \n 0.0692387738 -1.4362958615 -1.8477752431 -3.5018407719 -0.9702974562 \nfactor(id)217 factor(id)218 factor(id)219 factor(id)220 factor(id)221 \n-0.1864633404 -0.5583055945 -0.7131139439 -2.4184070473 -1.9991061550 \nfactor(id)222 factor(id)223 factor(id)224 factor(id)225 factor(id)226 \n 0.0252310278 -0.9071314759 -1.5476122285 -0.4589191769 -2.9925640720 \nfactor(id)227 factor(id)228 factor(id)229 factor(id)230 factor(id)231 \n-2.2095473327  0.3349890128 -1.1599356203  0.3085005957 -0.9650086661 \nfactor(id)232 factor(id)233 factor(id)234 factor(id)235 factor(id)236 \n-2.1620488993 -1.8096153228 -1.5562606230 -1.1494961437  0.0996192770 \nfactor(id)237 factor(id)238 factor(id)239 factor(id)240 factor(id)241 \n-0.5395924150 -2.1478127095 -1.3393016192 -2.0580183534 -0.5006546958 \nfactor(id)242 factor(id)243 factor(id)244 factor(id)245 factor(id)246 \n-0.5467203416  0.3174743400 -1.3575828629 -2.4005959097 -2.8705268871 \nfactor(id)247 factor(id)248 factor(id)249 factor(id)250 factor(id)251 \n-0.6680143531 -1.0334924832 -2.4259470807 -1.2501498259 -0.5113721708 \nfactor(id)252 factor(id)253 factor(id)254 factor(id)255 factor(id)256 \n-1.4304018364 -0.0325545732 -2.6562757026  0.0656002646 -0.1480848210 \nfactor(id)257 factor(id)258 factor(id)259 factor(id)260 factor(id)261 \n-2.1835747504 -2.1795404242 -0.6462803350 -0.0226215308 -0.7093864827 \nfactor(id)262 factor(id)263 factor(id)264 factor(id)265 factor(id)266 \n-0.4419561296 -0.5194252649 -0.0738509630 -0.5043753168 -1.3893601795 \nfactor(id)267 factor(id)268 factor(id)269 factor(id)270 factor(id)271 \n-0.5388875817 -0.7334291072 -0.8729609312 -0.7036995922 -0.3483834285 \nfactor(id)272 factor(id)273 factor(id)274 factor(id)275 factor(id)276 \n-0.1503155312 -1.6624965066 -0.8988125791  0.0182397780  0.3830322685 \nfactor(id)277 factor(id)278 factor(id)279 factor(id)280 factor(id)281 \n-2.0641062977  0.2842052782 -0.5571589206 -2.7175197487  0.2712451990 \nfactor(id)282 factor(id)283 factor(id)284 factor(id)285 factor(id)286 \n-1.2350275452 -2.9457801191 -2.1976344024  0.2953395631 -0.2979508412 \nfactor(id)287 factor(id)288 factor(id)289 factor(id)290 factor(id)291 \n-0.5060374166 -0.1389329664 -1.5606159775 -0.0496261975 -2.5588631607 \nfactor(id)292 factor(id)293 factor(id)294 factor(id)295 factor(id)296 \n-1.7353127339 -0.4838661547 -1.0950139771 -1.3625604521 -2.0039274853 \nfactor(id)297 factor(id)298 factor(id)299 factor(id)300 factor(id)301 \n-0.4900311502 -0.6255232917 -3.2764384180 -2.7874789491 -0.2320672807 \nfactor(id)302 factor(id)303 factor(id)304 factor(id)305 factor(id)306 \n-0.9204708005  0.3208647271 -0.4017890824 -0.9748110949 -1.1893175018 \nfactor(id)307 factor(id)308 factor(id)309 factor(id)310 factor(id)311 \n 0.8071047654 -1.7498638622 -1.2960178469 -0.6605396033  0.2580087741 \nfactor(id)312 factor(id)313 factor(id)314 factor(id)315 factor(id)316 \n-0.7528944270 -0.5506410012 -0.3941112826 -0.9229402595 -1.8274179626 \nfactor(id)317 factor(id)318 factor(id)319 factor(id)320 factor(id)321 \n-0.8247447772 -0.5802491953 -1.5586914742 -0.9323836374 -0.2039400846 \nfactor(id)322 factor(id)323 factor(id)324 factor(id)325 factor(id)326 \n-0.2921333885 -0.6743960485  0.2622449597 -3.1733394515 -1.2746050004 \nfactor(id)327 factor(id)328 factor(id)329 factor(id)330 factor(id)331 \n-0.7198079782 -1.9716336831 -3.2765849294 -2.8887402424 -2.5642055811 \nfactor(id)332 factor(id)333 factor(id)334 factor(id)335 factor(id)336 \n-3.5439335180  0.1442706620 -2.5202972059 -1.9535704434 -2.2741984666 \nfactor(id)337 factor(id)338 factor(id)339 factor(id)340 factor(id)341 \n 0.6128078989 -0.5285042151 -0.8065665718 -1.9086103203  0.2025478485 \nfactor(id)342 factor(id)343 factor(id)344 factor(id)345 factor(id)346 \n-1.8569597798 -1.4207532392 -0.8177345172 -1.1359718040 -1.5565812102 \nfactor(id)347 factor(id)348 factor(id)349 factor(id)350 factor(id)351 \n-1.1854475295 -1.2825974474  0.5210211695 -2.6392655774 -1.3267929343 \nfactor(id)352 factor(id)353 factor(id)354 factor(id)355 factor(id)356 \n 0.1483095360 -1.6234121024 -1.2639442268 -0.3914705698  0.3968436943 \nfactor(id)357 factor(id)358 factor(id)359 factor(id)360 factor(id)361 \n-0.8625592693 -1.2512615948 -3.1090549004 -1.6305910533 -0.6092150258 \nfactor(id)362 factor(id)363 factor(id)364 factor(id)365 factor(id)366 \n-0.8371178797 -0.9898744078 -1.3642822793 -2.6162066308 -0.5612725365 \nfactor(id)367 factor(id)368 factor(id)369 factor(id)370 factor(id)371 \n-1.2495822315 -0.2187092395  0.4178998056  0.0078933499 -1.9408407708 \nfactor(id)372 factor(id)373 factor(id)374 factor(id)375 factor(id)376 \n-0.5027177298 -1.0854903868 -0.8835680799 -1.9056647603 -1.9023803800 \nfactor(id)377 factor(id)378 factor(id)379 factor(id)380 factor(id)381 \n-0.9639363237  0.3406054553 -0.9413693239 -2.2397839447 -1.7982803154 \nfactor(id)382 factor(id)383 factor(id)384 factor(id)385 factor(id)386 \n-1.4710100144 -1.8264254416 -2.4723075037 -0.0768100019 -0.5160529107 \nfactor(id)387 factor(id)388 factor(id)389 factor(id)390 factor(id)391 \n-0.2578492866 -2.3248529615 -1.0053657636 -1.7411722647 -2.5827446340 \nfactor(id)392 factor(id)393 factor(id)394 factor(id)395 factor(id)396 \n-1.4626183438 -0.7086413720  0.2463182313 -2.2837492689 -0.5884685114 \nfactor(id)397 factor(id)398 factor(id)399 factor(id)400 factor(id)401 \n 0.2356664347 -0.7086465595 -1.7699758466 -0.2998927907  0.3625535025 \nfactor(id)402 factor(id)403 factor(id)404 factor(id)405 factor(id)406 \n-0.7479742774 -0.8356707689 -0.6119443914  0.4318878206  0.2769301765 \nfactor(id)407 factor(id)408 factor(id)409 factor(id)410 factor(id)411 \n-1.6938634436 -0.3449254188 -3.0796976040 -1.9186588812 -0.3448521794 \nfactor(id)412 factor(id)413 factor(id)414 factor(id)415 factor(id)416 \n 0.5344690854 -0.2754098403 -2.9000592046 -1.5516997952 -2.1976862146 \nfactor(id)417 factor(id)418 factor(id)419 factor(id)420 factor(id)421 \n-0.3349106320 -2.0011123980 -0.2497252685 -0.3094673540 -1.3378014218 \nfactor(id)422 factor(id)423 factor(id)424 factor(id)425 factor(id)426 \n-0.4763015280 -0.5240316478  0.2449675285  0.3554911994  0.2639519275 \nfactor(id)427 factor(id)428 factor(id)429 factor(id)430 factor(id)431 \n-1.7757641083 -2.9988699763 -0.5174251966 -0.3311521857 -0.6388796236 \nfactor(id)432 factor(id)433 factor(id)434 factor(id)435 factor(id)436 \n-1.5023081692 -1.8757056922  0.2045655478 -0.1300569248 -0.2414767262 \nfactor(id)437 factor(id)438 factor(id)439 factor(id)440 factor(id)441 \n-1.0147851794 -1.7232776561 -0.2994656507 -0.8008434818 -2.2896856636 \nfactor(id)442 factor(id)443 factor(id)444 factor(id)445 factor(id)446 \n-3.5228083702 -1.5956581751  0.7607259370 -0.9304985177 -0.4575093394 \nfactor(id)447 factor(id)448 factor(id)449 factor(id)450 factor(id)451 \n-1.7447682740 -2.3280084075 -0.1979985646  0.1968641662 -0.2394807998 \nfactor(id)452 factor(id)453 factor(id)454 factor(id)455 factor(id)456 \n-0.6871992018 -2.2832695958  0.0553588667 -1.6052273642 -1.3604415774 \nfactor(id)457 factor(id)458 factor(id)459 factor(id)460 factor(id)461 \n-2.9330839431 -0.7950325315 -1.3101227633  0.1845563521 -2.1887667590 \nfactor(id)462 factor(id)463 factor(id)464 factor(id)465 factor(id)466 \n-2.6588026903 -0.7844760292 -3.6891418929 -0.2048295480 -2.1924740196 \nfactor(id)467 factor(id)468 factor(id)469 factor(id)470 factor(id)471 \n-1.7733473344 -3.0882373096 -4.6017229797 -0.0156170664 -2.2125823815 \nfactor(id)472 factor(id)473 factor(id)474 factor(id)475 factor(id)476 \n-0.3975606405 -0.0023810456 -0.5669107940 -0.5452321990 -2.1619484195 \nfactor(id)477 factor(id)478 factor(id)479 factor(id)480 factor(id)481 \n-0.2849685250 -0.0642931007 -0.7619497004 -1.2719168687 -1.2089275559 \nfactor(id)482 factor(id)483 factor(id)484 factor(id)485 factor(id)486 \n-0.2446361845 -0.2852928955  0.4205269799 -1.0918704373 -1.7871075911 \nfactor(id)487 factor(id)488 factor(id)489 factor(id)490 factor(id)491 \n-0.2186232164 -1.6473050452 -2.2352049887 -1.6895014356  0.0093056252 \nfactor(id)492 factor(id)493 factor(id)494 factor(id)495 factor(id)496 \n-1.8240991047 -0.5181324012 -3.7789715200 -0.2995020877 -1.5719156294 \nfactor(id)497 factor(id)498 factor(id)499 factor(id)500 factor(id)501 \n-0.4227856875 -1.3891231669 -2.5486749069 -0.1770255946 -2.0239835831 \nfactor(id)502 factor(id)503 factor(id)504 factor(id)505 factor(id)506 \n-0.8841523636  0.4548914009  0.0415337729 -1.2715375785  0.1577186541 \nfactor(id)507 factor(id)508 factor(id)509 factor(id)510 factor(id)511 \n-1.6492387018 -2.6857072685 -1.0222254888  0.2682863195 -0.7274089220 \nfactor(id)512 factor(id)513 factor(id)514 factor(id)515 factor(id)516 \n 0.4763623194 -2.6688387156 -0.8605254000 -0.5576396661 -1.6446136441 \nfactor(id)517 factor(id)518 factor(id)519 factor(id)520 factor(id)521 \n-0.7938604091 -1.0129183582 -0.2512720094 -1.9850804956 -1.0799849364 \nfactor(id)522 factor(id)523 factor(id)524 factor(id)525 factor(id)526 \n 0.4697657617  0.3596403551 -0.3399189001 -0.5549848962 -0.0701031604 \nfactor(id)527 factor(id)528 factor(id)529 factor(id)530 factor(id)531 \n-0.1188496468 -0.3371025673 -2.0618098622 -0.0152701464  0.5611969023 \nfactor(id)532 factor(id)533 factor(id)534 factor(id)535 factor(id)536 \n-0.3043214598 -2.7035534598 -0.4556794141 -0.9822287470 -0.1899453332 \nfactor(id)537 factor(id)538 factor(id)539 factor(id)540 factor(id)541 \n-0.3095642727 -0.4033201563  0.2336208827 -1.3288471720 -0.2192632278 \nfactor(id)542 factor(id)543 factor(id)544 factor(id)545 factor(id)546 \n-0.9016210223 -0.0808041489  0.3911389336 -2.6144746127 -0.1760991315 \nfactor(id)547 factor(id)548 factor(id)549 factor(id)550 factor(id)551 \n 0.1351162874 -0.2655470565 -0.5352420192 -0.0269963448 -0.3822695480 \nfactor(id)552 factor(id)553 factor(id)554 factor(id)555 factor(id)556 \n-0.4154265877 -0.2116433988 -1.3752666395 -1.5874830748  0.4404262290 \nfactor(id)557 factor(id)558 factor(id)559 factor(id)560 factor(id)561 \n-0.9226222629 -1.0725980066 -3.2024279311 -2.5480062591  0.0979656839 \nfactor(id)562 factor(id)563 factor(id)564 factor(id)565 factor(id)566 \n 0.2441815397 -2.2284900220  0.1573326500 -1.1264255882  0.2474138501 \nfactor(id)567 factor(id)568 factor(id)569 factor(id)570 factor(id)571 \n-3.7249592849 -0.1598818078 -0.9379939705 -0.6580067426  0.0098865558 \nfactor(id)572 factor(id)573 factor(id)574 factor(id)575 factor(id)576 \n 0.0698585935 -0.1342958054  0.2927163728 -0.5525955041  0.2742423461 \nfactor(id)577 factor(id)578 factor(id)579 factor(id)580 factor(id)581 \n-0.7248170828  0.0001653778 -0.3764030891  0.1028761911 -0.2488290888 \nfactor(id)582 factor(id)583 factor(id)584 factor(id)585 factor(id)586 \n 0.3608357712  0.1716823235  0.0733130210 -0.0212577150 -1.2216850413 \nfactor(id)587 factor(id)588 factor(id)589 factor(id)590 factor(id)591 \n-0.2479521116 -0.2529055249 -2.0992273563  0.3733929902 -2.2589147119 \nfactor(id)592 factor(id)593 factor(id)594 factor(id)595 \n 0.0842891323 -1.0349524512  0.0308381380            NA"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#data-structure-in-the-lsdv",
+    "href": "slides/w08-panel-regression.html#data-structure-in-the-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Data structure in the LSDV",
+    "text": "Data structure in the LSDV\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nTime\nY\nX1\nX2\n\\(\\delta_1\\)\n\\(\\delta_2\\)\n\\(\\delta_N\\)\n\n\n\n\n\\(1\\)\n\\(1\\)\n\\(y_{11}\\)\n\\(x^{1}_{11}\\)\n\\(x^{2}_{11}\\)\n1\n0\n0\n\n\n\\(1\\)\n\\(2\\)\n\\(y_{12}\\)\n\\(x^{1}_{12}\\)\n\\(x^{2}_{12}\\)\n1\n0\n0\n\n\n\\(1\\)\n\\(3\\)\n\\(y_{13}\\)\n\\(x^{1}_{13}\\)\n\\(x^{2}_{13}\\)\n1\n0\n0\n\n\n\\(2\\)\n\\(2\\)\n\\(y_{22}\\)\n\\(x^{1}_{22}\\)\n\\(x^{2}_{22}\\)\n0\n1\n0\n\n\n\\(2\\)\n\\(3\\)\n\\(y_{23}\\)\n\\(x^{1}_{23}\\)\n\\(x^{2}_{23}\\)\n0\n1\n0\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(1\\)\n\\(y_{N1}\\)\n\\(x^{1}_{N1}\\)\n\\(x^{1}_{N1}\\)\n0\n0\n1\n\n\n\\(N\\)\n\\(2\\)\n\\(y_{N2}\\)\n\\(x^{1}_{N2}\\)\n\\(x^{2}_{N2}\\)\n0\n0\n1"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#results",
+    "href": "slides/w08-panel-regression.html#results",
+    "title": "Panel Regression Analysis",
+    "section": "Results",
+    "text": "Results\n\nmodelsummary(\n  list(\n    `Pooled` = union_fit_0, \n    `Least-squares dummy variable` = union_fit_1),\n  estimate = \"{estimate}{stars} ({std.error})\", \n  statistic = NULL,\n  coef_map = c(\"(Intercept)\", \"unionyes\", \"ed\", \"exp\", \"wks\"),\n  gof_map = c(\"nobs\", \"adj.r.squared\" , \"df\"),\n  notes = \"In the Least-squares dummy variable model we omitted all individual-related variables\"\n)\n\n\n\n\n\n \n  \n      \n    Pooled \n    Least-squares dummy variable \n  \n \n\n  \n    (Intercept) \n    4.905*** (0.070) \n    4.508*** (0.290) \n  \n  \n    unionyes \n    0.134*** (0.013) \n    0.031* (0.015) \n  \n  \n    ed \n    0.083*** (0.002) \n    0.093*** (0.027) \n  \n  \n    exp \n    0.013*** (0.001) \n    0.097*** (0.001) \n  \n  \n    wks \n    0.008*** (0.001) \n    0.001+ (0.001) \n  \n  \n    Num.Obs. \n    4165 \n    4165 \n  \n  \n    R2 Adj. \n    0.269 \n    0.890 \n  \n  \n    DF \n    4 \n    597 \n  \n\n\n In the Least-squares dummy variable model we omitted all individual-related variables"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#can-we-run-a-least-squares-dummy-variable-with-the-cross-sectional-data",
+    "href": "slides/w08-panel-regression.html#can-we-run-a-least-squares-dummy-variable-with-the-cross-sectional-data",
+    "title": "Panel Regression Analysis",
+    "section": "Can we run a Least-squares dummy variable with the cross-sectional data?",
+    "text": "Can we run a Least-squares dummy variable with the cross-sectional data?\n\nAny ideas?\nWhy?….\nNO…\nBecause the number of independent variables have to be less then or equal to the number of observations."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#cross-sectional-example",
+    "href": "slides/w08-panel-regression.html#cross-sectional-example",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional example",
+    "text": "Cross-sectional example\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nY\nX1\nX2\n\\(\\delta_1\\)\n\\(\\delta_2\\)\n\\(\\delta_3\\)\n\\(\\delta_N\\)\n\n\n\n\n\\(1\\)\n\\(y_{1}\\)\n\\(x^{1}_{1}\\)\n\\(x^{2}_{1}\\)\n1\n0\n0\n0\n\n\n\\(2\\)\n\\(y_{2}\\)\n\\(x^{1}_{2}\\)\n\\(x^{2}_{2}\\)\n0\n1\n0\n0\n\n\n\\(3\\)\n\\(y_{3}\\)\n\\(x^{1}_{3}\\)\n\\(x^{2}_{3}\\)\n0\n0\n1\n0\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(y_{N}\\)\n\\(x^{1}_{N}\\)\n\\(x^{1}_{N}\\)\n0\n0\n0\n1"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#with-the-panel-data-lsdv-model-works-but",
+    "href": "slides/w08-panel-regression.html#with-the-panel-data-lsdv-model-works-but",
+    "title": "Panel Regression Analysis",
+    "section": "With the panel data LSDV model works, but…",
+    "text": "With the panel data LSDV model works, but…\nit is inefficient! Any ideas why?…\n\nNumber of dummy variables is equal to the number of individuals + control variables.\n\nIf we have 5,000 individuals, we have 5,000+ regression coefficients.\nWhat if we have 100,000 individuals?\n\nHaving too many regressors remains unbiased, but complicates inference:\n\nnumber of degrees of freedom increases;\nadjusted \\(R^2\\) may shrink to zero;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#readings",
+    "href": "slides/w08-panel-regression.html#readings",
+    "title": "Panel Regression Analysis",
+    "section": "Readings",
+    "text": "Readings\n\nKey readings:\n\nMundlak (1961)\nAngrist & Pischke (2009) Ch. 5\nJ. M. Wooldridge (2010);\nM. J. Wooldridge (2020);\nSöderbom, Teal, & Eberhardt (2014), Ch. 9-11\n\nOther readings:\n\nCroissant & Millo (2018)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#terminology",
+    "href": "slides/w08-panel-regression.html#terminology",
+    "title": "Panel Regression Analysis",
+    "section": "Terminology",
+    "text": "Terminology\nPanel data has \\(i\\) individuals (groups) and \\(t\\) time periods for each individual;\n\nPooled OLS (regression without any panel structure);\nFixed Effect:\n\nLeast-squares dummy variable (Pooled OLS + individual dummies);\n\nPanel Regression Fixed Effect:\n\nWithin-transformation most commonly used\nFirst-difference, Between transformation (look it up in (Croissant & Millo, 2018))\n\nPanel Regression Random Effect"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#pooled-ols",
+    "href": "slides/w08-panel-regression.html#pooled-ols",
+    "title": "Panel Regression Analysis",
+    "section": "Pooled OLS",
+    "text": "Pooled OLS\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  +  \\epsilon_{it}\n\\]\n\nEstimates are biased because of the OVB.\nWe assume the OVB to be time-invariant (Mundlak, 1961)."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#least-squares-dummy-variable-model",
+    "href": "slides/w08-panel-regression.html#least-squares-dummy-variable-model",
+    "title": "Panel Regression Analysis",
+    "section": "Least-squares dummy variable model",
+    "text": "Least-squares dummy variable model\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\gamma_i \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\nIntroduces a vector of dummy variables \\(\\color{Red}{\\delta}\\) and estimated coefficients for each dummy variable \\(\\gamma_i\\).\nEstimates and unbiased (consistent) but inefficient."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-regression-fixed-effect-model",
+    "href": "slides/w08-panel-regression.html#panel-regression-fixed-effect-model",
+    "title": "Panel Regression Analysis",
+    "section": "Panel Regression Fixed Effect Model",
+    "text": "Panel Regression Fixed Effect Model\n\n\nWe apply a within-transformation or a first difference transformation:\n\nsubtract group means from each observation\nrun regression on the differences\n\n\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - \\overline{\\text{Wage}_{i}}) & =  \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  \\overline{\\text{Union}_{i}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - \\overline{\\text{X}_{i}}) \\\\\n& +  \\beta_3 \\cdot (\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}}) \\\\\n& +  (\\epsilon_{it} - \\overline{\\epsilon_{i}})\n\\end{aligned}\n\\]\n\nNote:\n\ntime-invariant effects disappear:\n\n\\(\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}} = 0\\).\nOther examples?\nGender, race, individual characteristics …\n\nFE (Within) estimates are identical to the LSDV, but SE are more efficient;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#within-transformation---the-key-method",
+    "href": "slides/w08-panel-regression.html#within-transformation---the-key-method",
+    "title": "Panel Regression Analysis",
+    "section": "Within transformation - the key method",
+    "text": "Within transformation - the key method\n\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - \\overline{\\text{Wage}_{i}}) & =  \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  \\overline{\\text{Union}_{i}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - \\overline{\\text{X}_{i}}) \\\\\n& +  \\beta_3 \\cdot (\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}}) \\\\\n& +  (\\epsilon_{it} - \\overline{\\epsilon_{i}})\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#first-difference-transformation",
+    "href": "slides/w08-panel-regression.html#first-difference-transformation",
+    "title": "Panel Regression Analysis",
+    "section": "First Difference transformation",
+    "text": "First Difference transformation\n\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - {\\text{Wage}_{i,t-1}}) & = \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  {\\text{Union}_{it-1}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - {{X}_{i,t-1}}) \\\\\n& + \\beta_3 \\cdot (\\text{Ability}_{i} - {\\text{Ability}_{i,t-1}}) \\\\\n& + (\\epsilon_{it} - {\\epsilon_{i,t-1}})\n\\end{aligned}\n\\]\nNote:\n\nSimilar to the within transformation, but sacrifices at least one time dimension.\nRelaxes the autocorrelation assumption.\nMay be not possible with unbalanced data."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-regression-fe-model-assumptions-1",
+    "href": "slides/w08-panel-regression.html#panel-regression-fe-model-assumptions-1",
+    "title": "Panel Regression Analysis",
+    "section": "Panel Regression FE model assumptions (1)",
+    "text": "Panel Regression FE model assumptions (1)\n\nNOT ZERO CORRELATION between effects and regressors: \\(Cov(\\delta_{i},{X}_{it}) \\neq 0\\)\nStrict exogeneity: \\(E[\\epsilon_{is}| {X}_{it}, \\delta_{i}] = 0\\)\n\n\\(Cov(\\epsilon_{is}, {X}_{jt}) = 0\\) and \\(Cov(\\epsilon_{it}, {X}_{it}) = 0\\) , where \\(j\\neq i\\) and \\(s\\neq t\\) ;\nResiduals (\\(\\epsilon\\)) do not correlate with all explanatory variable (\\(X\\)) in all time periods (\\(t\\)) and for all individuals (\\(i\\)).\n\nNo autocorrelation/serial correlation: \\(Cov(\\epsilon_{it}, {X}_{i,t-1}) = 0\\);\nNo cross-sectional dependence: \\(Cov(\\epsilon_{it}, {X}_{j,t}) = 0\\) (when individual observations react similarly to the common shocks or correlate in space);"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-regression-fe-model-not-less-important-assumptions-2",
+    "href": "slides/w08-panel-regression.html#panel-regression-fe-model-not-less-important-assumptions-2",
+    "title": "Panel Regression Analysis",
+    "section": "Panel Regression FE model not less important assumptions (2)",
+    "text": "Panel Regression FE model not less important assumptions (2)\n\nAll Gauss-Markov assumptions\n\nLinearity\nRandom sampling\nNo endogeneity\nNo collinearity\n\nHomoscedasticity of error terms: \\(Var(\\delta_{i}|{X}_{it}) = \\sigma^2_{\\delta}\\)\nNormality of the residuals"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-literature",
+    "href": "slides/w08-panel-regression.html#fixed-effect-literature",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed effect: literature",
+    "text": "Fixed effect: literature\nSeminal papers: Mundlak (1961)\nClimate and agriculture: Mendelsohn, Nordhaus, & Shaw (1994), Blanc & Schlenker (2017), Bozzola, Massetti, Mendelsohn, & Capitanio (2017)\nChoice of irrigation: Kurukulasuriya, Kala, & Mendelsohn (2011), Chatzopoulos & Lippert (2015)\nCrop choice: Kurukulasuriya, Mendelsohn, Kurukulasuriya, & Mendelsohn (2008), Seo & Mendelsohn (2008b),\nLivestock choice Seo, Mendelsohn, Seo, & Mendelsohn (2008), Seo & Mendelsohn (2008a)\nCross-sectional dependence: Conley (1999)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#random-effect-model",
+    "href": "slides/w08-panel-regression.html#random-effect-model",
+    "title": "Panel Regression Analysis",
+    "section": "Random Effect Model",
+    "text": "Random Effect Model\n\nIntroduce a random component of the error term \\(\\color{Red}{v}\\)\n\n\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it}  + \\beta_2 \\cdot X_{it} + \\beta_3 \\cdot \\color{Red}{v_{i}} + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between effects and regressors: \\(Cov(v_{i},{X}_{it}) = 0\\).\nIgnoring RE causes no bias to the estimates;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#limitations-of-fixed-and-random-effect-models",
+    "href": "slides/w08-panel-regression.html#limitations-of-fixed-and-random-effect-models",
+    "title": "Panel Regression Analysis",
+    "section": "Limitations of Fixed and Random effect models",
+    "text": "Limitations of Fixed and Random effect models\n\nNOT the ultimate solution to Endogeneity.\nThere might still be some OVB even with the fixed effects.\n\nInstrumental Variables are possible within the panel regression context too.\n\nMeasurement error may cause endogeneity;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#one-of-the-solutions",
+    "href": "slides/w08-panel-regression.html#one-of-the-solutions",
+    "title": "Panel Regression Analysis",
+    "section": "One of the solutions:",
+    "text": "One of the solutions:\n\nAbility are time-invariant and unique to each individual;\n\nIf we have multiple observation per each individual (panel data),\nwe can introduce dummy variables for each individual, to approximate ability.\n\nThis is also called Fixed Effect - regression model\n\nor a within transformation model\nor Difference in Difference"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#empirical-example",
+    "href": "slides/w08-panel-regression.html#empirical-example",
+    "title": "Panel Regression Analysis",
+    "section": "Empirical example",
+    "text": "Empirical example\n\nlibrary(tidyverse)\nlibrary(modelsummary)\nwage_dta <- read_csv(\"wage_unon_panel.csv\")\nglimpse(wage_dta)\n\n\n\nRows: 4,165\nColumns: 15\n$ id      <dbl> 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,…\n$ time    <dbl> 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7,…\n$ exp     <dbl> 3, 4, 5, 6, 7, 8, 9, 30, 31, 32, 33, 34, 35, 36, 6, 7, 8, 9, 1…\n$ wks     <dbl> 32, 43, 40, 39, 42, 35, 32, 34, 27, 33, 30, 30, 37, 30, 50, 51…\n$ bluecol <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"yes\", \"yes\",…\n$ ind     <dbl> 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ south   <chr> \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"no\", \"no\", \"…\n$ smsa    <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"n…\n$ married <chr> \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\",…\n$ union   <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"…\n$ ed      <dbl> 9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 1…\n$ black   <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"n…\n$ lwage   <dbl> 5.56068, 5.72031, 5.99645, 5.99645, 6.06146, 6.17379, 6.24417,…\n$ female  <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ wage    <dbl> 259.9996, 304.9995, 401.9992, 401.9992, 429.0013, 480.0019, 51…"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#least-squares-dummy-variable-lsdv",
+    "href": "slides/w08-panel-regression.html#least-squares-dummy-variable-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Least-squares dummy variable (LSDV)",
+    "text": "Least-squares dummy variable (LSDV)\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\n\nPooled regression plus dummy variable for each individual.\nThis is not a Fixed Effect Panel Regression!\n\n\nunion_fit_1 <- lm(log(wage) ~ union + ed + exp + wks + factor(id), data = wage_dta)\nunion_fit_1\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + ed + exp + wks + factor(id), \n    data = wage_dta)\n\nCoefficients:\n  (Intercept)       unionyes             ed            exp            wks  \n    4.5080310      0.0310064      0.0926571      0.0968921      0.0011035  \n  factor(id)2    factor(id)3    factor(id)4    factor(id)5    factor(id)6  \n   -2.2655222     -0.0679308     -2.3947793     -0.4109419     -1.3874675  \n  factor(id)7    factor(id)8    factor(id)9   factor(id)10   factor(id)11  \n   -1.1362786     -1.4477135      0.2723292     -0.1075228     -1.3842485  \n factor(id)12   factor(id)13   factor(id)14   factor(id)15   factor(id)16  \n   -1.2616563     -1.3172926     -0.8889020     -0.8432575     -1.4745899  \n factor(id)17   factor(id)18   factor(id)19   factor(id)20   factor(id)21  \n   -0.8441588     -1.2742693     -3.2082102     -1.7193082     -1.7458225  \n factor(id)22   factor(id)23   factor(id)24   factor(id)25   factor(id)26  \n   -1.2996716      0.1362159     -0.7882522     -0.4824655     -0.6052144  \n factor(id)27   factor(id)28   factor(id)29   factor(id)30   factor(id)31  \n   -0.1639394     -1.7505153     -1.8458438     -1.1971051     -1.2688614  \n factor(id)32   factor(id)33   factor(id)34   factor(id)35   factor(id)36  \n   -1.8010348     -0.4993946     -3.9776170     -0.1144741     -0.2558972  \n factor(id)37   factor(id)38   factor(id)39   factor(id)40   factor(id)41  \n   -0.2249786     -0.6736264     -0.0025109     -1.7826220     -0.9121282  \n factor(id)42   factor(id)43   factor(id)44   factor(id)45   factor(id)46  \n   -2.2237937      0.2413936      0.1624657     -0.8444194     -0.1974057  \n factor(id)47   factor(id)48   factor(id)49   factor(id)50   factor(id)51  \n   -1.6159192     -1.7035416     -1.8647062     -2.4251812     -1.9049737  \n factor(id)52   factor(id)53   factor(id)54   factor(id)55   factor(id)56  \n   -1.4889956     -0.3542162     -0.3625392     -1.7719093     -1.8379125  \n factor(id)57   factor(id)58   factor(id)59   factor(id)60   factor(id)61  \n   -1.5742322     -2.8782348     -1.6128343     -1.5560017     -1.8558689  \n factor(id)62   factor(id)63   factor(id)64   factor(id)65   factor(id)66  \n   -0.0537705     -0.1401364     -2.7097226     -1.7119739     -0.9377653  \n factor(id)67   factor(id)68   factor(id)69   factor(id)70   factor(id)71  \n   -2.4506638     -2.6116257     -2.0043879     -0.3437943      0.0062279  \n factor(id)72   factor(id)73   factor(id)74   factor(id)75   factor(id)76  \n   -0.7770393     -0.8324925     -0.6702294     -1.6657643     -1.0769969  \n factor(id)77   factor(id)78   factor(id)79   factor(id)80   factor(id)81  \n   -0.7243245     -3.5242011     -0.8338248      0.0349690     -0.1776675  \n factor(id)82   factor(id)83   factor(id)84   factor(id)85   factor(id)86  \n   -1.2737000     -0.7906868     -3.4418177     -0.5622796      0.3499131  \n factor(id)87   factor(id)88   factor(id)89   factor(id)90   factor(id)91  \n   -0.5045390      0.0380401     -0.6233465      0.2826281      0.2620449  \n factor(id)92   factor(id)93   factor(id)94   factor(id)95   factor(id)96  \n    0.0289977     -2.3216404     -0.5280710     -2.6695298     -1.8101172  \n factor(id)97   factor(id)98   factor(id)99  factor(id)100  factor(id)101  \n   -2.3424910     -0.9272796     -1.1399774     -0.3052923     -2.0064100  \nfactor(id)102  factor(id)103  factor(id)104  factor(id)105  factor(id)106  \n    0.3157009     -0.9088378     -1.1835804     -0.2772538      0.0581497  \nfactor(id)107  factor(id)108  factor(id)109  factor(id)110  factor(id)111  \n   -1.7912636     -0.8796059     -1.3243771     -2.8463802     -0.0460009  \nfactor(id)112  factor(id)113  factor(id)114  factor(id)115  factor(id)116  \n   -0.7305312     -1.7335455     -2.8425753     -0.3387171     -0.6042258  \nfactor(id)117  factor(id)118  factor(id)119  factor(id)120  factor(id)121  \n   -1.0761446     -1.3451631     -0.1660476     -0.6073506     -0.2294792  \nfactor(id)122  factor(id)123  factor(id)124  factor(id)125  factor(id)126  \n   -0.5827051     -1.5103279     -1.8115964     -0.8185827      0.2118703  \nfactor(id)127  factor(id)128  factor(id)129  factor(id)130  factor(id)131  \n   -1.7356276     -2.2764191     -2.3502707     -1.8838902     -1.7774889  \nfactor(id)132  factor(id)133  factor(id)134  factor(id)135  factor(id)136  \n   -1.1039652     -1.1578763     -0.2356162     -0.4350181     -0.7918764  \nfactor(id)137  factor(id)138  factor(id)139  factor(id)140  factor(id)141  \n   -1.1654461     -1.2049709      0.1297104     -0.0892276     -0.8983086  \nfactor(id)142  factor(id)143  factor(id)144  factor(id)145  factor(id)146  \n   -2.8736569     -2.5763786     -0.2206852     -1.0460118     -2.5755774  \nfactor(id)147  factor(id)148  factor(id)149  factor(id)150  factor(id)151  \n   -0.2364974     -0.1573803     -0.1374447     -0.8807033     -1.6957509  \nfactor(id)152  factor(id)153  factor(id)154  factor(id)155  factor(id)156  \n   -0.3889137     -0.8036954     -0.6832796      0.3284782     -2.3604420  \nfactor(id)157  factor(id)158  factor(id)159  factor(id)160  factor(id)161  \n   -0.0855476     -1.9158230     -2.2570551     -1.9574349     -0.3252022  \nfactor(id)162  factor(id)163  factor(id)164  factor(id)165  factor(id)166  \n   -0.5140634     -0.6273091     -0.4458526     -3.1347773     -0.2183026  \nfactor(id)167  factor(id)168  factor(id)169  factor(id)170  factor(id)171  \n   -1.2239655      0.4438626     -1.5297737     -2.0895504     -0.9346220  \nfactor(id)172  factor(id)173  factor(id)174  factor(id)175  factor(id)176  \n   -0.0871822     -1.6966359      0.1864583      0.0095013      0.3129948  \nfactor(id)177  factor(id)178  factor(id)179  factor(id)180  factor(id)181  \n   -1.4989524      0.3993597     -2.2172223     -0.2925061     -0.3059554  \nfactor(id)182  factor(id)183  factor(id)184  factor(id)185  factor(id)186  \n   -0.8910019     -1.0454580     -1.5991941     -1.4123302     -2.1886562  \nfactor(id)187  factor(id)188  factor(id)189  factor(id)190  factor(id)191  \n   -1.0673557     -0.0366404     -1.6422196      0.2895208     -1.4791178  \nfactor(id)192  factor(id)193  factor(id)194  factor(id)195  factor(id)196  \n    0.0743443     -2.1729540     -0.3371513     -0.6968244      0.1549564  \nfactor(id)197  factor(id)198  factor(id)199  factor(id)200  factor(id)201  \n   -1.4919082     -1.8806300     -0.1043902     -0.2540378     -1.4008996  \nfactor(id)202  factor(id)203  factor(id)204  factor(id)205  factor(id)206  \n   -0.4715793     -1.4354461     -2.0841560     -1.5908389      0.0974943  \nfactor(id)207  factor(id)208  factor(id)209  factor(id)210  factor(id)211  \n   -0.3734464     -1.5833722     -1.9386342     -2.1330802     -1.4607570  \nfactor(id)212  factor(id)213  factor(id)214  factor(id)215  factor(id)216  \n    0.0692388     -1.4362959     -1.8477752     -3.5018408     -0.9702975  \nfactor(id)217  factor(id)218  factor(id)219  factor(id)220  factor(id)221  \n   -0.1864633     -0.5583056     -0.7131139     -2.4184070     -1.9991062  \nfactor(id)222  factor(id)223  factor(id)224  factor(id)225  factor(id)226  \n    0.0252310     -0.9071315     -1.5476122     -0.4589192     -2.9925641  \nfactor(id)227  factor(id)228  factor(id)229  factor(id)230  factor(id)231  \n   -2.2095473      0.3349890     -1.1599356      0.3085006     -0.9650087  \nfactor(id)232  factor(id)233  factor(id)234  factor(id)235  factor(id)236  \n   -2.1620489     -1.8096153     -1.5562606     -1.1494961      0.0996193  \nfactor(id)237  factor(id)238  factor(id)239  factor(id)240  factor(id)241  \n   -0.5395924     -2.1478127     -1.3393016     -2.0580184     -0.5006547  \nfactor(id)242  factor(id)243  factor(id)244  factor(id)245  factor(id)246  \n   -0.5467203      0.3174743     -1.3575829     -2.4005959     -2.8705269  \nfactor(id)247  factor(id)248  factor(id)249  factor(id)250  factor(id)251  \n   -0.6680144     -1.0334925     -2.4259471     -1.2501498     -0.5113722  \nfactor(id)252  factor(id)253  factor(id)254  factor(id)255  factor(id)256  \n   -1.4304018     -0.0325546     -2.6562757      0.0656003     -0.1480848  \nfactor(id)257  factor(id)258  factor(id)259  factor(id)260  factor(id)261  \n   -2.1835748     -2.1795404     -0.6462803     -0.0226215     -0.7093865  \nfactor(id)262  factor(id)263  factor(id)264  factor(id)265  factor(id)266  \n   -0.4419561     -0.5194253     -0.0738510     -0.5043753     -1.3893602  \nfactor(id)267  factor(id)268  factor(id)269  factor(id)270  factor(id)271  \n   -0.5388876     -0.7334291     -0.8729609     -0.7036996     -0.3483834  \nfactor(id)272  factor(id)273  factor(id)274  factor(id)275  factor(id)276  \n   -0.1503155     -1.6624965     -0.8988126      0.0182398      0.3830323  \nfactor(id)277  factor(id)278  factor(id)279  factor(id)280  factor(id)281  \n   -2.0641063      0.2842053     -0.5571589     -2.7175197      0.2712452  \nfactor(id)282  factor(id)283  factor(id)284  factor(id)285  factor(id)286  \n   -1.2350275     -2.9457801     -2.1976344      0.2953396     -0.2979508  \nfactor(id)287  factor(id)288  factor(id)289  factor(id)290  factor(id)291  \n   -0.5060374     -0.1389330     -1.5606160     -0.0496262     -2.5588632  \nfactor(id)292  factor(id)293  factor(id)294  factor(id)295  factor(id)296  \n   -1.7353127     -0.4838662     -1.0950140     -1.3625605     -2.0039275  \nfactor(id)297  factor(id)298  factor(id)299  factor(id)300  factor(id)301  \n   -0.4900312     -0.6255233     -3.2764384     -2.7874789     -0.2320673  \nfactor(id)302  factor(id)303  factor(id)304  factor(id)305  factor(id)306  \n   -0.9204708      0.3208647     -0.4017891     -0.9748111     -1.1893175  \nfactor(id)307  factor(id)308  factor(id)309  factor(id)310  factor(id)311  \n    0.8071048     -1.7498639     -1.2960178     -0.6605396      0.2580088  \nfactor(id)312  factor(id)313  factor(id)314  factor(id)315  factor(id)316  \n   -0.7528944     -0.5506410     -0.3941113     -0.9229403     -1.8274180  \nfactor(id)317  factor(id)318  factor(id)319  factor(id)320  factor(id)321  \n   -0.8247448     -0.5802492     -1.5586915     -0.9323836     -0.2039401  \nfactor(id)322  factor(id)323  factor(id)324  factor(id)325  factor(id)326  \n   -0.2921334     -0.6743960      0.2622450     -3.1733395     -1.2746050  \nfactor(id)327  factor(id)328  factor(id)329  factor(id)330  factor(id)331  \n   -0.7198080     -1.9716337     -3.2765849     -2.8887402     -2.5642056  \nfactor(id)332  factor(id)333  factor(id)334  factor(id)335  factor(id)336  \n   -3.5439335      0.1442707     -2.5202972     -1.9535704     -2.2741985  \nfactor(id)337  factor(id)338  factor(id)339  factor(id)340  factor(id)341  \n    0.6128079     -0.5285042     -0.8065666     -1.9086103      0.2025478  \nfactor(id)342  factor(id)343  factor(id)344  factor(id)345  factor(id)346  \n   -1.8569598     -1.4207532     -0.8177345     -1.1359718     -1.5565812  \nfactor(id)347  factor(id)348  factor(id)349  factor(id)350  factor(id)351  \n   -1.1854475     -1.2825974      0.5210212     -2.6392656     -1.3267929  \nfactor(id)352  factor(id)353  factor(id)354  factor(id)355  factor(id)356  \n    0.1483095     -1.6234121     -1.2639442     -0.3914706      0.3968437  \nfactor(id)357  factor(id)358  factor(id)359  factor(id)360  factor(id)361  \n   -0.8625593     -1.2512616     -3.1090549     -1.6305911     -0.6092150  \nfactor(id)362  factor(id)363  factor(id)364  factor(id)365  factor(id)366  \n   -0.8371179     -0.9898744     -1.3642823     -2.6162066     -0.5612725  \nfactor(id)367  factor(id)368  factor(id)369  factor(id)370  factor(id)371  \n   -1.2495822     -0.2187092      0.4178998      0.0078933     -1.9408408  \nfactor(id)372  factor(id)373  factor(id)374  factor(id)375  factor(id)376  \n   -0.5027177     -1.0854904     -0.8835681     -1.9056648     -1.9023804  \nfactor(id)377  factor(id)378  factor(id)379  factor(id)380  factor(id)381  \n   -0.9639363      0.3406055     -0.9413693     -2.2397839     -1.7982803  \nfactor(id)382  factor(id)383  factor(id)384  factor(id)385  factor(id)386  \n   -1.4710100     -1.8264254     -2.4723075     -0.0768100     -0.5160529  \nfactor(id)387  factor(id)388  factor(id)389  factor(id)390  factor(id)391  \n   -0.2578493     -2.3248530     -1.0053658     -1.7411723     -2.5827446  \nfactor(id)392  factor(id)393  factor(id)394  factor(id)395  factor(id)396  \n   -1.4626183     -0.7086414      0.2463182     -2.2837493     -0.5884685  \nfactor(id)397  factor(id)398  factor(id)399  factor(id)400  factor(id)401  \n    0.2356664     -0.7086466     -1.7699758     -0.2998928      0.3625535  \nfactor(id)402  factor(id)403  factor(id)404  factor(id)405  factor(id)406  \n   -0.7479743     -0.8356708     -0.6119444      0.4318878      0.2769302  \nfactor(id)407  factor(id)408  factor(id)409  factor(id)410  factor(id)411  \n   -1.6938634     -0.3449254     -3.0796976     -1.9186589     -0.3448522  \nfactor(id)412  factor(id)413  factor(id)414  factor(id)415  factor(id)416  \n    0.5344691     -0.2754098     -2.9000592     -1.5516998     -2.1976862  \nfactor(id)417  factor(id)418  factor(id)419  factor(id)420  factor(id)421  \n   -0.3349106     -2.0011124     -0.2497253     -0.3094674     -1.3378014  \nfactor(id)422  factor(id)423  factor(id)424  factor(id)425  factor(id)426  \n   -0.4763015     -0.5240316      0.2449675      0.3554912      0.2639519  \nfactor(id)427  factor(id)428  factor(id)429  factor(id)430  factor(id)431  \n   -1.7757641     -2.9988700     -0.5174252     -0.3311522     -0.6388796  \nfactor(id)432  factor(id)433  factor(id)434  factor(id)435  factor(id)436  \n   -1.5023082     -1.8757057      0.2045655     -0.1300569     -0.2414767  \nfactor(id)437  factor(id)438  factor(id)439  factor(id)440  factor(id)441  \n   -1.0147852     -1.7232777     -0.2994657     -0.8008435     -2.2896857  \nfactor(id)442  factor(id)443  factor(id)444  factor(id)445  factor(id)446  \n   -3.5228084     -1.5956582      0.7607259     -0.9304985     -0.4575093  \nfactor(id)447  factor(id)448  factor(id)449  factor(id)450  factor(id)451  \n   -1.7447683     -2.3280084     -0.1979986      0.1968642     -0.2394808  \nfactor(id)452  factor(id)453  factor(id)454  factor(id)455  factor(id)456  \n   -0.6871992     -2.2832696      0.0553589     -1.6052274     -1.3604416  \nfactor(id)457  factor(id)458  factor(id)459  factor(id)460  factor(id)461  \n   -2.9330839     -0.7950325     -1.3101228      0.1845564     -2.1887668  \nfactor(id)462  factor(id)463  factor(id)464  factor(id)465  factor(id)466  \n   -2.6588027     -0.7844760     -3.6891419     -0.2048295     -2.1924740  \nfactor(id)467  factor(id)468  factor(id)469  factor(id)470  factor(id)471  \n   -1.7733473     -3.0882373     -4.6017230     -0.0156171     -2.2125824  \nfactor(id)472  factor(id)473  factor(id)474  factor(id)475  factor(id)476  \n   -0.3975606     -0.0023810     -0.5669108     -0.5452322     -2.1619484  \nfactor(id)477  factor(id)478  factor(id)479  factor(id)480  factor(id)481  \n   -0.2849685     -0.0642931     -0.7619497     -1.2719169     -1.2089276  \nfactor(id)482  factor(id)483  factor(id)484  factor(id)485  factor(id)486  \n   -0.2446362     -0.2852929      0.4205270     -1.0918704     -1.7871076  \nfactor(id)487  factor(id)488  factor(id)489  factor(id)490  factor(id)491  \n   -0.2186232     -1.6473050     -2.2352050     -1.6895014      0.0093056  \nfactor(id)492  factor(id)493  factor(id)494  factor(id)495  factor(id)496  \n   -1.8240991     -0.5181324     -3.7789715     -0.2995021     -1.5719156  \nfactor(id)497  factor(id)498  factor(id)499  factor(id)500  factor(id)501  \n   -0.4227857     -1.3891232     -2.5486749     -0.1770256     -2.0239836  \nfactor(id)502  factor(id)503  factor(id)504  factor(id)505  factor(id)506  \n   -0.8841524      0.4548914      0.0415338     -1.2715376      0.1577187  \nfactor(id)507  factor(id)508  factor(id)509  factor(id)510  factor(id)511  \n   -1.6492387     -2.6857073     -1.0222255      0.2682863     -0.7274089  \nfactor(id)512  factor(id)513  factor(id)514  factor(id)515  factor(id)516  \n    0.4763623     -2.6688387     -0.8605254     -0.5576397     -1.6446136  \nfactor(id)517  factor(id)518  factor(id)519  factor(id)520  factor(id)521  \n   -0.7938604     -1.0129184     -0.2512720     -1.9850805     -1.0799849  \nfactor(id)522  factor(id)523  factor(id)524  factor(id)525  factor(id)526  \n    0.4697658      0.3596404     -0.3399189     -0.5549849     -0.0701032  \nfactor(id)527  factor(id)528  factor(id)529  factor(id)530  factor(id)531  \n   -0.1188496     -0.3371026     -2.0618099     -0.0152701      0.5611969  \nfactor(id)532  factor(id)533  factor(id)534  factor(id)535  factor(id)536  \n   -0.3043215     -2.7035535     -0.4556794     -0.9822287     -0.1899453  \nfactor(id)537  factor(id)538  factor(id)539  factor(id)540  factor(id)541  \n   -0.3095643     -0.4033202      0.2336209     -1.3288472     -0.2192632  \nfactor(id)542  factor(id)543  factor(id)544  factor(id)545  factor(id)546  \n   -0.9016210     -0.0808041      0.3911389     -2.6144746     -0.1760991  \nfactor(id)547  factor(id)548  factor(id)549  factor(id)550  factor(id)551  \n    0.1351163     -0.2655471     -0.5352420     -0.0269963     -0.3822695  \nfactor(id)552  factor(id)553  factor(id)554  factor(id)555  factor(id)556  \n   -0.4154266     -0.2116434     -1.3752666     -1.5874831      0.4404262  \nfactor(id)557  factor(id)558  factor(id)559  factor(id)560  factor(id)561  \n   -0.9226223     -1.0725980     -3.2024279     -2.5480063      0.0979657  \nfactor(id)562  factor(id)563  factor(id)564  factor(id)565  factor(id)566  \n    0.2441815     -2.2284900      0.1573327     -1.1264256      0.2474139  \nfactor(id)567  factor(id)568  factor(id)569  factor(id)570  factor(id)571  \n   -3.7249593     -0.1598818     -0.9379940     -0.6580067      0.0098866  \nfactor(id)572  factor(id)573  factor(id)574  factor(id)575  factor(id)576  \n    0.0698586     -0.1342958      0.2927164     -0.5525955      0.2742423  \nfactor(id)577  factor(id)578  factor(id)579  factor(id)580  factor(id)581  \n   -0.7248171      0.0001654     -0.3764031      0.1028762     -0.2488291  \nfactor(id)582  factor(id)583  factor(id)584  factor(id)585  factor(id)586  \n    0.3608358      0.1716823      0.0733130     -0.0212577     -1.2216850  \nfactor(id)587  factor(id)588  factor(id)589  factor(id)590  factor(id)591  \n   -0.2479521     -0.2529055     -2.0992274      0.3733930     -2.2589147  \nfactor(id)592  factor(id)593  factor(id)594  factor(id)595  \n    0.0842891     -1.0349525      0.0308381             NA"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#cross-sectional-data-and-lsdv-1",
+    "href": "slides/w08-panel-regression.html#cross-sectional-data-and-lsdv-1",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data and LSDV (1)",
+    "text": "Cross-sectional data and LSDV (1)\n\nCan we run a LSDV model with the cross-sectional data?\n\n\nAny ideas?\nWhy?….\nNO…\nBecause the number of independent variables have to be less then or equal to the number of observations."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#cross-sectional-data-and-lsdv-2",
+    "href": "slides/w08-panel-regression.html#cross-sectional-data-and-lsdv-2",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data and LSDV (2)",
+    "text": "Cross-sectional data and LSDV (2)\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nY\nX1\nX2\n\\(\\delta_1\\)\n\\(\\delta_2\\)\n\\(\\delta_3\\)\n\\(\\delta_N\\)\n\n\n\n\n\\(1\\)\n\\(y_{1}\\)\n\\(x^{1}_{1}\\)\n\\(x^{2}_{1}\\)\n1\n0\n0\n0\n\n\n\\(2\\)\n\\(y_{2}\\)\n\\(x^{1}_{2}\\)\n\\(x^{2}_{2}\\)\n0\n1\n0\n0\n\n\n\\(3\\)\n\\(y_{3}\\)\n\\(x^{1}_{3}\\)\n\\(x^{2}_{3}\\)\n0\n0\n1\n0\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(y_{N}\\)\n\\(x^{1}_{N}\\)\n\\(x^{1}_{N}\\)\n0\n0\n0\n1"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-ata-and-lsdv",
+    "href": "slides/w08-panel-regression.html#panel-ata-and-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Panel ata and LSDV",
+    "text": "Panel ata and LSDV\nLSDV model works with the panel data, but…\n\nit is inefficient! Any ideas why?…\n\nNumber of dummy variables is equal to the number of individuals + control variables.\n\nIf we have 5,000 individuals, we have 5,000+ regression coefficients.\nWhat if we have 100,000 individuals?\n\nHaving too many regressors remains unbiased, but complicates inference:\n\nnumber of degrees of freedom increases;\nadjusted \\(R^2\\) may shrink to zero;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-model-within-transformation",
+    "href": "slides/w08-panel-regression.html#fixed-effect-model-within-transformation",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: Within transformation",
+    "text": "Fixed Effect Model: Within transformation\nWithin-transformation subtracts group means from each observation and run the regression.\n\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - \\overline{\\text{Wage}_{i}}) & =  \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  \\overline{\\text{Union}_{i}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - \\overline{\\text{X}_{i}}) \\\\\n& +  \\beta_3 \\cdot (\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}}) \\\\\n& +  \\color{Red}{\\alpha_{i}} \\\\\n& +  (\\epsilon_{it} - \\overline{\\epsilon_{i}})\n\\end{aligned}\n\\]\n\nNote that time-invariant effects disappear.\n\nAny examples and ideas why?\n\\(\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}} = 0\\).\nGender, race, individual characteristics …\nFE (Within) estimates are identical to the LSDV, but SE are more efficient;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-model-first-difference-transformation",
+    "href": "slides/w08-panel-regression.html#fixed-effect-model-first-difference-transformation",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: First Difference transformation",
+    "text": "Fixed Effect Model: First Difference transformation\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - {\\text{Wage}_{i,t-1}}) & = \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  {\\text{Union}_{it-1}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - {{X}_{i,t-1}}) \\\\\n& + \\beta_3 \\cdot (\\text{Ability}_{i} - {\\text{Ability}_{i,t-1}}) \\\\\n& + (\\epsilon_{it} - {\\epsilon_{i,t-1}})\n\\end{aligned}\n\\]\nNote:\n\nSimilar to the within transformation, but sacrifices at least one time dimension.\nRelaxes the autocorrelation assumption.\nMay be not possible with unbalanced data."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-model-assumptions-1",
+    "href": "slides/w08-panel-regression.html#fixed-effect-model-assumptions-1",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: assumptions (1)",
+    "text": "Fixed Effect Model: assumptions (1)\n\nNOT ZERO CORRELATION between effects and regressors:\n\n\\(Cov(\\delta_{i},{X}_{it}) \\neq 0\\)\n\nStrict exogeneity (No endogeneity):\n\n\\(E[\\epsilon_{is}| {X}_{it}, \\delta_{i}] = 0\\)\n\\(Cov(\\epsilon_{is}, {X}_{it}) = 0\\) and\n\\(Cov(\\epsilon_{it}, {X}_{jt}) = 0\\) , where \\(j\\neq i\\) and \\(s\\neq t\\) ;\nResiduals (\\(\\epsilon\\)) do not correlate with all explanatory variable (\\(X\\)) in all time periods (\\(t\\)) and for all individuals (\\(i\\)).\n\nNo autocorrelation/serial correlation: \\(Cov(\\epsilon_{it}, {X}_{i,t-1}) = 0\\);\nNo cross-sectional dependence: \\(Cov(\\epsilon_{it}, {X}_{j,t}) = 0\\) (when individual observations react similarly to the common shocks or correlate in space);"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#panel-data-and-lsdv",
+    "href": "slides/w08-panel-regression.html#panel-data-and-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data and LSDV",
+    "text": "Panel data and LSDV\nLSDV model works with the panel data, but…\n\nit is inefficient! Any ideas why?…\n\nNumber of dummy variables is equal to the number of individuals + control variables.\n\nIf we have 5,000 individuals, we have 5,000+ regression coefficients.\nWhat if we have 100,000 individuals?\n\nHaving too many regressors remains unbiased, but complicates inference:\n\nnumber of degrees of freedom increases;\nadjusted \\(R^2\\) may shrink to zero;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-model-notations",
+    "href": "slides/w08-panel-regression.html#fixed-effect-model-notations",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model (notations)",
+    "text": "Fixed Effect Model (notations)\nIndividual Fixed effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Red}{ \\alpha_i } + \\epsilon_{it}\n\\]\n\n\\(\\color{Red}{ \\alpha_i }\\) is the individual-specific fixed effect;\nusually wihtout the intercept \\(\\beta_0\\);\n\n\nTwo-ways fixed effect model (individual + time effect):\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Red}{ \\alpha_i } + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]\nTime Fixed Effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#limitations-of-the-fixed-and-random-effect-models",
+    "href": "slides/w08-panel-regression.html#limitations-of-the-fixed-and-random-effect-models",
+    "title": "Panel Regression Analysis",
+    "section": "Limitations of the Fixed and Random effect models",
+    "text": "Limitations of the Fixed and Random effect models\n\nNOT the ultimate solution to Endogeneity.\nThere might still be some OVB even with the fixed effects.\n\nInstrumental Variables are possible within the panel regression context too.\n\nMeasurement error may cause endogeneity;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#summary-on-the-panel-regression",
+    "href": "slides/w08-panel-regression.html#summary-on-the-panel-regression",
+    "title": "Panel Regression Analysis",
+    "section": "Summary on the Panel Regression",
+    "text": "Summary on the Panel Regression\n\n\nFixed Effect (within transformation)\n\nAssumes that Fixed Effects correlate with regressors!\nPartially resolved the OVB.\nIgnoring FE (using pooled regression) causes bias of estimates.\n\n\nRandom Effect\n\nAssumes that Random Effects do NOT correlate with regressors\nDo NOT resolved any OVB.\nProvides additional control strategy, but ignoring RE causes NO bias.\n\n\n\n\nBoth require valid Gauss–Markov assumptions.\n\n\nLimitations of the Fixed and Random effect models\n\nNOT the ultimate solution to Endogeneity.\nOVB may still remain after applying the fixed effects.\nMeasurement error is a problem in panel data."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#random-effect-model-individual-and-two-ways",
+    "href": "slides/w08-panel-regression.html#random-effect-model-individual-and-two-ways",
+    "title": "Panel Regression Analysis",
+    "section": "Random Effect Model (individual and two-ways)",
+    "text": "Random Effect Model (individual and two-ways)\n\nIntroduce random components \\(\\color{Red}{v_i}\\) and/or \\(\\color{Blue}{u_{t}}\\)\n\n\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\color{Red}{v_{i}} + \\color{Blue}{u_{t}}  + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:\n\n\\(Cov(v_{i},{X}_{it}) = 0\\)\n\nIgnoring RE causes no bias to the estimates;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#general-algorithm",
+    "href": "slides/w08-panel-regression.html#general-algorithm",
+    "title": "Panel Regression Analysis",
+    "section": "General algorithm",
+    "text": "General algorithm\n\nPooled OLS\n\nChoose an appropriate functional form (log/level);\nValidate gauss-Markov assumption validation: Linearity, Collinearity, Random Sampling; Homoscedasticity;\nNote on the ‘No endogeneity’ assumption (if not validated, shows importance of the FE model)\n\nFE: Fixed Effect. Within-transformation. Individual, Time or Two-ways effects;\n\nF-test on FE consistency against pooled.\nLM test on FE Individual, Time or Two-ways effects consistency against each other.\nIf tests suggest the pooled model, but the theory emphasizes FE, discus and reason your choice.\n\nRE: Random Effect;\n\nHausman test on effects’ correlation with regressors of RE consistency against the FE;\nSimilar Chamberlain test, Angrist and Newey tests.\n\nSerial correlation and cross-sectional dependence tests;\n\nWooldridge's, Locally–Robust LM Test, Breusch–Godfrey Test,\nt > 3, we may have a serial correlation problem. Check it with a test.\nCould individuals be affected by common shocks? We might have a cross-sectional dependence problem.\n\nUse robust standard errors to correct for serial correlation and/or cross-sectional dependence:\n\nClustered SE and/or heteroscedasticity and/or autocorrelation robust SE;\n\nSummary and interpretation;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.a-pooled-ols",
+    "href": "slides/w08-panel-regression.html#step-1.a-pooled-ols",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.a Pooled OLS",
+    "text": "Step 1.a Pooled OLS\n\nlibrary(tidyverse)\nlibrary(modelsummary)\nlibrary(parameters)\nlibrary(performance)\nlibrary(lmtest)\nwage_dta <- read_csv(\"wage_unon_panel.csv\")\nglimpse(wage_dta)\n\n\nunion_fit_0 <- lm(log(wage) ~ union + ed + exp + wks, data = wage_dta)\nunion_fit_0\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + ed + exp + wks, data = wage_dta)\n\nCoefficients:\n(Intercept)     unionyes           ed          exp          wks  \n   4.904952     0.133921     0.082861     0.013193     0.008467"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-linearity-homoschedasticity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-linearity-homoschedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Linearity + Homoschedasticity)",
+    "text": "Step 1.b Assumptions (Linearity + Homoschedasticity)\n\ncheck_model(union_fit_0, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-homoschedasticity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-homoschedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Homoschedasticity)",
+    "text": "Step 1.b Assumptions (Homoschedasticity)\n\ncheck_heteroscedasticity(union_fit_0) \n\n\n\nWarning: Heteroscedasticity (non-constant error variance) detected (p = 0.004).\n\n\n\n\nbptest(union_fit_0)\n\n\n\n\n    studentized Breusch-Pagan test\n\ndata:  union_fit_0\nBP = 106.47, df = 4, p-value < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-collinearity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-collinearity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Collinearity)",
+    "text": "Step 1.b Assumptions (Collinearity)\n\ncheck_collinearity(union_fit_0)\n\n\n\n# Check for Multicollinearity\n\nLow Correlation\n\n  Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n union 1.11 [1.08, 1.15]         1.05      0.90     [0.87, 0.93]\n    ed 1.13 [1.10, 1.18]         1.06      0.88     [0.85, 0.91]\n   exp 1.05 [1.03, 1.10]         1.03      0.95     [0.91, 0.97]\n   wks 1.03 [1.01, 1.09]         1.01      0.97     [0.92, 0.99]"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-no-endogeneity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-no-endogeneity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (No endogeneity)",
+    "text": "Step 1.b Assumptions (No endogeneity)\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\n\\(\\text{Ability}_{i}\\) not observable and not measurable.\nOmitting the ability may cause the OVB.\n\nNo endogeneity assumption cannot be satisfied.\nWe should exploit the panel data structure."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within",
+    "href": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within)",
+    "text": "Step 2. FE: Fixed Effect (within)\nNote, the new package: plm used for running panel regressions.\n\nlibrary(plm)\n\nDeclare data to be panel.\n\nwage_dta_pan <- pdata.frame(wage_dta, index = c(\"id\", \"time\"))\n\n\n\n\nCheck panel dimensions.\n\npdim(wage_dta_pan)\n\n\n\nBalanced Panel: n = 595, T = 7, N = 4165"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within-1",
+    "href": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within) (1)",
+    "text": "Step 2. FE: Fixed Effect (within) (1)\nRerun the pooled regression with plm:\n\nunion_pooled <- plm(log(wage) ~ union + ed + exp + wks,\n                    data = wage_dta, model = \"pooling\")\nunion_pooled\n\n\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\n(Intercept)    unionyes          ed         exp         wks \n  4.9049523   0.1339212   0.0828611   0.0131927   0.0084667 \n\n\n\nFixed Effect (individual) model\n\nunion_fe_ind <- plm(log(wage) ~ union + ed + exp + wks,\n                    data = wage_dta, model = \"within\", effect = \"individual\")\nunion_fe_ind\n\n\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\n unionyes       exp       wks \n0.0310064 0.0968921 0.0011035"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within-2",
+    "href": "slides/w08-panel-regression.html#step-2.-fe-fixed-effect-within-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within) (2)",
+    "text": "Step 2. FE: Fixed Effect (within) (2)\nFixed Effect (time) model\n\nunion_fe_time <- plm(log(wage) ~ union + ed + exp + wks,\n                     data = wage_dta, model = \"within\", effect = \"time\")\nunion_fe_time\n\n\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\n unionyes        ed       exp       wks \n0.1306555 0.0801044 0.0101620 0.0081754 \n\n\n\nFixed Effect (Two-ways) model\n\nunion_fe_twoways <- plm(log(wage) ~ union + ed + exp + wks,\n                        data = wage_dta, model = \"within\", effect = \"twoways\")\nunion_fe_twoways\n\n\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\n  unionyes        wks \n0.02793858 0.00091316"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-f-test-statistical-tests-1",
+    "href": "slides/w08-panel-regression.html#step-2.-f-test-statistical-tests-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test statistical tests (1)",
+    "text": "Step 2. F-test statistical tests (1)\n\n\n\nCompares FE models (individual, time, two-ways) vs pooled\n\nPooled is always consistent vs FE\n\nTest logic:\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nRun the test. Check the p-value\n\np-value < 0.05: Pooled is better then the FE model. Use pooled for interpretation.\np-value >= 0.05: FE is as good as pooled. Not using FE model may cause bias."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-f-test-statistical-tests-2",
+    "href": "slides/w08-panel-regression.html#step-2.-f-test-statistical-tests-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test statistical tests (2)",
+    "text": "Step 2. F-test statistical tests (2)\n\n\n\npFtest(union_fe_ind, union_pooled)\n\n\n    F test for individual effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 40.418, df1 = 593, df2 = 3567, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no individual effect FE is needed)\n\n\n\n\n\n\n\npFtest(union_fe_twoways, union_pooled)\n\n\n    F test for twoways effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 40.517, df1 = 598, df2 = 3562, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no two-ways FE is needed)\n\n\n\n\n\n\n\n\npFtest(union_fe_time, union_pooled)\n\n\n    F test for time effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 159.46, df1 = 6, df2 = 4154, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no time FE is needed)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-1",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test statistical tests (1)",
+    "text": "Step 2. LM test statistical tests (1)\n\n\n\nplmtest(union_pooled, effect = \"individual\")\n\n\n    Lagrange Multiplier Test - (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 70.501, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"twoway\")\n\n\n    Lagrange Multiplier Test - two-ways effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 190.86, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"time\")\n\n\n    Lagrange Multiplier Test - time effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 199.42, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no individual effect FE is needed)\nIndividual fixed effect model is preferred (no two-ways FE is needed)\nIndividual fixed effect model is preferred (no time FE is needed)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-1-1",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-1-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test statistical tests (1)",
+    "text": "Step 2. LM test statistical tests (1)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-2",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test statistical tests (2)",
+    "text": "Step 2. LM test statistical tests (2)\n\n\n\nExist to compare FE models between each other assuming that:\n\nPooled is always consistent in pooled vs individual FE\nIndividual FE always consistent in individual FE vs time or two-ways FE\n\nTest logic:\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nRun the test (one or another or both). Check p-value:\n\np-value < 0.05: Pooled or individual FE is better then the alternative\np-value >= 0.05:\n\nIndividual FE is as good as pooled;\nTime or Two-ways model is as good as individual FE;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-2-1",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-test-statistical-tests-2-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test statistical tests (2)",
+    "text": "Step 2. LM test statistical tests (2)\n\n\n\nplmtest(union_pooled, effect = \"individual\")\n\n\n    Lagrange Multiplier Test - (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 70.501, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"twoway\")\n\n\n    Lagrange Multiplier Test - two-ways effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 190.86, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"time\")\n\n\n    Lagrange Multiplier Test - time effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 199.42, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no individual FE is needed)\nIndividual FE is preferred (no two-ways FE is needed)\nIndividual FE is preferred (no time FE is needed)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-3.-random-effect-model-individual",
+    "href": "slides/w08-panel-regression.html#step-3.-random-effect-model-individual",
+    "title": "Panel Regression Analysis",
+    "section": "Step 3. Random Effect model (individual)",
+    "text": "Step 3. Random Effect model (individual)\n\nunion_rand_ind <- plm(log(wage) ~ union + ed + exp + wks,\n                    data = wage_dta, model = \"random\", effect = \"individual\")\nunion_rand_ind\n\n\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\n(Intercept)    unionyes          ed         exp         wks \n  3.9804910   0.0580121   0.1160369   0.0560612   0.0015205"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-3.-hausma-test",
+    "href": "slides/w08-panel-regression.html#step-3.-hausma-test",
+    "title": "Panel Regression Analysis",
+    "section": "Step 3. Hausma test",
+    "text": "Step 3. Hausma test\n\n\n\nCompares Fixed Effect model with Random Effect:\n\nFixed effect model is always consistent\n\nTest logic:\n\nH0: One model is inconsistent. Use FE!\nH1: Both models are equally consistent. RE is as good as FE.\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: Use FE, discard RE.\np-value >= 0.05: Use FE or RE, both are good.\n\n\n\n\n\n\n\n\nphtest(union_fe_ind, union_rand_ind)\n\n\n    Hausman Test\n\ndata:  log(wage) ~ union + ed + exp + wks\nchisq = 8018.2, df = 3, p-value < 2.2e-16\nalternative hypothesis: one model is inconsistent\n\n\n\n\nFE is preferred instead of the RE model."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-linearity-homoscedasticity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-linearity-homoscedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Linearity + Homoscedasticity)",
+    "text": "Step 1.b Assumptions (Linearity + Homoscedasticity)\n\ncheck_model(union_fit_0, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-1.b-assumptions-homoscedasticity",
+    "href": "slides/w08-panel-regression.html#step-1.b-assumptions-homoscedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Homoscedasticity)",
+    "text": "Step 1.b Assumptions (Homoscedasticity)\n\ncheck_heteroscedasticity(union_fit_0) \n\n\n\nWarning: Heteroscedasticity (non-constant error variance) detected (p = 0.004).\n\n\n\n\nbptest(union_fit_0)\n\n\n\n\n    studentized Breusch-Pagan test\n\ndata:  union_fit_0\nBP = 106.47, df = 4, p-value < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-3.-hausman-test",
+    "href": "slides/w08-panel-regression.html#step-3.-hausman-test",
+    "title": "Panel Regression Analysis",
+    "section": "Step 3. Hausman test",
+    "text": "Step 3. Hausman test\nWhich model to choose: Fixed effect or Random effect?\n\n\n\nCompares Fixed Effect model with Random Effect:\n\nFixed effect model is always consistent\n\nTest logic:\n\nH0: One model is inconsistent. Use FE!\nH1: Both models are equally consistent. RE is as good as FE.\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: Use FE, discard RE.\np-value >= 0.05: Use FE or RE, both are good.\n\n\n\n\n\n\n\n\nphtest(union_fe_ind, union_rand_ind)\n\n\n    Hausman Test\n\ndata:  log(wage) ~ union + ed + exp + wks\nchisq = 8018.2, df = 3, p-value < 2.2e-16\nalternative hypothesis: one model is inconsistent\n\n\n\n\nFE is preferred instead of the RE model."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.1-serial-correlation-and-cross-sectional-dependence",
+    "href": "slides/w08-panel-regression.html#step-4.1-serial-correlation-and-cross-sectional-dependence",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.1 Serial correlation and cross-sectional dependence",
+    "text": "Step 4.1 Serial correlation and cross-sectional dependence\n\n\n\nWooldridge’s test for unobserved individual effects\n\nH0: no unobserved effects\nH1: some effects exist due to cross-sectional dependence and/or serial correlation\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: cross-sectional dependence and/or serial correlation are present\np-value >= 0.05: No cross-sectional dependency and/or serial correlation\n\n\n\n\n\n\n\n\npwtest(union_pooled, effect = \"individual\")\n\n\n    Wooldridge's test for unobserved individual effects\n\ndata:  formula\nz = 13.064, p-value < 2.2e-16\nalternative hypothesis: unobserved effect\n\npwtest(union_pooled, effect = \"time\")\n\n\n    Wooldridge's test for unobserved time effects\n\ndata:  formula\nz = 2.0133, p-value = 0.04408\nalternative hypothesis: unobserved effect\n\n\n\n\ncross-sectional dependence is present\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-for-random-effects-andor-serial-correlation",
+    "href": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-for-random-effects-andor-serial-correlation",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.2 Lagrange-Multiplier tests for random effects and/or serial correlation",
+    "text": "Step 4.2 Lagrange-Multiplier tests for random effects and/or serial correlation\n\nH0: serial correlation is zero\nH1: some serial correlation\n\n\n\n\n\nLocally–Robust Lagrange Multiplier Tests for serial correlation\n\nH0: serial correlation is zero\nH1: some serial correlation is present\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: serial correlation need to be addressed\np-value >= 0.05: no serial correlation\n\n\n\n\n\n\n\n\n\npbsytest(union_pooled, test = \"ar\")\n\n\n    Bera, Sosa-Escudero and Yoon locally robust test\n\ndata:  formula\nchisq = 627.99, df = 1, p-value < 2.2e-16\nalternative hypothesis: AR(1) errors sub random effects\n\n\n\n\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-5.-correcting-for-serial-correlation-and-cross-sectional-dependence",
+    "href": "slides/w08-panel-regression.html#step-5.-correcting-for-serial-correlation-and-cross-sectional-dependence",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Correcting for serial correlation and cross-sectional dependence",
+    "text": "Step 5. Correcting for serial correlation and cross-sectional dependence\nCross-sectional dependence and/or serial correlation violate the variance homogeneity assumption:\n\nEstimates are unbiased, but inefficient.\nStandard errors need to be corrected.\n\n\nWe can use:\n\nRobust SE\nClustered SE at the individual (group) level"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-5.-correcting-cross-sectional-dependence",
+    "href": "slides/w08-panel-regression.html#step-5.-correcting-cross-sectional-dependence",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Correcting cross-sectional dependence",
+    "text": "Step 5. Correcting cross-sectional dependence\n\nlibrary(lmtest)\nlibrary(car)\nlibrary(sandwich)\noptions(digits = 3, scipen = 6)\nunion_fe_ind\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\nunionyes      exp      wks \n  0.0310   0.0969   0.0011 \n\n\n\n\nRegular SE\n\ncoeftest(union_fe_ind, \n         vcov. = vcov(union_fe_ind))\n\n\nt test of coefficients:\n\n         Estimate Std. Error t value Pr(>|t|)    \nunionyes 0.031006   0.014929    2.08    0.038 *  \nexp      0.096892   0.001189   81.52   <2e-16 ***\nwks      0.001104   0.000603    1.83    0.067 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nNo cross–sectional dependence-robust\n\ncoeftest(union_fe_ind, \n         vcov. = vcovHC(union_fe_ind, method = \"white1\", \n                        type = \"HC0\", cluster = \"group\"))\n\n\nt test of coefficients:\n\n         Estimate Std. Error t value Pr(>|t|)    \nunionyes 0.031006   0.016137    1.92    0.055 .  \nexp      0.096892   0.001145   84.59   <2e-16 ***\nwks      0.001104   0.000753    1.46    0.143    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nmethods for cross–sectional “white1” and “white2” and for c-s + autocorrelation “arellano”;\ntype for sample size correction: “HC0”, “sss”, “HC1”, “HC2”, “HC3”, “HC4” (“HC3” is recommended);\ncluster enabled by default (“group” or “time”);"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-6.-reporting-results-1",
+    "href": "slides/w08-panel-regression.html#step-6.-reporting-results-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting results (1)",
+    "text": "Step 6. Reporting results (1)\n\npooled_robust <- \n  coeftest(union_pooled,\n           vcov. = vcovHC(union_pooled, method = \"arellano\",\n                          type = \"HC3\", cluster = \"group\"))\n\npooled_cs_robust <- \n  coeftest(union_fe_ind,\n           vcov. = vcovHC(union_fe_ind, method = \"white1\", \n                          type = \"HC0\", cluster = \"group\"))\n\npooled_csac_robust <- \n  coeftest(union_fe_ind,\n           vcov. = vcovHC(union_fe_ind, method = \"arellano\", \n                          type = \"HC3\", cluster = \"group\"))\n\n\nmodelsummary(\n  list(\n    `Pooled (no SE correction)` = coeftest(union_pooled),\n    `Pooled (c/s dep. and aut.)` = pooled_robust,\n    `Ind. FE (no SE correction)` = coeftest(union_fe_ind),\n    `Ind. FE (c/s dep.)` = pooled_cs_robust, \n    `Ind. FE (c/s dep. and aut.)` = pooled_csac_robust\n    ), \n  fmt = 4, statistic = NULL,\n  estimate = \"{estimate}{stars} ({std.error})\")"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-6.-reporting-results-1-output",
+    "href": "slides/w08-panel-regression.html#step-6.-reporting-results-1-output",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting results (1)",
+    "text": "Step 6. Reporting results (1)\n\n\n\n \n  \n      \n    Pooled (no SE correction) \n    Pooled (c/s dep. and aut.) \n     Ind. FE (no SE correction) \n     Ind. FE (c/s dep.) \n     Ind. FE (c/s dep. and aut.) \n  \n \n\n  \n    (Intercept) \n    4.9050*** (0.0696) \n    4.9050*** (0.1364) \n     \n     \n     \n  \n  \n    unionyes \n    0.1339*** (0.0134) \n    0.1339*** (0.0262) \n    0.0310* (0.0149) \n    0.0310+ (0.0161) \n    0.0310 (0.0262) \n  \n  \n    ed \n    0.0829*** (0.0023) \n    0.0829*** (0.0052) \n     \n     \n     \n  \n  \n    exp \n    0.0132*** (0.0006) \n    0.0132*** (0.0014) \n    0.0969*** (0.0012) \n    0.0969*** (0.0011) \n    0.0969*** (0.0018) \n  \n  \n    wks \n    0.0085*** (0.0012) \n    0.0085*** (0.0020) \n    0.0011+ (0.0006) \n    0.0011 (0.0008) \n    0.0011 (0.0009) \n  \n  \n    Num.Obs. \n    4165 \n    4165 \n    4165 \n    4165 \n    4165 \n  \n  \n    AIC \n    4081.6 \n    4081.6 \n    −4434.5 \n    −4434.5 \n    −4434.5 \n  \n  \n    BIC \n    4119.6 \n    4119.6 \n    −4409.2 \n    −4409.2 \n    −4409.2 \n  \n  \n    Log.Lik. \n    -2034.793 \n    -2034.793 \n    2221.250 \n    2221.250 \n    2221.250"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-6.-reporting-gof-1",
+    "href": "slides/w08-panel-regression.html#step-6.-reporting-gof-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting GOF (1)",
+    "text": "Step 6. Reporting GOF (1)\n\nlibrary(performance)\ncompare_performance(list(Pooled = union_pooled, FE = union_fe_ind))\n\n\n\n# Comparison of Model Performance Indices\n\nName   | Model |   AIC (weights) |  AICc (weights) |   BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma\n--------------------------------------------------------------------------------------------------------\nPooled |   plm | 59695.6 (<.001) | 59695.6 (<.001) | 59733.6 (<.001) | 0.270 |     0.269 | 0.394 | 0.395\nFE     |   plm | 51179.5 (>.999) | 51179.5 (>.999) | 51204.8 (>.999) | 0.651 |     0.593 | 0.142 | 0.142"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#takeaways-for-the-exam",
+    "href": "slides/w08-panel-regression.html#takeaways-for-the-exam",
+    "title": "Panel Regression Analysis",
+    "section": "Takeaways for the exam",
+    "text": "Takeaways for the exam\n\nSimpson’s paradox. What are the causes of it and solutions.\nData types (cross-section, repeated cross-section, balanced panel, unbalanced panel)\nPanel Regression\n\nPooled;\nLeast Squared Dummy Variable model;\nFixed effect (within transformation);\nWhy FE is so important?\nWhat is the key difference between FE and RE?\nWhen FE and when RE are appropriate?\n\nPanel Regression tests F-test, LM-test, Hausman test\nRobust and Clustered SE: why these are important and when do we need to use one?"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#homework",
+    "href": "slides/w08-panel-regression.html#homework",
+    "title": "Panel Regression Analysis",
+    "section": "Homework",
+    "text": "Homework\n\nReproduce code from the slides\nPerform practical exercises."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#fixed-effect-application-literature",
+    "href": "slides/w08-panel-regression.html#fixed-effect-application-literature",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed effect application: literature",
+    "text": "Fixed effect application: literature\nSeminal papers: (Mundlak, 1961)\nClimate and agriculture: Bozzola, Massetti, Mendelsohn, & Capitanio (2017)\nChoice of irrigation: Chatzopoulos & Lippert (2015)\nCrop choice: Seo & Mendelsohn (2008b)\nLivestock choice: Seo & Mendelsohn (2008a)\nCross-sectional dependence: (Conley, 1999)"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#random-effect-model-individual-time-and-two-ways",
+    "href": "slides/w08-panel-regression.html#random-effect-model-individual-time-and-two-ways",
+    "title": "Panel Regression Analysis",
+    "section": "Random Effect Model (individual, time and two-ways)",
+    "text": "Random Effect Model (individual, time and two-ways)\n\nIntroduce random components \\(\\color{Red}{v_i}\\) and/or \\(\\color{Blue}{u_{t}}\\)\n\n\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\color{Red}{v_{i}} + \\color{Blue}{u_{t}}  + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:\n\n\\(Cov(v_{i},{X}_{it}) = 0\\)\n\nIgnoring RE causes no bias to the estimates;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-f-test-1",
+    "href": "slides/w08-panel-regression.html#step-2.-f-test-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test (1)",
+    "text": "Step 2. F-test (1)\nWhich model to choose: Pooled or FE?\n\n\n\nCompares FE models (individual, time, two-ways) vs pooled\n\nPooled is always consistent vs FE\n\nTest logic:\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nRun the test. Check the p-value\n\np-value < 0.05: Pooled is better than the FE model. Use pooled for interpretation.\np-value >= 0.05: FE is as good as pooled. Not using the FE model may cause bias."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-f-test-2",
+    "href": "slides/w08-panel-regression.html#step-2.-f-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test (2)",
+    "text": "Step 2. F-test (2)\n\n\n\npFtest(union_fe_ind, union_pooled)\n\n\n    F test for individual effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 40.418, df1 = 593, df2 = 3567, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no individual effect FE is needed)\n\n\n\n\n\n\n\npFtest(union_fe_twoways, union_pooled)\n\n\n    F test for twoways effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 40.517, df1 = 598, df2 = 3562, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no two-ways FE is needed)\n\n\n\n\n\n\n\n\npFtest(union_fe_time, union_pooled)\n\n\n    F test for time effects\n\ndata:  log(wage) ~ union + ed + exp + wks\nF = 159.46, df1 = 6, df2 = 4154, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no time FE is needed)\n\n\n\n\nF-test leads us to stick with the pooled regression. We can still argue that not accounting for the ability bias may invoke Simpson’s paradox and biased estimates. Thus, we can still choose the FE model, but this choice has to be well described."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-test-lagrange-multiplier-test-2",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-test-lagrange-multiplier-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test: Lagrange multiplier test (2)",
+    "text": "Step 2. LM test: Lagrange multiplier test (2)\nWhich FE model to choose: individual, time or two-way?\n\n\n\nExist to compare FE models between each other assuming that:\n\nPooled is always consistent in pooled vs individual FE\nIndividual FE always consistent in individual FE vs time or two-way FE\n\nTest logic:\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nRun the test (one or another or both). Check p-value:\n\np-value < 0.05: Pooled or individual FE is better than the alternative\np-value >= 0.05:\n\nIndividual FE is as good as pooled;\nTime or Two-ways model is as good as individual FE;"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-2.-lm-testlagrange-multiplier-2",
+    "href": "slides/w08-panel-regression.html#step-2.-lm-testlagrange-multiplier-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM testLagrange multiplier (2)",
+    "text": "Step 2. LM testLagrange multiplier (2)\n\n\n\nplmtest(union_pooled, effect = \"individual\")\n\n\n    Lagrange Multiplier Test - (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 70.501, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"twoway\")\n\n\n    Lagrange Multiplier Test - two-ways effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 190.86, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"time\")\n\n\n    Lagrange Multiplier Test - time effects (Honda)\n\ndata:  log(wage) ~ union + ed + exp + wks\nnormal = 199.42, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nPooled regression is preferred (no individual FE is needed)\nIndividual FE is preferred (no two-ways FE is needed)\nIndividual FE is preferred (no time FE is needed)\n\n\n\n\nAll tests point to the individual fixed effect regression (if not pooled)."
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.1-wooldridges-test-1",
+    "href": "slides/w08-panel-regression.html#step-4.1-wooldridges-test-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.1 Wooldridge’s test (1)",
+    "text": "Step 4.1 Wooldridge’s test (1)\nIs there serial correlation / cross-sectional dependence in the data?\n\n\n\nWooldridge’s test for unobserved individual effects\n\nH0: no unobserved effects\nH1: some effects exist due to cross-sectional dependence and/or serial correlation\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: cross-sectional dependence and/or serial correlation are present\np-value >= 0.05: No cross-sectional dependency and/or serial correlation"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.1-wooldridges-test-2",
+    "href": "slides/w08-panel-regression.html#step-4.1-wooldridges-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.1 Wooldridge’s test (2)",
+    "text": "Step 4.1 Wooldridge’s test (2)\n\n\n\npwtest(union_pooled, effect = \"individual\")\n\n\n    Wooldridge's test for unobserved individual effects\n\ndata:  formula\nz = 13.064, p-value < 2.2e-16\nalternative hypothesis: unobserved effect\n\npwtest(union_pooled, effect = \"time\")\n\n\n    Wooldridge's test for unobserved time effects\n\ndata:  formula\nz = 2.0133, p-value = 0.04408\nalternative hypothesis: unobserved effect\n\n\n\n\ncross-sectional dependence is present\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-1",
+    "href": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.2 Lagrange-Multiplier tests (1)",
+    "text": "Step 4.2 Lagrange-Multiplier tests (1)\nIs there serial correlation in the data?\n\n\n\nLocally–Robust Lagrange Multiplier Tests for serial correlation\n\nH0: serial correlation is zero\nH1: some serial correlation is present\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: serial correlation need to be addressed\np-value >= 0.05: no serial correlation"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-2",
+    "href": "slides/w08-panel-regression.html#step-4.2-lagrange-multiplier-tests-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.2 Lagrange-Multiplier tests (2)",
+    "text": "Step 4.2 Lagrange-Multiplier tests (2)\n\n\n\npbsytest(union_pooled, test = \"ar\")\n\n\n    Bera, Sosa-Escudero and Yoon locally robust test\n\ndata:  formula\nchisq = 627.99, df = 1, p-value < 2.2e-16\nalternative hypothesis: AR(1) errors sub random effects\n\n\n\n\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-5.-robust-inference",
+    "href": "slides/w08-panel-regression.html#step-5.-robust-inference",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust inference",
+    "text": "Step 5. Robust inference\nSerial correlation and/or cross-sectional dependence render our Standard errors useless.\n\nCross-sectional dependence and/or serial correlation violate the variance homogeneity assumption:\n\nEstimates are unbiased, but inefficient.\nStandard errors need to be corrected.\n\n\n\nWe need to use:\n\nRobust Standard Errors, and/or\nClustered SE at the individual (group) level"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-5.-robust-standard-error-1",
+    "href": "slides/w08-panel-regression.html#step-5.-robust-standard-error-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust Standard Error (1)",
+    "text": "Step 5. Robust Standard Error (1)\n\nlibrary(lmtest)\nlibrary(car)\nlibrary(sandwich)\noptions(digits = 3, scipen = 6)\nunion_fe_ind\n\n\nModel Formula: log(wage) ~ union + ed + exp + wks\n\nCoefficients:\nunionyes      exp      wks \n  0.0310   0.0969   0.0011 \n\n\nCorrecting cross-sectional dependence:\n\n\nRegular SE\n\ncoeftest(union_fe_ind, \n         vcov. = vcov(union_fe_ind))\n\n\nt test of coefficients:\n\n         Estimate Std. Error t value Pr(>|t|)    \nunionyes 0.031006   0.014929    2.08    0.038 *  \nexp      0.096892   0.001189   81.52   <2e-16 ***\nwks      0.001104   0.000603    1.83    0.067 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nRobust SE\n\ncoeftest(union_fe_ind, \n         vcov. = vcovHC(union_fe_ind, method = \"white1\", \n                        type = \"HC0\", cluster = \"group\"))\n\n\nt test of coefficients:\n\n         Estimate Std. Error t value Pr(>|t|)    \nunionyes 0.031006   0.016137    1.92    0.055 .  \nexp      0.096892   0.001145   84.59   <2e-16 ***\nwks      0.001104   0.000753    1.46    0.143    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-5.-robust-standard-error-2",
+    "href": "slides/w08-panel-regression.html#step-5.-robust-standard-error-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust Standard Error (2)",
+    "text": "Step 5. Robust Standard Error (2)\nWe produce new Variance-covariance matrix:\n\nvcovHC(union_fe_ind, \n       method = \"white1\", \n       type = \"HC0\", \n       cluster = \"group\")\n\n             unionyes           exp           wks\nunionyes  0.000260415 -0.0000006698 -0.0000005482\nexp      -0.000000670  0.0000013121  0.0000000824\nwks      -0.000000548  0.0000000824  0.0000005677\nattr(,\"cluster\")\n[1] \"group\"\n\n\n\nmethods for cross–sectional dependence “white1” and “white2” and for cross–sectional dependence and autocorrelation “arellano”;\ntype for sample size correction: “HC0”, “sss”, “HC1”, “HC2”, “HC3”, “HC4” (“HC3” is recommended);\ncluster enabled by default (“group” or “time”);"
+  },
+  {
+    "objectID": "slides/w08-panel-regression.html#step-6.-reporting-results-1-1",
+    "href": "slides/w08-panel-regression.html#step-6.-reporting-results-1-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting results (1)",
+    "text": "Step 6. Reporting results (1)\n\n\n\n\n \n  \n      \n    Pooled (no SE correction) \n    Pooled (c/s dep. and aut.) \n     Ind. FE (no SE correction) \n     Ind. FE (c/s dep.) \n     Ind. FE (c/s dep. and aut.) \n  \n \n\n  \n    (Intercept) \n    4.9050*** (0.0696) \n    4.9050*** (0.1364) \n     \n     \n     \n  \n  \n    unionyes \n    0.1339*** (0.0134) \n    0.1339*** (0.0262) \n    0.0310* (0.0149) \n    0.0310+ (0.0161) \n    0.0310 (0.0262) \n  \n  \n    ed \n    0.0829*** (0.0023) \n    0.0829*** (0.0052) \n     \n     \n     \n  \n  \n    exp \n    0.0132*** (0.0006) \n    0.0132*** (0.0014) \n    0.0969*** (0.0012) \n    0.0969*** (0.0011) \n    0.0969*** (0.0018) \n  \n  \n    wks \n    0.0085*** (0.0012) \n    0.0085*** (0.0020) \n    0.0011+ (0.0006) \n    0.0011 (0.0008) \n    0.0011 (0.0009) \n  \n  \n    Num.Obs. \n    4165 \n    4165 \n    4165 \n    4165 \n    4165 \n  \n  \n    AIC \n    4081.6 \n    4081.6 \n    −4434.5 \n    −4434.5 \n    −4434.5 \n  \n  \n    BIC \n    4119.6 \n    4119.6 \n    −4409.2 \n    −4409.2 \n    −4409.2 \n  \n  \n    Log.Lik. \n    -2034.793 \n    -2034.793 \n    2221.250 \n    2221.250 \n    2221.250"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#simpsons-paradox-with-penguins",
+    "href": "slides/w08a-panel-regression.html#simpsons-paradox-with-penguins",
+    "title": "Panel Regression Analysis",
+    "section": "Simpson’s paradox (with penguins)",
+    "text": "Simpson’s paradox (with penguins)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#let-us-investigate",
+    "href": "slides/w08a-panel-regression.html#let-us-investigate",
+    "title": "Panel Regression Analysis",
+    "section": "Let us investigate…",
+    "text": "Let us investigate…\nThe relationship between bill length and depth in penguins…"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#the-data",
+    "href": "slides/w08a-panel-regression.html#the-data",
+    "title": "Panel Regression Analysis",
+    "section": "The data",
+    "text": "The data\n\nlibrary(tidyverse)\nlibrary(modelsummary)\npenguins <- read_csv(\"penguins\")\npenguins %>% glimpse()\n\n\n\nRows: 344\nColumns: 8\n$ species           <fct> Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…\n$ island            <fct> Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…\n$ bill_length_mm    <dbl> 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …\n$ bill_depth_mm     <dbl> 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …\n$ flipper_length_mm <int> 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…\n$ body_mass_g       <int> 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …\n$ sex               <fct> male, female, female, NA, female, male, female, male…\n$ year              <int> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#the-relationship",
+    "href": "slides/w08a-panel-regression.html#the-relationship",
+    "title": "Panel Regression Analysis",
+    "section": "The relationship",
+    "text": "The relationship\n\ngg_bill <- \n  penguins %>% ggplot() + \n  aes(x = bill_length_mm, y = bill_depth_mm) +\n  xlab(\"Bill length, mm\") + ylab(\"Bill depth, mm\") +\n  geom_point()\ngg_bill"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#the-trend",
+    "href": "slides/w08a-panel-regression.html#the-trend",
+    "title": "Panel Regression Analysis",
+    "section": "The trend",
+    "text": "The trend\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\")"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#is-this-the-true-trend",
+    "href": "slides/w08a-panel-regression.html#is-this-the-true-trend",
+    "title": "Panel Regression Analysis",
+    "section": "Is this the true trend?",
+    "text": "Is this the true trend?\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\") + \n  aes(colour = species)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#the-true-trends",
+    "href": "slides/w08a-panel-regression.html#the-true-trends",
+    "title": "Panel Regression Analysis",
+    "section": "The true trends",
+    "text": "The true trends\n\ngg_bill + \n  geom_smooth(method = \"lm\", formula = y ~ x, colour = \"black\") + \n  aes(colour = species) + \n  geom_smooth(method = \"lm\", formula = y ~ x, se = FALSE)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#regression-results",
+    "href": "slides/w08a-panel-regression.html#regression-results",
+    "title": "Panel Regression Analysis",
+    "section": "Regression results",
+    "text": "Regression results\n\nfit1 <- lm(bill_depth_mm ~ bill_length_mm, data = penguins)\nfit2 <- lm(bill_depth_mm ~ bill_length_mm + species, data = penguins)\nfit3 <- lm(bill_depth_mm ~ -1 + bill_length_mm + species, data = penguins)\nmodelsummary(\n  list(fit1, fit2, fit3),\n  estimate = \"{estimate}{stars} ({std.error})\", \n  statistic = NULL, \n  gof_map = c(\"nobs\", \"adj.r.squared\")\n)\n\n\n\n\n\n \n  \n      \n     (1) \n      (2) \n      (3) \n  \n \n\n  \n    (Intercept) \n    20.885*** (0.844) \n    10.592*** (0.683) \n     \n  \n  \n    bill_length_mm \n    −0.085*** (0.019) \n    0.200*** (0.017) \n    0.200*** (0.017) \n  \n  \n    speciesChinstrap \n     \n    −1.933*** (0.224) \n    8.659*** (0.862) \n  \n  \n    speciesGentoo \n     \n    −5.106*** (0.191) \n    5.486*** (0.835) \n  \n  \n    speciesAdelie \n     \n     \n    10.592*** (0.683) \n  \n  \n    Num.Obs. \n    342 \n    342 \n    342 \n  \n  \n    R2 Adj. \n    0.052 \n    0.767 \n    0.997"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#simpsons-paradox-conclusion",
+    "href": "slides/w08a-panel-regression.html#simpsons-paradox-conclusion",
+    "title": "Panel Regression Analysis",
+    "section": "Simpson’s paradox conclusion",
+    "text": "Simpson’s paradox conclusion\n\nTrends or relationships are observed in the whole population, but they reverse or disappear, when each group is treated separately.\n\n\nCauses:\n\nUnobserved heterogeneity/differences between groups.\nUnderlining processes that are different between parts of the population.\n\n\n\nResolutions to the paradox:\n\nControl variables in the MRL.\nPanel data."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#cross-sectional-data",
+    "href": "slides/w08a-panel-regression.html#cross-sectional-data",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data",
+    "text": "Cross-sectional data\n\n\n\n\n\n\nID\nY\nX1\nX2\n\n\n\n\n\\(1\\)\n\\(y_{1}\\)\n\\(x^{1}_{1}\\)\n\\(x^{2}_{1}\\)\n\n\n\\(2\\)\n\\(y_{2}\\)\n\\(x^{1}_{2}\\)\n\\(x^{2}_{2}\\)\n\n\n\\(3\\)\n\\(y_{3}\\)\n\\(x^{1}_{3}\\)\n\\(x^{2}_{3}\\)\n\n\n\\(4\\)\n\\(y_{4}\\)\n\\(x^{1}_{4}\\)\n\\(x^{2}_{4}\\)\n\n\n\\(5\\)\n\\(y_{5}\\)\n\\(x^{1}_{5}\\)\n\\(x^{2}_{5}\\)\n\n\n\\(6\\)\n\\(y_{6}\\)\n\\(x^{1}_{6}\\)\n\\(x^{2}_{6}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(y_{N}\\)\n\\(x^{1}_{N}\\)\n\\(x^{2}_{N}\\)\n\n\n\n\n\n\nData that we usually collect in a single data collection.\n\nEach individual is represented by one observation.\n\nCould be repeatedly collected multiple times (repeated cross-section),\n\nbut, in every repetition, there are different individuals!"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#panel-data",
+    "href": "slides/w08a-panel-regression.html#panel-data",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data",
+    "text": "Panel data\n\n\n\n\n\nID\nTime\nY\nX1\nX2\n\n\n\n\n\\(1\\)\n\\(1\\)\n\\(y_{11}\\)\n\\(x^{1}_{11}\\)\n\\(x^{2}_{11}\\)\n\n\n\\(1\\)\n\\(2\\)\n\\(y_{12}\\)\n\\(x^{1}_{12}\\)\n\\(x^{2}_{12}\\)\n\n\n\\(1\\)\n\\(3\\)\n\\(y_{13}\\)\n\\(x^{1}_{13}\\)\n\\(x^{2}_{13}\\)\n\n\n\\(2\\)\n\\(2\\)\n\\(y_{22}\\)\n\\(x^{1}_{22}\\)\n\\(x^{2}_{22}\\)\n\n\n\\(2\\)\n\\(3\\)\n\\(y_{23}\\)\n\\(x^{1}_{23}\\)\n\\(x^{2}_{23}\\)\n\n\n\\(3\\)\n\\(1\\)\n\\(y_{31}\\)\n\\(x^{1}_{31}\\)\n\\(x^{2}_{31}\\)\n\n\n\\(3\\)\n\\(2\\)\n\\(y_{32}\\)\n\\(x^{1}_{32}\\)\n\\(x^{2}_{32}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(1\\)\n\\(y_{N1}\\)\n\\(x^{1}_{N1}\\)\n\\(x^{1}_{N1}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(y_{NT}\\)\n\\(x^{1}_{NT}\\)\n\\(x^{2}_{NT}\\)\n\n\n\n\n\ntable with data, where\neach individual (cohort, e.i. region, country)\nis represented by multiple observations at different time periods."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#panel-data-balanced-and-unbalanced",
+    "href": "slides/w08a-panel-regression.html#panel-data-balanced-and-unbalanced",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data: Balanced and Unbalanced",
+    "text": "Panel data: Balanced and Unbalanced\n\n\nBalanced\nEach individual is represented in all time periods.\n\n\n\n\\(\\text{ID}\\)\n\\(\\text{Time}\\)\n\\(Y\\)\n\\(X\\)\n\n\n\n\n1\n1\n\\(Y_{11}\\)\n\\(X_{11}\\)\n\n\n1\n2\n\\(Y_{12}\\)\n\\(X_{12}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n1\n\\(T\\)\n\\(Y_{1T}\\)\n\\(X_{1T}\\)\n\n\n2\n1\n\\(Y_{21}\\)\n\\(X_{21}\\)\n\n\n2\n2\n\\(Y_{22}\\)\n\\(X_{22}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n2\n\\(T\\)\n\\(Y_{2T}\\)\n\\(X_{2T}\\)\n\n\n3\n1\n\\(Y_{31}\\)\n\\(X_{31}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(Y_{NT}\\)\n\\(X_{NT}\\)\n\n\n\n\nUn balanced\nEach individual only appears in some time periods (not all).\n\n\n\n\\(\\text{ID}\\)\n\\(\\text{Time}\\)\n\\(Y\\)\n\\(X\\)\n\n\n\n\n1\n1\n\\(Y_{11}\\)\n\\(X_{11}\\)\n\n\n1\n2\n\\(Y_{12}\\)\n\\(X_{12}\\)\n\n\n2\n2\n\\(Y_{22}\\)\n\\(X_{22}\\)\n\n\n2\n3\n\\(Y_{23}\\)\n\\(X_{23}\\)\n\n\n3\n3\n\\(Y_{33}\\)\n\\(X_{33}\\)\n\n\n4\n1\n\\(Y_{41}\\)\n\\(X_{41}\\)\n\n\n5\n2\n\\(Y_{52}\\)\n\\(X_{52}\\)\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(T\\)\n\\(Y_{NT}\\)\n\\(X_{NT}\\)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#problem-setting",
+    "href": "slides/w08a-panel-regression.html#problem-setting",
+    "title": "Panel Regression Analysis",
+    "section": "Problem setting",
+    "text": "Problem setting\nDoes the collective bargaining (union membership) has any effect on wages?\n\nSee: (Card, 1996; Freeman, 1984)\n\n\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\nwhere \\(i\\) is the individual and \\(t\\) is the time dimension;"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#is-there-an-endogeneity-problem",
+    "href": "slides/w08a-panel-regression.html#is-there-an-endogeneity-problem",
+    "title": "Panel Regression Analysis",
+    "section": "Is there an endogeneity problem?",
+    "text": "Is there an endogeneity problem?\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\n\nIs there a source of endogeneity / selection bias here?\n\nAny ideas?\n\n\\(\\text{Ability}_{i}\\) not observable and not measurable;\n\ntime invariant;\ncorrelates with \\(X\\) and \\(Y\\);\n\nOmitting ability causes bias"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#one-of-the-solutions",
+    "href": "slides/w08a-panel-regression.html#one-of-the-solutions",
+    "title": "Panel Regression Analysis",
+    "section": "One of the solutions:",
+    "text": "One of the solutions:\n\nAbility are time-invariant and unique to each individual;\n\nIf we have multiple observation per each individual (panel data),\nwe can introduce dummy variables for each individual, to approximate ability.\n\nThis is also called Fixed Effect - regression model\n\nor a within transformation model\nor Difference in Difference"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#other-solutions",
+    "href": "slides/w08a-panel-regression.html#other-solutions",
+    "title": "Panel Regression Analysis",
+    "section": "Other solutions:",
+    "text": "Other solutions:\n\nAny ideas?\nIntroduce control variables that are proxy of ability.\nEmploy specific research design:\n\nRCT\nRDD"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#empirical-example",
+    "href": "slides/w08a-panel-regression.html#empirical-example",
+    "title": "Panel Regression Analysis",
+    "section": "Empirical example",
+    "text": "Empirical example\n\nlibrary(tidyverse)\nlibrary(modelsummary)\nwage_dta <- read_csv(\"wage_unon_panel.csv\")\nglimpse(wage_dta)\n\n\n\nRows: 4,165\nColumns: 15\n$ id      <dbl> 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3,…\n$ year    <dbl> 82, 83, 84, 85, 86, 87, 88, 82, 83, 84, 85, 86, 87, 88, 82, 83…\n$ exper   <dbl> 3, 4, 5, 6, 7, 8, 9, 30, 31, 32, 33, 34, 35, 36, 6, 7, 8, 9, 1…\n$ hours   <dbl> 32, 43, 40, 39, 42, 35, 32, 34, 27, 33, 30, 30, 37, 30, 50, 51…\n$ bluecol <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"yes\", \"yes\", \"yes\",…\n$ ind     <dbl> 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ south   <chr> \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"no\", \"no\", \"…\n$ smsa    <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"n…\n$ married <chr> \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\", \"yes\",…\n$ union   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,…\n$ educ    <dbl> 9, 9, 9, 9, 9, 9, 9, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 1…\n$ black   <chr> \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"no\", \"n…\n$ lwage   <dbl> 5.56068, 5.72031, 5.99645, 5.99645, 6.06146, 6.17379, 6.24417,…\n$ female  <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ wage    <dbl> 259.9996, 304.9995, 401.9992, 401.9992, 429.0013, 480.0019, 51…"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#the-data-1",
+    "href": "slides/w08a-panel-regression.html#the-data-1",
+    "title": "Panel Regression Analysis",
+    "section": "The data",
+    "text": "The data\n\n\n\n\n \n  \n    id \n    year \n    exper \n    hours \n    bluecol \n    ind \n    south \n    smsa \n    married \n    union \n    educ \n    black \n    lwage \n    female \n    wage \n  \n \n\n  \n    5 \n    82 \n    10 \n    50 \n    yes \n    0 \n    no \n    no \n    yes \n    1 \n    16 \n    no \n    6.43775 \n    1 \n    624.9990 \n  \n  \n    5 \n    83 \n    11 \n    46 \n    yes \n    0 \n    no \n    no \n    yes \n    1 \n    16 \n    no \n    6.62007 \n    1 \n    749.9976 \n  \n  \n    5 \n    84 \n    12 \n    40 \n    yes \n    0 \n    no \n    no \n    yes \n    1 \n    16 \n    no \n    6.63332 \n    1 \n    760.0012 \n  \n  \n    5 \n    85 \n    13 \n    50 \n    no \n    0 \n    no \n    no \n    yes \n    0 \n    16 \n    no \n    6.98286 \n    1 \n    1077.9970 \n  \n  \n    5 \n    86 \n    14 \n    47 \n    yes \n    0 \n    no \n    yes \n    yes \n    0 \n    16 \n    no \n    7.04752 \n    1 \n    1150.0032 \n  \n  \n    5 \n    87 \n    15 \n    47 \n    no \n    0 \n    no \n    no \n    yes \n    0 \n    16 \n    no \n    7.31322 \n    1 \n    1499.9994 \n  \n  \n    5 \n    88 \n    16 \n    49 \n    no \n    0 \n    no \n    no \n    yes \n    0 \n    16 \n    no \n    7.29574 \n    1 \n    1474.0073 \n  \n  \n    168 \n    82 \n    3 \n    40 \n    no \n    0 \n    no \n    yes \n    yes \n    0 \n    17 \n    no \n    6.23245 \n    1 \n    509.0010 \n  \n  \n    168 \n    83 \n    4 \n    42 \n    no \n    0 \n    no \n    yes \n    yes \n    0 \n    17 \n    no \n    6.57925 \n    1 \n    719.9991 \n  \n  \n    168 \n    84 \n    5 \n    44 \n    no \n    0 \n    no \n    yes \n    yes \n    1 \n    17 \n    no \n    6.65286 \n    1 \n    774.9977 \n  \n  \n    168 \n    85 \n    6 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    1 \n    17 \n    no \n    6.74524 \n    1 \n    850.0031 \n  \n  \n    168 \n    86 \n    7 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    0 \n    17 \n    no \n    7.49554 \n    1 \n    1799.9965 \n  \n  \n    168 \n    87 \n    8 \n    48 \n    no \n    0 \n    no \n    yes \n    yes \n    0 \n    17 \n    no \n    8.16052 \n    1 \n    3500.0061 \n  \n  \n    168 \n    88 \n    9 \n    50 \n    no \n    0 \n    no \n    yes \n    yes \n    0 \n    17 \n    no \n    8.30820 \n    1 \n    4057.0038"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#pooled-regression",
+    "href": "slides/w08a-panel-regression.html#pooled-regression",
+    "title": "Panel Regression Analysis",
+    "section": "Pooled Regression",
+    "text": "Pooled Regression\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\epsilon_{it}\n\\]\n\n\nRegression model on all observations in the panel data set without any individual effects.\n\n\nunion_fit_0 <- lm(log(wage) ~ union + educ + exper + I(exper^2) + hours , \n                  data = wage_dta)\nunion_fit_0\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + educ + exper + I(exper^2) + \n    hours, data = wage_dta)\n\nCoefficients:\n(Intercept)        union         educ        exper   I(exper^2)        hours  \n  4.7054380    0.1261467    0.0819744    0.0437155   -0.0006932    0.0077042"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#least-squares-dummy-variable-lsdv",
+    "href": "slides/w08a-panel-regression.html#least-squares-dummy-variable-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Least-squares dummy variable (LSDV)",
+    "text": "Least-squares dummy variable (LSDV)\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\n\nPooled regression plus dummy variable for each individual.\nThis is not a Fixed Effect Panel Regression!\n\n\nunion_fit_1 <- lm(log(wage) ~ union + educ + exper + I(exper^2) + hours + factor(id), \n                  data = wage_dta)\nunion_fit_1\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + educ + exper + I(exper^2) + \n    hours + factor(id), data = wage_dta)\n\nCoefficients:\n  (Intercept)          union           educ          exper     I(exper^2)  \n    4.3485732      0.0300295      0.1023231      0.1137052     -0.0004234  \n        hours    factor(id)2    factor(id)3    factor(id)4    factor(id)5  \n    0.0007980     -2.2946317     -0.1234092     -2.3978310     -0.5366805  \n  factor(id)6    factor(id)7    factor(id)8    factor(id)9   factor(id)10  \n   -1.4597761     -1.2411420     -1.5180049      0.2078530     -0.1734390  \n factor(id)11   factor(id)12   factor(id)13   factor(id)14   factor(id)15  \n   -1.4704689     -1.3608691     -1.3890339     -1.0439450     -0.9439428  \n factor(id)16   factor(id)17   factor(id)18   factor(id)19   factor(id)20  \n   -1.5809655     -0.9700846     -1.3922150     -3.0892451     -1.8367302  \n factor(id)21   factor(id)22   factor(id)23   factor(id)24   factor(id)25  \n   -1.7226414     -1.4223248      0.0054199     -0.8357823     -0.6064977  \n factor(id)26   factor(id)27   factor(id)28   factor(id)29   factor(id)30  \n   -0.7379286     -0.2772751     -1.8216457     -1.8871665     -1.3042601  \n factor(id)31   factor(id)32   factor(id)33   factor(id)34   factor(id)35  \n   -1.4134898     -1.8734643     -0.6413820     -3.7105381     -0.1984895  \n factor(id)36   factor(id)37   factor(id)38   factor(id)39   factor(id)40  \n   -0.3421001     -0.3410200     -0.7597065     -0.0688068     -1.7787978  \n factor(id)41   factor(id)42   factor(id)43   factor(id)44   factor(id)45  \n   -1.0532843     -2.2573678      0.1550164      0.0478652     -0.9543507  \n factor(id)46   factor(id)47   factor(id)48   factor(id)49   factor(id)50  \n   -0.2541933     -1.7069053     -1.8137723     -1.9258846     -2.4484643  \n factor(id)51   factor(id)52   factor(id)53   factor(id)54   factor(id)55  \n   -1.9760363     -1.6064527     -0.4646712     -0.4521180     -1.7422486  \n factor(id)56   factor(id)57   factor(id)58   factor(id)59   factor(id)60  \n   -1.9282946     -1.6643194     -2.8323912     -1.7329928     -1.6527519  \n factor(id)61   factor(id)62   factor(id)63   factor(id)64   factor(id)65  \n   -1.9914748     -0.1579195     -0.2806420     -2.6926172     -1.7074951  \n factor(id)66   factor(id)67   factor(id)68   factor(id)69   factor(id)70  \n   -1.0021172     -2.5046091     -2.5941980     -2.0777134     -0.4562135  \n factor(id)71   factor(id)72   factor(id)73   factor(id)74   factor(id)75  \n   -0.0984012     -0.9192300     -0.9709685     -0.7050966     -1.7193154  \n factor(id)76   factor(id)77   factor(id)78   factor(id)79   factor(id)80  \n   -1.1672133     -0.7934024     -3.4592869     -0.8823052     -0.0604197  \n factor(id)81   factor(id)82   factor(id)83   factor(id)84   factor(id)85  \n   -0.2728831     -1.3694580     -0.8873794     -3.4094508     -0.6181149  \n factor(id)86   factor(id)87   factor(id)88   factor(id)89   factor(id)90  \n    0.3230099     -0.6208690     -0.0384965     -0.7156531      0.2819298  \n factor(id)91   factor(id)92   factor(id)93   factor(id)94   factor(id)95  \n    0.2219382     -0.0389122     -2.2703900     -0.6713527     -2.5658913  \n factor(id)96   factor(id)97   factor(id)98   factor(id)99  factor(id)100  \n   -1.8929945     -2.3668088     -1.0815051     -1.2371669     -0.3689453  \nfactor(id)101  factor(id)102  factor(id)103  factor(id)104  factor(id)105  \n   -2.0715701      0.2419079     -1.0534000     -1.2417073     -0.3892415  \nfactor(id)106  factor(id)107  factor(id)108  factor(id)109  factor(id)110  \n    0.0013452     -1.8143890     -0.9852634     -1.4033012     -2.7813619  \nfactor(id)111  factor(id)112  factor(id)113  factor(id)114  factor(id)115  \n   -0.1122968     -0.8453668     -1.8469750     -2.9350313     -0.4420842  \nfactor(id)116  factor(id)117  factor(id)118  factor(id)119  factor(id)120  \n   -0.7258607     -1.2304082     -1.3950810     -0.3204476     -0.7104122  \nfactor(id)121  factor(id)122  factor(id)123  factor(id)124  factor(id)125  \n   -0.3685394     -0.6871320     -1.5356558     -1.9044675     -0.9214093  \nfactor(id)126  factor(id)127  factor(id)128  factor(id)129  factor(id)130  \n    0.1863200     -1.8088881     -2.3404805     -2.3327080     -1.8672439  \nfactor(id)131  factor(id)132  factor(id)133  factor(id)134  factor(id)135  \n   -1.7733156     -1.2515247     -1.2618072     -0.2715418     -0.5405965  \nfactor(id)136  factor(id)137  factor(id)138  factor(id)139  factor(id)140  \n   -0.9040781     -1.2464677     -1.3348897      0.0546240     -0.1468334  \nfactor(id)141  factor(id)142  factor(id)143  factor(id)144  factor(id)145  \n   -0.9653104     -2.8803152     -2.5587496     -0.3057205     -1.1895399  \nfactor(id)146  factor(id)147  factor(id)148  factor(id)149  factor(id)150  \n   -2.5564297     -0.3336869     -0.2135711     -0.2358201     -0.9902041  \nfactor(id)151  factor(id)152  factor(id)153  factor(id)154  factor(id)155  \n   -1.8371688     -0.3919091     -0.9059245     -0.8288426      0.2639585  \nfactor(id)156  factor(id)157  factor(id)158  factor(id)159  factor(id)160  \n   -2.3669688     -0.1579770     -1.9607783     -2.2903756     -2.0867318  \nfactor(id)161  factor(id)162  factor(id)163  factor(id)164  factor(id)165  \n   -0.4052899     -0.5879060     -0.7129091     -0.5237673     -3.0691480  \nfactor(id)166  factor(id)167  factor(id)168  factor(id)169  factor(id)170  \n   -0.3346194     -1.2951818      0.3693013     -1.6563817     -2.1460479  \nfactor(id)171  factor(id)172  factor(id)173  factor(id)174  factor(id)175  \n   -1.0321605     -0.2130777     -1.7902925      0.1377581     -0.0160055  \nfactor(id)176  factor(id)177  factor(id)178  factor(id)179  factor(id)180  \n    0.2569786     -1.6326400      0.4028510     -2.3587711     -0.3845946  \nfactor(id)181  factor(id)182  factor(id)183  factor(id)184  factor(id)185  \n   -0.4108327     -0.9834346     -1.0972550     -1.6781968     -1.5026082  \nfactor(id)186  factor(id)187  factor(id)188  factor(id)189  factor(id)190  \n   -2.1577766     -1.1647283     -0.1239156     -1.7815425      0.2619762  \nfactor(id)191  factor(id)192  factor(id)193  factor(id)194  factor(id)195  \n   -1.4993833      0.0160729     -2.2211180     -0.4287428     -0.8272276  \nfactor(id)196  factor(id)197  factor(id)198  factor(id)199  factor(id)200  \n    0.1178582     -1.5464632     -1.9258471     -0.1875497     -0.3310429  \nfactor(id)201  factor(id)202  factor(id)203  factor(id)204  factor(id)205  \n   -1.4934470     -0.5369335     -1.5108323     -2.0658719     -1.6709767  \nfactor(id)206  factor(id)207  factor(id)208  factor(id)209  factor(id)210  \n   -0.0090120     -0.5221725     -1.6804807     -2.0796591     -2.0767268  \nfactor(id)211  factor(id)212  factor(id)213  factor(id)214  factor(id)215  \n   -1.4748328     -0.0448817     -1.4898530     -1.9329652     -3.5076699  \nfactor(id)216  factor(id)217  factor(id)218  factor(id)219  factor(id)220  \n   -1.1255642     -0.2327264     -0.6513809     -0.8178650     -2.4156438  \nfactor(id)221  factor(id)222  factor(id)223  factor(id)224  factor(id)225  \n   -2.1017309      0.0331950     -1.0231728     -1.4645738     -0.5458016  \nfactor(id)226  factor(id)227  factor(id)228  factor(id)229  factor(id)230  \n   -3.0261551     -2.2929047      0.2832356     -1.3169281      0.2964316  \nfactor(id)231  factor(id)232  factor(id)233  factor(id)234  factor(id)235  \n   -1.0946220     -2.2743788     -1.8237789     -1.6554734     -1.2081230  \nfactor(id)236  factor(id)237  factor(id)238  factor(id)239  factor(id)240  \n   -0.0145449     -0.6384647     -2.1569987     -1.4416687     -2.0393688  \nfactor(id)241  factor(id)242  factor(id)243  factor(id)244  factor(id)245  \n   -0.5874512     -0.5934676      0.2367489     -1.4340693     -2.3045132  \nfactor(id)246  factor(id)247  factor(id)248  factor(id)249  factor(id)250  \n   -2.7880182     -0.7003395     -1.1107962     -2.4985511     -1.3364049  \nfactor(id)251  factor(id)252  factor(id)253  factor(id)254  factor(id)255  \n   -0.6067969     -1.5576645     -0.0986338     -2.6540530      0.0383125  \nfactor(id)256  factor(id)257  factor(id)258  factor(id)259  factor(id)260  \n   -0.2349775     -2.1928398     -2.3075449     -0.7143545     -0.1095476  \nfactor(id)261  factor(id)262  factor(id)263  factor(id)264  factor(id)265  \n   -0.7968060     -0.5774167     -0.6080097     -0.1404218     -0.6091514  \nfactor(id)266  factor(id)267  factor(id)268  factor(id)269  factor(id)270  \n   -1.5381684     -0.6415396     -0.8257309     -0.9420411     -0.8422041  \nfactor(id)271  factor(id)272  factor(id)273  factor(id)274  factor(id)275  \n   -0.4524016     -0.2456966     -1.7472768     -1.0506405     -0.0310502  \nfactor(id)276  factor(id)277  factor(id)278  factor(id)279  factor(id)280  \n    0.3472376     -2.0224341      0.1895913     -0.6614986     -2.7705095  \nfactor(id)281  factor(id)282  factor(id)283  factor(id)284  factor(id)285  \n    0.2245524     -1.3899214     -2.7102791     -2.2411764      0.2478444  \nfactor(id)286  factor(id)287  factor(id)288  factor(id)289  factor(id)290  \n   -0.3704373     -0.5927907     -0.2396347     -1.6533998     -0.0958892  \nfactor(id)291  factor(id)292  factor(id)293  factor(id)294  factor(id)295  \n   -2.5107176     -1.7989286     -0.5703390     -1.2011109     -1.4576638  \nfactor(id)296  factor(id)297  factor(id)298  factor(id)299  factor(id)300  \n   -1.9986368     -0.5870901     -0.7176117     -3.2822239     -2.7838597  \nfactor(id)301  factor(id)302  factor(id)303  factor(id)304  factor(id)305  \n   -0.3324034     -1.0640144      0.2979783     -0.4636494     -1.1197335  \nfactor(id)306  factor(id)307  factor(id)308  factor(id)309  factor(id)310  \n   -1.2954014      0.8212389     -1.8036660     -1.3745703     -0.7606135  \nfactor(id)311  factor(id)312  factor(id)313  factor(id)314  factor(id)315  \n    0.2105132     -0.8752712     -0.6629730     -0.4802000     -1.0600291  \nfactor(id)316  factor(id)317  factor(id)318  factor(id)319  factor(id)320  \n   -1.9089897     -0.9238980     -0.6972992     -1.6439082     -0.9770545  \nfactor(id)321  factor(id)322  factor(id)323  factor(id)324  factor(id)325  \n   -0.2597240     -0.3929224     -0.8099876      0.2160266     -3.1693716  \nfactor(id)326  factor(id)327  factor(id)328  factor(id)329  factor(id)330  \n   -1.3707289     -0.8099548     -1.9741880     -3.2232714     -2.9081193  \nfactor(id)331  factor(id)332  factor(id)333  factor(id)334  factor(id)335  \n   -2.4720627     -3.4967480      0.0880504     -2.4198878     -2.0780789  \nfactor(id)336  factor(id)337  factor(id)338  factor(id)339  factor(id)340  \n   -2.3475630      0.5764727     -0.6084878     -0.8872653     -1.9636734  \nfactor(id)341  factor(id)342  factor(id)343  factor(id)344  factor(id)345  \n    0.0883837     -1.8502495     -1.4848842     -0.9710595     -1.2319603  \nfactor(id)346  factor(id)347  factor(id)348  factor(id)349  factor(id)350  \n   -1.7024146     -1.3434399     -1.3863174      0.4956454     -2.5654191  \nfactor(id)351  factor(id)352  factor(id)353  factor(id)354  factor(id)355  \n   -1.3784243      0.0816134     -1.7059876     -1.3627206     -0.4565893  \nfactor(id)356  factor(id)357  factor(id)358  factor(id)359  factor(id)360  \n    0.3603776     -0.9685689     -1.3991295     -3.0412550     -1.6851473  \nfactor(id)361  factor(id)362  factor(id)363  factor(id)364  factor(id)365  \n   -0.7058692     -0.9195798     -1.0953487     -1.4769641     -2.6742985  \nfactor(id)366  factor(id)367  factor(id)368  factor(id)369  factor(id)370  \n   -0.6578946     -1.2999971     -0.3382028      0.3863243     -0.0720030  \nfactor(id)371  factor(id)372  factor(id)373  factor(id)374  factor(id)375  \n   -1.9432209     -0.6223422     -1.1822873     -0.9548354     -2.0004202  \nfactor(id)376  factor(id)377  factor(id)378  factor(id)379  factor(id)380  \n   -1.9659526     -1.0630786      0.2863626     -0.9885524     -2.2528915  \nfactor(id)381  factor(id)382  factor(id)383  factor(id)384  factor(id)385  \n   -1.8595097     -1.5724380     -1.8713639     -2.5344664     -0.1624537  \nfactor(id)386  factor(id)387  factor(id)388  factor(id)389  factor(id)390  \n   -0.6421035     -0.3629400     -2.3279087     -1.1232122     -1.7657519  \nfactor(id)391  factor(id)392  factor(id)393  factor(id)394  factor(id)395  \n   -2.5207200     -1.6091356     -0.8136357      0.2210733     -2.2452954  \nfactor(id)396  factor(id)397  factor(id)398  factor(id)399  factor(id)400  \n   -0.6756564      0.1621353     -0.8481867     -1.7341285     -0.3817257  \nfactor(id)401  factor(id)402  factor(id)403  factor(id)404  factor(id)405  \n    0.2949123     -0.8927519     -0.9338798     -0.7166768      0.3456415  \nfactor(id)406  factor(id)407  factor(id)408  factor(id)409  factor(id)410  \n    0.2419052     -1.8216061     -0.4228484     -2.9393318     -2.0225911  \nfactor(id)411  factor(id)412  factor(id)413  factor(id)414  factor(id)415  \n   -0.4310985      0.4951506     -0.3954707     -2.8343863     -1.6226128  \nfactor(id)416  factor(id)417  factor(id)418  factor(id)419  factor(id)420  \n   -2.2101251     -0.3836277     -2.0551281     -0.3642385     -0.4022928  \nfactor(id)421  factor(id)422  factor(id)423  factor(id)424  factor(id)425  \n   -1.4834110     -0.5625562     -0.6107236      0.1691667      0.3211209  \nfactor(id)426  factor(id)427  factor(id)428  factor(id)429  factor(id)430  \n    0.2279390     -1.8875790     -3.0841075     -0.6159943     -0.3415796  \nfactor(id)431  factor(id)432  factor(id)433  factor(id)434  factor(id)435  \n   -0.7118149     -1.5641616     -1.9801839      0.1450722     -0.2017439  \nfactor(id)436  factor(id)437  factor(id)438  factor(id)439  factor(id)440  \n   -0.3145338     -1.1190083     -1.7823379     -0.3957654     -0.9003941  \nfactor(id)441  factor(id)442  factor(id)443  factor(id)444  factor(id)445  \n   -2.3437182     -3.4028128     -1.7003478      0.7524891     -1.0873692  \nfactor(id)446  factor(id)447  factor(id)448  factor(id)449  factor(id)450  \n   -0.5228583     -1.8009627     -2.2900269     -0.2715184      0.1416728  \nfactor(id)451  factor(id)452  factor(id)453  factor(id)454  factor(id)455  \n   -0.3214500     -0.7690325     -2.2657456     -0.0174455     -1.6515788  \nfactor(id)456  factor(id)457  factor(id)458  factor(id)459  factor(id)460  \n   -1.4418559     -2.8946224     -0.9420793     -1.4296444      0.1185207  \nfactor(id)461  factor(id)462  factor(id)463  factor(id)464  factor(id)465  \n   -2.2330238     -2.5544505     -0.9337258     -3.5688408     -0.2714708  \nfactor(id)466  factor(id)467  factor(id)468  factor(id)469  factor(id)470  \n   -2.2471530     -1.8575604     -3.0165280     -4.3707337     -0.1020631  \nfactor(id)471  factor(id)472  factor(id)473  factor(id)474  factor(id)475  \n   -2.2962452     -0.4362524     -0.0682312     -0.7113828     -0.6509739  \nfactor(id)476  factor(id)477  factor(id)478  factor(id)479  factor(id)480  \n   -2.2159030     -0.3722269     -0.1277137     -0.8617902     -1.3784264  \nfactor(id)481  factor(id)482  factor(id)483  factor(id)484  factor(id)485  \n   -1.2668125     -0.3221145     -0.3694822      0.3742597     -1.1971520  \nfactor(id)486  factor(id)487  factor(id)488  factor(id)489  factor(id)490  \n   -1.7667638     -0.3340940     -1.7205133     -2.2568467     -1.8137394  \nfactor(id)491  factor(id)492  factor(id)493  factor(id)494  factor(id)495  \n   -0.0582747     -1.9190715     -0.6342174     -3.6974693     -0.3921098  \nfactor(id)496  factor(id)497  factor(id)498  factor(id)499  factor(id)500  \n   -1.5298775     -0.5476525     -1.4930554     -2.5228905     -0.2511241  \nfactor(id)501  factor(id)502  factor(id)503  factor(id)504  factor(id)505  \n   -2.0783921     -1.0366267      0.3891613     -0.0326843     -1.4013691  \nfactor(id)506  factor(id)507  factor(id)508  factor(id)509  factor(id)510  \n    0.1109218     -1.7455372     -2.6679473     -1.1284840      0.1729925  \nfactor(id)511  factor(id)512  factor(id)513  factor(id)514  factor(id)515  \n   -0.8348753      0.4589049     -2.5682984     -0.9878010     -0.5940622  \nfactor(id)516  factor(id)517  factor(id)518  factor(id)519  factor(id)520  \n   -1.7425469     -0.8692734     -1.1061395     -0.2754527     -2.0568223  \nfactor(id)521  factor(id)522  factor(id)523  factor(id)524  factor(id)525  \n   -1.2248788      0.4854992      0.3539625     -0.4260779     -0.6468819  \nfactor(id)526  factor(id)527  factor(id)528  factor(id)529  factor(id)530  \n   -0.0903952     -0.2045723     -0.4261753     -2.0586098     -0.1378354  \nfactor(id)531  factor(id)532  factor(id)533  factor(id)534  factor(id)535  \n    0.5090071     -0.3524712     -2.7228941     -0.5025199     -1.0624910  \nfactor(id)536  factor(id)537  factor(id)538  factor(id)539  factor(id)540  \n   -0.3035858     -0.4137570     -0.5286483      0.1598279     -1.4470984  \nfactor(id)541  factor(id)542  factor(id)543  factor(id)544  factor(id)545  \n   -0.3111554     -1.0187912     -0.1758000      0.3356895     -2.5147919  \nfactor(id)546  factor(id)547  factor(id)548  factor(id)549  factor(id)550  \n   -0.2690522      0.0699535     -0.3780972     -0.5916537     -0.1192377  \nfactor(id)551  factor(id)552  factor(id)553  factor(id)554  factor(id)555  \n   -0.4489108     -0.5228657     -0.2531003     -1.4951698     -1.6801842  \nfactor(id)556  factor(id)557  factor(id)558  factor(id)559  factor(id)560  \n    0.3760810     -1.0286751     -1.1760088     -3.2089989     -2.5710271  \nfactor(id)561  factor(id)562  factor(id)563  factor(id)564  factor(id)565  \n    0.0315641      0.1818021     -2.2825744      0.0822954     -1.1950727  \nfactor(id)566  factor(id)567  factor(id)568  factor(id)569  factor(id)570  \n    0.1940021     -3.5865482     -0.2442893     -1.0425527     -0.7318057  \nfactor(id)571  factor(id)572  factor(id)573  factor(id)574  factor(id)575  \n   -0.0624118      0.0528832     -0.1803426      0.2557702     -0.6287755  \nfactor(id)576  factor(id)577  factor(id)578  factor(id)579  factor(id)580  \n    0.2609783     -0.8120050     -0.0670469     -0.4403119      0.0559130  \nfactor(id)581  factor(id)582  factor(id)583  factor(id)584  factor(id)585  \n   -0.3724249      0.3466553      0.1053244      0.0263852     -0.1070240  \nfactor(id)586  factor(id)587  factor(id)588  factor(id)589  factor(id)590  \n   -1.3060257     -0.3438155     -0.2917004     -2.1209831      0.3472921  \nfactor(id)591  factor(id)592  factor(id)593  factor(id)594  factor(id)595  \n   -2.2030413      0.0168668     -1.0857457     -0.0342374             NA"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#data-structure-in-the-lsdv",
+    "href": "slides/w08a-panel-regression.html#data-structure-in-the-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Data structure in the LSDV",
+    "text": "Data structure in the LSDV\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nTime\nY\nX1\nX2\n\\(\\delta_1\\)\n\\(\\delta_2\\)\n\\(\\delta_N\\)\n\n\n\n\n\\(1\\)\n\\(1\\)\n\\(y_{11}\\)\n\\(x^{1}_{11}\\)\n\\(x^{2}_{11}\\)\n1\n0\n0\n\n\n\\(1\\)\n\\(2\\)\n\\(y_{12}\\)\n\\(x^{1}_{12}\\)\n\\(x^{2}_{12}\\)\n1\n0\n0\n\n\n\\(1\\)\n\\(3\\)\n\\(y_{13}\\)\n\\(x^{1}_{13}\\)\n\\(x^{2}_{13}\\)\n1\n0\n0\n\n\n\\(2\\)\n\\(2\\)\n\\(y_{22}\\)\n\\(x^{1}_{22}\\)\n\\(x^{2}_{22}\\)\n0\n1\n0\n\n\n\\(2\\)\n\\(3\\)\n\\(y_{23}\\)\n\\(x^{1}_{23}\\)\n\\(x^{2}_{23}\\)\n0\n1\n0\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(1\\)\n\\(y_{N1}\\)\n\\(x^{1}_{N1}\\)\n\\(x^{1}_{N1}\\)\n0\n0\n1\n\n\n\\(N\\)\n\\(2\\)\n\\(y_{N2}\\)\n\\(x^{1}_{N2}\\)\n\\(x^{2}_{N2}\\)\n0\n0\n1"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#results",
+    "href": "slides/w08a-panel-regression.html#results",
+    "title": "Panel Regression Analysis",
+    "section": "Results",
+    "text": "Results\n\nmodelsummary(\n  list(\n    `Pooled` = union_fit_0, \n    `Least-squares dummy variable` = union_fit_1),\n  estimate = \"{estimate}{stars} ({std.error})\", \n  statistic = NULL,\n  coef_map = c(\"(Intercept)\", \"union\", \"educ\", \"exper\", \"hours\", \"tenure\"),\n  gof_map = c(\"nobs\", \"adj.r.squared\" , \"df\"),\n  notes = \"In the Least-squares dummy variable model we omitted all individual-related variables\"\n)\n\n\n\n\n\n \n  \n      \n    Pooled \n    Least-squares dummy variable \n  \n \n\n  \n    (Intercept) \n    4.705*** (0.070) \n    4.349*** (0.289) \n  \n  \n    union \n    0.126*** (0.013) \n    0.030* (0.015) \n  \n  \n    educ \n    0.082*** (0.002) \n    0.102*** (0.027) \n  \n  \n    exper \n    0.044*** (0.002) \n    0.114*** (0.002) \n  \n  \n    hours \n    0.008*** (0.001) \n    0.001 (0.001) \n  \n  \n    Num.Obs. \n    4165 \n    4165 \n  \n  \n    R2 Adj. \n    0.298 \n    0.891 \n  \n  \n    DF \n    5 \n    598 \n  \n\n\n In the Least-squares dummy variable model we omitted all individual-related variables"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#cross-sectional-data-and-lsdv-1",
+    "href": "slides/w08a-panel-regression.html#cross-sectional-data-and-lsdv-1",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data and LSDV (1)",
+    "text": "Cross-sectional data and LSDV (1)\n\nCan we run a LSDV model with the cross-sectional data?\n\n\nAny ideas?\nWhy?….\nNO…\nBecause the number of independent variables have to be less then or equal to the number of observations."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#cross-sectional-data-and-lsdv-2",
+    "href": "slides/w08a-panel-regression.html#cross-sectional-data-and-lsdv-2",
+    "title": "Panel Regression Analysis",
+    "section": "Cross-sectional data and LSDV (2)",
+    "text": "Cross-sectional data and LSDV (2)\n\n\n\n\n\n\n\n\n\n\n\n\n\nID\nY\nX1\nX2\n\\(\\delta_1\\)\n\\(\\delta_2\\)\n\\(\\delta_3\\)\n\\(\\delta_N\\)\n\n\n\n\n\\(1\\)\n\\(y_{1}\\)\n\\(x^{1}_{1}\\)\n\\(x^{2}_{1}\\)\n1\n0\n0\n0\n\n\n\\(2\\)\n\\(y_{2}\\)\n\\(x^{1}_{2}\\)\n\\(x^{2}_{2}\\)\n0\n1\n0\n0\n\n\n\\(3\\)\n\\(y_{3}\\)\n\\(x^{1}_{3}\\)\n\\(x^{2}_{3}\\)\n0\n0\n1\n0\n\n\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\\(\\vdots\\)\n\n\n\\(N\\)\n\\(y_{N}\\)\n\\(x^{1}_{N}\\)\n\\(x^{1}_{N}\\)\n0\n0\n0\n1"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#panel-data-and-lsdv",
+    "href": "slides/w08a-panel-regression.html#panel-data-and-lsdv",
+    "title": "Panel Regression Analysis",
+    "section": "Panel data and LSDV",
+    "text": "Panel data and LSDV\nLSDV model works with the panel data, but…\n\nit is inefficient! Any ideas why?…\n\nNumber of dummy variables is equal to the number of individuals + control variables.\n\nIf we have 5,000 individuals, we have 5,000+ regression coefficients.\nWhat if we have 100,000 individuals?\n\nHaving too many regressors remains unbiased, but complicates inference:\n\nnumber of degrees of freedom increases;\nadjusted \\(R^2\\) may shrink to zero;"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#readings",
+    "href": "slides/w08a-panel-regression.html#readings",
+    "title": "Panel Regression Analysis",
+    "section": "Readings",
+    "text": "Readings\n\nKey readings:\n\nMundlak (1961)\nAngrist & Pischke (2009) Ch. 5\nJ. M. Wooldridge (2010);\nM. J. Wooldridge (2020);\nSöderbom, Teal, & Eberhardt (2014), Ch. 9-11\n\nOther readings:\n\nCroissant & Millo (2018)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#terminology",
+    "href": "slides/w08a-panel-regression.html#terminology",
+    "title": "Panel Regression Analysis",
+    "section": "Terminology",
+    "text": "Terminology\nPanel data has \\(i\\) individuals (groups) and \\(t\\) time periods for each individual;\n\nPooled OLS (regression without any panel structure);\nFixed Effect:\n\nLeast-squares dummy variable (Pooled OLS + individual dummies);\n\nPanel Regression Fixed Effect:\n\nWithin-transformation most commonly used\nFirst-difference, Between transformation (look it up in (Croissant & Millo, 2018))\n\nPanel Regression Random Effect"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#pooled-ols",
+    "href": "slides/w08a-panel-regression.html#pooled-ols",
+    "title": "Panel Regression Analysis",
+    "section": "Pooled OLS",
+    "text": "Pooled OLS\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  +  \\epsilon_{it}\n\\]\n\nEstimates are biased because of the OVB.\nWe assume the OVB to be time-invariant (Mundlak, 1961)."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#least-squares-dummy-variable-model",
+    "href": "slides/w08a-panel-regression.html#least-squares-dummy-variable-model",
+    "title": "Panel Regression Analysis",
+    "section": "Least-squares dummy variable model",
+    "text": "Least-squares dummy variable model\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\gamma_i \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\nIntroduces a vector of dummy variables \\(\\color{Red}{\\delta}\\) and estimated coefficients for each dummy variable \\(\\gamma_i\\).\nEstimates and unbiased (consistent) but inefficient."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-notations",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-notations",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model (notations)",
+    "text": "Fixed Effect Model (notations)\nIndividual Fixed effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Red}{ \\alpha_i } + \\epsilon_{it}\n\\]\n\n\\(\\color{Red}{ \\alpha_i }\\) is the individual-specific fixed effect;\nusually wihtout the intercept \\(\\beta_0\\);\n\n\nTwo-ways fixed effect model (individual + time effect):\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Red}{ \\alpha_i } + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]\nTime Fixed Effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{it} + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: Within transformation",
+    "text": "Fixed Effect Model: Within transformation\nWithin-transformation subtracts group means from each observation and run the regression.\n\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - \\overline{\\text{Wage}_{i}}) & =  \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  \\overline{\\text{Union}_{i}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - \\overline{\\text{X}_{i}}) \\\\\n& +  \\beta_3 \\cdot (\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}}) \\\\\n& +  \\color{Red}{\\alpha_{i}} \\\\\n& +  (\\epsilon_{it} - \\overline{\\epsilon_{i}})\n\\end{aligned}\n\\]\n\nNote that time-invariant effects disappear.\n\nAny examples and ideas why?\n\\(\\text{Ability}_{i} - \\overline{\\text{Ability}_{i}} = 0\\).\nGender, race, individual characteristics …\nFE (Within) estimates are identical to the LSDV, but SE are more efficient;"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-first-difference-transformation",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-first-difference-transformation",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: First Difference transformation",
+    "text": "Fixed Effect Model: First Difference transformation\n\\[\n\\begin{aligned}\nlog(\\text{Wage}_{it} - {\\text{Wage}_{i,t-1}}) & = \\beta_0 \\\\\n& + \\beta_1 \\cdot (\\text{Union}_{it} -  {\\text{Union}_{it-1}}) \\\\\n& + \\beta_2 \\cdot (X_{it} - {{X}_{i,t-1}}) \\\\\n& + \\beta_3 \\cdot (\\text{Ability}_{i} - {\\text{Ability}_{i,t-1}}) \\\\\n& + (\\epsilon_{it} - {\\epsilon_{i,t-1}})\n\\end{aligned}\n\\]\nNote:\n\nSimilar to the within transformation, but sacrifices at least one time dimension.\nRelaxes the autocorrelation assumption.\nMay be not possible with unbalanced data."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-assumptions-1",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-assumptions-1",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: assumptions (1)",
+    "text": "Fixed Effect Model: assumptions (1)\n\nNOT ZERO CORRELATION between effects and regressors:\n\n\\(Cov(\\delta_{i},{X}_{it}) \\neq 0\\)\n\nStrict exogeneity (No endogeneity):\n\n\\(E[\\epsilon_{is}| {X}_{it}, \\delta_{i}] = 0\\)\n\\(Cov(\\epsilon_{is}, {X}_{it}) = 0\\) and\n\\(Cov(\\epsilon_{it}, {X}_{jt}) = 0\\) , where \\(j\\neq i\\) and \\(s\\neq t\\) ;\nResiduals (\\(\\epsilon\\)) do not correlate with all explanatory variable (\\(X\\)) in all time periods (\\(t\\)) and for all individuals (\\(i\\)).\n\nNo autocorrelation/serial correlation: \\(Cov(\\epsilon_{it}, {X}_{i,t-1}) = 0\\);\nNo cross-sectional dependence: \\(Cov(\\epsilon_{it}, {X}_{j,t}) = 0\\) (when individual observations react similarly to the common shocks or correlate in space);"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#panel-regression-fe-model-not-less-important-assumptions-2",
+    "href": "slides/w08a-panel-regression.html#panel-regression-fe-model-not-less-important-assumptions-2",
+    "title": "Panel Regression Analysis",
+    "section": "Panel Regression FE model not less important assumptions (2)",
+    "text": "Panel Regression FE model not less important assumptions (2)\n\nAll Gauss-Markov assumptions\n\nLinearity\nRandom sampling\nNo endogeneity\nNo collinearity\n\nHomoscedasticity of error terms: \\(Var(\\delta_{i}|{X}_{it}) = \\sigma^2_{\\delta}\\)\nNormality of the residuals"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-application-literature",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-application-literature",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed effect application: literature",
+    "text": "Fixed effect application: literature\nSeminal papers: (Mundlak, 1961)\nClimate and agriculture: Bozzola, Massetti, Mendelsohn, & Capitanio (2017)\nChoice of irrigation: Chatzopoulos & Lippert (2015)\nCrop choice: Seo & Mendelsohn (2008b)\nLivestock choice: Seo & Mendelsohn (2008a)\nCross-sectional dependence: (Conley, 1999)"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#random-effect-model-individual-time-and-two-ways",
+    "href": "slides/w08a-panel-regression.html#random-effect-model-individual-time-and-two-ways",
+    "title": "Panel Regression Analysis",
+    "section": "Random Effect Model (individual, time and two-ways)",
+    "text": "Random Effect Model (individual, time and two-ways)\n\nIntroduce random components \\(\\color{Red}{v_i}\\) and/or \\(\\color{Blue}{u_{t}}\\)\n\n\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\color{Red}{v_{i}} + \\color{Blue}{u_{t}}  + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:\n\n\\(Cov(v_{i},{X}_{it}) = 0\\)\n\nIgnoring RE causes no bias to the estimates;"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#summary-on-the-panel-regression",
+    "href": "slides/w08a-panel-regression.html#summary-on-the-panel-regression",
+    "title": "Panel Regression Analysis",
+    "section": "Summary on the Panel Regression",
+    "text": "Summary on the Panel Regression\n\n\nFixed Effect (within transformation)\n\nAssumes that Fixed Effects correlate with regressors!\nPartially resolves the OVB.\nIgnoring FE (using pooled regression) causes bias of estimates.\n\n\nRandom Effect\n\nAssumes that Random Effects do NOT correlate with regressors\nDo NOT resolved any OVB.\nProvides additional control strategy, but ignoring RE causes NO bias.\n\n\n\n\nBoth require valid Gauss–Markov assumptions.\n\n\nLimitations of the Fixed and Random effect models\n\nNOT the ultimate solution to Endogeneity.\nOVB may still remain after applying the fixed effects.\nMeasurement error is a problem in panel data."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#general-algorithm",
+    "href": "slides/w08a-panel-regression.html#general-algorithm",
+    "title": "Panel Regression Analysis",
+    "section": "General algorithm",
+    "text": "General algorithm\n\nPooled OLS\n\nChoose an appropriate functional form (log/level);\nValidate gauss-Markov assumption validation: Linearity, Collinearity, Random Sampling; Homoscedasticity;\nNote on the ‘No endogeneity’ assumption (if not validated, shows importance of the FE model)\n\nFE: Fixed Effect. Within-transformation. Individual, Time or Two-ways effects;\n\nF-test on FE consistency against pooled.\nLM test on FE Individual, Time or Two-ways effects consistency against each other.\nIf tests suggest the pooled model, but the theory emphasizes FE, discus and reason your choice.\n\nRE: Random Effect;\n\nHausman test on effects’ correlation with regressors of RE consistency against the FE;\nSimilar Chamberlain test, Angrist and Newey tests.\n\nSerial correlation and cross-sectional dependence tests;\n\nWooldridge's, Locally–Robust LM Test, Breusch–Godfrey Test,\nt > 3, we may have a serial correlation problem. Check it with a test.\nCould individuals be affected by common shocks? We might have a cross-sectional dependence problem.\n\nUse robust standard errors to correct for serial correlation and/or cross-sectional dependence:\n\nClustered SE and/or heteroscedasticity and/or autocorrelation robust SE;\n\nSummary and interpretation;"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-1.a-pooled-ols",
+    "href": "slides/w08a-panel-regression.html#step-1.a-pooled-ols",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.a Pooled OLS",
+    "text": "Step 1.a Pooled OLS\n\nlibrary(tidyverse)\nlibrary(modelsummary)\nlibrary(parameters)\nlibrary(performance)\nlibrary(lmtest)\nwage_dta <- read_csv(\"wage_unon_panel.csv\")\nglimpse(wage_dta)\n\n\nunion_fit_0 <- \n  lm(log(wage) ~ union + educ + exper + I(exper^2) + hours , \n     data = wage_dta)\nunion_fit_0\n\n\n\n\nCall:\nlm(formula = log(wage) ~ union + educ + exper + I(exper^2) + \n    hours, data = wage_dta)\n\nCoefficients:\n(Intercept)        union         educ        exper   I(exper^2)        hours  \n  4.7054380    0.1261467    0.0819744    0.0437155   -0.0006932    0.0077042"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-1.b-assumptions-linearity-homoscedasticity",
+    "href": "slides/w08a-panel-regression.html#step-1.b-assumptions-linearity-homoscedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Linearity + Homoscedasticity)",
+    "text": "Step 1.b Assumptions (Linearity + Homoscedasticity)\n\ncheck_model(union_fit_0, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-1.b-assumptions-homoscedasticity",
+    "href": "slides/w08a-panel-regression.html#step-1.b-assumptions-homoscedasticity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Homoscedasticity)",
+    "text": "Step 1.b Assumptions (Homoscedasticity)\n\ncheck_heteroscedasticity(union_fit_0) \n\n\n\nOK: Error variance appears to be homoscedastic (p = 0.647).\n\n\n\n\nbptest(union_fit_0)\n\n\n\n\n    studentized Breusch-Pagan test\n\ndata:  union_fit_0\nBP = 92.71, df = 5, p-value < 2.2e-16"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-1.b-assumptions-collinearity",
+    "href": "slides/w08a-panel-regression.html#step-1.b-assumptions-collinearity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (Collinearity)",
+    "text": "Step 1.b Assumptions (Collinearity)\n\ncheck_collinearity(union_fit_0)\n\n\n\n# Check for Multicollinearity\n\nLow Correlation\n\n  Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n union 1.11 [ 1.08,  1.15]         1.05      0.90     [0.87, 0.93]\n  educ 1.13 [ 1.10,  1.18]         1.06      0.88     [0.85, 0.91]\n hours 1.03 [ 1.01,  1.09]         1.02      0.97     [0.92, 0.99]\n\nHigh Correlation\n\n       Term   VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n      exper 18.81 [17.73, 19.95]         4.34      0.05     [0.05, 0.06]\n I(exper^2) 18.81 [17.73, 19.95]         4.34      0.05     [0.05, 0.06]"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-1.b-assumptions-no-endogeneity",
+    "href": "slides/w08a-panel-regression.html#step-1.b-assumptions-no-endogeneity",
+    "title": "Panel Regression Analysis",
+    "section": "Step 1.b Assumptions (No endogeneity)",
+    "text": "Step 1.b Assumptions (No endogeneity)\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\n\\(\\text{Ability}_{i}\\) not observable and not measurable.\nOmitting the ability may cause the OVB.\n\nNo endogeneity assumption cannot be satisfied.\nWe should exploit the panel data structure."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within",
+    "href": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within)",
+    "text": "Step 2. FE: Fixed Effect (within)\nNote, the new package: plm used for running panel regressions.\n\nlibrary(plm)\n\nDeclare data to be panel.\n\nwage_dta_pan <- pdata.frame(wage_dta, index = c(\"id\", \"year\"))\n\n\n\n\nCheck panel dimensions.\n\npdim(wage_dta_pan)\n\n\n\nBalanced Panel: n = 595, T = 7, N = 4165"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within-1",
+    "href": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within) (1)",
+    "text": "Step 2. FE: Fixed Effect (within) (1)\nRerun the pooled regression with plm:\n\nunion_pooled <- \n  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,\n      data = wage_dta, model = \"pooling\")\nunion_pooled\n\n\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n(Intercept)       union        educ       exper  I(exper^2)       hours \n 4.70543801  0.12614668  0.08197441  0.04371549 -0.00069316  0.00770422 \n\n\n\nFixed Effect (individual) model\n\nunion_fe_ind <- \n  plm(log(wage)  ~ union + educ + exper + I(exper^2) + hours ,\n      data = wage_dta, model = \"within\", effect = \"individual\")\nunion_fe_ind\n\n\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n      union       exper  I(exper^2)       hours \n 0.03002946  0.11370518 -0.00042343  0.00079804"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within-2",
+    "href": "slides/w08a-panel-regression.html#step-2.-fe-fixed-effect-within-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. FE: Fixed Effect (within) (2)",
+    "text": "Step 2. FE: Fixed Effect (within) (2)\nFixed Effect (time) model\n\nunion_fe_time <- \n  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,\n      data = wage_dta, model = \"within\", effect = \"time\")\nunion_fe_time\n\n\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n      union        educ       exper  I(exper^2)       hours \n 0.12428314  0.07944664  0.03582803 -0.00058079  0.00756342 \n\n\n\nFixed Effect (Two-ways) model\n\nunion_fe_twoways <- \n  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,\n      data = wage_dta, model = \"within\", effect = \"twoways\")\nunion_fe_twoways\n\n\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n      union  I(exper^2)       hours \n 0.02712246 -0.00040431  0.00064611"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-f-test-1",
+    "href": "slides/w08a-panel-regression.html#step-2.-f-test-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test (1)",
+    "text": "Step 2. F-test (1)\nWhich model to choose: Pooled or FE?\n\n\n\nCompares FE models (individual, time, two-ways) vs pooled\n\nPooled is always consistent vs FE\n\nTest logic:\n\nH0: One model is inconsistent. (no individual/time/two-way effects)\nH1: Both models are equally consistent.\n\n\n\n\nRun the test. Check the p-value\n\np-value < 0.05: FE is as good as pooled. Not using the FE model may lead to the bias.\np-value >= 0.05: Pooled is better than the FE model. Use pooled for interpretation."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-f-test-2",
+    "href": "slides/w08a-panel-regression.html#step-2.-f-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. F-test (2)",
+    "text": "Step 2. F-test (2)\n\n\n\npFtest(union_fe_ind, union_pooled)\n\n\n    F test for individual effects\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nF = 39.274, df1 = 593, df2 = 3566, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nFE is preferred (pooled is biased)\n\n\n\n\n\n\n\npFtest(union_fe_twoways, union_pooled)\n\n\n    F test for twoways effects\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nF = 39.309, df1 = 598, df2 = 3561, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nTwo-ways is preferred (pooled is biased)\n\n\n\n\n\n\n\n\npFtest(union_fe_time, union_pooled)\n\n\n    F test for time effects\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nF = 154.34, df1 = 6, df2 = 4153, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nTime FE is preferred (pooled is biased)\n\n\n\n\nF-test leads us to stick with the FE individual, two-ways or time regression."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-lm-test-lagrange-multiplier-test-2",
+    "href": "slides/w08a-panel-regression.html#step-2.-lm-test-lagrange-multiplier-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM test: Lagrange multiplier test (2)",
+    "text": "Step 2. LM test: Lagrange multiplier test (2)\nWhich FE model to choose: individual, time or two-way?\n\n\n\nExist to compare FE models between each other assuming that:\n\nPooled is always consistent in pooled vs individual FE\nIndividual FE always consistent in individual FE vs time or two-way FE\n\nTest logic:\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nRun the test (one or another or both). Check p-value:\n\np-value < 0.05:\n\nIndividual FE is as good as pooled;\nTime or Two-ways model is as good as individual FE;\n\np-value >= 0.05: Pooled or individual FE is better than the alternative"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-2.-lm-testlagrange-multiplier-2",
+    "href": "slides/w08a-panel-regression.html#step-2.-lm-testlagrange-multiplier-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 2. LM testLagrange multiplier (2)",
+    "text": "Step 2. LM testLagrange multiplier (2)\n\n\n\nplmtest(union_pooled, effect = \"individual\")\n\n\n    Lagrange Multiplier Test - (Honda)\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nnormal = 70.727, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"twoway\")\n\n\n    Lagrange Multiplier Test - two-ways effects (Honda)\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nnormal = 186.47, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\nplmtest(union_pooled, effect = \"time\")\n\n\n    Lagrange Multiplier Test - time effects (Honda)\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nnormal = 192.98, p-value < 2.2e-16\nalternative hypothesis: significant effects\n\n\n\n\nIndividual FE is preferred (pooled is biased)\nIndividual FE and two-ways are both consistent. We can choose any of those two.\nIndividual FE and time FE are both consistent. We can choose any of those two.\n\n\n\n\nAll tests suggest that individual, time and two-ways fixed effect models are equally consistent."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-3.-random-effect-model-individual",
+    "href": "slides/w08a-panel-regression.html#step-3.-random-effect-model-individual",
+    "title": "Panel Regression Analysis",
+    "section": "Step 3. Random Effect model (individual)",
+    "text": "Step 3. Random Effect model (individual)\n\nunion_rand_ind <- \n  plm(log(wage) ~ union + educ + exper + I(exper^2) + hours ,\n      data = wage_dta, model = \"random\", effect = \"individual\")\nunion_rand_ind\n\n\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n(Intercept)       union        educ       exper  I(exper^2)       hours \n 3.80500063  0.05488827  0.11346029  0.08804403 -0.00077520  0.00095463"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-3.-hausman-test",
+    "href": "slides/w08a-panel-regression.html#step-3.-hausman-test",
+    "title": "Panel Regression Analysis",
+    "section": "Step 3. Hausman test",
+    "text": "Step 3. Hausman test\nWhich model to choose: Fixed effect or Random effect?\n\n\n\nCompares Fixed Effect model with Random Effect:\n\nFixed effect model is always consistent\n\nTest logic:\n\nH0: One model is inconsistent. Use FE!\nH1: Both models are equally consistent. RE is as good as FE.\n\n\n\n\nRun the test. Check the p-value.\n\np-value < 0.05: Use FE or RE, both are good.\np-value >= 0.05: Use FE, discard RE.\n\n\n\n\n\n\n\n\nphtest(union_fe_ind, union_rand_ind)\n\n\n    Hausman Test\n\ndata:  log(wage) ~ union + educ + exper + I(exper^2) + hours\nchisq = 6183.7, df = 4, p-value < 2.2e-16\nalternative hypothesis: one model is inconsistent\n\n\n\n\nFE is preferred instead of the RE model."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-4.1-wooldridges-test-1",
+    "href": "slides/w08a-panel-regression.html#step-4.1-wooldridges-test-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.1 Wooldridge’s test (1)",
+    "text": "Step 4.1 Wooldridge’s test (1)\nIs there serial correlation / cross-sectional dependence in the data?\n\n\n\nWooldridge’s test for unobserved individual effects\n\nH0: no unobserved effects\nH1: some effects exist due to cross-sectional dependence and/or serial correlation\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: cross-sectional dependence and/or serial correlation are present\np-value >= 0.05: No cross-sectional dependency and/or serial correlation"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-4.1-wooldridges-test-2",
+    "href": "slides/w08a-panel-regression.html#step-4.1-wooldridges-test-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.1 Wooldridge’s test (2)",
+    "text": "Step 4.1 Wooldridge’s test (2)\n\n\n\npwtest(union_pooled, effect = \"individual\")\n\n\n    Wooldridge's test for unobserved individual effects\n\ndata:  formula\nz = 13.865, p-value < 2.2e-16\nalternative hypothesis: unobserved effect\n\npwtest(union_pooled, effect = \"time\")\n\n\n    Wooldridge's test for unobserved time effects\n\ndata:  formula\nz = 2.015, p-value = 0.04391\nalternative hypothesis: unobserved effect\n\n\n\n\ncross-sectional dependence is present\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-4.2-lagrange-multiplier-tests-1",
+    "href": "slides/w08a-panel-regression.html#step-4.2-lagrange-multiplier-tests-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.2 Lagrange-Multiplier tests (1)",
+    "text": "Step 4.2 Lagrange-Multiplier tests (1)\nIs there serial correlation in the data?\n\n\n\nLocally–Robust Lagrange Multiplier Tests for serial correlation\n\nH0: serial correlation is zero\nH1: some serial correlation is present\n\n\n\n\nRun the test Check the p-value.\n\np-value < 0.05: serial correlation need to be addressed\np-value >= 0.05: no serial correlation"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-4.2-lagrange-multiplier-tests-2",
+    "href": "slides/w08a-panel-regression.html#step-4.2-lagrange-multiplier-tests-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 4.2 Lagrange-Multiplier tests (2)",
+    "text": "Step 4.2 Lagrange-Multiplier tests (2)\n\n\n\npbsytest(union_pooled, test = \"ar\")\n\n\n    Bera, Sosa-Escudero and Yoon locally robust test\n\ndata:  formula\nchisq = 608.98, df = 1, p-value < 2.2e-16\nalternative hypothesis: AR(1) errors sub random effects\n\n\n\n\nserial correlation is present"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-5.-robust-inference",
+    "href": "slides/w08a-panel-regression.html#step-5.-robust-inference",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust inference",
+    "text": "Step 5. Robust inference\nSerial correlation and/or cross-sectional dependence render our Standard errors useless.\n\nCross-sectional dependence and/or serial correlation violate the variance homogeneity assumption:\n\nEstimates are unbiased, but inefficient.\nStandard errors need to be corrected.\n\n\n\nWe need to use:\n\nRobust Standard Errors, and/or\nClustered SE at the individual (group) level"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-5.-robust-standard-error-1",
+    "href": "slides/w08a-panel-regression.html#step-5.-robust-standard-error-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust Standard Error (1)",
+    "text": "Step 5. Robust Standard Error (1)\n\nlibrary(lmtest)\nlibrary(car)\nlibrary(sandwich)\noptions(digits = 3, scipen = 6)\nunion_fe_ind\n\n\nModel Formula: log(wage) ~ union + educ + exper + I(exper^2) + hours\n\nCoefficients:\n     union      exper I(exper^2)      hours \n  0.030029   0.113705  -0.000423   0.000798 \n\n\nCorrecting cross-sectional dependence:\n\n\nRegular SE\n\ncoeftest(union_fe_ind, \n         vcov. = vcov(union_fe_ind))\n\n\nt test of coefficients:\n\n             Estimate Std. Error t value Pr(>|t|)    \nunion       0.0300295  0.0148074    2.03    0.043 *  \nexper       0.1137052  0.0024681   46.07  < 2e-16 ***\nI(exper^2) -0.0004234  0.0000546   -7.75  1.2e-14 ***\nhours       0.0007980  0.0005997    1.33    0.183    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nRobust SE\n\ncoeftest(union_fe_ind, \n         vcov. = vcovHC(union_fe_ind, method = \"white1\", \n                        type = \"HC0\", cluster = \"group\"))\n\n\nt test of coefficients:\n\n             Estimate Std. Error t value Pr(>|t|)    \nunion       0.0300295  0.0159202    1.89    0.059 .  \nexper       0.1137052  0.0025948   43.82  < 2e-16 ***\nI(exper^2) -0.0004234  0.0000539   -7.86  5.1e-15 ***\nhours       0.0007980  0.0007524    1.06    0.289    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-5.-robust-standard-error-2",
+    "href": "slides/w08a-panel-regression.html#step-5.-robust-standard-error-2",
+    "title": "Panel Regression Analysis",
+    "section": "Step 5. Robust Standard Error (2)",
+    "text": "Step 5. Robust Standard Error (2)\nWe produce new Variance-covariance matrix:\n\nvcovHC(union_fe_ind, \n       method = \"white1\", \n       type = \"HC0\", \n       cluster = \"group\")\n\n                   union         exper      I(exper^2)           hours\nunion       0.0002534526 -0.0000028527  0.000000054371 -0.000000443094\nexper      -0.0000028527  0.0000067329 -0.000000126361  0.000000043707\nI(exper^2)  0.0000000544 -0.0000001264  0.000000002902  0.000000000683\nhours      -0.0000004431  0.0000000437  0.000000000683  0.000000566054\nattr(,\"cluster\")\n[1] \"group\"\n\n\n\nmethods for cross–sectional dependence “white1” and “white2” and for cross–sectional dependence and autocorrelation “arellano”;\ntype for sample size correction: “HC0”, “sss”, “HC1”, “HC2”, “HC3”, “HC4” (“HC3” is recommended);\ncluster enabled by default (“group” or “time”);"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-6.-reporting-results-1",
+    "href": "slides/w08a-panel-regression.html#step-6.-reporting-results-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting results (1)",
+    "text": "Step 6. Reporting results (1)\n\npooled_robust <- \n  coeftest(union_pooled,\n           vcov. = vcovHC(union_pooled, method = \"arellano\",\n                          type = \"HC3\", cluster = \"group\"))\n\npooled_cs_robust <- \n  coeftest(union_fe_ind,\n           vcov. = vcovHC(union_fe_ind, method = \"white1\", \n                          type = \"HC0\", cluster = \"group\"))\n\npooled_csac_robust <- \n  coeftest(union_fe_ind,\n           vcov. = vcovHC(union_fe_ind, method = \"arellano\", \n                          type = \"HC3\", cluster = \"group\"))\n\n\nmodelsummary(\n  list(\n    `Pooled (no SE correction)` = coeftest(union_pooled),\n    `Pooled (c/s dep. and aut.)` = pooled_robust,\n    `Ind. FE (no SE correction)` = coeftest(union_fe_ind),\n    `Ind. FE (c/s dep.)` = pooled_cs_robust, \n    `Ind. FE (c/s dep. and aut.)` = pooled_csac_robust\n    ), \n  fmt = 4, statistic = NULL,\n  estimate = \"{estimate}{stars} ({std.error})\")"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-6.-reporting-results-1-1",
+    "href": "slides/w08a-panel-regression.html#step-6.-reporting-results-1-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting results (1)",
+    "text": "Step 6. Reporting results (1)\n\n\n\n\n \n  \n      \n    Pooled (no SE correction) \n    Pooled (c/s dep. and aut.) \n     Ind. FE (no SE correction) \n     Ind. FE (c/s dep.) \n     Ind. FE (c/s dep. and aut.) \n  \n \n\n  \n    (Intercept) \n    4.7054*** (0.0699) \n    4.7054*** (0.1383) \n     \n     \n     \n  \n  \n    union \n    0.1261*** (0.0131) \n    0.1261*** (0.0255) \n    0.0300* (0.0148) \n    0.0300+ (0.0159) \n    0.0300 (0.0256) \n  \n  \n    educ \n    0.0820*** (0.0023) \n    0.0820*** (0.0052) \n     \n     \n     \n  \n  \n    exper \n    0.0437*** (0.0024) \n    0.0437*** (0.0053) \n    0.1137*** (0.0025) \n    0.1137*** (0.0026) \n    0.1137*** (0.0040) \n  \n  \n    I(exper^2) \n    −0.0007*** (0.0001) \n    −0.0007*** (0.0001) \n    −0.0004*** (0.0001) \n    −0.0004*** (0.0001) \n    −0.0004*** (0.0001) \n  \n  \n    hours \n    0.0077*** (0.0012) \n    0.0077*** (0.0019) \n    0.0008 (0.0006) \n    0.0008 (0.0008) \n    0.0008 (0.0009) \n  \n  \n    Num.Obs. \n    4165 \n    4165 \n    4165 \n    4165 \n    4165 \n  \n  \n    AIC \n    3911.1 \n    3911.1 \n    −4502.1 \n    −4502.1 \n    −4502.1 \n  \n  \n    BIC \n    3955.5 \n    3955.5 \n    −4470.5 \n    −4470.5 \n    −4470.5 \n  \n  \n    Log.Lik. \n    -1948.564 \n    -1948.564 \n    2256.066 \n    2256.066 \n    2256.066"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#step-6.-reporting-gof-1",
+    "href": "slides/w08a-panel-regression.html#step-6.-reporting-gof-1",
+    "title": "Panel Regression Analysis",
+    "section": "Step 6. Reporting GOF (1)",
+    "text": "Step 6. Reporting GOF (1)\n\nlibrary(performance)\ncompare_performance(list(Pooled = union_pooled, FE = union_fe_ind))\n\n\n\n# Comparison of Model Performance Indices\n\nName   | Model |   AIC (weights) |  AICc (weights) |   BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma\n--------------------------------------------------------------------------------------------------------\nPooled |   plm | 59525.1 (<.001) | 59525.1 (<.001) | 59569.4 (<.001) | 0.299 |     0.298 | 0.386 | 0.387\nFE     |   plm | 51111.8 (>.999) | 51111.8 (>.999) | 51143.5 (>.999) | 0.657 |     0.600 | 0.141 | 0.141"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#takeaways-for-the-exam",
+    "href": "slides/w08a-panel-regression.html#takeaways-for-the-exam",
+    "title": "Panel Regression Analysis",
+    "section": "Takeaways for the exam",
+    "text": "Takeaways for the exam\n\nSimpson’s paradox. What are the causes of it and solutions.\nData types (cross-section, repeated cross-section, balanced panel, unbalanced panel)\nPanel Regression\n\nPooled;\nLeast Squared Dummy Variable model;\nFixed effect (within transformation);\nWhy FE is so important?\nWhat is the key difference between FE and RE?\nWhen FE and when RE are appropriate?\n\nPanel Regression tests F-test, LM-test, Hausman test\nRobust and Clustered SE:\n\nWhy these are important and when do we need to use one?"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#homework",
+    "href": "slides/w08a-panel-regression.html#homework",
+    "title": "Panel Regression Analysis",
+    "section": "Homework",
+    "text": "Homework\n\nReproduce code from the slides\nPerform practical exercises."
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#references",
+    "href": "slides/w08a-panel-regression.html#references",
+    "title": "Panel Regression Analysis",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nBlanc, E., & Schlenker, W. (2017). The use of panel models in assessments of climate impacts on agriculture. Review of Environmental Economics and Policy, 11(2), 258–279. http://doi.org/10.1093/reep/rex016\n\n\nBozzola, M., Massetti, E., Mendelsohn, R., & Capitanio, F. (2017). A ricardian analysis of the impact of climate change on italian agriculture. European Review of Agricultural Economics, 45(1), 57–79. http://doi.org/10.1093/erae/jbx023\n\n\nCard, D. (1996). The effect of unions on the structure of wages: A longitudinal analysis. Econometrica, 64(4), 957. http://doi.org/10.2307/2171852\n\n\nChatzopoulos, T., & Lippert, C. (2015). Endogenous farm-type selection, endogenous irrigation, and spatial effects in ricardian models of climate change. European Review of Agricultural Economics, 43(2), 217–235. http://doi.org/10.1093/erae/jbv014\n\n\nConley, T. G. (1999). GMM estimation with cross sectional dependence. Journal of Econometrics, 92(1), 1–45. http://doi.org/10.1016/s0304-4076(98)00084-0\n\n\nCroissant, Y., & Millo, G. (2018). Panel data econometrics with r. John Wiley & Sons.\n\n\nFreeman, R. B. (1984). Longitudinal analyses of the effects of trade unions. Journal of Labor Economics, 2(1), 1–26. http://doi.org/10.1086/298021\n\n\nKurukulasuriya, P., Kala, N., & Mendelsohn, R. (2011). Adaptation and climate change impacts: A structural ricardian model of irrigation and farm income in africa. Climate Change Economics, 2(02), 149–174.\n\n\nKurukulasuriya, P., Mendelsohn, R., Kurukulasuriya, P., & Mendelsohn, R. (2008). Crop switching as a strategy for adapting to climate change. http://doi.org/10.22004/AG.ECON.56970\n\n\nMendelsohn, R., Nordhaus, W. D., & Shaw, D. (1994). The impact of global warming on agriculture: A ricardian analysis. The American Economic Review, 753–771.\n\n\nMundlak, Y. (1961). Empirical production function free of management bias. Journal of Farm Economics, 43(1), 44. http://doi.org/10.2307/1235460\n\n\nSeo, S. N., & Mendelsohn, R. (2008a). An analysis of crop choice: Adapting to climate change in south american farms. Ecological Economics, 67(1), 109–116. http://doi.org/10.1016/j.ecolecon.2007.12.007\n\n\nSeo, S. N., & Mendelsohn, R. (2008b). Measuring impacts and adaptations to climate change: A structural ricardian model of african livestock management. Agricultural Economics, 38(2), 151–165. http://doi.org/10.1111/j.1574-0862.2008.00289.x\n\n\nSeo, S. N., Mendelsohn, R., Seo, S. N., & Mendelsohn, R. (2008). Animal husbandry in africa: Climate change impacts and adaptations. http://doi.org/10.22004/AG.ECON.56968\n\n\nSöderbom, M., Teal, F., & Eberhardt, M. (2014). Empirical development economics. ROUTLEDGE. Retrieved from https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html\n\n\nWooldridge, J. M. (2010). Econometric analysis of cross section and panel data. MIT press.\n\n\nWooldridge, M. J. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#problem-setting-1",
+    "href": "slides/w08a-panel-regression.html#problem-setting-1",
+    "title": "Panel Regression Analysis",
+    "section": "Problem setting",
+    "text": "Problem setting\nDoes the collective bargaining (union membership) has any effect on wages?\n\nSee: (Card, 1996; Freeman, 1984)\n\n\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\nwhere \\(i\\) is the individual and \\(t\\) is the time dimension;"
   }
 ]
