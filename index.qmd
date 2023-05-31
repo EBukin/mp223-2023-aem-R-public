@@ -59,7 +59,9 @@ Exercises:
 
 Slides: See Ilias.
 
-### Week 6. May 17. Interaction terms and DiD. R: DID. 
+### Week 6. May 17. Interaction terms and DiD. R: DID.
+
+Slides:
 
 -   [w06a-interactions](slides/w06a-interactions.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w06a-interactions.pdf)
 
@@ -71,29 +73,39 @@ Exercises:
 
 -   [ex06-did-and-interactions.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex06-did-and-interactions.zip) - the R project with code and data
 
--   ex.06.a Interaction terms <https://youtu.be/GJLt36FAj48>
--   ex.06.b DiD <https://youtu.be/QAI3-Rh1Sok>
--   ex.06.C DiD Card Krueger <https://youtu.be/ogaVyGCO_6c>
+    -   ex.06.a Interaction terms <https://youtu.be/GJLt36FAj48>
+    -   ex.06.b DiD <https://youtu.be/QAI3-Rh1Sok>
+    -   ex.06.C DiD Card Krueger <https://youtu.be/ogaVyGCO_6c>
 
-### Week 7. May 24. OVB - Omitted Variable Bias (Lecture). OBV formula 
+### Week 7. May 24. OVB - Omitted Variable Bias (Lecture). OBV formula
+
+Slides:
 
 -   [w07-OVB](slides/w07-OVB.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w07-OVB.pdf)
+
+    -   w07 OVB Lecture <https://youtu.be/AM6fhMby0W4>
+
+Exercises:
+
 -   [ex07-ovb.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex07-ovb.zip) - R project with code and data
 
--   w07 OVB Lecture <https://youtu.be/AM6fhMby0W4>
--   ex.07.a Wage, Education and ability <https://youtu.be/x3g9z63xqFE>
--   ex.07.b Wage, union membership and education <https://youtu.be/EJhmkJGLsBc>
+    -   ex.07.a Wage, Education and ability <https://youtu.be/x3g9z63xqFE>
+    -   ex.07.b Wage, union membership and education <https://youtu.be/EJhmkJGLsBc>
 
-### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture) + R: FE
+### Week 8. May 31. FE - Fixed Effect / Panel Regression (Lecture)
 
--   [w08a - Panel Regression Analysis](slides/)
-    -   [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
-    -   w08 Panel Regression Analysis Lecture
-    
-    
--   [w08b - Panel Regression Analysis: production function](slides/)
-    -   [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
-    -   w08 Panel Regression Analysis: production function Lecture
+Slides:
+
+-   **After the lecture**
+
+-   [w08a-panel-regression](slides/) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
+
+-   [w08b-panel-regression-production-function.qmd](slides/) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
+
+Exercises:
+
+-   [ex08-panel-regression.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex08-panel-regression.zip) - R project with code and data
+
 
 
 ### Week 9. June 7. R: FE

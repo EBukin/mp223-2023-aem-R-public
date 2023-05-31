@@ -1,0 +1,737 @@
+---
+title: "Panel Regression Analysis: Micro application to production function"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(modelsummary)
+library(plm)
+library(ggpubr)
+library(here)
+library(performance)
+library(lmtest)
+theme_set(theme_bw())
+farm_dta <- read_csv(here("exercises", "ex08-panel-regression", "farm_panel.csv"))
+```
+
+# Example 2. Micro-level application of panel regression analysis `RiceFarms`
+
+-   Are larger farms more productive if compared to the smaller once?
+
+-   This example:
+
+    -   explores relationship between farm size and productivity.
+
+    -   guides through the process of panel regression analysis.
+
+## Part 1. Theoretical basis
+
+We employ the Cobb-Douglas Production function:
+
+$$
+\ln y = \ln \beta_0 + \sum_{n = 1}^{N}  \beta_n \ln x_n + \sum_{k = 1}^{K} \gamma_k \delta_k + \epsilon
+$$
+
+where,
+
+-   $y$ is the output and $x_n$ are the inputs all in physical mass (or monetary value);
+
+-   $N$ is the number of independent variables;
+
+-   $\delta_k$ are the shift parameters of additional dummy variables;
+
+-   $\beta_0$ , $\beta_n$ , $\gamma_n$ are the estimated coefficients;
+
+## Estimation strategy. Part 1.
+
+Pooled OLS production function:
+
+$$
+\begin{aligned}
+\ln \text{output}_{it} & = A_0 + \beta_1 \cdot \ln \text{land}_{it} 
++ \beta_2 \cdot \ln \text{labor}_{it} \\
+& + \beta_3 \cdot \ln \text{seed}_{it} + \beta_4 \cdot \ln  \text{urea}_{it} \\
+& + \beta_5 \cdot \ln \text{pesticide}_{it} + e_{it}
+\end{aligned}
+$$
+
+-   What are the ex-ante expectations about the regression coefficients?
+
+    -   Ideas? ...
+    -   Probably all $\beta$ should be positive.
+
+## What about OVB?
+
+$$
+\begin{aligned}
+\ln \text{output}_{it} & = A_0 + \beta_1 \cdot \ln \text{land}_{it} 
++ \beta_2 \cdot \ln \text{labor}_{it} \\
+& + \beta_3 \cdot \ln \text{seed}_{it} + \beta_4 \cdot \ln  \text{urea}_{it} \\
+& + \beta_5 \cdot \ln \text{pesticide}_{it} + e_{it}
+\end{aligned}
+$$
+
+What omitted variables could cause bias of our estimates?
+
+-   Any!? ...
+-   Any!? ...
+-   Any OVB!? ...
+-   Capital, Ability, Climate, Geography...
+
+## Using the OVB formula {.smaller}
+
+-   Let us make an educated guess about the effect of OVB on the estimates of land-related coefficient $\beta_1$?
+
+::: columns
+::: {.column width="10%"}
+-   Short:
+
+-   Long:
+
+-   Aux.
+
+-   OVB:
+:::
+
+::: {.column width="90%"}
+-   $\text{output}_{it} = A_0^s + \beta_1^s \cdot \text{land}_{it} + \beta_2^s \cdot \text{labor}_{it} + \beta_3^s \cdot \text{seed}_{it} + \beta_4^s \cdot \text{urea}_{it} + \beta_5^s \cdot \text{pesticide}_{it} + e_{it}$
+
+-   $\text{output}_{it} = A_0 + \beta_1 \cdot \text{land}_{it} + \beta_2 \cdot \text{labor}_{it} + \beta_3 \cdot \text{seed}_{it} + \beta_4 \cdot \text{urea}_{it} + \beta_5 \cdot \text{pesticide}_{it} + \color{Red}{\gamma \text{Ability}_i} + e_{it}$
+
+-   $\text{Ability}_i = \pi_0 + \color{Blue}{\pi_1 \cdot \text{land}_{it}} + \pi_2 \cdot \text{labor}_{it} + \pi_3 \cdot \text{seed}_{it} + \pi_4 \cdot \text{urea}_{it} + \pi_5 \cdot \text{pesticide}_{it} + e_{it}$
+
+-   $\text{OVB}_{\text{land}} = \beta_1^s - \beta_1 = \color{Red}{\pi_1} * \color{Blue}{\gamma}$
+:::
+:::
+
+-   Educated guess about the bias of the estimates.
+
+-   What are the signs of $\pi_1$ and $\gamma$?
+
+    -   $\pi_1 > 0$
+    -   $\gamma > 0$
+    -   $\text{OVB} = (+) \times (+) > 0$
+
+-   Not controlling for the OV $\text{ability}_i$ may cause overestimation of the effect of the farm size $\beta_1$.
+
+-   $\text{ability}_i$ does not vary over time for each farm!
+
+## How to resolve such OVB?
+
+-   Introduce a proxy variable for ability?
+
+    -   No such data.
+
+-   Rely on the panel structure of the data.
+
+    -   Use the individual fixed effect model, for example.
+
+## Estimation strategy. Part 2.
+
+Individual fixed effect panel regression production function.
+
+$$
+\begin{aligned}
+\ln \text{output}_{it} & = A_0 + \beta_1 \cdot \ln \text{land}_{it} 
++ \beta_2 \cdot \ln \text{labor}_{it} \\
+& + \beta_3 \cdot \ln \text{seed}_{it} + \beta_4 \cdot \ln  \text{urea}_{it} \\
+& + \beta_5 \cdot \ln \text{pesticide}_{it} \\ 
+& + \color{Red}{\alpha_i} + e_{it}
+\end{aligned}
+$$
+
+-   What are the ex-ante expectations about the regression coefficients?
+
+    -   Ideas? ...
+    -   Probably the same as before: all $\beta$ should be positive.
+
+## Estimation strategy. Part 3. Return to scale (1)
+
+Are larger farms more productive?
+
+To understand this, we need to calculate how joint increase of all inputs change the output.
+
+-   If increase of all inputs by 1% increases output also by **the same 1%**, we have a **constant return to scale**.
+
+-   If increase of all inputs by 1% increases output also by **more than 1%**, we have an **increasing return to scale**.
+
+-   If increase of all inputs by 1% increases output also by **less than 1%**, we have an **decreasing return to scale**.
+
+## Estimation strategy. Part 3. Return to scale (2)
+
+From the main equation,
+
+$$
+\begin{aligned}
+\ln \text{output}_{it} & = A_0 + \beta_1 \cdot \ln \text{land}_{it} 
++ \beta_2 \cdot \ln \text{labor}_{it} \\
+& + \beta_3 \cdot \ln \text{seed}_{it} + \beta_4 \cdot \ln  \text{urea}_{it} \\
+& + \beta_5 \cdot \ln \text{pesticide}_{it} \\ 
+& + \color{Red}{\alpha_i} + e_{it}
+\end{aligned}
+$$
+
+-   return to scale can be estimated as a sum of all coefficients:
+
+$$
+\text{Rreturn to scale} = \beta_1 + \beta_2 + \beta_3 + \beta_4 + \beta_5
+$$
+
+-   To perform a hypothesis testing about the return to scale, we need to employ:
+
+    -   HT about a linear combination of parameters, and
+    -   **delta method** for estimating standard errors.
+
+## Estimation strategy. Part 3. Return to scale (3)
+
+HT about a linear combination of parameters:
+
+-   H0 - $\beta_1 + \beta_2 + \beta_3 + \beta_4 + \beta_5 = 1$ (also can be $=0$ or any number)
+-   H1 - $\beta_1 + \beta_2 + \beta_3 + \beta_4 + \beta_5 \ne 1$ (also can be $\ne0$ or any number)
+
+We compute standard errors using **delta method** (`car::deltaMethod()`).
+
+And perform HT using F statistics.
+
+## Part 2. Exploratory data analysis and data description
+
+We operate a farm-level data with following variables:
+
+-   `output` - gross output of rice in kg
+-   `land` - the total area cultivated with rice, measured in hectares
+-   `seed` - seed in kilogram
+-   `urea` - urea in kilogram
+-   `pesticide` - urea in kilogram
+-   `labor` - total labor in hours (excluding harvest labor)
+
+## Data preparation
+
+Load data and calculate rice yields and logs of all variables.
+
+```{r eval=FALSE}
+#| echo: true
+#| eval: false
+library(tidyverse)
+library(plm)
+library(modelsummary)
+library(performance)
+library(lmtest)
+
+farm_dta <- read_csv("farm_panel.csv")
+
+glimpse(farm_dta)
+```
+
+```{r}
+glimpse(farm_dta)
+```
+
+## Computing yields and logs
+
+```{r}
+#| echo: true
+farm_dta_log <- farm_dta %>%
+  mutate(
+    l_output = log(output),
+    l_land = log(land),
+    l_seed = log(seed),
+    l_urea = log(urea),
+    l_pest = log(pest),
+    l_labor = log(labor),
+    yields_mt_ha = output / land / 1000
+  )
+```
+
+## Summary statistics {.smaller}
+
+```{r}
+#| echo: true
+n_inf <- function(x) sum(is.infinite(x))
+n_missing <- function(x) sum(is.na(x)|is.nan(x))
+datasummary(
+  l_output + l_land + l_seed + l_urea + l_pest + l_labor + yields_mt_ha ~ 
+    N + n_missing + n_inf + Mean + SD + Median + Min + Max,
+  data = farm_dta_log)
+```
+
+-   Any problems with data?
+
+## Any problems with data?
+
+-   Any? ...
+
+-   `pest`, when transformed with logs, produces `-Inf` values.
+
+    -   Why is that so?
+    -   Any? ...
+    -   Because there are zero values of pesticides application $\ln 0 = - \infty$.
+
+-   How to resolve the $\ln 0$ problem?
+
+## `-Infinity` in logs: lazy solution
+
+-   Before log transformation, substitute any zero with a small value, for example `0.0001`;
+
+. . .
+
+```{r}
+#| echo: true
+farm_dta_log <- farm_dta_log %>%
+  mutate(l_pest_lazy = ifelse(is.infinite(l_pest), log(0.0001), l_pest))
+```
+
+## `-Infinity` in logs: smart solution
+
+-   Introduce reverse dummy variables for each variable with log of zero, see: @Battese1997;
+
+-   Substitute negative infinity with zero. . . .
+
+```{r}
+#| echo: true
+farm_dta_log <- farm_dta_log %>%
+  mutate(pest_revdum = ifelse(is.infinite(l_pest), 1, 0),
+         l_pest_smart = ifelse(is.infinite(l_pest), 0, l_pest)) 
+```
+
+## Summary statistics after data cleaning
+
+```{r}
+#| echo: true
+datasummary(l_pest + l_pest_lazy + l_pest_smart +  pest_revdum ~ 
+    N + n_missing + n_inf + Mean + SD + Median + Min + Max, 
+    data = farm_dta_log)
+```
+
+## Farm size vs rice yields
+
+```{r}
+#| echo: true
+#| output-location: slide
+yield_size <- 
+  farm_dta_log %>% 
+  ggplot() + 
+  aes(x = land, y = yields_mt_ha) + 
+  geom_point() + 
+  geom_smooth() + 
+  scale_x_log10("Farm size, ha", 
+                breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10)) + 
+  scale_y_log10("Rice yeilds, MT/ha", 
+                breaks = c(0.2, 0.5, 1, 2, 3, 4, 5, 7, 10, 15, 20, 30)) + 
+  annotation_logticks() + 
+  labs(title = "Relationship between farm size and yield of rice",
+       caption = "Loess non-parametric smoothing line highlights the trend")
+yield_size
+```
+
+## Farm size vs rice yields by year
+
+```{r}
+#| fig-width: 11
+#| fig-height: 6
+#| echo: true
+yield_size + facet_wrap(. ~ time)
+```
+
+## Part 3. Estimating the models
+
+Step 1. Pooled OLS (with `lm()` and `plm()` functions);
+
+-   Validate all assumptions (linearity, collinearity, homogeneity)
+
+Step 2. Fixed Effect and Random Effect models (with `plm()`);
+
+-   Choose a consistent model (models) relying on: F-test (`pftest()`), Lagrange multiplier test (`plmtest()`), Hausman test (`phtest()`);
+
+Step 3. Validate homogeneity assumption (cross-sectional dependency and autocorrelation)
+
+-   Wooldridge's test (`pwtest()`) and Lagrange-Multiplier tests (`pbsytest()`).
+
+Step 4. Robust inference and results interpretation.
+
+## Step 1 Pooled OLS
+
+```{r}
+#| echo: true
+rice_pooled <- 
+  plm(l_output ~ l_land + l_labor + l_seed + l_urea + 
+        l_pest_smart + pest_revdum, 
+      data = farm_dta_log, model = "pooling", index = c("id", "time"))
+
+rice_pooled_2 <- 
+  lm(l_output ~ l_land + l_labor + l_seed + l_urea + 
+       l_pest_smart + pest_revdum, 
+      data = farm_dta_log)
+
+rice_pooled
+```
+
+## Step 1 Linearity and homoscedasticity
+
+```{r}
+#| echo: true
+check_model(rice_pooled_2, check = c("linearity", "homogeneity"))
+```
+
+## Step 1 Collinearity
+
+```{r}
+#| echo: true
+check_collinearity(rice_pooled_2)
+```
+
+## Step 2 Fixed Effect
+
+```{r}
+#| echo: true
+rice_fe <- 
+  plm(l_output ~ l_land + l_labor + l_seed + l_urea + 
+        l_pest_smart + pest_revdum, 
+      data = farm_dta_log,
+      model = "within", 
+      effect = "individual", 
+      index = c("id", "time"))
+rice_fe
+```
+
+## Step 2 FE with lazy log(0)
+
+```{r}
+#| echo: true
+rice_fe_lazy <- 
+  plm(l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_lazy , 
+      data = farm_dta_log,
+      model = "within",
+      effect = "individual",
+      index = c("id", "time"))
+rice_fe_lazy
+```
+
+## Step 2.2 F test for individual effects
+
+-   Compares FE model to OLS. OLS is always consistent, when Gauss-Markov assumptions are satisfied.
+
+    -   H0: One model is inconsistent.
+    -   H1: Both models are equally consistent.
+
+```{r}
+#| echo: true
+pFtest(rice_fe, rice_pooled)
+```
+
+## Step 2.3 Lagrange Multiplier Tests
+
+-   Compares FE model to OLS. OLS is always consistent, when Gauss-Markov assumptions are satisfied.
+
+    -   H0: One model is inconsistent.
+    -   H1: Both models are equally consistent.
+
+```{r}
+#| echo: true
+plmtest(rice_pooled, effect = "individual", type = "honda")
+plmtest(rice_pooled, effect = "individual", type = "bp")
+```
+
+## Step 2 Random Effect
+
+```{r}
+#| echo: true
+rice_re <- 
+  plm(l_output ~ l_land + l_labor + l_seed + l_urea + 
+        l_pest_smart + pest_revdum, 
+      data = farm_dta_log,
+      model = "random",
+      effect = "individual",
+      index = c("id", "time"))
+rice_re
+```
+
+## Step 2 Hausman Test for Panel Models
+
+-   Compares RE to FE model. FE is assumed to be consistent
+
+    -   H0: One model is inconsistent.
+    -   H1: Both models are equally consistent.
+
+. . .
+
+```{r}
+#| echo: true
+phtest(rice_fe, rice_re)
+```
+
+-   Fixed Effect model is recommended
+
+## Step 3 Serial correlation and cross-sectional dependence
+
+-   Wooldridge's test for unobserved individual effects
+
+    -   H0: no unobserved effects
+    -   H1: some effects also dues to serial correlation
+
+```{r}
+#| echo: true
+pwtest(rice_pooled, effect = "individual")
+pwtest(rice_pooled, effect = "time")
+```
+
+## Step 3 lm tests for random effects and/or serial correlation
+
+-   H0: serial correlation is zero
+-   H1: some serial correlation
+
+. . .
+
+```{r}
+#| echo: true
+pbsytest(rice_pooled)
+```
+
+## Step 4. Robust inference
+
+```{r echo=TRUE}
+#| echo: true
+library(lmtest)
+
+rice_pooled_robust <- coeftest(
+  rice_pooled,
+  vcovHC(rice_pooled, method = "arellano", type = "HC3", cluster = "group")
+)
+
+rice_fe_robust <- coeftest(
+  rice_fe,
+  vcovHC(rice_fe, method = "arellano", type = "HC3", cluster = "group")
+)
+
+rice_felazy_robust <- coeftest(
+  rice_fe_lazy,
+  vcovHC(rice_fe_lazy, method = "arellano", type = "HC3", cluster = "group")
+)
+
+```
+
+## Step 4. Robust inference {.smaller}
+
+```{r}
+#| echo: true
+modelsummary(
+  list(
+    `Pooled` = rice_pooled_robust,
+    `FE (rev. dum.)` = rice_fe_robust,
+    `FE (lazy)` = rice_felazy_robust
+    ), 
+  fmt = 4, statistic = NULL,
+  estimate = "{estimate}{stars} ({std.error})",
+  notes = "Robust standard errors clustered at the group level are reported in the brackets.")
+```
+
+## Step 4. Robust inference
+
+```{r}
+#| echo: true
+compare_performance(
+  list(
+    `Pooled` = rice_pooled,
+    `FE with rev. dum` = rice_fe,
+    `FE lazy` = rice_fe_lazy
+  )
+) 
+```
+
+## Part 4. Return to scale (1)
+
+```{r}
+#| echo: true
+rice_fe
+```
+
+Computing sum of the coefficients and robust SE:
+
+```{r}
+#| echo: true
+library(car)
+deltaMethod(
+  rice_fe, 
+  "l_land + l_labor + l_seed + l_urea + l_pest_smart", 
+  vcov = vcovHC(rice_fe, method = "arellano", type = "HC3", cluster = "group")
+)
+```
+
+## Part 4. Return to scale (2)
+
+HT about the sum of the coefficients:
+
+-   $H_0: \text{return to scale} = 1$
+-   $H_0: \text{return to scale} \ne 1$
+
+```{r}
+#| echo: true
+linearHypothesis(rice_fe, 
+  "l_land + l_labor + l_seed + l_urea + l_pest_smart = 1", 
+  vcov = vcovHC(rice_fe, method = "arellano", type = "HC3", cluster = "group"))
+```
+
+## Conclusions {.smaller}
+
+::: columns
+::: {.column width="50%"}
+**Regression results**
+
+```{r}
+modelsummary(
+  list(
+    `Pooled` = rice_pooled_robust,
+    `FE (rev. dum.)` = rice_fe_robust,
+    `FE (lazy)` = rice_felazy_robust
+  ),
+  fmt = 4,
+  statistic = NULL,
+  estimate = "{estimate}{stars} ({std.error})",
+  gof_map  = "nobs",
+  add_rows  =
+    list(
+      `Pooled` = rice_pooled,
+      `FE with rev. dum` = rice_fe,
+      `FE lazy` = rice_fe_lazy
+    ) %>%
+    map_dfr(broom::glance) %>% t() %>% 
+    as.data.frame() %>% rownames_to_column() %>% 
+    mutate(rowname = case_when(
+      rowname == "adj.r.squared" ~ "R2. adj",
+      rowname == "statistic" ~ "F stat.",
+      rowname == "p.value" ~ "p-value",
+      rowname == "df.residual" ~ "df"
+    ),
+    across(c(V1, V2, V3), 
+           ~ ifelse(rowname == "p-value", scales::pvalue(.), 
+                    ifelse(rowname == "df", scales::label_number(1)(.), 
+                           scales::label_number(0.001)(.))))) %>%
+    filter(!is.na(rowname)),
+  notes = "Note: All reported variables are transformed with a natural logarithm. Reverse dummy variable that compensates for the zero pesticides use is omitted. Robust standard errors clustered at the group level are reported in the brackets."
+)
+```
+:::
+
+::: {.column width="50%"}
+**Return to scale**
+
+```{r}
+#| echo: true
+library(car)
+deltaMethod(rice_fe, 
+            "l_land + l_labor + l_seed + l_urea + l_pest_smart", 
+            vcov = vcovHC(rice_fe, method = "arellano", type = "HC3", cluster = "group"))
+```
+
+```{r}
+#| echo: true
+linearHypothesis(rice_fe, 
+                 "l_land + l_labor + l_seed + l_urea + l_pest_smart = 1", 
+                 vcov = vcovHC(rice_fe, method = "arellano", type = "HC3", cluster = "group"))
+```
+:::
+:::
+
+## Individual fixed effects
+
+From the regression equation below,
+
+$$
+\begin{aligned}
+\ln \text{output}_{it} & = A_0 + \beta_1 \cdot \ln \text{land}_{it} 
++ \beta_2 \cdot \ln \text{labor}_{it} \\
+& + \beta_3 \cdot \ln \text{seed}_{it} + \beta_4 \cdot \ln  \text{urea}_{it} \\
+& + \beta_5 \cdot \ln \text{pesticide}_{it} \\ 
+& + \color{Red}{\alpha_i} + e_{it}
+\end{aligned}
+$$
+
+we know that $\color{Red}{\alpha_i}$ are the individual fixed effects.
+
+-   R calculates them and we can explore them.
+
+-   In fact, those individual fixed effects are the simplest possible measured of farms efficiency!
+
+# Extra on fixed effects
+
+## Individual fixed effects (extraction 1)
+
+In the model: 
+
+```{r}
+#| echo: true
+rice_fe
+```
+
+Individual fixed effects can be extracted as:
+
+```{r}
+#| echo: true
+fixef(rice_fe)
+```
+
+
+## Individual fixed effects (extraction 3)
+
+Or, we can extract individual fixed effects with effect-specific standard errors:
+
+```{r}
+#| echo: true
+fef_dta <- 
+  fixef(rice_fe) %>% 
+  summary() %>% 
+  as.data.frame() %>% rownames_to_column("id") %>% 
+  as_tibble() %>% 
+  mutate(id = as.double(id))
+fef_dta
+```
+
+## Farm size and efficiency
+
+Let us compute average farm size and plot fixed effects versus farm size:
+
+```{r}
+#| echo: true
+farm_mean_size <- farm_dta_log %>% group_by(id) %>% summarise(mean_size = mean(land))
+glimpse(farm_mean_size)
+```
+
+```{r}
+#| echo: true
+plot_dta <- farm_mean_size %>% left_join(fef_dta)
+glimpse(plot_dta)
+```
+
+```{r}
+#| echo: true
+#| output-location: slide
+#| fig-width: 9 
+#| fig-height: 5
+plot_dta %>% ggplot() + aes(x = mean_size, y = Estimate) + 
+  geom_point() + geom_smooth() + scale_x_log10() +
+  xlab("Farm-specific fixed effect") + 
+  ylab("Average farm size, ha") + 
+  annotation_logticks(side = "b")
+```
+
+# References

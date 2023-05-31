@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nw07-OVB + pdf\nex07-ovb.zip - R project with code and data\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nAfter the lecture\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -3470,5 +3470,362 @@
     "title": "Panel Regression Analysis",
     "section": "Problem setting",
     "text": "Problem setting\nDoes the collective bargaining (union membership) has any effect on wages?\n\nSee: (Card, 1996; Freeman, 1984)\n\n\n\\[\nlog(\\text{Wage}_{it}) = \\beta_0 + \\beta_1 \\cdot \\text{Union}_{it} + \\beta_2 \\cdot {X_{it}} + \\beta_3 \\cdot \\text{Ability}_{i} + \\epsilon_{it}\n\\]\nwhere \\(i\\) is the individual and \\(t\\) is the time dimension;"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#part-1.-theoretical-basis",
+    "href": "slides/w08b-panel-regression-production-function.html#part-1.-theoretical-basis",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Part 1. Theoretical basis",
+    "text": "Part 1. Theoretical basis\nWe employ the Cobb-Douglas Production function:\n\\[\n\\ln y = \\ln \\beta_0 + \\sum_{n = 1}^{N}  \\beta_n \\ln x_n + \\sum_{k = 1}^{K} \\gamma_k \\delta_k + \\epsilon\n\\]\nwhere,\n\n\\(y\\) is the output and \\(x_n\\) are the inputs all in physical mass (or monetary value);\n\\(N\\) is the number of independent variables;\n\\(\\delta_k\\) are the shift parameters of additional dummy variables;\n\\(\\beta_0\\) , \\(\\beta_n\\) , \\(\\gamma_n\\) are the estimated coefficients;"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-1.",
+    "href": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-1.",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Estimation strategy. Part 1.",
+    "text": "Estimation strategy. Part 1.\nPooled OLS production function:\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} + e_{it}\n\\end{aligned}\n\\]\n\nWhat are the ex-ante expectations about the regression coefficients?\n\nIdeas? …\nProbably all \\(\\beta\\) should be positive."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#what-about-ovb-3",
+    "href": "slides/w08b-panel-regression-production-function.html#what-about-ovb-3",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "What about OVB? (3)",
+    "text": "What about OVB? (3)\n\nWhat omitted variables could cause bias of our estimates?\n\nAny!? …\nAny!? …\nAny OVB!? …\nCapital, Ability, Climate, Geography…"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#applying-the-ovb-formula-1",
+    "href": "slides/w08b-panel-regression-production-function.html#applying-the-ovb-formula-1",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Applying the OVB formula (1)",
+    "text": "Applying the OVB formula (1)\n\nLet us make an educated guess about the effect of OVB on the estimates of land-related coefficient \\(\\beta_1\\)?\n\n\n\n\nShort model:\nLong model:\nAuxiliary regression\nOVB formula:\n\n\n\n\\(\\text{output}_{it} = A_0^s + \\beta_1^s \\cdot \\text{land}_{it} + \\beta_2^s \\cdot \\text{labor}_{it} + \\beta_3^s \\cdot \\text{seed}_{it} + \\beta_4^s \\cdot \\text{urea}_{it} + \\beta_5^s \\cdot \\text{pesticide}_{it} + e_{it}\\)\n\\(\\text{output}_{it} = A_0 + \\beta_1 \\cdot \\text{land}_{it} + \\beta_2 \\cdot \\text{labor}_{it} + \\beta_3 \\cdot \\text{seed}_{it} + \\beta_4 \\cdot \\text{urea}_{it} + \\beta_5 \\cdot \\text{pesticide}_{it} + \\gamma \\text{Ability}_i + e_{it}\\)\n\\(\\text{Ability}_i = \\pi_0 + \\pi_1 \\cdot \\text{land}_{it} + \\pi_2 \\cdot \\text{labor}_{it} + \\pi_3 \\cdot \\text{seed}_{it} + \\pi_4 \\cdot \\text{urea}_{it} + \\pi_5 \\cdot \\text{pesticide}_{it} + e_{it}\\)\n\\(\\text{OVB}_{\\text{land}} = \\beta_1^s - \\beta_1 = \\pi_1 * \\gamma\\)"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#applying-the-ovb-formula-2",
+    "href": "slides/w08b-panel-regression-production-function.html#applying-the-ovb-formula-2",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Applying the OVB formula (2)",
+    "text": "Applying the OVB formula (2)\n\nEducated guess about bias of the estimates.\n\n\\(\\pi_1 > 0\\)\n\\(\\gamma > 0\\)\n\\(\\text{OVB} = (+) \\times (+) > 0\\)\n\nNot controlling for the omitted ability may cause overestimation of the effect of the farm size \\(\\beta_1\\)."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#how-to-resolve-the-ovb",
+    "href": "slides/w08b-panel-regression-production-function.html#how-to-resolve-the-ovb",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "How to resolve the OVB?",
+    "text": "How to resolve the OVB?\n\nIntroduce a proxy variable for ability?\n\nNo such data.\n\nRely on the panel structure of the data.\n\nUse the individual fixed effect model, for example."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-2.",
+    "href": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-2.",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Estimation strategy. Part 2.",
+    "text": "Estimation strategy. Part 2.\nIndividual fixed effect panel regression production function.\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} \\\\\n& + \\color{Red}{\\alpha_i} + e_{it}\n\\end{aligned}\n\\]\n\nWhat are the ex-ante expectations about the regression coefficients?\n\nIdeas? …\nProbably the same as before: all \\(\\beta\\) should be positive."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#part-2.-exploratory-data-analysis-and-data-description",
+    "href": "slides/w08b-panel-regression-production-function.html#part-2.-exploratory-data-analysis-and-data-description",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Part 2. Exploratory data analysis and data description",
+    "text": "Part 2. Exploratory data analysis and data description\nWe operate a farm-level data with following variables:\n\noutput - gross output of rice in kg\nland - the total area cultivated with rice, measured in hectares\nseed - seed in kilogram\nurea - urea in kilogram\npesticide - urea in kilogram\nlabor - total labor in hours (excluding harvest labor)"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#data-preparation",
+    "href": "slides/w08b-panel-regression-production-function.html#data-preparation",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Data preparation",
+    "text": "Data preparation\nLoad data and calculate rice yields and logs of all variables.\n\nlibrary(tidyverse)\nlibrary(plm)\nlibrary(modelsummary)\nlibrary(performance)\nlibrary(lmtest)\n\nfarm_dta <- read_csv(\"farm_panel.csv\")\n\nglimpse(farm_dta)\n\n\n\nRows: 1,026\nColumns: 15\n$ id         <dbl> 101001, 101001, 101001, 101001, 101001, 101001, 101017, 101…\n$ time       <dbl> 1999, 2000, 2001, 2002, 2003, 2004, 1999, 2000, 2001, 2002,…\n$ output     <dbl> 7980, 4083, 2650, 4500, 16300, 17424, 3840, 2800, 950, 240,…\n$ land       <dbl> 3.000, 2.000, 1.000, 2.000, 3.572, 3.572, 1.420, 1.420, 0.4…\n$ labor      <dbl> 2915, 2155, 1075, 2091, 3889, 3519, 810, 855, 460, 109, 230…\n$ hiredlabor <dbl> 2875, 2110, 980, 2081, 3889, 3519, 670, 805, 380, 40, 210, …\n$ famlabor   <dbl> 40, 45, 95, 10, 1, 1, 140, 50, 80, 69, 20, 1, 108, 63, 57, …\n$ seed       <dbl> 90, 40, 100, 60, 105, 105, 50, 20, 15, 7, 15, 15, 5, 10, 10…\n$ urea       <dbl> 900, 600, 700, 600, 400, 400, 120, 100, 150, 50, 100, 100, …\n$ pest       <dbl> 6000, 3000, 5000, 5000, 10200, 10200, 0, 0, 900, 0, 2000, 2…\n$ varieties  <chr> \"mixed\", \"trad\", \"high\", \"high\", \"high\", \"high\", \"trad\", \"h…\n$ status     <chr> \"owner\", \"owner\", \"owner\", \"owner\", \"share\", \"share\", \"mixe…\n$ bimas      <chr> \"mixed\", \"mixed\", \"mixed\", \"mixed\", \"no\", \"no\", \"mixed\", \"m…\n$ region     <chr> \"wargabinangun\", \"wargabinangun\", \"wargabinangun\", \"wargabi…\n$ price      <dbl> 60, 60, 65, 70, 120, 140, 60, 50, 62, 60, 110, 130, 65, 50,…"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#computing-yeilds-and-logs",
+    "href": "slides/w08b-panel-regression-production-function.html#computing-yeilds-and-logs",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Computing yeilds and logs",
+    "text": "Computing yeilds and logs\n\nfarm_dta_log <- farm_dta %>%\n  mutate(\n    l_output = log(output),\n    l_land = log(land),\n    l_seed = log(seed),\n    l_urea = log(urea),\n    l_pest = log(pest),\n    l_labor = log(labor),\n    yields_mt_ha = output / land / 1000\n  )"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#sumary-statistics",
+    "href": "slides/w08b-panel-regression-production-function.html#sumary-statistics",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Sumary statistics",
+    "text": "Sumary statistics\n\nn_inf <- function(x) sum(is.infinite(x))\nn_missing <- function(x) sum(is.na(x)|is.nan(x))\ndatasummary(\n  l_output + l_land + l_seed + l_urea + l_pest + l_labor + yields_mt_ha ~ \n    N + n_missing + n_inf + Mean + SD + Median + Min + Max,\n  data = farm_dta_log)\n\n\n\n \n  \n      \n    N \n    n_missing \n    n_inf \n    Mean \n    SD \n    Median \n    Min \n    Max \n  \n \n\n  \n    l_output \n    1026 \n    0.00 \n    0.00 \n    6.73 \n    0.99 \n    6.79 \n    3.74 \n    9.95 \n  \n  \n    l_land \n    1026 \n    0.00 \n    0.00 \n    −1.30 \n    0.95 \n    −1.25 \n    −4.61 \n    1.67 \n  \n  \n    l_seed \n    1026 \n    0.00 \n    0.00 \n    2.37 \n    0.94 \n    2.30 \n    0.00 \n    7.13 \n  \n  \n    l_urea \n    1026 \n    0.00 \n    0.00 \n    3.98 \n    1.16 \n    4.09 \n    0.00 \n    7.13 \n  \n  \n    l_pest \n    1026 \n    0.00 \n    713.00 \n     \n     \n     \n     \n    11.04 \n  \n  \n    l_labor \n    1026 \n    0.00 \n    0.00 \n    5.56 \n    0.85 \n    5.53 \n    2.83 \n    8.47 \n  \n  \n    yields_mt_ha \n    1026 \n    0.00 \n    0.00 \n    3.38 \n    1.68 \n    3.16 \n    0.40 \n    27.50 \n  \n\n\n\n\n\n\nAny problems with data?"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#any-problems-with-data",
+    "href": "slides/w08b-panel-regression-production-function.html#any-problems-with-data",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Any problems with data?",
+    "text": "Any problems with data?\n\nAny? …\npest, when transformed with logs, produces -Inf values.\n\nWhy is that so?\nAny? …\nBecause there are zero values of pesticides application \\(\\ln 0 = - \\infty\\).\n\nHow to resolve the \\(\\ln 0\\) problem?"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#infinity-in-logs-lazy-solution",
+    "href": "slides/w08b-panel-regression-production-function.html#infinity-in-logs-lazy-solution",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "-Infinity in logs: lazy solution",
+    "text": "-Infinity in logs: lazy solution\n\nBefore log transformation, substitute any zero with a small value, for example 0.0001;\n\n\n\nfarm_dta_log <- farm_dta_log %>%\n  mutate(l_pest_lazy = ifelse(is.infinite(l_pest), log(0.0001), l_pest))"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#infinity-in-logs-smart-solution",
+    "href": "slides/w08b-panel-regression-production-function.html#infinity-in-logs-smart-solution",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "-Infinity in logs: smart solution",
+    "text": "-Infinity in logs: smart solution\n\nIntroduce reverse dummy variables for each variable with log of zero, see: Battese (1997);\nSubstitute negative infinity with zero. . . .\n\n\nfarm_dta_log <- farm_dta_log %>%\n  mutate(pest_revdum = ifelse(is.infinite(l_pest), 1, 0),\n         l_pest_smart = ifelse(is.infinite(l_pest), 0, l_pest))"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#summary-staistics-after-data-cleaning",
+    "href": "slides/w08b-panel-regression-production-function.html#summary-staistics-after-data-cleaning",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Summary staistics after data cleaning",
+    "text": "Summary staistics after data cleaning\n\ndatasummary(l_pest + l_pest_lazy + l_pest_smart +  pest_revdum ~ \n    N + n_missing + n_inf + Mean + SD + Median + Min + Max, \n    data = farm_dta_log)\n\n\n\n \n  \n      \n    N \n    n_missing \n    n_inf \n    Mean \n    SD \n    Median \n    Min \n    Max \n  \n \n\n  \n    l_pest \n    1026 \n    0.00 \n    713.00 \n     \n     \n     \n     \n    11.04 \n  \n  \n    l_pest_lazy \n    1026 \n    0.00 \n    0.00 \n    −4.37 \n    7.35 \n    −9.21 \n    −9.21 \n    11.04 \n  \n  \n    l_pest_smart \n    1026 \n    0.00 \n    0.00 \n    2.04 \n    3.15 \n    0.00 \n    0.00 \n    11.04 \n  \n  \n    pest_revdum \n    1026 \n    0.00 \n    0.00 \n    0.69 \n    0.46 \n    1.00 \n    0.00 \n    1.00"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields",
+    "href": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Farm size vs rice yields",
+    "text": "Farm size vs rice yields\n\nyield_size <- \n  farm_dta_log %>% \n  ggplot() + \n  aes(x = land, y = yields_mt_ha) + \n  geom_point() + \n  geom_smooth() + \n  scale_x_log10(\"Farm size, ha\", \n                breaks = c(0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10)) + \n  scale_y_log10(\"Rice yeilds, MT/ha\", \n                breaks = c(0.2, 0.5, 1, 2, 3, 4, 5, 7, 10, 15, 20, 30)) + \n  annotation_logticks() + \n  labs(title = \"Relationship between farm size and yield of rice\",\n       caption = \"Loess non-parametric smoothing line highlights the trend\")\nyield_size"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields-output",
+    "href": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields-output",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Farm size vs rice yields",
+    "text": "Farm size vs rice yields"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields-by-year",
+    "href": "slides/w08b-panel-regression-production-function.html#farm-size-vs-rice-yields-by-year",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Farm size vs rice yields by year",
+    "text": "Farm size vs rice yields by year\n\nyield_size + facet_wrap(. ~ time)"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#part-3.-estimating-the-models",
+    "href": "slides/w08b-panel-regression-production-function.html#part-3.-estimating-the-models",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Part 3. Estimating the models",
+    "text": "Part 3. Estimating the models\nStep 1. Pooled OLS (with lm() and plm() functions);\n\nValidate all assumptions (linearity, collinearity, homogeneity)\n\nStep 2. Fixed Effect and Random Effect models (with plm());\n\nChoose a consistent model (models) relying on: F-test (pftest()), Lagrange multiplier test (plmtest()), Hausman test (phtest());\n\nStep 3. Validate homogeneity assumption (cross-sectional dependency and autocorrelation)\n\nWooldridge’s test (pwtest()) and Lagrange-Multiplier tests (pbsytest()).\n\nStep 4. Robust inference and results interpretation."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-1-pooled-ols",
+    "href": "slides/w08b-panel-regression-production-function.html#step-1-pooled-ols",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 1 Pooled OLS",
+    "text": "Step 1 Pooled OLS\n\nrice_pooled <- \n  plm(l_output ~ l_land + l_labor + l_seed + l_urea + \n        l_pest_smart + pest_revdum, \n      data = farm_dta_log, model = \"pooling\", index = c(\"id\", \"time\"))\n\nrice_pooled_2 <- \n  lm(l_output ~ l_land + l_labor + l_seed + l_urea + \n       l_pest_smart + pest_revdum, \n      data = farm_dta_log)\n\nrice_pooled\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nCoefficients:\n (Intercept)       l_land      l_labor       l_seed       l_urea l_pest_smart \n    4.314437     0.434792     0.253482     0.148404     0.171475     0.091171 \n pest_revdum \n    0.512910"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-1-linearity-and-homoscedasticity",
+    "href": "slides/w08b-panel-regression-production-function.html#step-1-linearity-and-homoscedasticity",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 1 Linearity and homoscedasticity",
+    "text": "Step 1 Linearity and homoscedasticity\n\ncheck_model(rice_pooled_2, check = c(\"linearity\", \"homogeneity\"))"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-1-collinearity",
+    "href": "slides/w08b-panel-regression-production-function.html#step-1-collinearity",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 1 Collinearity",
+    "text": "Step 1 Collinearity\n\ncheck_collinearity(rice_pooled_2)\n\n# Check for Multicollinearity\n\nLow Correlation\n\n    Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n l_labor 4.77 [ 4.28,  5.32]         2.18      0.21     [0.19, 0.23]\n  l_urea 2.67 [ 2.42,  2.95]         1.63      0.37     [0.34, 0.41]\n\nModerate Correlation\n\n   Term  VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n l_land 6.94 [ 6.21,  7.78]         2.64      0.14     [0.13, 0.16]\n l_seed 5.07 [ 4.55,  5.66]         2.25      0.20     [0.18, 0.22]\n\nHigh Correlation\n\n         Term   VIF     VIF 95% CI Increased SE Tolerance Tolerance 95% CI\n l_pest_smart 25.04 [22.24, 28.20]         5.00      0.04     [0.04, 0.04]\n  pest_revdum 24.07 [21.38, 27.11]         4.91      0.04     [0.04, 0.05]"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2-fixed-effect",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2-fixed-effect",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2 Fixed Effect",
+    "text": "Step 2 Fixed Effect\n\nrice_fe <- \n  plm(l_output ~ l_land + l_labor + l_seed + l_urea + \n        l_pest_smart + pest_revdum, \n      data = farm_dta_log,\n      model = \"within\", \n      effect = \"individual\", \n      index = c(\"id\", \"time\"))\nrice_fe\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nCoefficients:\n      l_land      l_labor       l_seed       l_urea l_pest_smart  pest_revdum \n     0.41984      0.27084      0.12381      0.16291      0.11029      0.63498"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2-fe-with-lazy-log0",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2-fe-with-lazy-log0",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2 FE with lazy log(0)",
+    "text": "Step 2 FE with lazy log(0)\n\nrice_fe_lazy <- \n  plm(l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_lazy , \n      data = farm_dta_log,\n      model = \"within\",\n      effect = \"individual\",\n      index = c(\"id\", \"time\"))\nrice_fe_lazy\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_lazy\n\nCoefficients:\n     l_land     l_labor      l_seed      l_urea l_pest_lazy \n   0.421042    0.263876    0.134373    0.174145    0.007703"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2.2-f-test-for-individual-effects",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2.2-f-test-for-individual-effects",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2.2 F test for individual effects",
+    "text": "Step 2.2 F test for individual effects\n\nCompares FE model to OLS. OLS is always consistent, when Gauss-Markov assumptions are satisfied.\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\npFtest(rice_fe, rice_pooled)\n\n\n    F test for individual effects\n\ndata:  l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart +  ...\nF = 1.4988, df1 = 170, df2 = 849, p-value = 0.0001704\nalternative hypothesis: significant effects"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2.3-lagrange-multiplier-tests",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2.3-lagrange-multiplier-tests",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2.3 Lagrange Multiplier Tests",
+    "text": "Step 2.3 Lagrange Multiplier Tests\n\nCompares FE model to OLS. OLS is always consistent, when Gauss-Markov assumptions are satisfied.\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\nplmtest(rice_pooled, effect = \"individual\", type = \"honda\")\n\n\n    Lagrange Multiplier Test - (Honda)\n\ndata:  l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart +  ...\nnormal = 3.7129, p-value = 0.0001025\nalternative hypothesis: significant effects\n\nplmtest(rice_pooled, effect = \"individual\", type = \"bp\")\n\n\n    Lagrange Multiplier Test - (Breusch-Pagan)\n\ndata:  l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart +  ...\nchisq = 13.785, df = 1, p-value = 0.0002049\nalternative hypothesis: significant effects"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2-random-effect",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2-random-effect",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2 Random Effect",
+    "text": "Step 2 Random Effect\n\nrice_re <- \n  plm(l_output ~ l_land + l_labor + l_seed + l_urea + \n        l_pest_smart + pest_revdum, \n      data = farm_dta_log,\n      model = \"random\",\n      effect = \"individual\",\n      index = c(\"id\", \"time\"))\nrice_re\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nCoefficients:\n (Intercept)       l_land      l_labor       l_seed       l_urea l_pest_smart \n    4.276601     0.433744     0.257738     0.142589     0.169423     0.096608 \n pest_revdum \n    0.546997"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-2-hausman-test-for-panel-models",
+    "href": "slides/w08b-panel-regression-production-function.html#step-2-hausman-test-for-panel-models",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 2 Hausman Test for Panel Models",
+    "text": "Step 2 Hausman Test for Panel Models\n\nCompares RE to FE model. FE is assumed to be consistent\n\nH0: One model is inconsistent.\nH1: Both models are equally consistent.\n\n\n\n\nphtest(rice_fe, rice_re)\n\n\n    Hausman Test\n\ndata:  l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart +  ...\nchisq = 7.285, df = 6, p-value = 0.2953\nalternative hypothesis: one model is inconsistent\n\n\n\nFixed Effect model is recommended"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-3-serial-correlation-and-cross-sectional-dependence",
+    "href": "slides/w08b-panel-regression-production-function.html#step-3-serial-correlation-and-cross-sectional-dependence",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 3 Serial correlation and cross-sectional dependence",
+    "text": "Step 3 Serial correlation and cross-sectional dependence\n\nWooldridge’s test for unobserved individual effects\n\nH0: no unobserved effects\nH1: some effects also dues to serial correlation\n\n\n\npwtest(rice_pooled, effect = \"individual\")\n\n\n    Wooldridge's test for unobserved individual effects\n\ndata:  formula\nz = 2.1603, p-value = 0.03075\nalternative hypothesis: unobserved effect\n\npwtest(rice_pooled, effect = \"time\")\n\n\n    Wooldridge's test for unobserved time effects\n\ndata:  formula\nz = 1.6899, p-value = 0.09105\nalternative hypothesis: unobserved effect"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-3-lm-tests-for-random-effects-andor-serial-correlation",
+    "href": "slides/w08b-panel-regression-production-function.html#step-3-lm-tests-for-random-effects-andor-serial-correlation",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 3 lm tests for random effects and/or serial correlation",
+    "text": "Step 3 lm tests for random effects and/or serial correlation\n\nH0: serial correlation is zero\nH1: some serial correlation\n\n\n\npbsytest(rice_pooled)\n\n\n    Bera, Sosa-Escudero and Yoon locally robust test\n\ndata:  formula\nchisq = 20.988, df = 1, p-value = 4.622e-06\nalternative hypothesis: AR(1) errors sub random effects"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference",
+    "href": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 4. Robust inference",
+    "text": "Step 4. Robust inference\n\nlibrary(lmtest)\n\nrice_pooled_robust <- coeftest(\n  rice_pooled,\n  vcovHC(rice_pooled, method = \"arellano\", type = \"HC3\", cluster = \"group\")\n)\n\nrice_fe_robust <- coeftest(\n  rice_fe,\n  vcovHC(rice_fe, method = \"arellano\", type = \"HC3\", cluster = \"group\")\n)\n\nrice_felazy_robust <- coeftest(\n  rice_fe_lazy,\n  vcovHC(rice_fe_lazy, method = \"arellano\", type = \"HC3\", cluster = \"group\")\n)"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference-1",
+    "href": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference-1",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 4. Robust inference",
+    "text": "Step 4. Robust inference\n\nmodelsummary(\n  list(\n    `Pooled` = rice_pooled_robust,\n    `FE (rev. dum.)` = rice_fe_robust,\n    `FE (lazy)` = rice_felazy_robust\n    ), \n  fmt = 4, statistic = NULL,\n  estimate = \"{estimate}{stars} ({std.error})\",\n  notes = \"Robust standard errors clustered at the group level are reported in the brackets.\")\n\n\n\n \n  \n      \n    Pooled \n    FE (rev. dum.) \n    FE (lazy) \n  \n \n\n  \n    (Intercept) \n    4.3144*** (0.2691) \n     \n     \n  \n  \n    l_land \n    0.4348*** (0.0418) \n    0.4198*** (0.0479) \n    0.4210*** (0.0486) \n  \n  \n    l_labor \n    0.2535*** (0.0333) \n    0.2708*** (0.0347) \n    0.2639*** (0.0348) \n  \n  \n    l_seed \n    0.1484*** (0.0344) \n    0.1238*** (0.0370) \n    0.1344*** (0.0386) \n  \n  \n    l_urea \n    0.1715*** (0.0228) \n    0.1629*** (0.0262) \n    0.1741*** (0.0269) \n  \n  \n    l_pest_smart \n    0.0912*** (0.0172) \n    0.1103*** (0.0185) \n     \n  \n  \n    pest_revdum \n    0.5129*** (0.1141) \n    0.6350*** (0.1290) \n     \n  \n  \n    l_pest_lazy \n     \n     \n    0.0077*** (0.0020) \n  \n  \n    Num.Obs. \n    1026 \n    1026 \n    1026 \n  \n  \n    AIC \n    2796.9 \n    2187.6 \n    2222.6 \n  \n  \n    BIC \n    7824.1 \n    6376.1 \n    6416.0 \n  \n\n\n Robust standard errors clustered at the group level are reported in the brackets."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#computing-yields-and-logs",
+    "href": "slides/w08b-panel-regression-production-function.html#computing-yields-and-logs",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Computing yields and logs",
+    "text": "Computing yields and logs\n\nfarm_dta_log <- farm_dta %>%\n  mutate(\n    l_output = log(output),\n    l_land = log(land),\n    l_seed = log(seed),\n    l_urea = log(urea),\n    l_pest = log(pest),\n    l_labor = log(labor),\n    yields_mt_ha = output / land / 1000\n  )"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#summary-statistics",
+    "href": "slides/w08b-panel-regression-production-function.html#summary-statistics",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Summary statistics",
+    "text": "Summary statistics\n\nn_inf <- function(x) sum(is.infinite(x))\nn_missing <- function(x) sum(is.na(x)|is.nan(x))\ndatasummary(\n  l_output + l_land + l_seed + l_urea + l_pest + l_labor + yields_mt_ha ~ \n    N + n_missing + n_inf + Mean + SD + Median + Min + Max,\n  data = farm_dta_log)\n\n\n\n \n  \n      \n    N \n    n_missing \n    n_inf \n    Mean \n    SD \n    Median \n    Min \n    Max \n  \n \n\n  \n    l_output \n    1026 \n    0.00 \n    0.00 \n    6.73 \n    0.99 \n    6.79 \n    3.74 \n    9.95 \n  \n  \n    l_land \n    1026 \n    0.00 \n    0.00 \n    −1.30 \n    0.95 \n    −1.25 \n    −4.61 \n    1.67 \n  \n  \n    l_seed \n    1026 \n    0.00 \n    0.00 \n    2.37 \n    0.94 \n    2.30 \n    0.00 \n    7.13 \n  \n  \n    l_urea \n    1026 \n    0.00 \n    0.00 \n    3.98 \n    1.16 \n    4.09 \n    0.00 \n    7.13 \n  \n  \n    l_pest \n    1026 \n    0.00 \n    713.00 \n     \n     \n     \n     \n    11.04 \n  \n  \n    l_labor \n    1026 \n    0.00 \n    0.00 \n    5.56 \n    0.85 \n    5.53 \n    2.83 \n    8.47 \n  \n  \n    yields_mt_ha \n    1026 \n    0.00 \n    0.00 \n    3.38 \n    1.68 \n    3.16 \n    0.40 \n    27.50 \n  \n\n\n\n\n\n\nAny problems with data?"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#summary-statistics-after-data-cleaning",
+    "href": "slides/w08b-panel-regression-production-function.html#summary-statistics-after-data-cleaning",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Summary statistics after data cleaning",
+    "text": "Summary statistics after data cleaning\n\ndatasummary(l_pest + l_pest_lazy + l_pest_smart +  pest_revdum ~ \n    N + n_missing + n_inf + Mean + SD + Median + Min + Max, \n    data = farm_dta_log)\n\n\n\n \n  \n      \n    N \n    n_missing \n    n_inf \n    Mean \n    SD \n    Median \n    Min \n    Max \n  \n \n\n  \n    l_pest \n    1026 \n    0.00 \n    713.00 \n     \n     \n     \n     \n    11.04 \n  \n  \n    l_pest_lazy \n    1026 \n    0.00 \n    0.00 \n    −4.37 \n    7.35 \n    −9.21 \n    −9.21 \n    11.04 \n  \n  \n    l_pest_smart \n    1026 \n    0.00 \n    0.00 \n    2.04 \n    3.15 \n    0.00 \n    0.00 \n    11.04 \n  \n  \n    pest_revdum \n    1026 \n    0.00 \n    0.00 \n    0.69 \n    0.46 \n    1.00 \n    0.00 \n    1.00"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference-2",
+    "href": "slides/w08b-panel-regression-production-function.html#step-4.-robust-inference-2",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Step 4. Robust inference",
+    "text": "Step 4. Robust inference\n\ncompare_performance(\n  list(\n    `Pooled` = rice_pooled,\n    `FE with rev. dum` = rice_fe,\n    `FE lazy` = rice_fe_lazy\n  )\n) \n\n# Comparison of Model Performance Indices\n\nName             | Model | AIC (weights) | AICc (weights) | BIC (weights) |    R2 | R2 (adj.) |  RMSE | Sigma\n-------------------------------------------------------------------------------------------------------------\nPooled           |   plm | 774.9 (<.001) |  775.1 (<.001) | 814.4 (<.001) | 0.876 |     0.875 | 0.350 | 0.351\nFE with rev. dum |   plm | 503.6 (>.999) |  503.7 (>.999) | 538.2 (>.999) | 0.732 |     0.676 | 0.307 | 0.308\nFE lazy          |   plm | 534.6 (<.001) |  534.6 (<.001) | 564.2 (<.001) | 0.723 |     0.666 | 0.312 | 0.313"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#what-about-ovb",
+    "href": "slides/w08b-panel-regression-production-function.html#what-about-ovb",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "What about OVB?",
+    "text": "What about OVB?\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} + e_{it}\n\\end{aligned}\n\\]\nWhat omitted variables could cause bias of our estimates?\n\nAny!? …\nAny!? …\nAny OVB!? …\nCapital, Ability, Climate, Geography…"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#using-the-ovb-formula",
+    "href": "slides/w08b-panel-regression-production-function.html#using-the-ovb-formula",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Using the OVB formula",
+    "text": "Using the OVB formula\n\nLet us make an educated guess about the effect of OVB on the estimates of land-related coefficient \\(\\beta_1\\)?\n\n\n\n\nShort:\nLong:\nAux.\nOVB:\n\n\n\n\\(\\text{output}_{it} = A_0^s + \\beta_1^s \\cdot \\text{land}_{it} + \\beta_2^s \\cdot \\text{labor}_{it} + \\beta_3^s \\cdot \\text{seed}_{it} + \\beta_4^s \\cdot \\text{urea}_{it} + \\beta_5^s \\cdot \\text{pesticide}_{it} + e_{it}\\)\n\\(\\text{output}_{it} = A_0 + \\beta_1 \\cdot \\text{land}_{it} + \\beta_2 \\cdot \\text{labor}_{it} + \\beta_3 \\cdot \\text{seed}_{it} + \\beta_4 \\cdot \\text{urea}_{it} + \\beta_5 \\cdot \\text{pesticide}_{it} + \\color{Red}{\\gamma \\text{Ability}_i} + e_{it}\\)\n\\(\\text{Ability}_i = \\pi_0 + \\color{Blue}{\\pi_1 \\cdot \\text{land}_{it}} + \\pi_2 \\cdot \\text{labor}_{it} + \\pi_3 \\cdot \\text{seed}_{it} + \\pi_4 \\cdot \\text{urea}_{it} + \\pi_5 \\cdot \\text{pesticide}_{it} + e_{it}\\)\n\\(\\text{OVB}_{\\text{land}} = \\beta_1^s - \\beta_1 = \\color{Red}{\\pi_1} * \\color{Blue}{\\gamma}\\)\n\n\n\n\nEducated guess about the bias of the estimates.\nWhat are the signs of \\(\\pi_1\\) and \\(\\gamma\\)?\n\n\\(\\pi_1 > 0\\)\n\\(\\gamma > 0\\)\n\\(\\text{OVB} = (+) \\times (+) > 0\\)\n\nNot controlling for the OV \\(\\text{ability}_i\\) may cause overestimation of the effect of the farm size \\(\\beta_1\\).\n\\(\\text{ability}_i\\) does not vary over time for each farm!"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#how-to-resolve-such-ovb",
+    "href": "slides/w08b-panel-regression-production-function.html#how-to-resolve-such-ovb",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "How to resolve such OVB?",
+    "text": "How to resolve such OVB?\n\nIntroduce a proxy variable for ability?\n\nNo such data.\n\nRely on the panel structure of the data.\n\nUse the individual fixed effect model, for example."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-1",
+    "href": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-1",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Estimation strategy. Part 3. Return to scale (1)",
+    "text": "Estimation strategy. Part 3. Return to scale (1)\nAre larger farms more productive?\nTo understand this, we need to calculate how joint increase of all inputs change the output.\n\nIf increase of all inputs by 1% increases output also by the same 1%, we have a constant return to scale.\nIf increase of all inputs by 1% increases output also by more than 1%, we have an increasing return to scale.\nIf increase of all inputs by 1% increases output also by less than 1%, we have an decreasing return to scale."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-2",
+    "href": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-2",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Estimation strategy. Part 3. Return to scale (2)",
+    "text": "Estimation strategy. Part 3. Return to scale (2)\nFrom the main equation,\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} \\\\\n& + \\color{Red}{\\alpha_i} + e_{it}\n\\end{aligned}\n\\]\n\nreturn to scale can be estimated as a sum of all coefficients:\n\n\\[\n\\text{Rreturn to scale} = \\beta_1 + \\beta_2 + \\beta_3 + \\beta_4 + \\beta_5\n\\]\n\nTo perform a hypothesis testing about the return to scale, we need to employ:\n\nHT about a linear combination of parameters, and\ndelta method for estimating standard errors."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-3",
+    "href": "slides/w08b-panel-regression-production-function.html#estimation-strategy.-part-3.-return-to-scale-3",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Estimation strategy. Part 3. Return to scale (3)",
+    "text": "Estimation strategy. Part 3. Return to scale (3)\nHT about a linear combination of parameters:\n\nH0 - \\(\\beta_1 + \\beta_2 + \\beta_3 + \\beta_4 + \\beta_5 = 1\\) (also can be \\(=0\\) or any number)\nH1 - \\(\\beta_1 + \\beta_2 + \\beta_3 + \\beta_4 + \\beta_5 \\ne 1\\) (also can be \\(\\ne0\\) or any number)\n\nWe compute standard errors using delta method (car::deltaMethod()).\nAnd perform HT using F statistics."
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#part-4.-return-to-scale-1",
+    "href": "slides/w08b-panel-regression-production-function.html#part-4.-return-to-scale-1",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Part 4. Return to scale (1)",
+    "text": "Part 4. Return to scale (1)\n\nrice_fe\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nCoefficients:\n      l_land      l_labor       l_seed       l_urea l_pest_smart  pest_revdum \n     0.41984      0.27084      0.12381      0.16291      0.11029      0.63498 \n\n\nComputing sum of the coefficients and robust SE:\n\nlibrary(car)\ndeltaMethod(\n  rice_fe, \n  \"l_land + l_labor + l_seed + l_urea + l_pest_smart\", \n  vcov = vcovHC(rice_fe, method = \"arellano\", type = \"HC3\", cluster = \"group\")\n)\n\n                                                  Estimate       SE    2.5 %\nl_land + l_labor + l_seed + l_urea + l_pest_smart 1.087685 0.031039 1.026850\n                                                  97.5 %\nl_land + l_labor + l_seed + l_urea + l_pest_smart 1.1485"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#part-4.-return-to-scale-2",
+    "href": "slides/w08b-panel-regression-production-function.html#part-4.-return-to-scale-2",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Part 4. Return to scale (2)",
+    "text": "Part 4. Return to scale (2)\nHT about the sum of the coefficients:\n\n\\(H_0: \\text{return to scale} = 1\\)\n\\(H_0: \\text{return to scale} \\ne 1\\)\n\n\nlinearHypothesis(rice_fe, \n  \"l_land + l_labor + l_seed + l_urea + l_pest_smart = 1\", \n  vcov = vcovHC(rice_fe, method = \"arellano\", type = \"HC3\", cluster = \"group\"))\n\nLinear hypothesis test\n\nHypothesis:\nl_land  + l_labor  + l_seed  + l_urea  + l_pest_smart = 1\n\nModel 1: restricted model\nModel 2: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nNote: Coefficient covariance matrix supplied.\n\n  Res.Df Df  Chisq Pr(>Chisq)   \n1    850                        \n2    849  1 7.9806   0.004728 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#conclusions",
+    "href": "slides/w08b-panel-regression-production-function.html#conclusions",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Conclusions",
+    "text": "Conclusions\n\n\nRegression results\n\n\n\n\n \n  \n      \n    Pooled \n    FE (rev. dum.) \n    FE (lazy) \n  \n \n\n  \n    (Intercept) \n    4.3144*** (0.2691) \n     \n     \n  \n  \n    l_land \n    0.4348*** (0.0418) \n    0.4198*** (0.0479) \n    0.4210*** (0.0486) \n  \n  \n    l_labor \n    0.2535*** (0.0333) \n    0.2708*** (0.0347) \n    0.2639*** (0.0348) \n  \n  \n    l_seed \n    0.1484*** (0.0344) \n    0.1238*** (0.0370) \n    0.1344*** (0.0386) \n  \n  \n    l_urea \n    0.1715*** (0.0228) \n    0.1629*** (0.0262) \n    0.1741*** (0.0269) \n  \n  \n    l_pest_smart \n    0.0912*** (0.0172) \n    0.1103*** (0.0185) \n     \n  \n  \n    pest_revdum \n    0.5129*** (0.1141) \n    0.6350*** (0.1290) \n     \n  \n  \n    l_pest_lazy \n     \n     \n    0.0077*** (0.0020) \n  \n  \n    Num.Obs. \n    1026 \n    1026 \n    1026 \n  \n  \n    R2. adj \n    0.875 \n    0.676 \n    0.666 \n  \n  \n    F stat. \n    1 198.277 \n    386.282 \n    444.057 \n  \n  \n    p-value \n    <0.001 \n    <0.001 \n    <0.001 \n  \n  \n    df \n    1 019 \n    849 \n    850 \n  \n\n\n Note: All reported variables are transformed with a natural logarithm. Reverse dummy variable that compensates for the zero pesticides use is omitted. Robust standard errors clustered at the group level are reported in the brackets.\n\n\n\n\n\nReturn to scale\n\nlibrary(car)\ndeltaMethod(rice_fe, \n            \"l_land + l_labor + l_seed + l_urea + l_pest_smart\", \n            vcov = vcovHC(rice_fe, method = \"arellano\", type = \"HC3\", cluster = \"group\"))\n\n                                                  Estimate       SE    2.5 %\nl_land + l_labor + l_seed + l_urea + l_pest_smart 1.087685 0.031039 1.026850\n                                                  97.5 %\nl_land + l_labor + l_seed + l_urea + l_pest_smart 1.1485\n\n\n\nlinearHypothesis(rice_fe, \n                 \"l_land + l_labor + l_seed + l_urea + l_pest_smart = 1\", \n                 vcov = vcovHC(rice_fe, method = \"arellano\", type = \"HC3\", cluster = \"group\"))\n\nLinear hypothesis test\n\nHypothesis:\nl_land  + l_labor  + l_seed  + l_urea  + l_pest_smart = 1\n\nModel 1: restricted model\nModel 2: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nNote: Coefficient covariance matrix supplied.\n\n  Res.Df Df  Chisq Pr(>Chisq)   \n1    850                        \n2    849  1 7.9806   0.004728 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-1",
+    "href": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-1",
+    "title": "Panel Regression Analysis: Micro application",
+    "section": "Individual fixed effects (1)",
+    "text": "Individual fixed effects (1)\nFrom the regression equation below,\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} \\\\\n& + \\color{Red}{\\alpha_i} + e_{it}\n\\end{aligned}\n\\]\nwe know that \\(\\color{Red}{\\alpha_i}\\) are the individual fixed effects.\n\nR calculates them and we can explore them.\nIn fact, those individual fixed effects are simples possible measured of farms efficiency!"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-extraction-1",
+    "href": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-extraction-1",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Individual fixed effects (extraction 1)",
+    "text": "Individual fixed effects (extraction 1)\nIn the model:\n\nrice_fe\n\n\nModel Formula: l_output ~ l_land + l_labor + l_seed + l_urea + l_pest_smart + \n    pest_revdum\n\nCoefficients:\n      l_land      l_labor       l_seed       l_urea l_pest_smart  pest_revdum \n     0.41984      0.27084      0.12381      0.16291      0.11029      0.63498 \n\n\nIndividual fixed effects can be extracted as:\n\nfixef(rice_fe)\n\n101001 101017 101026 101035 101056 101057 101067 101068 101069 101073 101089 \n3.8470 4.1040 4.2375 4.2631 4.5649 4.2051 4.2591 4.3471 4.3598 4.0599 4.0611 \n101094 102111 102113 102119 102126 102157 102194 102220 201001 201002 201003 \n4.0503 4.1591 4.1073 4.2289 3.9991 4.2420 3.9798 4.2032 4.3270 4.3719 4.2906 \n201009 202039 202061 202066 203079 203080 204096 204114 204116 204124 205132 \n4.1036 4.2036 4.1584 4.1318 4.2522 4.0977 4.2539 3.9338 4.3095 4.0783 3.9765 \n205136 205151 205153 206158 206169 207209 208225 209232 209241 209250 301004 \n3.9870 4.2319 4.2504 4.4004 4.0218 4.2235 4.2522 4.1496 4.0292 4.0267 4.0658 \n301010 301023 301038 301055 301058 301067 301070 301075 301084 301105 301110 \n3.7676 4.1062 4.1388 4.1066 4.1385 4.1110 4.0471 4.3944 3.8461 3.9620 3.9876 \n302116 302120 302131 302134 302137 302142 302143 302144 302146 302147 302151 \n4.1645 3.8708 4.0910 4.2774 4.1428 4.0946 4.0225 4.1853 4.1072 3.8265 4.1892 \n302153 302161 302163 302169 302182 302189 302192 302194 302195 302197 302199 \n3.9304 4.1563 4.1978 4.2176 4.1114 4.2771 4.3379 4.1691 4.3303 4.2350 4.0927 \n302205 302207 302209 401002 401006 401032 401034 401036 401037 401041 401043 \n4.1584 3.9223 4.1140 4.2507 3.9059 4.2725 4.0764 3.9731 3.8727 4.0375 4.1468 \n401049 401058 401063 401069 401075 401077 401092 401095 401109 401122 401124 \n4.0360 3.9986 3.9069 4.0990 4.2085 4.0976 4.3029 4.2423 4.3479 4.2510 4.1138 \n401125 401138 402150 402155 402162 402167 402168 402169 402171 402176 402179 \n4.3466 4.1990 4.1397 4.1476 4.2274 4.0829 3.9949 3.9759 4.1879 4.0469 4.1212 \n402201 402203 402208 501001 501008 501020 501034 501041 501045 502057 502062 \n4.1575 4.1735 4.0134 3.8749 4.0124 4.3724 3.8748 4.7488 4.3660 4.0882 4.0824 \n502080 502081 502112 503135 503136 503143 504161 504162 504167 504168 504169 \n4.1904 4.1741 4.3069 4.1730 4.2219 4.1793 4.2881 4.2402 4.4824 4.4172 4.0891 \n504197 504201 504204 601005 601010 601016 602034 603043 603052 603053 603062 \n4.1560 4.1874 4.3086 4.0255 4.2169 3.9834 4.0436 4.0758 4.2705 3.8823 3.8317 \n603065 603067 603068 603070 604074 605108 605109 605116 606133 606145 606147 \n3.9770 3.8956 4.2175 4.2099 4.2280 4.1904 4.0838 4.4748 4.5949 4.4224 4.2922 \n606151 607164 607167 607168 607170 607188 607195 608205 608207 608215 609227 \n4.3270 4.3790 4.3251 4.3789 4.3182 4.4098 4.2933 4.1269 4.6940 4.7730 4.1891 \n609231 609234 609241 609242 609244 609245 \n4.1425 4.5465 4.2098 4.1420 4.1388 4.2396"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-extraction-3",
+    "href": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects-extraction-3",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Individual fixed effects (extraction 3)",
+    "text": "Individual fixed effects (extraction 3)\nOr, we can extract individual fixed effects with effect-specific standard errors:\n\nfef_dta <- \n  fixef(rice_fe) %>% \n  summary() %>% \n  as.data.frame() %>% rownames_to_column(\"id\") %>% \n  as_tibble() %>% \n  mutate(id = as.double(id))\nfef_dta\n\n# A tibble: 171 × 5\n       id Estimate `Std. Error` `t-value` `Pr(>|t|)`\n    <dbl>    <dbl>        <dbl>     <dbl>      <dbl>\n 1 101001     3.85        0.317      12.2   1.96e-31\n 2 101017     4.10        0.282      14.6   5.20e-43\n 3 101026     4.24        0.285      14.9   1.09e-44\n 4 101035     4.26        0.279      15.3   1.11e-46\n 5 101056     4.56        0.285      16.0   9.02e-51\n 6 101057     4.21        0.292      14.4   3.46e-42\n 7 101067     4.26        0.296      14.4   2.89e-42\n 8 101068     4.35        0.283      15.4   3.87e-47\n 9 101069     4.36        0.279      15.6   1.62e-48\n10 101073     4.06        0.294      13.8   3.35e-39\n# ℹ 161 more rows"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#farm-size-and-efficiency",
+    "href": "slides/w08b-panel-regression-production-function.html#farm-size-and-efficiency",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Farm size and efficiency",
+    "text": "Farm size and efficiency\nLet us compute average farm size and plot fixed effects versus farm size:\n\nfarm_mean_size <- farm_dta_log %>% group_by(id) %>% summarise(mean_size = mean(land))\nglimpse(farm_mean_size)\n\nRows: 171\nColumns: 2\n$ id        <dbl> 101001, 101017, 101026, 101035, 101056, 101057, 101067, 1010…\n$ mean_size <dbl> 2.5240000, 0.7230000, 0.1558333, 0.3211667, 0.3360000, 0.189…\n\n\n\nplot_dta <- farm_mean_size %>% left_join(fef_dta)\nglimpse(plot_dta)\n\nRows: 171\nColumns: 6\n$ id           <dbl> 101001, 101017, 101026, 101035, 101056, 101057, 101067, 1…\n$ mean_size    <dbl> 2.5240000, 0.7230000, 0.1558333, 0.3211667, 0.3360000, 0.…\n$ Estimate     <dbl> 3.847036, 4.103960, 4.237548, 4.263063, 4.564856, 4.20514…\n$ `Std. Error` <dbl> 0.3166160, 0.2819603, 0.2847204, 0.2792276, 0.2846006, 0.…\n$ `t-value`    <dbl> 12.15048, 14.55510, 14.88319, 15.26734, 16.03951, 14.3927…\n$ `Pr(>|t|)`   <dbl> 1.958956e-31, 5.202280e-43, 1.090622e-44, 1.109427e-46, 9…\n\n\n\nplot_dta %>% ggplot() + aes(x = mean_size, y = Estimate) + \n  geom_point() + geom_smooth() + scale_x_log10() +\n  xlab(\"Farm-specific fixed effect\") + \n  ylab(\"Average farm size, ha\") + \n  annotation_logticks(side = \"b\")"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#farm-size-and-efficiency-output",
+    "href": "slides/w08b-panel-regression-production-function.html#farm-size-and-efficiency-output",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Farm size and efficiency",
+    "text": "Farm size and efficiency"
+  },
+  {
+    "objectID": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects",
+    "href": "slides/w08b-panel-regression-production-function.html#individual-fixed-effects",
+    "title": "Panel Regression Analysis: Micro application to production function",
+    "section": "Individual fixed effects",
+    "text": "Individual fixed effects\nFrom the regression equation below,\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} \\\\\n& + \\color{Red}{\\alpha_i} + e_{it}\n\\end{aligned}\n\\]\nwe know that \\(\\color{Red}{\\alpha_i}\\) are the individual fixed effects.\n\nR calculates them and we can explore them.\nIn fact, those individual fixed effects are the simplest possible measured of farms efficiency!"
   }
 ]
