@@ -96,16 +96,12 @@ Exercises:
 
 Slides:
 
--   **After the lecture**
-
--   [w08a-panel-regression](slides/) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
-
--   [w08b-panel-regression-production-function.qmd](slides/) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/)
+-   [w08a-panel-regression](slides/w08a-panel-regression.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w08a-panel-regression.pdf)
+-   [w08b-panel-regression-production-function.qmd](slides/w08b-panel-regression-production-function.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w08b-panel-regression-production-function.pdf)
 
 Exercises:
 
 -   [ex08-panel-regression.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex08-panel-regression.zip) - R project with code and data
-
 
 
 ### Week 9. June 7. R: FE

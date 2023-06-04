@@ -1990,122 +1990,136 @@ factor(id)591  factor(id)592  factor(id)593  factor(id)594  factor(id)595
 </section>
 <section id="terminology" class="slide level2">
 <h2>Terminology</h2>
-<p>Panel data has <span class="math inline">\(i\)</span> individuals (groups) and <span class="math inline">\(t\)</span> time periods <strong>for each individual</strong>;</p>
+<p><strong>Panel data</strong> has:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(i\)</span> individuals (groups);</li>
+<li class="fragment"><span class="math inline">\(t\)</span> time periods <strong>for each individual</strong>; and</li>
+<li class="fragment"><span class="math inline">\(k\)</span> independent variables <span class="math inline">\(x\)</span></li>
+</ul>
+<p>Panel Regression could be:</p>
 <ul>
 <li class="fragment"><p><strong>Pooled</strong> OLS (regression without any panel structure);</p></li>
 <li class="fragment"><p><strong>Fixed Effect</strong>:</p>
 <ul>
 <li class="fragment"><strong>Least-squares dummy variable</strong> (Pooled OLS + individual dummies);</li>
+<li class="fragment"><strong>Within</strong>-transformation panel regression <strong>most commonly used</strong></li>
+<li class="fragment"><strong>First-difference</strong>, Between transformation panel regressions (look it up in <span class="citation" data-cites="Croissant2018">(<a href="#/references" role="doc-biblioref" onclick="">Croissant &amp; Millo, 2018</a>)</span>)</li>
 </ul></li>
-<li class="fragment"><p>Panel Regression <strong>Fixed Effect</strong>:</p>
-<ul>
-<li class="fragment"><strong>Within</strong>-transformation <strong>most commonly used</strong></li>
-<li class="fragment"><strong>First-difference</strong>, Between transformation (look it up in <span class="citation" data-cites="Croissant2018">(<a href="#/references" role="doc-biblioref" onclick="">Croissant &amp; Millo, 2018</a>)</span>)</li>
-</ul></li>
-<li class="fragment"><p>Panel Regression <strong>Random Effect</strong></p></li>
+<li class="fragment"><p><strong>Random Effect</strong> panel regression</p></li>
 </ul>
 </section>
 <section id="pooled-ols" class="slide level2">
 <h2>Pooled OLS</h2>
+<p>OLS regression on the entire data set with panel structure.</p>
 <p><span class="math display">\[
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  +  \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{2it}  + \dots + \beta_k  \cdot x_{kit} +  \epsilon_{it}
 \]</span></p>
 <ul>
 <li class="fragment"><p>Estimates are biased because of the OVB.</p></li>
-<li class="fragment"><p>We assume the OVB to be time-invariant <span class="citation" data-cites="Mundlak1961">(<a href="#/references" role="doc-biblioref" onclick="">Mundlak, 1961</a>)</span>.</p></li>
+<li class="fragment"><p>We assume the OVB to be time-invariant.</p></li>
 </ul>
 </section>
 <section id="least-squares-dummy-variable-model" class="slide level2">
 <h2>Least-squares dummy variable model</h2>
 <p><span class="math display">\[
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{2it}  + \dots + \beta_k  \cdot x_{kit} + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
 \]</span></p>
 <ul>
-<li class="fragment"><p>Introduces a vector of dummy variables <span class="math inline">\(\color{Red}{\delta}\)</span> and estimated coefficients for each dummy variable <span class="math inline">\(\gamma_i\)</span>.</p></li>
-<li class="fragment"><p>Estimates and unbiased (consistent) but inefficient.</p></li>
+<li class="fragment"><p>Introduces a vector of dummy variables <span class="math inline">\(\color{Red}{\delta}\)</span> and estimated coefficients <span class="math inline">\(\gamma_i\)</span> for each dummy variable.</p></li>
+<li class="fragment"><p>Estimates <span class="math inline">\(\hat \beta\)</span> and <span class="math inline">\(\hat \gamma\)</span> are unbiased (consistent) but inefficient.</p></li>
+<li class="fragment"><p>When there are too many <span class="math inline">\(\color{Red}{\delta_{i}}\)</span> (5000 or more), computer will have difficulties with estimating the coefficients…</p></li>
 </ul>
 </section>
-<section id="fixed-effect-model-notations" class="slide level2">
-<h2>Fixed Effect Model (notations)</h2>
+<section id="fixed-effect-panel-regression-model" class="slide level2">
+<h2>Fixed Effect Panel Regression Model</h2>
 <p><strong>Individual</strong> Fixed effect model:</p>
 <p><span class="math display">\[
-y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  + \color{Red}{ \alpha_i } + \epsilon_{it}
 \]</span></p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(\color{Red}{ \alpha_i }\)</span> is the individual-specific fixed effect;</p></li>
-<li class="fragment"><p>usually wihtout the intercept <span class="math inline">\(\beta_0\)</span>;</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{Red}{ \alpha_i }\)</span> are the individual-specific (<span class="math inline">\(i\)</span>) fixed effect;</p></li>
+<li class="fragment"><p>usually without the intercept <span class="math inline">\(\beta_0\)</span>;</p></li>
 </ul>
 <div class="fragment">
 <p><strong>Two-ways</strong> fixed effect model (individual + time effect):</p>
 <p><span class="math display">\[
-y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  \\ + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
 \]</span></p>
 <p><strong>Time</strong> Fixed Effect model:</p>
 <p><span class="math display">\[
-y_{it} =  \beta_1 \cdot x_{it} + \color{Blue}{ \eta_t } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  \\ + \color{Blue}{ \eta_t } + \epsilon_{it}
 \]</span></p>
 </div>
 </section>
-<section id="fixed-effect-model-within-transformation" class="slide level2">
-<h2>Fixed Effect Model: Within transformation</h2>
-<p><strong>Within-transformation</strong> subtracts <strong>group means</strong> from each observation and run the regression.</p>
-<div class="fragment">
+<section id="fixed-effect-model-within-transformation-step-1" class="slide level2">
+<h2>Fixed Effect Model: Within transformation (Step 1)</h2>
+<p><strong>Within-transformation</strong> subtracts <strong>group means</strong> from each observation and estimates <span class="math inline">\(\beta\)</span> on transformed data using OLS.</p>
 <p><span class="math display">\[
 \begin{aligned}
-log(\text{Wage}_{it} - \overline{\text{Wage}_{i}}) &amp; =  \beta_0 \\
-&amp; + \beta_1 \cdot (\text{Union}_{it} -  \overline{\text{Union}_{i}}) \\
-&amp; + \beta_2 \cdot (X_{it} - \overline{\text{X}_{i}}) \\
-&amp; +  \beta_3 \cdot (\text{Ability}_{i} - \overline{\text{Ability}_{i}}) \\
-&amp; +  \color{Red}{\alpha_{i}} \\
-&amp; +  (\epsilon_{it} - \overline{\epsilon_{i}})
+y_{it} - \overline{y_{i}} &amp;
+= \beta_1 (x_{1it} - \overline{x_{1i}})
++ \beta_2 (x_{2it} - \overline{x_{2i}}) \\
+&amp; + \beta_3 (x_{3i} - \overline{x_{3i}})
++ \color{Red}{\alpha_{i}}
++ \epsilon_{it},
 \end{aligned}
 \]</span></p>
 <div class="fragment">
-<p>Note that <strong>time-invariant effects disappear</strong>.</p>
-<ul>
-<li class="fragment">Any examples and ideas why?</li>
-<li class="fragment"><span class="math inline">\(\text{Ability}_{i} - \overline{\text{Ability}_{i}} = 0\)</span>.</li>
-<li class="fragment">Gender, race, individual characteristics …</li>
-<li class="fragment">FE (Within) estimates are identical to the LSDV, but SE are more efficient;</li>
-</ul>
+<p><span class="math inline">\(\overline{y_{i}}\)</span> and <span class="math inline">\(\overline{x_{ki}}\)</span> are group <span class="math inline">\(i\)</span>-specific means computed as: <span class="math inline">\(\overline{x_{ki}} = \frac{1}{N_i} \sum_t x_{kit}\)</span>, where <span class="math inline">\(N_i\)</span> is the number of observations (time periods <span class="math inline">\(t\)</span>) in the group <span class="math inline">\(i\)</span>.</p>
 </div>
+<div class="fragment">
+<p><span class="math inline">\(\ddot{y_i} = y_{it} - \overline{y_{i}}\)</span>, <span class="math inline">\(\ddot{x_i} = x_{it} - \overline{x_{i}}\)</span> are <strong>de-meaned</strong> regressand and regressors.</p>
+<ul>
+<li class="fragment"><p>Note! <span class="math inline">\(\beta_3=0\)</span>, because any <strong>time-invariant <span class="math inline">\(x_{ki}\)</span></strong> (<span class="math inline">\(x_k\)</span> without <span class="math inline">\(t\)</span> index) will become zero: <span class="math inline">\({x}_{i} - \overline{{x}_{i}} = 0\)</span>.</p>
+<ul>
+<li class="fragment">Such <span class="math inline">\(x\)</span> are: gender, race, individual characteristics …</li>
+</ul></li>
+</ul>
 </div>
 </section>
-<section id="fixed-effect-model-first-difference-transformation" class="slide level2">
-<h2>Fixed Effect Model: First Difference transformation</h2>
+<section id="fixed-effect-model-within-transformation-step-2" class="slide level2">
+<h2>Fixed Effect Model: Within transformation (Step 2)</h2>
+<p>Based on the demeaned data without time-invariant effects, OLS method is used to estimate <span class="math inline">\(\hat \beta\)</span> for all <span class="math inline">\(k\)</span> variables:</p>
 <p><span class="math display">\[
 \begin{aligned}
-log(\text{Wage}_{it} - {\text{Wage}_{i,t-1}}) &amp; = \beta_0 \\
-&amp; + \beta_1 \cdot (\text{Union}_{it} -  {\text{Union}_{it-1}}) \\
-&amp; + \beta_2 \cdot (X_{it} - {{X}_{i,t-1}}) \\
-&amp; + \beta_3 \cdot (\text{Ability}_{i} - {\text{Ability}_{i,t-1}}) \\
-&amp; + (\epsilon_{it} - {\epsilon_{i,t-1}})
+\ddot{y_i} &amp; = \hat \beta_1 \ddot{x}_{1it} + \hat \beta_2 \ddot{x}_{2it} + \dots + \hat \beta_k \ddot{x}_{kit} + \epsilon_{it}
 \end{aligned}
 \]</span></p>
-<p>Note:</p>
-<ul>
-<li class="fragment"><p>Similar to the within transformation, but sacrifices at least one time dimension.</p></li>
-<li class="fragment"><p>Relaxes the autocorrelation assumption.</p></li>
-<li class="fragment"><p>May be not possible with unbalanced data.</p></li>
-</ul>
+<div class="fragment">
+<p>Estimated <span class="math inline">\(\hat \beta\)</span> are identical to the one obtain using LSDV model!</p>
+</div>
+</section>
+<section id="fixed-effect-model-within-transformation-step-3" class="slide level2">
+<h2>Fixed Effect Model: Within transformation (Step 3)</h2>
+<p>Individual Fixed Effects <span class="math inline">\(\alpha_i\)</span> are computed as:</p>
+<p><span class="math display">\[
+\alpha_i = \overline y_i - (\hat \beta_1 \overline{x}_{1i} + \hat \beta_2 \overline{x}_{2i} + \dots + \hat \beta_k \overline{x}_{ki} )
+\]</span></p>
+<p>Individual fixed effects are identical to <span class="math inline">\(\delta_i\)</span> from LSDV model:</p>
+<p><span class="math display">\[
+\alpha_i = \beta_0 + \delta_i
+\]</span></p>
+<div class="fragment">
+<p>Ignoring FE causes bias to the estimates.</p>
+</div>
 </section>
 <section id="fixed-effect-model-assumptions-1" class="slide level2">
 <h2>Fixed Effect Model: assumptions (1)</h2>
 <ul>
-<li class="fragment"><p><strong>NOT ZERO CORRELATION between effects and regressors</strong>:</p>
+<li class="fragment"><p><strong>NOT ZERO</strong> correlation between fixed effects <span class="math inline">\(\alpha_i\)</span> and (not de-meaned) regressors <span class="math inline">\(x_{kit}\)</span>:</p>
 <ul>
-<li class="fragment"><span class="math inline">\(Cov(\delta_{i},{X}_{it}) \neq 0\)</span></li>
+<li class="fragment"><span class="math inline">\(Cov(\alpha_i, {x}_{kit}) \neq 0\)</span></li>
 </ul></li>
 <li class="fragment"><p><strong>Strict exogeneity (No endogeneity):</strong></p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(E[\epsilon_{is}| {X}_{it}, \delta_{i}] = 0\)</span></p></li>
-<li class="fragment"><p><span class="math inline">\(Cov(\epsilon_{is}, {X}_{it}) = 0\)</span> and</p></li>
-<li class="fragment"><p><span class="math inline">\(Cov(\epsilon_{it}, {X}_{jt}) = 0\)</span> , where <span class="math inline">\(j\neq i\)</span> and <span class="math inline">\(s\neq t\)</span> ;</p></li>
-<li class="fragment"><p>Residuals (<span class="math inline">\(\epsilon\)</span>) do not correlate with all explanatory variable (<span class="math inline">\(X\)</span>) in all time periods (<span class="math inline">\(t\)</span>) and for all individuals (<span class="math inline">\(i\)</span>).</p>
+<li class="fragment"><p><span class="math inline">\(E[\epsilon_{is}| {x}_{kit}, \alpha_i] = 0\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(Cov(\epsilon_{is}, {x}_{kit}) = 0\)</span> and <span class="math inline">\(Cov(\epsilon_{it}, {x}_{kjt}) = 0\)</span> , where <span class="math inline">\(j\neq i\)</span> and <span class="math inline">\(s\neq t\)</span> ;</p></li>
+<li class="fragment"><p>Residuals (<span class="math inline">\(\epsilon\)</span>) do not correlate with all explanatory variable (<span class="math inline">\(x_k\)</span>) in all time periods (<span class="math inline">\(t\)</span>) and for all individuals (<span class="math inline">\(i\)</span>).</p></li>
+</ul></li>
+<li class="fragment"><p>Variance homogeneity:</p>
 <ul>
 <li class="fragment"><p>No autocorrelation/serial correlation: <span class="math inline">\(Cov(\epsilon_{it}, {X}_{i,t-1}) = 0\)</span>;</p></li>
 <li class="fragment"><p>No cross-sectional dependence: <span class="math inline">\(Cov(\epsilon_{it}, {X}_{j,t}) = 0\)</span> (when individual observations react similarly to the common shocks or correlate in space);</p></li>
-</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -2139,12 +2153,13 @@ log(\text{Wage}_{it} - {\text{Wage}_{i,t-1}}) &amp; = \beta_0 \\
 </ul>
 <div class="fragment">
 <p><span class="math display">\[
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \dots + \beta_k \cdot x_{kit}  \\
++ \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
 \]</span></p>
 <ul>
 <li class="fragment"><p>Difference from the fixed effect model:</p>
 <ul>
-<li class="fragment"><p>Assumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:</p>
+<li class="fragment"><p>Assumes NO CORRELATION (ZERO CORRELATION) between random effects and regressors:</p>
 <ul>
 <li class="fragment"><span class="math inline">\(Cov(v_{i},{X}_{it}) = 0\)</span></li>
 </ul></li>

@@ -503,132 +503,154 @@ it is inefficient! Any ideas why?...
 
 ## Terminology
 
-Panel data has $i$ individuals (groups) and $t$ time periods **for each individual**;
+**Panel data** has:
+
+-   $i$ individuals (groups);
+-   $t$ time periods **for each individual**; and
+-   $k$ independent variables $x$
+
+Panel Regression could be: 
 
 -   **Pooled** OLS (regression without any panel structure);
 
 -   **Fixed Effect**:
 
     -   **Least-squares dummy variable** (Pooled OLS + individual dummies);
+    -   **Within**-transformation panel regression **most commonly used**
+    -   **First-difference**, Between transformation panel regressions (look it up in [@Croissant2018])
 
--   Panel Regression **Fixed Effect**:
-
-    -   **Within**-transformation **most commonly used**
-    -   **First-difference**, Between transformation (look it up in [@Croissant2018])
-
--   Panel Regression **Random Effect**
+-   **Random Effect** panel regression
 
 ## Pooled OLS
 
+OLS regression on the entire data set with panel structure.
+
 $$
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  +  \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{2it}  + \dots + \beta_k  \cdot x_{kit} +  \epsilon_{it}
 $$
 
 -   Estimates are biased because of the OVB.
 
--   We assume the OVB to be time-invariant [@Mundlak1961].
+-   We assume the OVB to be time-invariant.
 
 ## Least-squares dummy variable model
 
 $$
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{2it}  + \dots + \beta_k  \cdot x_{kit} + \gamma_i \cdot \color{Red}{\delta_{i}} + \epsilon_{it}
 $$
 
--   Introduces a vector of dummy variables $\color{Red}{\delta}$ and estimated coefficients for each dummy variable $\gamma_i$.
+-   Introduces a vector of dummy variables $\color{Red}{\delta}$ and estimated coefficients $\gamma_i$ for each dummy variable.
 
--   Estimates and unbiased (consistent) but inefficient.
+-   Estimates $\hat \beta$ and $\hat \gamma$ are unbiased (consistent) but inefficient.
 
-## Fixed Effect Model (notations)
+-   When there are too many $\color{Red}{\delta_{i}}$ (5000 or more), computer will have difficulties with estimating the coefficients... 
+
+## Fixed Effect Panel Regression Model
 
 **Individual** Fixed effect model:
 
 $$
-y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  + \color{Red}{ \alpha_i } + \epsilon_{it}
 $$
 
--   $\color{Red}{ \alpha_i }$ is the individual-specific fixed effect;
+-   $\color{Red}{ \alpha_i }$ are the individual-specific ($i$) fixed effect;
 
--   usually wihtout the intercept $\beta_0$;
+-   usually without the intercept $\beta_0$;
 
 . . .
 
 **Two-ways** fixed effect model (individual + time effect):
 
 $$
-y_{it} =  \beta_1 \cdot x_{it} + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  \\ + \color{Red}{ \alpha_i } + \color{Blue}{ \eta_t } + \epsilon_{it}
 $$
 
 **Time** Fixed Effect model:
 
 $$
-y_{it} =  \beta_1 \cdot x_{it} + \color{Blue}{ \eta_t } + \epsilon_{it}
+y_{it} =  \beta_1 \cdot x_{1it} + \beta_2 \cdot x_{1it}  + \dots + \beta_k  \cdot x_{kit}  \\ + \color{Blue}{ \eta_t } + \epsilon_{it}
 $$
 
-## Fixed Effect Model: Within transformation
+## Fixed Effect Model: Within transformation (Step 1)
 
-**Within-transformation** subtracts **group means** from each observation and run the regression.
+
+**Within-transformation** subtracts **group means** from each observation and estimates $\beta$ on transformed data using OLS.
+
+
+$$
+\begin{aligned}
+y_{it} - \overline{y_{i}} & 
+= \beta_1 (x_{1it} - \overline{x_{1i}}) 
++ \beta_2 (x_{2it} - \overline{x_{2i}}) \\
+& + \beta_3 (x_{3i} - \overline{x_{3i}}) 
++ \color{Red}{\alpha_{i}} 
++ \epsilon_{it},
+\end{aligned}
+$$
 
 . . .
 
-$$
-\begin{aligned}
-log(\text{Wage}_{it} - \overline{\text{Wage}_{i}}) & =  \beta_0 \\
-& + \beta_1 \cdot (\text{Union}_{it} -  \overline{\text{Union}_{i}}) \\ 
-& + \beta_2 \cdot (X_{it} - \overline{\text{X}_{i}}) \\
-& +  \beta_3 \cdot (\text{Ability}_{i} - \overline{\text{Ability}_{i}}) \\
-& +  \color{Red}{\alpha_{i}} \\
-& +  (\epsilon_{it} - \overline{\epsilon_{i}})
-\end{aligned}
-$$
+$\overline{y_{i}}$ and $\overline{x_{ki}}$ are group $i$-specific means computed as: $\overline{x_{ki}} = \frac{1}{N_i} \sum_t x_{kit}$, where $N_i$ is the number of observations (time periods $t$) in the group $i$.
 
-::: fragment
-Note that **time-invariant effects disappear**. 
+. . .
 
--   Any examples and ideas why?
--   $\text{Ability}_{i} - \overline{\text{Ability}_{i}} = 0$.
--   Gender, race, individual characteristics ...
--   FE (Within) estimates are identical to the LSDV, but SE are more efficient;
-:::
+$\ddot{y_i} = y_{it} - \overline{y_{i}}$, $\ddot{x_i} = x_{it} - \overline{x_{i}}$ are **de-meaned** regressand and regressors.
 
-## Fixed Effect Model: First Difference transformation
+-   Note! $\beta_3=0$, because any **time-invariant $x_{ki}$** ($x_k$ without $t$ index) will become zero: ${x}_{i} - \overline{{x}_{i}} = 0$.
+
+    -   Such $x$ are: gender, race, individual characteristics ...
+
+## Fixed Effect Model: Within transformation (Step 2)
+
+Based on the demeaned data without time-invariant effects, OLS method is used to estimate $\hat \beta$ for all $k$ variables:
 
 $$
 \begin{aligned}
-log(\text{Wage}_{it} - {\text{Wage}_{i,t-1}}) & = \beta_0 \\
-& + \beta_1 \cdot (\text{Union}_{it} -  {\text{Union}_{it-1}}) \\
-& + \beta_2 \cdot (X_{it} - {{X}_{i,t-1}}) \\
-& + \beta_3 \cdot (\text{Ability}_{i} - {\text{Ability}_{i,t-1}}) \\
-& + (\epsilon_{it} - {\epsilon_{i,t-1}})
+\ddot{y_i} & = \hat \beta_1 \ddot{x}_{1it} + \hat \beta_2 \ddot{x}_{2it} + \dots + \hat \beta_k \ddot{x}_{kit} + \epsilon_{it}
 \end{aligned}
 $$
 
-Note:
+. . .
 
--   Similar to the within transformation, but sacrifices at least one time dimension.
+Estimated $\hat \beta$ are identical to the one obtain using LSDV model!
 
--   Relaxes the autocorrelation assumption.
+## Fixed Effect Model: Within transformation (Step 3)
 
--   May be not possible with unbalanced data.
+Individual Fixed Effects $\alpha_i$ are computed as:
+
+$$
+\alpha_i = \overline y_i - (\hat \beta_1 \overline{x}_{1i} + \hat \beta_2 \overline{x}_{2i} + \dots + \hat \beta_k \overline{x}_{ki} )
+$$
+
+Individual fixed effects are identical to $\delta_i$ from LSDV model:
+
+$$
+\alpha_i = \beta_0 + \delta_i
+$$
+
+. . .
+
+Ignoring FE causes bias to the estimates.
 
 ## Fixed Effect Model: assumptions (1)
 
--   **NOT ZERO CORRELATION between effects and regressors**: 
+-   **NOT ZERO** correlation between fixed effects $\alpha_i$ and (not de-meaned) regressors $x_{kit}$: 
 
-    -   $Cov(\delta_{i},{X}_{it}) \neq 0$
+    -   $Cov(\alpha_i, {x}_{kit}) \neq 0$
 
 -   **Strict exogeneity (No endogeneity):** 
 
-    -   $E[\epsilon_{is}| {X}_{it}, \delta_{i}] = 0$
+    -   $E[\epsilon_{is}| {x}_{kit}, \alpha_i] = 0$
 
-    -   $Cov(\epsilon_{is}, {X}_{it}) = 0$ and 
+    -   $Cov(\epsilon_{is}, {x}_{kit}) = 0$ and $Cov(\epsilon_{it}, {x}_{kjt}) = 0$ , where $j\neq i$ and $s\neq t$ ;
+
+    -   Residuals ($\epsilon$) do not correlate with all explanatory variable ($x_k$) in all time periods ($t$) and for all individuals ($i$).
+
+-   Variance homogeneity: 
     
-    -   $Cov(\epsilon_{it}, {X}_{jt}) = 0$ , where $j\neq i$ and $s\neq t$ ;
+    -   No autocorrelation/serial correlation: $Cov(\epsilon_{it}, {X}_{i,t-1}) = 0$;
 
-    -   Residuals ($\epsilon$) do not correlate with all explanatory variable ($X$) in all time periods ($t$) and for all individuals ($i$).
-
-        -   No autocorrelation/serial correlation: $Cov(\epsilon_{it}, {X}_{i,t-1}) = 0$;
-
-        -   No cross-sectional dependence: $Cov(\epsilon_{it}, {X}_{j,t}) = 0$ (when individual observations react similarly to the common shocks or correlate in space);
+    -   No cross-sectional dependence: $Cov(\epsilon_{it}, {X}_{j,t}) = 0$ (when individual observations react similarly to the common shocks or correlate in space);
 
 ## Panel Regression FE model not less important assumptions (2)
 
@@ -667,12 +689,13 @@ Cross-sectional dependence: [@Conley1999]
 . . .
 
 $$
-y_{it} = \beta_0 + \beta_1 \cdot x_{it}  + \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
+y_{it} = \beta_0 + \beta_1 \cdot x_{1it} + \dots + \beta_k \cdot x_{kit}  \\ 
++ \color{Red}{v_{i}} + \color{Blue}{u_{t}}  + \epsilon_{it}
 $$
 
 -   Difference from the fixed effect model:
 
-    -   Assumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:
+    -   Assumes NO CORRELATION (ZERO CORRELATION) between random effects and regressors:
 
         -   $Cov(v_{i},{X}_{it}) = 0$
 

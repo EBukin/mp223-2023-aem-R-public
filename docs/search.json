@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nAfter the lecture\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -3196,21 +3196,21 @@
     "href": "slides/w08a-panel-regression.html#terminology",
     "title": "Panel Regression Analysis",
     "section": "Terminology",
-    "text": "Terminology\nPanel data has \\(i\\) individuals (groups) and \\(t\\) time periods for each individual;\n\nPooled OLS (regression without any panel structure);\nFixed Effect:\n\nLeast-squares dummy variable (Pooled OLS + individual dummies);\n\nPanel Regression Fixed Effect:\n\nWithin-transformation most commonly used\nFirst-difference, Between transformation (look it up in (Croissant & Millo, 2018))\n\nPanel Regression Random Effect"
+    "text": "Terminology\nPanel data has:\n\n\\(i\\) individuals (groups);\n\\(t\\) time periods for each individual; and\n\\(k\\) independent variables \\(x\\)\n\nPanel Regression could be:\n\nPooled OLS (regression without any panel structure);\nFixed Effect:\n\nLeast-squares dummy variable (Pooled OLS + individual dummies);\nWithin-transformation panel regression most commonly used\nFirst-difference, Between transformation panel regressions (look it up in (Croissant & Millo, 2018))\n\nRandom Effect panel regression"
   },
   {
     "objectID": "slides/w08a-panel-regression.html#pooled-ols",
     "href": "slides/w08a-panel-regression.html#pooled-ols",
     "title": "Panel Regression Analysis",
     "section": "Pooled OLS",
-    "text": "Pooled OLS\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  +  \\epsilon_{it}\n\\]\n\nEstimates are biased because of the OVB.\nWe assume the OVB to be time-invariant (Mundlak, 1961)."
+    "text": "Pooled OLS\nOLS regression on the entire data set with panel structure.\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{1it} + \\beta_2 \\cdot x_{2it}  + \\dots + \\beta_k  \\cdot x_{kit} +  \\epsilon_{it}\n\\]\n\nEstimates are biased because of the OVB.\nWe assume the OVB to be time-invariant."
   },
   {
     "objectID": "slides/w08a-panel-regression.html#least-squares-dummy-variable-model",
     "href": "slides/w08a-panel-regression.html#least-squares-dummy-variable-model",
     "title": "Panel Regression Analysis",
     "section": "Least-squares dummy variable model",
-    "text": "Least-squares dummy variable model\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\gamma_i \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\nIntroduces a vector of dummy variables \\(\\color{Red}{\\delta}\\) and estimated coefficients for each dummy variable \\(\\gamma_i\\).\nEstimates and unbiased (consistent) but inefficient."
+    "text": "Least-squares dummy variable model\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{1it} + \\beta_2 \\cdot x_{2it}  + \\dots + \\beta_k  \\cdot x_{kit} + \\gamma_i \\cdot \\color{Red}{\\delta_{i}} + \\epsilon_{it}\n\\]\n\nIntroduces a vector of dummy variables \\(\\color{Red}{\\delta}\\) and estimated coefficients \\(\\gamma_i\\) for each dummy variable.\nEstimates \\(\\hat \\beta\\) and \\(\\hat \\gamma\\) are unbiased (consistent) but inefficient.\nWhen there are too many \\(\\color{Red}{\\delta_{i}}\\) (5000 or more), computer will have difficulties with estimating the coefficients…"
   },
   {
     "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-notations",
@@ -3238,7 +3238,7 @@
     "href": "slides/w08a-panel-regression.html#fixed-effect-model-assumptions-1",
     "title": "Panel Regression Analysis",
     "section": "Fixed Effect Model: assumptions (1)",
-    "text": "Fixed Effect Model: assumptions (1)\n\nNOT ZERO CORRELATION between effects and regressors:\n\n\\(Cov(\\delta_{i},{X}_{it}) \\neq 0\\)\n\nStrict exogeneity (No endogeneity):\n\n\\(E[\\epsilon_{is}| {X}_{it}, \\delta_{i}] = 0\\)\n\\(Cov(\\epsilon_{is}, {X}_{it}) = 0\\) and\n\\(Cov(\\epsilon_{it}, {X}_{jt}) = 0\\) , where \\(j\\neq i\\) and \\(s\\neq t\\) ;\nResiduals (\\(\\epsilon\\)) do not correlate with all explanatory variable (\\(X\\)) in all time periods (\\(t\\)) and for all individuals (\\(i\\)).\n\nNo autocorrelation/serial correlation: \\(Cov(\\epsilon_{it}, {X}_{i,t-1}) = 0\\);\nNo cross-sectional dependence: \\(Cov(\\epsilon_{it}, {X}_{j,t}) = 0\\) (when individual observations react similarly to the common shocks or correlate in space);"
+    "text": "Fixed Effect Model: assumptions (1)\n\nNOT ZERO correlation between fixed effects \\(\\alpha_i\\) and (not de-meaned) regressors \\(x_{kit}\\):\n\n\\(Cov(\\alpha_i, {x}_{kit}) \\neq 0\\)\n\nStrict exogeneity (No endogeneity):\n\n\\(E[\\epsilon_{is}| {x}_{kit}, \\alpha_i] = 0\\)\n\\(Cov(\\epsilon_{is}, {x}_{kit}) = 0\\) and \\(Cov(\\epsilon_{it}, {x}_{kjt}) = 0\\) , where \\(j\\neq i\\) and \\(s\\neq t\\) ;\nResiduals (\\(\\epsilon\\)) do not correlate with all explanatory variable (\\(x_k\\)) in all time periods (\\(t\\)) and for all individuals (\\(i\\)).\n\nVariance homogeneity:\n\nNo autocorrelation/serial correlation: \\(Cov(\\epsilon_{it}, {X}_{i,t-1}) = 0\\);\nNo cross-sectional dependence: \\(Cov(\\epsilon_{it}, {X}_{j,t}) = 0\\) (when individual observations react similarly to the common shocks or correlate in space);"
   },
   {
     "objectID": "slides/w08a-panel-regression.html#panel-regression-fe-model-not-less-important-assumptions-2",
@@ -3259,7 +3259,7 @@
     "href": "slides/w08a-panel-regression.html#random-effect-model-individual-time-and-two-ways",
     "title": "Panel Regression Analysis",
     "section": "Random Effect Model (individual, time and two-ways)",
-    "text": "Random Effect Model (individual, time and two-ways)\n\nIntroduce random components \\(\\color{Red}{v_i}\\) and/or \\(\\color{Blue}{u_{t}}\\)\n\n\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{it}  + \\color{Red}{v_{i}} + \\color{Blue}{u_{t}}  + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between effects and regressors:\n\n\\(Cov(v_{i},{X}_{it}) = 0\\)\n\nIgnoring RE causes no bias to the estimates;"
+    "text": "Random Effect Model (individual, time and two-ways)\n\nIntroduce random components \\(\\color{Red}{v_i}\\) and/or \\(\\color{Blue}{u_{t}}\\)\n\n\n\\[\ny_{it} = \\beta_0 + \\beta_1 \\cdot x_{1it} + \\dots + \\beta_k \\cdot x_{kit}  \\\\\n+ \\color{Red}{v_{i}} + \\color{Blue}{u_{t}}  + \\epsilon_{it}\n\\]\n\nDifference from the fixed effect model:\n\nAssumes NO CORRELATION (ZERO CORRELATION) between random effects and regressors:\n\n\\(Cov(v_{i},{X}_{it}) = 0\\)\n\nIgnoring RE causes no bias to the estimates;"
   },
   {
     "objectID": "slides/w08a-panel-regression.html#summary-on-the-panel-regression",
@@ -3827,5 +3827,33 @@
     "title": "Panel Regression Analysis: Micro application to production function",
     "section": "Individual fixed effects",
     "text": "Individual fixed effects\nFrom the regression equation below,\n\\[\n\\begin{aligned}\n\\ln \\text{output}_{it} & = A_0 + \\beta_1 \\cdot \\ln \\text{land}_{it}\n+ \\beta_2 \\cdot \\ln \\text{labor}_{it} \\\\\n& + \\beta_3 \\cdot \\ln \\text{seed}_{it} + \\beta_4 \\cdot \\ln  \\text{urea}_{it} \\\\\n& + \\beta_5 \\cdot \\ln \\text{pesticide}_{it} \\\\\n& + \\color{Red}{\\alpha_i} + e_{it}\n\\end{aligned}\n\\]\nwe know that \\(\\color{Red}{\\alpha_i}\\) are the individual fixed effects.\n\nR calculates them and we can explore them.\nIn fact, those individual fixed effects are the simplest possible measured of farms efficiency!"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-panel-regression-model",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-panel-regression-model",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Panel Regression Model",
+    "text": "Fixed Effect Panel Regression Model\nIndividual Fixed effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{1it} + \\beta_2 \\cdot x_{1it}  + \\dots + \\beta_k  \\cdot x_{kit}  + \\color{Red}{ \\alpha_i } + \\epsilon_{it}\n\\]\n\n\\(\\color{Red}{ \\alpha_i }\\) are the individual-specific (\\(i\\)) fixed effect;\nusually without the intercept \\(\\beta_0\\);\n\n\nTwo-ways fixed effect model (individual + time effect):\n\\[\ny_{it} =  \\beta_1 \\cdot x_{1it} + \\beta_2 \\cdot x_{1it}  + \\dots + \\beta_k  \\cdot x_{kit}  \\\\ + \\color{Red}{ \\alpha_i } + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]\nTime Fixed Effect model:\n\\[\ny_{it} =  \\beta_1 \\cdot x_{1it} + \\beta_2 \\cdot x_{1it}  + \\dots + \\beta_k  \\cdot x_{kit}  \\\\ + \\color{Blue}{ \\eta_t } + \\epsilon_{it}\n\\]"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-1",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-1",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: Within transformation (Step 1)",
+    "text": "Fixed Effect Model: Within transformation (Step 1)\nWithin-transformation subtracts group means from each observation and estimates \\(\\beta\\) on transformed data using OLS.\n\\[\n\\begin{aligned}\ny_{it} - \\overline{y_{i}} &\n= \\beta_1 (x_{1it} - \\overline{x_{1i}})\n+ \\beta_2 (x_{2it} - \\overline{x_{2i}}) \\\\\n& + \\beta_3 (x_{3i} - \\overline{x_{3i}})\n+ \\color{Red}{\\alpha_{i}}\n+ \\epsilon_{it},\n\\end{aligned}\n\\]\n\n\\(\\overline{y_{i}}\\) and \\(\\overline{x_{ki}}\\) are group \\(i\\)-specific means computed as: \\(\\overline{x_{ki}} = \\frac{1}{N_i} \\sum_t x_{kit}\\), where \\(N_i\\) is the number of observations (time periods \\(t\\)) in the group \\(i\\).\n\n\n\\(\\ddot{y_i} = y_{it} - \\overline{y_{i}}\\), \\(\\ddot{x_i} = x_{it} - \\overline{x_{i}}\\) are de-meaned regressand and regressors.\n\nNote! \\(\\beta_3=0\\), because any time-invariant \\(x_{ki}\\) (\\(x_k\\) without \\(t\\) index) will become zero: \\({x}_{i} - \\overline{{x}_{i}} = 0\\).\n\nSuch \\(x\\) are: gender, race, individual characteristics …"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-2",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-2",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: Within transformation (Step 2)",
+    "text": "Fixed Effect Model: Within transformation (Step 2)\nBased on the demeaned data without time-invariant effects, OLS method is used to estimate \\(\\hat \\beta\\) for all \\(k\\) variables:\n\\[\n\\begin{aligned}\n\\ddot{y_i} & = \\hat \\beta_1 \\ddot{x}_{1it} + \\hat \\beta_2 \\ddot{x}_{2it} + \\dots + \\hat \\beta_k \\ddot{x}_{kit} + \\epsilon_{it}\n\\end{aligned}\n\\]\n\nEstimated \\(\\hat \\beta\\) are identical to the one obtain using LSDV model!"
+  },
+  {
+    "objectID": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-3",
+    "href": "slides/w08a-panel-regression.html#fixed-effect-model-within-transformation-step-3",
+    "title": "Panel Regression Analysis",
+    "section": "Fixed Effect Model: Within transformation (Step 3)",
+    "text": "Fixed Effect Model: Within transformation (Step 3)\nIndividual Fixed Effects \\(\\alpha_i\\) are computed as:\n\\[\n\\alpha_i = \\overline y_i - (\\hat \\beta_1 \\overline{x}_{1i} + \\hat \\beta_2 \\overline{x}_{2i} + \\dots + \\hat \\beta_k \\overline{x}_{ki} )\n\\]\nIndividual fixed effects are identical to \\(\\delta_i\\) from LSDV model:\n\\[\n\\alpha_i = \\beta_0 + \\delta_i\n\\]\n\nIgnoring FE causes bias to the estimates."
   }
 ]
