@@ -479,7 +479,7 @@ Researchers that use IV should aspire to work with **large samples**.
 
 -   This test does not ensure that our instruments are independent of omitted variable $A^{'}_i$ or $Y_i$;
 
--   [see @angrist2001, @Staiger1997]
+-   [see @Angrist2001, @Staiger1997]
 
 ## Overidentification (1)
 
