@@ -1,0 +1,178 @@
+---
+title: "Instrumental Variable"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding: show
+editor_options: 
+  chunk_output_type: console
+---
+
+# Setup
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(haven)
+library(modelsummary)
+library(ivreg)
+```
+
+# Exercise 1. Reproduce Acemoglu et al. 2001
+
+Acemoglu, Daron / Johnson, Simon / Robinson, James A. The Colonial Origins of Comparative Development: An Empirical Investigation. 2001. American Economic Review , Vol. 91, No. 5. p. 1369-1401
+
+## 1 Data loading
+
+
+In the data set, there are following variables:
+
+-   `iso` - Country code;
+-   `base_sample` - dummy variable indicating countries that constitute
+    a base sample;
+-   `africa`, `asia` and `other` - dummy variables indicating if a
+    country is in Africa, Asia or on another continent. Please note that
+    when all three dummy variables are equal to zero, that means that
+    the country is in Latin America.
+-   `pgp95` - GDP per capita (PPP) in 1995;
+-   `hjypl` - Log output per worker in 1988;
+-   `avexpr` - Average protection against expropriation risk,
+    1985--1995;
+-   `extmort4` - European settler mortality;
+-   `lat_abst` - absolute value of the latitude, where the country is located;
+
+
+```{r}
+dta <-
+  read_csv("Acemoglu2001.csv") %>% 
+  filter(iso != "notIndonesia") %>% 
+  mutate(l_pgp95 = log(pgp95), 
+         l_extmort4 = log(extmort4))
+```
+
+-   filter out country that is called "notIndonesia";
+-   compute natural logarithm of the variables, GDP per capita, output
+    per worker and settlers mortality;
+
+##  Descriptive statistics
+
+```{r}
+datasummary_skim(dta)
+```
+
+# OLS
+
+```{r}
+fit1 <- lm(l_pgp95 ~ avexpr, data = dta)
+fit3 <- update(fit1, . ~ . + lat_abst)
+fit5 <- update(fit3, . ~ . + asia + africa + other)
+
+modelsummary::modelsummary(
+  list(`(1) Whole world` = fit1, 
+       `(3) Whole world` = fit3, 
+       `(5) Whole world` = fit5
+       ),
+  fmt = "%.3f",
+  estimate = "{estimate}{stars} ({std.error})",
+  statistic = NULL,
+  gof_map = c("adj.r.squared", "nobs"),
+  stars = c("*" = 0.05, "**" = 0.01, "***" = 0.001),
+  coef_rename = 
+    c("avexpr" = "Av. prot. ag. expropriation risk 1985–1995",
+      "lat_abst" = "Latitude",
+      "asia" = "Asia dummy",
+      "africa" = "Africa dummy",
+      "other" = "Other continent dummy"), 
+  coef_omit = "Intercep"
+) 
+```
+
+
+# IV
+
+```{r}
+library(ivreg)
+library(lmtest)
+
+fit1iv <- ivreg(l_pgp95 ~ avexpr | l_extmort4,
+                data = dta %>% filter(base_sample == 1),
+                method = "M")
+
+coef(fit1iv, component = "stage1")
+vcov(fit1iv, component = "stage1") %>% diag %>% sqrt()
+
+fit2iv <- update(fit1iv, . ~ . + lat_abst| . + lat_abst)
+
+coef(fit2iv, component = "stage1")
+vcov(fit2iv, component = "stage1") %>% diag %>% sqrt()
+
+fit8iv <- update(fit1iv, . ~ . + lat_abst  + asia + africa + other| . + lat_abst  + asia + africa + other)
+
+coef(fit2iv, component = "stage1")
+vcov(fit2iv, component = "stage1") %>% diag %>% sqrt()
+
+```
+
+Second stage 
+
+```{r}
+modelsummary::modelsummary(
+  list(`(1) Base sample` = fit1iv, 
+       `(2) Base sample` = fit2iv,
+       `(7) Base sample` = fit8iv
+       ),
+  fmt = "%.3f",
+  estimate = "{estimate}{stars} ({std.error})",
+  statistic = NULL,
+  gof_map = c("adj.r.squared", "nobs", "statistic.Weak.instrument",
+              "statistic.Wu.Hausman"),
+  coef_rename = 
+    c("avexpr" = "Av. prot. ag. expropriation risk 1985–1995",
+      "lat_abst" = "Latitude",
+      "asia" = "Asia dummy",
+      "africa" = "Africa dummy",
+      "other" = "Other continent dummy"), 
+  stars = c("*" = 0.05, "**" = 0.01, "***" = 0.001),
+  diagnostic = TRUE,
+  title = "Panel A: Two-Stage Least Squares"
+) 
+```
+
+
+First stage 
+
+```{r}
+list(
+  `(1) Base sample` = fit1iv,
+  `(2) Base sample` = fit2iv,
+  `(7) Base sample` = fit8iv
+) %>% 
+  imap(~{
+    modd <- .x
+    moddname <- .y
+    tibble(
+      parameter = names(coef(modd, component = "stage1")),
+      est = coef(modd, component = "stage1"),
+      se = vcov(modd, component = "stage1") %>% diag() %>% sqrt()
+    ) %>% 
+      mutate(
+        {{moddname}} := str_c(round(est, 3), " (", round(se, 3), ")")
+      ) %>% 
+      select(-se, -est)
+  }) %>% 
+  reduce(full_join) %>% 
+  right_join(
+    tibble(
+      parameter = c("log_extmort4", "lat_abst", "asia", "africa", "other"),
+      ` ` = c("Log European settler mortality", "Latitude", "Asia dummy",
+              "Africa dummy", "Other continent dummy")
+      )
+  ) %>% 
+  select(` `, everything()) %>% 
+  select(-parameter ) %>% 
+  knitr::kable()
+```
+
+

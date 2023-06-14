@@ -1,5 +1,5 @@
 ---
-title: "OVB: ability bias"
+title: "Penguins and Simpsons paradox"
 author: "EB"
 date: "`r Sys.Date()`"
 output: html_document

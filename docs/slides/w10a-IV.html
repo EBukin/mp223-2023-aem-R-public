@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Eduard Bukin">
+
+<title>Instrumental Variable</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Instrumental Variable</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Eduard Bukin 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Institute of Agricultural Policy and Market Research. Faculty 09. Justus Liebig University Giessen.
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="return-to-schooling-and-the-selection-bias" class="level1">
+<h1>Return to schooling and the Selection bias</h1>
+<ul>
+<li><p><strong>Does more years of schooling cause higher wages?</strong></p></li>
+<li><p><strong>What other methods can we use to compute the return to schooling?</strong></p></li>
+</ul>
+<section id="short-regression" class="level2">
+<h2 class="anchored" data-anchor-id="short-regression">Short Regression</h2>
+<p><span id="eq-mincer-short"><span class="math display">\[
+Y_i = \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S
+\tag{1.1}\]</span></span></p>
+<ul>
+<li>annual earning <span class="math inline">\(Y_i\)</span></li>
+<li>years of education <span class="math inline">\(s_i\)</span></li>
+<li><span class="math inline">\(X_i\)</span> vector of other control variables, such as experience.</li>
+</ul>
+<div class="incremental">
+<p>Is the ceteris paribus fulfilled in <a href="#eq-mincer-short">Equation&nbsp;1.1</a>?</p>
+<ul>
+<li><p>Is control for experience and education sufficient?</p></li>
+<li><p>At a given experience/education level, are more- and less-educated workers equally able and diligent? <span class="citation" data-cites="Angrist2014">(see <a href="#ref-Angrist2014" role="doc-biblioref">Joshua D. Angrist &amp; Pischke, 2014</a>, Ch. 6)</span></p></li>
+</ul>
+</div>
+</section>
+<section id="long-regression" class="level2">
+<h2 class="anchored" data-anchor-id="long-regression">Long Regression</h2>
+<p><span id="eq-long"><span class="math display">\[
+Y_i = \alpha + \rho s_i + \beta X_i + \gamma A^{'}_{i} + \varepsilon_i
+\tag{1.2}\]</span></span></p>
+<ul>
+<li><p>where <span class="math inline">\(A^{'}_{i}\)</span> is the ability variable that we desire to have in order to ensure the unbiased estimates of <span class="math inline">\(\rho\)</span>.</p></li>
+<li><p>Omitting <span class="math inline">\(A^{'}_{i}\)</span> causes a selection bias or endogeneity:</p>
+<ul>
+<li><span class="math inline">\(\rho^{S} = \rho + \underbrace{\delta_{A^{'} s} \times \gamma}_{\text{ability bias}}\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="endogeneity" class="level1">
+<h1>Endogeneity</h1>
+<p><strong>Is another terminology for a selection bias!</strong></p>
+<section id="definition" class="level2">
+<h2 class="anchored" data-anchor-id="definition">Definition</h2>
+<ul>
+<li>Consider following <strong>LONG</strong> and <strong>SHORT</strong> models:</li>
+</ul>
+<div class="incremental">
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp;= \alpha + \rho s_i + \beta X_i + \gamma A^{'}_{i} + \varepsilon_i , &amp;&amp; \text{long}\\
+Y_i &amp;= \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S , &amp;&amp; \text{short}
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(s_i\)</span> is the causal variable of interest (education)</p></li>
+<li><p><span class="math inline">\(A^{'}_{i}\)</span> is the vector of control variables that we desire to have in order to ensure unbiased estimates of <span class="math inline">\(\rho\)</span>;</p></li>
+<li><p>Variable <span class="math inline">\(s_i\)</span> is <strong>endogenous</strong> if it correlates with the error terms <span class="math inline">\(\varepsilon^{S}_i\)</span> :</p></li>
+</ul>
+</div>
+<div class="incremental">
+<p><span class="math display">\[
+Cov(s_i, \varepsilon^{S}_i) \neq 0
+\]</span></p>
+</div>
+</section>
+<section id="endogeneity-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="endogeneity-in-practice">Endogeneity in practice:</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<ul>
+<li><p>variation in the independent variable <span class="math inline">\(s_i\)</span> (education) is not “random” as compared to the variation in the dependent variable <span class="math inline">\(Y_i\)</span>, but</p></li>
+<li><p>an external process <span class="math inline">\(U\)</span> affects variation in both <span class="math inline">\(s_i\)</span> and <span class="math inline">\(Y_i\)</span>;</p></li>
+<li><p>thus, <span class="math inline">\(s_i\)</span> is endogenous to <span class="math inline">\(Y_i\)</span>;</p></li>
+</ul>
+<div class="fragment">
+<p><img src="img/w10/ovb-scheme-1.png" class="img-fluid"></p>
+</div>
+</div><div class="column" style="width:25%;">
+<div class="fragment">
+<p>If variance of <span class="math inline">\(s_i\)</span> is truly independent of <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(s_i\)</span> is exogenous.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="causes-of-endogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="causes-of-endogeneity">Causes of endogeneity</h2>
+<ul>
+<li><p>Omitted Variable Bias (familiar)</p></li>
+<li><p>Measurement Error</p></li>
+<li><p>Simultaneity</p></li>
+</ul>
+</section>
+<section id="ovb" class="level2">
+<h2 class="anchored" data-anchor-id="ovb">OVB</h2>
+<p><img src="img/w10/ovb-scheme-1.png" class="img-fluid"></p>
+</section>
+<section id="measurement-error" class="level2">
+<h2 class="anchored" data-anchor-id="measurement-error">Measurement error</h2>
+<p><img src="img/w10/meserr-scheme-1.png" class="img-fluid"></p>
+</section>
+<section id="measurement-error-1" class="level2">
+<h2 class="anchored" data-anchor-id="measurement-error-1">Measurement error</h2>
+<ul>
+<li><p>We estimate a long model: <span class="math inline">\(Y_i = \alpha + \beta s^*_i + e_i\)</span> ,</p>
+<ul>
+<li>but <span class="math inline">\(s^*_i\)</span> is unavailable, we only have <span class="math inline">\(s_i = s^*_i + m_i\)</span> instead,</li>
+<li><span class="math inline">\(m_i\)</span> is a systematic measurement error,</li>
+<li><span class="math inline">\(E[m_i] =0\)</span> and <span class="math inline">\(Cov(s^*_i, m_i) = Cov(e_i, m_i) = 0\)</span>.</li>
+</ul></li>
+<li><p>Desired coefficient <span class="math inline">\(\beta = \frac{Cov(Y_i, s_i)}{Var(s_i)}\)</span></p></li>
+<li><p>But with the erroneous data, we estimate biased coefficient <span class="math inline">\(\beta_b\)</span></p></li>
+</ul>
+<div class="incremental">
+<p><span class="math display">\[
+\begin{aligned}
+\beta_b &amp; =  
+\frac{Cov(Y_i, s_i)}{Var(s_i)}  =
+\frac{Cov(a+\beta s^*_i + e_i, s^*_i + m_i)}{Var(s_i)} \\  
+&amp; =  \frac{\beta \cdot Cov(s^*_i, s^*_i)}{Var(s_i)}  =  \beta \frac{Var(s^{*}_i)}{Var(s_i)}
+\end{aligned}
+\]</span></p>
+<ul>
+<li><span class="citation" data-cites="Angrist2014">(see <a href="#ref-Angrist2014" role="doc-biblioref">Joshua D. Angrist &amp; Pischke, 2014</a>, Ch. 6)</span></li>
+</ul>
+</div>
+</section>
+<section id="simultaneity" class="level2">
+<h2 class="anchored" data-anchor-id="simultaneity">Simultaneity</h2>
+<p><img src="img/w10/simultaneity-scheme-1.png" class="img-fluid"></p>
+</section>
+<section id="simultaneity-1" class="level2">
+<h2 class="anchored" data-anchor-id="simultaneity-1">Simultaneity</h2>
+<ul>
+<li><p>Simultaneity occurs if at least two variables are jointly determined.</p>
+<ul>
+<li>A typical case is when observed outcomes are the result of separate behavioral mechanisms that are coordinated in an equilibrium.</li>
+</ul></li>
+<li><p>The prototypical case is a system of demand and supply equations:</p>
+<ul>
+<li><span class="math inline">\(D(p)\)</span> = how high would demand be if the price was set to <span class="math inline">\(p\)</span>?</li>
+<li><span class="math inline">\(S(p)\)</span> = how high would supply be if the price was set to <span class="math inline">\(p\)</span>?</li>
+</ul></li>
+<li><p>Number of police people and the crime rate.</p></li>
+<li><p><span class="citation" data-cites="wooldridge2020introductory">(see <a href="#ref-wooldridge2020introductory" role="doc-biblioref">M. J. Wooldridge, 2020</a>, Ch. 17)</span> for more details on the problem and solutions.</p></li>
+</ul>
+</section>
+</section>
+<section id="iv---one-of-the-solutions-to-endogeneity" class="level1">
+<h1>IV - one of the solutions to endogeneity</h1>
+<p>IV stands for Instrumental Variable</p>
+<section id="instrumental-variable" class="level2">
+<h2 class="anchored" data-anchor-id="instrumental-variable">Instrumental Variable</h2>
+<p>is another variable <span class="math inline">\(Z_i\)</span> that affects only endogenous regressor <span class="math inline">\(s_i\)</span> and satisfies:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="fragment">
+<p><img src="img/w10/iv-scheme-1.png" class="img-fluid"></p>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<ol type="1">
+<li><p><strong>Relevance condition:</strong></p></li>
+<li><p><strong>Exclusion restriction:</strong></p></li>
+<li><p><strong>Independence assumption:</strong></p></li>
+</ol>
+</div>
+</div>
+</div>
+<p><span class="citation" data-cites="Angrist2014 Angrist2009 Hernan2020 Wooldridge2010 Soederbom2014 Imbens2020">(see <a href="#ref-Angrist2014" role="doc-biblioref">Joshua D. Angrist &amp; Pischke, 2014</a> Ch. 3 and 6; <a href="#ref-Angrist2009" role="doc-biblioref">Joshua D. Angrist &amp; Pischke, 2009</a>, Ch. 4.; <a href="#ref-Hernan2020" role="doc-biblioref">Hernán &amp; Robins, 2020</a>, Ch. 16; <a href="#ref-Wooldridge2010" role="doc-biblioref">J. M. Wooldridge, 2010</a>, Ch. 8; <a href="#ref-Soederbom2014" role="doc-biblioref">Söderbom, Teal, &amp; Eberhardt, 2014</a>, Ch. 11; <a href="#ref-Imbens2020" role="doc-biblioref">Imbens, 2020</a>)</span></p>
+</section>
+<section id="relevance-condition" class="level2">
+<h2 class="anchored" data-anchor-id="relevance-condition">1. Relevance condition:</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><span class="math inline">\(Z_i\)</span> has a causal effect on <span class="math inline">\(s_i\)</span>;</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<p><strong>Violation of the relevance condition:</strong> <img src="img/w10/iv-relevance-violation.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="exclusion-restriction" class="level2">
+<h2 class="anchored" data-anchor-id="exclusion-restriction">2. Exclusion restriction:</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><span class="math inline">\(Z_i\)</span> does not affect <span class="math inline">\(Y_i\)</span> directly, except through its potential effect on <span class="math inline">\(s_i\)</span>;</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<p><strong>Violation of the exclusion restriction:</strong> <img src="img/w10/iv-exclusion-violation.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="independence-assumption" class="level2">
+<h2 class="anchored" data-anchor-id="independence-assumption">3. Independence assumption:</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li><span class="math inline">\(Z_i\)</span> is randomly assigned or “as good as randomly assigned”, the same as</li>
+<li><span class="math inline">\(Z_i\)</span> is unrelated to the omitted variables <span class="math inline">\(A^{'}_i\)</span>, same as</li>
+<li><span class="math inline">\(Z_i\)</span> and <span class="math inline">\(Y_i\)</span> do not share any common causes</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<p><strong>Violation of the independence assumption:</strong> <img src="img/w10/iv-independence-violation.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="iv-regression-algorithm-using-2sls-1" class="level2">
+<h2 class="anchored" data-anchor-id="iv-regression-algorithm-using-2sls-1">IV regression algorithm using 2SLS (1)</h2>
+<p><strong>Stage 1:</strong> regress endogenous variable <span class="math inline">\(s_i\)</span> on all <span class="math inline">\(X_i\)</span> plus the instrument <span class="math inline">\(Z_i\)</span></p>
+<p><span class="math display">\[
+s_i = \pi_0 + \pi_1 Z_i + \rho X_i + \nu_i
+\]</span></p>
+<div class="incremental">
+<p>Compute fitted values form the stage 1: <span class="math inline">\(\hat s_i = \pi_0 + \pi_1 Z_i + \rho X_i\)</span>.</p>
+</div>
+<div class="incremental">
+<p>Substitute <span class="math inline">\(s_i\)</span> with the <span class="math inline">\(\hat{s_i}\)</span> from the stage 1.</p>
+</div>
+<div class="incremental">
+<p><strong>Stage 2:</strong> <span class="math inline">\(Y_i = \alpha^{IV} + \rho^{IV} \hat{s_i} + \beta^{IV} X_i + \varepsilon^{IV}_i\)</span></p>
+</div>
+<div class="incremental">
+<p>where</p>
+<ul>
+<li><p><span class="math inline">\(\hat{s_i}\)</span> are the fitted values from the first stage</p></li>
+<li><p><span class="math inline">\(\rho^{IV}\)</span> is the causal effect of interest from stage two that is asymptotically equal to <span class="math inline">\(\rho\)</span> , the true effect of interest (<span class="math inline">\(\rho^{IV} \asymp \rho\)</span>)</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="wage-and-education-again" class="level1">
+<h1>Wage and Education (again)</h1>
+<section id="wage-and-education-again-1" class="level2">
+<h2 class="anchored" data-anchor-id="wage-and-education-again-1">Wage and Education (again)</h2>
+<p><span class="math display">\[
+Y_i = \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S
+\]</span></p>
+<ul>
+<li><p>We know that estimate of years of education <span class="math inline">\(s_i\)</span> is biased because of the OVB (ability bias).</p></li>
+<li><p><strong>Think of an RCT experiment that could help to estimate true causal effect of</strong> <span class="math inline">\(s_i\)</span> on income!</p></li>
+<li><p>What instrument <span class="math inline">\(Z_i\)</span> can we use for education?</p></li>
+</ul>
+</section>
+<section id="fantastic-ivs-and-how-to-find-them" class="level2">
+<h2 class="anchored" data-anchor-id="fantastic-ivs-and-how-to-find-them">Fantastic IVs and how to find them…</h2>
+<ol type="1">
+<li><p>Use theory!</p>
+<ul>
+<li>human capital theory suggests that people make schooling choices by comparing the costs and benefits of alternatives.</li>
+</ul></li>
+<li><p>Think and speculate:</p>
+<ul>
+<li><p>What is the ideal experiment that could capture the effect of schooling on education?</p></li>
+<li><p>What are the forces you’d like to manipulate and the factors you’d like to hold constant?</p></li>
+<li><p>What are the other processes that are independent of wage, but may affect schooling?</p></li>
+</ul></li>
+<li><p>Analyze, what were/are the policies/environments that could mimic the experimental setting?</p></li>
+</ol>
+<div class="fragment">
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Reasoning on how researcher use theory and available observational data to approximate real experiment is called <strong>Identification strategy</strong>!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="fantastic-ivs-for-education" class="level2">
+<h2 class="anchored" data-anchor-id="fantastic-ivs-for-education">Fantastic IVs for education</h2>
+<ul>
+<li><p>Loan policies or other subsidies that vary independently of ability or earnings potential</p></li>
+<li><p>Region and time variation in school construction <span class="citation" data-cites="Duflo2001">(<a href="#ref-Duflo2001" role="doc-biblioref">Duflo, 2001</a>)</span></p></li>
+<li><p>Proximity to college<span class="citation" data-cites="Card1994">(<a href="#ref-Card1994" role="doc-biblioref">Card, 1994</a>)</span></p></li>
+<li><p>Quarter of birth <span class="citation" data-cites="Angrist1991a">(<a href="#ref-Angrist1991a" role="doc-biblioref">Joshua D. Angrist &amp; Krueger, 1991</a>)</span></p></li>
+<li><p>Parents education <span class="citation" data-cites="Buckles2013">(<a href="#ref-Buckles2013" role="doc-biblioref">Buckles &amp; Hungerman, 2013</a>)</span></p></li>
+<li><p>Number of siblings</p></li>
+</ul>
+</section>
+<section id="using-parents-education-as-the-iv-for-education" class="level2 smmaller">
+<h2 class="smmaller anchored" data-anchor-id="using-parents-education-as-the-iv-for-education">Using parents education as the IV for education</h2>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>dta <span class="ot">&lt;-</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">read_csv</span>(<span class="st">"education_parents.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">mutate</span>(<span class="at">lwagehour =</span> <span class="fu">log</span>(wage<span class="sc">/</span>hours)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">mutate</span>(<span class="at">parents_edu =</span> feduc <span class="sc">+</span> meduc)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">glimpse</span>(dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(haven)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>dta <span class="ot">&lt;-</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"exercises"</span>,<span class="st">"ex10-IV"</span>, <span class="st">"education_parents.csv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="fu">mutate</span>(<span class="at">lwagehour =</span> <span class="fu">log</span>(wage<span class="sc">/</span>hours)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fu">mutate</span>(<span class="at">parents_edu =</span> feduc <span class="sc">+</span> meduc) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(parents_edu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 935 Columns: 17
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (17): wage, hours, IQ, KWW, educ, exper, tenure, age, married, black, so...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">glimpse</span>(dta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 722
+Columns: 19
+$ wage        &lt;dbl&gt; 769, 808, 825, 650, 562, 600, 1154, 1000, 930, 900, 1318, …
+$ hours       &lt;dbl&gt; 40, 50, 40, 40, 40, 40, 45, 40, 43, 45, 38, 40, 50, 45, 40…
+$ IQ          &lt;dbl&gt; 93, 119, 108, 96, 74, 91, 111, 95, 132, 125, 119, 118, 105…
+$ KWW         &lt;dbl&gt; 35, 41, 46, 32, 27, 24, 37, 44, 44, 40, 24, 47, 37, 39, 36…
+$ educ        &lt;dbl&gt; 12, 18, 14, 12, 11, 10, 15, 12, 18, 15, 16, 16, 10, 15, 11…
+$ exper       &lt;dbl&gt; 11, 11, 11, 13, 14, 13, 13, 16, 8, 4, 7, 9, 17, 6, 19, 10,…
+$ tenure      &lt;dbl&gt; 2, 16, 9, 7, 5, 0, 1, 16, 13, 3, 2, 9, 2, 9, 10, 4, 3, 8, …
+$ age         &lt;dbl&gt; 31, 37, 33, 32, 34, 30, 36, 36, 38, 30, 28, 34, 35, 36, 38…
+$ married     &lt;dbl&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ black       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ south       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ urban       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+$ sibs        &lt;dbl&gt; 1, 1, 1, 4, 10, 1, 2, 1, 1, 2, 3, 1, 1, 3, 2, 2, 5, 2, 0, …
+$ brthord     &lt;dbl&gt; 2, NA, 2, 3, 6, 2, 3, 1, 1, NA, 1, 1, 2, 3, 3, 1, 1, 1, 1,…
+$ meduc       &lt;dbl&gt; 8, 14, 14, 12, 6, 8, 14, 12, 13, 12, 10, 12, 6, 12, 10, 12…
+$ feduc       &lt;dbl&gt; 8, 14, 14, 12, 11, 8, 5, 11, 14, 12, 10, 12, 8, 10, 8, 12,…
+$ lwage       &lt;dbl&gt; 6.645091, 6.694562, 6.715384, 6.476973, 6.331502, 6.396930…
+$ lwagehour   &lt;dbl&gt; 2.956212, 2.782539, 3.026504, 2.788093, 2.642622, 2.708050…
+$ parents_edu &lt;dbl&gt; 16, 28, 28, 24, 17, 16, 19, 23, 27, 24, 20, 24, 14, 22, 18…</code></pre>
+</div>
+</div>
+</section>
+<section id="estimating-iv-manually" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="estimating-iv-manually">Estimating IV manually</h2>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># No IV</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>ols <span class="ot">&lt;-</span>  <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta)</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># No IV but with controls for IQ</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>ols_iq <span class="ot">&lt;-</span>  <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> IQ, <span class="at">data =</span> dta)</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># First stage</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>first_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> parents_edu <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta)</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Fitted values of endogenous regressor</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>dta_fitted <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">educ_fit =</span> <span class="fu">fitted</span>(first_stage))</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Second stage</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>second_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ_fit <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta_fitted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">OLS</span><span class="st">`</span> <span class="ot">=</span> ols, <span class="st">`</span><span class="at">OLS (with ability proxi)</span><span class="st">`</span> <span class="ot">=</span> ols_iq,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>       <span class="st">`</span><span class="at">1 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> first_stage, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>       <span class="st">`</span><span class="at">2 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> second_stage),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="at">fmt =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="st">"educ"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="st">"educ_fit"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="st">"parents_edu"</span> <span class="ot">=</span> <span class="st">"Parents educ."</span>,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="st">"exper"</span> <span class="ot">=</span> <span class="st">"Experience"</span>,  </span>
+<span id="cb7-13"><a href="#cb7-13"></a>    <span class="st">"I(exper^2)"</span> <span class="ot">=</span> <span class="st">"Experience sq."</span>,  </span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="st">"IQ"</span> <span class="ot">=</span> <span class="st">"Ability proxi"</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  ),</span>
+<span id="cb7-16"><a href="#cb7-16"></a>  <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|RMSE"</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> OLS </th>
+   <th style="text-align:center;"> OLS (with ability proxi) </th>
+   <th style="text-align:center;"> 1 stage (par. educ.) </th>
+   <th style="text-align:center;"> &nbsp;2 stage (par. educ.) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Education </td>
+   <td style="text-align:center;"> 0.078*** (0.007) </td>
+   <td style="text-align:center;"> 0.058*** (0.008) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.146*** (0.019) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Parents educ. </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.148*** (0.013) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Experience </td>
+   <td style="text-align:center;"> 0.009 (0.015) </td>
+   <td style="text-align:center;"> 0.010 (0.015) </td>
+   <td style="text-align:center;"> −0.021 (0.072) </td>
+   <td style="text-align:center;"> 0.008 (0.016) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Experience sq. </td>
+   <td style="text-align:center;"> 0.001 (0.001) </td>
+   <td style="text-align:center;"> 0.001 (0.001) </td>
+   <td style="text-align:center;"> −0.007* (0.003) </td>
+   <td style="text-align:center;"> 0.001+ (0.001) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px"> Ability proxi </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.006*** (0.001) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.141 </td>
+   <td style="text-align:center;"> 0.169 </td>
+   <td style="text-align:center;"> 0.326 </td>
+   <td style="text-align:center;"> 0.076 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.137 </td>
+   <td style="text-align:center;"> 0.164 </td>
+   <td style="text-align:center;"> 0.323 </td>
+   <td style="text-align:center;"> 0.072 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> −341.745 </td>
+   <td style="text-align:center;"> −329.737 </td>
+   <td style="text-align:center;"> −1462.726 </td>
+   <td style="text-align:center;"> −368.199 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 39.259 </td>
+   <td style="text-align:center;"> 36.461 </td>
+   <td style="text-align:center;"> 115.813 </td>
+   <td style="text-align:center;"> 19.574 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="using-siblings-number-as-the-iv-for-education" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="using-siblings-number-as-the-iv-for-education">Using siblings number as the IV for education</h2>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(ivreg)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>iv_fit2 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">|</span> sibs <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper <span class="sc">^</span> <span class="dv">2</span>) ,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">data =</span> dta )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">OLS</span><span class="st">`</span> <span class="ot">=</span> ols, <span class="st">`</span><span class="at">OLS (with ability proxi)</span><span class="st">`</span> <span class="ot">=</span> ols_iq,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>       <span class="st">`</span><span class="at">1 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> first_stage, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>       <span class="st">`</span><span class="at">2 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> second_stage,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>       <span class="st">`</span><span class="at">2 stage (siblings)</span><span class="st">`</span> <span class="ot">=</span> iv_fit2),</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="at">fmt =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="st">"educ"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="st">"educ_fit"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="st">"parents_edu"</span> <span class="ot">=</span> <span class="st">"Parents educ."</span>,</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="st">"exper"</span> <span class="ot">=</span> <span class="st">"Experience"</span>,  </span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="st">"I(exper^2)"</span> <span class="ot">=</span> <span class="st">"Experience sq."</span>,  </span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="st">"IQ"</span> <span class="ot">=</span> <span class="st">"Ability proxi"</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>  ),</span>
+<span id="cb9-17"><a href="#cb9-17"></a>  <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|RMSE"</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> OLS </th>
+   <th style="text-align:center;"> OLS (with ability proxi) </th>
+   <th style="text-align:center;"> 1 stage (par. educ.) </th>
+   <th style="text-align:center;"> &nbsp;2 stage (par. educ.) </th>
+   <th style="text-align:center;"> &nbsp;2 stage (siblings) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Education </td>
+   <td style="text-align:center;"> 0.078*** (0.007) </td>
+   <td style="text-align:center;"> 0.058*** (0.008) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.146*** (0.019) </td>
+   <td style="text-align:center;"> 0.128*** (0.033) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Parents educ. </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 0.148*** (0.013) </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Experience </td>
+   <td style="text-align:center;"> 0.009 (0.015) </td>
+   <td style="text-align:center;"> 0.010 (0.015) </td>
+   <td style="text-align:center;"> −0.021 (0.072) </td>
+   <td style="text-align:center;"> 0.008 (0.016) </td>
+   <td style="text-align:center;"> 0.008 (0.016) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Experience sq. </td>
+   <td style="text-align:center;"> 0.001 (0.001) </td>
+   <td style="text-align:center;"> 0.001 (0.001) </td>
+   <td style="text-align:center;"> −0.007* (0.003) </td>
+   <td style="text-align:center;"> 0.001+ (0.001) </td>
+   <td style="text-align:center;"> 0.001 (0.001) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1.5px"> Ability proxi </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> 0.006*** (0.001) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+   <td style="text-align:center;"> 722 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 </td>
+   <td style="text-align:center;"> 0.141 </td>
+   <td style="text-align:center;"> 0.169 </td>
+   <td style="text-align:center;"> 0.326 </td>
+   <td style="text-align:center;"> 0.076 </td>
+   <td style="text-align:center;"> 0.085 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R2 Adj. </td>
+   <td style="text-align:center;"> 0.137 </td>
+   <td style="text-align:center;"> 0.164 </td>
+   <td style="text-align:center;"> 0.323 </td>
+   <td style="text-align:center;"> 0.072 </td>
+   <td style="text-align:center;"> 0.081 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Log.Lik. </td>
+   <td style="text-align:center;"> −341.745 </td>
+   <td style="text-align:center;"> −329.737 </td>
+   <td style="text-align:center;"> −1462.726 </td>
+   <td style="text-align:center;"> −368.199 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> F </td>
+   <td style="text-align:center;"> 39.259 </td>
+   <td style="text-align:center;"> 36.461 </td>
+   <td style="text-align:center;"> 115.813 </td>
+   <td style="text-align:center;"> 19.574 </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+<section id="pitfalls-of-the-iv" class="level1">
+<h1>Pitfalls of the IV</h1>
+<section id="consistency-and-unbiasedness" class="level2">
+<h2 class="anchored" data-anchor-id="consistency-and-unbiasedness">Consistency and unbiasedness</h2>
+<ul>
+<li><p>IV estimates <strong>are not unbiased</strong>, but they <strong>are consistent</strong> <span class="citation" data-cites="Angrist2001">(<a href="#ref-Angrist2001" role="doc-biblioref">Joshua D. Angrist &amp; Krueger, 2001</a>)</span>.</p>
+<ul>
+<li><p><strong>Unbiasedness</strong> means the estimator has a sampling distribution centered on the parameter of interest in a sample of any size, while</p></li>
+<li><p><strong>Consistency</strong> only means that the estimator converges to the population parameter as the sample size grows.</p></li>
+</ul></li>
+</ul>
+<div class="incremental">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Researchers that use IV should aspire to work with <strong>large samples</strong>.</p>
+</div>
+</div>
+<ul>
+<li>No statistical tests is available for checking consistency</li>
+</ul>
+</div>
+</section>
+<section id="bad-instruments-1" class="level2">
+<h2 class="anchored" data-anchor-id="bad-instruments-1">Bad instruments (1)</h2>
+<ol type="1">
+<li><span class="math inline">\(Z_i\)</span> that does not satisfy any of the Relevance condition, Exclusion restriction and Independence assumption;</li>
+</ol>
+</section>
+<section id="bad-instruments-2" class="level2">
+<h2 class="anchored" data-anchor-id="bad-instruments-2">Bad instruments (2)</h2>
+<ol start="2" type="1">
+<li><span class="math inline">\(Z_i\)</span> that correlate with omitted variable (OV) but <strong>do not cause</strong> changes in it or inflict simultaneity:</li>
+</ol>
+<ul>
+<li><p>They result into much greater upwards shifting bias compare to the OLS;</p></li>
+<li><p>For example the weather in Brazil and supply price and demand quantity of coffee:</p>
+<ul>
+<li><p>weather shifts the supply curve, it is random, thus it seems as a plausible instrument for price in the demand model</p></li>
+<li><p>the weather in Brazil determines supply expectations on futures exchange, thus, it also shifts the demand for coffee before the supply price is affected;</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="bad-instruments-3" class="level2">
+<h2 class="anchored" data-anchor-id="bad-instruments-3">Bad instruments (3)</h2>
+<ol start="3" type="1">
+<li><p>Weak instrument <span class="math inline">\(Z_i\)</span>:</p>
+<ul>
+<li><p>When the instrument <span class="math inline">\(Z_i\)</span> is only weakly correlates with endogenous regressor <span class="math inline">\(s_i\)</span>;</p></li>
+<li><p>Find a better one!</p></li>
+</ul></li>
+</ol>
+</section>
+<section id="weak-instrument-test" class="level2">
+<h2 class="anchored" data-anchor-id="weak-instrument-test">Weak instrument test:</h2>
+<ul>
+<li><p>Run the first stage regression with and without the IV;</p></li>
+<li><p>Compare the F-statistics</p>
+<ul>
+<li>If F-statistics with instrument is greater than that without <strong>by 5 of more</strong>,</li>
+<li>this is a sign of a strong instrument <span class="citation" data-cites="Staiger1997">(<a href="#ref-Staiger1997" role="doc-biblioref">Staiger &amp; Stock, 1997</a>)</span>;</li>
+</ul></li>
+<li><p>This test does not ensure that our instruments are independent of omitted variable <span class="math inline">\(A^{'}_i\)</span> or <span class="math inline">\(Y_i\)</span>;</p></li>
+<li><p><span class="citation" data-cites="angrist2001">Staiger &amp; Stock (<a href="#ref-Staiger1997" role="doc-biblioref">1997</a>)</span></p></li>
+</ul>
+</section>
+<section id="overidentification-1" class="level2">
+<h2 class="anchored" data-anchor-id="overidentification-1">Overidentification (1)</h2>
+<ul>
+<li><p>number of instruments <span class="math inline">\(G\)</span> exceeds the number of endogenous variables <span class="math inline">\(K\)</span>.</p>
+<ul>
+<li>when the IV is overidentified, estimates are biased;</li>
+<li>bias is proportional to <span class="math inline">\(K - G\)</span>;</li>
+<li>using fewer instruments therefore reduces bias;</li>
+</ul></li>
+<li><p>If you have few candidates for IV and one endogenous regressor:</p>
+<ul>
+<li>select one IV for the first stage, and</li>
+<li>put the remaining instruments as controls into the second stage</li>
+</ul></li>
+</ul>
+</section>
+<section id="overidentification-2" class="level2">
+<h2 class="anchored" data-anchor-id="overidentification-2">Overidentification (2)</h2>
+<p>Sargan’s overidentification test:</p>
+<ul>
+<li><p><span class="math inline">\(H_0:Cov(Z^{'}_i,\varepsilon^{IV}_i)=0\)</span> - the covariance between the instrument and the error term is zero</p></li>
+<li><p><span class="math inline">\(H_1:Cov(Z^{'}_i,\varepsilon^{IV}_i)\neq0\)</span></p></li>
+<li><p>Thus, by rejecting the <span class="math inline">\(H_0\)</span>, we conclude that at least one of the instruments is not valid.</p></li>
+</ul>
+</section>
+<section id="wu-hausman-test-for-endogeneity" class="level2">
+<h2 class="anchored" data-anchor-id="wu-hausman-test-for-endogeneity">Wu-Hausman test for endogeneity</h2>
+<p>Wu-Hausman test for endogeneity tests if the variable that we are worried about is indeed endogenous.</p>
+<ul>
+<li><p><span class="math inline">\(H_0:Cov(s_i,\varepsilon_i)=0\)</span> - the covariance between potentially endogenous variable and the error term is zero</p></li>
+<li><p><span class="math inline">\(H_1:Cov(s_i,\varepsilon_i) \neq 0\)</span></p></li>
+<li><p>Thus, by rejecting the <span class="math inline">\(H_0\)</span>, we conclude that there is endogeneity and there might be a need for IV.</p></li>
+</ul>
+</section>
+</section>
+<section id="example-1.-the-colonial-origins-of-comparative-development-an-empirical-investigation" class="level1">
+<h1>Example 1. The colonial origins of comparative development: An empirical investigation</h1>
+<p><span class="citation" data-cites="Acemoglu2001">(<a href="#ref-Acemoglu2001" role="doc-biblioref">Acemoglu, Johnson, &amp; Robinson, 2001</a>)</span>. The colonial origins of comparative development: An empirical investigation. American economic review, 91(5), 1369-1401.</p>
+<section id="research-question-and-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-and-the-problem">Research question and the problem</h2>
+<ul>
+<li><p><strong>What are the fundamental causes of the large differences in income per capita across countries?</strong></p></li>
+<li><p>with better “institutions,” more secure property rights, and less distortionary policies,</p>
+<ul>
+<li>countries invest more in physical and human capital, and</li>
+<li>use these factors more efficiently to</li>
+<li>achieve a greater level of income.</li>
+</ul></li>
+<li><p>Institutions are a likely cause of income growth.</p></li>
+</ul>
+</section>
+<section id="endogeneity-problem" class="level2">
+<h2 class="anchored" data-anchor-id="endogeneity-problem">Endogeneity problem</h2>
+<p>What could be the ideal experiment to find the effect of institutions on income?</p>
+<ul>
+<li><p>Rich economies choose or can afford better institutions.</p></li>
+<li><p>Economies that are different for a variety of reasons</p>
+<ul>
+<li>will differ both in their institutions and in their income per capita.</li>
+</ul></li>
+<li><p>To estimate the impact of institutions on income,</p>
+<ul>
+<li>we need a <strong>source of exogenous variation in institutions</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="identification-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="identification-strategy">Identification strategy</h2>
+<p>is the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment <span class="citation" data-cites="Angrist1991a">(<a href="#ref-Angrist1991a" role="doc-biblioref">Joshua D. Angrist &amp; Krueger, 1991</a>)</span></p>
+<div class="incremental">
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p>Current performance is caused by</p></li>
+<li><p>Current <strong>institutions</strong>, which are caused by</p></li>
+<li><p><strong>Early institutions</strong>, which are caused by</p></li>
+<li><p><strong>Settlements types</strong> during colonization, which are caused by</p></li>
+<li><p>Settlers’ (potential) <strong>mortality or colonization risks</strong>.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><img src="img/w10/institution-identification.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="empirical-model-ols-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-model-ols-estimator">Empirical model (OLS estimator)</h2>
+<p><span class="math display">\[
+\begin{aligned}
+\log (\text{GDP per capita}_i) &amp; = \beta_0  \\
+&amp; + \beta_1 \text{Proxy for institutions} \\
+&amp; + \gamma \text{Control variables} + \epsilon_i
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(i\)</span> is the country;</p></li>
+<li><p>Dependent variable is the GDP per capita in 1995;</p></li>
+<li><p>As the proxy of the institutional quality, authors used <strong>average protection against expropriation risk in 1985-1990</strong> (index/country ranking);</p></li>
+<li><p>Controls include latitude of the country and continent-specific dummy variables;</p></li>
+</ul>
+</section>
+<section id="ols-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="ols-estimation">OLS estimation</h2>
+<p><img src="img/w10/institution-ols.png" class="img-fluid"></p>
+</section>
+<section id="empirical-model-iv-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-model-iv-estimator">Empirical model (IV estimator)</h2>
+<p>First stage:</p>
+<div class="incremental">
+<p><span class="math display">\[
+\begin{aligned}
+\text{Proxy for institutions}  &amp; = \beta_0  \\
+&amp; + \beta_1 \log (\text{Settlers mortality in 16-18th cent.}) \\
+&amp; + \gamma \text{Control variables} + e_i,
+\end{aligned}
+\]</span></p>
+<ul>
+<li>European settlers mortality in the 16-18th centuries is the precise number of how many settlers died in the country that they tried to colonize.</li>
+</ul>
+</div>
+<div class="incremental">
+<p>Second stage:</p>
+</div>
+<div class="incremental">
+<p><span class="math display">\[
+\begin{aligned}
+\log (\text{GDP per capita}_i) &amp; = \beta_0^{IV}  \\
+&amp; + \beta_1^{IV} \widehat{ \text{Proxy for institutions}} \\
+&amp; + \gamma^{IV} \text{Control variables} + \epsilon_i^{IV},
+\end{aligned}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\widehat{ \{ \text{Proxy for institutions} \}}\)</span> are fitted values from the first stage.</li>
+</ul>
+</div>
+</section>
+<section id="iv-results" class="level2">
+<h2 class="anchored" data-anchor-id="iv-results">IV results</h2>
+<p><img src="img/w10/institution-iv-2.png" class="img-fluid"></p>
+</section>
+<section id="references" class="level2">
+
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-Acemoglu2001" class="csl-entry" role="doc-biblioentry">
+Acemoglu, D., Johnson, S., &amp; Robinson, J. A. (2001). The colonial origins of comparative development: An empirical investigation. <em>American Economic Review</em>, <em>91</em>(5), 1369–1401. http://doi.org/<a href="https://doi.org/10.1257/aer.91.5.1369">10.1257/aer.91.5.1369</a>
+</div>
+<div id="ref-Angrist1991a" class="csl-entry" role="doc-biblioentry">
+Angrist, Joshua D., &amp; Krueger, A. B. (1991). <span class="nocase">Does Compulsory School Attendance Affect Schooling and Earnings?</span> <em>The Quarterly Journal of Economics</em>, <em>106</em>(4), 979–1014. http://doi.org/<a href="https://doi.org/10.2307/2937954">10.2307/2937954</a>
+</div>
+<div id="ref-Angrist2001" class="csl-entry" role="doc-biblioentry">
+Angrist, Joshua D., &amp; Krueger, A. B. (2001). Instrumental variables and the search for identification: From supply and demand to natural experiments. <em>Journal of Economic Perspectives</em>, <em>15</em>(4), 69–85. http://doi.org/<a href="https://doi.org/10.1257/jep.15.4.69">10.1257/jep.15.4.69</a>
+</div>
+<div id="ref-Angrist2009" class="csl-entry" role="doc-biblioentry">
+Angrist, Joshua D., &amp; Pischke, J.-S. (2009). <em>Mostly harmless econometrics</em>. Princeton University Press. http://doi.org/<a href="https://doi.org/10.1515/9781400829828">10.1515/9781400829828</a>
+</div>
+<div id="ref-Angrist2014" class="csl-entry" role="doc-biblioentry">
+Angrist, Joshua D., &amp; Pischke, J.-S. (2014). <em>Mastering’metrics: The path from cause to effect</em>. Princeton University Press.
+</div>
+<div id="ref-Buckles2013" class="csl-entry" role="doc-biblioentry">
+Buckles, K. S., &amp; Hungerman, D. M. (2013). Season of birth and later outcomes: Old questions, new answers. <em>Review of Economics and Statistics</em>, <em>95</em>(3), 711–724. http://doi.org/<a href="https://doi.org/10.1162/rest_a_00314">10.1162/rest_a_00314</a>
+</div>
+<div id="ref-Card1994" class="csl-entry" role="doc-biblioentry">
+Card, D. (1994). <em><a href="https://doi.org/10.3386/w4832">Earnings, schooling, and ability revisited</a></em>. National Bureau of Economic Research.
+</div>
+<div id="ref-Duflo2001" class="csl-entry" role="doc-biblioentry">
+Duflo, E. (2001). Schooling and labor market consequences of school construction in indonesia: Evidence from an unusual policy experiment. <em>American Economic Review</em>, <em>91</em>(4), 795–813. http://doi.org/<a href="https://doi.org/10.1257/aer.91.4.795">10.1257/aer.91.4.795</a>
+</div>
+<div id="ref-Hernan2020" class="csl-entry" role="doc-biblioentry">
+Hernán, M. A., &amp; Robins, J. M. (2020). <em><span>Causal Inference: What If</span></em>. Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-Imbens2020" class="csl-entry" role="doc-biblioentry">
+Imbens, G. W. (2020). Potential outcome and directed acyclic graph approaches to causality: Relevance for empirical practice in economics. <em>Journal of Economic Literature</em>, <em>58</em>(4), 1129–1179. http://doi.org/<a href="https://doi.org/10.1257/jel.20191597">10.1257/jel.20191597</a>
+</div>
+<div id="ref-Soederbom2014" class="csl-entry" role="doc-biblioentry">
+Söderbom, M., Teal, F., &amp; Eberhardt, M. (2014). <em>Empirical development economics</em>. ROUTLEDGE. Retrieved from <a href="https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html">https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html</a>
+</div>
+<div id="ref-Staiger1997" class="csl-entry" role="doc-biblioentry">
+Staiger, D., &amp; Stock, J. H. (1997). Instrumental variables regression with weak instruments. <em>Econometrica</em>, <em>65</em>(3), 557. http://doi.org/<a href="https://doi.org/10.2307/2171753">10.2307/2171753</a>
+</div>
+<div id="ref-Wooldridge2010" class="csl-entry" role="doc-biblioentry">
+Wooldridge, J. M. (2010). <em>Econometric analysis of cross section and panel data</em>. MIT press.
+</div>
+<div id="ref-wooldridge2020introductory" class="csl-entry" role="doc-biblioentry">
+Wooldridge, M. J. (2020). <em>Introductory econometrics: A modern approach</em>. South-Western. Retrieved from <a href="https://www.cengage.uk/shop/isbn/9781337558860">https://www.cengage.uk/shop/isbn/9781337558860</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="an">title:</span><span class="co"> "Instrumental Variable"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="an">editor:</span><span class="co"> source</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="an">format:</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">  revealjs: </span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">    incremental: true</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">    smaller: false</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">    scrollable: false</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">    code-copy: true</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">    header-includes: |</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">      &lt;link href="custom.css" rel="stylesheet"&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="an">bibliography:</span><span class="co"> ../bib/references.bib</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">---</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="in">```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb10-20"><a href="#cb10-20"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
+<span id="cb10-22"><a href="#cb10-22"></a>  <span class="at">fig.asp =</span> <span class="fl">0.618</span>,</span>
+<span id="cb10-23"><a href="#cb10-23"></a>  <span class="at">fig.retina =</span> <span class="dv">3</span>,</span>
+<span id="cb10-24"><a href="#cb10-24"></a>  <span class="at">out.width =</span> <span class="st">"100%"</span></span>
+<span id="cb10-25"><a href="#cb10-25"></a>)</span>
+<span id="cb10-26"><a href="#cb10-26"></a></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="fu">library</span>(wooldridge)</span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="fu">library</span>(here)</span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="fu">library</span>(parameters)</span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="fu">library</span>(performance)</span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="in">```</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="fu"># Return to schooling and the Selection bias</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="ss">-   </span>**Does more years of schooling cause higher wages?**</span>
+<span id="cb10-41"><a href="#cb10-41"></a></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="ss">-   </span>**What other methods can we use to compute the return to schooling?**</span>
+<span id="cb10-43"><a href="#cb10-43"></a></span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="fu">## Short Regression</span></span>
+<span id="cb10-45"><a href="#cb10-45"></a></span>
+<span id="cb10-46"><a href="#cb10-46"></a>$$</span>
+<span id="cb10-47"><a href="#cb10-47"></a>Y_i = \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S</span>
+<span id="cb10-48"><a href="#cb10-48"></a>$$ {#eq-mincer-short}</span>
+<span id="cb10-49"><a href="#cb10-49"></a></span>
+<span id="cb10-50"><a href="#cb10-50"></a><span class="ss">-   </span>annual earning $Y_i$</span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="ss">-   </span>years of education $s_i$</span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="ss">-   </span>$X_i$ vector of other control variables, such as experience.</span>
+<span id="cb10-53"><a href="#cb10-53"></a></span>
+<span id="cb10-54"><a href="#cb10-54"></a>. . .</span>
+<span id="cb10-55"><a href="#cb10-55"></a></span>
+<span id="cb10-56"><a href="#cb10-56"></a>Is the ceteris paribus fulfilled in @eq-mincer-short?</span>
+<span id="cb10-57"><a href="#cb10-57"></a></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="ss">-   </span>Is control for experience and education sufficient?</span>
+<span id="cb10-59"><a href="#cb10-59"></a></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="ss">-   </span>At a given experience/education level, are more- and less-educated workers equally able and diligent? <span class="co">[</span><span class="ot">see @Angrist2014, Ch. 6</span><span class="co">]</span></span>
+<span id="cb10-61"><a href="#cb10-61"></a></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="fu">## Long Regression</span></span>
+<span id="cb10-63"><a href="#cb10-63"></a></span>
+<span id="cb10-64"><a href="#cb10-64"></a>$$</span>
+<span id="cb10-65"><a href="#cb10-65"></a>Y_i = \alpha + \rho s_i + \beta X_i + \gamma A^{'}_{i} + \varepsilon_i</span>
+<span id="cb10-66"><a href="#cb10-66"></a>$$ {#eq-long}</span>
+<span id="cb10-67"><a href="#cb10-67"></a></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="ss">-   </span>where $A^{'}_{i}$ is the ability variable that we desire to have in order to ensure the unbiased estimates of $\rho$.</span>
+<span id="cb10-69"><a href="#cb10-69"></a></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="ss">-   </span>Omitting $A^{'}_{i}$ causes a selection bias or endogeneity:</span>
+<span id="cb10-71"><a href="#cb10-71"></a></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="ss">    -   </span>$\rho^{S} = \rho + \underbrace{\delta_{A^{'} s} \times \gamma}_{\text{ability bias}}$</span>
+<span id="cb10-73"><a href="#cb10-73"></a></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="fu"># Endogeneity</span></span>
+<span id="cb10-75"><a href="#cb10-75"></a></span>
+<span id="cb10-76"><a href="#cb10-76"></a>**Is another terminology for a selection bias!**</span>
+<span id="cb10-77"><a href="#cb10-77"></a></span>
+<span id="cb10-78"><a href="#cb10-78"></a><span class="fu">## Definition</span></span>
+<span id="cb10-79"><a href="#cb10-79"></a></span>
+<span id="cb10-80"><a href="#cb10-80"></a><span class="ss">-   </span>Consider following **LONG** and **SHORT** models:</span>
+<span id="cb10-81"><a href="#cb10-81"></a></span>
+<span id="cb10-82"><a href="#cb10-82"></a>. . .</span>
+<span id="cb10-83"><a href="#cb10-83"></a></span>
+<span id="cb10-84"><a href="#cb10-84"></a>$$</span>
+<span id="cb10-85"><a href="#cb10-85"></a>\begin{aligned}</span>
+<span id="cb10-86"><a href="#cb10-86"></a>Y_i &amp;= \alpha + \rho s_i + \beta X_i + \gamma A^{'}_{i} + \varepsilon_i , &amp;&amp; \text{long}<span class="sc">\\</span></span>
+<span id="cb10-87"><a href="#cb10-87"></a>Y_i &amp;= \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S , &amp;&amp; \text{short}</span>
+<span id="cb10-88"><a href="#cb10-88"></a>\end{aligned}</span>
+<span id="cb10-89"><a href="#cb10-89"></a>$$</span>
+<span id="cb10-90"><a href="#cb10-90"></a></span>
+<span id="cb10-91"><a href="#cb10-91"></a><span class="ss">-   </span>$s_i$ is the causal variable of interest (education)</span>
+<span id="cb10-92"><a href="#cb10-92"></a></span>
+<span id="cb10-93"><a href="#cb10-93"></a><span class="ss">-   </span>$A^{'}_{i}$ is the vector of control variables that we desire to have in order to ensure unbiased estimates of $\rho$;</span>
+<span id="cb10-94"><a href="#cb10-94"></a></span>
+<span id="cb10-95"><a href="#cb10-95"></a><span class="ss">-   </span>Variable $s_i$ is **endogenous** if it correlates with the error terms $\varepsilon^{S}_i$ :</span>
+<span id="cb10-96"><a href="#cb10-96"></a></span>
+<span id="cb10-97"><a href="#cb10-97"></a>. . .</span>
+<span id="cb10-98"><a href="#cb10-98"></a></span>
+<span id="cb10-99"><a href="#cb10-99"></a>$$ </span>
+<span id="cb10-100"><a href="#cb10-100"></a>Cov(s_i, \varepsilon^{S}_i) \neq 0</span>
+<span id="cb10-101"><a href="#cb10-101"></a>$$</span>
+<span id="cb10-102"><a href="#cb10-102"></a></span>
+<span id="cb10-103"><a href="#cb10-103"></a><span class="fu">## Endogeneity in practice:</span></span>
+<span id="cb10-104"><a href="#cb10-104"></a></span>
+<span id="cb10-105"><a href="#cb10-105"></a>::: columns</span>
+<span id="cb10-106"><a href="#cb10-106"></a>::: {.column width="75%"}</span>
+<span id="cb10-107"><a href="#cb10-107"></a><span class="ss">-   </span>variation in the independent variable $s_i$ (education) is not "random" as compared to the variation in the dependent variable $Y_i$, but</span>
+<span id="cb10-108"><a href="#cb10-108"></a></span>
+<span id="cb10-109"><a href="#cb10-109"></a><span class="ss">-   </span>an external process $U$ affects variation in both $s_i$ and $Y_i$;</span>
+<span id="cb10-110"><a href="#cb10-110"></a></span>
+<span id="cb10-111"><a href="#cb10-111"></a><span class="ss">-   </span>thus, $s_i$ is endogenous to $Y_i$;</span>
+<span id="cb10-112"><a href="#cb10-112"></a></span>
+<span id="cb10-113"><a href="#cb10-113"></a>::: fragment</span>
+<span id="cb10-114"><a href="#cb10-114"></a><span class="al">![](img/w10/ovb-scheme-1.png)</span></span>
+<span id="cb10-115"><a href="#cb10-115"></a>:::</span>
+<span id="cb10-116"><a href="#cb10-116"></a>:::</span>
+<span id="cb10-117"><a href="#cb10-117"></a></span>
+<span id="cb10-118"><a href="#cb10-118"></a>::: {.column width="25%"}</span>
+<span id="cb10-119"><a href="#cb10-119"></a>::: fragment</span>
+<span id="cb10-120"><a href="#cb10-120"></a>If variance of $s_i$ is truly independent of $Y_i$, $s_i$ is exogenous.</span>
+<span id="cb10-121"><a href="#cb10-121"></a>:::</span>
+<span id="cb10-122"><a href="#cb10-122"></a>:::</span>
+<span id="cb10-123"><a href="#cb10-123"></a>:::</span>
+<span id="cb10-124"><a href="#cb10-124"></a></span>
+<span id="cb10-125"><a href="#cb10-125"></a><span class="fu">## Causes of endogeneity</span></span>
+<span id="cb10-126"><a href="#cb10-126"></a></span>
+<span id="cb10-127"><a href="#cb10-127"></a><span class="ss">-   </span>Omitted Variable Bias (familiar)</span>
+<span id="cb10-128"><a href="#cb10-128"></a></span>
+<span id="cb10-129"><a href="#cb10-129"></a><span class="ss">-   </span>Measurement Error</span>
+<span id="cb10-130"><a href="#cb10-130"></a></span>
+<span id="cb10-131"><a href="#cb10-131"></a><span class="ss">-   </span>Simultaneity</span>
+<span id="cb10-132"><a href="#cb10-132"></a></span>
+<span id="cb10-133"><a href="#cb10-133"></a><span class="fu">## OVB</span></span>
+<span id="cb10-134"><a href="#cb10-134"></a></span>
+<span id="cb10-135"><a href="#cb10-135"></a><span class="al">![](img/w10/ovb-scheme-1.png)</span></span>
+<span id="cb10-136"><a href="#cb10-136"></a></span>
+<span id="cb10-137"><a href="#cb10-137"></a><span class="fu">## Measurement error</span></span>
+<span id="cb10-138"><a href="#cb10-138"></a></span>
+<span id="cb10-139"><a href="#cb10-139"></a><span class="al">![](img/w10/meserr-scheme-1.png)</span></span>
+<span id="cb10-140"><a href="#cb10-140"></a></span>
+<span id="cb10-141"><a href="#cb10-141"></a><span class="fu">## Measurement error</span></span>
+<span id="cb10-142"><a href="#cb10-142"></a></span>
+<span id="cb10-143"><a href="#cb10-143"></a><span class="ss">-   </span>We estimate a long model: $Y_i = \alpha + \beta s^*_i + e_i$ ,</span>
+<span id="cb10-144"><a href="#cb10-144"></a></span>
+<span id="cb10-145"><a href="#cb10-145"></a><span class="ss">    -   </span>but $s^*_i$ is unavailable, we only have $s_i = s^*_i + m_i$ instead,</span>
+<span id="cb10-146"><a href="#cb10-146"></a><span class="ss">    -   </span>$m_i$ is a systematic measurement error,</span>
+<span id="cb10-147"><a href="#cb10-147"></a><span class="ss">    -   </span>$E<span class="co">[</span><span class="ot">m_i</span><span class="co">]</span> =0$ and $Cov(s^*_i, m_i) = Cov(e_i, m_i) = 0$.</span>
+<span id="cb10-148"><a href="#cb10-148"></a></span>
+<span id="cb10-149"><a href="#cb10-149"></a><span class="ss">-   </span>Desired coefficient $\beta = \frac{Cov(Y_i, s_i)}{Var(s_i)}$</span>
+<span id="cb10-150"><a href="#cb10-150"></a></span>
+<span id="cb10-151"><a href="#cb10-151"></a><span class="ss">-   </span>But with the erroneous data, we estimate biased coefficient $\beta_b$</span>
+<span id="cb10-152"><a href="#cb10-152"></a></span>
+<span id="cb10-153"><a href="#cb10-153"></a>. . .</span>
+<span id="cb10-154"><a href="#cb10-154"></a></span>
+<span id="cb10-155"><a href="#cb10-155"></a>$$</span>
+<span id="cb10-156"><a href="#cb10-156"></a>\begin{aligned}</span>
+<span id="cb10-157"><a href="#cb10-157"></a>\beta_b &amp; =  </span>
+<span id="cb10-158"><a href="#cb10-158"></a>\frac{Cov(Y_i, s_i)}{Var(s_i)}  = </span>
+<span id="cb10-159"><a href="#cb10-159"></a>\frac{Cov(a+\beta s^*_i + e_i, s^*_i + m_i)}{Var(s_i)} <span class="sc">\\</span>  </span>
+<span id="cb10-160"><a href="#cb10-160"></a>&amp; =  \frac{\beta \cdot Cov(s^*_i, s^*_i)}{Var(s_i)}  =  \beta \frac{Var(s^{*}_i)}{Var(s_i)} </span>
+<span id="cb10-161"><a href="#cb10-161"></a>\end{aligned}</span>
+<span id="cb10-162"><a href="#cb10-162"></a>$$</span>
+<span id="cb10-163"><a href="#cb10-163"></a></span>
+<span id="cb10-164"><a href="#cb10-164"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">see @Angrist2014, Ch. 6</span><span class="co">]</span></span>
+<span id="cb10-165"><a href="#cb10-165"></a></span>
+<span id="cb10-166"><a href="#cb10-166"></a><span class="fu">## Simultaneity</span></span>
+<span id="cb10-167"><a href="#cb10-167"></a></span>
+<span id="cb10-168"><a href="#cb10-168"></a><span class="al">![](img/w10/simultaneity-scheme-1.png)</span></span>
+<span id="cb10-169"><a href="#cb10-169"></a></span>
+<span id="cb10-170"><a href="#cb10-170"></a><span class="fu">## Simultaneity</span></span>
+<span id="cb10-171"><a href="#cb10-171"></a></span>
+<span id="cb10-172"><a href="#cb10-172"></a><span class="ss">-   </span>Simultaneity occurs if at least two variables are jointly determined.</span>
+<span id="cb10-173"><a href="#cb10-173"></a></span>
+<span id="cb10-174"><a href="#cb10-174"></a><span class="ss">    -   </span>A typical case is when observed outcomes are the result of separate behavioral mechanisms that are coordinated in an equilibrium.</span>
+<span id="cb10-175"><a href="#cb10-175"></a></span>
+<span id="cb10-176"><a href="#cb10-176"></a><span class="ss">-   </span>The prototypical case is a system of demand and supply equations:</span>
+<span id="cb10-177"><a href="#cb10-177"></a></span>
+<span id="cb10-178"><a href="#cb10-178"></a><span class="ss">    -   </span>$D(p)$ = how high would demand be if the price was set to $p$?</span>
+<span id="cb10-179"><a href="#cb10-179"></a><span class="ss">    -   </span>$S(p)$ = how high would supply be if the price was set to $p$?</span>
+<span id="cb10-180"><a href="#cb10-180"></a></span>
+<span id="cb10-181"><a href="#cb10-181"></a><span class="ss">-   </span>Number of police people and the crime rate.</span>
+<span id="cb10-182"><a href="#cb10-182"></a></span>
+<span id="cb10-183"><a href="#cb10-183"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">see @wooldridge2020introductory, Ch. 17</span><span class="co">]</span> for more details on the problem and solutions.</span>
+<span id="cb10-184"><a href="#cb10-184"></a></span>
+<span id="cb10-185"><a href="#cb10-185"></a><span class="fu"># IV - one of the solutions to endogeneity</span></span>
+<span id="cb10-186"><a href="#cb10-186"></a></span>
+<span id="cb10-187"><a href="#cb10-187"></a>IV stands for Instrumental Variable</span>
+<span id="cb10-188"><a href="#cb10-188"></a></span>
+<span id="cb10-189"><a href="#cb10-189"></a><span class="fu">## Instrumental Variable</span></span>
+<span id="cb10-190"><a href="#cb10-190"></a></span>
+<span id="cb10-191"><a href="#cb10-191"></a>is another variable $Z_i$ that affects only endogenous regressor $s_i$ and satisfies:</span>
+<span id="cb10-192"><a href="#cb10-192"></a></span>
+<span id="cb10-193"><a href="#cb10-193"></a>::: columns</span>
+<span id="cb10-194"><a href="#cb10-194"></a>::: {.column width="60%"}</span>
+<span id="cb10-195"><a href="#cb10-195"></a>::: fragment</span>
+<span id="cb10-196"><a href="#cb10-196"></a><span class="al">![](img/w10/iv-scheme-1.png)</span></span>
+<span id="cb10-197"><a href="#cb10-197"></a>:::</span>
+<span id="cb10-198"><a href="#cb10-198"></a>:::</span>
+<span id="cb10-199"><a href="#cb10-199"></a></span>
+<span id="cb10-200"><a href="#cb10-200"></a>::: {.column width="40%"}</span>
+<span id="cb10-201"><a href="#cb10-201"></a>::: fragment</span>
+<span id="cb10-202"><a href="#cb10-202"></a><span class="ss">1.  </span>**Relevance condition:**</span>
+<span id="cb10-203"><a href="#cb10-203"></a></span>
+<span id="cb10-204"><a href="#cb10-204"></a><span class="ss">2.  </span>**Exclusion restriction:**</span>
+<span id="cb10-205"><a href="#cb10-205"></a></span>
+<span id="cb10-206"><a href="#cb10-206"></a><span class="ss">3.  </span>**Independence assumption:**</span>
+<span id="cb10-207"><a href="#cb10-207"></a>:::</span>
+<span id="cb10-208"><a href="#cb10-208"></a>:::</span>
+<span id="cb10-209"><a href="#cb10-209"></a>:::</span>
+<span id="cb10-210"><a href="#cb10-210"></a></span>
+<span id="cb10-211"><a href="#cb10-211"></a><span class="co">[</span><span class="ot">see @Angrist2014 Ch. 3 and 6; @Angrist2009, Ch. 4.; @Hernan2020, Ch. 16; @Wooldridge2010, Ch. 8; @Soederbom2014, Ch. 11; @Imbens2020</span><span class="co">]</span></span>
+<span id="cb10-212"><a href="#cb10-212"></a></span>
+<span id="cb10-213"><a href="#cb10-213"></a><span class="fu">## 1. Relevance condition:</span></span>
+<span id="cb10-214"><a href="#cb10-214"></a></span>
+<span id="cb10-215"><a href="#cb10-215"></a>::: columns</span>
+<span id="cb10-216"><a href="#cb10-216"></a>::: {.column width="40%"}</span>
+<span id="cb10-217"><a href="#cb10-217"></a><span class="ss">-   </span>$Z_i$ has a causal effect on $s_i$;</span>
+<span id="cb10-218"><a href="#cb10-218"></a>:::</span>
+<span id="cb10-219"><a href="#cb10-219"></a></span>
+<span id="cb10-220"><a href="#cb10-220"></a>::: {.column width="60%"}</span>
+<span id="cb10-221"><a href="#cb10-221"></a>::: fragment</span>
+<span id="cb10-222"><a href="#cb10-222"></a>**Violation of the relevance condition:** <span class="al">![](img/w10/iv-relevance-violation.png)</span></span>
+<span id="cb10-223"><a href="#cb10-223"></a>:::</span>
+<span id="cb10-224"><a href="#cb10-224"></a>:::</span>
+<span id="cb10-225"><a href="#cb10-225"></a>:::</span>
+<span id="cb10-226"><a href="#cb10-226"></a></span>
+<span id="cb10-227"><a href="#cb10-227"></a><span class="fu">## 2. Exclusion restriction:</span></span>
+<span id="cb10-228"><a href="#cb10-228"></a></span>
+<span id="cb10-229"><a href="#cb10-229"></a>::: columns</span>
+<span id="cb10-230"><a href="#cb10-230"></a>::: {.column width="40%"}</span>
+<span id="cb10-231"><a href="#cb10-231"></a><span class="ss">-   </span>$Z_i$ does not affect $Y_i$ directly, except through its potential effect on $s_i$;</span>
+<span id="cb10-232"><a href="#cb10-232"></a>:::</span>
+<span id="cb10-233"><a href="#cb10-233"></a></span>
+<span id="cb10-234"><a href="#cb10-234"></a>::: {.column width="60%"}</span>
+<span id="cb10-235"><a href="#cb10-235"></a>::: fragment</span>
+<span id="cb10-236"><a href="#cb10-236"></a>**Violation of the exclusion restriction:** <span class="al">![](img/w10/iv-exclusion-violation.png)</span></span>
+<span id="cb10-237"><a href="#cb10-237"></a>:::</span>
+<span id="cb10-238"><a href="#cb10-238"></a>:::</span>
+<span id="cb10-239"><a href="#cb10-239"></a>:::</span>
+<span id="cb10-240"><a href="#cb10-240"></a></span>
+<span id="cb10-241"><a href="#cb10-241"></a><span class="fu">## 3. Independence assumption:</span></span>
+<span id="cb10-242"><a href="#cb10-242"></a></span>
+<span id="cb10-243"><a href="#cb10-243"></a>::: columns</span>
+<span id="cb10-244"><a href="#cb10-244"></a>::: {.column width="40%"}</span>
+<span id="cb10-245"><a href="#cb10-245"></a><span class="ss">-   </span>$Z_i$ is randomly assigned or "as good as randomly assigned", the same as</span>
+<span id="cb10-246"><a href="#cb10-246"></a><span class="ss">-   </span>$Z_i$ is unrelated to the omitted variables $A^{'}_i$, same as</span>
+<span id="cb10-247"><a href="#cb10-247"></a><span class="ss">-   </span>$Z_i$ and $Y_i$ do not share any common causes</span>
+<span id="cb10-248"><a href="#cb10-248"></a>:::</span>
+<span id="cb10-249"><a href="#cb10-249"></a></span>
+<span id="cb10-250"><a href="#cb10-250"></a>::: {.column width="60%"}</span>
+<span id="cb10-251"><a href="#cb10-251"></a>::: fragment</span>
+<span id="cb10-252"><a href="#cb10-252"></a>**Violation of the independence assumption:** <span class="al">![](img/w10/iv-independence-violation.png)</span></span>
+<span id="cb10-253"><a href="#cb10-253"></a>:::</span>
+<span id="cb10-254"><a href="#cb10-254"></a>:::</span>
+<span id="cb10-255"><a href="#cb10-255"></a>:::</span>
+<span id="cb10-256"><a href="#cb10-256"></a></span>
+<span id="cb10-257"><a href="#cb10-257"></a><span class="fu">## IV regression algorithm using 2SLS (1)</span></span>
+<span id="cb10-258"><a href="#cb10-258"></a></span>
+<span id="cb10-259"><a href="#cb10-259"></a>**Stage 1:** regress endogenous variable $s_i$ on all $X_i$ plus the instrument $Z_i$</span>
+<span id="cb10-260"><a href="#cb10-260"></a></span>
+<span id="cb10-261"><a href="#cb10-261"></a>$$</span>
+<span id="cb10-262"><a href="#cb10-262"></a>s_i = \pi_0 + \pi_1 Z_i + \rho X_i + \nu_i</span>
+<span id="cb10-263"><a href="#cb10-263"></a>$$</span>
+<span id="cb10-264"><a href="#cb10-264"></a></span>
+<span id="cb10-265"><a href="#cb10-265"></a>. . .</span>
+<span id="cb10-266"><a href="#cb10-266"></a></span>
+<span id="cb10-267"><a href="#cb10-267"></a>Compute fitted values form the stage 1: $\hat s_i = \pi_0 + \pi_1 Z_i + \rho X_i$.</span>
+<span id="cb10-268"><a href="#cb10-268"></a></span>
+<span id="cb10-269"><a href="#cb10-269"></a>. . .</span>
+<span id="cb10-270"><a href="#cb10-270"></a></span>
+<span id="cb10-271"><a href="#cb10-271"></a>Substitute $s_i$ with the $\hat{s_i}$ from the stage 1.</span>
+<span id="cb10-272"><a href="#cb10-272"></a></span>
+<span id="cb10-273"><a href="#cb10-273"></a>. . .</span>
+<span id="cb10-274"><a href="#cb10-274"></a></span>
+<span id="cb10-275"><a href="#cb10-275"></a>**Stage 2:** $Y_i = \alpha^{IV} + \rho^{IV} \hat{s_i} + \beta^{IV} X_i + \varepsilon^{IV}_i$</span>
+<span id="cb10-276"><a href="#cb10-276"></a></span>
+<span id="cb10-277"><a href="#cb10-277"></a>. . .</span>
+<span id="cb10-278"><a href="#cb10-278"></a></span>
+<span id="cb10-279"><a href="#cb10-279"></a>where</span>
+<span id="cb10-280"><a href="#cb10-280"></a></span>
+<span id="cb10-281"><a href="#cb10-281"></a><span class="ss">-   </span>$\hat{s_i}$ are the fitted values from the first stage</span>
+<span id="cb10-282"><a href="#cb10-282"></a></span>
+<span id="cb10-283"><a href="#cb10-283"></a><span class="ss">-   </span>$\rho^{IV}$ is the causal effect of interest from stage two that is asymptotically equal to $\rho$ , the true effect of interest ($\rho^{IV} \asymp \rho$)</span>
+<span id="cb10-284"><a href="#cb10-284"></a></span>
+<span id="cb10-285"><a href="#cb10-285"></a><span class="fu"># Wage and Education (again)</span></span>
+<span id="cb10-286"><a href="#cb10-286"></a></span>
+<span id="cb10-287"><a href="#cb10-287"></a><span class="fu">## Wage and Education (again)</span></span>
+<span id="cb10-288"><a href="#cb10-288"></a></span>
+<span id="cb10-289"><a href="#cb10-289"></a>$$</span>
+<span id="cb10-290"><a href="#cb10-290"></a>Y_i = \alpha^S + \rho^S s_i + \beta^S X_i + \varepsilon_i^S</span>
+<span id="cb10-291"><a href="#cb10-291"></a>$$</span>
+<span id="cb10-292"><a href="#cb10-292"></a></span>
+<span id="cb10-293"><a href="#cb10-293"></a><span class="ss">-   </span>We know that estimate of years of education $s_i$ is biased because of the OVB (ability bias).</span>
+<span id="cb10-294"><a href="#cb10-294"></a></span>
+<span id="cb10-295"><a href="#cb10-295"></a><span class="ss">-   </span>**Think of an RCT experiment that could help to estimate true causal effect of** $s_i$ on income!</span>
+<span id="cb10-296"><a href="#cb10-296"></a></span>
+<span id="cb10-297"><a href="#cb10-297"></a><span class="ss">-   </span>What instrument $Z_i$ can we use for education?</span>
+<span id="cb10-298"><a href="#cb10-298"></a></span>
+<span id="cb10-299"><a href="#cb10-299"></a><span class="fu">## Fantastic IVs and how to find them...</span></span>
+<span id="cb10-300"><a href="#cb10-300"></a></span>
+<span id="cb10-301"><a href="#cb10-301"></a><span class="ss">1.  </span>Use theory!</span>
+<span id="cb10-302"><a href="#cb10-302"></a></span>
+<span id="cb10-303"><a href="#cb10-303"></a><span class="ss">    -   </span>human capital theory suggests that people make schooling choices by comparing the costs and benefits of alternatives.</span>
+<span id="cb10-304"><a href="#cb10-304"></a></span>
+<span id="cb10-305"><a href="#cb10-305"></a><span class="ss">2.  </span>Think and speculate:</span>
+<span id="cb10-306"><a href="#cb10-306"></a></span>
+<span id="cb10-307"><a href="#cb10-307"></a><span class="ss">    -   </span>What is the ideal experiment that could capture the effect of schooling on education?</span>
+<span id="cb10-308"><a href="#cb10-308"></a></span>
+<span id="cb10-309"><a href="#cb10-309"></a><span class="ss">    -   </span>What are the forces you'd like to manipulate and the factors you'd like to hold constant?</span>
+<span id="cb10-310"><a href="#cb10-310"></a></span>
+<span id="cb10-311"><a href="#cb10-311"></a><span class="ss">    -   </span>What are the other processes that are independent of wage, but may affect schooling?</span>
+<span id="cb10-312"><a href="#cb10-312"></a></span>
+<span id="cb10-313"><a href="#cb10-313"></a><span class="ss">3.  </span>Analyze, what were/are the policies/environments that could mimic the experimental setting?</span>
+<span id="cb10-314"><a href="#cb10-314"></a></span>
+<span id="cb10-315"><a href="#cb10-315"></a>::: fragment</span>
+<span id="cb10-316"><a href="#cb10-316"></a>::: {.callout-important appearance="minimal"}</span>
+<span id="cb10-317"><a href="#cb10-317"></a>Reasoning on how researcher use theory and available observational data to approximate real experiment is called **Identification strategy**!</span>
+<span id="cb10-318"><a href="#cb10-318"></a>:::</span>
+<span id="cb10-319"><a href="#cb10-319"></a>:::</span>
+<span id="cb10-320"><a href="#cb10-320"></a></span>
+<span id="cb10-321"><a href="#cb10-321"></a><span class="fu">## Fantastic IVs for education</span></span>
+<span id="cb10-322"><a href="#cb10-322"></a></span>
+<span id="cb10-323"><a href="#cb10-323"></a><span class="ss">-   </span>Loan policies or other subsidies that vary independently of ability or earnings potential</span>
+<span id="cb10-324"><a href="#cb10-324"></a></span>
+<span id="cb10-325"><a href="#cb10-325"></a><span class="ss">-   </span>Region and time variation in school construction <span class="co">[</span><span class="ot">@Duflo2001</span><span class="co">]</span></span>
+<span id="cb10-326"><a href="#cb10-326"></a></span>
+<span id="cb10-327"><a href="#cb10-327"></a><span class="ss">-   </span>Proximity to college<span class="co">[</span><span class="ot">@Card1994</span><span class="co">]</span></span>
+<span id="cb10-328"><a href="#cb10-328"></a></span>
+<span id="cb10-329"><a href="#cb10-329"></a><span class="ss">-   </span>Quarter of birth <span class="co">[</span><span class="ot">@Angrist1991a</span><span class="co">]</span></span>
+<span id="cb10-330"><a href="#cb10-330"></a></span>
+<span id="cb10-331"><a href="#cb10-331"></a><span class="ss">-   </span>Parents education <span class="co">[</span><span class="ot">@Buckles2013</span><span class="co">]</span></span>
+<span id="cb10-332"><a href="#cb10-332"></a></span>
+<span id="cb10-333"><a href="#cb10-333"></a><span class="ss">-   </span>Number of siblings</span>
+<span id="cb10-334"><a href="#cb10-334"></a></span>
+<span id="cb10-335"><a href="#cb10-335"></a><span class="fu">## Using parents education as the IV for education {.smmaller}</span></span>
+<span id="cb10-336"><a href="#cb10-336"></a></span>
+<span id="cb10-337"><a href="#cb10-337"></a><span class="in">```{r eval=FALSE, echo=TRUE}</span></span>
+<span id="cb10-338"><a href="#cb10-338"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-339"><a href="#cb10-339"></a><span class="fu">library</span>(haven)</span>
+<span id="cb10-340"><a href="#cb10-340"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb10-341"><a href="#cb10-341"></a>dta <span class="ot">&lt;-</span></span>
+<span id="cb10-342"><a href="#cb10-342"></a>  <span class="fu">read_csv</span>(<span class="st">"education_parents.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-343"><a href="#cb10-343"></a>  <span class="fu">mutate</span>(<span class="at">lwagehour =</span> <span class="fu">log</span>(wage<span class="sc">/</span>hours)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-344"><a href="#cb10-344"></a>  <span class="fu">mutate</span>(<span class="at">parents_edu =</span> feduc <span class="sc">+</span> meduc)</span>
+<span id="cb10-345"><a href="#cb10-345"></a><span class="fu">glimpse</span>(dta)</span>
+<span id="cb10-346"><a href="#cb10-346"></a><span class="in">```</span></span>
+<span id="cb10-347"><a href="#cb10-347"></a></span>
+<span id="cb10-350"><a href="#cb10-350"></a><span class="in">```{r}</span></span>
+<span id="cb10-351"><a href="#cb10-351"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-352"><a href="#cb10-352"></a><span class="fu">library</span>(haven)</span>
+<span id="cb10-353"><a href="#cb10-353"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb10-354"><a href="#cb10-354"></a>dta <span class="ot">&lt;-</span></span>
+<span id="cb10-355"><a href="#cb10-355"></a>  <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"exercises"</span>,<span class="st">"ex10-IV"</span>, <span class="st">"education_parents.csv"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-356"><a href="#cb10-356"></a>  <span class="fu">mutate</span>(<span class="at">lwagehour =</span> <span class="fu">log</span>(wage<span class="sc">/</span>hours)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-357"><a href="#cb10-357"></a>  <span class="fu">mutate</span>(<span class="at">parents_edu =</span> feduc <span class="sc">+</span> meduc) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-358"><a href="#cb10-358"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(parents_edu))</span>
+<span id="cb10-359"><a href="#cb10-359"></a><span class="fu">glimpse</span>(dta)</span>
+<span id="cb10-360"><a href="#cb10-360"></a><span class="in">```</span></span>
+<span id="cb10-361"><a href="#cb10-361"></a></span>
+<span id="cb10-362"><a href="#cb10-362"></a><span class="fu">## Estimating IV manually {.smaller}</span></span>
+<span id="cb10-363"><a href="#cb10-363"></a></span>
+<span id="cb10-364"><a href="#cb10-364"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb10-365"><a href="#cb10-365"></a><span class="co"># No IV</span></span>
+<span id="cb10-366"><a href="#cb10-366"></a>ols <span class="ot">&lt;-</span>  <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta)</span>
+<span id="cb10-367"><a href="#cb10-367"></a></span>
+<span id="cb10-368"><a href="#cb10-368"></a><span class="co"># No IV but with controls for IQ</span></span>
+<span id="cb10-369"><a href="#cb10-369"></a>ols_iq <span class="ot">&lt;-</span>  <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> IQ, <span class="at">data =</span> dta)</span>
+<span id="cb10-370"><a href="#cb10-370"></a></span>
+<span id="cb10-371"><a href="#cb10-371"></a><span class="co"># First stage</span></span>
+<span id="cb10-372"><a href="#cb10-372"></a>first_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(educ <span class="sc">~</span> parents_edu <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta)</span>
+<span id="cb10-373"><a href="#cb10-373"></a></span>
+<span id="cb10-374"><a href="#cb10-374"></a><span class="co"># Fitted values of endogenous regressor</span></span>
+<span id="cb10-375"><a href="#cb10-375"></a>dta_fitted <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">educ_fit =</span> <span class="fu">fitted</span>(first_stage))</span>
+<span id="cb10-376"><a href="#cb10-376"></a></span>
+<span id="cb10-377"><a href="#cb10-377"></a><span class="co"># Second stage</span></span>
+<span id="cb10-378"><a href="#cb10-378"></a>second_stage <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage) <span class="sc">~</span> educ_fit <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> dta_fitted)</span>
+<span id="cb10-379"><a href="#cb10-379"></a><span class="in">```</span></span>
+<span id="cb10-380"><a href="#cb10-380"></a></span>
+<span id="cb10-383"><a href="#cb10-383"></a><span class="in">```{r}</span></span>
+<span id="cb10-384"><a href="#cb10-384"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb10-385"><a href="#cb10-385"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">OLS</span><span class="st">`</span> <span class="ot">=</span> ols, <span class="st">`</span><span class="at">OLS (with ability proxi)</span><span class="st">`</span> <span class="ot">=</span> ols_iq,</span>
+<span id="cb10-386"><a href="#cb10-386"></a>       <span class="st">`</span><span class="at">1 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> first_stage, </span>
+<span id="cb10-387"><a href="#cb10-387"></a>       <span class="st">`</span><span class="at">2 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> second_stage),</span>
+<span id="cb10-388"><a href="#cb10-388"></a>  <span class="at">fmt =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb10-389"><a href="#cb10-389"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb10-390"><a href="#cb10-390"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-391"><a href="#cb10-391"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb10-392"><a href="#cb10-392"></a>    <span class="st">"educ"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb10-393"><a href="#cb10-393"></a>    <span class="st">"educ_fit"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb10-394"><a href="#cb10-394"></a>    <span class="st">"parents_edu"</span> <span class="ot">=</span> <span class="st">"Parents educ."</span>,</span>
+<span id="cb10-395"><a href="#cb10-395"></a>    <span class="st">"exper"</span> <span class="ot">=</span> <span class="st">"Experience"</span>,  </span>
+<span id="cb10-396"><a href="#cb10-396"></a>    <span class="st">"I(exper^2)"</span> <span class="ot">=</span> <span class="st">"Experience sq."</span>,  </span>
+<span id="cb10-397"><a href="#cb10-397"></a>    <span class="st">"IQ"</span> <span class="ot">=</span> <span class="st">"Ability proxi"</span></span>
+<span id="cb10-398"><a href="#cb10-398"></a>  ),</span>
+<span id="cb10-399"><a href="#cb10-399"></a>  <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|RMSE"</span></span>
+<span id="cb10-400"><a href="#cb10-400"></a>)</span>
+<span id="cb10-401"><a href="#cb10-401"></a><span class="in">```</span></span>
+<span id="cb10-402"><a href="#cb10-402"></a></span>
+<span id="cb10-403"><a href="#cb10-403"></a><span class="fu">## Using siblings number as the IV for education {.smaller}</span></span>
+<span id="cb10-404"><a href="#cb10-404"></a></span>
+<span id="cb10-405"><a href="#cb10-405"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb10-406"><a href="#cb10-406"></a><span class="fu">library</span>(ivreg)</span>
+<span id="cb10-407"><a href="#cb10-407"></a>iv_fit2 <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(</span>
+<span id="cb10-408"><a href="#cb10-408"></a>  <span class="fu">log</span>(wage) <span class="sc">~</span> educ <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">|</span> sibs <span class="sc">+</span> exper <span class="sc">+</span> <span class="fu">I</span>(exper <span class="sc">^</span> <span class="dv">2</span>) ,</span>
+<span id="cb10-409"><a href="#cb10-409"></a>  <span class="at">data =</span> dta )</span>
+<span id="cb10-410"><a href="#cb10-410"></a><span class="in">```</span></span>
+<span id="cb10-411"><a href="#cb10-411"></a></span>
+<span id="cb10-414"><a href="#cb10-414"></a><span class="in">```{r}</span></span>
+<span id="cb10-415"><a href="#cb10-415"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb10-416"><a href="#cb10-416"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">OLS</span><span class="st">`</span> <span class="ot">=</span> ols, <span class="st">`</span><span class="at">OLS (with ability proxi)</span><span class="st">`</span> <span class="ot">=</span> ols_iq,</span>
+<span id="cb10-417"><a href="#cb10-417"></a>       <span class="st">`</span><span class="at">1 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> first_stage, </span>
+<span id="cb10-418"><a href="#cb10-418"></a>       <span class="st">`</span><span class="at">2 stage (par. educ.)</span><span class="st">`</span> <span class="ot">=</span> second_stage,</span>
+<span id="cb10-419"><a href="#cb10-419"></a>       <span class="st">`</span><span class="at">2 stage (siblings)</span><span class="st">`</span> <span class="ot">=</span> iv_fit2),</span>
+<span id="cb10-420"><a href="#cb10-420"></a>  <span class="at">fmt =</span> <span class="st">"%.3f"</span>,</span>
+<span id="cb10-421"><a href="#cb10-421"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb10-422"><a href="#cb10-422"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-423"><a href="#cb10-423"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb10-424"><a href="#cb10-424"></a>    <span class="st">"educ"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb10-425"><a href="#cb10-425"></a>    <span class="st">"educ_fit"</span> <span class="ot">=</span> <span class="st">"Education"</span>, </span>
+<span id="cb10-426"><a href="#cb10-426"></a>    <span class="st">"parents_edu"</span> <span class="ot">=</span> <span class="st">"Parents educ."</span>,</span>
+<span id="cb10-427"><a href="#cb10-427"></a>    <span class="st">"exper"</span> <span class="ot">=</span> <span class="st">"Experience"</span>,  </span>
+<span id="cb10-428"><a href="#cb10-428"></a>    <span class="st">"I(exper^2)"</span> <span class="ot">=</span> <span class="st">"Experience sq."</span>,  </span>
+<span id="cb10-429"><a href="#cb10-429"></a>    <span class="st">"IQ"</span> <span class="ot">=</span> <span class="st">"Ability proxi"</span></span>
+<span id="cb10-430"><a href="#cb10-430"></a>  ),</span>
+<span id="cb10-431"><a href="#cb10-431"></a>  <span class="at">gof_omit =</span> <span class="st">"AIC|BIC|RMSE"</span></span>
+<span id="cb10-432"><a href="#cb10-432"></a>)</span>
+<span id="cb10-433"><a href="#cb10-433"></a><span class="in">```</span></span>
+<span id="cb10-434"><a href="#cb10-434"></a></span>
+<span id="cb10-435"><a href="#cb10-435"></a><span class="fu"># Pitfalls of the IV</span></span>
+<span id="cb10-436"><a href="#cb10-436"></a></span>
+<span id="cb10-437"><a href="#cb10-437"></a><span class="fu">## Consistency and unbiasedness</span></span>
+<span id="cb10-438"><a href="#cb10-438"></a></span>
+<span id="cb10-439"><a href="#cb10-439"></a><span class="ss">-   </span>IV estimates **are not unbiased**, but they **are consistent** <span class="co">[</span><span class="ot">@Angrist2001</span><span class="co">]</span>.</span>
+<span id="cb10-440"><a href="#cb10-440"></a></span>
+<span id="cb10-441"><a href="#cb10-441"></a><span class="ss">    -   </span>**Unbiasedness** means the estimator has a sampling distribution centered on the parameter of interest in a sample of any size, while</span>
+<span id="cb10-442"><a href="#cb10-442"></a></span>
+<span id="cb10-443"><a href="#cb10-443"></a><span class="ss">    -   </span>**Consistency** only means that the estimator converges to the population parameter as the sample size grows.</span>
+<span id="cb10-444"><a href="#cb10-444"></a></span>
+<span id="cb10-445"><a href="#cb10-445"></a>. . .</span>
+<span id="cb10-446"><a href="#cb10-446"></a></span>
+<span id="cb10-447"><a href="#cb10-447"></a>::: callout-note</span>
+<span id="cb10-448"><a href="#cb10-448"></a>Researchers that use IV should aspire to work with **large samples**.</span>
+<span id="cb10-449"><a href="#cb10-449"></a>:::</span>
+<span id="cb10-450"><a href="#cb10-450"></a></span>
+<span id="cb10-451"><a href="#cb10-451"></a><span class="ss">-   </span>No statistical tests is available for checking consistency</span>
+<span id="cb10-452"><a href="#cb10-452"></a></span>
+<span id="cb10-453"><a href="#cb10-453"></a><span class="fu">## Bad instruments (1)</span></span>
+<span id="cb10-454"><a href="#cb10-454"></a></span>
+<span id="cb10-455"><a href="#cb10-455"></a><span class="ss">1.  </span>$Z_i$ that does not satisfy any of the Relevance condition, Exclusion restriction and Independence assumption;</span>
+<span id="cb10-456"><a href="#cb10-456"></a></span>
+<span id="cb10-457"><a href="#cb10-457"></a><span class="fu">## Bad instruments (2)</span></span>
+<span id="cb10-458"><a href="#cb10-458"></a></span>
+<span id="cb10-459"><a href="#cb10-459"></a><span class="ss">2.  </span>$Z_i$ that correlate with omitted variable (OV) but **do not cause** changes in it or inflict simultaneity:</span>
+<span id="cb10-460"><a href="#cb10-460"></a></span>
+<span id="cb10-461"><a href="#cb10-461"></a><span class="ss">-   </span>They result into much greater upwards shifting bias compare to the OLS;</span>
+<span id="cb10-462"><a href="#cb10-462"></a></span>
+<span id="cb10-463"><a href="#cb10-463"></a><span class="ss">-   </span>For example the weather in Brazil and supply price and demand quantity of coffee:</span>
+<span id="cb10-464"><a href="#cb10-464"></a></span>
+<span id="cb10-465"><a href="#cb10-465"></a><span class="ss">    -   </span>weather shifts the supply curve, it is random, thus it seems as a plausible instrument for price in the demand model</span>
+<span id="cb10-466"><a href="#cb10-466"></a></span>
+<span id="cb10-467"><a href="#cb10-467"></a><span class="ss">    -   </span>the weather in Brazil determines supply expectations on futures exchange, thus, it also shifts the demand for coffee before the supply price is affected;</span>
+<span id="cb10-468"><a href="#cb10-468"></a></span>
+<span id="cb10-469"><a href="#cb10-469"></a><span class="fu">## Bad instruments (3)</span></span>
+<span id="cb10-470"><a href="#cb10-470"></a></span>
+<span id="cb10-471"><a href="#cb10-471"></a><span class="ss">3.  </span>Weak instrument $Z_i$:</span>
+<span id="cb10-472"><a href="#cb10-472"></a></span>
+<span id="cb10-473"><a href="#cb10-473"></a><span class="ss">    -   </span>When the instrument $Z_i$ is only weakly correlates with endogenous regressor $s_i$;</span>
+<span id="cb10-474"><a href="#cb10-474"></a></span>
+<span id="cb10-475"><a href="#cb10-475"></a><span class="ss">    -   </span>Find a better one!</span>
+<span id="cb10-476"><a href="#cb10-476"></a></span>
+<span id="cb10-477"><a href="#cb10-477"></a><span class="fu">## Weak instrument test:</span></span>
+<span id="cb10-478"><a href="#cb10-478"></a></span>
+<span id="cb10-479"><a href="#cb10-479"></a><span class="ss">-   </span>Run the first stage regression with and without the IV;</span>
+<span id="cb10-480"><a href="#cb10-480"></a></span>
+<span id="cb10-481"><a href="#cb10-481"></a><span class="ss">-   </span>Compare the F-statistics</span>
+<span id="cb10-482"><a href="#cb10-482"></a></span>
+<span id="cb10-483"><a href="#cb10-483"></a><span class="ss">    -   </span>If F-statistics with instrument is greater than that without **by 5 of more**,</span>
+<span id="cb10-484"><a href="#cb10-484"></a><span class="ss">    -   </span>this is a sign of a strong instrument <span class="co">[</span><span class="ot">@Staiger1997</span><span class="co">]</span>;</span>
+<span id="cb10-485"><a href="#cb10-485"></a></span>
+<span id="cb10-486"><a href="#cb10-486"></a><span class="ss">-   </span>This test does not ensure that our instruments are independent of omitted variable $A^{'}_i$ or $Y_i$;</span>
+<span id="cb10-487"><a href="#cb10-487"></a></span>
+<span id="cb10-488"><a href="#cb10-488"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">see @angrist2001, @Staiger1997</span><span class="co">]</span></span>
+<span id="cb10-489"><a href="#cb10-489"></a></span>
+<span id="cb10-490"><a href="#cb10-490"></a><span class="fu">## Overidentification (1)</span></span>
+<span id="cb10-491"><a href="#cb10-491"></a></span>
+<span id="cb10-492"><a href="#cb10-492"></a><span class="ss">-   </span>number of instruments $G$ exceeds the number of endogenous variables $K$.</span>
+<span id="cb10-493"><a href="#cb10-493"></a></span>
+<span id="cb10-494"><a href="#cb10-494"></a><span class="ss">    -   </span>when the IV is overidentified, estimates are biased;</span>
+<span id="cb10-495"><a href="#cb10-495"></a><span class="ss">    -   </span>bias is proportional to $K - G$;</span>
+<span id="cb10-496"><a href="#cb10-496"></a><span class="ss">    -   </span>using fewer instruments therefore reduces bias;</span>
+<span id="cb10-497"><a href="#cb10-497"></a></span>
+<span id="cb10-498"><a href="#cb10-498"></a><span class="ss">-   </span>If you have few candidates for IV and one endogenous regressor:</span>
+<span id="cb10-499"><a href="#cb10-499"></a></span>
+<span id="cb10-500"><a href="#cb10-500"></a><span class="ss">    -   </span>select one IV for the first stage, and</span>
+<span id="cb10-501"><a href="#cb10-501"></a><span class="ss">    -   </span>put the remaining instruments as controls into the second stage</span>
+<span id="cb10-502"><a href="#cb10-502"></a></span>
+<span id="cb10-503"><a href="#cb10-503"></a><span class="fu">## Overidentification (2)</span></span>
+<span id="cb10-504"><a href="#cb10-504"></a></span>
+<span id="cb10-505"><a href="#cb10-505"></a>Sargan's overidentification test:</span>
+<span id="cb10-506"><a href="#cb10-506"></a></span>
+<span id="cb10-507"><a href="#cb10-507"></a><span class="ss">-   </span>$H_0:Cov(Z^{'}_i,\varepsilon^{IV}_i)=0$ - the covariance between the instrument and the error term is zero</span>
+<span id="cb10-508"><a href="#cb10-508"></a></span>
+<span id="cb10-509"><a href="#cb10-509"></a><span class="ss">-   </span>$H_1:Cov(Z^{'}_i,\varepsilon^{IV}_i)\neq0$</span>
+<span id="cb10-510"><a href="#cb10-510"></a></span>
+<span id="cb10-511"><a href="#cb10-511"></a><span class="ss">-   </span>Thus, by rejecting the $H_0$, we conclude that at least one of the instruments is not valid.</span>
+<span id="cb10-512"><a href="#cb10-512"></a></span>
+<span id="cb10-513"><a href="#cb10-513"></a><span class="fu">## Wu-Hausman test for endogeneity</span></span>
+<span id="cb10-514"><a href="#cb10-514"></a></span>
+<span id="cb10-515"><a href="#cb10-515"></a>Wu-Hausman test for endogeneity tests if the variable that we are worried about is indeed endogenous.</span>
+<span id="cb10-516"><a href="#cb10-516"></a></span>
+<span id="cb10-517"><a href="#cb10-517"></a><span class="ss">-   </span>$H_0:Cov(s_i,\varepsilon_i)=0$ - the covariance between potentially endogenous variable and the error term is zero</span>
+<span id="cb10-518"><a href="#cb10-518"></a></span>
+<span id="cb10-519"><a href="#cb10-519"></a><span class="ss">-   </span>$H_1:Cov(s_i,\varepsilon_i) \neq 0$</span>
+<span id="cb10-520"><a href="#cb10-520"></a></span>
+<span id="cb10-521"><a href="#cb10-521"></a><span class="ss">-   </span>Thus, by rejecting the $H_0$, we conclude that there is endogeneity and there might be a need for IV.</span>
+<span id="cb10-522"><a href="#cb10-522"></a></span>
+<span id="cb10-523"><a href="#cb10-523"></a><span class="fu"># Example 1. The colonial origins of comparative development: An empirical investigation</span></span>
+<span id="cb10-524"><a href="#cb10-524"></a></span>
+<span id="cb10-525"><a href="#cb10-525"></a><span class="co">[</span><span class="ot">@Acemoglu2001</span><span class="co">]</span>. The colonial origins of comparative development: An empirical investigation. American economic review, 91(5), 1369-1401.</span>
+<span id="cb10-526"><a href="#cb10-526"></a></span>
+<span id="cb10-527"><a href="#cb10-527"></a><span class="fu">## Research question and the problem</span></span>
+<span id="cb10-528"><a href="#cb10-528"></a></span>
+<span id="cb10-529"><a href="#cb10-529"></a><span class="ss">-   </span>**What are the fundamental causes of the large differences in income per capita across countries?**</span>
+<span id="cb10-530"><a href="#cb10-530"></a></span>
+<span id="cb10-531"><a href="#cb10-531"></a><span class="ss">-   </span>with better "institutions," more secure property rights, and less distortionary policies,</span>
+<span id="cb10-532"><a href="#cb10-532"></a></span>
+<span id="cb10-533"><a href="#cb10-533"></a><span class="ss">    -   </span>countries invest more in physical and human capital, and</span>
+<span id="cb10-534"><a href="#cb10-534"></a><span class="ss">    -   </span>use these factors more efficiently to</span>
+<span id="cb10-535"><a href="#cb10-535"></a><span class="ss">    -   </span>achieve a greater level of income.</span>
+<span id="cb10-536"><a href="#cb10-536"></a></span>
+<span id="cb10-537"><a href="#cb10-537"></a><span class="ss">-   </span>Institutions are a likely cause of income growth.</span>
+<span id="cb10-538"><a href="#cb10-538"></a></span>
+<span id="cb10-539"><a href="#cb10-539"></a><span class="fu">## Endogeneity problem</span></span>
+<span id="cb10-540"><a href="#cb10-540"></a></span>
+<span id="cb10-541"><a href="#cb10-541"></a>What could be the ideal experiment to find the effect of institutions on income?</span>
+<span id="cb10-542"><a href="#cb10-542"></a></span>
+<span id="cb10-543"><a href="#cb10-543"></a><span class="ss">-   </span>Rich economies choose or can afford better institutions.</span>
+<span id="cb10-544"><a href="#cb10-544"></a></span>
+<span id="cb10-545"><a href="#cb10-545"></a><span class="ss">-   </span>Economies that are different for a variety of reasons</span>
+<span id="cb10-546"><a href="#cb10-546"></a></span>
+<span id="cb10-547"><a href="#cb10-547"></a><span class="ss">    -   </span>will differ both in their institutions and in their income per capita.</span>
+<span id="cb10-548"><a href="#cb10-548"></a></span>
+<span id="cb10-549"><a href="#cb10-549"></a><span class="ss">-   </span>To estimate the impact of institutions on income,</span>
+<span id="cb10-550"><a href="#cb10-550"></a></span>
+<span id="cb10-551"><a href="#cb10-551"></a><span class="ss">    -   </span>we need a **source of exogenous variation in institutions**.</span>
+<span id="cb10-552"><a href="#cb10-552"></a></span>
+<span id="cb10-553"><a href="#cb10-553"></a><span class="fu">## Identification strategy</span></span>
+<span id="cb10-554"><a href="#cb10-554"></a></span>
+<span id="cb10-555"><a href="#cb10-555"></a>is the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment <span class="co">[</span><span class="ot">@Angrist1991a</span><span class="co">]</span></span>
+<span id="cb10-556"><a href="#cb10-556"></a></span>
+<span id="cb10-557"><a href="#cb10-557"></a>. . .</span>
+<span id="cb10-558"><a href="#cb10-558"></a></span>
+<span id="cb10-559"><a href="#cb10-559"></a>::: columns</span>
+<span id="cb10-560"><a href="#cb10-560"></a>::: {.column width="50%"}</span>
+<span id="cb10-561"><a href="#cb10-561"></a><span class="ss">1.  </span>Current performance is caused by</span>
+<span id="cb10-562"><a href="#cb10-562"></a></span>
+<span id="cb10-563"><a href="#cb10-563"></a><span class="ss">2.  </span>Current **institutions**, which are caused by</span>
+<span id="cb10-564"><a href="#cb10-564"></a></span>
+<span id="cb10-565"><a href="#cb10-565"></a><span class="ss">3.  </span>**Early institutions**, which are caused by</span>
+<span id="cb10-566"><a href="#cb10-566"></a></span>
+<span id="cb10-567"><a href="#cb10-567"></a><span class="ss">4.  </span>**Settlements types** during colonization, which are caused by</span>
+<span id="cb10-568"><a href="#cb10-568"></a></span>
+<span id="cb10-569"><a href="#cb10-569"></a><span class="ss">5.  </span>Settlers' (potential) **mortality or colonization risks**.</span>
+<span id="cb10-570"><a href="#cb10-570"></a>:::</span>
+<span id="cb10-571"><a href="#cb10-571"></a></span>
+<span id="cb10-572"><a href="#cb10-572"></a>::: {.column width="50%"}</span>
+<span id="cb10-573"><a href="#cb10-573"></a>::: fragment</span>
+<span id="cb10-574"><a href="#cb10-574"></a><span class="al">![](img/w10/institution-identification.png)</span></span>
+<span id="cb10-575"><a href="#cb10-575"></a>:::</span>
+<span id="cb10-576"><a href="#cb10-576"></a>:::</span>
+<span id="cb10-577"><a href="#cb10-577"></a>:::</span>
+<span id="cb10-578"><a href="#cb10-578"></a></span>
+<span id="cb10-579"><a href="#cb10-579"></a><span class="fu">## Empirical model (OLS estimator)</span></span>
+<span id="cb10-580"><a href="#cb10-580"></a></span>
+<span id="cb10-581"><a href="#cb10-581"></a>$$</span>
+<span id="cb10-582"><a href="#cb10-582"></a>\begin{aligned}</span>
+<span id="cb10-583"><a href="#cb10-583"></a>\log (\text{GDP per capita}_i) &amp; = \beta_0  <span class="sc">\\</span> </span>
+<span id="cb10-584"><a href="#cb10-584"></a>&amp; + \beta_1 \text{Proxy for institutions} <span class="sc">\\</span></span>
+<span id="cb10-585"><a href="#cb10-585"></a>&amp; + \gamma \text{Control variables} + \epsilon_i</span>
+<span id="cb10-586"><a href="#cb10-586"></a>\end{aligned}</span>
+<span id="cb10-587"><a href="#cb10-587"></a>$$</span>
+<span id="cb10-588"><a href="#cb10-588"></a></span>
+<span id="cb10-589"><a href="#cb10-589"></a><span class="ss">-   </span>$i$ is the country;</span>
+<span id="cb10-590"><a href="#cb10-590"></a></span>
+<span id="cb10-591"><a href="#cb10-591"></a><span class="ss">-   </span>Dependent variable is the GDP per capita in 1995;</span>
+<span id="cb10-592"><a href="#cb10-592"></a></span>
+<span id="cb10-593"><a href="#cb10-593"></a><span class="ss">-   </span>As the proxy of the institutional quality, authors used **average protection against expropriation risk in 1985-1990** (index/country ranking);</span>
+<span id="cb10-594"><a href="#cb10-594"></a></span>
+<span id="cb10-595"><a href="#cb10-595"></a><span class="ss">-   </span>Controls include latitude of the country and continent-specific dummy variables;</span>
+<span id="cb10-596"><a href="#cb10-596"></a></span>
+<span id="cb10-597"><a href="#cb10-597"></a><span class="fu">## OLS estimation</span></span>
+<span id="cb10-598"><a href="#cb10-598"></a></span>
+<span id="cb10-599"><a href="#cb10-599"></a><span class="al">![](img/w10/institution-ols.png)</span></span>
+<span id="cb10-600"><a href="#cb10-600"></a></span>
+<span id="cb10-601"><a href="#cb10-601"></a><span class="fu">## Empirical model (IV estimator)</span></span>
+<span id="cb10-602"><a href="#cb10-602"></a></span>
+<span id="cb10-603"><a href="#cb10-603"></a>First stage:</span>
+<span id="cb10-604"><a href="#cb10-604"></a></span>
+<span id="cb10-605"><a href="#cb10-605"></a>. . .</span>
+<span id="cb10-606"><a href="#cb10-606"></a></span>
+<span id="cb10-607"><a href="#cb10-607"></a>$$</span>
+<span id="cb10-608"><a href="#cb10-608"></a>\begin{aligned}</span>
+<span id="cb10-609"><a href="#cb10-609"></a>\text{Proxy for institutions}  &amp; = \beta_0  <span class="sc">\\</span> </span>
+<span id="cb10-610"><a href="#cb10-610"></a>&amp; + \beta_1 \log (\text{Settlers mortality in 16-18th cent.}) <span class="sc">\\</span></span>
+<span id="cb10-611"><a href="#cb10-611"></a>&amp; + \gamma \text{Control variables} + e_i,</span>
+<span id="cb10-612"><a href="#cb10-612"></a>\end{aligned}</span>
+<span id="cb10-613"><a href="#cb10-613"></a>$$</span>
+<span id="cb10-614"><a href="#cb10-614"></a></span>
+<span id="cb10-615"><a href="#cb10-615"></a><span class="ss">-   </span>European settlers mortality in the 16-18th centuries is the precise number of how many settlers died in the country that they tried to colonize.</span>
+<span id="cb10-616"><a href="#cb10-616"></a></span>
+<span id="cb10-617"><a href="#cb10-617"></a>. . .</span>
+<span id="cb10-618"><a href="#cb10-618"></a></span>
+<span id="cb10-619"><a href="#cb10-619"></a>Second stage:</span>
+<span id="cb10-620"><a href="#cb10-620"></a></span>
+<span id="cb10-621"><a href="#cb10-621"></a>. . .</span>
+<span id="cb10-622"><a href="#cb10-622"></a></span>
+<span id="cb10-623"><a href="#cb10-623"></a>$$</span>
+<span id="cb10-624"><a href="#cb10-624"></a>\begin{aligned}</span>
+<span id="cb10-625"><a href="#cb10-625"></a>\log (\text{GDP per capita}_i) &amp; = \beta_0^{IV}  <span class="sc">\\</span> </span>
+<span id="cb10-626"><a href="#cb10-626"></a>&amp; + \beta_1^{IV} \widehat{ \text{Proxy for institutions}} <span class="sc">\\</span></span>
+<span id="cb10-627"><a href="#cb10-627"></a>&amp; + \gamma^{IV} \text{Control variables} + \epsilon_i^{IV},</span>
+<span id="cb10-628"><a href="#cb10-628"></a>\end{aligned}</span>
+<span id="cb10-629"><a href="#cb10-629"></a>$$</span>
+<span id="cb10-630"><a href="#cb10-630"></a></span>
+<span id="cb10-631"><a href="#cb10-631"></a><span class="ss">-   </span>$\widehat{ <span class="sc">\{</span> \text{Proxy for institutions} <span class="sc">\}</span>}$ are fitted values from the first stage.</span>
+<span id="cb10-632"><a href="#cb10-632"></a></span>
+<span id="cb10-633"><a href="#cb10-633"></a><span class="fu">## IV results</span></span>
+<span id="cb10-634"><a href="#cb10-634"></a></span>
+<span id="cb10-635"><a href="#cb10-635"></a><span class="al">![](img/w10/institution-iv-2.png)</span></span>
+<span id="cb10-636"><a href="#cb10-636"></a></span>
+<span id="cb10-637"><a href="#cb10-637"></a><span class="fu">## References</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

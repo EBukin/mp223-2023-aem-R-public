@@ -1,0 +1,120 @@
+---
+title: "Instrumental Variable"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    code_folding: show
+editor_options: 
+  chunk_output_type: console
+---
+
+# Setup
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(haven)
+library(modelsummary)
+
+```
+
+
+## Data loading
+
+Compute log of wage per hour and sum of the mother and father education
+
+```{r}
+dta <-
+  read_csv("education_parents.csv") %>% 
+  mutate(lwagehour = log(wage/hours)) %>% 
+  mutate(parents_edu = feduc + meduc)
+glimpse(dta)
+datasummary_skim(dta)
+```
+
+## OLS
+
+```{r}
+ols_fit1 <- lm(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2),
+  data = dta 
+)
+ols_fit2 <- lm(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2) + IQ,
+  data = dta 
+)
+```
+
+
+## IV estimation
+
+```{r}
+library(ivreg)
+
+iv_fit1 <- ivreg(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2) + black | 
+    parents_edu + exper + I(exper ^ 2) + age + I(age^2) + black,
+  data = dta 
+)
+
+summary(iv_fit1, diagnostics = T)
+
+iv_fit2 <- ivreg(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2)   | 
+    sibs + exper + I(exper ^ 2) + age + I(age^2) ,
+  data = dta 
+)
+
+summary(iv_fit2, diagnostics = T)
+
+iv_fit3 <- ivreg(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2)   | 
+    sibs + parents_edu + exper + I(exper ^ 2) + age + I(age^2) ,
+  data = dta 
+)
+
+summary(iv_fit3, diagnostics = T)
+
+iv_fit4 <- ivreg(
+  lwagehour ~ educ + exper + I(exper ^ 2) + age + I(age^2) + black  | 
+    sibs + parents_edu + exper + I(exper ^ 2) + age + I(age^2)  + black,
+  data = dta 
+)
+
+summary(iv_fit4, diagnostics = T)
+
+
+coef(iv_fit1, component = c("stage1"), complete = FALSE)
+vcov(iv_fit1, component = c("stage1"), complete = FALSE) %>% diag() %>% sqrt()
+
+coef(iv_fit2, component = c("stage1"), complete = FALSE)
+vcov(iv_fit2, component = c("stage1"), complete = FALSE) %>% diag() %>% sqrt()
+
+coef(iv_fit3, component = c("stage1"), complete = FALSE)
+vcov(iv_fit3, component = c("stage1"), complete = FALSE) %>% diag() %>% sqrt()
+
+coef(iv_fit4, component = c("stage1"), complete = FALSE)
+vcov(iv_fit4, component = c("stage1"), complete = FALSE) %>% diag() %>% sqrt()
+```
+
+
+```{r}
+modelsummary(
+  list(
+    `OLS` = ols_fit1,
+    `OLS + IQ as proxy` = ols_fit1,
+    `IV (parents education)` = iv_fit1,
+    `IV (sibilins)` = iv_fit2,
+    `IV (sibs + parents_edu)` = iv_fit3,
+    `IV (sibs + parents_edu)` = iv_fit4
+  ),
+  fmt = "%.3f",
+  estimate = "{estimate}{stars} ({std.error})",
+  statistic = NULL,
+  coef_omit = "yob|Intercept",
+  diagnostic = TRUE
+)
+```
+

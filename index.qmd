@@ -104,11 +104,20 @@ Exercises:
 -   [ex08-panel-regression.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex08-panel-regression.zip) - R project with code and data
 
 
-### Week 9. June 7. R: FE
+### Week 9. June 7. R: FE practice
 
-### Week 10. June 14. RDD - Regression Discontinuity (Lecture) + R: RDD
+### Week 10. June 14. IV - Instrumental Variable (Lecture) + R: IV
 
-### Week 11. June 21. IV - Instrumental Variable (Lecture) + R: IV
+Slides:
+
+-   [w10a-IV.qmd](slides/w10a.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w10a-IV.pdf)
+-   [w10b-IV-examples.qmd](slides/w10b-IV-examples.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w10b-IV-examples.pdf)
+
+Exercises:
+
+-   [ex10-IV.zip](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/exercises/ex10-IV.zip) - R project with code and data
+
+### Week 11. June 21. RDD - Regression Discontinuity (Lecture) + R: RDD
 
 ### Week 12. June 28. Binary outcome variable (Lecture)
 

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data\n\n\n\n\n\n\n\nSlides:\n\nw10a-IV.qmd + pdf\nw10b-IV-examples.qmd + pdf\n\nExercises:\n\nex10-IV.zip - R project with code and data"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -1999,84 +1999,84 @@
     "href": "slides/w06a-interactions.html#loading-data",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Loading data",
-    "text": "Loading data\n\n\n\n\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(modelsummary)\nlibrary(ggeffects)\nlibrary(marginaleffects)\nlibrary(GGally)\noptions(modelsummary_get = \"broom\")\n## 1. Load the data\ndta <- read_excel(\"land-prices.xlsx\") %>%\n  mutate(improvements  = as.numeric(improvements),\n         development = as.factor(as.integer(improvements > 25)),\n         productivity  = as.numeric(productivity),\n         tillable  = as.numeric(tillable),\n         year = as.factor(year)) %>% \n  select(acrePrice, crpPct, acres, improvements, development, region, year)\n\nglimpse(dta)"
+    "text": "Loading data\n\n\nWarning: package 'modelsummary' was built under R version 4.2.3\n\n\nWarning: package 'marginaleffects' was built under R version 4.2.3\n\n\nWarning: package 'GGally' was built under R version 4.2.3\n\n\nRegistered S3 method overwritten by 'GGally':\n  method from   \n  +.gg   ggplot2\n\n\nWarning in mask$eval_all_mutate(quo): NAs introduced by coercion\n\n\nWarning in mask$eval_all_mutate(quo): NAs introduced by coercion\n\nWarning in mask$eval_all_mutate(quo): NAs introduced by coercion\n\n\n\n\nShow the code\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(modelsummary)\nlibrary(ggeffects)\nlibrary(marginaleffects)\nlibrary(GGally)\noptions(modelsummary_get = \"broom\")\n## 1. Load the data\ndta <- read_excel(\"land-prices.xlsx\") %>%\n  mutate(improvements  = as.numeric(improvements),\n         development = as.factor(as.integer(improvements > 25)),\n         productivity  = as.numeric(productivity),\n         tillable  = as.numeric(tillable),\n         year = as.factor(year)) %>% \n  select(acrePrice, crpPct, acres, improvements, development, region, year)\n\nglimpse(dta)"
   },
   {
     "objectID": "slides/w06a-interactions.html#descriptive-statistics",
     "href": "slides/w06a-interactions.html#descriptive-statistics",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Descriptive statistics",
-    "text": "Descriptive statistics\n\ndatasummary(\n    acrePrice + crpPct + acres + improvements + as.integer(development) ~ \n      (mean + sd + min + median + max) * \n      Arguments(na.rm = TRUE),\n    data = dta, \n    output = \"html\"\n  )\n\n\n\n\n\n \n  \n      \n    mean \n    sd \n    min \n    median \n    max \n  \n \n\n  \n    acrePrice \n    2787.33 \n    1914.04 \n    108.00 \n    2442.00 \n    15000.00 \n  \n  \n    crpPct \n    4.16 \n    17.17 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    acres \n    112.69 \n    128.46 \n    1.00 \n    80.00 \n    6970.00 \n  \n  \n    improvements \n    4.49 \n    12.94 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    as.integer(development) \n    1.08 \n    0.26 \n    1.00 \n    1.00 \n    2.00"
+    "text": "Descriptive statistics\n\n\nShow the code\ndatasummary(\n    (acrePrice + crpPct + acres + improvements) * (development)  ~ \n      N + ( mean + sd + min + median + max) * \n      Arguments(na.rm = TRUE),\n    data = dta%>% \n       mutate(development = development %>% forcats::fct_explicit_na()) #, \n    # output = \"html\"\n  )\n\n\nWarning in .Primitive(\"min\")(c(NA_real_, NA_real_, NA_real_, NA_real_,\nNA_real_, : no non-missing arguments to min; returning Inf\n\n\nWarning in .Primitive(\"max\")(c(NA_real_, NA_real_, NA_real_, NA_real_,\nNA_real_, : no non-missing arguments to max; returning -Inf\n\n\n\n\n \n  \n      \n    development \n    N \n    mean \n    sd \n    min \n    median \n    max \n  \n \n\n  \n    acrePrice \n    0 \n    17239 \n    2683.35 \n    1773.92 \n    108.00 \n    2392.00 \n    15000.00 \n  \n  \n     \n    1 \n    1411 \n    4018.31 \n    2868.57 \n    230.00 \n    3153.00 \n    14960.00 \n  \n  \n     \n    (Missing) \n    50 \n    3900.24 \n    2353.14 \n    331.00 \n    3960.50 \n    15000.00 \n  \n  \n    crpPct \n    0 \n    17239 \n    4.33 \n    17.56 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n     \n    1 \n    1411 \n    1.89 \n    10.44 \n    0.00 \n    0.00 \n    86.00 \n  \n  \n     \n    (Missing) \n    50 \n    9.44 \n    26.25 \n    0.00 \n    0.00 \n    100.00 \n  \n  \n    acres \n    0 \n    17239 \n    115.45 \n    132.40 \n    1.00 \n    80.00 \n    6970.00 \n  \n  \n     \n    1 \n    1411 \n    78.46 \n    52.14 \n    5.00 \n    62.00 \n    380.00 \n  \n  \n     \n    (Missing) \n    50 \n    124.20 \n    125.42 \n    7.00 \n    82.50 \n    605.00 \n  \n  \n    improvements \n    0 \n    17239 \n    1.15 \n    4.07 \n    0.00 \n    0.00 \n    25.00 \n  \n  \n     \n    1 \n    1411 \n    45.37 \n    14.18 \n    26.00 \n    42.00 \n    100.00 \n  \n  \n     \n    (Missing) \n    0"
   },
   {
     "objectID": "slides/w06a-interactions.html#descriptive-plots",
     "href": "slides/w06a-interactions.html#descriptive-plots",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Descriptive Plots",
-    "text": "Descriptive Plots\n\ndta %>%\n  select(acrePrice, crpPct, acres, improvements, development) %>%\n  ggpairs(aes(colour = development, alpha = 0.2))"
+    "text": "Descriptive Plots\n\n\nShow the code\ndta %>%\n  # filter(!is.na(development)) %>% %>% \n  # mutate(development = development %>% forcats::fct_explicit_na()) %>% \n  select(acrePrice, crpPct, acres, improvements, development) %>%\n  ggpairs(aes(colour = development, alpha = 0.2))\n\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\nWarning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :\nRemoved 50 rows containing missing values\n\n\nWarning: Removed 50 rows containing missing values (`geom_point()`).\nRemoved 50 rows containing missing values (`geom_point()`).\nRemoved 50 rows containing missing values (`geom_point()`).\n\n\nWarning: Removed 50 rows containing non-finite values (`stat_density()`).\n\n\nWarning: Removed 50 rows containing non-finite values (`stat_boxplot()`).\n\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\nWarning: Removed 50 rows containing non-finite values (`stat_bin()`)."
   },
   {
     "objectID": "slides/w06a-interactions.html#example-1.-basic-regressions",
     "href": "slides/w06a-interactions.html#example-1.-basic-regressions",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Example 1. Basic regressions",
-    "text": "Example 1. Basic regressions\n\nfit1 <- \n  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),\n     data = dta)\n\nsumm <-\n  function(x, coef_omit = \"reg|year\", output = \"html\", notes = NULL, ...) {\n    modelsummary(\n      x,\n      estimate = \"{estimate}{stars} ({std.error})\",\n      statistic = NULL,\n      output = output,\n      gof_omit =  c(\"AIC|BIC|Log|F|RMS\"),\n      coef_omit = coef_omit,\n      notes = notes,\n      ...\n    )\n  }\n\ncust_summ <- function(x, coef_omit = \"reg|year\", output = \"markdown\", ...) {\n  x <- set_names(x, str_c(\"Model \", seq_along(x)))\n  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, \": \", as.character(.x$call)[[2]])}) %>% \n    str_c(collapse = \"</br>\")\n  summ(x, coef_omit = coef_omit, output = output, notes = all_eq, ...)\n}"
+    "text": "Example 1. Basic regressions\n\n\nShow the code\nfit1 <- \n  lm(acrePrice  ~ acres + development + crpPct + region + factor(year),\n     data =\n       dta %>% \n       mutate(\n         development1 = development,\n         development2 = development,\n         development = development %>% forcats::fct_explicit_na()) %>% \n       mutate(\n         development1_reverse = ifelse(is.na(development1), 1, 0),\n         development1 = ifelse(is.na(development1), 0, as.character(development1)) %>%\n           as.numeric()\n       )\n     \n     )\nfit1\n\n\n\nCall:\nlm(formula = acrePrice ~ acres + development + crpPct + region + \n    factor(year), data = dta %>% mutate(development1 = development, \n    development2 = development, development = development %>% \n        forcats::fct_explicit_na()) %>% mutate(development1_reverse = ifelse(is.na(development1), \n    1, 0), development1 = ifelse(is.na(development1), 0, as.character(development1)) %>% \n    as.numeric()))\n\nCoefficients:\n         (Intercept)                 acres          development1  \n           2021.4868               -0.8614             1555.0949  \ndevelopment(Missing)                crpPct       regionNorthwest  \n            183.2505               -8.8900            -2079.4434  \n regionSouth Central      regionSouth East      regionSouth West  \n            404.8314              499.2447             -208.3592  \n  regionWest Central      factor(year)2003      factor(year)2004  \n           -993.6831              317.3415              675.3764  \n    factor(year)2005      factor(year)2006      factor(year)2007  \n           1092.3309             1146.1577             1320.2950  \n    factor(year)2008      factor(year)2009      factor(year)2010  \n           1886.5410             1927.9044             2209.0035  \n    factor(year)2011  \n           2271.7464  \n\n\nShow the code\n   dta %>% \n       mutate(\n         development1 = development,\n         development2 = development,\n         development = development %>% forcats::fct_explicit_na()) %>% \n       mutate(\n         development1_reverse = ifelse(is.na(development1), 1, 0),\n         development1 = ifelse(is.na(development1), 0, as.character(development1)) %>%\n           as.numeric()\n       ) %>% \n     filter(is.na(development2))\n\n\n# A tibble: 50 × 10\n   acrePrice crpPct acres improvements development region     year  development1\n       <dbl>  <dbl> <dbl>        <dbl> <fct>       <chr>      <fct>        <dbl>\n 1       717      0   103           NA (Missing)   Northwest  2010             0\n 2      3626      0   273           NA (Missing)   Central    2011             0\n 3      4635      0    80           NA (Missing)   South Cen… 2011             0\n 4      4883      0   200           NA (Missing)   South Cen… 2010             0\n 5      4640      0    85           NA (Missing)   South Cen… 2010             0\n 6      4513      0    40           NA (Missing)   South Cen… 2011             0\n 7      4724      0    80           NA (Missing)   South Cen… 2011             0\n 8      6298     57    79           NA (Missing)   South Cen… 2011             0\n 9      8196      0    65           NA (Missing)   South Cen… 2011             0\n10      4995      0    39           NA (Missing)   South Cen… 2011             0\n# ℹ 40 more rows\n# ℹ 2 more variables: development2 <fct>, development1_reverse <dbl>\n\n\nShow the code\nsumm <-\n  function(x, coef_omit = \"reg|year\", output = \"html\", notes = NULL, ...) {\n    modelsummary(\n      x,\n      estimate = \"{estimate}{stars} ({std.error})\",\n      statistic = NULL,\n      output = output,\n      gof_omit =  c(\"AIC|BIC|Log|F|RMS\"),\n      coef_omit = coef_omit,\n      notes = notes,\n      ...\n    )\n  }\n\ncust_summ <- function(x, coef_omit = \"reg|year\", output = \"markdown\", ...) {\n  x <- set_names(x, str_c(\"Model \", seq_along(x)))\n  all_eq <- x %>% imap_chr(. , ~ {str_c(.y, \": \", as.character(.x$call)[[2]])}) %>% \n    str_c(collapse = \"</br>\")\n  summ(x, coef_omit = coef_omit, output = output, notes = all_eq, ...)\n}"
   },
   {
     "objectID": "slides/w06a-interactions.html#interpret-the-baseline-results",
     "href": "slides/w06a-interactions.html#interpret-the-baseline-results",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Interpret the baseline results",
-    "text": "Interpret the baseline results\n\ncust_summ(list(fit1))\n\n\n\n\n\nModel 1\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n\n\nacres\n-0.857*** (0.086)\n\n\ndevelopment1\n1555.287*** (41.467)\n\n\ncrpPct\n-8.892*** (0.645)\n\n\nNum.Obs.\n18650\n\n\nR2\n0.413\n\n\nR2 Adj.\n0.412\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)"
+    "text": "Interpret the baseline results\n\n\nShow the code\ncust_summ(list(fit1))\n\n\n\n\n\n\nModel 1\n\n\n\n\n(Intercept)\n2021.487*** (65.458)\n\n\nacres\n-0.861*** (0.086)\n\n\ndevelopment1\n1555.095*** (41.498)\n\n\ndevelopment(Missing)\n183.250 (210.799)\n\n\ncrpPct\n-8.890*** (0.643)\n\n\n:———————\n———————:\n\n\nNum.Obs.\n18700\n\n\nR2\n0.413\n\n\nR2 Adj.\n0.413\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)"
   },
   {
     "objectID": "slides/w06a-interactions.html#fitted-vs-area-and-development",
     "href": "slides/w06a-interactions.html#fitted-vs-area-and-development",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Fitted vs area and development",
-    "text": "Fitted vs area and development\n\n\n\n\nlibrary(ggeffects)\nggpredict(fit1, terms = \"acres\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit1, terms = \"development\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Development, 0 = no 1 = yes\")"
+    "text": "Fitted vs area and development\n\n\n\n\n\nShow the code\nlibrary(ggeffects)\nggpredict(fit1, terms = \"acres\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggpredict(fit1, terms = \"development\") %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\")+ \n  xlab(\"Development, 0 = no 1 = yes\")"
   },
   {
     "objectID": "slides/w06a-interactions.html#fitted-vs-area-and-development-2",
     "href": "slides/w06a-interactions.html#fitted-vs-area-and-development-2",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Fitted vs area and development (2)",
-    "text": "Fitted vs area and development (2)\n\n\n\n\nggpredict(fit1, terms = c(\"acres\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nWithout an interaction term, dummy variables simply cause shifts in the outcome variable."
+    "text": "Fitted vs area and development (2)\n\n\n\n\n\nShow the code\nggpredict(fit1, terms = c(\"acres\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nWithout an interaction term, dummy variables simply cause shifts in the outcome variable."
   },
   {
     "objectID": "slides/w06a-interactions.html#example-2.-interaction-term-with-a-binary-variable",
     "href": "slides/w06a-interactions.html#example-2.-interaction-term-with-a-binary-variable",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Example 2. Interaction term with a binary variable",
-    "text": "Example 2. Interaction term with a binary variable\n\nfit2 <- \n  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2))\n\n\n\n\n\n\n\nModel 1\nModel 2\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\nNum.Obs.\n18650\n18650\n\n\nR2\n0.413\n0.431\n\n\nR2 Adj.\n0.412\n0.430\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)"
+    "text": "Example 2. Interaction term with a binary variable\n\n\nShow the code\nfit2 <- \n  lm(acrePrice  ~ acres * development + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2))\n\n\n\n\n\n\nModel 1\nModel 2\n\n\n\n\n(Intercept)\n2021.487*** (65.458)\n1997.055*** (64.413)\n\n\nacres\n-0.861*** (0.086)\n-0.652*** (0.085)\n\n\ndevelopment1\n1555.095*** (41.498)\n2978.491*** (71.424)\n\n\ndevelopment(Missing)\n183.250 (210.799)\n\n\n\ncrpPct\n-8.890*** (0.643)\n-9.073*** (0.635)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n:———————\n———————:\n———————:\n\n\nNum.Obs.\n18700\n18650\n\n\nR2\n0.413\n0.431\n\n\nR2 Adj.\n0.413\n0.430\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)"
   },
   {
     "objectID": "slides/w06a-interactions.html#fitted-vs-development-with-an-interaction-term",
     "href": "slides/w06a-interactions.html#fitted-vs-development-with-an-interaction-term",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Fitted vs development with an interaction term",
-    "text": "Fitted vs development with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"development\", \"acres [0, 10, 50, 100, 200, 250, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")"
+    "text": "Fitted vs development with an interaction term\n\n\n\n\n\nShow the code\nggpredict(fit2, terms = c(\"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggpredict(fit2, terms = c(\"development\", \"acres [0, 10, 50, 100, 200, 250, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Development, 0 = no 1 = yes\")"
   },
   {
     "objectID": "slides/w06a-interactions.html#fitted-vs-area-with-an-interaction-term",
     "href": "slides/w06a-interactions.html#fitted-vs-area-with-an-interaction-term",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Fitted vs area with an interaction term",
-    "text": "Fitted vs area with an interaction term\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")"
+    "text": "Fitted vs area with an interaction term\n\n\n\n\n\nShow the code\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggpredict(fit2, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"development\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")"
   },
   {
     "objectID": "slides/w06a-interactions.html#marginal-effect-acres-and-development-at-means",
     "href": "slides/w06a-interactions.html#marginal-effect-acres-and-development-at-means",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Marginal Effect acres and development at means",
-    "text": "Marginal Effect acres and development at means\n\nlibrary(marginaleffects)\nmodelsummary(fit2)\nmodelsummary(marginaleffects(fit2))\n\n\n\n\n\n \n  \n      \n    Coef. as is \n    M.E. at means \n  \n \n\n  \n    acres \n    −0.652*** (0.085) \n    −2.017*** (0.097) \n  \n  \n    crpPct \n    −9.073*** (0.635) \n    −9.073*** (0.635) \n  \n  \n    development1 \n    2978.491*** (71.424) \n    944.727*** (47.947) \n  \n  \n    acres * development1 \n    −18.053*** (0.743) \n     \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n  \n  \n    R2 \n    0.431 \n    0.431 \n  \n  \n    R2 Adj. \n    0.430 \n    0.430"
+    "text": "Marginal Effect acres and development at means\n\n\nShow the code\nlibrary(marginaleffects)\nmodelsummary(fit2)\nmodelsummary(marginaleffects(fit2))\n\n\n\n\nShow the code\nsumm(\n  list(`Coef. as is` = fit2,\n       `M.E. at means` = marginaleffects(fit2)),\n  output = \"html\",\n  coef_map = c(\n    \"acres\" = \"acres\",\n    \"crpPct\" = \"crpPct\",\n    \"development\" = \"development1\",\n    \"development1\" = \"development1\",\n    \"acres:development1\" = \"acres * development1\"\n  )\n)\n\n\n\n\n \n  \n      \n    Coef. as is \n    M.E. at means \n  \n \n\n  \n    acres \n    −0.652*** (0.085) \n    −2.017*** (0.097) \n  \n  \n    crpPct \n    −9.073*** (0.635) \n    −9.073*** (0.635) \n  \n  \n    development1 \n    2978.491*** (71.424) \n    944.727*** (47.947) \n  \n  \n    acres * development1 \n    −18.053*** (0.743) \n     \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n  \n  \n    R2 \n    0.431 \n    0.431 \n  \n  \n    R2 Adj. \n    0.430 \n    0.430"
   },
   {
     "objectID": "slides/w06a-interactions.html#marginal-effect-acres-and-development-visually",
     "href": "slides/w06a-interactions.html#marginal-effect-acres-and-development-visually",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Marginal Effect acres and development (visually)",
-    "text": "Marginal Effect acres and development (visually)\n\n\n\n\nplot_slopes(fit2, variables = \"acres\", condition = \"development\") + \n  ylab(\"Marginal effect of acres (slope)\") + xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit2, variables = \"development\", condition = \"acres\") + \n  ylab(\"Marginal effect of development dummy (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+    "text": "Marginal Effect acres and development (visually)\n\n\n\n\n\nShow the code\nplot_slopes(fit2, variables = \"acres\", condition = \"development\") + \n  ylab(\"Marginal effect of acres (slope)\") + xlab(\"Development, 0 = no 1 = yes\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nplot_slopes(fit2, variables = \"development\", condition = \"acres\") + \n  ylab(\"Marginal effect of development dummy (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
   },
   {
     "objectID": "slides/w06a-interactions.html#example-1.-interaction-with-a-continuous-variable",
@@ -2090,21 +2090,21 @@
     "href": "slides/w06a-interactions.html#fitted-vs-area-improvements",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Fitted vs area * improvements",
-    "text": "Fitted vs area * improvements\n\n\n\n\nggpredict(fit3, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"improvements [0, 10, 50, 100]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\nggpredict(fit3, terms = c(\"improvements\", \"acres [1, 50, 100, 200, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Improvements, % of price due to infrastructure\")"
+    "text": "Fitted vs area * improvements\n\n\n\n\n\nShow the code\nggpredict(fit3, terms = c(\"acres [0, 10, 50, 100, 200, 250, 500, 1000]\", \"improvements [0, 10, 50, 100]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Parcel size (acres), acres\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nggpredict(fit3, terms = c(\"improvements\", \"acres [1, 50, 100, 200, 500]\")) %>%\n  plot() + \n  ylab(\"Predicted price per acre (acrePrice), USD\") + \n  xlab(\"Improvements, % of price due to infrastructure\")"
   },
   {
     "objectID": "slides/w06a-interactions.html#marginal-effect-acres-improvements-visually",
     "href": "slides/w06a-interactions.html#marginal-effect-acres-improvements-visually",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Marginal Effect acres * improvements (visually)",
-    "text": "Marginal Effect acres * improvements (visually)\n\n\n\n\nplot_slopes(fit3, variables = \"acres\", condition = \"improvements\") + \n  ylab(\"Marginal effect of acres (slope)\")  + \n  xlab(\"Improvements, % of price due to infrastructure\")  + \n  scale_y_continuous(n.breaks = 10) \n\n\n\n\n\n\n\n\n\n\n\n\nplot_slopes(fit3, variables = \"improvements\", condition = \"acres\") + \n  ylab(\"Marginal effect of improvements (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
+    "text": "Marginal Effect acres * improvements (visually)\n\n\n\n\n\nShow the code\nplot_slopes(fit3, variables = \"acres\", condition = \"improvements\") + \n  ylab(\"Marginal effect of acres (slope)\")  + \n  xlab(\"Improvements, % of price due to infrastructure\")  + \n  scale_y_continuous(n.breaks = 10) \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow the code\nplot_slopes(fit3, variables = \"improvements\", condition = \"acres\") + \n  ylab(\"Marginal effect of improvements (slope)\") + xlab(\"Parcel size, acres\") + \n  scale_y_continuous(n.breaks = 10)"
   },
   {
     "objectID": "slides/w06a-interactions.html#reporting-all-regressions-results",
     "href": "slides/w06a-interactions.html#reporting-all-regressions-results",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Reporting all regressions results",
-    "text": "Reporting all regressions results\n\n\n\n\n \n  \n      \n    Model 1 (no interaction) \n     Model 2 (Area*Development) \n     Model 3 (Area*Improvements) \n  \n \n\n  \n    Area, acres (*) \n    −0.857* (0.350) \n    −2.017*** (0.097) \n    −1.520*** (0.089) \n  \n  \n    crpPct \n    −8.892*** (1.998) \n    −9.073*** (0.635) \n    −8.980*** (0.631) \n  \n  \n    Development status, dummy (*) \n     \n    944.727*** (47.947) \n     \n  \n  \n    Share infrastructure in land price, % (*) \n     \n     \n    25.490*** (0.984) \n  \n  \n    Num.Obs. \n    18650 \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n    0.438 \n  \n  \n    R2 Adj. \n    0.412 \n    0.430 \n    0.438 \n  \n\n\n (*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."
+    "text": "Reporting all regressions results\n\n\nShow the code\nmodelsummary(\n  list(\n    `Model 1 (no interaction)` = fit1,\n    `Model 2 (Area*Development)` = marginaleffects(fit2, vcov = ~ region),\n    `Model 3 (Area*Improvements)` = slopes(fit3, vcov = ~ region)\n    ),\n  vcov = list(~ region, NULL, NULL),\n  estimate = \"{estimate}{stars} ({std.error})\",\n  statistic = NULL,\n  gof_omit =  c(\"AIC|BIC|Log|F|RMS|Std\"),\n  output = \"html\",\n  coef_map = c(\n    \"acres\" = \"Area, acres (*)\",\n    \"crpPct\" = \"crpPct\",\n    \"development\" = \"Development status, dummy (*)\",\n    \"improvements\" = \"Share infrastructure in land price, % (*)\"\n  ), \n  notes = \"(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method.\"\n)\n\n\n\n\n \n  \n      \n    Model 1 (no interaction) \n     Model 2 (Area*Development) \n     Model 3 (Area*Improvements) \n  \n \n\n  \n    Area, acres (*) \n    −0.861* (0.350) \n    −2.017*** (0.097) \n    −1.520*** (0.089) \n  \n  \n    crpPct \n    −8.890*** (1.991) \n    −9.073*** (0.635) \n    −8.980*** (0.631) \n  \n  \n    Development status, dummy (*) \n     \n    944.727*** (47.947) \n     \n  \n  \n    Share infrastructure in land price, % (*) \n     \n     \n    25.490*** (0.984) \n  \n  \n    Num.Obs. \n    18700 \n    18650 \n    18650 \n  \n  \n    R2 \n    0.413 \n    0.431 \n    0.438 \n  \n  \n    R2 Adj. \n    0.413 \n    0.430 \n    0.438 \n  \n\n\n (*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."
   },
   {
     "objectID": "slides/w06a-interactions.html#takeaway-and-homework-1",
@@ -2125,7 +2125,7 @@
     "href": "slides/w06a-interactions.html#example-3.-interaction-with-a-continuous-variable",
     "title": "Interaction terms in MLR and Difference in Difference (DID)",
     "section": "Example 3. Interaction with a continuous variable",
-    "text": "Example 3. Interaction with a continuous variable\n\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2019.877*** (65.416)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.857*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.287*** (41.467)\n2978.491*** (71.424)\n\n\n\ncrpPct\n-8.892*** (0.645)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\nNum.Obs.\n18650\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.412\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
+    "text": "Example 3. Interaction with a continuous variable\n\n\nShow the code\nfit3 <- \n  lm(acrePrice  ~ acres * improvements + crpPct + region + factor(year),\n     data = dta)\ncust_summ(list(fit1, fit2, fit3), output = \"markdown\")\n\n\n\n\n\n\n\n\n\n\n\n\nModel 1\nModel 2\nModel 3\n\n\n\n\n(Intercept)\n2021.487*** (65.458)\n1997.055*** (64.413)\n1923.131*** (64.085)\n\n\nacres\n-0.861*** (0.086)\n-0.652*** (0.085)\n-0.276** (0.089)\n\n\ndevelopment1\n1555.095*** (41.498)\n2978.491*** (71.424)\n\n\n\ndevelopment(Missing)\n183.250 (210.799)\n\n\n\n\ncrpPct\n-8.890*** (0.643)\n-9.073*** (0.635)\n-8.980*** (0.631)\n\n\nacres × development1\n\n-18.053*** (0.743)\n\n\n\nimprovements\n\n\n56.695*** (1.307)\n\n\nacres × improvements\n\n\n-0.277*** (0.014)\n\n\n:———————\n———————:\n———————:\n———————:\n\n\nNum.Obs.\n18700\n18650\n18650\n\n\nR2\n0.413\n0.431\n0.438\n\n\nR2 Adj.\n0.413\n0.430\n0.438\n\n\n\nNote: ^^ Model 1: acrePrice ~ acres + development + crpPct + region + factor(year)Model 2: acrePrice ~ acres * development + crpPct + region + factor(year)Model 3: acrePrice ~ acres * improvements + crpPct + region + factor(year)"
   },
   {
     "objectID": "slides/w07-OVB.html#long-model",
@@ -3855,5 +3855,950 @@
     "title": "Panel Regression Analysis",
     "section": "Fixed Effect Model: Within transformation (Step 3)",
     "text": "Fixed Effect Model: Within transformation (Step 3)\nIndividual Fixed Effects \\(\\alpha_i\\) are computed as:\n\\[\n\\alpha_i = \\overline y_i - (\\hat \\beta_1 \\overline{x}_{1i} + \\hat \\beta_2 \\overline{x}_{2i} + \\dots + \\hat \\beta_k \\overline{x}_{ki} )\n\\]\nIndividual fixed effects are identical to \\(\\delta_i\\) from LSDV model:\n\\[\n\\alpha_i = \\beta_0 + \\delta_i\n\\]\n\nIgnoring FE causes bias to the estimates."
+  },
+  {
+    "objectID": "slides/w10-IV.html#return-to-schooling-and-the-selection-bias",
+    "href": "slides/w10-IV.html#return-to-schooling-and-the-selection-bias",
+    "title": "Instrumental Variable",
+    "section": "Return to schooling and the Selection bias",
+    "text": "Return to schooling and the Selection bias\n\nDoes more years of schooling cause higher wages?\nThink of an RCT experiment that could help to estimate true causal effect of schooling on income!\nWhat other methods can we use to compute the return to schooling?"
+  },
+  {
+    "objectID": "slides/w10-IV.html#short-regression",
+    "href": "slides/w10-IV.html#short-regression",
+    "title": "Instrumental Variable",
+    "section": "Short Regression",
+    "text": "Short Regression\n\\[\nY_i = \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S\n\\qquad(1.1)\\]\n\nannual earning \\(Y_i\\)\nyears of education \\(s_i\\)\n\\(X_i\\) vector of other control variables, such as experience.\n\n\nIs the ceteris paribus fulfilled in Equation 1.1?\n\nIs control for experience and education sufficient?\nAt a given experience/education level, are more- and less-educated workers equally able and diligent? (see Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#long-regression",
+    "href": "slides/w10-IV.html#long-regression",
+    "title": "Instrumental Variable",
+    "section": "Long Regression",
+    "text": "Long Regression\n\\[\nY_i = \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i\n\\qquad(1.2)\\]\n\nwhere \\(A^{'}_{i}\\) is the ability variable that we desire to have in order to ensure the unbiased estimates of \\(\\rho\\).\nOmitting \\(A^{'}_{i}\\) causes a selection bias or endogeneity:\n\n\\(\\rho^{S} = \\rho + \\underbrace{\\delta_{A^{'} s} \\times \\gamma}_{\\text{ability bias}}\\)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#definition",
+    "href": "slides/w10-IV.html#definition",
+    "title": "Instrumental Variable",
+    "section": "Definition",
+    "text": "Definition\n\nConsider following LONG and SHORT models:\n\n\n\\[\n\\begin{aligned}\nY_i &= \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i , && \\text{long}\\\\\nY_i &= \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S , && \\text{short}\n\\end{aligned}\n\\]\n\n\\(s_i\\) is a causal variable of interest (education)\n\\(A^{'}_{i}\\) is the vector of control variables that we desire to have in order to ensure unbiased estimates of \\(\\rho\\);\nVariable \\(s_i\\) is endogenous if it correlates with the error terms \\(\\varepsilon^{S}_i\\) :\n\n\n\n\\[\nCov(s_i, \\varepsilon^{S}_i) \\neq 0\n\\]"
+  },
+  {
+    "objectID": "slides/w10-IV.html#definition-of-the-endogeneity",
+    "href": "slides/w10-IV.html#definition-of-the-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Definition of the endogeneity",
+    "text": "Definition of the endogeneity\nVariable \\(s_i\\) is endogenous if it correlates with the error terms \\(\\varepsilon^{S}_i\\) :\n\\[\nCov(s_i, \\varepsilon^{S}_i) \\neq 0\n\\]\n\nIn practice, this means that:\n\nvariation in the independent variable \\(s_i\\) (education) are not “random” as compared to the variation in the dependent variable \\(Y_i\\), but\nan external process \\(U\\) affects variation in both \\(s_i\\) and \\(Y_i\\);\nthus, \\(s_i\\) is endogenous to \\(Y_i\\);\n\n\n\nIf variance of \\(s_i\\) is truly independent of \\(Y_i\\), \\(s_i\\) is exogenous."
+  },
+  {
+    "objectID": "slides/w10-IV.html#causes-of-endogeneity",
+    "href": "slides/w10-IV.html#causes-of-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Causes of endogeneity",
+    "text": "Causes of endogeneity\n\nOmitted Variable Bias (familiar)\nMeasurement Error\nSimultaneity"
+  },
+  {
+    "objectID": "slides/w10-IV.html#measurement-error",
+    "href": "slides/w10-IV.html#measurement-error",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error"
+  },
+  {
+    "objectID": "slides/w10-IV.html#simultaneity",
+    "href": "slides/w10-IV.html#simultaneity",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity"
+  },
+  {
+    "objectID": "slides/w10-IV.html#endogeneity-in-practice",
+    "href": "slides/w10-IV.html#endogeneity-in-practice",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity in practice:",
+    "text": "Endogeneity in practice:\n\nvariation in the independent variable \\(s_i\\) (education) is not “random” as compared to the variation in the dependent variable \\(Y_i\\), but\nan external process \\(U\\) affects variation in both \\(s_i\\) and \\(Y_i\\);\nthus, \\(s_i\\) is endogenous to \\(Y_i\\);\n\n\nIf variance of \\(s_i\\) is truly independent of \\(Y_i\\), \\(s_i\\) is exogenous."
+  },
+  {
+    "objectID": "slides/w10-IV.html#ovb",
+    "href": "slides/w10-IV.html#ovb",
+    "title": "Instrumental Variable",
+    "section": "OVB",
+    "text": "OVB"
+  },
+  {
+    "objectID": "slides/w10-IV.html#measurement-error-1",
+    "href": "slides/w10-IV.html#measurement-error-1",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error\n\nWe estimate a long model: \\(Y_i = \\alpha + \\beta s^*_i + e_i\\) ,\n\nbut \\(s^*_i\\) is unavailable, we only have \\(s_i = s^*_i + m_i\\) instead,\n\\(m_i\\) is a systematic measurement error,\n\\(E[m_i] =0\\) and \\(Cov(s^*_i, m_i) = Cov(e_i, m_i) = 0\\).\n\nDesired coefficient \\(\\beta = \\frac{Cov(Y_i, s_i)}{Var(s_i)}\\)\nBut with the erroneous data, we estimate biased coefficient \\(\\beta_b\\)\n\n\n\\[\n\\begin{aligned}\n\\beta_b & =  \n\\frac{Cov(Y_i, s_i)}{Var(s_i)}  =\n\\frac{Cov(a+\\beta s^*_i + e_i, s^*_i + m_i)}{Var(s_i)} \\\\  \n& =  \\frac{\\beta \\cdot Cov(s^*_i, s^*_i)}{Var(s_i)}  =  \\beta \\frac{Var(s^{*}_i)}{Var(s_i)}\n\\end{aligned}\n\\]\n\n(see Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#simultaneity-1",
+    "href": "slides/w10-IV.html#simultaneity-1",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity\n\nSimultaneity occurs if at least two variables are jointly determined.\n\nA typical case is when observed outcomes are the result of separate behavioral mechanisms that are coordinated in an equilibrium.\n\nThe prototypical case is a system of demand and supply equations:\n\n\\(D(p)\\) = how high would demand be if the price was set to \\(p\\)?\n\\(S(p)\\) = how high would supply be if the price was set to \\(p\\)?\n\nNumber of police people and the crime rate.\n(see M. J. Wooldridge, 2020, Ch. 17) for more details on the problem and solutions."
+  },
+  {
+    "objectID": "slides/w10-IV.html#instrumental-variable-is-another-variable-z_i-that-satisfies",
+    "href": "slides/w10-IV.html#instrumental-variable-is-another-variable-z_i-that-satisfies",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable is another variable \\(Z_i\\) that satisfies:",
+    "text": "Instrumental Variable is another variable \\(Z_i\\) that satisfies:\n\nRelevance condition:\n\n\\(Z_i\\) has a causal effect on \\(s_i\\) (or strong association with (see Hernan2020?));\n\nExclusion restriction:\n\n\\(Z_i\\) does not affect \\(Y_i\\) directly, except through its potential effect on \\(s_i\\);\n\nIndependence assumption:\n\n\\(Z_i\\) is randomly assigned or “as good as randomly assigned”, the same as\n\\(Z_i\\) is unrelated to the omitted variables \\(A^{'}_i\\), same as\n\\(Z_i\\) and \\(Y_i\\) do not share any common causes\n\n\n\n\n\n\n\n\nImportant\n\n\n(see Angrist & Pischke, 2014 Ch. 3 and 6; Angrist & Pischke, 2009, Ch. 4.; Hernan2020?, Ch. 16; J. M. Wooldridge, 2010, Ch. 8; Söderbom, Teal, & Eberhardt, 2014, Ch. 11)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#instrumental-variable-1",
+    "href": "slides/w10-IV.html#instrumental-variable-1",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable (1)",
+    "text": "Instrumental Variable (1)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#instrumental-variable-2",
+    "href": "slides/w10-IV.html#instrumental-variable-2",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable (2)",
+    "text": "Instrumental Variable (2)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-violation-of-the-relevance-condition",
+    "href": "slides/w10-IV.html#iv-violation-of-the-relevance-condition",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Relevance condition",
+    "text": "IV: violation of the Relevance condition"
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-violation-of-the-exclusion-restriction",
+    "href": "slides/w10-IV.html#iv-violation-of-the-exclusion-restriction",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Exclusion restriction",
+    "text": "IV: violation of the Exclusion restriction"
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-violation-of-the-independence-assumption",
+    "href": "slides/w10-IV.html#iv-violation-of-the-independence-assumption",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Independence assumption",
+    "text": "IV: violation of the Independence assumption"
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-regression-angorithm-using-2sls-1",
+    "href": "slides/w10-IV.html#iv-regression-angorithm-using-2sls-1",
+    "title": "Instrumental Variable",
+    "section": "IV regression angorithm using 2SLS (1)",
+    "text": "IV regression angorithm using 2SLS (1)\nStage 1: regress endogenous variable \\(s_i\\) on all \\(X_i\\) plus the instrument \\(Z_i\\)\n\\[\ns_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i + \\nu_i\n\\]\n\nCompute fitted values form the stage 1: \\(\\hat s_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i\\).\n\n\nSubstitute \\(s_i\\) with the \\(\\hat{s_i}\\) from the stage 1.\n\n\nStage 2: \\(Y_i = \\alpha^{IV} + \\rho^{IV} \\hat{s_i} + \\beta^{IV} X_i + \\varepsilon^{IV}_i\\)\n\n\nwhere\n\n\\(\\hat{s_i}\\) are the fitted values from the first stage\n\\(\\rho^{IV}\\) is the causal effect of interest from stage two that is asymptotically equal to \\(\\rho\\) , the true effect of interest (\\(\\rho^{IV} \\asymp \\rho\\))"
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-intuition-using-2sls-2",
+    "href": "slides/w10-IV.html#iv-intuition-using-2sls-2",
+    "title": "Instrumental Variable",
+    "section": "IV intuition using 2SLS (2)",
+    "text": "IV intuition using 2SLS (2)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#consistency-and-unbiasedness",
+    "href": "slides/w10-IV.html#consistency-and-unbiasedness",
+    "title": "Instrumental Variable",
+    "section": "Consistency and unbiasedness",
+    "text": "Consistency and unbiasedness\n\nIV estimates are not unbiased, but they are consistent (Angrist2001?).\n\nUnbiasedness means the estimator has a sampling distribution centered on the parameter of interest in a sample of any size, while\nConsistency only means that the estimator converges to the population parameter as the sample size grows.\n\n\n\n\n\n\n\n\n\nNote\n\n\nResearchers that use IV should aspire to work with large samples.\n\n\n\n\nNo statistical tests is available for checking consistency"
+  },
+  {
+    "objectID": "slides/w10-IV.html#bad-instruments-1",
+    "href": "slides/w10-IV.html#bad-instruments-1",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (1)",
+    "text": "Bad instruments (1)\n\n\\(Z_i\\) that does not satisfy any of the Relevance condition, Exclusion restriction and Independence assumption;"
+  },
+  {
+    "objectID": "slides/w10-IV.html#bad-instruments-2",
+    "href": "slides/w10-IV.html#bad-instruments-2",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (2)",
+    "text": "Bad instruments (2)\n\n\\(Z_i\\) that correlate with omitted variable (OV) but do not cause changes in it or inflict simultaneity:\n\n\nThey result into much greater upwards shifting bias compare to the OLS;\nFor example the weather in Brazil and supply price and demand quantity of coffee:\n\nweather shifts the supply curve, it is random, thus it seems as a plausible instrument for price in the demand model\nthe weather in Brazil determines supply expectations on futures exchange, thus, it also shifts the demand for coffee before the supply price is affected;"
+  },
+  {
+    "objectID": "slides/w10-IV.html#overidentification-1",
+    "href": "slides/w10-IV.html#overidentification-1",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (1)",
+    "text": "Overidentification (1)\n\nnumber of instruments \\(G\\) exceeds the number of endogenous variables \\(K\\).\n\nwhen the IV is overidentified, estimates are biased;\nbias is proportional to \\(K - G\\);\nusing fewer instruments therefore reduces bias;\n\nIf you have few candidates for IV and one endogenous regressor:\n\nselect one IV for the first stage, and\nput the remaining instruments as controls into the second stage"
+  },
+  {
+    "objectID": "slides/w10-IV.html#overidentification-2",
+    "href": "slides/w10-IV.html#overidentification-2",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (2)",
+    "text": "Overidentification (2)\nSargan’s overidentification test:\n\n\\(H_0:Cov(Z^{'}_i,\\varepsilon^{IV}_i)=0\\) - the covariance between the instrument and the error term is zero\n\\(H_1:Cov(Z^{'}_i,\\varepsilon^{IV}_i)\\neq0\\)\nThus, by rejecting the \\(H_0\\), we conclude that at least one of the instruments is not valid."
+  },
+  {
+    "objectID": "slides/w10-IV.html#wu-hausman-test-for-endogeneity",
+    "href": "slides/w10-IV.html#wu-hausman-test-for-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Wu-Hausman test for endogeneity",
+    "text": "Wu-Hausman test for endogeneity\nWu-Hausman test for endogeneity tests if the variable that we are worried about is indeed endogenous.\n\n\\(H_0:Cov(s_i,\\varepsilon_i)=0\\) - the covariance between potentially endogenous variable and the error term is zero\n\\(H_1:Cov(s_i,\\varepsilon_i) \\neq 0\\)\nThus, by rejecting the \\(H_0\\), we conclude that there is endogeneity and there might be a need for IV."
+  },
+  {
+    "objectID": "slides/w10-IV.html#references",
+    "href": "slides/w10-IV.html#references",
+    "title": "Instrumental Variable",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAngrist, J. D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, J. D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nSöderbom, M., Teal, F., & Eberhardt, M. (2014). Empirical development economics. ROUTLEDGE. Retrieved from https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html\n\n\nWooldridge, J. M. (2010). Econometric analysis of cross section and panel data. MIT press.\n\n\nWooldridge, M. J. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w10-IV.html#bad-instruments-3",
+    "href": "slides/w10-IV.html#bad-instruments-3",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (3)",
+    "text": "Bad instruments (3)\n\nWeak instrument \\(Z_i\\):\n\nWhen the instrument \\(Z_i\\) is only weakly correlates with endogenous regressor \\(s_i\\);\nFind a better one!"
+  },
+  {
+    "objectID": "slides/w10-IV.html#weak-instrument-test",
+    "href": "slides/w10-IV.html#weak-instrument-test",
+    "title": "Instrumental Variable",
+    "section": "Weak instrument test:",
+    "text": "Weak instrument test:\n\nRun the first stage regression with and without the IV;\nCompare the F-statistics\n\nIf F-statistics with instrument is greater than that without by 5 of more,\nthis is a sign of a strong instrument (Staiger1997?);\n\nThis test does not ensure that our instruments are independent of omitted variable \\(A^{'}_i\\) or \\(Y_i\\);\n(Staiger1997?)"
+  },
+  {
+    "objectID": "slides/w10-IV.html#research-question-and-the-problem",
+    "href": "slides/w10-IV.html#research-question-and-the-problem",
+    "title": "Instrumental Variable",
+    "section": "Research question and the problem",
+    "text": "Research question and the problem\n\nWhat are the fundamental causes of the large differences in income per capita across countries?\nwith better “institutions,” more secure property rights, and less distortionary policies,\n\ncountries invest more in physical and human capital, and\nuse these factors more efficiently to\nachieve a greater level of income.\n\nInstitutions are a likely cause of income growth."
+  },
+  {
+    "objectID": "slides/w10-IV.html#endogeneity-problem",
+    "href": "slides/w10-IV.html#endogeneity-problem",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity problem",
+    "text": "Endogeneity problem\nWhat could be the ideal experiment to find the effect of institutions on income?\n\nRich economies choose or can afford better institutions.\nEconomies that are different for a variety of reasons\n\nwill differ both in their institutions and in their income per capita.\n\nTo estimate the impact of institutions on income,\n\nwe need a source of exogenous variation in institutions."
+  },
+  {
+    "objectID": "slides/w10-IV.html#identification-strategy",
+    "href": "slides/w10-IV.html#identification-strategy",
+    "title": "Instrumental Variable",
+    "section": "Identification strategy",
+    "text": "Identification strategy\nis the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment (Angrist1991a?)\n\n\n\n\nCurrent performance is caused by:\nCurrent institutions, which are caused by\nEarly institutions, which are caused by\nSettlements types during colonization, which are caused by\nSettlers’ (potential) mortality or colonization risks."
+  },
+  {
+    "objectID": "slides/w10-IV.html#empirical-model-ols-estimator",
+    "href": "slides/w10-IV.html#empirical-model-ols-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (OLS estimator)",
+    "text": "Empirical model (OLS estimator)\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0  \\\\\n& + \\beta_1 \\text{Proxy of the institutional quality} \\\\\n& + \\gamma \\text{Control variables} + \\epsilon_i\n\\end{aligned}\n\\]\n\n\\(i\\) is the country;\nDependent variable is the GDP per capita in 1995;\nAs the proxy of the institutional quality, authors used average protection against expropriation risk in 1985-1990 (index/country ranking);\nControls include latitude of the country and continent-specific dummy variables;"
+  },
+  {
+    "objectID": "slides/w10-IV.html#the-data",
+    "href": "slides/w10-IV.html#the-data",
+    "title": "Instrumental Variable",
+    "section": "The data",
+    "text": "The data"
+  },
+  {
+    "objectID": "slides/w10-IV.html#ols-estimation",
+    "href": "slides/w10-IV.html#ols-estimation",
+    "title": "Instrumental Variable",
+    "section": "OLS estimation",
+    "text": "OLS estimation"
+  },
+  {
+    "objectID": "slides/w10-IV.html#empirical-model-iv-estimator",
+    "href": "slides/w10-IV.html#empirical-model-iv-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (IV estimator)",
+    "text": "Empirical model (IV estimator)\nFirst stage:\n\n\\[\n\\begin{aligned}\n\\text{Proxy of the institutional quality}  & = \\beta_0  \\\\\n& + \\beta_1 \\log (\\text{European settlers mortality in the 16-18th centuries}) \\\\\n& + \\gamma \\text{Control variables} + e_i,\n\\end{aligned}\n\\]\n\nEuropean settlers mortality in the 16-18th centuries is the precise number of how many settlers died in the country that they tried to colonize.\n\n\n\nSecond stage:\n\n\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0^{IV}  \\\\\n& + \\beta_1^{IV} \\widehat{ \\text{Proxy of the institutional quality}} \\\\\n& + \\gamma^{IV} \\text{Control variables} + \\epsilon_i^{IV},\n\\end{aligned}\n\\]\n\n\\(\\widehat{ \\text{Proxy of the institutional quality}}\\) are fitted values from the first stage."
+  },
+  {
+    "objectID": "slides/w10-IV.html#iv-results",
+    "href": "slides/w10-IV.html#iv-results",
+    "title": "Instrumental Variable",
+    "section": "IV results",
+    "text": "IV results"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#short-regression",
+    "href": "slides/w10-IVa.html#short-regression",
+    "title": "Instrumental Variable",
+    "section": "Short Regression",
+    "text": "Short Regression\n\\[\nY_i = \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S\n\\qquad(1.1)\\]\n\nannual earning \\(Y_i\\)\nyears of education \\(s_i\\)\n\\(X_i\\) vector of other control variables, such as experience.\n\n\nIs the ceteris paribus fulfilled in Equation 1.1?\n\nIs control for experience and education sufficient?\nAt a given experience/education level, are more- and less-educated workers equally able and diligent? (see Joshua D. Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#long-regression",
+    "href": "slides/w10-IVa.html#long-regression",
+    "title": "Instrumental Variable",
+    "section": "Long Regression",
+    "text": "Long Regression\n\\[\nY_i = \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i\n\\qquad(1.2)\\]\n\nwhere \\(A^{'}_{i}\\) is the ability variable that we desire to have in order to ensure the unbiased estimates of \\(\\rho\\).\nOmitting \\(A^{'}_{i}\\) causes a selection bias or endogeneity:\n\n\\(\\rho^{S} = \\rho + \\underbrace{\\delta_{A^{'} s} \\times \\gamma}_{\\text{ability bias}}\\)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#definition",
+    "href": "slides/w10-IVa.html#definition",
+    "title": "Instrumental Variable",
+    "section": "Definition",
+    "text": "Definition\n\nConsider following LONG and SHORT models:\n\n\n\\[\n\\begin{aligned}\nY_i &= \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i , && \\text{long}\\\\\nY_i &= \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S , && \\text{short}\n\\end{aligned}\n\\]\n\n\\(s_i\\) is the causal variable of interest (education)\n\\(A^{'}_{i}\\) is the vector of control variables that we desire to have in order to ensure unbiased estimates of \\(\\rho\\);\nVariable \\(s_i\\) is endogenous if it correlates with the error terms \\(\\varepsilon^{S}_i\\) :\n\n\n\n\\[\nCov(s_i, \\varepsilon^{S}_i) \\neq 0\n\\]"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#endogeneity-in-practice",
+    "href": "slides/w10-IVa.html#endogeneity-in-practice",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity in practice:",
+    "text": "Endogeneity in practice:\n\n\n\nvariation in the independent variable \\(s_i\\) (education) is not “random” as compared to the variation in the dependent variable \\(Y_i\\), but\nan external process \\(U\\) affects variation in both \\(s_i\\) and \\(Y_i\\);\nthus, \\(s_i\\) is endogenous to \\(Y_i\\);\n\n\n\n\n\n\nIf variance of \\(s_i\\) is truly independent of \\(Y_i\\), \\(s_i\\) is exogenous."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#causes-of-endogeneity",
+    "href": "slides/w10-IVa.html#causes-of-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Causes of endogeneity",
+    "text": "Causes of endogeneity\n\nOmitted Variable Bias (familiar)\nMeasurement Error\nSimultaneity"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#ovb",
+    "href": "slides/w10-IVa.html#ovb",
+    "title": "Instrumental Variable",
+    "section": "OVB",
+    "text": "OVB"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#measurement-error",
+    "href": "slides/w10-IVa.html#measurement-error",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#measurement-error-1",
+    "href": "slides/w10-IVa.html#measurement-error-1",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error\n\nWe estimate a long model: \\(Y_i = \\alpha + \\beta s^*_i + e_i\\) ,\n\nbut \\(s^*_i\\) is unavailable, we only have \\(s_i = s^*_i + m_i\\) instead,\n\\(m_i\\) is a systematic measurement error,\n\\(E[m_i] =0\\) and \\(Cov(s^*_i, m_i) = Cov(e_i, m_i) = 0\\).\n\nDesired coefficient \\(\\beta = \\frac{Cov(Y_i, s_i)}{Var(s_i)}\\)\nBut with the erroneous data, we estimate biased coefficient \\(\\beta_b\\)\n\n\n\\[\n\\begin{aligned}\n\\beta_b & =  \n\\frac{Cov(Y_i, s_i)}{Var(s_i)}  =\n\\frac{Cov(a+\\beta s^*_i + e_i, s^*_i + m_i)}{Var(s_i)} \\\\  \n& =  \\frac{\\beta \\cdot Cov(s^*_i, s^*_i)}{Var(s_i)}  =  \\beta \\frac{Var(s^{*}_i)}{Var(s_i)}\n\\end{aligned}\n\\]\n\n(see Joshua D. Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#simultaneity",
+    "href": "slides/w10-IVa.html#simultaneity",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#simultaneity-1",
+    "href": "slides/w10-IVa.html#simultaneity-1",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity\n\nSimultaneity occurs if at least two variables are jointly determined.\n\nA typical case is when observed outcomes are the result of separate behavioral mechanisms that are coordinated in an equilibrium.\n\nThe prototypical case is a system of demand and supply equations:\n\n\\(D(p)\\) = how high would demand be if the price was set to \\(p\\)?\n\\(S(p)\\) = how high would supply be if the price was set to \\(p\\)?\n\nNumber of police people and the crime rate.\n(see M. J. Wooldridge, 2020, Ch. 17) for more details on the problem and solutions."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#instrumental-variable-is-another-variable-z_i-that-satisfies",
+    "href": "slides/w10-IVa.html#instrumental-variable-is-another-variable-z_i-that-satisfies",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable is another variable \\(Z_i\\) that satisfies:",
+    "text": "Instrumental Variable is another variable \\(Z_i\\) that satisfies:\n\nRelevance condition:\n\n\\(Z_i\\) has a causal effect on \\(s_i\\) (or strong association with (see Hernan2020?));\n\nExclusion restriction:\n\n\\(Z_i\\) does not affect \\(Y_i\\) directly, except through its potential effect on \\(s_i\\);\n\nIndependence assumption:\n\n\\(Z_i\\) is randomly assigned or “as good as randomly assigned”, the same as\n\\(Z_i\\) is unrelated to the omitted variables \\(A^{'}_i\\), same as\n\\(Z_i\\) and \\(Y_i\\) do not share any common causes\n\n\n\n\n\n\n\n\nImportant\n\n\n(see Angrist & Pischke, 2014 Ch. 3 and 6; Angrist & Pischke, 2009, Ch. 4.; Hernan2020?, Ch. 16; J. M. Wooldridge, 2010, Ch. 8; Söderbom, Teal, & Eberhardt, 2014, Ch. 11)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#instrumental-variable-1",
+    "href": "slides/w10-IVa.html#instrumental-variable-1",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable (1)",
+    "text": "Instrumental Variable (1)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#instrumental-variable-2",
+    "href": "slides/w10-IVa.html#instrumental-variable-2",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable (2)",
+    "text": "Instrumental Variable (2)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-violation-of-the-relevance-condition",
+    "href": "slides/w10-IVa.html#iv-violation-of-the-relevance-condition",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Relevance condition",
+    "text": "IV: violation of the Relevance condition"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-violation-of-the-exclusion-restriction",
+    "href": "slides/w10-IVa.html#iv-violation-of-the-exclusion-restriction",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Exclusion restriction",
+    "text": "IV: violation of the Exclusion restriction"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-violation-of-the-independence-assumption",
+    "href": "slides/w10-IVa.html#iv-violation-of-the-independence-assumption",
+    "title": "Instrumental Variable",
+    "section": "IV: violation of the Independence assumption",
+    "text": "IV: violation of the Independence assumption"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-regression-angorithm-using-2sls-1",
+    "href": "slides/w10-IVa.html#iv-regression-angorithm-using-2sls-1",
+    "title": "Instrumental Variable",
+    "section": "IV regression angorithm using 2SLS (1)",
+    "text": "IV regression angorithm using 2SLS (1)\nStage 1: regress endogenous variable \\(s_i\\) on all \\(X_i\\) plus the instrument \\(Z_i\\)\n\\[\ns_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i + \\nu_i\n\\]\n\nCompute fitted values form the stage 1: \\(\\hat s_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i\\).\n\n\nSubstitute \\(s_i\\) with the \\(\\hat{s_i}\\) from the stage 1.\n\n\nStage 2: \\(Y_i = \\alpha^{IV} + \\rho^{IV} \\hat{s_i} + \\beta^{IV} X_i + \\varepsilon^{IV}_i\\)\n\n\nwhere\n\n\\(\\hat{s_i}\\) are the fitted values from the first stage\n\\(\\rho^{IV}\\) is the causal effect of interest from stage two that is asymptotically equal to \\(\\rho\\) , the true effect of interest (\\(\\rho^{IV} \\asymp \\rho\\))"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#manual-iv-in-r",
+    "href": "slides/w10-IVa.html#manual-iv-in-r",
+    "title": "Instrumental Variable",
+    "section": "Manual IV in R",
+    "text": "Manual IV in R"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#consistency-and-unbiasedness",
+    "href": "slides/w10-IVa.html#consistency-and-unbiasedness",
+    "title": "Instrumental Variable",
+    "section": "Consistency and unbiasedness",
+    "text": "Consistency and unbiasedness\n\nIV estimates are not unbiased, but they are consistent (Joshua D. Angrist & Krueger, 2001).\n\nUnbiasedness means the estimator has a sampling distribution centered on the parameter of interest in a sample of any size, while\nConsistency only means that the estimator converges to the population parameter as the sample size grows.\n\n\n\n\n\n\n\n\n\nNote\n\n\nResearchers that use IV should aspire to work with large samples.\n\n\n\n\nNo statistical tests is available for checking consistency"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#bad-instruments-1",
+    "href": "slides/w10-IVa.html#bad-instruments-1",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (1)",
+    "text": "Bad instruments (1)\n\n\\(Z_i\\) that does not satisfy any of the Relevance condition, Exclusion restriction and Independence assumption;"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#bad-instruments-2",
+    "href": "slides/w10-IVa.html#bad-instruments-2",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (2)",
+    "text": "Bad instruments (2)\n\n\\(Z_i\\) that correlate with omitted variable (OV) but do not cause changes in it or inflict simultaneity:\n\n\nThey result into much greater upwards shifting bias compare to the OLS;\nFor example the weather in Brazil and supply price and demand quantity of coffee:\n\nweather shifts the supply curve, it is random, thus it seems as a plausible instrument for price in the demand model\nthe weather in Brazil determines supply expectations on futures exchange, thus, it also shifts the demand for coffee before the supply price is affected;"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#bad-instruments-3",
+    "href": "slides/w10-IVa.html#bad-instruments-3",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (3)",
+    "text": "Bad instruments (3)\n\nWeak instrument \\(Z_i\\):\n\nWhen the instrument \\(Z_i\\) is only weakly correlates with endogenous regressor \\(s_i\\);\nFind a better one!"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#weak-instrument-test",
+    "href": "slides/w10-IVa.html#weak-instrument-test",
+    "title": "Instrumental Variable",
+    "section": "Weak instrument test:",
+    "text": "Weak instrument test:\n\nRun the first stage regression with and without the IV;\nCompare the F-statistics\n\nIf F-statistics with instrument is greater than that without by 5 of more,\nthis is a sign of a strong instrument (Staiger & Stock, 1997);\n\nThis test does not ensure that our instruments are independent of omitted variable \\(A^{'}_i\\) or \\(Y_i\\);\nStaiger & Stock (1997)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#overidentification-1",
+    "href": "slides/w10-IVa.html#overidentification-1",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (1)",
+    "text": "Overidentification (1)\n\nnumber of instruments \\(G\\) exceeds the number of endogenous variables \\(K\\).\n\nwhen the IV is overidentified, estimates are biased;\nbias is proportional to \\(K - G\\);\nusing fewer instruments therefore reduces bias;\n\nIf you have few candidates for IV and one endogenous regressor:\n\nselect one IV for the first stage, and\nput the remaining instruments as controls into the second stage"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#overidentification-2",
+    "href": "slides/w10-IVa.html#overidentification-2",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (2)",
+    "text": "Overidentification (2)\nSargan’s overidentification test:\n\n\\(H_0:Cov(Z^{'}_i,\\varepsilon^{IV}_i)=0\\) - the covariance between the instrument and the error term is zero\n\\(H_1:Cov(Z^{'}_i,\\varepsilon^{IV}_i)\\neq0\\)\nThus, by rejecting the \\(H_0\\), we conclude that at least one of the instruments is not valid."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#wu-hausman-test-for-endogeneity",
+    "href": "slides/w10-IVa.html#wu-hausman-test-for-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Wu-Hausman test for endogeneity",
+    "text": "Wu-Hausman test for endogeneity\nWu-Hausman test for endogeneity tests if the variable that we are worried about is indeed endogenous.\n\n\\(H_0:Cov(s_i,\\varepsilon_i)=0\\) - the covariance between potentially endogenous variable and the error term is zero\n\\(H_1:Cov(s_i,\\varepsilon_i) \\neq 0\\)\nThus, by rejecting the \\(H_0\\), we conclude that there is endogeneity and there might be a need for IV."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#research-question-and-the-problem",
+    "href": "slides/w10-IVa.html#research-question-and-the-problem",
+    "title": "Instrumental Variable",
+    "section": "Research question and the problem",
+    "text": "Research question and the problem\n\nWhat are the fundamental causes of the large differences in income per capita across countries?\nwith better “institutions,” more secure property rights, and less distortionary policies,\n\ncountries invest more in physical and human capital, and\nuse these factors more efficiently to\nachieve a greater level of income.\n\nInstitutions are a likely cause of income growth."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#endogeneity-problem",
+    "href": "slides/w10-IVa.html#endogeneity-problem",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity problem",
+    "text": "Endogeneity problem\nWhat could be the ideal experiment to find the effect of institutions on income?\n\nRich economies choose or can afford better institutions.\nEconomies that are different for a variety of reasons\n\nwill differ both in their institutions and in their income per capita.\n\nTo estimate the impact of institutions on income,\n\nwe need a source of exogenous variation in institutions."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#identification-strategy",
+    "href": "slides/w10-IVa.html#identification-strategy",
+    "title": "Instrumental Variable",
+    "section": "Identification strategy",
+    "text": "Identification strategy\nis the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment (Joshua D. Angrist & Krueger, 1991)\n\n\n\n\nCurrent performance is caused by:\nCurrent institutions, which are caused by\nEarly institutions, which are caused by\nSettlements types during colonization, which are caused by\nSettlers’ (potential) mortality or colonization risks."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#empirical-model-ols-estimator",
+    "href": "slides/w10-IVa.html#empirical-model-ols-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (OLS estimator)",
+    "text": "Empirical model (OLS estimator)\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0  \\\\\n& + \\beta_1 \\text{Proxy for institutions} \\\\\n& + \\gamma \\text{Control variables} + \\epsilon_i\n\\end{aligned}\n\\]\n\n\\(i\\) is the country;\nDependent variable is the GDP per capita in 1995;\nAs the proxy of the institutional quality, authors used average protection against expropriation risk in 1985-1990 (index/country ranking);\nControls include latitude of the country and continent-specific dummy variables;"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#the-data",
+    "href": "slides/w10-IVa.html#the-data",
+    "title": "Instrumental Variable",
+    "section": "The data",
+    "text": "The data"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#ols-estimation",
+    "href": "slides/w10-IVa.html#ols-estimation",
+    "title": "Instrumental Variable",
+    "section": "OLS estimation",
+    "text": "OLS estimation"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#empirical-model-iv-estimator",
+    "href": "slides/w10-IVa.html#empirical-model-iv-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (IV estimator)",
+    "text": "Empirical model (IV estimator)\nFirst stage:\n\n\\[\n\\begin{aligned}\n\\text{Proxy for institutions}  & = \\beta_0  \\\\\n& + \\beta_1 \\log (\\text{Settlers mortality in 16-18th cent.}) \\\\\n& + \\gamma \\text{Control variables} + e_i,\n\\end{aligned}\n\\]\n\nEuropean settlers mortality in the 16-18th centuries is the precise number of how many settlers died in the country that they tried to colonize.\n\n\n\nSecond stage:\n\n\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0^{IV}  \\\\\n& + \\beta_1^{IV} \\widehat{ \\text{Proxy for institutions}} \\\\\n& + \\gamma^{IV} \\text{Control variables} + \\epsilon_i^{IV},\n\\end{aligned}\n\\]\n\n\\(\\widehat{ \\{ \\text{Proxy for institutions} \\}}\\) are fitted values from the first stage."
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-results",
+    "href": "slides/w10-IVa.html#iv-results",
+    "title": "Instrumental Variable",
+    "section": "IV results",
+    "text": "IV results"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#references",
+    "href": "slides/w10-IVa.html#references",
+    "title": "Instrumental Variable",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAcemoglu, D., Johnson, S., & Robinson, J. A. (2001). The colonial origins of comparative development: An empirical investigation. American Economic Review, 91(5), 1369–1401. http://doi.org/10.1257/aer.91.5.1369\n\n\nAngrist, Joshua D., & Krueger, A. B. (1991). Does compulsory school attendance affect schooling and earnings? The Quarterly Journal of Economics, 106(4), 979–1014. http://doi.org/10.2307/2937954\n\n\nAngrist, Joshua D., & Krueger, A. B. (2001). Instrumental variables and the search for identification: From supply and demand to natural experiments. Journal of Economic Perspectives, 15(4), 69–85. http://doi.org/10.1257/jep.15.4.69\n\n\nAngrist, Joshua D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, Joshua D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nBuckles, K. S., & Hungerman, D. M. (2013). Season of birth and later outcomes: Old questions, new answers. Review of Economics and Statistics, 95(3), 711–724. http://doi.org/10.1162/rest_a_00314\n\n\nCard, D. (1994). Earnings, schooling, and ability revisited. National Bureau of Economic Research.\n\n\nDuflo, E. (2001). Schooling and labor market consequences of school construction in indonesia: Evidence from an unusual policy experiment. American Economic Review, 91(4), 795–813. http://doi.org/10.1257/aer.91.4.795\n\n\nHernán, M. A., & Robins, J. M. (2020). Causal Inference: What If. Chapman & Hall/CRC.\n\n\nImbens, G. W. (2020). Potential outcome and directed acyclic graph approaches to causality: Relevance for empirical practice in economics. Journal of Economic Literature, 58(4), 1129–1179. http://doi.org/10.1257/jel.20191597\n\n\nSöderbom, M., Teal, F., & Eberhardt, M. (2014). Empirical development economics. ROUTLEDGE. Retrieved from https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html\n\n\nStaiger, D., & Stock, J. H. (1997). Instrumental variables regression with weak instruments. Econometrica, 65(3), 557. http://doi.org/10.2307/2171753\n\n\nWooldridge, J. M. (2010). Econometric analysis of cross section and panel data. MIT press.\n\n\nWooldridge, M. J. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#instrumental-variable",
+    "href": "slides/w10-IVa.html#instrumental-variable",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable",
+    "text": "Instrumental Variable\nis another variable \\(Z_i\\) that affects only endogenous regressor \\(s_i\\) and satisfies:\n\n\n\n\n\n\n\n\nRelevance condition:\nExclusion restriction:\nIndependence assumption:\n\n\n\n\n(see Joshua D. Angrist & Pischke, 2014 Ch. 3 and 6; Joshua D. Angrist & Pischke, 2009, Ch. 4.; Hernán & Robins, 2020, Ch. 16; J. M. Wooldridge, 2010, Ch. 8; Söderbom, Teal, & Eberhardt, 2014, Ch. 11; Imbens, 2020)"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#relevance-condition",
+    "href": "slides/w10-IVa.html#relevance-condition",
+    "title": "Instrumental Variable",
+    "section": "1. Relevance condition:",
+    "text": "1. Relevance condition:\n\n\n\n\\(Z_i\\) has a causal effect on \\(s_i\\);\n\n\n\nViolation of the relevance condition:"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#exclusion-restriction",
+    "href": "slides/w10-IVa.html#exclusion-restriction",
+    "title": "Instrumental Variable",
+    "section": "2. Exclusion restriction:",
+    "text": "2. Exclusion restriction:\n\n\n\n\\(Z_i\\) does not affect \\(Y_i\\) directly, except through its potential effect on \\(s_i\\);\n\n\n\nViolation of the exclusion restriction:"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#independence-assumption",
+    "href": "slides/w10-IVa.html#independence-assumption",
+    "title": "Instrumental Variable",
+    "section": "3. Independence assumption:",
+    "text": "3. Independence assumption:\n\n\n\n\\(Z_i\\) is randomly assigned or “as good as randomly assigned”, the same as\n\\(Z_i\\) is unrelated to the omitted variables \\(A^{'}_i\\), same as\n\\(Z_i\\) and \\(Y_i\\) do not share any common causes\n\n\n\nViolation of the independence assumption:"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#wage-and-education-again-1",
+    "href": "slides/w10-IVa.html#wage-and-education-again-1",
+    "title": "Instrumental Variable",
+    "section": "Wage and Education (again)",
+    "text": "Wage and Education (again)\n\\[\nY_i = \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S\n\\]\n\nWe know that estimate of years of education \\(s_i\\) is biased because of the OVB (ability bias).\nThink of an RCT experiment that could help to estimate true causal effect of \\(s_i\\) on income!\nWhat instrument \\(Z_i\\) can we use for education?"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#fantastic-ivs-and-how-to-find-them",
+    "href": "slides/w10-IVa.html#fantastic-ivs-and-how-to-find-them",
+    "title": "Instrumental Variable",
+    "section": "Fantastic IVs and how to find them…",
+    "text": "Fantastic IVs and how to find them…\n\nUse theory!\n\nhuman capital theory suggests that people make schooling choices by comparing the costs and benefits of alternatives.\n\nThink and speculate:\n\nWhat is the ideal experiment that could capture the effect of schooling on education?\nWhat are the forces you’d like to manipulate and the factors you’d like to hold constant?\nWhat are the other processes that are independent of wage, but may affect schooling?\n\nAnalyze, what were/are the policies/environments that could mimic the experimental setting?\n\n\n\n\n\nReasoning on how researcher use theory and available observational data to approximate real experiment is called Identification strategy!"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#fantastic-ivs-for-education",
+    "href": "slides/w10-IVa.html#fantastic-ivs-for-education",
+    "title": "Instrumental Variable",
+    "section": "Fantastic IVs for education",
+    "text": "Fantastic IVs for education\n\nLoan policies or other subsidies that vary independently of ability or earnings potential\nRegion and time variation in school construction (Duflo, 2001)\nProximity to college(Card, 1994)\nQuarter of birth (Joshua D. Angrist & Krueger, 1991)\nParents education (Buckles & Hungerman, 2013)\nNumber of siblings"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#using-parents-education-as-the-iv-for-education",
+    "href": "slides/w10-IVa.html#using-parents-education-as-the-iv-for-education",
+    "title": "Instrumental Variable",
+    "section": "Using parents education as the IV for education",
+    "text": "Using parents education as the IV for education\n\nlibrary(tidyverse)\nlibrary(haven)\nlibrary(modelsummary)\ndta <-\n  read_csv(\"education_parents.csv\") %>% \n  mutate(lwagehour = log(wage/hours)) %>% \n  mutate(parents_edu = feduc + meduc)\nglimpse(dta)\n\n\n\nRows: 722\nColumns: 19\n$ wage        <dbl> 769, 808, 825, 650, 562, 600, 1154, 1000, 930, 900, 1318, …\n$ hours       <dbl> 40, 50, 40, 40, 40, 40, 45, 40, 43, 45, 38, 40, 50, 45, 40…\n$ IQ          <dbl> 93, 119, 108, 96, 74, 91, 111, 95, 132, 125, 119, 118, 105…\n$ KWW         <dbl> 35, 41, 46, 32, 27, 24, 37, 44, 44, 40, 24, 47, 37, 39, 36…\n$ educ        <dbl> 12, 18, 14, 12, 11, 10, 15, 12, 18, 15, 16, 16, 10, 15, 11…\n$ exper       <dbl> 11, 11, 11, 13, 14, 13, 13, 16, 8, 4, 7, 9, 17, 6, 19, 10,…\n$ tenure      <dbl> 2, 16, 9, 7, 5, 0, 1, 16, 13, 3, 2, 9, 2, 9, 10, 4, 3, 8, …\n$ age         <dbl> 31, 37, 33, 32, 34, 30, 36, 36, 38, 30, 28, 34, 35, 36, 38…\n$ married     <dbl> 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ black       <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ south       <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ urban       <dbl> 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ sibs        <dbl> 1, 1, 1, 4, 10, 1, 2, 1, 1, 2, 3, 1, 1, 3, 2, 2, 5, 2, 0, …\n$ brthord     <dbl> 2, NA, 2, 3, 6, 2, 3, 1, 1, NA, 1, 1, 2, 3, 3, 1, 1, 1, 1,…\n$ meduc       <dbl> 8, 14, 14, 12, 6, 8, 14, 12, 13, 12, 10, 12, 6, 12, 10, 12…\n$ feduc       <dbl> 8, 14, 14, 12, 11, 8, 5, 11, 14, 12, 10, 12, 8, 10, 8, 12,…\n$ lwage       <dbl> 6.645091, 6.694562, 6.715384, 6.476973, 6.331502, 6.396930…\n$ lwagehour   <dbl> 2.956212, 2.782539, 3.026504, 2.788093, 2.642622, 2.708050…\n$ parents_edu <dbl> 16, 28, 28, 24, 17, 16, 19, 23, 27, 24, 20, 24, 14, 22, 18…"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#estimating-iv-manually",
+    "href": "slides/w10-IVa.html#estimating-iv-manually",
+    "title": "Instrumental Variable",
+    "section": "Estimating IV manually",
+    "text": "Estimating IV manually\n\n# No IV\nols <-  lm(log(wage) ~ educ + exper + I(exper^2), data = dta)\n\n# No IV but with controls for IQ\nols_iq <-  lm(log(wage) ~ educ + exper + I(exper^2) + IQ, data = dta)\n\n# First stage\nfirst_stage <- lm(educ ~ parents_edu + exper + I(exper^2), data = dta)\n\n# Fitted values of endogenous regressor\ndta_fitted <- dta %>% mutate(educ_fit = fitted(first_stage))\n\n# Second stage\nsecond_stage <- lm(log(wage) ~ educ_fit + exper + I(exper^2), data = dta_fitted)\n\n\n\n\n\n \n  \n      \n    OLS \n    OLS (with ability proxi) \n    1 stage (par. educ.) \n     2 stage (par. educ.) \n  \n \n\n  \n    Education \n    0.078*** (0.007) \n    0.058*** (0.008) \n     \n    0.146*** (0.019) \n  \n  \n    Parents educ. \n     \n     \n    0.148*** (0.013) \n     \n  \n  \n    Experience \n    0.009 (0.015) \n    0.010 (0.015) \n    −0.021 (0.072) \n    0.008 (0.016) \n  \n  \n    Experience sq. \n    0.001 (0.001) \n    0.001 (0.001) \n    −0.007* (0.003) \n    0.001+ (0.001) \n  \n  \n    Ability proxi \n     \n    0.006*** (0.001) \n     \n     \n  \n  \n    Num.Obs. \n    722 \n    722 \n    722 \n    722 \n  \n  \n    R2 \n    0.141 \n    0.169 \n    0.326 \n    0.076 \n  \n  \n    R2 Adj. \n    0.137 \n    0.164 \n    0.323 \n    0.072 \n  \n  \n    Log.Lik. \n    −341.745 \n    −329.737 \n    −1462.726 \n    −368.199 \n  \n  \n    F \n    39.259 \n    36.461 \n    115.813 \n    19.574"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#using-sibilins-number-as-the-iv-for-education",
+    "href": "slides/w10-IVa.html#using-sibilins-number-as-the-iv-for-education",
+    "title": "Instrumental Variable",
+    "section": "Using sibilins number as the IV for education",
+    "text": "Using sibilins number as the IV for education\n\nlibrary(ivreg)\niv_fit2 <- ivreg(\n  log(wage) ~ educ + exper + I(exper ^ 2) | sibs + exper + I(exper ^ 2) ,\n  data = dta \n)\n\n\n\n\n\n \n  \n      \n    OLS \n    First stage (parents education) \n    Second stage (parents education) \n    Second stage number of sibilins \n  \n \n\n  \n    Education, years \n    0.078*** (0.007) \n     \n    0.146*** (0.019) \n    0.128*** (0.033) \n  \n  \n    Parents education, years \n     \n    0.148*** (0.013) \n     \n     \n  \n  \n    Experience \n    0.009 (0.015) \n    −0.021 (0.072) \n    0.008 (0.016) \n    0.008 (0.016) \n  \n  \n    Experience square \n    0.001 (0.001) \n    −0.007* (0.003) \n    0.001+ (0.001) \n    0.001 (0.001) \n  \n  \n    Num.Obs. \n    722 \n    722 \n    722 \n    722 \n  \n  \n    R2 \n    0.141 \n    0.326 \n    0.076 \n    0.085 \n  \n  \n    R2 Adj. \n    0.137 \n    0.323 \n    0.072 \n    0.081 \n  \n  \n    Log.Lik. \n    −341.745 \n    −1462.726 \n    −368.199 \n     \n  \n  \n    F \n    39.259 \n    115.813 \n    19.574"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#iv-regression-algorithm-using-2sls-1",
+    "href": "slides/w10-IVa.html#iv-regression-algorithm-using-2sls-1",
+    "title": "Instrumental Variable",
+    "section": "IV regression algorithm using 2SLS (1)",
+    "text": "IV regression algorithm using 2SLS (1)\nStage 1: regress endogenous variable \\(s_i\\) on all \\(X_i\\) plus the instrument \\(Z_i\\)\n\\[\ns_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i + \\nu_i\n\\]\n\nCompute fitted values form the stage 1: \\(\\hat s_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i\\).\n\n\nSubstitute \\(s_i\\) with the \\(\\hat{s_i}\\) from the stage 1.\n\n\nStage 2: \\(Y_i = \\alpha^{IV} + \\rho^{IV} \\hat{s_i} + \\beta^{IV} X_i + \\varepsilon^{IV}_i\\)\n\n\nwhere\n\n\\(\\hat{s_i}\\) are the fitted values from the first stage\n\\(\\rho^{IV}\\) is the causal effect of interest from stage two that is asymptotically equal to \\(\\rho\\) , the true effect of interest (\\(\\rho^{IV} \\asymp \\rho\\))"
+  },
+  {
+    "objectID": "slides/w10-IVa.html#using-siblings-number-as-the-iv-for-education",
+    "href": "slides/w10-IVa.html#using-siblings-number-as-the-iv-for-education",
+    "title": "Instrumental Variable",
+    "section": "Using siblings number as the IV for education",
+    "text": "Using siblings number as the IV for education\n\nlibrary(ivreg)\niv_fit2 <- ivreg(\n  log(wage) ~ educ + exper + I(exper ^ 2) | sibs + exper + I(exper ^ 2) ,\n  data = dta )\n\n\n\n\n\n \n  \n      \n    OLS \n    OLS (with ability proxi) \n    1 stage (par. educ.) \n     2 stage (par. educ.) \n     2 stage (siblings) \n  \n \n\n  \n    Education \n    0.078*** (0.007) \n    0.058*** (0.008) \n     \n    0.146*** (0.019) \n    0.128*** (0.033) \n  \n  \n    Parents educ. \n     \n     \n    0.148*** (0.013) \n     \n     \n  \n  \n    Experience \n    0.009 (0.015) \n    0.010 (0.015) \n    −0.021 (0.072) \n    0.008 (0.016) \n    0.008 (0.016) \n  \n  \n    Experience sq. \n    0.001 (0.001) \n    0.001 (0.001) \n    −0.007* (0.003) \n    0.001+ (0.001) \n    0.001 (0.001) \n  \n  \n    Ability proxi \n     \n    0.006*** (0.001) \n     \n     \n     \n  \n  \n    Num.Obs. \n    722 \n    722 \n    722 \n    722 \n    722 \n  \n  \n    R2 \n    0.141 \n    0.169 \n    0.326 \n    0.076 \n    0.085 \n  \n  \n    R2 Adj. \n    0.137 \n    0.164 \n    0.323 \n    0.072 \n    0.081 \n  \n  \n    Log.Lik. \n    −341.745 \n    −329.737 \n    −1462.726 \n    −368.199 \n     \n  \n  \n    F \n    39.259 \n    36.461 \n    115.813 \n    19.574"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#research-faqs",
+    "href": "slides/w10b-IV-examples.html#research-faqs",
+    "title": "Instrumental Variable: Examples",
+    "section": "Research FAQs:",
+    "text": "Research FAQs:\nBefore running a regression, ask the following four questions (see J. D. Angrist & Pischke, 2009, Ch. 1)\n\nWhat is the causal relationship of interest?\nWhat is the experiment that could ideally be used to capture the causal effect of interest?\nWhat is your identification strategy?\nWhat is your mode of statistical inference?"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#faq-1.-what-is-the-causal-relationship-of-interest",
+    "href": "slides/w10b-IV-examples.html#faq-1.-what-is-the-causal-relationship-of-interest",
+    "title": "Instrumental Variable: Examples",
+    "section": "FAQ 1. What is the causal relationship of interest?",
+    "text": "FAQ 1. What is the causal relationship of interest?"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#faq-2.-what-is-the-experiment",
+    "href": "slides/w10b-IV-examples.html#faq-2.-what-is-the-experiment",
+    "title": "Instrumental Variable: Examples",
+    "section": "FAQ 2. What is the experiment…?",
+    "text": "FAQ 2. What is the experiment…?\n\nDescribe an ideal experiment.\nHighlight the forces you’d like to manipulate and the factors you’d like to hold constant.\nFUQs: fundamentally unidentified questions\n\nCausal effect of race or gender;\n\nHowever, we can experiment with how believes about a person’s gender of race affect decisions (Bertrand & Mullainathan, 2004).\n\nDo children that start school 1 year later learn more in the primary school?\n\nBecause older kinds are in general better learners there is not counter factual.\nHowever, it is possible to establish this school starting effect on adults (Black, Devereux, & Salvanes, 2008)."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#faq-3.-what-is-your-identification-strategy",
+    "href": "slides/w10b-IV-examples.html#faq-3.-what-is-your-identification-strategy",
+    "title": "Instrumental Variable: Examples",
+    "section": "FAQ 3. What is your identification strategy?",
+    "text": "FAQ 3. What is your identification strategy?\n\n\n\n\n\n\n\nIdentification strategy\n\n\nis the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment (J. D. Angrist & Krueger, 1991)\n\n\n\n\nUse theory!\nAnalyze, what were/are the policies/environments that could mimic the experimental setting?"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#faq-4.-what-is-your-mode-of-statistical-inference",
+    "href": "slides/w10b-IV-examples.html#faq-4.-what-is-your-mode-of-statistical-inference",
+    "title": "Instrumental Variable: Examples",
+    "section": "FAQ 4. What is your mode of statistical inference?",
+    "text": "FAQ 4. What is your mode of statistical inference?\n\ndescribes the population to be studied,\nthe sample to be used,\nand the assumptions made when constructing standard errors.\nchoose appropriate statistical methods\napply them diligently."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#example-1.-wage-education-and-random-nature-of-the-date-of-birth",
+    "href": "slides/w10b-IV-examples.html#example-1.-wage-education-and-random-nature-of-the-date-of-birth",
+    "title": "Instrumental Variable: Examples",
+    "section": "Example 1. wage, education and random nature of the date of birth",
+    "text": "Example 1. wage, education and random nature of the date of birth\nAngrist, J. D., & Krueger, A. B. (1991). Does Compulsory School Attendance Affect Schooling and Earnings? The Quarterly Journal of Economics, 106, 979–1014. https://doi.org/10.2307/2937954\nIdentification strategy:\n\nPolicy required students to enter school in the calendar year in which they turned six years old;\nChildren born in the fourth quarter enter school at age 5 and 3⁄4 , while those born in the first quarter enter school at age 6 3⁄4;\nCompulsory schooling laws require students to remain in school until their 16th birthdays;\n\n\nCombination of school start age policies and compulsory schooling laws creates a natural experiment in which children are compelled to attend school for different lengths of time depending on their birthdays."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#average-schooling-by-quarter-of-birth",
+    "href": "slides/w10b-IV-examples.html#average-schooling-by-quarter-of-birth",
+    "title": "Instrumental Variable: Examples",
+    "section": "Average schooling by quarter of birth",
+    "text": "Average schooling by quarter of birth\n\n\nSource: (J. D. Angrist & Krueger, 1991)"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#average-wage-by-quarter-of-birth",
+    "href": "slides/w10b-IV-examples.html#average-wage-by-quarter-of-birth",
+    "title": "Instrumental Variable: Examples",
+    "section": "Average wage by quarter of birth",
+    "text": "Average wage by quarter of birth\n\n\nSource: (J. D. Angrist & Krueger, 1991)"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#fantastic-instrumental-variable",
+    "href": "slides/w10b-IV-examples.html#fantastic-instrumental-variable",
+    "title": "Instrumental Variable: Examples",
+    "section": "Fantastic instrumental variable:",
+    "text": "Fantastic instrumental variable:\n\nQuarter of birth;\nThe intuition is:\n\nOnly a small part of variance in education (the one linked to the quarter of birth) is used to identify the return to education.\nThis small part of variance occurs due to random natural experiment, thus the ceteris paribus holds here."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#estimates",
+    "href": "slides/w10b-IV-examples.html#estimates",
+    "title": "Instrumental Variable: Examples",
+    "section": "Estimates",
+    "text": "Estimates"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#conclusions",
+    "href": "slides/w10b-IV-examples.html#conclusions",
+    "title": "Instrumental Variable: Examples",
+    "section": "Conclusions",
+    "text": "Conclusions\n\nIV estimates are very close to the OLS;\nWhat does it mean?\n\nAbility bias was small in the OLS!"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#research-question-and-the-problem",
+    "href": "slides/w10b-IV-examples.html#research-question-and-the-problem",
+    "title": "Instrumental Variable: Examples",
+    "section": "Research question and the problem",
+    "text": "Research question and the problem\n\nWhat is the effect of additional child on women labor market participation?\nConventional wisdom:\n\nMore children require more time therefore, women used to sacrifice own employment opportunities."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#endogeneity-problem",
+    "href": "slides/w10b-IV-examples.html#endogeneity-problem",
+    "title": "Instrumental Variable: Examples",
+    "section": "Endogeneity problem",
+    "text": "Endogeneity problem\nWhat would the ideal experiment here?\n\nFamilies without children are inappropriate counter factual\nRich families can afford more children: inappropriate counter factual\nFamily usually plan for having an additional children\n\nthus, a families with 1 children are also inappropriate counter factual\n\nwe need a source of exogenous variation in children"
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#identification-strategy-1",
+    "href": "slides/w10b-IV-examples.html#identification-strategy-1",
+    "title": "Instrumental Variable: Examples",
+    "section": "Identification strategy",
+    "text": "Identification strategy\nPeople may plan for a second child, but they cannot plan for having twins!!!\n\nWe can use dummy variable for a twin birth as instrument for the number of children."
+  },
+  {
+    "objectID": "slides/w10b-IV-examples.html#results",
+    "href": "slides/w10b-IV-examples.html#results",
+    "title": "Instrumental Variable: Examples",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#short-regression",
+    "href": "slides/w10a-IV.html#short-regression",
+    "title": "Instrumental Variable",
+    "section": "Short Regression",
+    "text": "Short Regression\n\\[\nY_i = \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S\n\\tag{1.1}\\]\n\nannual earning \\(Y_i\\)\nyears of education \\(s_i\\)\n\\(X_i\\) vector of other control variables, such as experience.\n\n\nIs the ceteris paribus fulfilled in Equation 1.1?\n\nIs control for experience and education sufficient?\nAt a given experience/education level, are more- and less-educated workers equally able and diligent? (see Joshua D. Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#long-regression",
+    "href": "slides/w10a-IV.html#long-regression",
+    "title": "Instrumental Variable",
+    "section": "Long Regression",
+    "text": "Long Regression\n\\[\nY_i = \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i\n\\tag{1.2}\\]\n\nwhere \\(A^{'}_{i}\\) is the ability variable that we desire to have in order to ensure the unbiased estimates of \\(\\rho\\).\nOmitting \\(A^{'}_{i}\\) causes a selection bias or endogeneity:\n\n\\(\\rho^{S} = \\rho + \\underbrace{\\delta_{A^{'} s} \\times \\gamma}_{\\text{ability bias}}\\)"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#definition",
+    "href": "slides/w10a-IV.html#definition",
+    "title": "Instrumental Variable",
+    "section": "Definition",
+    "text": "Definition\n\nConsider following LONG and SHORT models:\n\n\n\\[\n\\begin{aligned}\nY_i &= \\alpha + \\rho s_i + \\beta X_i + \\gamma A^{'}_{i} + \\varepsilon_i , && \\text{long}\\\\\nY_i &= \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S , && \\text{short}\n\\end{aligned}\n\\]\n\n\\(s_i\\) is the causal variable of interest (education)\n\\(A^{'}_{i}\\) is the vector of control variables that we desire to have in order to ensure unbiased estimates of \\(\\rho\\);\nVariable \\(s_i\\) is endogenous if it correlates with the error terms \\(\\varepsilon^{S}_i\\) :\n\n\n\n\\[\nCov(s_i, \\varepsilon^{S}_i) \\neq 0\n\\]"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#endogeneity-in-practice",
+    "href": "slides/w10a-IV.html#endogeneity-in-practice",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity in practice:",
+    "text": "Endogeneity in practice:\n\n\n\nvariation in the independent variable \\(s_i\\) (education) is not “random” as compared to the variation in the dependent variable \\(Y_i\\), but\nan external process \\(U\\) affects variation in both \\(s_i\\) and \\(Y_i\\);\nthus, \\(s_i\\) is endogenous to \\(Y_i\\);\n\n\n\n\n\n\nIf variance of \\(s_i\\) is truly independent of \\(Y_i\\), \\(s_i\\) is exogenous."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#causes-of-endogeneity",
+    "href": "slides/w10a-IV.html#causes-of-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Causes of endogeneity",
+    "text": "Causes of endogeneity\n\nOmitted Variable Bias (familiar)\nMeasurement Error\nSimultaneity"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#ovb",
+    "href": "slides/w10a-IV.html#ovb",
+    "title": "Instrumental Variable",
+    "section": "OVB",
+    "text": "OVB"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#measurement-error",
+    "href": "slides/w10a-IV.html#measurement-error",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#measurement-error-1",
+    "href": "slides/w10a-IV.html#measurement-error-1",
+    "title": "Instrumental Variable",
+    "section": "Measurement error",
+    "text": "Measurement error\n\nWe estimate a long model: \\(Y_i = \\alpha + \\beta s^*_i + e_i\\) ,\n\nbut \\(s^*_i\\) is unavailable, we only have \\(s_i = s^*_i + m_i\\) instead,\n\\(m_i\\) is a systematic measurement error,\n\\(E[m_i] =0\\) and \\(Cov(s^*_i, m_i) = Cov(e_i, m_i) = 0\\).\n\nDesired coefficient \\(\\beta = \\frac{Cov(Y_i, s_i)}{Var(s_i)}\\)\nBut with the erroneous data, we estimate biased coefficient \\(\\beta_b\\)\n\n\n\\[\n\\begin{aligned}\n\\beta_b & =  \n\\frac{Cov(Y_i, s_i)}{Var(s_i)}  =\n\\frac{Cov(a+\\beta s^*_i + e_i, s^*_i + m_i)}{Var(s_i)} \\\\  \n& =  \\frac{\\beta \\cdot Cov(s^*_i, s^*_i)}{Var(s_i)}  =  \\beta \\frac{Var(s^{*}_i)}{Var(s_i)}\n\\end{aligned}\n\\]\n\n(see Joshua D. Angrist & Pischke, 2014, Ch. 6)"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#simultaneity",
+    "href": "slides/w10a-IV.html#simultaneity",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#simultaneity-1",
+    "href": "slides/w10a-IV.html#simultaneity-1",
+    "title": "Instrumental Variable",
+    "section": "Simultaneity",
+    "text": "Simultaneity\n\nSimultaneity occurs if at least two variables are jointly determined.\n\nA typical case is when observed outcomes are the result of separate behavioral mechanisms that are coordinated in an equilibrium.\n\nThe prototypical case is a system of demand and supply equations:\n\n\\(D(p)\\) = how high would demand be if the price was set to \\(p\\)?\n\\(S(p)\\) = how high would supply be if the price was set to \\(p\\)?\n\nNumber of police people and the crime rate.\n(see M. J. Wooldridge, 2020, Ch. 17) for more details on the problem and solutions."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#instrumental-variable",
+    "href": "slides/w10a-IV.html#instrumental-variable",
+    "title": "Instrumental Variable",
+    "section": "Instrumental Variable",
+    "text": "Instrumental Variable\nis another variable \\(Z_i\\) that affects only endogenous regressor \\(s_i\\) and satisfies:\n\n\n\n\n\n\n\n\nRelevance condition:\nExclusion restriction:\nIndependence assumption:\n\n\n\n\n(see Joshua D. Angrist & Pischke, 2014 Ch. 3 and 6; Joshua D. Angrist & Pischke, 2009, Ch. 4.; Hernán & Robins, 2020, Ch. 16; J. M. Wooldridge, 2010, Ch. 8; Söderbom, Teal, & Eberhardt, 2014, Ch. 11; Imbens, 2020)"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#relevance-condition",
+    "href": "slides/w10a-IV.html#relevance-condition",
+    "title": "Instrumental Variable",
+    "section": "1. Relevance condition:",
+    "text": "1. Relevance condition:\n\n\n\n\\(Z_i\\) has a causal effect on \\(s_i\\);\n\n\n\nViolation of the relevance condition:"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#exclusion-restriction",
+    "href": "slides/w10a-IV.html#exclusion-restriction",
+    "title": "Instrumental Variable",
+    "section": "2. Exclusion restriction:",
+    "text": "2. Exclusion restriction:\n\n\n\n\\(Z_i\\) does not affect \\(Y_i\\) directly, except through its potential effect on \\(s_i\\);\n\n\n\nViolation of the exclusion restriction:"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#independence-assumption",
+    "href": "slides/w10a-IV.html#independence-assumption",
+    "title": "Instrumental Variable",
+    "section": "3. Independence assumption:",
+    "text": "3. Independence assumption:\n\n\n\n\\(Z_i\\) is randomly assigned or “as good as randomly assigned”, the same as\n\\(Z_i\\) is unrelated to the omitted variables \\(A^{'}_i\\), same as\n\\(Z_i\\) and \\(Y_i\\) do not share any common causes\n\n\n\nViolation of the independence assumption:"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#iv-regression-algorithm-using-2sls-1",
+    "href": "slides/w10a-IV.html#iv-regression-algorithm-using-2sls-1",
+    "title": "Instrumental Variable",
+    "section": "IV regression algorithm using 2SLS (1)",
+    "text": "IV regression algorithm using 2SLS (1)\nStage 1: regress endogenous variable \\(s_i\\) on all \\(X_i\\) plus the instrument \\(Z_i\\)\n\\[\ns_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i + \\nu_i\n\\]\n\nCompute fitted values form the stage 1: \\(\\hat s_i = \\pi_0 + \\pi_1 Z_i + \\rho X_i\\).\n\n\nSubstitute \\(s_i\\) with the \\(\\hat{s_i}\\) from the stage 1.\n\n\nStage 2: \\(Y_i = \\alpha^{IV} + \\rho^{IV} \\hat{s_i} + \\beta^{IV} X_i + \\varepsilon^{IV}_i\\)\n\n\nwhere\n\n\\(\\hat{s_i}\\) are the fitted values from the first stage\n\\(\\rho^{IV}\\) is the causal effect of interest from stage two that is asymptotically equal to \\(\\rho\\) , the true effect of interest (\\(\\rho^{IV} \\asymp \\rho\\))"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#wage-and-education-again-1",
+    "href": "slides/w10a-IV.html#wage-and-education-again-1",
+    "title": "Instrumental Variable",
+    "section": "Wage and Education (again)",
+    "text": "Wage and Education (again)\n\\[\nY_i = \\alpha^S + \\rho^S s_i + \\beta^S X_i + \\varepsilon_i^S\n\\]\n\nWe know that estimate of years of education \\(s_i\\) is biased because of the OVB (ability bias).\nThink of an RCT experiment that could help to estimate true causal effect of \\(s_i\\) on income!\nWhat instrument \\(Z_i\\) can we use for education?"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#fantastic-ivs-and-how-to-find-them",
+    "href": "slides/w10a-IV.html#fantastic-ivs-and-how-to-find-them",
+    "title": "Instrumental Variable",
+    "section": "Fantastic IVs and how to find them…",
+    "text": "Fantastic IVs and how to find them…\n\nUse theory!\n\nhuman capital theory suggests that people make schooling choices by comparing the costs and benefits of alternatives.\n\nThink and speculate:\n\nWhat is the ideal experiment that could capture the effect of schooling on education?\nWhat are the forces you’d like to manipulate and the factors you’d like to hold constant?\nWhat are the other processes that are independent of wage, but may affect schooling?\n\nAnalyze, what were/are the policies/environments that could mimic the experimental setting?\n\n\n\n\n\n\n\n\nReasoning on how researcher use theory and available observational data to approximate real experiment is called Identification strategy!"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#fantastic-ivs-for-education",
+    "href": "slides/w10a-IV.html#fantastic-ivs-for-education",
+    "title": "Instrumental Variable",
+    "section": "Fantastic IVs for education",
+    "text": "Fantastic IVs for education\n\nLoan policies or other subsidies that vary independently of ability or earnings potential\nRegion and time variation in school construction (Duflo, 2001)\nProximity to college(Card, 1994)\nQuarter of birth (Joshua D. Angrist & Krueger, 1991)\nParents education (Buckles & Hungerman, 2013)\nNumber of siblings"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#using-parents-education-as-the-iv-for-education",
+    "href": "slides/w10a-IV.html#using-parents-education-as-the-iv-for-education",
+    "title": "Instrumental Variable",
+    "section": "Using parents education as the IV for education",
+    "text": "Using parents education as the IV for education\n\n\nShow the code\nlibrary(tidyverse)\nlibrary(haven)\nlibrary(modelsummary)\ndta <-\n  read_csv(\"education_parents.csv\") %>% \n  mutate(lwagehour = log(wage/hours)) %>% \n  mutate(parents_edu = feduc + meduc)\nglimpse(dta)\n\n\n\n\nShow the code\nlibrary(tidyverse)\nlibrary(haven)\nlibrary(modelsummary)\ndta <-\n  read_csv(here::here(\"exercises\",\"ex10-IV\", \"education_parents.csv\")) %>% \n  mutate(lwagehour = log(wage/hours)) %>% \n  mutate(parents_edu = feduc + meduc) %>% \n  filter(!is.na(parents_edu))\n\n\nRows: 935 Columns: 17\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (17): wage, hours, IQ, KWW, educ, exper, tenure, age, married, black, so...\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\nShow the code\nglimpse(dta)\n\n\nRows: 722\nColumns: 19\n$ wage        <dbl> 769, 808, 825, 650, 562, 600, 1154, 1000, 930, 900, 1318, …\n$ hours       <dbl> 40, 50, 40, 40, 40, 40, 45, 40, 43, 45, 38, 40, 50, 45, 40…\n$ IQ          <dbl> 93, 119, 108, 96, 74, 91, 111, 95, 132, 125, 119, 118, 105…\n$ KWW         <dbl> 35, 41, 46, 32, 27, 24, 37, 44, 44, 40, 24, 47, 37, 39, 36…\n$ educ        <dbl> 12, 18, 14, 12, 11, 10, 15, 12, 18, 15, 16, 16, 10, 15, 11…\n$ exper       <dbl> 11, 11, 11, 13, 14, 13, 13, 16, 8, 4, 7, 9, 17, 6, 19, 10,…\n$ tenure      <dbl> 2, 16, 9, 7, 5, 0, 1, 16, 13, 3, 2, 9, 2, 9, 10, 4, 3, 8, …\n$ age         <dbl> 31, 37, 33, 32, 34, 30, 36, 36, 38, 30, 28, 34, 35, 36, 38…\n$ married     <dbl> 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ black       <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ south       <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…\n$ urban       <dbl> 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ sibs        <dbl> 1, 1, 1, 4, 10, 1, 2, 1, 1, 2, 3, 1, 1, 3, 2, 2, 5, 2, 0, …\n$ brthord     <dbl> 2, NA, 2, 3, 6, 2, 3, 1, 1, NA, 1, 1, 2, 3, 3, 1, 1, 1, 1,…\n$ meduc       <dbl> 8, 14, 14, 12, 6, 8, 14, 12, 13, 12, 10, 12, 6, 12, 10, 12…\n$ feduc       <dbl> 8, 14, 14, 12, 11, 8, 5, 11, 14, 12, 10, 12, 8, 10, 8, 12,…\n$ lwage       <dbl> 6.645091, 6.694562, 6.715384, 6.476973, 6.331502, 6.396930…\n$ lwagehour   <dbl> 2.956212, 2.782539, 3.026504, 2.788093, 2.642622, 2.708050…\n$ parents_edu <dbl> 16, 28, 28, 24, 17, 16, 19, 23, 27, 24, 20, 24, 14, 22, 18…"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#estimating-iv-manually",
+    "href": "slides/w10a-IV.html#estimating-iv-manually",
+    "title": "Instrumental Variable",
+    "section": "Estimating IV manually",
+    "text": "Estimating IV manually\n\n\nShow the code\n# No IV\nols <-  lm(log(wage) ~ educ + exper + I(exper^2), data = dta)\n\n# No IV but with controls for IQ\nols_iq <-  lm(log(wage) ~ educ + exper + I(exper^2) + IQ, data = dta)\n\n# First stage\nfirst_stage <- lm(educ ~ parents_edu + exper + I(exper^2), data = dta)\n\n# Fitted values of endogenous regressor\ndta_fitted <- dta %>% mutate(educ_fit = fitted(first_stage))\n\n# Second stage\nsecond_stage <- lm(log(wage) ~ educ_fit + exper + I(exper^2), data = dta_fitted)\n\n\n\n\nShow the code\nmodelsummary(\n  list(`OLS` = ols, `OLS (with ability proxi)` = ols_iq,\n       `1 stage (par. educ.)` = first_stage, \n       `2 stage (par. educ.)` = second_stage),\n  fmt = \"%.3f\",\n  estimate = \"{estimate}{stars} ({std.error})\",\n  statistic = NULL,\n  coef_map = c(\n    \"educ\" = \"Education\", \n    \"educ_fit\" = \"Education\", \n    \"parents_edu\" = \"Parents educ.\",\n    \"exper\" = \"Experience\",  \n    \"I(exper^2)\" = \"Experience sq.\",  \n    \"IQ\" = \"Ability proxi\"\n  ),\n  gof_omit = \"AIC|BIC|RMSE\"\n)\n\n\n\n\n \n  \n      \n    OLS \n    OLS (with ability proxi) \n    1 stage (par. educ.) \n     2 stage (par. educ.) \n  \n \n\n  \n    Education \n    0.078*** (0.007) \n    0.058*** (0.008) \n     \n    0.146*** (0.019) \n  \n  \n    Parents educ. \n     \n     \n    0.148*** (0.013) \n     \n  \n  \n    Experience \n    0.009 (0.015) \n    0.010 (0.015) \n    −0.021 (0.072) \n    0.008 (0.016) \n  \n  \n    Experience sq. \n    0.001 (0.001) \n    0.001 (0.001) \n    −0.007* (0.003) \n    0.001+ (0.001) \n  \n  \n    Ability proxi \n     \n    0.006*** (0.001) \n     \n     \n  \n  \n    Num.Obs. \n    722 \n    722 \n    722 \n    722 \n  \n  \n    R2 \n    0.141 \n    0.169 \n    0.326 \n    0.076 \n  \n  \n    R2 Adj. \n    0.137 \n    0.164 \n    0.323 \n    0.072 \n  \n  \n    Log.Lik. \n    −341.745 \n    −329.737 \n    −1462.726 \n    −368.199 \n  \n  \n    F \n    39.259 \n    36.461 \n    115.813 \n    19.574"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#using-siblings-number-as-the-iv-for-education",
+    "href": "slides/w10a-IV.html#using-siblings-number-as-the-iv-for-education",
+    "title": "Instrumental Variable",
+    "section": "Using siblings number as the IV for education",
+    "text": "Using siblings number as the IV for education\n\n\nShow the code\nlibrary(ivreg)\niv_fit2 <- ivreg(\n  log(wage) ~ educ + exper + I(exper ^ 2) | sibs + exper + I(exper ^ 2) ,\n  data = dta )\n\n\n\n\nShow the code\nmodelsummary(\n  list(`OLS` = ols, `OLS (with ability proxi)` = ols_iq,\n       `1 stage (par. educ.)` = first_stage, \n       `2 stage (par. educ.)` = second_stage,\n       `2 stage (siblings)` = iv_fit2),\n  fmt = \"%.3f\",\n  estimate = \"{estimate}{stars} ({std.error})\",\n  statistic = NULL,\n  coef_map = c(\n    \"educ\" = \"Education\", \n    \"educ_fit\" = \"Education\", \n    \"parents_edu\" = \"Parents educ.\",\n    \"exper\" = \"Experience\",  \n    \"I(exper^2)\" = \"Experience sq.\",  \n    \"IQ\" = \"Ability proxi\"\n  ),\n  gof_omit = \"AIC|BIC|RMSE\"\n)\n\n\n\n\n \n  \n      \n    OLS \n    OLS (with ability proxi) \n    1 stage (par. educ.) \n     2 stage (par. educ.) \n     2 stage (siblings) \n  \n \n\n  \n    Education \n    0.078*** (0.007) \n    0.058*** (0.008) \n     \n    0.146*** (0.019) \n    0.128*** (0.033) \n  \n  \n    Parents educ. \n     \n     \n    0.148*** (0.013) \n     \n     \n  \n  \n    Experience \n    0.009 (0.015) \n    0.010 (0.015) \n    −0.021 (0.072) \n    0.008 (0.016) \n    0.008 (0.016) \n  \n  \n    Experience sq. \n    0.001 (0.001) \n    0.001 (0.001) \n    −0.007* (0.003) \n    0.001+ (0.001) \n    0.001 (0.001) \n  \n  \n    Ability proxi \n     \n    0.006*** (0.001) \n     \n     \n     \n  \n  \n    Num.Obs. \n    722 \n    722 \n    722 \n    722 \n    722 \n  \n  \n    R2 \n    0.141 \n    0.169 \n    0.326 \n    0.076 \n    0.085 \n  \n  \n    R2 Adj. \n    0.137 \n    0.164 \n    0.323 \n    0.072 \n    0.081 \n  \n  \n    Log.Lik. \n    −341.745 \n    −329.737 \n    −1462.726 \n    −368.199 \n     \n  \n  \n    F \n    39.259 \n    36.461 \n    115.813 \n    19.574"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#consistency-and-unbiasedness",
+    "href": "slides/w10a-IV.html#consistency-and-unbiasedness",
+    "title": "Instrumental Variable",
+    "section": "Consistency and unbiasedness",
+    "text": "Consistency and unbiasedness\n\nIV estimates are not unbiased, but they are consistent (Joshua D. Angrist & Krueger, 2001).\n\nUnbiasedness means the estimator has a sampling distribution centered on the parameter of interest in a sample of any size, while\nConsistency only means that the estimator converges to the population parameter as the sample size grows.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nResearchers that use IV should aspire to work with large samples.\n\n\n\nNo statistical tests is available for checking consistency"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#bad-instruments-1",
+    "href": "slides/w10a-IV.html#bad-instruments-1",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (1)",
+    "text": "Bad instruments (1)\n\n\\(Z_i\\) that does not satisfy any of the Relevance condition, Exclusion restriction and Independence assumption;"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#bad-instruments-2",
+    "href": "slides/w10a-IV.html#bad-instruments-2",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (2)",
+    "text": "Bad instruments (2)\n\n\\(Z_i\\) that correlate with omitted variable (OV) but do not cause changes in it or inflict simultaneity:\n\n\nThey result into much greater upwards shifting bias compare to the OLS;\nFor example the weather in Brazil and supply price and demand quantity of coffee:\n\nweather shifts the supply curve, it is random, thus it seems as a plausible instrument for price in the demand model\nthe weather in Brazil determines supply expectations on futures exchange, thus, it also shifts the demand for coffee before the supply price is affected;"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#bad-instruments-3",
+    "href": "slides/w10a-IV.html#bad-instruments-3",
+    "title": "Instrumental Variable",
+    "section": "Bad instruments (3)",
+    "text": "Bad instruments (3)\n\nWeak instrument \\(Z_i\\):\n\nWhen the instrument \\(Z_i\\) is only weakly correlates with endogenous regressor \\(s_i\\);\nFind a better one!"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#weak-instrument-test",
+    "href": "slides/w10a-IV.html#weak-instrument-test",
+    "title": "Instrumental Variable",
+    "section": "Weak instrument test:",
+    "text": "Weak instrument test:\n\nRun the first stage regression with and without the IV;\nCompare the F-statistics\n\nIf F-statistics with instrument is greater than that without by 5 of more,\nthis is a sign of a strong instrument (Staiger & Stock, 1997);\n\nThis test does not ensure that our instruments are independent of omitted variable \\(A^{'}_i\\) or \\(Y_i\\);\nStaiger & Stock (1997)"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#overidentification-1",
+    "href": "slides/w10a-IV.html#overidentification-1",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (1)",
+    "text": "Overidentification (1)\n\nnumber of instruments \\(G\\) exceeds the number of endogenous variables \\(K\\).\n\nwhen the IV is overidentified, estimates are biased;\nbias is proportional to \\(K - G\\);\nusing fewer instruments therefore reduces bias;\n\nIf you have few candidates for IV and one endogenous regressor:\n\nselect one IV for the first stage, and\nput the remaining instruments as controls into the second stage"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#overidentification-2",
+    "href": "slides/w10a-IV.html#overidentification-2",
+    "title": "Instrumental Variable",
+    "section": "Overidentification (2)",
+    "text": "Overidentification (2)\nSargan’s overidentification test:\n\n\\(H_0:Cov(Z^{'}_i,\\varepsilon^{IV}_i)=0\\) - the covariance between the instrument and the error term is zero\n\\(H_1:Cov(Z^{'}_i,\\varepsilon^{IV}_i)\\neq0\\)\nThus, by rejecting the \\(H_0\\), we conclude that at least one of the instruments is not valid."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#wu-hausman-test-for-endogeneity",
+    "href": "slides/w10a-IV.html#wu-hausman-test-for-endogeneity",
+    "title": "Instrumental Variable",
+    "section": "Wu-Hausman test for endogeneity",
+    "text": "Wu-Hausman test for endogeneity\nWu-Hausman test for endogeneity tests if the variable that we are worried about is indeed endogenous.\n\n\\(H_0:Cov(s_i,\\varepsilon_i)=0\\) - the covariance between potentially endogenous variable and the error term is zero\n\\(H_1:Cov(s_i,\\varepsilon_i) \\neq 0\\)\nThus, by rejecting the \\(H_0\\), we conclude that there is endogeneity and there might be a need for IV."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#research-question-and-the-problem",
+    "href": "slides/w10a-IV.html#research-question-and-the-problem",
+    "title": "Instrumental Variable",
+    "section": "Research question and the problem",
+    "text": "Research question and the problem\n\nWhat are the fundamental causes of the large differences in income per capita across countries?\nwith better “institutions,” more secure property rights, and less distortionary policies,\n\ncountries invest more in physical and human capital, and\nuse these factors more efficiently to\nachieve a greater level of income.\n\nInstitutions are a likely cause of income growth."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#endogeneity-problem",
+    "href": "slides/w10a-IV.html#endogeneity-problem",
+    "title": "Instrumental Variable",
+    "section": "Endogeneity problem",
+    "text": "Endogeneity problem\nWhat could be the ideal experiment to find the effect of institutions on income?\n\nRich economies choose or can afford better institutions.\nEconomies that are different for a variety of reasons\n\nwill differ both in their institutions and in their income per capita.\n\nTo estimate the impact of institutions on income,\n\nwe need a source of exogenous variation in institutions."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#identification-strategy",
+    "href": "slides/w10a-IV.html#identification-strategy",
+    "title": "Instrumental Variable",
+    "section": "Identification strategy",
+    "text": "Identification strategy\nis the manner in which a researcher uses observational data (i.e., data not generated by a randomized trial) to approximate a real experiment (Joshua D. Angrist & Krueger, 1991)\n\n\n\n\nCurrent performance is caused by\nCurrent institutions, which are caused by\nEarly institutions, which are caused by\nSettlements types during colonization, which are caused by\nSettlers’ (potential) mortality or colonization risks."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#empirical-model-ols-estimator",
+    "href": "slides/w10a-IV.html#empirical-model-ols-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (OLS estimator)",
+    "text": "Empirical model (OLS estimator)\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0  \\\\\n& + \\beta_1 \\text{Proxy for institutions} \\\\\n& + \\gamma \\text{Control variables} + \\epsilon_i\n\\end{aligned}\n\\]\n\n\\(i\\) is the country;\nDependent variable is the GDP per capita in 1995;\nAs the proxy of the institutional quality, authors used average protection against expropriation risk in 1985-1990 (index/country ranking);\nControls include latitude of the country and continent-specific dummy variables;"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#ols-estimation",
+    "href": "slides/w10a-IV.html#ols-estimation",
+    "title": "Instrumental Variable",
+    "section": "OLS estimation",
+    "text": "OLS estimation"
+  },
+  {
+    "objectID": "slides/w10a-IV.html#empirical-model-iv-estimator",
+    "href": "slides/w10a-IV.html#empirical-model-iv-estimator",
+    "title": "Instrumental Variable",
+    "section": "Empirical model (IV estimator)",
+    "text": "Empirical model (IV estimator)\nFirst stage:\n\n\\[\n\\begin{aligned}\n\\text{Proxy for institutions}  & = \\beta_0  \\\\\n& + \\beta_1 \\log (\\text{Settlers mortality in 16-18th cent.}) \\\\\n& + \\gamma \\text{Control variables} + e_i,\n\\end{aligned}\n\\]\n\nEuropean settlers mortality in the 16-18th centuries is the precise number of how many settlers died in the country that they tried to colonize.\n\n\n\nSecond stage:\n\n\n\\[\n\\begin{aligned}\n\\log (\\text{GDP per capita}_i) & = \\beta_0^{IV}  \\\\\n& + \\beta_1^{IV} \\widehat{ \\text{Proxy for institutions}} \\\\\n& + \\gamma^{IV} \\text{Control variables} + \\epsilon_i^{IV},\n\\end{aligned}\n\\]\n\n\\(\\widehat{ \\{ \\text{Proxy for institutions} \\}}\\) are fitted values from the first stage."
+  },
+  {
+    "objectID": "slides/w10a-IV.html#iv-results",
+    "href": "slides/w10a-IV.html#iv-results",
+    "title": "Instrumental Variable",
+    "section": "IV results",
+    "text": "IV results"
   }
 ]
