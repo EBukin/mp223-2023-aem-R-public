@@ -296,30 +296,19 @@ Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">datasummary</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>    (acrePrice <span class="sc">+</span> crpPct <span class="sc">+</span> acres <span class="sc">+</span> improvements) <span class="sc">*</span> (development)  <span class="sc">~</span> </span>
-<span id="cb8-3"><a href="#cb8-3"></a>      N <span class="sc">+</span> ( mean <span class="sc">+</span> sd <span class="sc">+</span> min <span class="sc">+</span> median <span class="sc">+</span> max) <span class="sc">*</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>    acrePrice <span class="sc">+</span> crpPct <span class="sc">+</span> acres <span class="sc">+</span> improvements <span class="sc">+</span> <span class="fu">as.integer</span>(development) <span class="sc">~</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>      (mean <span class="sc">+</span> sd <span class="sc">+</span> min <span class="sc">+</span> median <span class="sc">+</span> max) <span class="sc">*</span> </span>
 <span id="cb8-4"><a href="#cb8-4"></a>      <span class="fu">Arguments</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">data =</span> dta<span class="sc">%&gt;%</span> </span>
-<span id="cb8-6"><a href="#cb8-6"></a>       <span class="fu">mutate</span>(<span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="co">#, </span></span>
-<span id="cb8-7"><a href="#cb8-7"></a>    <span class="co"># output = "html"</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">data =</span> dta, </span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">output =</span> <span class="st">"html"</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in .Primitive("min")(c(NA_real_, NA_real_, NA_real_, NA_real_,
-NA_real_, : no non-missing arguments to min; returning Inf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in .Primitive("max")(c(NA_real_, NA_real_, NA_real_, NA_real_,
-NA_real_, : no non-missing arguments to max; returning -Inf</code></pre>
-</div>
 <div class="cell-output-display">
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> development </th>
-   <th style="text-align:right;"> N </th>
    <th style="text-align:right;"> mean </th>
    <th style="text-align:right;"> sd </th>
    <th style="text-align:right;"> min </th>
@@ -330,123 +319,43 @@ NA_real_, : no non-missing arguments to max; returning -Inf</code></pre>
 <tbody>
   <tr>
    <td style="text-align:left;"> acrePrice </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 17239 </td>
-   <td style="text-align:right;"> 2683.35 </td>
-   <td style="text-align:right;"> 1773.92 </td>
+   <td style="text-align:right;"> 2787.33 </td>
+   <td style="text-align:right;"> 1914.04 </td>
    <td style="text-align:right;"> 108.00 </td>
-   <td style="text-align:right;"> 2392.00 </td>
-   <td style="text-align:right;"> 15000.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 1411 </td>
-   <td style="text-align:right;"> 4018.31 </td>
-   <td style="text-align:right;"> 2868.57 </td>
-   <td style="text-align:right;"> 230.00 </td>
-   <td style="text-align:right;"> 3153.00 </td>
-   <td style="text-align:right;"> 14960.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (Missing) </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 3900.24 </td>
-   <td style="text-align:right;"> 2353.14 </td>
-   <td style="text-align:right;"> 331.00 </td>
-   <td style="text-align:right;"> 3960.50 </td>
+   <td style="text-align:right;"> 2442.00 </td>
    <td style="text-align:right;"> 15000.00 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> crpPct </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 17239 </td>
-   <td style="text-align:right;"> 4.33 </td>
-   <td style="text-align:right;"> 17.56 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 100.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 1411 </td>
-   <td style="text-align:right;"> 1.89 </td>
-   <td style="text-align:right;"> 10.44 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 86.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (Missing) </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 9.44 </td>
-   <td style="text-align:right;"> 26.25 </td>
+   <td style="text-align:right;"> 4.16 </td>
+   <td style="text-align:right;"> 17.17 </td>
    <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:right;"> 100.00 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> acres </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 17239 </td>
-   <td style="text-align:right;"> 115.45 </td>
-   <td style="text-align:right;"> 132.40 </td>
+   <td style="text-align:right;"> 112.69 </td>
+   <td style="text-align:right;"> 128.46 </td>
    <td style="text-align:right;"> 1.00 </td>
    <td style="text-align:right;"> 80.00 </td>
    <td style="text-align:right;"> 6970.00 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 1411 </td>
-   <td style="text-align:right;"> 78.46 </td>
-   <td style="text-align:right;"> 52.14 </td>
-   <td style="text-align:right;"> 5.00 </td>
-   <td style="text-align:right;"> 62.00 </td>
-   <td style="text-align:right;"> 380.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (Missing) </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 124.20 </td>
-   <td style="text-align:right;"> 125.42 </td>
-   <td style="text-align:right;"> 7.00 </td>
-   <td style="text-align:right;"> 82.50 </td>
-   <td style="text-align:right;"> 605.00 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> improvements </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 17239 </td>
-   <td style="text-align:right;"> 1.15 </td>
-   <td style="text-align:right;"> 4.07 </td>
+   <td style="text-align:right;"> 4.49 </td>
+   <td style="text-align:right;"> 12.94 </td>
    <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 25.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 1411 </td>
-   <td style="text-align:right;"> 45.37 </td>
-   <td style="text-align:right;"> 14.18 </td>
-   <td style="text-align:right;"> 26.00 </td>
-   <td style="text-align:right;"> 42.00 </td>
    <td style="text-align:right;"> 100.00 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (Missing) </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:right;">  </td>
-   <td style="text-align:right;">  </td>
+   <td style="text-align:left;"> as.integer(development) </td>
+   <td style="text-align:right;"> 1.08 </td>
+   <td style="text-align:right;"> 0.26 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 2.00 </td>
   </tr>
 </tbody>
 </table>
@@ -459,11 +368,9 @@ NA_real_, : no non-missing arguments to max; returning -Inf</code></pre>
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>dta <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="co"># filter(!is.na(development)) %&gt;% %&gt;% </span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="co"># mutate(development = development %&gt;% forcats::fct_explicit_na()) %&gt;% </span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development) <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour =</span> development, <span class="at">alpha =</span> <span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour =</span> development, <span class="at">alpha =</span> <span class="fl">0.2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in ggally_statistic(data = data, mapping = mapping, na.rm = na.rm, :
@@ -518,102 +425,30 @@ Removed 50 rows containing missing values (`geom_point()`).</code></pre>
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>fit1 <span class="ot">&lt;-</span> </span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">+</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb18-3"><a href="#cb18-3"></a>     <span class="at">data =</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>       dta <span class="sc">%&gt;%</span> </span>
-<span id="cb18-5"><a href="#cb18-5"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb18-6"><a href="#cb18-6"></a>         <span class="at">development1 =</span> development,</span>
-<span id="cb18-7"><a href="#cb18-7"></a>         <span class="at">development2 =</span> development,</span>
-<span id="cb18-8"><a href="#cb18-8"></a>         <span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-9"><a href="#cb18-9"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb18-10"><a href="#cb18-10"></a>         <span class="at">development1_reverse =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb18-11"><a href="#cb18-11"></a>         <span class="at">development1 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">0</span>, <span class="fu">as.character</span>(development1)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a>           <span class="fu">as.numeric</span>()</span>
-<span id="cb18-13"><a href="#cb18-13"></a>       )</span>
-<span id="cb18-14"><a href="#cb18-14"></a>     </span>
-<span id="cb18-15"><a href="#cb18-15"></a>     )</span>
-<span id="cb18-16"><a href="#cb18-16"></a>fit1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = acrePrice ~ acres + development + crpPct + region + 
-    factor(year), data = dta %&gt;% mutate(development1 = development, 
-    development2 = development, development = development %&gt;% 
-        forcats::fct_explicit_na()) %&gt;% mutate(development1_reverse = ifelse(is.na(development1), 
-    1, 0), development1 = ifelse(is.na(development1), 0, as.character(development1)) %&gt;% 
-    as.numeric()))
-
-Coefficients:
-         (Intercept)                 acres          development1  
-           2021.4868               -0.8614             1555.0949  
-development(Missing)                crpPct       regionNorthwest  
-            183.2505               -8.8900            -2079.4434  
- regionSouth Central      regionSouth East      regionSouth West  
-            404.8314              499.2447             -208.3592  
-  regionWest Central      factor(year)2003      factor(year)2004  
-           -993.6831              317.3415              675.3764  
-    factor(year)2005      factor(year)2006      factor(year)2007  
-           1092.3309             1146.1577             1320.2950  
-    factor(year)2008      factor(year)2009      factor(year)2010  
-           1886.5410             1927.9044             2209.0035  
-    factor(year)2011  
-           2271.7464  </code></pre>
-</div>
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>   dta <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb20-3"><a href="#cb20-3"></a>         <span class="at">development1 =</span> development,</span>
-<span id="cb20-4"><a href="#cb20-4"></a>         <span class="at">development2 =</span> development,</span>
-<span id="cb20-5"><a href="#cb20-5"></a>         <span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="#cb20-6"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb20-7"><a href="#cb20-7"></a>         <span class="at">development1_reverse =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb20-8"><a href="#cb20-8"></a>         <span class="at">development1 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">0</span>, <span class="fu">as.character</span>(development1)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a>           <span class="fu">as.numeric</span>()</span>
-<span id="cb20-10"><a href="#cb20-10"></a>       ) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-11"><a href="#cb20-11"></a>     <span class="fu">filter</span>(<span class="fu">is.na</span>(development2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 50 × 10
-   acrePrice crpPct acres improvements development region     year  development1
-       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;       &lt;chr&gt;      &lt;fct&gt;        &lt;dbl&gt;
- 1       717      0   103           NA (Missing)   Northwest  2010             0
- 2      3626      0   273           NA (Missing)   Central    2011             0
- 3      4635      0    80           NA (Missing)   South Cen… 2011             0
- 4      4883      0   200           NA (Missing)   South Cen… 2010             0
- 5      4640      0    85           NA (Missing)   South Cen… 2010             0
- 6      4513      0    40           NA (Missing)   South Cen… 2011             0
- 7      4724      0    80           NA (Missing)   South Cen… 2011             0
- 8      6298     57    79           NA (Missing)   South Cen… 2011             0
- 9      8196      0    65           NA (Missing)   South Cen… 2011             0
-10      4995      0    39           NA (Missing)   South Cen… 2011             0
-# ℹ 40 more rows
-# ℹ 2 more variables: development2 &lt;fct&gt;, development1_reverse &lt;dbl&gt;</code></pre>
-</div>
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>summ <span class="ot">&lt;-</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"html"</span>, <span class="at">notes =</span> <span class="cn">NULL</span>, ...) {</span>
-<span id="cb22-3"><a href="#cb22-3"></a>    <span class="fu">modelsummary</span>(</span>
-<span id="cb22-4"><a href="#cb22-4"></a>      x,</span>
-<span id="cb22-5"><a href="#cb22-5"></a>      <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
-<span id="cb22-6"><a href="#cb22-6"></a>      <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
-<span id="cb22-7"><a href="#cb22-7"></a>      <span class="at">output =</span> output,</span>
-<span id="cb22-8"><a href="#cb22-8"></a>      <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS"</span>),</span>
-<span id="cb22-9"><a href="#cb22-9"></a>      <span class="at">coef_omit =</span> coef_omit,</span>
-<span id="cb22-10"><a href="#cb22-10"></a>      <span class="at">notes =</span> notes,</span>
-<span id="cb22-11"><a href="#cb22-11"></a>      ...</span>
-<span id="cb22-12"><a href="#cb22-12"></a>    )</span>
-<span id="cb22-13"><a href="#cb22-13"></a>  }</span>
-<span id="cb22-14"><a href="#cb22-14"></a></span>
-<span id="cb22-15"><a href="#cb22-15"></a>cust_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"markdown"</span>, ...) {</span>
-<span id="cb22-16"><a href="#cb22-16"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_names</span>(x, <span class="fu">str_c</span>(<span class="st">"Model "</span>, <span class="fu">seq_along</span>(x)))</span>
-<span id="cb22-17"><a href="#cb22-17"></a>  all_eq <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">imap_chr</span>(. , <span class="sc">~</span> {<span class="fu">str_c</span>(.y, <span class="st">": "</span>, <span class="fu">as.character</span>(.x<span class="sc">$</span>call)[[<span class="dv">2</span>]])}) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-18"><a href="#cb22-18"></a>    <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">"&lt;/br&gt;"</span>)</span>
-<span id="cb22-19"><a href="#cb22-19"></a>  <span class="fu">summ</span>(x, <span class="at">coef_omit =</span> coef_omit, <span class="at">output =</span> output, <span class="at">notes =</span> all_eq, ...)</span>
-<span id="cb22-20"><a href="#cb22-20"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>fit1 <span class="ot">&lt;-</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">+</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb16-3"><a href="#cb16-3"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>summ <span class="ot">&lt;-</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"html"</span>, <span class="at">notes =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="fu">modelsummary</span>(</span>
+<span id="cb16-8"><a href="#cb16-8"></a>      x,</span>
+<span id="cb16-9"><a href="#cb16-9"></a>      <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>      <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-11"><a href="#cb16-11"></a>      <span class="at">output =</span> output,</span>
+<span id="cb16-12"><a href="#cb16-12"></a>      <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS"</span>),</span>
+<span id="cb16-13"><a href="#cb16-13"></a>      <span class="at">coef_omit =</span> coef_omit,</span>
+<span id="cb16-14"><a href="#cb16-14"></a>      <span class="at">notes =</span> notes,</span>
+<span id="cb16-15"><a href="#cb16-15"></a>      ...</span>
+<span id="cb16-16"><a href="#cb16-16"></a>    )</span>
+<span id="cb16-17"><a href="#cb16-17"></a>  }</span>
+<span id="cb16-18"><a href="#cb16-18"></a></span>
+<span id="cb16-19"><a href="#cb16-19"></a>cust_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"markdown"</span>, ...) {</span>
+<span id="cb16-20"><a href="#cb16-20"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_names</span>(x, <span class="fu">str_c</span>(<span class="st">"Model "</span>, <span class="fu">seq_along</span>(x)))</span>
+<span id="cb16-21"><a href="#cb16-21"></a>  all_eq <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">imap_chr</span>(. , <span class="sc">~</span> {<span class="fu">str_c</span>(.y, <span class="st">": "</span>, <span class="fu">as.character</span>(.x<span class="sc">$</span>call)[[<span class="dv">2</span>]])}) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-22"><a href="#cb16-22"></a>    <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">"&lt;/br&gt;"</span>)</span>
+<span id="cb16-23"><a href="#cb16-23"></a>  <span class="fu">summ</span>(x, <span class="at">coef_omit =</span> coef_omit, <span class="at">output =</span> output, <span class="at">notes =</span> all_eq, ...)</span>
+<span id="cb16-24"><a href="#cb16-24"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -622,7 +457,7 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
@@ -635,39 +470,35 @@ development(Missing)                crpPct       regionNorthwest
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">2021.487*** (65.458)</td>
+<td style="text-align: right;">2019.877*** (65.416)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">acres</td>
-<td style="text-align: right;">-0.861*** (0.086)</td>
+<td style="text-align: right;">-0.857*** (0.086)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">development1</td>
-<td style="text-align: right;">1555.095*** (41.498)</td>
+<td style="text-align: right;">1555.287*** (41.467)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">development(Missing)</td>
-<td style="text-align: right;">183.250 (210.799)</td>
+<td style="text-align: left;">crpPct</td>
+<td style="text-align: right;">-8.892*** (0.645)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">crpPct</td>
-<td style="text-align: right;">-8.890*** (0.643)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">:———————</td>
+<td style="text-align: left;">:————-</td>
 <td style="text-align: right;">———————:</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: right;">18700</td>
-</tr>
 <tr class="even">
+<td style="text-align: left;">Num.Obs.</td>
+<td style="text-align: right;">18650</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">R2</td>
 <td style="text-align: right;">0.413</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">R2 Adj.</td>
-<td style="text-align: right;">0.413</td>
+<td style="text-align: right;">0.412</td>
 </tr>
 </tbody>
 </table>
@@ -683,11 +514,11 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"acres"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"acres"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -703,10 +534,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"development"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
-<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"development"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -728,10 +559,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -756,10 +587,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>fit2 <span class="ot">&lt;-</span> </span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb27-3"><a href="#cb27-3"></a>     <span class="at">data =</span> dta)</span>
-<span id="cb27-4"><a href="#cb27-4"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>fit2 <span class="ot">&lt;-</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb21-3"><a href="#cb21-3"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
@@ -773,52 +604,47 @@ development(Missing)                crpPct       regionNorthwest
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">2021.487*** (65.458)</td>
+<td style="text-align: right;">2019.877*** (65.416)</td>
 <td style="text-align: right;">1997.055*** (64.413)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">acres</td>
-<td style="text-align: right;">-0.861*** (0.086)</td>
+<td style="text-align: right;">-0.857*** (0.086)</td>
 <td style="text-align: right;">-0.652*** (0.085)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">development1</td>
-<td style="text-align: right;">1555.095*** (41.498)</td>
+<td style="text-align: right;">1555.287*** (41.467)</td>
 <td style="text-align: right;">2978.491*** (71.424)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">development(Missing)</td>
-<td style="text-align: right;">183.250 (210.799)</td>
-<td style="text-align: right;"></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">crpPct</td>
-<td style="text-align: right;">-8.890*** (0.643)</td>
+<td style="text-align: right;">-8.892*** (0.645)</td>
 <td style="text-align: right;">-9.073*** (0.635)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">acres × development1</td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;">-18.053*** (0.743)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">:———————</td>
 <td style="text-align: right;">———————:</td>
 <td style="text-align: right;">———————:</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: right;">18700</td>
+<td style="text-align: right;">18650</td>
 <td style="text-align: right;">18650</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">R2</td>
 <td style="text-align: right;">0.413</td>
 <td style="text-align: right;">0.431</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">R2 Adj.</td>
-<td style="text-align: right;">0.413</td>
+<td style="text-align: right;">0.412</td>
 <td style="text-align: right;">0.430</td>
 </tr>
 </tbody>
@@ -835,10 +661,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -854,10 +680,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [0, 10, 50, 100, 200, 250, 500]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [0, 10, 50, 100, 200, 250, 500]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -929,10 +755,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -948,10 +774,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -970,26 +796,26 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(marginaleffects)</span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">modelsummary</span>(fit2)</span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="fu">modelsummary</span>(<span class="fu">marginaleffects</span>(fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">modelsummary</span>(fit2)</span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">modelsummary</span>(<span class="fu">marginaleffects</span>(fit2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">summ</span>(</span>
-<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">Coef. as is</span><span class="st">`</span> <span class="ot">=</span> fit2,</span>
-<span id="cb33-3"><a href="#cb33-3"></a>       <span class="st">`</span><span class="at">M.E. at means</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2)),</span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
-<span id="cb33-5"><a href="#cb33-5"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
-<span id="cb33-6"><a href="#cb33-6"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"acres"</span>,</span>
-<span id="cb33-7"><a href="#cb33-7"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
-<span id="cb33-8"><a href="#cb33-8"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
-<span id="cb33-9"><a href="#cb33-9"></a>    <span class="st">"development1"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
-<span id="cb33-10"><a href="#cb33-10"></a>    <span class="st">"acres:development1"</span> <span class="ot">=</span> <span class="st">"acres * development1"</span></span>
-<span id="cb33-11"><a href="#cb33-11"></a>  )</span>
-<span id="cb33-12"><a href="#cb33-12"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">summ</span>(</span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">Coef. as is</span><span class="st">`</span> <span class="ot">=</span> fit2,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>       <span class="st">`</span><span class="at">M.E. at means</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2)),</span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb27-6"><a href="#cb27-6"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"acres"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9"></a>    <span class="st">"development1"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10"></a>    <span class="st">"acres:development1"</span> <span class="ot">=</span> <span class="st">"acres * development1"</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a>  )</span>
+<span id="cb27-12"><a href="#cb27-12"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
@@ -1051,8 +877,8 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"development"</span>) <span class="sc">+</span> </span>
-<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"development"</span>) <span class="sc">+</span> </span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1068,9 +894,9 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"development"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of development dummy (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"development"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of development dummy (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1089,10 +915,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="fragment">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>fit3 <span class="ot">&lt;-</span> </span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> improvements <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb36-3"><a href="#cb36-3"></a>     <span class="at">data =</span> dta)</span>
-<span id="cb36-4"><a href="#cb36-4"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2, fit3), <span class="at">output =</span> <span class="st">"markdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>fit3 <span class="ot">&lt;-</span> </span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> improvements <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb30-3"><a href="#cb30-3"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2, fit3), <span class="at">output =</span> <span class="st">"markdown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
@@ -1113,73 +939,67 @@ development(Missing)                crpPct       regionNorthwest
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">2021.487*** (65.458)</td>
+<td style="text-align: right;">2019.877*** (65.416)</td>
 <td style="text-align: right;">1997.055*** (64.413)</td>
 <td style="text-align: right;">1923.131*** (64.085)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">acres</td>
-<td style="text-align: right;">-0.861*** (0.086)</td>
+<td style="text-align: right;">-0.857*** (0.086)</td>
 <td style="text-align: right;">-0.652*** (0.085)</td>
 <td style="text-align: right;">-0.276** (0.089)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">development1</td>
-<td style="text-align: right;">1555.095*** (41.498)</td>
+<td style="text-align: right;">1555.287*** (41.467)</td>
 <td style="text-align: right;">2978.491*** (71.424)</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">development(Missing)</td>
-<td style="text-align: right;">183.250 (210.799)</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">crpPct</td>
-<td style="text-align: right;">-8.890*** (0.643)</td>
+<td style="text-align: right;">-8.892*** (0.645)</td>
 <td style="text-align: right;">-9.073*** (0.635)</td>
 <td style="text-align: right;">-8.980*** (0.631)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">acres × development1</td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;">-18.053*** (0.743)</td>
 <td style="text-align: right;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">improvements</td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;">56.695*** (1.307)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">acres × improvements</td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;">-0.277*** (0.014)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">:———————</td>
 <td style="text-align: right;">———————:</td>
 <td style="text-align: right;">———————:</td>
 <td style="text-align: right;">———————:</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Num.Obs.</td>
-<td style="text-align: right;">18700</td>
+<td style="text-align: right;">18650</td>
 <td style="text-align: right;">18650</td>
 <td style="text-align: right;">18650</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">R2</td>
 <td style="text-align: right;">0.413</td>
 <td style="text-align: right;">0.431</td>
 <td style="text-align: right;">0.438</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">R2 Adj.</td>
-<td style="text-align: right;">0.413</td>
+<td style="text-align: right;">0.412</td>
 <td style="text-align: right;">0.430</td>
 <td style="text-align: right;">0.438</td>
 </tr>
@@ -1197,10 +1017,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"improvements [0, 10, 50, 100]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"improvements [0, 10, 50, 100]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1216,10 +1036,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"improvements"</span>, <span class="st">"acres [1, 50, 100, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"improvements"</span>, <span class="st">"acres [1, 50, 100, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1241,10 +1061,10 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"improvements"</span>) <span class="sc">+</span> </span>
-<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>)  <span class="sc">+</span> </span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)  <span class="sc">+</span> </span>
-<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"improvements"</span>) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>)  <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)  <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1260,9 +1080,9 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"improvements"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of improvements (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"improvements"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of improvements (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1281,25 +1101,25 @@ development(Missing)                crpPct       regionNorthwest
 <div class="cell" data-layout-align="center" data-output-location="slide">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">list</span>(</span>
-<span id="cb41-3"><a href="#cb41-3"></a>    <span class="st">`</span><span class="at">Model 1 (no interaction)</span><span class="st">`</span> <span class="ot">=</span> fit1,</span>
-<span id="cb41-4"><a href="#cb41-4"></a>    <span class="st">`</span><span class="at">Model 2 (Area*Development)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2, <span class="at">vcov =</span> <span class="sc">~</span> region),</span>
-<span id="cb41-5"><a href="#cb41-5"></a>    <span class="st">`</span><span class="at">Model 3 (Area*Improvements)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">slopes</span>(fit3, <span class="at">vcov =</span> <span class="sc">~</span> region)</span>
-<span id="cb41-6"><a href="#cb41-6"></a>    ),</span>
-<span id="cb41-7"><a href="#cb41-7"></a>  <span class="at">vcov =</span> <span class="fu">list</span>(<span class="sc">~</span> region, <span class="cn">NULL</span>, <span class="cn">NULL</span>),</span>
-<span id="cb41-8"><a href="#cb41-8"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
-<span id="cb41-9"><a href="#cb41-9"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
-<span id="cb41-10"><a href="#cb41-10"></a>  <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS|Std"</span>),</span>
-<span id="cb41-11"><a href="#cb41-11"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
-<span id="cb41-12"><a href="#cb41-12"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
-<span id="cb41-13"><a href="#cb41-13"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"Area, acres (*)"</span>,</span>
-<span id="cb41-14"><a href="#cb41-14"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
-<span id="cb41-15"><a href="#cb41-15"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"Development status, dummy (*)"</span>,</span>
-<span id="cb41-16"><a href="#cb41-16"></a>    <span class="st">"improvements"</span> <span class="ot">=</span> <span class="st">"Share infrastructure in land price, % (*)"</span></span>
-<span id="cb41-17"><a href="#cb41-17"></a>  ), </span>
-<span id="cb41-18"><a href="#cb41-18"></a>  <span class="at">notes =</span> <span class="st">"(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."</span></span>
-<span id="cb41-19"><a href="#cb41-19"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">list</span>(</span>
+<span id="cb35-3"><a href="#cb35-3"></a>    <span class="st">`</span><span class="at">Model 1 (no interaction)</span><span class="st">`</span> <span class="ot">=</span> fit1,</span>
+<span id="cb35-4"><a href="#cb35-4"></a>    <span class="st">`</span><span class="at">Model 2 (Area*Development)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2, <span class="at">vcov =</span> <span class="sc">~</span> region),</span>
+<span id="cb35-5"><a href="#cb35-5"></a>    <span class="st">`</span><span class="at">Model 3 (Area*Improvements)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">slopes</span>(fit3, <span class="at">vcov =</span> <span class="sc">~</span> region)</span>
+<span id="cb35-6"><a href="#cb35-6"></a>    ),</span>
+<span id="cb35-7"><a href="#cb35-7"></a>  <span class="at">vcov =</span> <span class="fu">list</span>(<span class="sc">~</span> region, <span class="cn">NULL</span>, <span class="cn">NULL</span>),</span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS|Std"</span>),</span>
+<span id="cb35-11"><a href="#cb35-11"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
+<span id="cb35-12"><a href="#cb35-12"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb35-13"><a href="#cb35-13"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"Area, acres (*)"</span>,</span>
+<span id="cb35-14"><a href="#cb35-14"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
+<span id="cb35-15"><a href="#cb35-15"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"Development status, dummy (*)"</span>,</span>
+<span id="cb35-16"><a href="#cb35-16"></a>    <span class="st">"improvements"</span> <span class="ot">=</span> <span class="st">"Share infrastructure in land price, % (*)"</span></span>
+<span id="cb35-17"><a href="#cb35-17"></a>  ), </span>
+<span id="cb35-18"><a href="#cb35-18"></a>  <span class="at">notes =</span> <span class="st">"(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."</span></span>
+<span id="cb35-19"><a href="#cb35-19"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
@@ -1315,13 +1135,13 @@ development(Missing)                crpPct       regionNorthwest
 <tbody>
   <tr>
    <td style="text-align:left;"> Area, acres (*) </td>
-   <td style="text-align:center;"> −0.861* (0.350) </td>
+   <td style="text-align:center;"> −0.857* (0.350) </td>
    <td style="text-align:center;"> −2.017*** (0.097) </td>
    <td style="text-align:center;"> −1.520*** (0.089) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> crpPct </td>
-   <td style="text-align:center;"> −8.890*** (1.991) </td>
+   <td style="text-align:center;"> −8.892*** (1.998) </td>
    <td style="text-align:center;"> −9.073*** (0.635) </td>
    <td style="text-align:center;"> −8.980*** (0.631) </td>
   </tr>
@@ -1339,7 +1159,7 @@ development(Missing)                crpPct       regionNorthwest
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
-   <td style="text-align:center;"> 18700 </td>
+   <td style="text-align:center;"> 18650 </td>
    <td style="text-align:center;"> 18650 </td>
    <td style="text-align:center;"> 18650 </td>
   </tr>
@@ -1351,7 +1171,7 @@ development(Missing)                crpPct       regionNorthwest
   </tr>
   <tr>
    <td style="text-align:left;"> R2 Adj. </td>
-   <td style="text-align:center;"> 0.413 </td>
+   <td style="text-align:center;"> 0.412 </td>
    <td style="text-align:center;"> 0.430 </td>
    <td style="text-align:center;"> 0.438 </td>
   </tr>
@@ -1545,574 +1365,546 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb42" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">---</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a><span class="an">title:</span><span class="co"> "Interaction terms in MLR and Difference in Difference (DID)"</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a><span class="an">editor:</span><span class="co"> source</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a><span class="an">format:</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a><span class="co">  revealjs: </span></span>
-<span id="cb42-6"><a href="#cb42-6"></a><span class="co">    incremental: true</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a><span class="co">    smaller: false</span></span>
-<span id="cb42-8"><a href="#cb42-8"></a><span class="co">    scrollable: false</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a><span class="co">    code-overflow: wrap</span></span>
-<span id="cb42-10"><a href="#cb42-10"></a><span class="co">    code-copy: true</span></span>
-<span id="cb42-11"><a href="#cb42-11"></a><span class="co">    header-includes: |</span></span>
-<span id="cb42-12"><a href="#cb42-12"></a><span class="co">      &lt;link href="custom.css" rel="stylesheet"&gt;</span></span>
-<span id="cb42-13"><a href="#cb42-13"></a><span class="an">bibliography:</span><span class="co"> ../bib/references.bib</span></span>
-<span id="cb42-14"><a href="#cb42-14"></a><span class="an">editor_options:</span><span class="co"> </span></span>
-<span id="cb42-15"><a href="#cb42-15"></a><span class="co">  chunk_output_type: console</span></span>
-<span id="cb42-16"><a href="#cb42-16"></a><span class="co">---</span></span>
-<span id="cb42-17"><a href="#cb42-17"></a></span>
-<span id="cb42-18"><a href="#cb42-18"></a><span class="in">```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}</span></span>
-<span id="cb42-19"><a href="#cb42-19"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb42-20"><a href="#cb42-20"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
-<span id="cb42-21"><a href="#cb42-21"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
-<span id="cb42-22"><a href="#cb42-22"></a>  <span class="at">fig.asp =</span> <span class="fl">0.618</span>,</span>
-<span id="cb42-23"><a href="#cb42-23"></a>  <span class="at">fig.retina =</span> <span class="dv">3</span>,</span>
-<span id="cb42-24"><a href="#cb42-24"></a>  <span class="at">out.width =</span> <span class="st">"100%"</span></span>
-<span id="cb42-25"><a href="#cb42-25"></a>)</span>
-<span id="cb42-26"><a href="#cb42-26"></a></span>
-<span id="cb42-27"><a href="#cb42-27"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb42-28"><a href="#cb42-28"></a><span class="fu">library</span>(ggdag)      <span class="co"># For plotting DAGs</span></span>
-<span id="cb42-29"><a href="#cb42-29"></a><span class="fu">library</span>(dagitty)    <span class="co"># For working with DAG logic</span></span>
-<span id="cb42-30"><a href="#cb42-30"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb42-31"><a href="#cb42-31"></a><span class="fu">library</span>(wooldridge)</span>
-<span id="cb42-32"><a href="#cb42-32"></a><span class="fu">library</span>(here)</span>
-<span id="cb42-33"><a href="#cb42-33"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
-<span id="cb42-34"><a href="#cb42-34"></a><span class="in">```</span></span>
-<span id="cb42-35"><a href="#cb42-35"></a></span>
-<span id="cb42-36"><a href="#cb42-36"></a><span class="fu"># MLR with an interaction term</span></span>
-<span id="cb42-37"><a href="#cb42-37"></a></span>
-<span id="cb42-38"><a href="#cb42-38"></a><span class="fu">## Interaction term</span></span>
-<span id="cb42-39"><a href="#cb42-39"></a></span>
-<span id="cb42-40"><a href="#cb42-40"></a>$$</span>
-<span id="cb42-41"><a href="#cb42-41"></a>y = \beta_0 + \beta_1 x_1  + \beta_2 x_2 + \beta_3 (x_1 \cdot x_2) + \beta_4 x_4 + \epsilon</span>
-<span id="cb42-42"><a href="#cb42-42"></a>$$</span>
-<span id="cb42-43"><a href="#cb42-43"></a></span>
-<span id="cb42-44"><a href="#cb42-44"></a>. . .</span>
-<span id="cb42-45"><a href="#cb42-45"></a></span>
-<span id="cb42-46"><a href="#cb42-46"></a>Interpretation is only possible through **marginal effects**:</span>
-<span id="cb42-47"><a href="#cb42-47"></a></span>
-<span id="cb42-48"><a href="#cb42-48"></a>. . .</span>
-<span id="cb42-49"><a href="#cb42-49"></a></span>
-<span id="cb42-50"><a href="#cb42-50"></a>Marginal effect is a partial derivative of the regression equation with respect to a regressor of interest evaluated at certain value of the interaction term.</span>
-<span id="cb42-51"><a href="#cb42-51"></a></span>
-<span id="cb42-52"><a href="#cb42-52"></a>. . .</span>
-<span id="cb42-53"><a href="#cb42-53"></a></span>
-<span id="cb42-54"><a href="#cb42-54"></a>$\frac{\partial y}{\partial x_1} = \beta_1 + \beta_3 x_2$ </span>
-<span id="cb42-55"><a href="#cb42-55"></a></span>
-<span id="cb42-56"><a href="#cb42-56"></a>$\frac{\partial y}{\partial x_2} = \beta_2 + \beta_3 x_1$</span>
-<span id="cb42-57"><a href="#cb42-57"></a></span>
-<span id="cb42-58"><a href="#cb42-58"></a>. . .</span>
-<span id="cb42-59"><a href="#cb42-59"></a></span>
-<span id="cb42-60"><a href="#cb42-60"></a>Marginal Effect (the slope) of $x_1$ depends on $x_2$ and vice versa.</span>
-<span id="cb42-61"><a href="#cb42-61"></a></span>
-<span id="cb42-62"><a href="#cb42-62"></a><span class="fu">## Reporting results with marginal effects</span></span>
-<span id="cb42-63"><a href="#cb42-63"></a></span>
-<span id="cb42-64"><a href="#cb42-64"></a><span class="ss">1.  </span>Report coefficients $\beta_1$, $\beta_2$, $\beta_3$ as is.</span>
-<span id="cb42-65"><a href="#cb42-65"></a></span>
-<span id="cb42-66"><a href="#cb42-66"></a><span class="ss">2.  </span>Report marginal effects at mean values of the interaction term(s):</span>
-<span id="cb42-67"><a href="#cb42-67"></a></span>
-<span id="cb42-68"><a href="#cb42-68"></a><span class="ss">    -   </span>$\text{ME}(\bar x_1) = \beta_1 + \beta_3 \bar x_2$</span>
-<span id="cb42-69"><a href="#cb42-69"></a></span>
-<span id="cb42-70"><a href="#cb42-70"></a><span class="ss">    -   </span>$\text{ME}(\bar x_2) = \beta_2 + \beta_3 \bar x_1$</span>
-<span id="cb42-71"><a href="#cb42-71"></a></span>
-<span id="cb42-72"><a href="#cb42-72"></a><span class="ss">3.  </span>To compute standard errors for the marginal effects, we use **delta method**.</span>
-<span id="cb42-73"><a href="#cb42-73"></a></span>
-<span id="cb42-74"><a href="#cb42-74"></a>Learn more: <span class="co">[</span><span class="ot">@Angrist2009, also Chapter 3</span><span class="co">]</span></span>
-<span id="cb42-75"><a href="#cb42-75"></a></span>
-<span id="cb42-76"><a href="#cb42-76"></a><span class="fu">## Recall the hedonic land prices model:</span></span>
-<span id="cb42-77"><a href="#cb42-77"></a></span>
-<span id="cb42-78"><a href="#cb42-78"></a>$$</span>
-<span id="cb42-79"><a href="#cb42-79"></a>\text{acrePrice} = \beta_0 +  \beta_1 \text{crpPct} + \beta_2 \text{acres} + \beta_3 \text{improvements} <span class="sc">\\</span></span>
-<span id="cb42-80"><a href="#cb42-80"></a><span class="ss">+ </span>\beta_4 \text{year} + \beta_5 \text{region}  + e</span>
-<span id="cb42-81"><a href="#cb42-81"></a>$$</span>
-<span id="cb42-82"><a href="#cb42-82"></a></span>
-<span id="cb42-83"><a href="#cb42-83"></a><span class="ss">-   </span><span class="in">`acrePrice`</span> - sale price in dollars per acre;</span>
-<span id="cb42-84"><a href="#cb42-84"></a></span>
-<span id="cb42-85"><a href="#cb42-85"></a><span class="ss">-   </span><span class="in">`crpPct`</span> - the percentage of all farm acres enrolled in CRP;</span>
-<span id="cb42-86"><a href="#cb42-86"></a></span>
-<span id="cb42-87"><a href="#cb42-87"></a><span class="ss">-   </span><span class="in">`acres`</span> - size of the farm in acres;</span>
-<span id="cb42-88"><a href="#cb42-88"></a></span>
-<span id="cb42-89"><a href="#cb42-89"></a><span class="ss">-   </span><span class="in">`improvements`</span> - share of infrastructure's value in the land price;</span>
-<span id="cb42-90"><a href="#cb42-90"></a></span>
-<span id="cb42-91"><a href="#cb42-91"></a><span class="ss">-   </span><span class="in">`development`</span> - dummy variable aliased with <span class="in">`improvements`</span>. Is 1 when improvements &gt; 25% and is 0 otherwise.</span>
-<span id="cb42-92"><a href="#cb42-92"></a></span>
-<span id="cb42-93"><a href="#cb42-93"></a><span class="ss">-   </span><span class="in">`region`</span> - region in the state Minnesota;</span>
-<span id="cb42-94"><a href="#cb42-94"></a></span>
-<span id="cb42-95"><a href="#cb42-95"></a><span class="ss">-   </span><span class="in">`year`</span> - year of the land sales translation;</span>
-<span id="cb42-96"><a href="#cb42-96"></a></span>
-<span id="cb42-97"><a href="#cb42-97"></a><span class="fu">## Loading data</span></span>
-<span id="cb42-98"><a href="#cb42-98"></a></span>
-<span id="cb42-99"><a href="#cb42-99"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-100"><a href="#cb42-100"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb42-101"><a href="#cb42-101"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb42-102"><a href="#cb42-102"></a><span class="fu">library</span>(modelsummary)</span>
-<span id="cb42-103"><a href="#cb42-103"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb42-104"><a href="#cb42-104"></a><span class="fu">library</span>(marginaleffects)</span>
-<span id="cb42-105"><a href="#cb42-105"></a><span class="fu">library</span>(here)</span>
-<span id="cb42-106"><a href="#cb42-106"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb42-107"><a href="#cb42-107"></a></span>
-<span id="cb42-108"><a href="#cb42-108"></a><span class="do">## 1. Load the data</span></span>
-<span id="cb42-109"><a href="#cb42-109"></a>dta <span class="ot">&lt;-</span></span>
-<span id="cb42-110"><a href="#cb42-110"></a>  <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"exercises"</span>, <span class="st">"ex06-did-and-interactions"</span>, <span class="st">"land-prices.xlsx"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-111"><a href="#cb42-111"></a>  <span class="fu">mutate</span>(<span class="at">improvements  =</span> <span class="fu">as.numeric</span>(improvements),</span>
-<span id="cb42-112"><a href="#cb42-112"></a>         <span class="at">development =</span> <span class="fu">as.factor</span>(<span class="fu">as.integer</span>(improvements <span class="sc">&gt;</span> <span class="dv">25</span>)),</span>
-<span id="cb42-113"><a href="#cb42-113"></a>         <span class="at">productivity  =</span> <span class="fu">as.numeric</span>(productivity),</span>
-<span id="cb42-114"><a href="#cb42-114"></a>         <span class="at">tillable  =</span> <span class="fu">as.numeric</span>(tillable),</span>
-<span id="cb42-115"><a href="#cb42-115"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-116"><a href="#cb42-116"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development, region, year)</span>
-<span id="cb42-117"><a href="#cb42-117"></a></span>
-<span id="cb42-118"><a href="#cb42-118"></a><span class="in">```</span></span>
-<span id="cb42-119"><a href="#cb42-119"></a></span>
-<span id="cb42-120"><a href="#cb42-120"></a><span class="in">```{r eval=FALSE, echo=TRUE}</span></span>
-<span id="cb42-121"><a href="#cb42-121"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb42-122"><a href="#cb42-122"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb42-123"><a href="#cb42-123"></a><span class="fu">library</span>(modelsummary)</span>
-<span id="cb42-124"><a href="#cb42-124"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb42-125"><a href="#cb42-125"></a><span class="fu">library</span>(marginaleffects)</span>
-<span id="cb42-126"><a href="#cb42-126"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb42-127"><a href="#cb42-127"></a><span class="fu">options</span>(<span class="at">modelsummary_get =</span> <span class="st">"broom"</span>)</span>
-<span id="cb42-128"><a href="#cb42-128"></a><span class="do">## 1. Load the data</span></span>
-<span id="cb42-129"><a href="#cb42-129"></a>dta <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"land-prices.xlsx"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-130"><a href="#cb42-130"></a>  <span class="fu">mutate</span>(<span class="at">improvements  =</span> <span class="fu">as.numeric</span>(improvements),</span>
-<span id="cb42-131"><a href="#cb42-131"></a>         <span class="at">development =</span> <span class="fu">as.factor</span>(<span class="fu">as.integer</span>(improvements <span class="sc">&gt;</span> <span class="dv">25</span>)),</span>
-<span id="cb42-132"><a href="#cb42-132"></a>         <span class="at">productivity  =</span> <span class="fu">as.numeric</span>(productivity),</span>
-<span id="cb42-133"><a href="#cb42-133"></a>         <span class="at">tillable  =</span> <span class="fu">as.numeric</span>(tillable),</span>
-<span id="cb42-134"><a href="#cb42-134"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-135"><a href="#cb42-135"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development, region, year)</span>
-<span id="cb42-136"><a href="#cb42-136"></a></span>
-<span id="cb42-137"><a href="#cb42-137"></a><span class="fu">glimpse</span>(dta)</span>
-<span id="cb42-138"><a href="#cb42-138"></a><span class="in">```</span></span>
-<span id="cb42-139"><a href="#cb42-139"></a></span>
-<span id="cb42-140"><a href="#cb42-140"></a><span class="fu">## Descriptive statistics</span></span>
-<span id="cb42-141"><a href="#cb42-141"></a></span>
-<span id="cb42-142"><a href="#cb42-142"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-143"><a href="#cb42-143"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-144"><a href="#cb42-144"></a><span class="fu">datasummary</span>(</span>
-<span id="cb42-145"><a href="#cb42-145"></a>    (acrePrice <span class="sc">+</span> crpPct <span class="sc">+</span> acres <span class="sc">+</span> improvements) <span class="sc">*</span> (development)  <span class="sc">~</span> </span>
-<span id="cb42-146"><a href="#cb42-146"></a>      N <span class="sc">+</span> ( mean <span class="sc">+</span> sd <span class="sc">+</span> min <span class="sc">+</span> median <span class="sc">+</span> max) <span class="sc">*</span> </span>
-<span id="cb42-147"><a href="#cb42-147"></a>      <span class="fu">Arguments</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb42-148"><a href="#cb42-148"></a>    <span class="at">data =</span> dta<span class="sc">%&gt;%</span> </span>
-<span id="cb42-149"><a href="#cb42-149"></a>       <span class="fu">mutate</span>(<span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="co">#, </span></span>
-<span id="cb42-150"><a href="#cb42-150"></a>    <span class="co"># output = "html"</span></span>
-<span id="cb42-151"><a href="#cb42-151"></a>  )</span>
-<span id="cb42-152"><a href="#cb42-152"></a><span class="in">```</span></span>
-<span id="cb42-153"><a href="#cb42-153"></a></span>
-<span id="cb42-154"><a href="#cb42-154"></a><span class="fu">## Descriptive Plots</span></span>
-<span id="cb42-155"><a href="#cb42-155"></a></span>
-<span id="cb42-156"><a href="#cb42-156"></a><span class="in">```{r eval=TRUE, echo=TRUE}</span></span>
-<span id="cb42-157"><a href="#cb42-157"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-158"><a href="#cb42-158"></a><span class="co">#| fig-width: 10</span></span>
-<span id="cb42-159"><a href="#cb42-159"></a><span class="co">#| fig-asp: 0.6</span></span>
-<span id="cb42-160"><a href="#cb42-160"></a>dta <span class="sc">%&gt;%</span></span>
-<span id="cb42-161"><a href="#cb42-161"></a>  <span class="co"># filter(!is.na(development)) %&gt;% %&gt;% </span></span>
-<span id="cb42-162"><a href="#cb42-162"></a>  <span class="co"># mutate(development = development %&gt;% forcats::fct_explicit_na()) %&gt;% </span></span>
-<span id="cb42-163"><a href="#cb42-163"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development) <span class="sc">%&gt;%</span></span>
-<span id="cb42-164"><a href="#cb42-164"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour =</span> development, <span class="at">alpha =</span> <span class="fl">0.2</span>))</span>
-<span id="cb42-165"><a href="#cb42-165"></a><span class="in">```</span></span>
-<span id="cb42-166"><a href="#cb42-166"></a></span>
-<span id="cb42-167"><a href="#cb42-167"></a><span class="fu">## Example 1. Basic regressions</span></span>
-<span id="cb42-168"><a href="#cb42-168"></a></span>
-<span id="cb42-169"><a href="#cb42-169"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-170"><a href="#cb42-170"></a>fit1 <span class="ot">&lt;-</span> </span>
-<span id="cb42-171"><a href="#cb42-171"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">+</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb42-172"><a href="#cb42-172"></a>     <span class="at">data =</span></span>
-<span id="cb42-173"><a href="#cb42-173"></a>       dta <span class="sc">%&gt;%</span> </span>
-<span id="cb42-174"><a href="#cb42-174"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb42-175"><a href="#cb42-175"></a>         <span class="at">development1 =</span> development,</span>
-<span id="cb42-176"><a href="#cb42-176"></a>         <span class="at">development2 =</span> development,</span>
-<span id="cb42-177"><a href="#cb42-177"></a>         <span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-178"><a href="#cb42-178"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb42-179"><a href="#cb42-179"></a>         <span class="at">development1_reverse =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb42-180"><a href="#cb42-180"></a>         <span class="at">development1 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">0</span>, <span class="fu">as.character</span>(development1)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-181"><a href="#cb42-181"></a>           <span class="fu">as.numeric</span>()</span>
-<span id="cb42-182"><a href="#cb42-182"></a>       )</span>
-<span id="cb42-183"><a href="#cb42-183"></a>     </span>
-<span id="cb42-184"><a href="#cb42-184"></a>     )</span>
-<span id="cb42-185"><a href="#cb42-185"></a>fit1</span>
-<span id="cb42-186"><a href="#cb42-186"></a></span>
-<span id="cb42-187"><a href="#cb42-187"></a>   dta <span class="sc">%&gt;%</span> </span>
-<span id="cb42-188"><a href="#cb42-188"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb42-189"><a href="#cb42-189"></a>         <span class="at">development1 =</span> development,</span>
-<span id="cb42-190"><a href="#cb42-190"></a>         <span class="at">development2 =</span> development,</span>
-<span id="cb42-191"><a href="#cb42-191"></a>         <span class="at">development =</span> development <span class="sc">%&gt;%</span> forcats<span class="sc">::</span><span class="fu">fct_explicit_na</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-192"><a href="#cb42-192"></a>       <span class="fu">mutate</span>(</span>
-<span id="cb42-193"><a href="#cb42-193"></a>         <span class="at">development1_reverse =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb42-194"><a href="#cb42-194"></a>         <span class="at">development1 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(development1), <span class="dv">0</span>, <span class="fu">as.character</span>(development1)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-195"><a href="#cb42-195"></a>           <span class="fu">as.numeric</span>()</span>
-<span id="cb42-196"><a href="#cb42-196"></a>       ) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-197"><a href="#cb42-197"></a>     <span class="fu">filter</span>(<span class="fu">is.na</span>(development2))</span>
-<span id="cb42-198"><a href="#cb42-198"></a>     </span>
-<span id="cb42-199"><a href="#cb42-199"></a>summ <span class="ot">&lt;-</span></span>
-<span id="cb42-200"><a href="#cb42-200"></a>  <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"html"</span>, <span class="at">notes =</span> <span class="cn">NULL</span>, ...) {</span>
-<span id="cb42-201"><a href="#cb42-201"></a>    <span class="fu">modelsummary</span>(</span>
-<span id="cb42-202"><a href="#cb42-202"></a>      x,</span>
-<span id="cb42-203"><a href="#cb42-203"></a>      <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
-<span id="cb42-204"><a href="#cb42-204"></a>      <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
-<span id="cb42-205"><a href="#cb42-205"></a>      <span class="at">output =</span> output,</span>
-<span id="cb42-206"><a href="#cb42-206"></a>      <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS"</span>),</span>
-<span id="cb42-207"><a href="#cb42-207"></a>      <span class="at">coef_omit =</span> coef_omit,</span>
-<span id="cb42-208"><a href="#cb42-208"></a>      <span class="at">notes =</span> notes,</span>
-<span id="cb42-209"><a href="#cb42-209"></a>      ...</span>
-<span id="cb42-210"><a href="#cb42-210"></a>    )</span>
-<span id="cb42-211"><a href="#cb42-211"></a>  }</span>
-<span id="cb42-212"><a href="#cb42-212"></a></span>
-<span id="cb42-213"><a href="#cb42-213"></a>cust_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"markdown"</span>, ...) {</span>
-<span id="cb42-214"><a href="#cb42-214"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_names</span>(x, <span class="fu">str_c</span>(<span class="st">"Model "</span>, <span class="fu">seq_along</span>(x)))</span>
-<span id="cb42-215"><a href="#cb42-215"></a>  all_eq <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">imap_chr</span>(. , <span class="sc">~</span> {<span class="fu">str_c</span>(.y, <span class="st">": "</span>, <span class="fu">as.character</span>(.x<span class="sc">$</span>call)[[<span class="dv">2</span>]])}) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-216"><a href="#cb42-216"></a>    <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">"&lt;/br&gt;"</span>)</span>
-<span id="cb42-217"><a href="#cb42-217"></a>  <span class="fu">summ</span>(x, <span class="at">coef_omit =</span> coef_omit, <span class="at">output =</span> output, <span class="at">notes =</span> all_eq, ...)</span>
-<span id="cb42-218"><a href="#cb42-218"></a>}</span>
-<span id="cb42-219"><a href="#cb42-219"></a><span class="in">```</span></span>
-<span id="cb42-220"><a href="#cb42-220"></a></span>
-<span id="cb42-221"><a href="#cb42-221"></a><span class="fu">## Interpret the baseline results {.smaller}</span></span>
-<span id="cb42-222"><a href="#cb42-222"></a></span>
-<span id="cb42-223"><a href="#cb42-223"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-224"><a href="#cb42-224"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1))</span>
-<span id="cb42-225"><a href="#cb42-225"></a><span class="in">```</span></span>
-<span id="cb42-226"><a href="#cb42-226"></a></span>
-<span id="cb42-227"><a href="#cb42-227"></a><span class="fu">## Fitted vs area and development</span></span>
-<span id="cb42-228"><a href="#cb42-228"></a></span>
-<span id="cb42-229"><a href="#cb42-229"></a>::: columns</span>
-<span id="cb42-230"><a href="#cb42-230"></a>::: {.column width="50%"}</span>
-<span id="cb42-231"><a href="#cb42-231"></a>::: fragment</span>
-<span id="cb42-232"><a href="#cb42-232"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-233"><a href="#cb42-233"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-234"><a href="#cb42-234"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-235"><a href="#cb42-235"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-236"><a href="#cb42-236"></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb42-237"><a href="#cb42-237"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"acres"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-238"><a href="#cb42-238"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-239"><a href="#cb42-239"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
-<span id="cb42-240"><a href="#cb42-240"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
-<span id="cb42-241"><a href="#cb42-241"></a><span class="in">```</span></span>
-<span id="cb42-242"><a href="#cb42-242"></a>:::</span>
-<span id="cb42-243"><a href="#cb42-243"></a>:::</span>
-<span id="cb42-244"><a href="#cb42-244"></a></span>
-<span id="cb42-245"><a href="#cb42-245"></a>::: {.column width="50%"}</span>
-<span id="cb42-246"><a href="#cb42-246"></a>::: fragment</span>
-<span id="cb42-247"><a href="#cb42-247"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-248"><a href="#cb42-248"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-249"><a href="#cb42-249"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-250"><a href="#cb42-250"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-251"><a href="#cb42-251"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"development"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-252"><a href="#cb42-252"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-253"><a href="#cb42-253"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
-<span id="cb42-254"><a href="#cb42-254"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-255"><a href="#cb42-255"></a><span class="in">```</span></span>
-<span id="cb42-256"><a href="#cb42-256"></a>:::</span>
-<span id="cb42-257"><a href="#cb42-257"></a>:::</span>
-<span id="cb42-258"><a href="#cb42-258"></a>:::</span>
-<span id="cb42-259"><a href="#cb42-259"></a></span>
-<span id="cb42-260"><a href="#cb42-260"></a><span class="fu">## Fitted vs area and development (2)</span></span>
-<span id="cb42-261"><a href="#cb42-261"></a></span>
-<span id="cb42-262"><a href="#cb42-262"></a>::: columns</span>
-<span id="cb42-263"><a href="#cb42-263"></a>::: {.column width="75%"}</span>
-<span id="cb42-264"><a href="#cb42-264"></a>::: fragment</span>
-<span id="cb42-265"><a href="#cb42-265"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-266"><a href="#cb42-266"></a><span class="co">#| fig-asp: 0.8</span></span>
-<span id="cb42-267"><a href="#cb42-267"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-268"><a href="#cb42-268"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-269"><a href="#cb42-269"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-270"><a href="#cb42-270"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-271"><a href="#cb42-271"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
-<span id="cb42-272"><a href="#cb42-272"></a><span class="in">```</span></span>
-<span id="cb42-273"><a href="#cb42-273"></a>:::</span>
-<span id="cb42-274"><a href="#cb42-274"></a>:::</span>
-<span id="cb42-275"><a href="#cb42-275"></a></span>
-<span id="cb42-276"><a href="#cb42-276"></a>::: {.column width="25%"}</span>
-<span id="cb42-277"><a href="#cb42-277"></a>::: fragment</span>
-<span id="cb42-278"><a href="#cb42-278"></a><span class="ss">-   </span>Without an interaction term, dummy variables simply cause shifts in the outcome variable.</span>
-<span id="cb42-279"><a href="#cb42-279"></a>:::</span>
-<span id="cb42-280"><a href="#cb42-280"></a>:::</span>
-<span id="cb42-281"><a href="#cb42-281"></a>:::</span>
-<span id="cb42-282"><a href="#cb42-282"></a></span>
-<span id="cb42-283"><a href="#cb42-283"></a><span class="fu">## Example 2. Interaction term with a binary variable {.smaller}</span></span>
-<span id="cb42-284"><a href="#cb42-284"></a></span>
-<span id="cb42-285"><a href="#cb42-285"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-286"><a href="#cb42-286"></a><span class="co">#| fig-asp: 0.6</span></span>
-<span id="cb42-287"><a href="#cb42-287"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-288"><a href="#cb42-288"></a>fit2 <span class="ot">&lt;-</span> </span>
-<span id="cb42-289"><a href="#cb42-289"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb42-290"><a href="#cb42-290"></a>     <span class="at">data =</span> dta)</span>
-<span id="cb42-291"><a href="#cb42-291"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2))</span>
-<span id="cb42-292"><a href="#cb42-292"></a><span class="in">```</span></span>
-<span id="cb42-293"><a href="#cb42-293"></a></span>
-<span id="cb42-294"><a href="#cb42-294"></a><span class="fu">## Fitted vs development with an interaction term</span></span>
-<span id="cb42-295"><a href="#cb42-295"></a></span>
-<span id="cb42-296"><a href="#cb42-296"></a>::: columns</span>
-<span id="cb42-297"><a href="#cb42-297"></a>::: {.column width="50%"}</span>
-<span id="cb42-298"><a href="#cb42-298"></a>::: fragment</span>
-<span id="cb42-299"><a href="#cb42-299"></a><span class="in">```{r  echo=TRUE}</span></span>
-<span id="cb42-300"><a href="#cb42-300"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-301"><a href="#cb42-301"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-302"><a href="#cb42-302"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-303"><a href="#cb42-303"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-304"><a href="#cb42-304"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-305"><a href="#cb42-305"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-306"><a href="#cb42-306"></a><span class="in">```</span></span>
-<span id="cb42-307"><a href="#cb42-307"></a>:::</span>
-<span id="cb42-308"><a href="#cb42-308"></a>:::</span>
-<span id="cb42-309"><a href="#cb42-309"></a></span>
-<span id="cb42-310"><a href="#cb42-310"></a>::: {.column width="50%"}</span>
-<span id="cb42-311"><a href="#cb42-311"></a>::: fragment</span>
-<span id="cb42-312"><a href="#cb42-312"></a><span class="in">```{r echo=TRUE, eval=FALSE}</span></span>
-<span id="cb42-313"><a href="#cb42-313"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-314"><a href="#cb42-314"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-315"><a href="#cb42-315"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [0, 10, 50, 100, 200, 250, 500]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-316"><a href="#cb42-316"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-317"><a href="#cb42-317"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-318"><a href="#cb42-318"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-319"><a href="#cb42-319"></a><span class="in">```</span></span>
-<span id="cb42-320"><a href="#cb42-320"></a>:::</span>
-<span id="cb42-321"><a href="#cb42-321"></a>::: r-stack</span>
-<span id="cb42-322"><a href="#cb42-322"></a>::: fragment</span>
-<span id="cb42-323"><a href="#cb42-323"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-324"><a href="#cb42-324"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-325"><a href="#cb42-325"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-326"><a href="#cb42-326"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-327"><a href="#cb42-327"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-328"><a href="#cb42-328"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-329"><a href="#cb42-329"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-330"><a href="#cb42-330"></a><span class="in">```</span></span>
-<span id="cb42-331"><a href="#cb42-331"></a>:::</span>
-<span id="cb42-332"><a href="#cb42-332"></a>::: fragment</span>
-<span id="cb42-333"><a href="#cb42-333"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-334"><a href="#cb42-334"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-335"><a href="#cb42-335"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-336"><a href="#cb42-336"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-337"><a href="#cb42-337"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-338"><a href="#cb42-338"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-339"><a href="#cb42-339"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-340"><a href="#cb42-340"></a><span class="in">```</span></span>
-<span id="cb42-341"><a href="#cb42-341"></a>:::</span>
-<span id="cb42-342"><a href="#cb42-342"></a>::: fragment</span>
-<span id="cb42-343"><a href="#cb42-343"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-344"><a href="#cb42-344"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-345"><a href="#cb42-345"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-346"><a href="#cb42-346"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [, 10, 50]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-347"><a href="#cb42-347"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-348"><a href="#cb42-348"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-349"><a href="#cb42-349"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-350"><a href="#cb42-350"></a><span class="in">```</span></span>
-<span id="cb42-351"><a href="#cb42-351"></a>:::</span>
-<span id="cb42-352"><a href="#cb42-352"></a>::: fragment</span>
-<span id="cb42-353"><a href="#cb42-353"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-354"><a href="#cb42-354"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-355"><a href="#cb42-355"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-356"><a href="#cb42-356"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10, 50, 200]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-357"><a href="#cb42-357"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-358"><a href="#cb42-358"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-359"><a href="#cb42-359"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-360"><a href="#cb42-360"></a><span class="in">```</span></span>
-<span id="cb42-361"><a href="#cb42-361"></a>:::</span>
-<span id="cb42-362"><a href="#cb42-362"></a>::: fragment</span>
-<span id="cb42-363"><a href="#cb42-363"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb42-364"><a href="#cb42-364"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-365"><a href="#cb42-365"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-366"><a href="#cb42-366"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10, 50, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-367"><a href="#cb42-367"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-368"><a href="#cb42-368"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-369"><a href="#cb42-369"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-370"><a href="#cb42-370"></a><span class="in">```</span></span>
-<span id="cb42-371"><a href="#cb42-371"></a>:::</span>
-<span id="cb42-372"><a href="#cb42-372"></a>:::</span>
-<span id="cb42-373"><a href="#cb42-373"></a>:::</span>
-<span id="cb42-374"><a href="#cb42-374"></a>:::</span>
-<span id="cb42-375"><a href="#cb42-375"></a></span>
-<span id="cb42-376"><a href="#cb42-376"></a><span class="fu">## Fitted vs area with an interaction term</span></span>
-<span id="cb42-377"><a href="#cb42-377"></a></span>
-<span id="cb42-378"><a href="#cb42-378"></a>::: columns</span>
-<span id="cb42-379"><a href="#cb42-379"></a>::: {.column width="50%"}</span>
-<span id="cb42-380"><a href="#cb42-380"></a>::: fragment</span>
-<span id="cb42-381"><a href="#cb42-381"></a><span class="in">```{r  echo=TRUE}</span></span>
-<span id="cb42-382"><a href="#cb42-382"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-383"><a href="#cb42-383"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-384"><a href="#cb42-384"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-385"><a href="#cb42-385"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-386"><a href="#cb42-386"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-387"><a href="#cb42-387"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
-<span id="cb42-388"><a href="#cb42-388"></a><span class="in">```</span></span>
-<span id="cb42-389"><a href="#cb42-389"></a>:::</span>
-<span id="cb42-390"><a href="#cb42-390"></a>:::</span>
-<span id="cb42-391"><a href="#cb42-391"></a></span>
-<span id="cb42-392"><a href="#cb42-392"></a>::: {.column width="50%"}</span>
-<span id="cb42-393"><a href="#cb42-393"></a>::: fragment</span>
-<span id="cb42-394"><a href="#cb42-394"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-395"><a href="#cb42-395"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-396"><a href="#cb42-396"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-397"><a href="#cb42-397"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-398"><a href="#cb42-398"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-399"><a href="#cb42-399"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-400"><a href="#cb42-400"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
-<span id="cb42-401"><a href="#cb42-401"></a><span class="in">```</span></span>
-<span id="cb42-402"><a href="#cb42-402"></a>:::</span>
-<span id="cb42-403"><a href="#cb42-403"></a>:::</span>
-<span id="cb42-404"><a href="#cb42-404"></a>:::</span>
-<span id="cb42-405"><a href="#cb42-405"></a></span>
-<span id="cb42-406"><a href="#cb42-406"></a><span class="fu">## Marginal Effect `acres` and `development` at means {.smaller}</span></span>
-<span id="cb42-407"><a href="#cb42-407"></a></span>
-<span id="cb42-408"><a href="#cb42-408"></a><span class="in">```{r echo=TRUE, eval=FALSE}</span></span>
-<span id="cb42-409"><a href="#cb42-409"></a><span class="fu">library</span>(marginaleffects)</span>
-<span id="cb42-410"><a href="#cb42-410"></a><span class="fu">modelsummary</span>(fit2)</span>
-<span id="cb42-411"><a href="#cb42-411"></a><span class="fu">modelsummary</span>(<span class="fu">marginaleffects</span>(fit2))</span>
-<span id="cb42-412"><a href="#cb42-412"></a><span class="in">```</span></span>
-<span id="cb42-413"><a href="#cb42-413"></a></span>
-<span id="cb42-416"><a href="#cb42-416"></a><span class="in">```{r}</span></span>
-<span id="cb42-417"><a href="#cb42-417"></a><span class="fu">summ</span>(</span>
-<span id="cb42-418"><a href="#cb42-418"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">Coef. as is</span><span class="st">`</span> <span class="ot">=</span> fit2,</span>
-<span id="cb42-419"><a href="#cb42-419"></a>       <span class="st">`</span><span class="at">M.E. at means</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2)),</span>
-<span id="cb42-420"><a href="#cb42-420"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
-<span id="cb42-421"><a href="#cb42-421"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
-<span id="cb42-422"><a href="#cb42-422"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"acres"</span>,</span>
-<span id="cb42-423"><a href="#cb42-423"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
-<span id="cb42-424"><a href="#cb42-424"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
-<span id="cb42-425"><a href="#cb42-425"></a>    <span class="st">"development1"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
-<span id="cb42-426"><a href="#cb42-426"></a>    <span class="st">"acres:development1"</span> <span class="ot">=</span> <span class="st">"acres * development1"</span></span>
-<span id="cb42-427"><a href="#cb42-427"></a>  )</span>
-<span id="cb42-428"><a href="#cb42-428"></a>)</span>
-<span id="cb42-429"><a href="#cb42-429"></a><span class="in">```</span></span>
-<span id="cb42-430"><a href="#cb42-430"></a></span>
-<span id="cb42-431"><a href="#cb42-431"></a><span class="fu">## Marginal Effect `acres` and `development` (visually)</span></span>
-<span id="cb42-432"><a href="#cb42-432"></a></span>
-<span id="cb42-433"><a href="#cb42-433"></a>::: columns</span>
-<span id="cb42-434"><a href="#cb42-434"></a>::: {.column width="50%"}</span>
-<span id="cb42-435"><a href="#cb42-435"></a>::: fragment</span>
-<span id="cb42-436"><a href="#cb42-436"></a><span class="in">```{r  echo=TRUE}</span></span>
-<span id="cb42-437"><a href="#cb42-437"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-438"><a href="#cb42-438"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-439"><a href="#cb42-439"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"development"</span>) <span class="sc">+</span> </span>
-<span id="cb42-440"><a href="#cb42-440"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
-<span id="cb42-441"><a href="#cb42-441"></a><span class="in">```</span></span>
-<span id="cb42-442"><a href="#cb42-442"></a>:::</span>
-<span id="cb42-443"><a href="#cb42-443"></a>:::</span>
-<span id="cb42-444"><a href="#cb42-444"></a></span>
-<span id="cb42-445"><a href="#cb42-445"></a>::: {.column width="50%"}</span>
-<span id="cb42-446"><a href="#cb42-446"></a>::: fragment</span>
-<span id="cb42-447"><a href="#cb42-447"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-448"><a href="#cb42-448"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-449"><a href="#cb42-449"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-450"><a href="#cb42-450"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"development"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
-<span id="cb42-451"><a href="#cb42-451"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of development dummy (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
-<span id="cb42-452"><a href="#cb42-452"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
-<span id="cb42-453"><a href="#cb42-453"></a><span class="in">```</span></span>
-<span id="cb42-454"><a href="#cb42-454"></a>:::</span>
-<span id="cb42-455"><a href="#cb42-455"></a>:::</span>
-<span id="cb42-456"><a href="#cb42-456"></a>:::</span>
-<span id="cb42-457"><a href="#cb42-457"></a></span>
-<span id="cb42-458"><a href="#cb42-458"></a><span class="fu">## Example 3. Interaction with a continuous variable {.smaller}</span></span>
-<span id="cb42-459"><a href="#cb42-459"></a></span>
-<span id="cb42-460"><a href="#cb42-460"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-461"><a href="#cb42-461"></a><span class="co">#| fig-asp: 0.6</span></span>
-<span id="cb42-462"><a href="#cb42-462"></a><span class="co">#| output-location: fragment</span></span>
-<span id="cb42-463"><a href="#cb42-463"></a>fit3 <span class="ot">&lt;-</span> </span>
-<span id="cb42-464"><a href="#cb42-464"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> improvements <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
-<span id="cb42-465"><a href="#cb42-465"></a>     <span class="at">data =</span> dta)</span>
-<span id="cb42-466"><a href="#cb42-466"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2, fit3), <span class="at">output =</span> <span class="st">"markdown"</span>)</span>
-<span id="cb42-467"><a href="#cb42-467"></a><span class="in">```</span></span>
-<span id="cb42-468"><a href="#cb42-468"></a></span>
-<span id="cb42-469"><a href="#cb42-469"></a><span class="fu">## Fitted vs `area` \* `improvements`</span></span>
-<span id="cb42-470"><a href="#cb42-470"></a></span>
-<span id="cb42-471"><a href="#cb42-471"></a>::: columns</span>
-<span id="cb42-472"><a href="#cb42-472"></a>::: {.column width="50%"}</span>
-<span id="cb42-473"><a href="#cb42-473"></a>::: fragment</span>
-<span id="cb42-474"><a href="#cb42-474"></a><span class="in">```{r  echo=TRUE}</span></span>
-<span id="cb42-475"><a href="#cb42-475"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-476"><a href="#cb42-476"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-477"><a href="#cb42-477"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"improvements [0, 10, 50, 100]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-478"><a href="#cb42-478"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-479"><a href="#cb42-479"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-480"><a href="#cb42-480"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
-<span id="cb42-481"><a href="#cb42-481"></a><span class="in">```</span></span>
-<span id="cb42-482"><a href="#cb42-482"></a>:::</span>
-<span id="cb42-483"><a href="#cb42-483"></a>:::</span>
-<span id="cb42-484"><a href="#cb42-484"></a></span>
-<span id="cb42-485"><a href="#cb42-485"></a>::: {.column width="50%"}</span>
-<span id="cb42-486"><a href="#cb42-486"></a>::: fragment</span>
-<span id="cb42-487"><a href="#cb42-487"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-488"><a href="#cb42-488"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-489"><a href="#cb42-489"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-490"><a href="#cb42-490"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"improvements"</span>, <span class="st">"acres [1, 50, 100, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-491"><a href="#cb42-491"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
-<span id="cb42-492"><a href="#cb42-492"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
-<span id="cb42-493"><a href="#cb42-493"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)</span>
-<span id="cb42-494"><a href="#cb42-494"></a><span class="in">```</span></span>
-<span id="cb42-495"><a href="#cb42-495"></a>:::</span>
-<span id="cb42-496"><a href="#cb42-496"></a>:::</span>
-<span id="cb42-497"><a href="#cb42-497"></a>:::</span>
-<span id="cb42-498"><a href="#cb42-498"></a></span>
-<span id="cb42-499"><a href="#cb42-499"></a><span class="fu">## Marginal Effect `acres` \* `improvements` (visually)</span></span>
-<span id="cb42-500"><a href="#cb42-500"></a></span>
-<span id="cb42-501"><a href="#cb42-501"></a>::: columns</span>
-<span id="cb42-502"><a href="#cb42-502"></a>::: {.column width="50%"}</span>
-<span id="cb42-503"><a href="#cb42-503"></a>::: fragment</span>
-<span id="cb42-504"><a href="#cb42-504"></a><span class="in">```{r  echo=TRUE}</span></span>
-<span id="cb42-505"><a href="#cb42-505"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-506"><a href="#cb42-506"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-507"><a href="#cb42-507"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"improvements"</span>) <span class="sc">+</span> </span>
-<span id="cb42-508"><a href="#cb42-508"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>)  <span class="sc">+</span> </span>
-<span id="cb42-509"><a href="#cb42-509"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)  <span class="sc">+</span> </span>
-<span id="cb42-510"><a href="#cb42-510"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) </span>
-<span id="cb42-511"><a href="#cb42-511"></a><span class="in">```</span></span>
-<span id="cb42-512"><a href="#cb42-512"></a>:::</span>
-<span id="cb42-513"><a href="#cb42-513"></a>:::</span>
-<span id="cb42-514"><a href="#cb42-514"></a></span>
-<span id="cb42-515"><a href="#cb42-515"></a>::: {.column width="50%"}</span>
-<span id="cb42-516"><a href="#cb42-516"></a>::: fragment</span>
-<span id="cb42-517"><a href="#cb42-517"></a><span class="in">```{r echo=TRUE}</span></span>
-<span id="cb42-518"><a href="#cb42-518"></a><span class="co">#| fig-asp: 1</span></span>
-<span id="cb42-519"><a href="#cb42-519"></a><span class="co">#| fig-width: 4.5</span></span>
-<span id="cb42-520"><a href="#cb42-520"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"improvements"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
-<span id="cb42-521"><a href="#cb42-521"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of improvements (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
-<span id="cb42-522"><a href="#cb42-522"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
-<span id="cb42-523"><a href="#cb42-523"></a><span class="in">```</span></span>
-<span id="cb42-524"><a href="#cb42-524"></a>:::</span>
-<span id="cb42-525"><a href="#cb42-525"></a>:::</span>
-<span id="cb42-526"><a href="#cb42-526"></a>:::</span>
-<span id="cb42-527"><a href="#cb42-527"></a></span>
-<span id="cb42-528"><a href="#cb42-528"></a><span class="fu">## Reporting all regressions results {.smaller}</span></span>
-<span id="cb42-529"><a href="#cb42-529"></a></span>
-<span id="cb42-532"><a href="#cb42-532"></a><span class="in">```{r}</span></span>
-<span id="cb42-533"><a href="#cb42-533"></a><span class="co">#| output-location: slide</span></span>
-<span id="cb42-534"><a href="#cb42-534"></a><span class="fu">modelsummary</span>(</span>
-<span id="cb42-535"><a href="#cb42-535"></a>  <span class="fu">list</span>(</span>
-<span id="cb42-536"><a href="#cb42-536"></a>    <span class="st">`</span><span class="at">Model 1 (no interaction)</span><span class="st">`</span> <span class="ot">=</span> fit1,</span>
-<span id="cb42-537"><a href="#cb42-537"></a>    <span class="st">`</span><span class="at">Model 2 (Area*Development)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2, <span class="at">vcov =</span> <span class="sc">~</span> region),</span>
-<span id="cb42-538"><a href="#cb42-538"></a>    <span class="st">`</span><span class="at">Model 3 (Area*Improvements)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">slopes</span>(fit3, <span class="at">vcov =</span> <span class="sc">~</span> region)</span>
-<span id="cb42-539"><a href="#cb42-539"></a>    ),</span>
-<span id="cb42-540"><a href="#cb42-540"></a>  <span class="at">vcov =</span> <span class="fu">list</span>(<span class="sc">~</span> region, <span class="cn">NULL</span>, <span class="cn">NULL</span>),</span>
-<span id="cb42-541"><a href="#cb42-541"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
-<span id="cb42-542"><a href="#cb42-542"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
-<span id="cb42-543"><a href="#cb42-543"></a>  <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS|Std"</span>),</span>
-<span id="cb42-544"><a href="#cb42-544"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
-<span id="cb42-545"><a href="#cb42-545"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
-<span id="cb42-546"><a href="#cb42-546"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"Area, acres (*)"</span>,</span>
-<span id="cb42-547"><a href="#cb42-547"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
-<span id="cb42-548"><a href="#cb42-548"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"Development status, dummy (*)"</span>,</span>
-<span id="cb42-549"><a href="#cb42-549"></a>    <span class="st">"improvements"</span> <span class="ot">=</span> <span class="st">"Share infrastructure in land price, % (*)"</span></span>
-<span id="cb42-550"><a href="#cb42-550"></a>  ), </span>
-<span id="cb42-551"><a href="#cb42-551"></a>  <span class="at">notes =</span> <span class="st">"(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."</span></span>
-<span id="cb42-552"><a href="#cb42-552"></a>)</span>
-<span id="cb42-553"><a href="#cb42-553"></a><span class="in">```</span></span>
-<span id="cb42-554"><a href="#cb42-554"></a></span>
-<span id="cb42-555"><a href="#cb42-555"></a><span class="fu"># Takeaway and homework</span></span>
-<span id="cb42-556"><a href="#cb42-556"></a></span>
-<span id="cb42-557"><a href="#cb42-557"></a></span>
-<span id="cb42-558"><a href="#cb42-558"></a><span class="fu">## Takeaway and homework</span></span>
-<span id="cb42-559"><a href="#cb42-559"></a></span>
-<span id="cb42-560"><a href="#cb42-560"></a><span class="ss">-   </span>Marginal effects.</span>
-<span id="cb42-561"><a href="#cb42-561"></a></span>
-<span id="cb42-562"><a href="#cb42-562"></a><span class="ss">-   </span>Difference between fitted values and marginal effects.</span>
-<span id="cb42-563"><a href="#cb42-563"></a></span>
-<span id="cb42-564"><a href="#cb42-564"></a><span class="ss">-   </span>Homework:</span>
-<span id="cb42-565"><a href="#cb42-565"></a></span>
-<span id="cb42-566"><a href="#cb42-566"></a><span class="ss">    -   </span>Reproduce code from the slides.</span>
-<span id="cb42-567"><a href="#cb42-567"></a></span>
-<span id="cb42-568"><a href="#cb42-568"></a><span class="ss">    -   </span>Follow pre-recorded materials with extra calculations.</span>
-<span id="cb42-569"><a href="#cb42-569"></a></span>
-<span id="cb42-570"><a href="#cb42-570"></a><span class="fu"># References</span></span>
-<span id="cb42-571"><a href="#cb42-571"></a></span>
-<span id="cb42-572"><a href="#cb42-572"></a><span class="fu">## References</span></span>
+<div class="sourceCode" id="cb36" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">---</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="an">title:</span><span class="co"> "Interaction terms in MLR and Difference in Difference (DID)"</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="an">editor:</span><span class="co"> source</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="an">format:</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="co">  revealjs: </span></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="co">    incremental: true</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a><span class="co">    smaller: false</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="co">    scrollable: false</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="co">    code-copy: true</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="co">    header-includes: |</span></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="co">      &lt;link href="custom.css" rel="stylesheet"&gt;</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="an">bibliography:</span><span class="co"> ../bib/references.bib</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a><span class="an">editor_options:</span><span class="co"> </span></span>
+<span id="cb36-15"><a href="#cb36-15"></a><span class="co">  chunk_output_type: console</span></span>
+<span id="cb36-16"><a href="#cb36-16"></a><span class="co">---</span></span>
+<span id="cb36-17"><a href="#cb36-17"></a></span>
+<span id="cb36-18"><a href="#cb36-18"></a><span class="in">```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}</span></span>
+<span id="cb36-19"><a href="#cb36-19"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb36-20"><a href="#cb36-20"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb36-21"><a href="#cb36-21"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
+<span id="cb36-22"><a href="#cb36-22"></a>  <span class="at">fig.asp =</span> <span class="fl">0.618</span>,</span>
+<span id="cb36-23"><a href="#cb36-23"></a>  <span class="at">fig.retina =</span> <span class="dv">3</span>,</span>
+<span id="cb36-24"><a href="#cb36-24"></a>  <span class="at">out.width =</span> <span class="st">"100%"</span></span>
+<span id="cb36-25"><a href="#cb36-25"></a>)</span>
+<span id="cb36-26"><a href="#cb36-26"></a></span>
+<span id="cb36-27"><a href="#cb36-27"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-28"><a href="#cb36-28"></a><span class="fu">library</span>(ggdag)      <span class="co"># For plotting DAGs</span></span>
+<span id="cb36-29"><a href="#cb36-29"></a><span class="fu">library</span>(dagitty)    <span class="co"># For working with DAG logic</span></span>
+<span id="cb36-30"><a href="#cb36-30"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb36-31"><a href="#cb36-31"></a><span class="fu">library</span>(wooldridge)</span>
+<span id="cb36-32"><a href="#cb36-32"></a><span class="fu">library</span>(here)</span>
+<span id="cb36-33"><a href="#cb36-33"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb36-34"><a href="#cb36-34"></a><span class="in">```</span></span>
+<span id="cb36-35"><a href="#cb36-35"></a></span>
+<span id="cb36-36"><a href="#cb36-36"></a><span class="fu"># MLR with an interaction term</span></span>
+<span id="cb36-37"><a href="#cb36-37"></a></span>
+<span id="cb36-38"><a href="#cb36-38"></a><span class="fu">## Interaction term</span></span>
+<span id="cb36-39"><a href="#cb36-39"></a></span>
+<span id="cb36-40"><a href="#cb36-40"></a>$$</span>
+<span id="cb36-41"><a href="#cb36-41"></a>y = \beta_0 + \beta_1 x_1  + \beta_2 x_2 + \beta_3 (x_1 \cdot x_2) + \beta_4 x_4 + \epsilon</span>
+<span id="cb36-42"><a href="#cb36-42"></a>$$</span>
+<span id="cb36-43"><a href="#cb36-43"></a></span>
+<span id="cb36-44"><a href="#cb36-44"></a>. . .</span>
+<span id="cb36-45"><a href="#cb36-45"></a></span>
+<span id="cb36-46"><a href="#cb36-46"></a>Interpretation is only possible through **marginal effects**:</span>
+<span id="cb36-47"><a href="#cb36-47"></a></span>
+<span id="cb36-48"><a href="#cb36-48"></a>. . .</span>
+<span id="cb36-49"><a href="#cb36-49"></a></span>
+<span id="cb36-50"><a href="#cb36-50"></a>Marginal effect is a partial derivative of the regression equation with respect to a regressor of interest evaluated at certain value of the interaction term.</span>
+<span id="cb36-51"><a href="#cb36-51"></a></span>
+<span id="cb36-52"><a href="#cb36-52"></a>. . .</span>
+<span id="cb36-53"><a href="#cb36-53"></a></span>
+<span id="cb36-54"><a href="#cb36-54"></a>$\frac{\partial y}{\partial x_1} = \beta_1 + \beta_3 x_2$ </span>
+<span id="cb36-55"><a href="#cb36-55"></a></span>
+<span id="cb36-56"><a href="#cb36-56"></a>$\frac{\partial y}{\partial x_2} = \beta_2 + \beta_3 x_1$</span>
+<span id="cb36-57"><a href="#cb36-57"></a></span>
+<span id="cb36-58"><a href="#cb36-58"></a>. . .</span>
+<span id="cb36-59"><a href="#cb36-59"></a></span>
+<span id="cb36-60"><a href="#cb36-60"></a>Marginal Effect (the slope) of $x_1$ depends on $x_2$ and vice versa.</span>
+<span id="cb36-61"><a href="#cb36-61"></a></span>
+<span id="cb36-62"><a href="#cb36-62"></a><span class="fu">## Reporting results with marginal effects</span></span>
+<span id="cb36-63"><a href="#cb36-63"></a></span>
+<span id="cb36-64"><a href="#cb36-64"></a><span class="ss">1.  </span>Report coefficients $\beta_1$, $\beta_2$, $\beta_3$ as is.</span>
+<span id="cb36-65"><a href="#cb36-65"></a></span>
+<span id="cb36-66"><a href="#cb36-66"></a><span class="ss">2.  </span>Report marginal effects at mean values of the interaction term(s):</span>
+<span id="cb36-67"><a href="#cb36-67"></a></span>
+<span id="cb36-68"><a href="#cb36-68"></a><span class="ss">    -   </span>$\text{ME}(\bar x_1) = \beta_1 + \beta_3 \bar x_2$</span>
+<span id="cb36-69"><a href="#cb36-69"></a></span>
+<span id="cb36-70"><a href="#cb36-70"></a><span class="ss">    -   </span>$\text{ME}(\bar x_2) = \beta_2 + \beta_3 \bar x_1$</span>
+<span id="cb36-71"><a href="#cb36-71"></a></span>
+<span id="cb36-72"><a href="#cb36-72"></a><span class="ss">3.  </span>To compute standard errors for the marginal effects, we use **delta method**.</span>
+<span id="cb36-73"><a href="#cb36-73"></a></span>
+<span id="cb36-74"><a href="#cb36-74"></a>Learn more: <span class="co">[</span><span class="ot">@Angrist2009, also Chapter 3</span><span class="co">]</span></span>
+<span id="cb36-75"><a href="#cb36-75"></a></span>
+<span id="cb36-76"><a href="#cb36-76"></a><span class="fu">## Recall the hedonic land prices model:</span></span>
+<span id="cb36-77"><a href="#cb36-77"></a></span>
+<span id="cb36-78"><a href="#cb36-78"></a>$$</span>
+<span id="cb36-79"><a href="#cb36-79"></a>\text{acrePrice} = \beta_0 +  \beta_1 \text{crpPct} + \beta_2 \text{acres} + \beta_3 \text{improvements} <span class="sc">\\</span></span>
+<span id="cb36-80"><a href="#cb36-80"></a><span class="ss">+ </span>\beta_4 \text{year} + \beta_5 \text{region}  + e</span>
+<span id="cb36-81"><a href="#cb36-81"></a>$$</span>
+<span id="cb36-82"><a href="#cb36-82"></a></span>
+<span id="cb36-83"><a href="#cb36-83"></a><span class="ss">-   </span><span class="in">`acrePrice`</span> - sale price in dollars per acre;</span>
+<span id="cb36-84"><a href="#cb36-84"></a></span>
+<span id="cb36-85"><a href="#cb36-85"></a><span class="ss">-   </span><span class="in">`crpPct`</span> - the percentage of all farm acres enrolled in CRP;</span>
+<span id="cb36-86"><a href="#cb36-86"></a></span>
+<span id="cb36-87"><a href="#cb36-87"></a><span class="ss">-   </span><span class="in">`acres`</span> - size of the farm in acres;</span>
+<span id="cb36-88"><a href="#cb36-88"></a></span>
+<span id="cb36-89"><a href="#cb36-89"></a><span class="ss">-   </span><span class="in">`improvements`</span> - share of infrastructure's value in the land price;</span>
+<span id="cb36-90"><a href="#cb36-90"></a></span>
+<span id="cb36-91"><a href="#cb36-91"></a><span class="ss">-   </span><span class="in">`development`</span> - dummy variable aliased with <span class="in">`improvements`</span>. Is 1 when improvements &gt; 25% and is 0 otherwise.</span>
+<span id="cb36-92"><a href="#cb36-92"></a></span>
+<span id="cb36-93"><a href="#cb36-93"></a><span class="ss">-   </span><span class="in">`region`</span> - region in the state Minnesota;</span>
+<span id="cb36-94"><a href="#cb36-94"></a></span>
+<span id="cb36-95"><a href="#cb36-95"></a><span class="ss">-   </span><span class="in">`year`</span> - year of the land sales translation;</span>
+<span id="cb36-96"><a href="#cb36-96"></a></span>
+<span id="cb36-97"><a href="#cb36-97"></a><span class="fu">## Loading data</span></span>
+<span id="cb36-98"><a href="#cb36-98"></a></span>
+<span id="cb36-99"><a href="#cb36-99"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-100"><a href="#cb36-100"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-101"><a href="#cb36-101"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb36-102"><a href="#cb36-102"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb36-103"><a href="#cb36-103"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb36-104"><a href="#cb36-104"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb36-105"><a href="#cb36-105"></a><span class="fu">library</span>(here)</span>
+<span id="cb36-106"><a href="#cb36-106"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb36-107"><a href="#cb36-107"></a></span>
+<span id="cb36-108"><a href="#cb36-108"></a><span class="do">## 1. Load the data</span></span>
+<span id="cb36-109"><a href="#cb36-109"></a>dta <span class="ot">&lt;-</span></span>
+<span id="cb36-110"><a href="#cb36-110"></a>  <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"exercises"</span>, <span class="st">"ex06-did-and-interactions"</span>, <span class="st">"land-prices.xlsx"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-111"><a href="#cb36-111"></a>  <span class="fu">mutate</span>(<span class="at">improvements  =</span> <span class="fu">as.numeric</span>(improvements),</span>
+<span id="cb36-112"><a href="#cb36-112"></a>         <span class="at">development =</span> <span class="fu">as.factor</span>(<span class="fu">as.integer</span>(improvements <span class="sc">&gt;</span> <span class="dv">25</span>)),</span>
+<span id="cb36-113"><a href="#cb36-113"></a>         <span class="at">productivity  =</span> <span class="fu">as.numeric</span>(productivity),</span>
+<span id="cb36-114"><a href="#cb36-114"></a>         <span class="at">tillable  =</span> <span class="fu">as.numeric</span>(tillable),</span>
+<span id="cb36-115"><a href="#cb36-115"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-116"><a href="#cb36-116"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development, region, year)</span>
+<span id="cb36-117"><a href="#cb36-117"></a></span>
+<span id="cb36-118"><a href="#cb36-118"></a><span class="in">```</span></span>
+<span id="cb36-119"><a href="#cb36-119"></a></span>
+<span id="cb36-120"><a href="#cb36-120"></a><span class="in">```{r eval=FALSE, echo=TRUE}</span></span>
+<span id="cb36-121"><a href="#cb36-121"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-122"><a href="#cb36-122"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb36-123"><a href="#cb36-123"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb36-124"><a href="#cb36-124"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb36-125"><a href="#cb36-125"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb36-126"><a href="#cb36-126"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb36-127"><a href="#cb36-127"></a><span class="fu">options</span>(<span class="at">modelsummary_get =</span> <span class="st">"broom"</span>)</span>
+<span id="cb36-128"><a href="#cb36-128"></a><span class="do">## 1. Load the data</span></span>
+<span id="cb36-129"><a href="#cb36-129"></a>dta <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"land-prices.xlsx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-130"><a href="#cb36-130"></a>  <span class="fu">mutate</span>(<span class="at">improvements  =</span> <span class="fu">as.numeric</span>(improvements),</span>
+<span id="cb36-131"><a href="#cb36-131"></a>         <span class="at">development =</span> <span class="fu">as.factor</span>(<span class="fu">as.integer</span>(improvements <span class="sc">&gt;</span> <span class="dv">25</span>)),</span>
+<span id="cb36-132"><a href="#cb36-132"></a>         <span class="at">productivity  =</span> <span class="fu">as.numeric</span>(productivity),</span>
+<span id="cb36-133"><a href="#cb36-133"></a>         <span class="at">tillable  =</span> <span class="fu">as.numeric</span>(tillable),</span>
+<span id="cb36-134"><a href="#cb36-134"></a>         <span class="at">year =</span> <span class="fu">as.factor</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-135"><a href="#cb36-135"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development, region, year)</span>
+<span id="cb36-136"><a href="#cb36-136"></a></span>
+<span id="cb36-137"><a href="#cb36-137"></a><span class="fu">glimpse</span>(dta)</span>
+<span id="cb36-138"><a href="#cb36-138"></a><span class="in">```</span></span>
+<span id="cb36-139"><a href="#cb36-139"></a></span>
+<span id="cb36-140"><a href="#cb36-140"></a><span class="fu">## Descriptive statistics</span></span>
+<span id="cb36-141"><a href="#cb36-141"></a></span>
+<span id="cb36-142"><a href="#cb36-142"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-143"><a href="#cb36-143"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-144"><a href="#cb36-144"></a><span class="fu">datasummary</span>(</span>
+<span id="cb36-145"><a href="#cb36-145"></a>    acrePrice <span class="sc">+</span> crpPct <span class="sc">+</span> acres <span class="sc">+</span> improvements <span class="sc">+</span> <span class="fu">as.integer</span>(development) <span class="sc">~</span> </span>
+<span id="cb36-146"><a href="#cb36-146"></a>      (mean <span class="sc">+</span> sd <span class="sc">+</span> min <span class="sc">+</span> median <span class="sc">+</span> max) <span class="sc">*</span> </span>
+<span id="cb36-147"><a href="#cb36-147"></a>      <span class="fu">Arguments</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb36-148"><a href="#cb36-148"></a>    <span class="at">data =</span> dta, </span>
+<span id="cb36-149"><a href="#cb36-149"></a>    <span class="at">output =</span> <span class="st">"html"</span></span>
+<span id="cb36-150"><a href="#cb36-150"></a>  )</span>
+<span id="cb36-151"><a href="#cb36-151"></a><span class="in">```</span></span>
+<span id="cb36-152"><a href="#cb36-152"></a></span>
+<span id="cb36-153"><a href="#cb36-153"></a><span class="fu">## Descriptive Plots</span></span>
+<span id="cb36-154"><a href="#cb36-154"></a></span>
+<span id="cb36-155"><a href="#cb36-155"></a><span class="in">```{r eval=TRUE, echo=TRUE}</span></span>
+<span id="cb36-156"><a href="#cb36-156"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-157"><a href="#cb36-157"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb36-158"><a href="#cb36-158"></a><span class="co">#| fig-asp: 0.6</span></span>
+<span id="cb36-159"><a href="#cb36-159"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb36-160"><a href="#cb36-160"></a>  <span class="fu">select</span>(acrePrice, crpPct, acres, improvements, development) <span class="sc">%&gt;%</span></span>
+<span id="cb36-161"><a href="#cb36-161"></a>  <span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">colour =</span> development, <span class="at">alpha =</span> <span class="fl">0.2</span>))</span>
+<span id="cb36-162"><a href="#cb36-162"></a><span class="in">```</span></span>
+<span id="cb36-163"><a href="#cb36-163"></a></span>
+<span id="cb36-164"><a href="#cb36-164"></a><span class="fu">## Example 1. Basic regressions</span></span>
+<span id="cb36-165"><a href="#cb36-165"></a></span>
+<span id="cb36-166"><a href="#cb36-166"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-167"><a href="#cb36-167"></a>fit1 <span class="ot">&lt;-</span> </span>
+<span id="cb36-168"><a href="#cb36-168"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">+</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb36-169"><a href="#cb36-169"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb36-170"><a href="#cb36-170"></a></span>
+<span id="cb36-171"><a href="#cb36-171"></a>summ <span class="ot">&lt;-</span></span>
+<span id="cb36-172"><a href="#cb36-172"></a>  <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"html"</span>, <span class="at">notes =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb36-173"><a href="#cb36-173"></a>    <span class="fu">modelsummary</span>(</span>
+<span id="cb36-174"><a href="#cb36-174"></a>      x,</span>
+<span id="cb36-175"><a href="#cb36-175"></a>      <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb36-176"><a href="#cb36-176"></a>      <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb36-177"><a href="#cb36-177"></a>      <span class="at">output =</span> output,</span>
+<span id="cb36-178"><a href="#cb36-178"></a>      <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS"</span>),</span>
+<span id="cb36-179"><a href="#cb36-179"></a>      <span class="at">coef_omit =</span> coef_omit,</span>
+<span id="cb36-180"><a href="#cb36-180"></a>      <span class="at">notes =</span> notes,</span>
+<span id="cb36-181"><a href="#cb36-181"></a>      ...</span>
+<span id="cb36-182"><a href="#cb36-182"></a>    )</span>
+<span id="cb36-183"><a href="#cb36-183"></a>  }</span>
+<span id="cb36-184"><a href="#cb36-184"></a></span>
+<span id="cb36-185"><a href="#cb36-185"></a>cust_summ <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">coef_omit =</span> <span class="st">"reg|year"</span>, <span class="at">output =</span> <span class="st">"markdown"</span>, ...) {</span>
+<span id="cb36-186"><a href="#cb36-186"></a>  x <span class="ot">&lt;-</span> <span class="fu">set_names</span>(x, <span class="fu">str_c</span>(<span class="st">"Model "</span>, <span class="fu">seq_along</span>(x)))</span>
+<span id="cb36-187"><a href="#cb36-187"></a>  all_eq <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">imap_chr</span>(. , <span class="sc">~</span> {<span class="fu">str_c</span>(.y, <span class="st">": "</span>, <span class="fu">as.character</span>(.x<span class="sc">$</span>call)[[<span class="dv">2</span>]])}) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-188"><a href="#cb36-188"></a>    <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">"&lt;/br&gt;"</span>)</span>
+<span id="cb36-189"><a href="#cb36-189"></a>  <span class="fu">summ</span>(x, <span class="at">coef_omit =</span> coef_omit, <span class="at">output =</span> output, <span class="at">notes =</span> all_eq, ...)</span>
+<span id="cb36-190"><a href="#cb36-190"></a>}</span>
+<span id="cb36-191"><a href="#cb36-191"></a><span class="in">```</span></span>
+<span id="cb36-192"><a href="#cb36-192"></a></span>
+<span id="cb36-193"><a href="#cb36-193"></a><span class="fu">## Interpret the baseline results {.smaller}</span></span>
+<span id="cb36-194"><a href="#cb36-194"></a></span>
+<span id="cb36-195"><a href="#cb36-195"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-196"><a href="#cb36-196"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1))</span>
+<span id="cb36-197"><a href="#cb36-197"></a><span class="in">```</span></span>
+<span id="cb36-198"><a href="#cb36-198"></a></span>
+<span id="cb36-199"><a href="#cb36-199"></a><span class="fu">## Fitted vs area and development</span></span>
+<span id="cb36-200"><a href="#cb36-200"></a></span>
+<span id="cb36-201"><a href="#cb36-201"></a>::: columns</span>
+<span id="cb36-202"><a href="#cb36-202"></a>::: {.column width="50%"}</span>
+<span id="cb36-203"><a href="#cb36-203"></a>::: fragment</span>
+<span id="cb36-204"><a href="#cb36-204"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-205"><a href="#cb36-205"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-206"><a href="#cb36-206"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-207"><a href="#cb36-207"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-208"><a href="#cb36-208"></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb36-209"><a href="#cb36-209"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"acres"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-210"><a href="#cb36-210"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-211"><a href="#cb36-211"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
+<span id="cb36-212"><a href="#cb36-212"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
+<span id="cb36-213"><a href="#cb36-213"></a><span class="in">```</span></span>
+<span id="cb36-214"><a href="#cb36-214"></a>:::</span>
+<span id="cb36-215"><a href="#cb36-215"></a>:::</span>
+<span id="cb36-216"><a href="#cb36-216"></a></span>
+<span id="cb36-217"><a href="#cb36-217"></a>::: {.column width="50%"}</span>
+<span id="cb36-218"><a href="#cb36-218"></a>::: fragment</span>
+<span id="cb36-219"><a href="#cb36-219"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-220"><a href="#cb36-220"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-221"><a href="#cb36-221"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-222"><a href="#cb36-222"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-223"><a href="#cb36-223"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="st">"development"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-224"><a href="#cb36-224"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-225"><a href="#cb36-225"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>)<span class="sc">+</span> </span>
+<span id="cb36-226"><a href="#cb36-226"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-227"><a href="#cb36-227"></a><span class="in">```</span></span>
+<span id="cb36-228"><a href="#cb36-228"></a>:::</span>
+<span id="cb36-229"><a href="#cb36-229"></a>:::</span>
+<span id="cb36-230"><a href="#cb36-230"></a>:::</span>
+<span id="cb36-231"><a href="#cb36-231"></a></span>
+<span id="cb36-232"><a href="#cb36-232"></a><span class="fu">## Fitted vs area and development (2)</span></span>
+<span id="cb36-233"><a href="#cb36-233"></a></span>
+<span id="cb36-234"><a href="#cb36-234"></a>::: columns</span>
+<span id="cb36-235"><a href="#cb36-235"></a>::: {.column width="75%"}</span>
+<span id="cb36-236"><a href="#cb36-236"></a>::: fragment</span>
+<span id="cb36-237"><a href="#cb36-237"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-238"><a href="#cb36-238"></a><span class="co">#| fig-asp: 0.8</span></span>
+<span id="cb36-239"><a href="#cb36-239"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-240"><a href="#cb36-240"></a><span class="fu">ggpredict</span>(fit1, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-241"><a href="#cb36-241"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-242"><a href="#cb36-242"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-243"><a href="#cb36-243"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
+<span id="cb36-244"><a href="#cb36-244"></a><span class="in">```</span></span>
+<span id="cb36-245"><a href="#cb36-245"></a>:::</span>
+<span id="cb36-246"><a href="#cb36-246"></a>:::</span>
+<span id="cb36-247"><a href="#cb36-247"></a></span>
+<span id="cb36-248"><a href="#cb36-248"></a>::: {.column width="25%"}</span>
+<span id="cb36-249"><a href="#cb36-249"></a>::: fragment</span>
+<span id="cb36-250"><a href="#cb36-250"></a><span class="ss">-   </span>Without an interaction term, dummy variables simply cause shifts in the outcome variable.</span>
+<span id="cb36-251"><a href="#cb36-251"></a>:::</span>
+<span id="cb36-252"><a href="#cb36-252"></a>:::</span>
+<span id="cb36-253"><a href="#cb36-253"></a>:::</span>
+<span id="cb36-254"><a href="#cb36-254"></a></span>
+<span id="cb36-255"><a href="#cb36-255"></a><span class="fu">## Example 2. Interaction term with a binary variable {.smaller}</span></span>
+<span id="cb36-256"><a href="#cb36-256"></a></span>
+<span id="cb36-257"><a href="#cb36-257"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-258"><a href="#cb36-258"></a><span class="co">#| fig-asp: 0.6</span></span>
+<span id="cb36-259"><a href="#cb36-259"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-260"><a href="#cb36-260"></a>fit2 <span class="ot">&lt;-</span> </span>
+<span id="cb36-261"><a href="#cb36-261"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> development <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb36-262"><a href="#cb36-262"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb36-263"><a href="#cb36-263"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2))</span>
+<span id="cb36-264"><a href="#cb36-264"></a><span class="in">```</span></span>
+<span id="cb36-265"><a href="#cb36-265"></a></span>
+<span id="cb36-266"><a href="#cb36-266"></a><span class="fu">## Fitted vs development with an interaction term</span></span>
+<span id="cb36-267"><a href="#cb36-267"></a></span>
+<span id="cb36-268"><a href="#cb36-268"></a>::: columns</span>
+<span id="cb36-269"><a href="#cb36-269"></a>::: {.column width="50%"}</span>
+<span id="cb36-270"><a href="#cb36-270"></a>::: fragment</span>
+<span id="cb36-271"><a href="#cb36-271"></a><span class="in">```{r  echo=TRUE}</span></span>
+<span id="cb36-272"><a href="#cb36-272"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-273"><a href="#cb36-273"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-274"><a href="#cb36-274"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-275"><a href="#cb36-275"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-276"><a href="#cb36-276"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-277"><a href="#cb36-277"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-278"><a href="#cb36-278"></a><span class="in">```</span></span>
+<span id="cb36-279"><a href="#cb36-279"></a>:::</span>
+<span id="cb36-280"><a href="#cb36-280"></a>:::</span>
+<span id="cb36-281"><a href="#cb36-281"></a></span>
+<span id="cb36-282"><a href="#cb36-282"></a>::: {.column width="50%"}</span>
+<span id="cb36-283"><a href="#cb36-283"></a>::: fragment</span>
+<span id="cb36-284"><a href="#cb36-284"></a><span class="in">```{r echo=TRUE, eval=FALSE}</span></span>
+<span id="cb36-285"><a href="#cb36-285"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-286"><a href="#cb36-286"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-287"><a href="#cb36-287"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [0, 10, 50, 100, 200, 250, 500]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-288"><a href="#cb36-288"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-289"><a href="#cb36-289"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-290"><a href="#cb36-290"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-291"><a href="#cb36-291"></a><span class="in">```</span></span>
+<span id="cb36-292"><a href="#cb36-292"></a>:::</span>
+<span id="cb36-293"><a href="#cb36-293"></a>::: r-stack</span>
+<span id="cb36-294"><a href="#cb36-294"></a>::: fragment</span>
+<span id="cb36-295"><a href="#cb36-295"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-296"><a href="#cb36-296"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-297"><a href="#cb36-297"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-298"><a href="#cb36-298"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-299"><a href="#cb36-299"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-300"><a href="#cb36-300"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-301"><a href="#cb36-301"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-302"><a href="#cb36-302"></a><span class="in">```</span></span>
+<span id="cb36-303"><a href="#cb36-303"></a>:::</span>
+<span id="cb36-304"><a href="#cb36-304"></a>::: fragment</span>
+<span id="cb36-305"><a href="#cb36-305"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-306"><a href="#cb36-306"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-307"><a href="#cb36-307"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-308"><a href="#cb36-308"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-309"><a href="#cb36-309"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-310"><a href="#cb36-310"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-311"><a href="#cb36-311"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-312"><a href="#cb36-312"></a><span class="in">```</span></span>
+<span id="cb36-313"><a href="#cb36-313"></a>:::</span>
+<span id="cb36-314"><a href="#cb36-314"></a>::: fragment</span>
+<span id="cb36-315"><a href="#cb36-315"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-316"><a href="#cb36-316"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-317"><a href="#cb36-317"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-318"><a href="#cb36-318"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [, 10, 50]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-319"><a href="#cb36-319"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-320"><a href="#cb36-320"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-321"><a href="#cb36-321"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-322"><a href="#cb36-322"></a><span class="in">```</span></span>
+<span id="cb36-323"><a href="#cb36-323"></a>:::</span>
+<span id="cb36-324"><a href="#cb36-324"></a>::: fragment</span>
+<span id="cb36-325"><a href="#cb36-325"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-326"><a href="#cb36-326"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-327"><a href="#cb36-327"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-328"><a href="#cb36-328"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10, 50, 200]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-329"><a href="#cb36-329"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-330"><a href="#cb36-330"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-331"><a href="#cb36-331"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-332"><a href="#cb36-332"></a><span class="in">```</span></span>
+<span id="cb36-333"><a href="#cb36-333"></a>:::</span>
+<span id="cb36-334"><a href="#cb36-334"></a>::: fragment</span>
+<span id="cb36-335"><a href="#cb36-335"></a><span class="in">```{r echo=FALSE}</span></span>
+<span id="cb36-336"><a href="#cb36-336"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-337"><a href="#cb36-337"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-338"><a href="#cb36-338"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"development"</span>, <span class="st">"acres [1, 10, 50, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-339"><a href="#cb36-339"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-340"><a href="#cb36-340"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-341"><a href="#cb36-341"></a>  <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-342"><a href="#cb36-342"></a><span class="in">```</span></span>
+<span id="cb36-343"><a href="#cb36-343"></a>:::</span>
+<span id="cb36-344"><a href="#cb36-344"></a>:::</span>
+<span id="cb36-345"><a href="#cb36-345"></a>:::</span>
+<span id="cb36-346"><a href="#cb36-346"></a>:::</span>
+<span id="cb36-347"><a href="#cb36-347"></a></span>
+<span id="cb36-348"><a href="#cb36-348"></a><span class="fu">## Fitted vs area with an interaction term</span></span>
+<span id="cb36-349"><a href="#cb36-349"></a></span>
+<span id="cb36-350"><a href="#cb36-350"></a>::: columns</span>
+<span id="cb36-351"><a href="#cb36-351"></a>::: {.column width="50%"}</span>
+<span id="cb36-352"><a href="#cb36-352"></a>::: fragment</span>
+<span id="cb36-353"><a href="#cb36-353"></a><span class="in">```{r  echo=TRUE}</span></span>
+<span id="cb36-354"><a href="#cb36-354"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-355"><a href="#cb36-355"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-356"><a href="#cb36-356"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-357"><a href="#cb36-357"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-358"><a href="#cb36-358"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-359"><a href="#cb36-359"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
+<span id="cb36-360"><a href="#cb36-360"></a><span class="in">```</span></span>
+<span id="cb36-361"><a href="#cb36-361"></a>:::</span>
+<span id="cb36-362"><a href="#cb36-362"></a>:::</span>
+<span id="cb36-363"><a href="#cb36-363"></a></span>
+<span id="cb36-364"><a href="#cb36-364"></a>::: {.column width="50%"}</span>
+<span id="cb36-365"><a href="#cb36-365"></a>::: fragment</span>
+<span id="cb36-366"><a href="#cb36-366"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-367"><a href="#cb36-367"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-368"><a href="#cb36-368"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-369"><a href="#cb36-369"></a><span class="fu">ggpredict</span>(fit2, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"development"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-370"><a href="#cb36-370"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-371"><a href="#cb36-371"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-372"><a href="#cb36-372"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
+<span id="cb36-373"><a href="#cb36-373"></a><span class="in">```</span></span>
+<span id="cb36-374"><a href="#cb36-374"></a>:::</span>
+<span id="cb36-375"><a href="#cb36-375"></a>:::</span>
+<span id="cb36-376"><a href="#cb36-376"></a>:::</span>
+<span id="cb36-377"><a href="#cb36-377"></a></span>
+<span id="cb36-378"><a href="#cb36-378"></a><span class="fu">## Marginal Effect `acres` and `development` at means {.smaller}</span></span>
+<span id="cb36-379"><a href="#cb36-379"></a></span>
+<span id="cb36-380"><a href="#cb36-380"></a><span class="in">```{r echo=TRUE, eval=FALSE}</span></span>
+<span id="cb36-381"><a href="#cb36-381"></a><span class="fu">library</span>(marginaleffects)</span>
+<span id="cb36-382"><a href="#cb36-382"></a><span class="fu">modelsummary</span>(fit2)</span>
+<span id="cb36-383"><a href="#cb36-383"></a><span class="fu">modelsummary</span>(<span class="fu">marginaleffects</span>(fit2))</span>
+<span id="cb36-384"><a href="#cb36-384"></a><span class="in">```</span></span>
+<span id="cb36-385"><a href="#cb36-385"></a></span>
+<span id="cb36-388"><a href="#cb36-388"></a><span class="in">```{r}</span></span>
+<span id="cb36-389"><a href="#cb36-389"></a><span class="fu">summ</span>(</span>
+<span id="cb36-390"><a href="#cb36-390"></a>  <span class="fu">list</span>(<span class="st">`</span><span class="at">Coef. as is</span><span class="st">`</span> <span class="ot">=</span> fit2,</span>
+<span id="cb36-391"><a href="#cb36-391"></a>       <span class="st">`</span><span class="at">M.E. at means</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2)),</span>
+<span id="cb36-392"><a href="#cb36-392"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
+<span id="cb36-393"><a href="#cb36-393"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb36-394"><a href="#cb36-394"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"acres"</span>,</span>
+<span id="cb36-395"><a href="#cb36-395"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
+<span id="cb36-396"><a href="#cb36-396"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
+<span id="cb36-397"><a href="#cb36-397"></a>    <span class="st">"development1"</span> <span class="ot">=</span> <span class="st">"development1"</span>,</span>
+<span id="cb36-398"><a href="#cb36-398"></a>    <span class="st">"acres:development1"</span> <span class="ot">=</span> <span class="st">"acres * development1"</span></span>
+<span id="cb36-399"><a href="#cb36-399"></a>  )</span>
+<span id="cb36-400"><a href="#cb36-400"></a>)</span>
+<span id="cb36-401"><a href="#cb36-401"></a><span class="in">```</span></span>
+<span id="cb36-402"><a href="#cb36-402"></a></span>
+<span id="cb36-403"><a href="#cb36-403"></a><span class="fu">## Marginal Effect `acres` and `development` (visually)</span></span>
+<span id="cb36-404"><a href="#cb36-404"></a></span>
+<span id="cb36-405"><a href="#cb36-405"></a>::: columns</span>
+<span id="cb36-406"><a href="#cb36-406"></a>::: {.column width="50%"}</span>
+<span id="cb36-407"><a href="#cb36-407"></a>::: fragment</span>
+<span id="cb36-408"><a href="#cb36-408"></a><span class="in">```{r  echo=TRUE}</span></span>
+<span id="cb36-409"><a href="#cb36-409"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-410"><a href="#cb36-410"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-411"><a href="#cb36-411"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"development"</span>) <span class="sc">+</span> </span>
+<span id="cb36-412"><a href="#cb36-412"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Development, 0 = no 1 = yes"</span>)</span>
+<span id="cb36-413"><a href="#cb36-413"></a><span class="in">```</span></span>
+<span id="cb36-414"><a href="#cb36-414"></a>:::</span>
+<span id="cb36-415"><a href="#cb36-415"></a>:::</span>
+<span id="cb36-416"><a href="#cb36-416"></a></span>
+<span id="cb36-417"><a href="#cb36-417"></a>::: {.column width="50%"}</span>
+<span id="cb36-418"><a href="#cb36-418"></a>::: fragment</span>
+<span id="cb36-419"><a href="#cb36-419"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-420"><a href="#cb36-420"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-421"><a href="#cb36-421"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-422"><a href="#cb36-422"></a><span class="fu">plot_slopes</span>(fit2, <span class="at">variables =</span> <span class="st">"development"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
+<span id="cb36-423"><a href="#cb36-423"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of development dummy (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
+<span id="cb36-424"><a href="#cb36-424"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb36-425"><a href="#cb36-425"></a><span class="in">```</span></span>
+<span id="cb36-426"><a href="#cb36-426"></a>:::</span>
+<span id="cb36-427"><a href="#cb36-427"></a>:::</span>
+<span id="cb36-428"><a href="#cb36-428"></a>:::</span>
+<span id="cb36-429"><a href="#cb36-429"></a></span>
+<span id="cb36-430"><a href="#cb36-430"></a><span class="fu">## Example 3. Interaction with a continuous variable {.smaller}</span></span>
+<span id="cb36-431"><a href="#cb36-431"></a></span>
+<span id="cb36-432"><a href="#cb36-432"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-433"><a href="#cb36-433"></a><span class="co">#| fig-asp: 0.6</span></span>
+<span id="cb36-434"><a href="#cb36-434"></a><span class="co">#| output-location: fragment</span></span>
+<span id="cb36-435"><a href="#cb36-435"></a>fit3 <span class="ot">&lt;-</span> </span>
+<span id="cb36-436"><a href="#cb36-436"></a>  <span class="fu">lm</span>(acrePrice  <span class="sc">~</span> acres <span class="sc">*</span> improvements <span class="sc">+</span> crpPct <span class="sc">+</span> region <span class="sc">+</span> <span class="fu">factor</span>(year),</span>
+<span id="cb36-437"><a href="#cb36-437"></a>     <span class="at">data =</span> dta)</span>
+<span id="cb36-438"><a href="#cb36-438"></a><span class="fu">cust_summ</span>(<span class="fu">list</span>(fit1, fit2, fit3), <span class="at">output =</span> <span class="st">"markdown"</span>)</span>
+<span id="cb36-439"><a href="#cb36-439"></a><span class="in">```</span></span>
+<span id="cb36-440"><a href="#cb36-440"></a></span>
+<span id="cb36-441"><a href="#cb36-441"></a><span class="fu">## Fitted vs `area` \* `improvements`</span></span>
+<span id="cb36-442"><a href="#cb36-442"></a></span>
+<span id="cb36-443"><a href="#cb36-443"></a>::: columns</span>
+<span id="cb36-444"><a href="#cb36-444"></a>::: {.column width="50%"}</span>
+<span id="cb36-445"><a href="#cb36-445"></a>::: fragment</span>
+<span id="cb36-446"><a href="#cb36-446"></a><span class="in">```{r  echo=TRUE}</span></span>
+<span id="cb36-447"><a href="#cb36-447"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-448"><a href="#cb36-448"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-449"><a href="#cb36-449"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"acres [0, 10, 50, 100, 200, 250, 500, 1000]"</span>, <span class="st">"improvements [0, 10, 50, 100]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-450"><a href="#cb36-450"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-451"><a href="#cb36-451"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-452"><a href="#cb36-452"></a>  <span class="fu">xlab</span>(<span class="st">"Parcel size (acres), acres"</span>)</span>
+<span id="cb36-453"><a href="#cb36-453"></a><span class="in">```</span></span>
+<span id="cb36-454"><a href="#cb36-454"></a>:::</span>
+<span id="cb36-455"><a href="#cb36-455"></a>:::</span>
+<span id="cb36-456"><a href="#cb36-456"></a></span>
+<span id="cb36-457"><a href="#cb36-457"></a>::: {.column width="50%"}</span>
+<span id="cb36-458"><a href="#cb36-458"></a>::: fragment</span>
+<span id="cb36-459"><a href="#cb36-459"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-460"><a href="#cb36-460"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-461"><a href="#cb36-461"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-462"><a href="#cb36-462"></a><span class="fu">ggpredict</span>(fit3, <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"improvements"</span>, <span class="st">"acres [1, 50, 100, 200, 500]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-463"><a href="#cb36-463"></a>  <span class="fu">plot</span>() <span class="sc">+</span> </span>
+<span id="cb36-464"><a href="#cb36-464"></a>  <span class="fu">ylab</span>(<span class="st">"Predicted price per acre (acrePrice), USD"</span>) <span class="sc">+</span> </span>
+<span id="cb36-465"><a href="#cb36-465"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)</span>
+<span id="cb36-466"><a href="#cb36-466"></a><span class="in">```</span></span>
+<span id="cb36-467"><a href="#cb36-467"></a>:::</span>
+<span id="cb36-468"><a href="#cb36-468"></a>:::</span>
+<span id="cb36-469"><a href="#cb36-469"></a>:::</span>
+<span id="cb36-470"><a href="#cb36-470"></a></span>
+<span id="cb36-471"><a href="#cb36-471"></a><span class="fu">## Marginal Effect `acres` \* `improvements` (visually)</span></span>
+<span id="cb36-472"><a href="#cb36-472"></a></span>
+<span id="cb36-473"><a href="#cb36-473"></a>::: columns</span>
+<span id="cb36-474"><a href="#cb36-474"></a>::: {.column width="50%"}</span>
+<span id="cb36-475"><a href="#cb36-475"></a>::: fragment</span>
+<span id="cb36-476"><a href="#cb36-476"></a><span class="in">```{r  echo=TRUE}</span></span>
+<span id="cb36-477"><a href="#cb36-477"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-478"><a href="#cb36-478"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-479"><a href="#cb36-479"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"acres"</span>, <span class="at">condition =</span> <span class="st">"improvements"</span>) <span class="sc">+</span> </span>
+<span id="cb36-480"><a href="#cb36-480"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of acres (slope)"</span>)  <span class="sc">+</span> </span>
+<span id="cb36-481"><a href="#cb36-481"></a>  <span class="fu">xlab</span>(<span class="st">"Improvements, % of price due to infrastructure"</span>)  <span class="sc">+</span> </span>
+<span id="cb36-482"><a href="#cb36-482"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) </span>
+<span id="cb36-483"><a href="#cb36-483"></a><span class="in">```</span></span>
+<span id="cb36-484"><a href="#cb36-484"></a>:::</span>
+<span id="cb36-485"><a href="#cb36-485"></a>:::</span>
+<span id="cb36-486"><a href="#cb36-486"></a></span>
+<span id="cb36-487"><a href="#cb36-487"></a>::: {.column width="50%"}</span>
+<span id="cb36-488"><a href="#cb36-488"></a>::: fragment</span>
+<span id="cb36-489"><a href="#cb36-489"></a><span class="in">```{r echo=TRUE}</span></span>
+<span id="cb36-490"><a href="#cb36-490"></a><span class="co">#| fig-asp: 1</span></span>
+<span id="cb36-491"><a href="#cb36-491"></a><span class="co">#| fig-width: 4.5</span></span>
+<span id="cb36-492"><a href="#cb36-492"></a><span class="fu">plot_slopes</span>(fit3, <span class="at">variables =</span> <span class="st">"improvements"</span>, <span class="at">condition =</span> <span class="st">"acres"</span>) <span class="sc">+</span> </span>
+<span id="cb36-493"><a href="#cb36-493"></a>  <span class="fu">ylab</span>(<span class="st">"Marginal effect of improvements (slope)"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Parcel size, acres"</span>) <span class="sc">+</span> </span>
+<span id="cb36-494"><a href="#cb36-494"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb36-495"><a href="#cb36-495"></a><span class="in">```</span></span>
+<span id="cb36-496"><a href="#cb36-496"></a>:::</span>
+<span id="cb36-497"><a href="#cb36-497"></a>:::</span>
+<span id="cb36-498"><a href="#cb36-498"></a>:::</span>
+<span id="cb36-499"><a href="#cb36-499"></a></span>
+<span id="cb36-500"><a href="#cb36-500"></a><span class="fu">## Reporting all regressions results {.smaller}</span></span>
+<span id="cb36-501"><a href="#cb36-501"></a></span>
+<span id="cb36-504"><a href="#cb36-504"></a><span class="in">```{r}</span></span>
+<span id="cb36-505"><a href="#cb36-505"></a><span class="co">#| output-location: slide</span></span>
+<span id="cb36-506"><a href="#cb36-506"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb36-507"><a href="#cb36-507"></a>  <span class="fu">list</span>(</span>
+<span id="cb36-508"><a href="#cb36-508"></a>    <span class="st">`</span><span class="at">Model 1 (no interaction)</span><span class="st">`</span> <span class="ot">=</span> fit1,</span>
+<span id="cb36-509"><a href="#cb36-509"></a>    <span class="st">`</span><span class="at">Model 2 (Area*Development)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">marginaleffects</span>(fit2, <span class="at">vcov =</span> <span class="sc">~</span> region),</span>
+<span id="cb36-510"><a href="#cb36-510"></a>    <span class="st">`</span><span class="at">Model 3 (Area*Improvements)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">slopes</span>(fit3, <span class="at">vcov =</span> <span class="sc">~</span> region)</span>
+<span id="cb36-511"><a href="#cb36-511"></a>    ),</span>
+<span id="cb36-512"><a href="#cb36-512"></a>  <span class="at">vcov =</span> <span class="fu">list</span>(<span class="sc">~</span> region, <span class="cn">NULL</span>, <span class="cn">NULL</span>),</span>
+<span id="cb36-513"><a href="#cb36-513"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}{stars} ({std.error})"</span>,</span>
+<span id="cb36-514"><a href="#cb36-514"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb36-515"><a href="#cb36-515"></a>  <span class="at">gof_omit =</span>  <span class="fu">c</span>(<span class="st">"AIC|BIC|Log|F|RMS|Std"</span>),</span>
+<span id="cb36-516"><a href="#cb36-516"></a>  <span class="at">output =</span> <span class="st">"html"</span>,</span>
+<span id="cb36-517"><a href="#cb36-517"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb36-518"><a href="#cb36-518"></a>    <span class="st">"acres"</span> <span class="ot">=</span> <span class="st">"Area, acres (*)"</span>,</span>
+<span id="cb36-519"><a href="#cb36-519"></a>    <span class="st">"crpPct"</span> <span class="ot">=</span> <span class="st">"crpPct"</span>,</span>
+<span id="cb36-520"><a href="#cb36-520"></a>    <span class="st">"development"</span> <span class="ot">=</span> <span class="st">"Development status, dummy (*)"</span>,</span>
+<span id="cb36-521"><a href="#cb36-521"></a>    <span class="st">"improvements"</span> <span class="ot">=</span> <span class="st">"Share infrastructure in land price, % (*)"</span></span>
+<span id="cb36-522"><a href="#cb36-522"></a>  ), </span>
+<span id="cb36-523"><a href="#cb36-523"></a>  <span class="at">notes =</span> <span class="st">"(*) marginal effects of the coefficients are reported at means of the corresponding interaction terms. Robust standard errors clustered at region are reported in brackets. For marginal effects, standard errors are estimated using delta method."</span></span>
+<span id="cb36-524"><a href="#cb36-524"></a>)</span>
+<span id="cb36-525"><a href="#cb36-525"></a><span class="in">```</span></span>
+<span id="cb36-526"><a href="#cb36-526"></a></span>
+<span id="cb36-527"><a href="#cb36-527"></a><span class="fu"># Takeaway and homework</span></span>
+<span id="cb36-528"><a href="#cb36-528"></a></span>
+<span id="cb36-529"><a href="#cb36-529"></a></span>
+<span id="cb36-530"><a href="#cb36-530"></a><span class="fu">## Takeaway and homework</span></span>
+<span id="cb36-531"><a href="#cb36-531"></a></span>
+<span id="cb36-532"><a href="#cb36-532"></a><span class="ss">-   </span>Marginal effects.</span>
+<span id="cb36-533"><a href="#cb36-533"></a></span>
+<span id="cb36-534"><a href="#cb36-534"></a><span class="ss">-   </span>Difference between fitted values and marginal effects.</span>
+<span id="cb36-535"><a href="#cb36-535"></a></span>
+<span id="cb36-536"><a href="#cb36-536"></a><span class="ss">-   </span>Homework:</span>
+<span id="cb36-537"><a href="#cb36-537"></a></span>
+<span id="cb36-538"><a href="#cb36-538"></a><span class="ss">    -   </span>Reproduce code from the slides.</span>
+<span id="cb36-539"><a href="#cb36-539"></a></span>
+<span id="cb36-540"><a href="#cb36-540"></a><span class="ss">    -   </span>Follow pre-recorded materials with extra calculations.</span>
+<span id="cb36-541"><a href="#cb36-541"></a></span>
+<span id="cb36-542"><a href="#cb36-542"></a><span class="fu"># References</span></span>
+<span id="cb36-543"><a href="#cb36-543"></a></span>
+<span id="cb36-544"><a href="#cb36-544"></a><span class="fu">## References</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
