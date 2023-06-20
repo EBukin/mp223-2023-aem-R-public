@@ -1,0 +1,36 @@
+---
+title: "Week 02. Homework supplementary materials"
+editor: source
+format:
+  revealjs: 
+    smaller: false
+bibliography: ../bib/references.bib
+---
+
+```{r}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 8,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "80%"
+)
+```
+
+These slides supplement the homework on checks and balances tables in R.
+
+The goals of this homework is to reproduce the analysis of the RAND Health Insurance Experiment (HIE) present in tables 1.3 amd 1.4 in Mastering'metrics [@Angrist2014]
+
+## Table 1.3 Check and balance
+
+![](img/w02/mm-t1.3.PNG)
+
+## Table 1.4 Intervention evaluation
+
+![](img/w02/mm-t1.4.PNG)
+
+# Tools
+
+Here we briefly summarize the tools one need to make this HW.
+
+## References

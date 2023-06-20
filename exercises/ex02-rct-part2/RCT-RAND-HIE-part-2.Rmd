@@ -1,0 +1,283 @@
+---
+title: "Exploratory analysis of the RAND Health Insurance Experiment (HIE) data"
+author: "EB"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+The RAND Health Insurance Experiment (HIE), which ran from 1974 to 1982, was one of the most influential social experiments in research history. It's purpose was to evaluate the price elasticity of the health insurance plans. The HIE enrolled 3,958 people aged 14 to 61 from six areas of the USA. The results of this randomized experiment could be used for evaluating the causal effect of the health insurance on peoples health.
+
+Data that we are using in greater details is described in the Chapter 1. Randomized Trials in [Angrist, J. D., & Pischke, J.-S. (2014). Mastering'metrics: The path from cause to effect. Princeton University Press.](https://hds.hebis.de/ubgi/Record/HEB35797798X). For our exercise, we use a somehow simplified data set with only two distinct insurance plans:
+
+1.  Catastrophic - Analogy of having no insurance
+2.  Free - the most comprehensive insurance plan that allows practically any medical treatment for free.
+
+The question that we want to answer is about the causal effect of insurance of enrolled people health.
+
+> Note. To better understand the context, read subsection "Randomized results" of the Chapter 1 in Mastering'metrics.
+
+### Excersise takaways:
+
+These are the key R-related skills showcased in this exercise;
+
+1.  Data wrangling with:
+
+    -   `dplyr::filter()`;
+    -   `dplyr::select()`;
+
+2.  Descriptive statistics: 
+
+    -   `mean()`, `sd()`;
+    -   `modelsummary::datasummary_skim()`;
+
+3.  Means comparison:
+
+    -   `t.test()`;
+    -   `modelsummary::datasummary_balance()`
+    -   `lm()` - regression methods
+
+4.  Causal effects analysis:
+
+    -   `t.test()`;
+    -   `modelsummary::datasummary_balance()`
+    -   `lm()`
+
+
+## Loading packages and the data
+
+To start working in R, we need to load packages. Sometimes, when we have a fresh new version of R, we need to install libraries before loading them. To install package, one need to run: `install.packages("name_of_the_package")`.
+
+```{r}
+# install.packages("psych")   
+library(psych)
+
+# install.packages("tidyverse")
+library(tidyverse)  
+
+# install.packages("modelsummary")
+library(modelsummary)  
+
+# install.packages("GGally")
+library(GGally)  
+```
+
+Loading data
+
+```{r message=FALSE}
+pre_dta <- read_csv("rand-hie-pre-treatment.csv")
+post_dta <-  read_csv("rand-hie-post-treatment.csv")
+```
+
+Inspecting data:
+
+-   `glimpse()` at the data in the console.
+
+## Wrangling basics:
+
+`dplyr::filter()` - filters observations in the data and `dplyr::selects()` selects variables.
+
+To learn more, do interactive exercise online here:
+
+-   <https://posit.cloud/learn/primers/2.1>
+
+-   <https://posit.cloud/learn/primers/2.2>
+
+Read: <https://r4ds.had.co.nz/transform.html>
+
+### Filtering data in R
+
+Let us filter one intervention only using `dplyr::filter()`.
+
+`?filter` - type in the console to get help.
+
+Filter sub samples with a specific insurance plan. Available insurance plans are:
+
+-   "Any insurance"
+-   "Catastrophic"
+-   "Free"
+
+```{r}
+pre_dta %>% filter(plan == "Catastrophic")
+```
+
+Filter individuals, where total family income is 10 000 or above.
+
+```{r}
+pre_dta %>% filter(income_family >  10000)
+```
+
+Count the number of individual under each insurance plan with total expenses above 1000.
+
+```{r}
+pre_dta %>% filter(income_family >  10000) %>% count(plan)
+```
+
+### Selecting data in R
+
+Select any set of variables. For example:
+
+```{r}
+pre_dta %>% select(female, income_family, age, education_years)
+```
+
+One can specify what variables to drop:
+
+```{r}
+pre_dta %>% select(-plantype, plan_type_2, -id, -general_health_index)
+```
+
+### Combine selecting and filtering
+
+```{r}
+pre_dta %>% 
+  filter(female == 1) %>% 
+  select(income_family, age, education_years)
+```
+
+## Descriptive statistics
+
+There are many ways how to make the descriptive statistics. I like `datasummary`
+
+### Tables
+
+New function: `datasummary_skim()` from the package `modelsummary`. Check examples in `?datasummary_skim`.
+
+```{r}
+datasummary_skim(pre_dta)
+```
+
+Use `filter()`, `select()` and `datasummary_skim()` to build summary statistics for each insurance plan in the pre-treatment data. Compare those results with the Table 1.3 in the Mastering'metrics book. Make sure that variables `plantype`, `plan_type_2` are not in the summary statistics.
+
+```{r}
+pre_dta %>% 
+  filter(plan == "Catastrophic") %>% 
+  select(female, age, education_years) %>% 
+  datasummary_skim()
+```
+
+### Complex data summary tables
+
+Step 1. Create functions that make summary statistics for us.
+
+```{r}
+mean_na <- function(x) mean(x, na.rm = TRUE)
+
+sd_na <- function(x) sd(x, na.rm = TRUE)
+
+min_max <-
+  function(x)  {
+    sprintf("[%.1f, %.1f]", min(x, na.rm = T), max(x, na.rm = T))
+  }
+```
+
+Step 2. Check how these functions work:
+
+```{r}
+c(1:120) %>% mean_na
+pre_dta$age %>% sd_na
+pre_dta$income_family %>% min_max
+```
+
+Step 3. Construct a complex summary statistic table using:
+
+-   `datasummary()`. help: `?datasummary`. Check the examples.
+
+```{r message=FALSE, warning=FALSE}
+datasummary(All(pre_dta) ~ plan * (mean_na + sd_na + min_max), data = pre_dta)
+```
+
+### Visual summary statistics
+
+Here we can use `GGally::ggpair()` more information is here: <https://ggobi.github.io/ggally/articles/ggpairs.html>
+
+```{r}
+pre_dta %>% 
+  select(plan, age, education_years, mental_health_index) %>% 
+  GGally::ggpairs(mapping = aes(fill = plan)) 
+```
+
+## Checks and balances
+
+### Means differences between groups
+
+We can perform means comparison tests one by one for each variable and difference. For example: 
+
+```{r}
+t.test(income_family ~ plan, data = pre_dta %>% filter(plan_type_2 %in% c(1,2)))
+```
+
+Make a similar comparison for a different plan type:
+
+```{r}
+
+```
+
+Make a similar comparison for a different outcome variable:
+
+```{r}
+
+```
+
+### Checks and balances tables
+
+`datasummary_balance()` is a more sophisticated function. It builds summary statistics for multiple groups and for two groups only it permits comparing means. For help, see `?datasummary_balance`.
+
+Compare leans for all variables across all insurances.
+
+```{r}
+datasummary_balance(. ~ plan, data = pre_dta)
+```
+
+Filter two insurance plans to compare means between those. 
+
+```{r}
+
+```
+
+Filter other two insurance plans and compare means between them.
+
+```{r}
+
+```
+
+### Mean comparison with regression
+
+Regression analysis could be used to compare means. For example:
+
+```{r}
+mod1 <- lm(income_family ~ plan, data = pre_dta)
+summary(mod1)
+```
+
+## Causal effects
+
+To study causal effects, we will use a new data set, which loaded before called: `post_dta`. 
+
+Glimpse at it: 
+
+```{r}
+glimpse(post_dta)
+```
+
+### t-test
+
+Use the t-test to show the effect of insurance on total expenditure on healthcare. 
+
+```{r}
+t.test(total_exp ~ plan, data = post_dta %>% filter(plan_type_2 %in% c(0,2)))
+```
+
+### Use `datasummary_balance()` for the same comparison
+
+```{r}
+datasummary_balance(. ~ plan, data = post_dta %>% filter(plan_type_2 %in% c(0,2)))
+```
+
+
+
