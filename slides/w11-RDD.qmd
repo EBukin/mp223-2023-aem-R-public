@@ -1,0 +1,294 @@
+---
+title: "Regression Discontinuity Design"
+editor: source
+format:
+  revealjs: 
+    incremental: true
+    smaller: false
+    scrollable: false
+    code-overflow: wrap
+    code-copy: true
+    header-includes: |
+      <link href="custom.css" rel="stylesheet">
+bibliography: ../bib/references.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  fig.align = "center",
+  fig.width = 7,
+  fig.asp = 0.618,
+  fig.retina = 3,
+  out.width = "100%"
+)
+
+library(tidyverse)
+library(modelsummary)
+library(palmerpenguins)
+library(ggpubr)
+library(wooldridge)
+library(here)
+library(parameters)
+library(performance)
+library(lmtest)
+```
+
+# Regression Discontinuity (Design)
+
+-   Exploit **natural experiments** that constrain the role of chance in human affairs by arbitrary decision-making in policy that divide groups.
+
+-   Rigid rules that aim to eliminate randomness create a natural experiment with the random components.
+
+-   There area: **Sharp and Fuzzy** RDD
+
+## Example 1. Birthdays and funerals [@Angrist2014]
+
+::: columns
+::: {.column width="70%"}
+![](img/w11/f4.1.PNG)
+:::
+
+::: {.column width="30%"}
+-   After the 21st birthday, the number of death spikes in the USA.
+
+-   Why?
+
+-   In the number of death over age, there is some kind of **discontinuity**.
+:::
+:::
+
+## Theoretical basis
+
+-   Yong people are more likely to die from external causes such as car accidents or suicides.
+
+-   Older people are more likely to die from internal causes (cancer).
+
+. . .
+
+Discontinuity in the death rate over age must be caused by some external factors.
+
+-   Policy.
+
+. . .
+
+Regression Discontinuity (Design) **RDD** is called like that because it **uses regression to determine the discontinuity**.
+
+## RDD: basics
+
+::: columns
+::: {.column width="60%"}
+-   $a$ age of the cohort of people;
+-   $\bar M_a$ as the monthly average death rate for the cohort;
+-   $D_a$ dummy variable that indicates if the cohort $a$ has right to drink alcohol.
+:::
+
+::: {.column width="40%"}
+::: fragment
+$$
+D_{a}=
+\begin{cases}
+1, & \text{if}\ a \ge 21 \\
+0, & \text{if}\ a < 21.
+\end{cases}
+$$
+:::
+:::
+:::
+
+. . .
+
+Treatment status $D_a$ is **discontinuous of the running variable** $a$ at the cut-off threshold $21$.
+
+. . .
+
+Using regression we can estimate the effect of the discontinuity $\rho$:
+
+. . .
+
+$$
+\bar M_{a} = \alpha + \rho D_a + \gamma a + e_a,
+$$
+
+where
+
+-   $\rho$ captures the jump in death due to the policy change,
+
+-   $\gamma$ reflects internals/external causes substitution.
+
+## RDD: anatomy
+
+$$
+\bar M_{a} = \alpha + \rho D_a + \gamma a + e_a,
+$$
+
+-   This is a **short model**.
+
+    -   Does it suffer from the OVB?
+
+-   No, because:
+
+    -   treatment $D_a$ depends only on $a$, and
+
+    -   there is no difference between 20 and 21 yo
+
+    -   there is no difference between 20 years and 11 m.o. and 21y. and 1 m.o.
+
+    -   we have "insiders" information about the similarity of the observations on two sides of the treatment/threshold.
+
+## Sharp vs Fuzzy RDD
+
+. . .
+
+Sharp: the threshold is sharp and changes status from one to another immediately.
+
+-   $a$ is age and age limit is a threshold that
+
+-   probability of treatment changes from 0 to 1 at the threshold.
+
+. . .
+
+Fuzzy RDD:
+
+-   Probability of intensity of treatment usually persists all along the running variables,
+
+-   but at the cut-off probability of treatment intensity jumps.
+
+## RDD: visual transparency
+
+![](img/w11/f4.2.PNG)
+
+## RDD: robustness
+
+![](img/w11/f4.5a.PNG)
+
+## RDD: limitations
+
+-   External validity:
+
+-   Non-linear relationship between running variable and discontinuity:
+
+-   Discontinuity must be sharp but it may not be observed in the data.
+
+## RDD: bandwidth
+
+Window around the threshold that we use to estimate the effect of the cut-off.
+
+-   bandwidth is the trade-off between Bias and Variance.
+
+-   Selecting bandwidth
+
+    -   bandwidth should vary as a function of the sample size: more information, narrower the bandwidth.
+
+    -   Point of the judgment call, but results should be robust given the bandwidth variation.
+
+See @Imbens2011
+
+## Non linearity and discontinuity (1)
+
+![](img/w11/f4.3a.PNG)
+
+## Non linearity and discontinuity (2)
+
+![](img/w11/f4.3b.PNG)
+
+## Non linearity and discontinuity (3)
+
+![](img/w11/f4.3c.PNG)
+
+## Non linearity solutions {.smaller}
+
+1.  Polynomial:
+
+-   $\bar M_{a} = \alpha + \rho D_a + \gamma_1 a + \gamma_2 a^2 + e_a$
+-   could be too good and confirm prejudices;
+-   we need to make a judgment call in a publication and check alternatives with robustness checks.
+
+2.  Centering the running variable at the cut-off $a_0$ and adding the interaction term with $D_a$.
+
+-   $\bar M_{a} = \alpha + \rho D_a + \gamma (a - a_0) + \delta [(a-a_0)D_a] + e_a$
+-   When centered, $\rho$ is the the jump parameter.
+-   change in the slope of $\rho$ before and after the threshold with: $\rho + \delta (a - a_0)$.
+
+3.  Non linearity and the cut-off slope change could be combined:
+
+-   $\bar M_{a} = \alpha + \rho D_a + \gamma_1 (a - a_0) + \gamma_2 (a - a_0) ^ 2 + \delta_1 [(a-a_0)D_a] + \delta_2 [(a-a_0) ^ 2 D_a] + e_a$
+
+## Complexity vs simplicity
+
+-   No general rule on choosing one or another model (simple vs complex);
+
+-   Better to have robust not-sensitive results.
+
+-   Visual inspection is a key.
+
+-   Checks and balances are important. Check for the composites of the death for example.
+
+-   There are also non-parametric approaches.
+
+## Difference of the RD from the regression
+
+-   In the regression we **control** for other factors
+
+    -   hoping that this will **match counterfactual** for our factual and ensure the ceteris paribus.
+
+-   In the RDD **running variable** $a$ is the one that ensures that:
+
+    -   once we can observe the treatment we cannot observe the counterfactual.
+
+-   It works at least for the **observations that are neighboring on the running variable**.
+
+# RDD in agricultural and environmental economics
+
+See: [@Wuepper2022]
+
+## Specific considerations:
+
+1.  Ag economics may rely on remote sensing and GIS data more.
+
+2.  Distances from physical borders or longitude and latitude coordinates are the running variables
+
+## East or West Germany, farm size and biodiversity [@Noack2021]
+
+![](img/w11/germany-biodiversity.jpg)
+
+## East or West Germany: farm size [@Noack2021]
+
+![](img/w11/germany-farm-size.jpg)
+
+## Soil erosion and the Soviet legacy [@Wuepper2020]
+
+![](img/w11/soil-erosion-ussr.PNG)
+
+## @Wuepper2020: Natural soil erosion
+
+![](img/w11/soil-erosion-ussr-1.PNG)
+
+## @Wuepper2020: Maximum soil erosion
+
+![](img/w11/soil-erosion-ussr-2.PNG)
+
+## @Wuepper2020: Soil erosion due to land use
+
+![](img/w11/soil-erosion-ussr-2.PNG)
+
+## @Wuepper2020: Robustness checks
+
+![](img/w11/soil-eorsion-5.jpg)
+
+## @Wuepper2020: Forest cover
+
+![](img/w11/soil-eorsion-6.jpg)
+
+## @Wuepper2020
+
+## Sampling strategy in [@Ali2014]
+
+![](img/w11/sampling.jpg)
+
+## More examples and practice
+
+\< https://rdpackages.github.io \>
+
+# References

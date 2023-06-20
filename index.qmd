@@ -119,10 +119,15 @@ Exercises:
 
 ### Week 11. June 21. RDD - Regression Discontinuity (Lecture) + R: RDD
 
+Slides:
+
+-   [w11-RDD](slides/w11-RDD.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w10-RDD.pdf)
+
+
 ### Week 12. June 28. Binary outcome variable (see Ilias)
 
 ### Week 13. July 5. R: Binary outcome variable (see Ilias)
 
 ### Week 14. July 12. (see Ilias / StudIP)
 
-### Week 15. July 19. (see Ilias / StudIP)
+### Week 15. July 19. Exam 1. 

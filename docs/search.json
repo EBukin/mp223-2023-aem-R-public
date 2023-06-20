@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Index",
     "section": "",
-    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data\n\n\n\n\n\n\n\nSlides:\n\nw10a-IV + pdf\nw10b-IV-examples + pdf\n\nExercises:\n\nex10-IV.zip - R project with code and data"
+    "text": "Repository with the materials of the course MP223 - Applied Econometrics Methods in the Social Sciences for summer Semester 2023 at the JLU.\n\n\nThis is an approximate course plan that is updated before each lecture with the slides and materials relevant for each lecture.\n\n\nSlides:\n\nw01a-introduction + pdf\nw01b-selection-bias + pdf\nw01c-r-rstudio-intro + pdf\n\nExercises:\n\nex01-rct.zip - the R project with code and data\nSupplementary recording on how to execute the analysis https://youtu.be/-ednrypEv4o.\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw03-mlr-part1 + pdf\n\nExercises + Recordings:\n\nex03-regression-part1.zip - the R project with code and data\nex.03.a Regression basics https://youtu.be/rUlpdHsXPRw\nex.03.b Wage and Education https://youtu.be/5zwYnnjnZXo\nex.03.c Hedonic regression https://youtu.be/-tIylFJUNX4\n\n\n\n\nSlides:\n\nw04-mlr-part2 + pdf\n\nExercises:\n\nex04-regression-part2.zip - the R project with code and data\nex.04.b Complex production function https://youtu.be/DMxFupZSzTs\n\n\n\n\nSlides: See Ilias.\n\n\n\nSlides:\n\nw06a-interactions + pdf\n\nPre-recorded materials on interaction term https://youtu.be/2M4LRVGPgoI\n\nw06b-DiD + pdf\n\nExercises:\n\nex06-did-and-interactions.zip - the R project with code and data\n\nex.06.a Interaction terms https://youtu.be/GJLt36FAj48\nex.06.b DiD https://youtu.be/QAI3-Rh1Sok\nex.06.C DiD Card Krueger https://youtu.be/ogaVyGCO_6c\n\n\n\n\n\nSlides:\n\nw07-OVB + pdf\n\nw07 OVB Lecture https://youtu.be/AM6fhMby0W4\n\n\nExercises:\n\nex07-ovb.zip - R project with code and data\n\nex.07.a Wage, Education and ability https://youtu.be/x3g9z63xqFE\nex.07.b Wage, union membership and education https://youtu.be/EJhmkJGLsBc\n\n\n\n\n\nSlides:\n\nw08a-panel-regression + pdf\nw08b-panel-regression-production-function.qmd + pdf\n\nExercises:\n\nex08-panel-regression.zip - R project with code and data\n\n\n\n\n\n\n\nSlides:\n\nw10a-IV + pdf\nw10b-IV-examples + pdf\n\nExercises:\n\nex10-IV.zip - R project with code and data\n\n\n\n\nSlides:\n\nw11-RDD + pdf"
   },
   {
     "objectID": "slides/w01a-introduction.html#welcome-to-meta-course",
@@ -4807,5 +4807,306 @@
     "title": "Instrumental Variable",
     "section": "References",
     "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS.\n\n\n\nAcemoglu, D., Johnson, S., & Robinson, J. A. (2001). The colonial origins of comparative development: An empirical investigation. American Economic Review, 91(5), 1369–1401. http://doi.org/10.1257/aer.91.5.1369\n\n\nAngrist, Joshua D., & Krueger, A. B. (1991). Does Compulsory School Attendance Affect Schooling and Earnings? The Quarterly Journal of Economics, 106(4), 979–1014. http://doi.org/10.2307/2937954\n\n\nAngrist, Joshua D., & Krueger, A. B. (2001). Instrumental variables and the search for identification: From supply and demand to natural experiments. Journal of Economic Perspectives, 15(4), 69–85. http://doi.org/10.1257/jep.15.4.69\n\n\nAngrist, Joshua D., & Pischke, J.-S. (2009). Mostly harmless econometrics. Princeton University Press. http://doi.org/10.1515/9781400829828\n\n\nAngrist, Joshua D., & Pischke, J.-S. (2014). Mastering’metrics: The path from cause to effect. Princeton University Press.\n\n\nBuckles, K. S., & Hungerman, D. M. (2013). Season of birth and later outcomes: Old questions, new answers. Review of Economics and Statistics, 95(3), 711–724. http://doi.org/10.1162/rest_a_00314\n\n\nCard, D. (1994). Earnings, schooling, and ability revisited. National Bureau of Economic Research.\n\n\nDuflo, E. (2001). Schooling and labor market consequences of school construction in indonesia: Evidence from an unusual policy experiment. American Economic Review, 91(4), 795–813. http://doi.org/10.1257/aer.91.4.795\n\n\nHernán, M. A., & Robins, J. M. (2020). Causal Inference: What If. Chapman & Hall/CRC.\n\n\nImbens, G. W. (2020). Potential outcome and directed acyclic graph approaches to causality: Relevance for empirical practice in economics. Journal of Economic Literature, 58(4), 1129–1179. http://doi.org/10.1257/jel.20191597\n\n\nSöderbom, M., Teal, F., & Eberhardt, M. (2014). Empirical development economics. ROUTLEDGE. Retrieved from https://www.ebook.de/de/product/21466458/mans_soederbom_francis_teal_markus_eberhardt_empirical_development_economics.html\n\n\nStaiger, D., & Stock, J. H. (1997). Instrumental variables regression with weak instruments. Econometrica, 65(3), 557. http://doi.org/10.2307/2171753\n\n\nWooldridge, J. M. (2010). Econometric analysis of cross section and panel data. MIT press.\n\n\nWooldridge, M. J. (2020). Introductory econometrics: A modern approach. South-Western. Retrieved from https://www.cengage.uk/shop/isbn/9781337558860"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#conceptual-framework",
+    "href": "slides/w11-RDD.html#conceptual-framework",
+    "title": "Regression Discontinuity Design",
+    "section": "Conceptual framework",
+    "text": "Conceptual framework\n\nWhy do countries fight and occupy territories? What are the reasons for the warfare?\nAnthropology:\n\nThe Hobbesian thesis: war is part of human nature and serves both the internal function of solidarity and the external function of maintaining the balance of power.\nThe Rousseauean thesis: war is not in human nature but was invented by states for the functions mentioned above.\nThe Malthusian thesis: war serves the grand function of reducing population, quite apart from its conscious proximate functions\nSee (Dawson1996?) for a review.\n\nEconomics?"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#conceptual-framework-cont.",
+    "href": "slides/w11-RDD.html#conceptual-framework-cont.",
+    "title": "Regression Discontinuity Design",
+    "section": "Conceptual framework (cont.)",
+    "text": "Conceptual framework (cont.)\nEconomics (Kimbrough, Laughren, & Sheremeta, 2020):\n\nCosts and benefits of war:\n\nthe value of contestable resources vs. the costs of their occupation;\nlong-term economic benefits from the resources vs. costs;\n\nGame theory:\n\nIncorporate more information to capture the decision-making processes of individuals and their strategies."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#conceptual-framework-cont.-1",
+    "href": "slides/w11-RDD.html#conceptual-framework-cont.-1",
+    "title": "Regression Discontinuity Design",
+    "section": "Conceptual framework (cont.)",
+    "text": "Conceptual framework (cont.)\nIf resources and control over them are the key, how economic agents may use these resources before and after the occupation?\n\nTo the maximum possible before.\nTo the maximum possible after.\n\n\nWhat if before and after, resource use intensity is not the same?\n\nIf before resources were used efficiently, but after they are used less efficiently, then, objective was not to own more valuable resources."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#specific-example",
+    "href": "slides/w11-RDD.html#specific-example",
+    "title": "Regression Discontinuity Design",
+    "section": "Specific example:",
+    "text": "Specific example:"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#references",
+    "href": "slides/w11-RDD.html#references",
+    "title": "Regression Discontinuity Design",
+    "section": "References",
+    "text": "References\n\n\n\nMP223-Applied Econometrics (SoSe 2023). Author: Eduard Bukin (2023). | GitHub | StudIP | ILIAS."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#example-1.-birthdays-and-funerals-usa-angrist2014",
+    "href": "slides/w11-RDD.html#example-1.-birthdays-and-funerals-usa-angrist2014",
+    "title": "Regression Discontinuity Design",
+    "section": "Example 1. Birthdays and funerals (USA) (Angrist & Pischke, 2014)",
+    "text": "Example 1. Birthdays and funerals (USA) (Angrist & Pischke, 2014)\n\n\n\n\n\nAfter the 21st birthday, the number of death spikes in the USA.\nWhy?\nIn the number of death over age, there is some kind of discontinuity."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#theoretical-basis",
+    "href": "slides/w11-RDD.html#theoretical-basis",
+    "title": "Regression Discontinuity Design",
+    "section": "Theoretical basis",
+    "text": "Theoretical basis\n\nYong people are more likely to die from external causes such as car accidents or suicides.\nOlder people are more likely to die from internal causes (cancer).\n\n\nDiscontinuity in the death rate over age must be caused by some external factors.\n\nPolicy.\n\n\n\nRegression Discontinuity (Design) RDD is called like that because it uses regression to determine the discontinuity."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-basics",
+    "href": "slides/w11-RDD.html#rdd-basics",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: basics",
+    "text": "RDD: basics\n\n\n\n\\(a\\) age of the cohort of people;\n\\(\\bar M_a\\) as the monthly average death rate for the cohort;\n\\(D_a\\) dummy variable that indicates if the cohort \\(a\\) has right to drink alcohol.\n\n\n\n\\[\nD_{a}=\n\\begin{cases}\n1, & \\text{if}\\ a \\ge 21 \\\\\n0, & \\text{if}\\ a < 21.\n\\end{cases}\n\\]\n\n\n\n\nTreatment status \\(D_a\\) is discontinuous of the running variable \\(a\\) at the cut-off threshold \\(21\\).\n\n\nUsing regression we can estimate the effect of the discontinuity \\(\\rho\\):\n\n\n\\[\n\\bar M_{a} = \\alpha + \\rho D_a + \\gamma a + e_a,\n\\]\nwhere\n\n\\(\\rho\\) captures the jump in death due to the policy change,\n\\(\\gamma\\) reflects internals/external causes substitution."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-anatomy",
+    "href": "slides/w11-RDD.html#rdd-anatomy",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: anatomy",
+    "text": "RDD: anatomy\n\\[\n\\bar M_{a} = \\alpha + \\rho D_a + \\gamma a + e_a,\n\\]\n\nThis is a short model.\n\nDoes it suffer from the OVB?\n\nNo, because:\n\ntreatment \\(D_a\\) depends only on \\(a\\), and\nthere is no difference between 20 and 21 yo\nthere is no difference between 20 years and 11 m.o. and 21y. and 1 m.o.\nwe have “insiders” information about the similarity of the observations on two sides of the treatment/threshold."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#difference-of-the-rd-from-the-regression",
+    "href": "slides/w11-RDD.html#difference-of-the-rd-from-the-regression",
+    "title": "Regression Discontinuity Design",
+    "section": "Difference of the RD from the regression",
+    "text": "Difference of the RD from the regression\n\nIn the regression we control for other factors\n\nhoping that this will match counterfactual for our factual and ensure the ceteris paribus.\n\nIn the RDD running variable \\(a\\) is the one that ensures that:\n\nonce we can observe the treatment we cannot observe the counterfactual.\n\nIt works at least for the observations that are neighboring on the running variable."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-features",
+    "href": "slides/w11-RDD.html#rdd-features",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD features:",
+    "text": "RDD features:\n\nTreatment status \\(D_a\\) is a function of the running variable \\(a\\): \\(D = f(a)\\);\n\n\n\\[\nD_{a}=\n\\begin{cases}\n1, & \\text{if}\\ a \\ge 21 \\\\\n0, & \\text{if}\\ a < 21.\n\\end{cases}\n\\]\n\n\nTreatment status is discontinuous of the running variable at the cut-off threshold."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#after-minsk-agreement-september-2014-borders-stabilized",
+    "href": "slides/w11-RDD.html#after-minsk-agreement-september-2014-borders-stabilized",
+    "title": "Regression Discontinuity Design",
+    "section": "After “Minsk Agreement” September 2014 borders stabilized",
+    "text": "After “Minsk Agreement” September 2014 borders stabilized"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#after-minsk-agreement-example-of-one-district",
+    "href": "slides/w11-RDD.html#after-minsk-agreement-example-of-one-district",
+    "title": "Regression Discontinuity Design",
+    "section": "After “Minsk Agreement” example of one district",
+    "text": "After “Minsk Agreement” example of one district"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#after-minsk-agreement-agricultural-fields-in-2018",
+    "href": "slides/w11-RDD.html#after-minsk-agreement-agricultural-fields-in-2018",
+    "title": "Regression Discontinuity Design",
+    "section": "After “Minsk Agreement” Agricultural fields in 2018",
+    "text": "After “Minsk Agreement” Agricultural fields in 2018"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#example-1.-birthdays-and-funerals-angrist2014",
+    "href": "slides/w11-RDD.html#example-1.-birthdays-and-funerals-angrist2014",
+    "title": "Regression Discontinuity Design",
+    "section": "Example 1. Birthdays and funerals (Angrist & Pischke, 2014)",
+    "text": "Example 1. Birthdays and funerals (Angrist & Pischke, 2014)\n\n\n\n\n\nAfter the 21st birthday, the number of death spikes in the USA.\nWhy?\nIn the number of death over age, there is some kind of discontinuity."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#sharp-vs-fuzzy-rdd",
+    "href": "slides/w11-RDD.html#sharp-vs-fuzzy-rdd",
+    "title": "Regression Discontinuity Design",
+    "section": "Sharp vs Fuzzy RDD",
+    "text": "Sharp vs Fuzzy RDD\n\nSharp: the threshold is sharp and changes status from one to another immediately.\n\n\\(a\\) is age and age limit is a threshold that\nprobability of treatment changes from 0 to 1 at the threshold.\n\n\n\nFuzzy RDD:\n\nProbability of intensity of treatment usually persists all along the running variables,\nbut at the cut-off probability of treatment intensity jumps."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-visual-transparency",
+    "href": "slides/w11-RDD.html#rdd-visual-transparency",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: visual transparency",
+    "text": "RDD: visual transparency"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-robustness",
+    "href": "slides/w11-RDD.html#rdd-robustness",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: robustness",
+    "text": "RDD: robustness"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-limitations",
+    "href": "slides/w11-RDD.html#rdd-limitations",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: limitations",
+    "text": "RDD: limitations\n\nExternal validity:\nNon-linear relationship between running variable and discontinuity:\nDiscontinuity must be sharp but it may not be observed in the data."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#rdd-bandwidth",
+    "href": "slides/w11-RDD.html#rdd-bandwidth",
+    "title": "Regression Discontinuity Design",
+    "section": "RDD: bandwidth",
+    "text": "RDD: bandwidth\nWindow around the threshold that we use to estimate the effect of the cut-off.\n\nbandwidth is the trade-off between Bias and Variance.\nSelecting bandwidth\n\nbandwidth should vary as a function of the sample size: more information, narrower the bandwidth.\nPoint of the judgment call, but results should be robust given the bandwidth variation.\n\n\nSee Imbens & Kalyanaraman (2011)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#non-linearity-and-discontinuity-1",
+    "href": "slides/w11-RDD.html#non-linearity-and-discontinuity-1",
+    "title": "Regression Discontinuity Design",
+    "section": "Non linearity and discontinuity (1)",
+    "text": "Non linearity and discontinuity (1)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#non-linearity-and-discontinuity-2",
+    "href": "slides/w11-RDD.html#non-linearity-and-discontinuity-2",
+    "title": "Regression Discontinuity Design",
+    "section": "Non linearity and discontinuity (2)",
+    "text": "Non linearity and discontinuity (2)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#non-linearity-and-discontinuity-3",
+    "href": "slides/w11-RDD.html#non-linearity-and-discontinuity-3",
+    "title": "Regression Discontinuity Design",
+    "section": "Non linearity and discontinuity (3)",
+    "text": "Non linearity and discontinuity (3)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#non-linearity-and-discontinuity-4-all-solutions",
+    "href": "slides/w11-RDD.html#non-linearity-and-discontinuity-4-all-solutions",
+    "title": "Regression Discontinuity Design",
+    "section": "Non linearity and discontinuity (4) all solutions:",
+    "text": "Non linearity and discontinuity (4) all solutions:\n\nPolynomial:\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma_1 a + \\gamma_2 a^2 + e_a\\)\ncould be too good and confirm prejudices;\nwe need to make a judgment call in a publication and check alternatives with robustness checks.\n\n\nCentering the running variable at the cut-off \\(a_0\\) and adding the interaction term with \\(D_a\\).\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma (a - a_0) + \\delta [(a-a_0)D_a] + e_a\\)\nWhen centered, \\(\\rho\\) is the the jump parameter.\nchange in the slope of \\(\\rho\\) before and after the threshold with: \\(\\rho + \\delta (a - a_0)\\).\n\n\nNon linearity and the cut-off slope change could be combined:\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma_1 (a - a_0) + \\gamma_2 (a - a_0) ^ 2 + \\delta_1 [(a-a_0)D_a] + \\delta_2 [(a-a_0) ^ 2 D_a] + e_a\\)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#complexity-vs-simplicity",
+    "href": "slides/w11-RDD.html#complexity-vs-simplicity",
+    "title": "Regression Discontinuity Design",
+    "section": "Complexity vs simplicity",
+    "text": "Complexity vs simplicity\n\nNo general rule on choosing one or another model (simple vs complex);\nBetter to have robust not-sensitive results.\nVisual inspection is a key.\nChecks and balances are important. Check for the composites of the death for example.\nThere are also non-parametric approaches."
+  },
+  {
+    "objectID": "slides/w11-RDD.html#specific-considerations",
+    "href": "slides/w11-RDD.html#specific-considerations",
+    "title": "Regression Discontinuity Design",
+    "section": "Specific considerations:",
+    "text": "Specific considerations:\n\nAg economics may rely on remote sensing and GIS data more.\nDistances from physical borders or longitude and latitude coordinates are the running variables"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#east-or-west-germany-farm-size-and-biodivercity-noack2021",
+    "href": "slides/w11-RDD.html#east-or-west-germany-farm-size-and-biodivercity-noack2021",
+    "title": "Regression Discontinuity Design",
+    "section": "East or West Germany, farm size and biodivercity (Noack, Larsen, Kamp, & Levers, 2021)",
+    "text": "East or West Germany, farm size and biodivercity (Noack, Larsen, Kamp, & Levers, 2021)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#east-or-west-germany-farm-size-noack2021",
+    "href": "slides/w11-RDD.html#east-or-west-germany-farm-size-noack2021",
+    "title": "Regression Discontinuity Design",
+    "section": "East or West Germany: farm size (Noack et al., 2021)",
+    "text": "East or West Germany: farm size (Noack et al., 2021)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#soil-errosion-and-the-soviet-legacy-wuepper2020",
+    "href": "slides/w11-RDD.html#soil-errosion-and-the-soviet-legacy-wuepper2020",
+    "title": "Regression Discontinuity Design",
+    "section": "Soil errosion and the Soviet legacy (Wuepper, Borrelli, Mueller, & Finger, 2020)",
+    "text": "Soil errosion and the Soviet legacy (Wuepper, Borrelli, Mueller, & Finger, 2020)\n ## Sampling strategy in (Ali, Deininger, & Goldstein, 2014)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#context",
+    "href": "slides/w11-RDD.html#context",
+    "title": "Regression Discontinuity Design",
+    "section": "Context",
+    "text": "Context"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#how-can-we-quantiy-discontinuity-of-development-between-occupied-and-free-land",
+    "href": "slides/w11-RDD.html#how-can-we-quantiy-discontinuity-of-development-between-occupied-and-free-land",
+    "title": "Regression Discontinuity Design",
+    "section": "How can we quantiy discontinuity of development between occupied and free land?",
+    "text": "How can we quantiy discontinuity of development between occupied and free land?\n\nMeasure economic development / agricultural activities remotely.\n\nUsing remote sensing\nNight Time Lights as a proxi for development intensity;\nNDVI Normalized Difference in Vegetation index as a proxy for agricultural intensity.\n\nRun regression discontinuity with:"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#soil-erosion-and-the-soviet-legacy-wuepper2020",
+    "href": "slides/w11-RDD.html#soil-erosion-and-the-soviet-legacy-wuepper2020",
+    "title": "Regression Discontinuity Design",
+    "section": "Soil erosion and the Soviet legacy (Wuepper, Borrelli, Mueller, & Finger, 2020)",
+    "text": "Soil erosion and the Soviet legacy (Wuepper, Borrelli, Mueller, & Finger, 2020)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#sampling-strategy-in-ali2014",
+    "href": "slides/w11-RDD.html#sampling-strategy-in-ali2014",
+    "title": "Regression Discontinuity Design",
+    "section": "Sampling strategy in (Ali, Deininger, & Goldstein, 2014)",
+    "text": "Sampling strategy in (Ali, Deininger, & Goldstein, 2014)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#more-examples-and-pratice",
+    "href": "slides/w11-RDD.html#more-examples-and-pratice",
+    "title": "Regression Discontinuity Design",
+    "section": "More examples and pratice",
+    "text": "More examples and pratice\n< https://rdpackages.github.io >"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#non-linearity-solutions",
+    "href": "slides/w11-RDD.html#non-linearity-solutions",
+    "title": "Regression Discontinuity Design",
+    "section": "Non linearity solutions",
+    "text": "Non linearity solutions\n\nPolynomial:\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma_1 a + \\gamma_2 a^2 + e_a\\)\ncould be too good and confirm prejudices;\nwe need to make a judgment call in a publication and check alternatives with robustness checks.\n\n\nCentering the running variable at the cut-off \\(a_0\\) and adding the interaction term with \\(D_a\\).\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma (a - a_0) + \\delta [(a-a_0)D_a] + e_a\\)\nWhen centered, \\(\\rho\\) is the the jump parameter.\nchange in the slope of \\(\\rho\\) before and after the threshold with: \\(\\rho + \\delta (a - a_0)\\).\n\n\nNon linearity and the cut-off slope change could be combined:\n\n\n\\(\\bar M_{a} = \\alpha + \\rho D_a + \\gamma_1 (a - a_0) + \\gamma_2 (a - a_0) ^ 2 + \\delta_1 [(a-a_0)D_a] + \\delta_2 [(a-a_0) ^ 2 D_a] + e_a\\)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#east-or-west-germany-farm-size-and-biodiversity-noack2021",
+    "href": "slides/w11-RDD.html#east-or-west-germany-farm-size-and-biodiversity-noack2021",
+    "title": "Regression Discontinuity Design",
+    "section": "East or West Germany, farm size and biodiversity (Noack, Larsen, Kamp, & Levers, 2021)",
+    "text": "East or West Germany, farm size and biodiversity (Noack, Larsen, Kamp, & Levers, 2021)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020-natural-soil-erosion",
+    "href": "slides/w11-RDD.html#wuepper2020-natural-soil-erosion",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020): Natural soil erosion",
+    "text": "Wuepper et al. (2020): Natural soil erosion"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020-maximum-soil-erosion",
+    "href": "slides/w11-RDD.html#wuepper2020-maximum-soil-erosion",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020): Maximum soil erosion",
+    "text": "Wuepper et al. (2020): Maximum soil erosion"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020-soil-erosion-due-to-land-use",
+    "href": "slides/w11-RDD.html#wuepper2020-soil-erosion-due-to-land-use",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020): Soil erosion due to land use",
+    "text": "Wuepper et al. (2020): Soil erosion due to land use"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020-robustness-checks",
+    "href": "slides/w11-RDD.html#wuepper2020-robustness-checks",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020): Robustness checks",
+    "text": "Wuepper et al. (2020): Robustness checks"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020-forest-cover",
+    "href": "slides/w11-RDD.html#wuepper2020-forest-cover",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020): Forest cover",
+    "text": "Wuepper et al. (2020): Forest cover"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#wuepper2020",
+    "href": "slides/w11-RDD.html#wuepper2020",
+    "title": "Regression Discontinuity Design",
+    "section": "Wuepper et al. (2020)",
+    "text": "Wuepper et al. (2020)"
+  },
+  {
+    "objectID": "slides/w11-RDD.html#more-examples-and-practice",
+    "href": "slides/w11-RDD.html#more-examples-and-practice",
+    "title": "Regression Discontinuity Design",
+    "section": "More examples and practice",
+    "text": "More examples and practice\n< https://rdpackages.github.io >"
   }
 ]
