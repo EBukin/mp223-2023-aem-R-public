@@ -121,7 +121,7 @@ Exercises:
 
 Slides:
 
--   [w11-RDD](slides/w11-RDD.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w10-RDD.pdf)
+-   [w11-RDD](slides/w11-RDD.qmd) + [pdf](https://github.com/EBukin/mp223-2023-aem-R-public/raw/main/files/w11-RDD.pdf)
 
 
 ### Week 12. June 28. Binary outcome variable (see Ilias)
